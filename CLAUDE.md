@@ -134,6 +134,23 @@ All game data lives in the `const g = {...}` constant. Top-level keys:
 
 **New in v8:** `glossary_only` (flat glossary view from `g.glossary_clean`), `vehicles`, `cat_drones`, `modules`, and `ships` (all sourced from `g.catalog`).
 
+### Rule Groups (in `rules_grouped`)
+
+| Group | Key Sections |
+|---|---|
+| CREATING A CHARACTER | Character creation steps |
+| CHARACTER ADVANCEMENT | XP, levelling |
+| BASIC RULES | Core mechanics, combat, actions |
+| ARMORS | Armor rules |
+| WEAPONS | Weapon rules |
+| MAGIC | Spell rules |
+| HACKING AND DRONES | Hacking, drone control |
+| EVOLUTION | Genetics, cybernetics, magic evolutions |
+| GLOSSARY | In-rules glossary |
+| SPACE COMBAT | Ship combat job order, roles, movement, damage, environment |
+
+The **SPACE COMBAT** group covers: job order, all five ship roles (Commander/Engineer/Navigator/Pilot/Gunner), role advantage/disadvantage, space movement & sensor ranges, damage/trauma/repairs, environmental rules (gravity, suffocation), and galactic regions.
+
 ---
 
 ## Manufacturer System
