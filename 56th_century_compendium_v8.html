@@ -443,6 +443,14 @@ const ARMOR_MFRS=['Generic','Harsh','Santech','BMS','Acer'];
 const DATACOM_MFRS=['Generic','Securicorp','Orionworks','Biocom','Carnifex','Saiko','Yotoma'];
 const MEDICAL_MFRS=['Generic','Altair Biomed','RX Generic','Goodman Holistic','Diva Solutions','Mono-Med Customs'];
 
+// ─── Catalog Component Helpers ────────────────────────────────────────────────
+const COMP_NAMES={AIRLOCKBRIDGE:'Airlock Bridge',AMMOBAY:'Ammo Bay',ATMOSPHERIC:'Atmospheric',BAR:'Bar',BAY_CORVETTE:'Corvette Bay',BAY_DRONE:'Drone Bay',BAY_FIGHTER:'Fighter Bay',BRIDGE:'Bridge',CARGOSPACE:'Cargo Space',COCKPIT:'Cockpit',COMBRIDGE:'Comms Bridge',CONSTRUCTION:'Construction',CREWAUTOMATION:'Crew Automation',CREWSPACE:'Crew Quarters',ECM:'ECM',ENERGYTANK:'Energy Tank',ENGINEBALANCED:'Balanced Engine',ENGINECOMBAT:'Combat Engine',ENGINEERING:'Engineering',ENGINEHANDLING:'Handling Engine',ESCAPEPOD:'Escape Pod',FUELTANK:'Fuel Tank',HULL:'Hull',INSTRUMENTS:'Instruments',JACUZI:'Jacuzzi',JUMPDRIVE:'Jump Drive',LANDING:'Landing',LIFESUPPORT:'Life Support',MEDBAY:'Med Bay',NAVBRIDGE:'Nav Bridge',ORDONNANCE_FIXED:'Fixed Ordnance',PASSENGERSSPACE:'Passenger Space',POWER:'Power Core',POWER_CORONTHIA:'Coronthia Power',RADAR:'Radar',SHIELD:'Shield',STRUCTURE:'Structure',SWIMPOOL:'Pool',SYSTEM:'System',WARFARESUITE:'Warfare Suite',WEAPON_FIXED:'Fixed Weapon',WEAPON_TURRET:'Turret'};
+const COMP_QCOL={BASIC:'color:#6b7280;background:rgba(107,114,128,.12);border:1px solid rgba(107,114,128,.3)',AVERAGE:'color:#60a5fa;background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.3)',GOOD:'color:#34d399;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.3)',UNIVERSAL:'color:#a78bfa;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.3)',XLARGE:'color:#fbbf24;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.3)',HUGE:'color:#fb923c;background:rgba(249,115,22,.12);border:1px solid rgba(249,115,22,.3)',MASSIVE:'color:#f87171;background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.3)',COLOSSAL:'color:#d946ef;background:rgba(217,70,239,.12);border:1px solid rgba(217,70,239,.3)'};
+function pComp(code){const p=code.split('_');if(p.length<3)return{type:code,quality:'',cls:''};const lp=p[p.length-1];const qm=lp.match(/\d+-(.+)/);const quality=qm?qm[1]:lp;const cp=p[p.length-2];const cm=cp.match(/\d+-(.+)/);const cls=cm?cm[1]:cp;const type=p.slice(0,p.length-2).join('_');return{type,quality,cls};}
+function compLine(code){if(!code||code==='EMPTY')return'<span style="color:#374151;font-size:10px;font-style:italic;">empty</span>';const{type,quality}=pComp(code);const name=COMP_NAMES[type]||(type.replace(/_/g,' ').toLowerCase().replace(/\b\w/g,c=>c.toUpperCase()));const qs=COMP_QCOL[quality]||'color:#9ca3af;background:rgba(156,163,175,.1);border:1px solid rgba(156,163,175,.3)';return'<span style="font-size:10px;color:#d1d5db;">'+name+'</span>\u00a0<span style="font-size:9px;padding:1px 5px;border-radius:3px;'+qs+'">'+quality+'</span>';}
+function shipStat(s,type){const all=[...(s.core||[]),...(s.internal||[]),...(s.external||[])];const c=all.find(x=>{const p=x.split('_');return p.slice(0,p.length-2).join('_')===type;});return c?pComp(c).quality:null;}
+function qBadge(q){const qs=COMP_QCOL[q]||'color:#9ca3af;border:1px solid rgba(156,163,175,.3)';return q?'<span style="font-size:9px;padding:1px 5px;border-radius:3px;'+qs+'">'+q+'</span>':'';}
+
 // ─── Render ───────────────────────────────────────────────────────────────────
 function render(){
   const main=document.getElementById('main');
@@ -1029,7 +1037,7 @@ function render(){
 
   // ─── CATALOG: VEHICLES ───
   else if(cs==='vehicles'){
-    const V=(g.catalog&&g.catalog.vehicles||[]).filter(v=>ms([v.name,v.manufacturer,v.size,v.availability,v.special]));
+    const V=(g.catalog&&g.catalog.vehicles||[]).filter(v=>ms([v.name,v.manufacturer,v.size,v.availability,v.special,v.description,v.type]));
     cnt=V.length;
     html='<div class="stitle">🚗 VEHICLES <span class="badge">'+cnt+'</span></div>';
     html+='<div class="grid">';
@@ -1037,32 +1045,52 @@ function render(){
       const id='v-'+esc(v.name).replace(/\s/g,'_');
       const rc=rarCls(v.availability);
       html+='<div class="card '+rc+'" id="'+id+'" data-tog="'+id+'">';
-      html+='<div class="ch"><div class="cn">'+hl(v.name,sq)+'</div><div class="cs-right">'+hl(v.size||'',sq)+'</div></div>';
+      html+='<div class="ch"><div class="cn">'+hl(v.name,sq)+'</div><div class="cs-right">'+hl(v.type||v.size||'',sq)+'</div></div>';
       html+='<div class="cr2">';
       if(v.manufacturer) html+='<span class="wpn-pill">'+hl(v.manufacturer,sq)+'</span>';
+      if(v.size&&v.type) html+='<span class="wpn-pill">📦 '+hl(v.size,sq)+'</span>';
       if(v.availability) html+='<span class="wpn-pill wpill-avl">◈ '+hl(v.availability,sq)+'</span>';
       html+='</div>';
       html+='<div class="cr3"><div class="cr3l">';
-      if(v.durability) html+='<span class="wpn-pill">❤ DUR '+v.durability+'</span>';
-      if(v.structure) html+='<span class="wpn-pill">🏗 STR '+v.structure+'</span>';
+      if(v.durability!=null) html+='<span class="wpn-pill">❤ DUR '+v.durability+'</span>';
+      if(v.structure!=null) html+='<span class="wpn-pill">🏗 STR '+v.structure+'</span>';
+      if(v.speed!=null) html+='<span class="wpn-pill">💨 SPD '+v.speed+'</span>';
+      html+='</div>';
+      if(v.price||v.cost) html+='<div class="cr3r">'+fmt(v.price||v.cost)+' Cr</div>';
+      html+='</div>';
+      html+='<div class="cb">';
+      if(v.description) html+='<div class="rd" style="margin-bottom:8px;">'+hl(v.description,sq)+'</div>';
+      html+='<div class="fg">';
+      if(v.type) html+='<div class="f"><div class="fl">Type</div><div class="fv">'+hl(v.type,sq)+'</div></div>';
+      if(v.size) html+='<div class="f"><div class="fl">Size</div><div class="fv">'+hl(v.size,sq)+'</div></div>';
+      if(v.minimum_crew!=null) html+='<div class="f"><div class="fl">Min Crew</div><div class="fv">'+v.minimum_crew+'</div></div>';
+      if(v.maximum_crew!=null) html+='<div class="f"><div class="fl">Max Crew</div><div class="fv">'+v.maximum_crew+'</div></div>';
+      if(v.max_passengers!=null) html+='<div class="f"><div class="fl">Passengers</div><div class="fv">'+v.max_passengers+'</div></div>';
+      if(v.speed!=null) html+='<div class="f"><div class="fl">Speed</div><div class="fv">'+v.speed+'</div></div>';
+      if(v.handling!=null) html+='<div class="f"><div class="fl">Handling</div><div class="fv">'+v.handling+'</div></div>';
+      if(v.durability!=null) html+='<div class="f"><div class="fl">Durability</div><div class="fv">'+v.durability+'</div></div>';
+      if(v.structure!=null) html+='<div class="f"><div class="fl">Structure</div><div class="fv">'+v.structure+'</div></div>';
+      if(v.hull!=null) html+='<div class="f"><div class="fl">Hull</div><div class="fv">'+v.hull+'</div></div>';
+      if(v.deflect) html+='<div class="f"><div class="fl">Deflect</div><div class="fv">'+hl(v.deflect,sq)+'</div></div>';
+      if(v.soak) html+='<div class="f"><div class="fl">Soak</div><div class="fv">'+hl(v.soak,sq)+'</div></div>';
+      if(v.wall) html+='<div class="f"><div class="fl">Wall</div><div class="fv">'+hl(v.wall,sq)+'</div></div>';
+      if(v.integrity) html+='<div class="f"><div class="fl">Integrity</div><div class="fv">'+hl(v.integrity,sq)+'</div></div>';
+      if(v.cargo!=null) html+='<div class="f"><div class="fl">Cargo</div><div class="fv">'+v.cargo+'</div></div>';
+      if(v.system!=null) html+='<div class="f"><div class="fl">System</div><div class="fv">'+v.system+'</div></div>';
+      if(v.atmospheric_capability) html+='<div class="f"><div class="fl">Atmospheric</div><div class="fv">'+hl(v.atmospheric_capability,sq)+'</div></div>';
+      if(v.price||v.cost) html+='<div class="f"><div class="fl">Price</div><div class="fv" style="color:#6ee7a0;">'+fmt(v.price||v.cost)+' Cr</div></div>';
+      html+='</div>';
+      if(v.special) html+='<div style="margin-top:6px;padding-top:6px;border-top:1px solid var(--b);font-size:10px;color:#9ca3af;">'+hl(v.special,sq)+'</div>';
       html+='</div></div>';
-      html+='<div class="exp" id="x'+id+'"><div class="exb">';
-      if(v.deflect) html+='<div class="kv"><span class="k">Deflect</span><span class="v">'+v.deflect+'</span></div>';
-      if(v.soak) html+='<div class="kv"><span class="k">Soak</span><span class="v">'+v.soak+'</span></div>';
-      if(v.wall) html+='<div class="kv"><span class="k">Wall</span><span class="v">'+v.wall+'</span></div>';
-      if(v.integrity) html+='<div class="kv"><span class="k">Integrity</span><span class="v">'+v.integrity+'</span></div>';
-      if(v.special) html+='<div class="kv"><span class="k">Special</span><span class="v">'+hl(v.special,sq)+'</span></div>';
-      html+='</div></div></div>';
     });
     html+='</div>';
   }
 
   // ─── CATALOG: DRONES ───
   else if(cs==='cat_drones'){
-    const DR=(g.catalog&&g.catalog.drones||[]).filter(v=>ms([v.name,v.manufacturer,v.size,v.availability,v.special]));
+    const DR=(g.catalog&&g.catalog.drones||[]).filter(v=>ms([v.name,v.manufacturer,v.size,v.availability,v.special,v.description,v.type]));
     cnt=DR.length;
     html='<div class="stitle">🤖 DRONES <span class="badge">'+cnt+'</span></div>';
-    // Chassis info
     if(g.catalog&&g.catalog.chassis){
       html+='<div class="gitem" style="cursor:default;margin-bottom:12px;border-color:rgba(139,92,246,.3);">';
       html+='<div style="color:#a78bfa;font-size:10px;letter-spacing:1px;font-weight:700;margin-bottom:6px;">📐 DRONE CHASSIS</div>';
@@ -1082,22 +1110,39 @@ function render(){
       const id='dr-'+esc(v.name).replace(/\W/g,'_');
       const rc=rarCls(v.availability);
       html+='<div class="card '+rc+'" id="'+id+'" data-tog="'+id+'">';
-      html+='<div class="ch"><div class="cn">'+hl(v.name,sq)+'</div><div class="cs-right">'+hl(v.size||'',sq)+'</div></div>';
+      html+='<div class="ch"><div class="cn">'+hl(v.name,sq)+'</div><div class="cs-right">'+hl(v.type||v.size||'',sq)+'</div></div>';
       html+='<div class="cr2">';
       if(v.manufacturer) html+='<span class="wpn-pill">'+hl(v.manufacturer,sq)+'</span>';
+      if(v.size&&v.type) html+='<span class="wpn-pill">📦 '+hl(v.size,sq)+'</span>';
       if(v.availability) html+='<span class="wpn-pill wpill-avl">◈ '+hl(v.availability,sq)+'</span>';
       html+='</div>';
       html+='<div class="cr3"><div class="cr3l">';
-      if(v.durability) html+='<span class="wpn-pill">❤ DUR '+v.durability+'</span>';
-      if(v.structure) html+='<span class="wpn-pill">🏗 STR '+v.structure+'</span>';
+      if(v.durability!=null) html+='<span class="wpn-pill">❤ DUR '+v.durability+'</span>';
+      if(v.structure!=null) html+='<span class="wpn-pill">🏗 STR '+v.structure+'</span>';
       if(v.special) html+='<span class="wpn-pill" style="color:var(--a);">'+hl(v.special,sq)+'</span>';
       html+='</div></div>';
-      html+='<div class="exp" id="x'+id+'"><div class="exb">';
-      if(v.deflect) html+='<div class="kv"><span class="k">Deflect</span><span class="v">'+v.deflect+'</span></div>';
-      if(v.soak) html+='<div class="kv"><span class="k">Soak</span><span class="v">'+v.soak+'</span></div>';
-      if(v.wall) html+='<div class="kv"><span class="k">Wall</span><span class="v">'+v.wall+'</span></div>';
-      if(v.integrity) html+='<div class="kv"><span class="k">Integrity</span><span class="v">'+v.integrity+'</span></div>';
-      html+='</div></div></div>';
+      html+='<div class="cb">';
+      if(v.description) html+='<div class="rd" style="margin-bottom:8px;">'+hl(v.description,sq)+'</div>';
+      html+='<div class="fg">';
+      if(v.type) html+='<div class="f"><div class="fl">Type</div><div class="fv">'+hl(v.type,sq)+'</div></div>';
+      if(v.size) html+='<div class="f"><div class="fl">Size</div><div class="fv">'+hl(v.size,sq)+'</div></div>';
+      if(v.minimum_crew!=null) html+='<div class="f"><div class="fl">Min Crew</div><div class="fv">'+v.minimum_crew+'</div></div>';
+      if(v.maximum_crew!=null) html+='<div class="f"><div class="fl">Max Crew</div><div class="fv">'+v.maximum_crew+'</div></div>';
+      if(v.speed!=null) html+='<div class="f"><div class="fl">Speed</div><div class="fv">'+v.speed+'</div></div>';
+      if(v.handling!=null) html+='<div class="f"><div class="fl">Handling</div><div class="fv">'+v.handling+'</div></div>';
+      if(v.durability!=null) html+='<div class="f"><div class="fl">Durability</div><div class="fv">'+v.durability+'</div></div>';
+      if(v.structure!=null) html+='<div class="f"><div class="fl">Structure</div><div class="fv">'+v.structure+'</div></div>';
+      if(v.hull!=null) html+='<div class="f"><div class="fl">Hull</div><div class="fv">'+v.hull+'</div></div>';
+      if(v.deflect) html+='<div class="f"><div class="fl">Deflect</div><div class="fv">'+hl(v.deflect,sq)+'</div></div>';
+      if(v.soak) html+='<div class="f"><div class="fl">Soak</div><div class="fv">'+hl(v.soak,sq)+'</div></div>';
+      if(v.wall) html+='<div class="f"><div class="fl">Wall</div><div class="fv">'+hl(v.wall,sq)+'</div></div>';
+      if(v.integrity) html+='<div class="f"><div class="fl">Integrity</div><div class="fv">'+hl(v.integrity,sq)+'</div></div>';
+      if(v.cargo!=null) html+='<div class="f"><div class="fl">Cargo</div><div class="fv">'+v.cargo+'</div></div>';
+      if(v.system!=null) html+='<div class="f"><div class="fl">System</div><div class="fv">'+v.system+'</div></div>';
+      if(v.price||v.cost) html+='<div class="f"><div class="fl">Price</div><div class="fv" style="color:#6ee7a0;">'+fmt(v.price||v.cost)+' Cr</div></div>';
+      html+='</div>';
+      if(v.special) html+='<div style="margin-top:6px;padding-top:6px;border-top:1px solid var(--b);font-size:10px;color:#9ca3af;">'+hl(v.special,sq)+'</div>';
+      html+='</div></div>';
     });
     html+='</div>';
   }
@@ -1136,6 +1181,23 @@ function render(){
     const classEmoji={'DRONE':'🛸','FIGHTER':'✈️','CORVETTE':'🚀','FRIGATE':'⚓','CRUISER':'🛳','BATTLECRUISER':'⚔️','CARRIER':'🛫','NOVA':'🌟'};
     const classColors={'DRONE':'rgba(139,92,246,.3)','FIGHTER':'rgba(59,130,246,.3)','CORVETTE':'rgba(16,185,129,.3)','FRIGATE':'rgba(245,158,11,.3)','CRUISER':'rgba(239,68,68,.3)','BATTLECRUISER':'rgba(220,38,38,.4)','CARRIER':'rgba(249,115,22,.3)','NOVA':'rgba(168,85,247,.5)'};
     const classTx={'DRONE':'#a78bfa','FIGHTER':'#60a5fa','CORVETTE':'#34d399','FRIGATE':'#fbbf24','CRUISER':'#f87171','BATTLECRUISER':'#ef4444','CARRIER':'#fb923c','NOVA':'#d946ef'};
+    const KEY_STATS=[
+      {type:'HULL',label:'Hull',icon:'🛡'},{type:'SHIELD',label:'Shield',icon:'⚡'},
+      {type:'STRUCTURE',label:'Structure',icon:'🏗'},{type:'ECM',label:'ECM',icon:'📡'},
+      {type:'WARFARESUITE',label:'Warfare',icon:'⚔'},{type:'ENGINECOMBAT',label:'Combat Spd',icon:'🚀'},
+      {type:'ENGINEHANDLING',label:'Handling',icon:'🎮'},{type:'ENGINEBALANCED',label:'Engine',icon:'⚙'},
+      {type:'RADAR',label:'Radar',icon:'📻'},{type:'INSTRUMENTS',label:'Instruments',icon:'🔭'},
+      {type:'JUMPDRIVE',label:'Jump Drive',icon:'🌌'},{type:'LIFESUPPORT',label:'Life Support',icon:'💨'},
+    ];
+    const cSec=(list,sz,lbl,col,icon)=>{
+      if(!list||!list.length) return '';
+      let h='<div style="margin-top:10px;">';
+      h+='<div style="font-size:9px;font-weight:700;letter-spacing:1px;color:'+col+';padding:3px 0;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:5px;">'+icon+' '+lbl+(sz?' \u2014 '+sz:'')+'</div>';
+      h+='<div style="display:flex;flex-direction:column;gap:4px;">';
+      list.forEach(c=>{h+='<div style="padding:1px 0;">'+compLine(c)+'</div>';});
+      h+='</div></div>';
+      return h;
+    };
     html='<div class="stitle">🚀 SPACESHIPS <span class="badge">'+cnt+'</span></div>';
     classOrder.forEach(cls=>{
       const cShips=SF.filter(s=>s.class===cls);
@@ -1148,39 +1210,42 @@ function render(){
         const id='ship-'+esc(s.name||s.role).replace(/\W/g,'_');
         const bc=classColors[cls]||'rgba(255,255,255,.05)';
         html+='<div class="card" style="border-color:'+bc+'" id="'+id+'" data-tog="'+id+'">';
-        html+='<div class="ch"><div class="cn" style="color:'+classTx[cls]+'">'+hl(s.name||s.role,sq)+'</div><div class="cs-right">'+esc(s.role||s.class)+'</div></div>';
-        html+='<div class="cr2">';
-        html+='<span class="wpn-pill" style="color:'+classTx[cls]+';">'+cls+'</span>';
-        if(s.power) html+='<span class="wpn-pill">⚡ PWR '+esc(s.power)+'</span>';
+        // Compact: name | role
+        html+='<div class="ch">';
+        html+='<div class="cn" style="color:'+classTx[cls]+'">'+hl(s.name||s.role,sq)+'</div>';
+        html+='<div class="cs-right">'+esc(s.role||s.class)+'</div>';
         html+='</div>';
+        // Row 2: class badge + power
+        html+='<div class="cr2">';
+        html+='<span class="wpn-pill" style="color:'+classTx[cls]+';border-color:'+bc+';">'+classEmoji[cls]+' '+cls+'</span>';
+        if(s.power) html+='<span class="wpn-pill wpill-pwr">⚡ '+esc(s.power)+'</span>';
+        html+='</div>';
+        // Row 3: size | price
         html+='<div class="cr3"><div class="cr3l">';
-        if(s.total_size) html+='<span class="wpn-pill">📐 '+esc(s.total_size)+'</span>';
+        if(s.total_size) html+='<span class="wpn-pill">📐 '+esc(s.total_size)+' units</span>';
         html+='</div>';
         if(s.total_cost) html+='<div class="cr3r">'+fmt(s.total_cost)+' Cr</div>';
         html+='</div>';
-        html+='<div class="exp" id="x'+id+'"><div class="exb">';
-        if(s.description) html+='<div class="rd" style="margin-bottom:8px;">'+hl(s.description,sq)+'</div>';
-        // Component breakdown
-        const compDesc=comp=>esc(comp.replace(/_\d+/g,' ').replace(/-/g,' ').toLowerCase().replace(/\b\w/g,c=>c.toUpperCase()));
-        if(s.core&&s.core.length){
-          html+='<div style="margin-bottom:6px;"><div style="color:#34d399;font-size:9px;font-weight:700;letter-spacing:1px;margin-bottom:3px;">🔒 CORE ('+s.core_size+')</div>';
-          const coreCounts={};s.core.forEach(c=>{coreCounts[c]=(coreCounts[c]||0)+1;});
-          Object.entries(coreCounts).forEach(([c,n])=>{html+='<span class="wpn-pill" style="font-size:8px;">'+(n>1?n+'x ':'')+compDesc(c)+'</span>';});
-          html+='</div>';
+        // Expanded
+        html+='<div class="cb">';
+        if(s.description) html+='<div class="rd" style="margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--b);">'+hl(s.description,sq)+'</div>';
+        // Derived ratings from component list
+        const ratings=KEY_STATS.map(ks=>({...ks,q:shipStat(s,ks.type)})).filter(r=>r.q);
+        if(ratings.length||s.power||s.total_size){
+          html+='<div style="margin-bottom:4px;"><div style="font-size:9px;color:#6b7280;letter-spacing:1px;font-weight:700;margin-bottom:5px;text-transform:uppercase;">◈ Specifications</div>';
+          html+='<div class="fg">';
+          ratings.forEach(r=>{html+='<div class="f"><div class="fl">'+r.icon+' '+r.label+'</div><div class="fv">'+qBadge(r.q)+'</div></div>';});
+          if(s.power) html+='<div class="f"><div class="fl">⚡ Power</div><div class="fv" style="color:#fbbf24;">'+esc(s.power)+'</div></div>';
+          if(s.total_size) html+='<div class="f"><div class="fl">📐 Total Slots</div><div class="fv">'+esc(s.total_size)+'</div></div>';
+          if(s.core_size) html+='<div class="f"><div class="fl">🔒 Core</div><div class="fv">'+esc(s.core_size)+'</div></div>';
+          if(s.internal_size) html+='<div class="f"><div class="fl">⚙ Internal</div><div class="fv">'+esc(s.internal_size)+'</div></div>';
+          if(s.external_size) html+='<div class="f"><div class="fl">🔧 External</div><div class="fv">'+esc(s.external_size)+'</div></div>';
+          html+='</div></div>';
         }
-        if(s.internal&&s.internal.length){
-          html+='<div style="margin-bottom:6px;"><div style="color:#60a5fa;font-size:9px;font-weight:700;letter-spacing:1px;margin-bottom:3px;">🛡 INTERNAL ('+s.internal_size+')</div>';
-          const intCounts={};s.internal.forEach(c=>{intCounts[c]=(intCounts[c]||0)+1;});
-          Object.entries(intCounts).forEach(([c,n])=>{html+='<span class="wpn-pill" style="font-size:8px;">'+(n>1?n+'x ':'')+compDesc(c)+'</span>';});
-          html+='</div>';
-        }
-        if(s.external&&s.external.length){
-          html+='<div style="margin-bottom:6px;"><div style="color:#f87171;font-size:9px;font-weight:700;letter-spacing:1px;margin-bottom:3px;">💥 EXTERNAL ('+s.external_size+')</div>';
-          const extCounts={};s.external.forEach(c=>{extCounts[c]=(extCounts[c]||0)+1;});
-          Object.entries(extCounts).forEach(([c,n])=>{html+='<span class="wpn-pill" style="font-size:8px;">'+(n>1?n+'x ':'')+compDesc(c)+'</span>';});
-          html+='</div>';
-        }
-        html+='</div></div></div>';
+        html+=cSec(s.core,s.core_size,'CORE','#34d399','🔒');
+        html+=cSec(s.internal,s.internal_size,'INTERNAL','#60a5fa','⚙');
+        html+=cSec(s.external,s.external_size,'EXTERNAL','#fb923c','🔧');
+        html+='</div></div>';
       });
       html+='</div></div>';
     });
