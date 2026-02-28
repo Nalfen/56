@@ -476,8 +476,8 @@ const COMP_CC={
   ENGINEBALANCED: {handling:[2,1],engineering:[0,1],fuel_cons:[2,0],pwr_draw:[4,0]},
   ENGINECOMBAT:   {handling:[2,1],warfare:[0,1],fuel_cons:[3,0],pwr_draw:[4,0]},
   ENGINEHANDLING: {handling:[3,1],fuel_cons:[2,0],pwr_draw:[4,0]},
-  INSTRUMENTS:    {instruments:[3,1],detect_range:[100,100],pwr_draw:[2,0]},
-  RADAR:          {instruments:[1,1],combat_range:[100,50],pwr_draw:[1,0]},
+  INSTRUMENTS:    {instruments:[3,1],detect_range:[100,100],max_range:[200,200],pwr_draw:[2,0]},
+  RADAR:          {instruments:[1,1],combat_range:[100,50],detect_range:[50,25],pwr_draw:[1,0]},
   ENGINEERING:    {engineering:[3,1],pwr_draw:[2,0]},
   LIFESUPPORT:    {life_ppl:[5,5],life_hrs:[24,12],pwr_draw:[2,0]},
   FUELTANK:       {fuel_units:[100,50],pwr_draw:[0,0]},
@@ -487,9 +487,9 @@ const COMP_CC={
   PASSENGERSSPACE:{passengers:[10,10],pwr_draw:[1,0]},
   COCKPIT:        {handling:[1,0],pwr_draw:[1,0]},
   MEDBAY:         {pwr_draw:[2,0]},
-  WEAPON_TURRET:  {pwr_activation:[3,1],pwr_draw:[0,0]},
-  WEAPON_FIXED:   {pwr_activation:[2,1],pwr_draw:[0,0]},
-  ORDONNANCE_FIXED:{pwr_activation:[2,0],pwr_draw:[1,0]},
+  WEAPON_TURRET:  {warfare:[1,0],pwr_activation:[3,1],pwr_draw:[0,0]},
+  WEAPON_FIXED:   {warfare:[1,0],pwr_activation:[2,1],pwr_draw:[0,0]},
+  ORDONNANCE_FIXED:{warfare:[1,0],pwr_activation:[2,0],pwr_draw:[1,0]},
   AMMOBAY:        {pwr_draw:[0,0]},
   ESCAPEPOD:      {pwr_draw:[1,0]},
   BAY_CORVETTE:   {pwr_draw:[2,0]},
@@ -526,7 +526,10 @@ function calcShip(comps,cls){
     Object.entries(contrib).forEach(([stat,[bv,pq]])=>{s[stat]=(s[stat]||0)+(bv+pq*q)*cnt;});
   });
   s.pwr_consumption=s.pwr_draw; delete s.pwr_draw;
-  s.speed=SPD_STR[Math.min(s.spd_tier,SPD_STR.length-1)]||'NONE';
+  // Every ship has at least basic propulsion; use class minimum if no engine component found
+  const CLASS_MIN_SPD={DRONE:2,FIGHTER:3,CORVETTE:2,FRIGATE:2,CRUISER:1,BATTLECRUISER:1,CARRIER:1,NOVA:1};
+  if(s.spd_tier===0) s.spd_tier=CLASS_MIN_SPD[cls]||1;
+  s.speed=SPD_STR[Math.min(s.spd_tier,SPD_STR.length-1)];
   delete s.spd_tier; delete s.spd_cnt;
   s.crew_min=Math.max(0,s.crew_min-s.crew_auto); delete s.crew_auto;
   return s;
