@@ -479,7 +479,7 @@ const COMP_CC={
   AIRLOCKBRIDGE:  {command:[1,0],pwr_draw:[1,0]},
   NAVBRIDGE:      {instruments:[1,1],pwr_draw:[2,0]},  // instruments = tier
   // Navigation
-  JUMPDRIVE:      {pwr_activation:[5,0],pwr_draw:[0,0]},  // jump_range preserved from ship data
+  JUMPDRIVE:      {jump_range:[1,1],pwr_activation:[5,0],pwr_draw:[0,0]},  // BASIC=1 AVERAGE=2 GOOD=3
   // Engines — speed tier = base(2=LOW) + q (BASIC+0 AVERAGE+1 GOOD+2)
   // BALANCED: handling = tier; COMBAT: warfare = tier; HANDLING: handling = 2 flat
   ENGINEBALANCED: {handling:[1,1],pwr_draw:[4,0]},
@@ -1436,9 +1436,10 @@ function render(){
       cShips.forEach(s=>{
         const id='ship-'+esc(s.name||s.role).replace(/\W/g,'_');
         const bc=classColors[cls]||'rgba(255,255,255,.05)';
-        const cp=calcShip([...(s.core||[]),...(s.internal||[]),...(s.external||[])],s.class);
-        // Jump range is a ship-design value (varies per role); preserve from legacy computed field
-        cp.jump_range=(s.computed||{}).jump_range||0;
+        const allComps=[...(s.core||[]),...(s.internal||[]),...(s.external||[])];
+        const cp=calcShip(allComps,s.class);
+        // jump_range derives from JUMPDRIVE quality: BASIC=1 AVERAGE=2 GOOD=3 (via COMP_CC)
+        const hasCoronthia=allComps.some(c=>(c||'').startsWith('POWER_CORONTHIA'));
         html+='<div class="card" style="border-color:'+bc+'" id="'+id+'" data-tog="'+id+'">';
         // Compact header: name | role
         html+='<div class="ch">';
@@ -1450,8 +1451,11 @@ function render(){
         html+='<span class="wpn-pill" style="color:'+classTx[cls]+';border-color:'+bc+';">'+classEmoji[cls]+' '+cls+'</span>';
         if(cp.speed) html+='<span class="wpn-pill">🚀 '+esc(cp.speed)+'</span>';
         if(cp.atmospheric&&cp.atmospheric!=='NONE') html+='<span class="wpn-pill" style="color:#34d399;">🌍 ATM '+esc(cp.atmospheric)+'</span>';
-        if(cp.max_range) html+='<span class="wpn-pill" style="color:#22d3ee;">📡 '+cp.max_range+' km</span>';
-        if(cp.fuel_cons) html+='<span class="wpn-pill" style="color:#fb923c;">⚗ CORON</span>';
+        if(hasCoronthia) html+='<span class="wpn-pill" style="color:#fb923c;">⚗ CORON</span>';
+        if(cp.jump_range) html+='<span class="wpn-pill" style="color:#a78bfa;">🌌 JMP '+cp.jump_range+'</span>';
+        // Sensor summary: Combat / Detect / Max
+        {const sr=[cp.combat_range?'C'+cp.combat_range:null,cp.detect_range?'D'+cp.detect_range:null,cp.max_range?'M'+cp.max_range:null].filter(Boolean).join(' / ');
+        if(sr)html+='<span class="wpn-pill" style="color:#22d3ee;">📡 '+sr+'</span>';}
         html+='</div>';
         // Row 3: key ratings as small stat pills
         html+='<div style="display:flex;flex-wrap:wrap;gap:3px;margin:4px 0;">';
@@ -1512,18 +1516,24 @@ function render(){
         html+='<div class="f"><div class="fl">🚀 Speed</div><div class="fv">'+sv(cp.speed)+'</div></div>';
         html+='<div class="f"><div class="fl">🌍 Atmospheric</div><div class="fv">'+sv(cp.atmospheric)+'</div></div>';
         if(cp.jump_range){html+='<div class="f"><div class="fl">🌌 Jump Range</div><div class="fv" style="color:#a78bfa;">'+sv(cp.jump_range)+'</div></div>';}
-        if(cp.combat_range){html+='<div class="f"><div class="fl">📡 Combat Range</div><div class="fv">'+sv(cp.combat_range)+'</div></div>';}
-        if(cp.detect_range){html+='<div class="f"><div class="fl">🔭 Detect Range</div><div class="fv">'+sv(cp.detect_range)+'</div></div>';}
-        if(cp.max_range){html+='<div class="f"><div class="fl">📡 Max Range</div><div class="fv" style="color:#22d3ee;">'+sv(cp.max_range,' km')+'</div></div>';}
         html+='</div>';
-        // Fuel — only for Coronthia-powered ships or tankers carrying fuel
-        if(cp.fuel_cons||cp.fuel_units){
+        // Sensors — always show all three categories
+        html+=sLabel('Sensors');
+        html+='<div class="fg">';
+        html+='<div class="f"><div class="fl">📡 Combat Range</div><div class="fv" style="color:#22d3ee;">'+sv(cp.combat_range,' km')+'</div></div>';
+        html+='<div class="f"><div class="fl">🔭 Detect Range</div><div class="fv" style="color:#22d3ee;">'+sv(cp.detect_range,' km')+'</div></div>';
+        html+='<div class="f"><div class="fl">📻 Max Range</div><div class="fv" style="color:#22d3ee;">'+sv(cp.max_range,' km')+'</div></div>';
+        html+='</div>';
+        // Fuel — only when POWER_CORONTHIA is in the component list
+        if(hasCoronthia){
           html+=sLabel('⚗ Coronthia Fuel');
           html+='<div class="fg">';
           if(cp.fuel_cons){html+='<div class="f"><div class="fl">🔥 Crystals/hr</div><div class="fv" style="color:#fb923c;">'+sv(cp.fuel_cons)+'</div></div>';}
           if(cp.fuel_units){
             html+='<div class="f"><div class="fl">🛢 Capacity</div><div class="fv" style="color:#fbbf24;">'+sv(cp.fuel_units,' units')+'</div></div>';
             if(cp.fuel_cons){const hrs=Math.round(cp.fuel_units/cp.fuel_cons);html+='<div class="f"><div class="fl">⏱ Range</div><div class="fv" style="color:#a78bfa;">'+fmtTime(hrs)+'</div></div>';}
+          } else {
+            html+='<div class="f"><div class="fl" style="color:#ef4444;">⚠ No FUELTANK component</div></div>';
           }
           html+='</div>';
         }
