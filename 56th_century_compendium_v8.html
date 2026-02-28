@@ -1530,69 +1530,59 @@ function render(){
     const ALL=g.catalog&&g.catalog.ship_components||[];
     const clsOrder=SCOMP_CLASSES;
     const typeOrder=Object.keys(SCOMP_DEF);
-    const typeFilter=af||'';
     const clsFilter=af&&af.startsWith('CLS:')?(af.slice(4)):'';
-    // Dual filter: type or class
+    const typeFilter=clsFilter?'':(af||'');
     const SC=ALL.filter(c=>{
-      if(!ms([c.name,c.type,c.ship_class,c.quality,...Object.keys(c.stats||{})])) return false;
+      if(!ms([c.name,c.type,c.ship_class,c.quality])) return false;
       if(clsFilter&&c.ship_class!==clsFilter) return false;
-      if(typeFilter&&!clsFilter&&c.type!==typeFilter) return false;
+      if(typeFilter&&c.type!==typeFilter) return false;
       return true;
     });
     cnt=SC.length;
     const clsTx={DRONE:'#a78bfa',FIGHTER:'#60a5fa',CORVETTE:'#34d399',FRIGATE:'#fbbf24',CRUISER:'#f87171',BATTLECRUISER:'#ef4444',CARRIER:'#fb923c',NOVA:'#d946ef'};
     const clsEmoji={DRONE:'🛸',FIGHTER:'✈️',CORVETTE:'🚀',FRIGATE:'⚓',CRUISER:'🛳',BATTLECRUISER:'⚔️',CARRIER:'🛫',NOVA:'🌟'};
-    // Filter bar — by component type
     html='<div class="stitle">⚙ SHIP COMPONENTS <span class="badge">'+cnt+'</span></div>';
     html+='<div class="fbar">';
-    html+=fcBtn('All','' ,af);
+    html+=fcBtn('All','',af);
     typeOrder.forEach(t=>{if(ALL.some(c=>c.type===t))html+=fcBtn(SCOMP_DEF[t].name,t,af);});
     html+='<span style="color:#4b5563;margin:0 4px;">│</span>';
-    clsOrder.forEach(c=>html+=fcBtn(clsEmoji[c]+' '+c,'CLS:'+c,af));
+    clsOrder.forEach(k=>html+=fcBtn(clsEmoji[k]+' '+k,'CLS:'+k,af));
     html+='</div>';
-    // Group by component type
     typeOrder.forEach(type=>{
       const group=SC.filter(c=>c.type===type);
       if(!group.length) return;
       html+='<div style="margin-bottom:16px;">';
-      html+='<div style="font-family:\'Orbitron\',monospace;font-size:10px;font-weight:700;color:#94a3b8;letter-spacing:2px;padding:6px 4px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:6px;">'+esc(SCOMP_DEF[type].name).toUpperCase()+'</div>';
+      html+='<div class="nl">'+esc(SCOMP_DEF[type].name)+'</div>';
       html+='<div class="grid">';
       group.forEach(c=>{
+        const cid='sc'+c.id.replace(/\W/g,'_');
         const col=clsTx[c.ship_class]||'#d1d5db';
-        const qcol=COMP_QCOL[c.quality]||'color:#9ca3af;border:1px solid rgba(156,163,175,.3)';
-        const statEntries=Object.entries(c.stats||{}).filter(([k])=>!['pwr_activation'].includes(k));
-        html+='<div class="card" style="border-color:'+col.replace(')',',0.3)').replace('rgb','rgba')+';" id="sc-'+esc(c.id).replace(/\W/g,'_')+'" data-tog="sc-'+esc(c.id).replace(/\W/g,'_')+'">';
-        // Header
-        html+='<div class="ch">';
-        html+='<div class="cn" style="color:'+col+'">'+hl(c.name,sq)+'</div>';
-        html+='<span style="font-size:9px;padding:1px 6px;border-radius:3px;'+qcol+'">'+c.quality+'</span>';
-        html+='</div>';
-        // Row 2: class + stat pills
-        html+='<div class="cr2">';
-        html+='<span class="wpn-pill" style="color:'+col+';font-size:9px;">'+(clsEmoji[c.ship_class]||'')+' '+esc(c.ship_class)+'</span>';
-        statEntries.forEach(([k,v])=>{
-          if(v===0||v===''||v===null) return;
-          html+='<span class="wpn-pill" style="font-size:9px;"><span style="color:#6b7280;">'+k.replace(/_/g,' ')+'</span> '+v+'</span>';
-        });
-        html+='</div>';
-        // Row 3: unit size | pwr | price
+        const qbadge=qBadge(c.quality);
+        const statRows=Object.entries(c.stats||{}).filter(([,v])=>v!==0&&v!==''&&v!==null);
+        html+='<div class="card" id="'+cid+'" data-tog="'+cid+'">';
+        // Header — always visible
+        html+='<div class="ch"><div>';
+        html+='<div class="cn">'+hl(c.name,sq)+'</div>';
+        html+='<div class="cs" style="color:'+col+';">'+(clsEmoji[c.ship_class]||'')+' '+esc(c.ship_class)+'</div>';
+        html+='</div><div style="display:flex;align-items:center;gap:4px;">'+qbadge+'<span class="xi">▼</span></div></div>';
+        // Summary row — always visible
         html+='<div class="cr3"><div class="cr3l">';
-        html+='<span class="wpn-pill" style="font-size:9px;"><span style="color:#6b7280;">SZ</span> '+(c.unit_size>0?'+':'')+c.unit_size+'</span>';
-        if(c.pwr_draw) html+='<span class="wpn-pill" style="font-size:9px;color:#f87171;"><span style="color:#6b7280;">PWR</span> '+c.pwr_draw+'</span>';
-        if(c.stats&&c.stats.pwr_activation) html+='<span class="wpn-pill" style="font-size:9px;color:#fb923c;"><span style="color:#6b7280;">ACT</span> '+c.stats.pwr_activation+'</span>';
-        html+='</div>';
-        html+='<div class="cr3r">'+fmt(c.price)+' Cr</div>';
-        html+='</div>';
-        // Expanded details
-        html+='<div class="cb">';
-        html+='<div class="fg">';
-        html+='<div class="f"><div class="fl">Unit Size</div><div class="fv" style="color:#94a3b8;">'+(c.unit_size>0?'+':'')+c.unit_size+'</div></div>';
-        html+='<div class="f"><div class="fl">Pwr Draw</div><div class="fv" style="color:#f87171;">'+(c.pwr_draw||0)+'</div></div>';
+        html+='<span class="wpn-pill"><span style="color:var(--mu)">SIZE</span> '+(c.unit_size>0?'+':'')+c.unit_size+'</span>';
+        if(c.pwr_draw) html+='<span class="wpn-pill" style="color:#f87171;"><span style="color:var(--mu)">PWR</span> '+c.pwr_draw+'</span>';
+        html+='</div><div class="cr3r">'+fmt(c.price)+' Cr</div></div>';
+        // Expanded stats — inside .cb only
+        html+='<div class="cb"><div class="fg">';
+        if(statRows.length){
+          statRows.forEach(([k,v])=>{
+            const label=k.replace(/_/g,' ').replace(/\b\w/g,x=>x.toUpperCase());
+            html+='<div class="f"><div class="fl">'+label+'</div><div class="fv">'+v+'</div></div>';
+          });
+        } else {
+          html+='<div class="f"><div class="fl" style="color:var(--mu);font-style:italic;">No stat bonus</div></div>';
+        }
+        if(c.pwr_draw) html+='<div class="f"><div class="fl">Pwr Draw</div><div class="fv" style="color:#f87171;">'+c.pwr_draw+'</div></div>';
+        html+='<div class="f"><div class="fl">Unit Size</div><div class="fv" style="color:var(--mu);">'+(c.unit_size>0?'+':'')+c.unit_size+'</div></div>';
         html+='<div class="f"><div class="fl">Price</div><div class="fv" style="color:#4ade80;">'+fmt(c.price)+' Cr</div></div>';
-        Object.entries(c.stats||{}).forEach(([k,v])=>{
-          if(v===0||v===''||v===null) return;
-          html+='<div class="f"><div class="fl">'+k.replace(/_/g,' ').replace(/\b\w/g,x=>x.toUpperCase())+'</div><div class="fv">'+v+'</div></div>';
-        });
         html+='</div></div></div>';
       });
       html+='</div></div>';
