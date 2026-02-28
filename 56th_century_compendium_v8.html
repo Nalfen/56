@@ -451,6 +451,87 @@ function compLine(code){if(!code||code==='EMPTY')return'<span style="color:#3741
 function shipStat(s,type){const all=[...(s.core||[]),...(s.internal||[]),...(s.external||[])];const c=all.find(x=>{const p=x.split('_');return p.slice(0,p.length-2).join('_')===type;});return c?pComp(c).quality:null;}
 function qBadge(q){const qs=COMP_QCOL[q]||'color:#9ca3af;border:1px solid rgba(156,163,175,.3)';return q?'<span style="font-size:9px;padding:1px 5px;border-radius:3px;'+qs+'">'+q+'</span>':'';}
 
+// ─── Ship Stat Calculator ─────────────────────────────────────────────────────
+// Quality index: BASIC=0 AVERAGE=1 GOOD=2 UNIVERSAL=3 / Weapon size: XLARGE=0 HUGE=1 MASSIVE=2 COLOSSAL=3
+const COMP_Q={BASIC:0,AVERAGE:1,GOOD:2,UNIVERSAL:3,XLARGE:0,HUGE:1,MASSIVE:2,COLOSSAL:3};
+// Base frame stats by ship class
+const SHIP_BASE={DRONE:{structure:1,hull:5,crew_min:0},FIGHTER:{structure:2,hull:8,crew_min:1},CORVETTE:{structure:3,hull:10,crew_min:3},FRIGATE:{structure:4,hull:12,crew_min:5},CRUISER:{structure:6,hull:15,crew_min:8},BATTLECRUISER:{structure:8,hull:18,crew_min:12},CARRIER:{structure:10,hull:20,crew_min:20},NOVA:{structure:15,hull:25,crew_min:30}};
+// Component stat contributions: {stat:[base, per_quality_bonus], ...}
+// pwr_draw = passive power consumed by this component
+const COMP_CC={
+  POWER:          {pwr_create:[20,5],system:[3,1],pwr_draw:[0,0]},
+  POWER_CORONTHIA:{pwr_create:[25,8],system:[4,2],pwr_draw:[0,0]},
+  ENERGYTANK:     {energy_storage:[10,5],pwr_draw:[0,0]},
+  HULL:           {hull:[3,1],pwr_draw:[0,0]},
+  STRUCTURE:      {structure:[1,1],pwr_draw:[0,0]},
+  SHIELD:         {shield_max:[15,5],shield_recharge:[3,1],system:[0,1],pwr_draw:[3,0]},
+  ECM:            {ecm:[3,1],pwr_draw:[3,0]},
+  SYSTEM:         {system:[3,1],pwr_draw:[3,0]},
+  WARFARESUITE:   {warfare:[3,1],pwr_draw:[2,0]},
+  BRIDGE:         {command:[3,1],pwr_draw:[2,0]},
+  COMBRIDGE:      {command:[2,1],ecm:[1,1],max_range:[500,500],pwr_draw:[2,0]},
+  AIRLOCKBRIDGE:  {command:[1,0],pwr_draw:[1,0]},
+  NAVBRIDGE:      {handling:[3,1],pwr_draw:[2,0]},
+  JUMPDRIVE:      {jump_range:[2,1],pwr_draw:[5,0]},
+  ENGINEBALANCED: {handling:[2,1],engineering:[0,1],fuel_cons:[2,0],pwr_draw:[4,0]},
+  ENGINECOMBAT:   {handling:[2,1],warfare:[0,1],fuel_cons:[3,0],pwr_draw:[4,0]},
+  ENGINEHANDLING: {handling:[3,1],fuel_cons:[2,0],pwr_draw:[4,0]},
+  INSTRUMENTS:    {instruments:[3,1],detect_range:[100,100],pwr_draw:[2,0]},
+  RADAR:          {instruments:[1,1],combat_range:[100,50],pwr_draw:[1,0]},
+  ENGINEERING:    {engineering:[3,1],pwr_draw:[2,0]},
+  LIFESUPPORT:    {life_ppl:[5,5],life_hrs:[24,12],pwr_draw:[2,0]},
+  FUELTANK:       {fuel_units:[100,50],pwr_draw:[0,0]},
+  CARGOSPACE:     {cargo:[1,0],pwr_draw:[1,0]},
+  CREWSPACE:      {crew_max:[5,5],pwr_draw:[1,0]},
+  CREWAUTOMATION: {crew_auto:[2,1],pwr_draw:[1,0]},
+  PASSENGERSSPACE:{passengers:[10,10],pwr_draw:[1,0]},
+  COCKPIT:        {handling:[1,0],pwr_draw:[1,0]},
+  MEDBAY:         {pwr_draw:[2,0]},
+  WEAPON_TURRET:  {pwr_activation:[3,1],pwr_draw:[0,0]},
+  WEAPON_FIXED:   {pwr_activation:[2,1],pwr_draw:[0,0]},
+  ORDONNANCE_FIXED:{pwr_activation:[2,0],pwr_draw:[1,0]},
+  AMMOBAY:        {pwr_draw:[0,0]},
+  ESCAPEPOD:      {pwr_draw:[1,0]},
+  BAY_CORVETTE:   {pwr_draw:[2,0]},
+  BAY_DRONE:      {pwr_draw:[2,0]},
+  BAY_FIGHTER:    {pwr_draw:[2,0]},
+  CONSTRUCTION:   {pwr_draw:[2,0]},
+  LANDING:        {pwr_draw:[1,0]},
+  ATMOSPHERIC:    {pwr_draw:[2,0]},
+  JACUZI:         {pwr_draw:[1,0]},
+  SWIMPOOL:       {pwr_draw:[1,0]},
+  BAR:            {pwr_draw:[1,0]},
+};
+// Engine base speed tiers (index into SPD_STR); GOOD+ quality adds +1 tier
+const ENG_SPD={ENGINEBALANCED:3,ENGINECOMBAT:4,ENGINEHANDLING:3};
+const SPD_STR=['NONE','VERY LOW','LOW','MEDIUM','HIGH','VERY HIGH','ULTRA'];
+function calcShip(comps,cls){
+  const base=SHIP_BASE[cls]||{structure:1,hull:5,crew_min:0};
+  const s={pwr_create:0,pwr_draw:0,pwr_activation:0,energy_storage:0,shield_max:0,shield_recharge:0,crew_min:base.crew_min,crew_max:0,passengers:0,cargo:0,life_ppl:0,life_hrs:0,fuel_cons:0,fuel_units:0,combat_range:0,detect_range:0,max_range:0,jump_range:0,structure:base.structure,hull:base.hull,ecm:0,system:0,command:0,handling:0,instruments:0,engineering:0,warfare:0,spd_tier:0,spd_cnt:0,atmospheric:'NONE',crew_auto:0};
+  (comps||[]).forEach(code=>{
+    if(!code||code==='EMPTY') return;
+    const xm=code.match(/^(.+?)\s+\u00d7(\d+)$/);
+    const raw=xm?xm[1]:code;
+    const cnt=xm?parseInt(xm[2]):1;
+    const{type,quality}=pComp(raw);
+    const q=COMP_Q[quality]??0;
+    if(ENG_SPD[type]!==undefined){
+      const tier=ENG_SPD[type]+(q>=2?1:0);
+      for(let i=0;i<cnt;i++){s.spd_cnt++;s.spd_tier=s.spd_cnt===1?tier:Math.min(s.spd_tier+1,SPD_STR.length-1);}
+    }
+    if(type==='LANDING') s.atmospheric=s.atmospheric==='NONE'?'LIMITED':s.atmospheric;
+    if(type==='ATMOSPHERIC') s.atmospheric='FULL';
+    const contrib=COMP_CC[type];
+    if(!contrib) return;
+    Object.entries(contrib).forEach(([stat,[bv,pq]])=>{s[stat]=(s[stat]||0)+(bv+pq*q)*cnt;});
+  });
+  s.pwr_consumption=s.pwr_draw; delete s.pwr_draw;
+  s.speed=SPD_STR[Math.min(s.spd_tier,SPD_STR.length-1)]||'NONE';
+  delete s.spd_tier; delete s.spd_cnt;
+  s.crew_min=Math.max(0,s.crew_min-s.crew_auto); delete s.crew_auto;
+  return s;
+}
+
 // ─── Render ───────────────────────────────────────────────────────────────────
 function render(){
   const main=document.getElementById('main');
@@ -1206,7 +1287,7 @@ function render(){
       cShips.forEach(s=>{
         const id='ship-'+esc(s.name||s.role).replace(/\W/g,'_');
         const bc=classColors[cls]||'rgba(255,255,255,.05)';
-        const cp=s.computed||{};
+        const cp=calcShip([...(s.core||[]),...(s.internal||[]),...(s.external||[])],s.class);
         html+='<div class="card" style="border-color:'+bc+'" id="'+id+'" data-tog="'+id+'">';
         // Compact header: name | role
         html+='<div class="ch">';
@@ -1261,29 +1342,29 @@ function render(){
         html+='<div class="f"><div class="fl">🛡 Shield Max</div><div class="fv" style="color:#34d399;">'+sv(cp.shield_max)+'</div></div>';
         html+='<div class="f"><div class="fl">♻ Recharge</div><div class="fv" style="color:#34d399;">'+sv(cp.shield_recharge)+'</div></div>';
         html+='</div>';
-        // Crew & mobility
-        html+=sLabel('Crew & Mobility');
+        // Personnel & capacity
+        if(cp.crew_min||cp.crew_max||cp.passengers||cp.cargo||cp.life_ppl){
+          html+=sLabel('Personnel & Capacity');
+          html+='<div class="fg">';
+          if(cp.crew_min!=null){html+='<div class="f"><div class="fl">👤 Min Crew</div><div class="fv">'+sv(cp.crew_min)+'</div></div>';}
+          if(cp.crew_max){html+='<div class="f"><div class="fl">👥 Max Crew</div><div class="fv">'+sv(cp.crew_max)+'</div></div>';}
+          if(cp.passengers){html+='<div class="f"><div class="fl">🧍 Passengers</div><div class="fv">'+sv(cp.passengers)+'</div></div>';}
+          if(cp.cargo){html+='<div class="f"><div class="fl">📦 Cargo</div><div class="fv">'+sv(cp.cargo,' HUGE')+'</div></div>';}
+          if(cp.life_ppl){html+='<div class="f"><div class="fl">💨 Life Support</div><div class="fv">'+sv(cp.life_ppl,'ppl')+(cp.life_hrs?' / '+sv(cp.life_hrs,'h'):'')+'</div></div>';}
+          html+='</div>';
+        }
+        // Navigation
+        html+=sLabel('Navigation');
         html+='<div class="fg">';
-        if(cp.crew_min||cp.crew_max){html+='<div class="f"><div class="fl">👤 Min Crew</div><div class="fv">'+sv(cp.crew_min)+'</div></div>';}
-        if(cp.crew_max){html+='<div class="f"><div class="fl">👥 Max Crew</div><div class="fv">'+sv(cp.crew_max)+'</div></div>';}
-        if(cp.passengers!=null){html+='<div class="f"><div class="fl">🧍 Passengers</div><div class="fv">'+sv(cp.passengers)+'</div></div>';}
         html+='<div class="f"><div class="fl">🚀 Speed</div><div class="fv">'+sv(cp.speed)+'</div></div>';
         html+='<div class="f"><div class="fl">🌍 Atmospheric</div><div class="fv">'+sv(cp.atmospheric)+'</div></div>';
         if(cp.jump_range){html+='<div class="f"><div class="fl">🌌 Jump Range</div><div class="fv" style="color:#a78bfa;">'+sv(cp.jump_range)+'</div></div>';}
+        if(cp.combat_range){html+='<div class="f"><div class="fl">📡 Combat Range</div><div class="fv">'+sv(cp.combat_range)+'</div></div>';}
+        if(cp.detect_range){html+='<div class="f"><div class="fl">🔭 Detect Range</div><div class="fv">'+sv(cp.detect_range)+'</div></div>';}
+        if(cp.max_range){html+='<div class="f"><div class="fl">📻 Max Range</div><div class="fv">'+sv(cp.max_range)+'</div></div>';}
+        if(cp.fuel_cons){html+='<div class="f"><div class="fl">⛽ Fuel/hr</div><div class="fv">'+sv(cp.fuel_cons)+'</div></div>';}
+        if(cp.fuel_units){html+='<div class="f"><div class="fl">🛢 Fuel Units</div><div class="fv">'+sv(cp.fuel_units)+'</div></div>';}
         html+='</div>';
-        // Sensors & logistics
-        if(cp.combat_range||cp.detect_range||cp.max_range||cp.cargo||cp.life_ppl||cp.fuel_cons){
-          html+=sLabel('Sensors & Logistics');
-          html+='<div class="fg">';
-          if(cp.combat_range){html+='<div class="f"><div class="fl">📡 Combat Range</div><div class="fv">'+sv(cp.combat_range)+'</div></div>';}
-          if(cp.detect_range){html+='<div class="f"><div class="fl">🔭 Detect Range</div><div class="fv">'+sv(cp.detect_range)+'</div></div>';}
-          if(cp.max_range){html+='<div class="f"><div class="fl">📻 Max Range</div><div class="fv">'+sv(cp.max_range)+'</div></div>';}
-          if(cp.cargo){html+='<div class="f"><div class="fl">📦 Cargo</div><div class="fv">'+sv(cp.cargo,' HUGE')+'</div></div>';}
-          if(cp.life_ppl){html+='<div class="f"><div class="fl">💨 Life Support</div><div class="fv">'+sv(cp.life_ppl,'ppl')+(cp.life_hrs?' / '+sv(cp.life_hrs,'h'):'')+'</div></div>';}
-          if(cp.fuel_cons){html+='<div class="f"><div class="fl">⛽ Fuel/hr</div><div class="fv">'+sv(cp.fuel_cons)+'</div></div>';}
-          if(cp.fuel_units){html+='<div class="f"><div class="fl">🛢 Fuel Units</div><div class="fv">'+sv(cp.fuel_units)+'</div></div>';}
-          html+='</div>';
-        }
         // Component sections
         html+=cSec(s.core,s.core_used,s.core_max,'CORE','#34d399','🔒');
         html+=cSec(s.internal,s.int_used,s.int_max,'INTERNAL','#60a5fa','⚙');
