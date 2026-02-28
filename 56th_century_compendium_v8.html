@@ -463,7 +463,7 @@ const SHIP_BASE={DRONE:{structure:1,hull:5,crew_min:0,command:0},FIGHTER:{struct
 const COMP_CC={
   // Power systems
   POWER:          {pwr_create:[20,5],system:[3,1],pwr_draw:[0,0]},
-  POWER_CORONTHIA:{pwr_create:[25,8],system:[4,2],pwr_draw:[0,0]},
+  POWER_CORONTHIA:{pwr_create:[25,8],system:[4,2],fuel_cons:[3,2],pwr_draw:[0,0]},  // burns coronthia crystals
   ENERGYTANK:     {energy_storage:[10,5],pwr_draw:[0,0]},
   // Frame
   HULL:           {structure:[-1,1],command:[1,-1],pwr_draw:[0,0]},  // BASIC penalises structure, GOOD hull is heavy (-command)
@@ -482,9 +482,9 @@ const COMP_CC={
   JUMPDRIVE:      {pwr_activation:[5,0],pwr_draw:[0,0]},  // jump_range preserved from ship data
   // Engines — speed tier = base(2=LOW) + q (BASIC+0 AVERAGE+1 GOOD+2)
   // BALANCED: handling = tier; COMBAT: warfare = tier; HANDLING: handling = 2 flat
-  ENGINEBALANCED: {handling:[1,1],fuel_cons:[2,0],pwr_draw:[4,0]},
-  ENGINECOMBAT:   {warfare:[1,1],fuel_cons:[3,0],pwr_draw:[4,0]},
-  ENGINEHANDLING: {handling:[2,0],fuel_cons:[2,0],pwr_draw:[4,0]},
+  ENGINEBALANCED: {handling:[1,1],pwr_draw:[4,0]},
+  ENGINECOMBAT:   {warfare:[1,1],pwr_draw:[4,0]},
+  ENGINEHANDLING: {handling:[2,0],pwr_draw:[4,0]},
   // Sensors
   INSTRUMENTS:    {instruments:[1,1],detect_range:[100,100],max_range:[200,200],pwr_draw:[2,0]},
   RADAR:          {instruments:[1,1],combat_range:[100,50],detect_range:[50,25],pwr_draw:[1,0]},
@@ -492,7 +492,7 @@ const COMP_CC={
   ENGINEERING:    {engineering:[1,1],pwr_draw:[2,0]},
   CONSTRUCTION:   {engineering:[1,1],pwr_draw:[2,0]},
   // Crew / life
-  LIFESUPPORT:    {life_ppl:[5,5],life_hrs:[24,12],pwr_draw:[2,0]},
+  LIFESUPPORT:    {life_ppl:[5,5],life_hrs:[720,8040],pwr_draw:[2,0]},  // BASIC=30d AVERAGE=1yr GOOD=~2yr per unit
   FUELTANK:       {fuel_units:[100,50],pwr_draw:[0,0]},
   CARGOSPACE:     {cargo:[1,0],pwr_draw:[1,0]},
   CREWSPACE:      {crew_max:[5,5],pwr_draw:[1,0]},
@@ -568,7 +568,7 @@ const SCOMP_DEF={
     tiers:[{pwr_create:20,system:3},{pwr_create:25,system:4},{pwr_create:30,system:5}]},
   POWER_CORONTHIA:{name:'Coronthia Power Core',classes:'ALL',
     unit:[4,6,10,15,22,32,47,69],pwr:[0,0,0,0,0,0,0,0],price:[200000,400000,950000,2100000,4700000,10600000,23800000,53500000],
-    tiers:[{pwr_create:25,system:4},{pwr_create:33,system:6},{pwr_create:41,system:8}]},
+    tiers:[{pwr_create:25,system:4,fuel_cons:3},{pwr_create:33,system:6,fuel_cons:5},{pwr_create:41,system:8,fuel_cons:7}]},
   SHIELD:{name:'Shield',classes:'ALL',
     unit:[4,6,10,15,22,32,47,69],pwr:[3,5,8,12,17,25,37,54],price:[80000,160000,380000,850000,1900000,4300000,9600000,21500000],
     tiers:[{shield_max:15,shield_recharge:3},{shield_max:20,shield_recharge:4},{shield_max:25,shield_recharge:5}]},
@@ -622,7 +622,7 @@ const SCOMP_DEF={
     tiers:[{fuel_units:100},{fuel_units:200},{fuel_units:300}]},
   LIFESUPPORT:{name:'Life Support',classes:['FIGHTER','CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
     unit:[3,5,8,12,17,25,37,54],pwr:[2,3,5,8,11,16,24,35],price:[50000,100000,238000,535000,1200000,2700000,6060000,13600000],
-    tiers:[{life_ppl:5,life_hrs:24},{life_ppl:10,life_hrs:48},{life_ppl:15,life_hrs:72}]},
+    tiers:[{life_ppl:5,life_hrs:720},{life_ppl:10,life_hrs:8760},{life_ppl:15,life_hrs:16800}]},
   CREWSPACE:{name:'Crew Quarters',classes:['CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
     unit:[0,0,3,5,8,12,17,25],pwr:[0,0,1,2,3,5,7,10],price:[0,0,143000,320000,720000,1620000,3640000,8180000],
     tiers:[{crew_max:5},{crew_max:10},{crew_max:15}]},
@@ -1411,6 +1411,7 @@ function render(){
     const classColors={'DRONE':'rgba(139,92,246,.3)','FIGHTER':'rgba(59,130,246,.3)','CORVETTE':'rgba(16,185,129,.3)','FRIGATE':'rgba(245,158,11,.3)','CRUISER':'rgba(239,68,68,.3)','BATTLECRUISER':'rgba(220,38,38,.4)','CARRIER':'rgba(249,115,22,.3)','NOVA':'rgba(168,85,247,.5)'};
     const classTx={'DRONE':'#a78bfa','FIGHTER':'#60a5fa','CORVETTE':'#34d399','FRIGATE':'#fbbf24','CRUISER':'#f87171','BATTLECRUISER':'#ef4444','CARRIER':'#fb923c','NOVA':'#d946ef'};
     const sv=(v,unit)=>(!v&&v!==0)?'\u2014':(v+(unit||''));
+    const fmtTime=h=>{if(!h)return'\u2014';if(h<48)return h+' hrs';const d=Math.round(h/24);if(d<60)return d+' days';const mo=Math.round(h/730);if(mo<24)return mo+' months';return(h/8760).toFixed(1)+' years';};
     const sp=(v)=>v>0?'+'+v:String(v);
     const statPill=(label,val,col)=>'<span class="wpn-pill" style="color:'+(col||'#d1d5db')+';font-size:9px;padding:1px 5px;"><span style="color:#6b7280;font-size:9px;">'+label+'</span> '+val+'</span>';
     const sLabel=(lbl)=>'<div style="font-size:9px;font-weight:700;letter-spacing:1px;color:#4b5563;text-transform:uppercase;margin:8px 0 4px;">'+lbl+'</div>';
@@ -1449,6 +1450,8 @@ function render(){
         html+='<span class="wpn-pill" style="color:'+classTx[cls]+';border-color:'+bc+';">'+classEmoji[cls]+' '+cls+'</span>';
         if(cp.speed) html+='<span class="wpn-pill">🚀 '+esc(cp.speed)+'</span>';
         if(cp.atmospheric&&cp.atmospheric!=='NONE') html+='<span class="wpn-pill" style="color:#34d399;">🌍 ATM '+esc(cp.atmospheric)+'</span>';
+        if(cp.max_range) html+='<span class="wpn-pill" style="color:#22d3ee;">📡 '+cp.max_range+' km</span>';
+        if(cp.fuel_cons) html+='<span class="wpn-pill" style="color:#fb923c;">⚗ CORON</span>';
         html+='</div>';
         // Row 3: key ratings as small stat pills
         html+='<div style="display:flex;flex-wrap:wrap;gap:3px;margin:4px 0;">';
@@ -1500,7 +1503,7 @@ function render(){
           if(cp.crew_max){html+='<div class="f"><div class="fl">👥 Max Crew</div><div class="fv">'+sv(cp.crew_max)+'</div></div>';}
           if(cp.passengers){html+='<div class="f"><div class="fl">🧍 Passengers</div><div class="fv">'+sv(cp.passengers)+'</div></div>';}
           if(cp.cargo){html+='<div class="f"><div class="fl">📦 Cargo</div><div class="fv">'+sv(cp.cargo,' HUGE')+'</div></div>';}
-          if(cp.life_ppl){html+='<div class="f"><div class="fl">💨 Life Support</div><div class="fv">'+sv(cp.life_ppl,'ppl')+(cp.life_hrs?' / '+sv(cp.life_hrs,'h'):'')+'</div></div>';}
+          if(cp.life_ppl){html+='<div class="f"><div class="fl">💨 Life Support</div><div class="fv">'+sv(cp.life_ppl,' ppl')+(cp.life_hrs?' / '+fmtTime(cp.life_hrs):'')+'</div></div>';}
           html+='</div>';
         }
         // Navigation
@@ -1511,10 +1514,19 @@ function render(){
         if(cp.jump_range){html+='<div class="f"><div class="fl">🌌 Jump Range</div><div class="fv" style="color:#a78bfa;">'+sv(cp.jump_range)+'</div></div>';}
         if(cp.combat_range){html+='<div class="f"><div class="fl">📡 Combat Range</div><div class="fv">'+sv(cp.combat_range)+'</div></div>';}
         if(cp.detect_range){html+='<div class="f"><div class="fl">🔭 Detect Range</div><div class="fv">'+sv(cp.detect_range)+'</div></div>';}
-        if(cp.max_range){html+='<div class="f"><div class="fl">📻 Max Range</div><div class="fv">'+sv(cp.max_range)+'</div></div>';}
-        if(cp.fuel_cons){html+='<div class="f"><div class="fl">⛽ Fuel/hr</div><div class="fv">'+sv(cp.fuel_cons)+'</div></div>';}
-        if(cp.fuel_units){html+='<div class="f"><div class="fl">🛢 Fuel Units</div><div class="fv">'+sv(cp.fuel_units)+'</div></div>';}
+        if(cp.max_range){html+='<div class="f"><div class="fl">📡 Max Range</div><div class="fv" style="color:#22d3ee;">'+sv(cp.max_range,' km')+'</div></div>';}
         html+='</div>';
+        // Fuel — only for Coronthia-powered ships or tankers carrying fuel
+        if(cp.fuel_cons||cp.fuel_units){
+          html+=sLabel('⚗ Coronthia Fuel');
+          html+='<div class="fg">';
+          if(cp.fuel_cons){html+='<div class="f"><div class="fl">🔥 Crystals/hr</div><div class="fv" style="color:#fb923c;">'+sv(cp.fuel_cons)+'</div></div>';}
+          if(cp.fuel_units){
+            html+='<div class="f"><div class="fl">🛢 Capacity</div><div class="fv" style="color:#fbbf24;">'+sv(cp.fuel_units,' units')+'</div></div>';
+            if(cp.fuel_cons){const hrs=Math.round(cp.fuel_units/cp.fuel_cons);html+='<div class="f"><div class="fl">⏱ Range</div><div class="fv" style="color:#a78bfa;">'+fmtTime(hrs)+'</div></div>';}
+          }
+          html+='</div>';
+        }
         // Component sections
         html+=cSec(s.core,s.core_used,s.core_max,'CORE','#34d399','🔒');
         html+=cSec(s.internal,s.int_used,s.int_max,'INTERNAL','#60a5fa','⚙');
