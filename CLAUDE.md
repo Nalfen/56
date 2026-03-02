@@ -14,8 +14,10 @@ The project is released under **CC0 1.0 Universal** (public domain).
 /
 ├── 56th_century_compendium_v3.html   # Version 3 (431 lines, archived)
 ├── 56th_century_compendium_v5.html   # Version 5 (838 lines, archived)
-├── 56th_century_compendium_v8.html   # Version 8 (1197 lines, current/latest)
-└── LICENSE                            # CC0 1.0 Universal
+├── 56th_century_compendium_v8.html   # Version 8 (current/latest)
+├── ship_components.csv               # Exported flat ship component catalog (generated)
+├── inject_engines.py                 # Dev helper: injects ENGINE codes into ship data
+└── LICENSE                           # CC0 1.0 Universal
 ```
 
 **v8 is the canonical/latest version.** Work on v8 unless explicitly told otherwise. v3 and v5 are kept for reference.
@@ -102,6 +104,7 @@ All game data lives in the `const g = {...}` constant. Top-level keys:
 | `g.catalog.chassis` | Drone chassis sizes `{size, core, internal, external, durability, structure, base_price}` |
 | `g.catalog.modules` | Drone & vehicle modules `{name, size, availability, description, cost}` |
 | `g.catalog.ships` | Spaceships `{name, class, role, description, power, total_size, total_cost, core_size, core:[], internal_size, internal:[], external_size, external:[]}` |
+| `g.catalog.ship_components` | Flat array of ship component catalog entries — built at startup by `buildShipComps()` from `SCOMP_DEF` |
 
 ---
 
@@ -129,10 +132,11 @@ All game data lives in the `const g = {...}` constant. Top-level keys:
 | `cat_drones` | Drones | 🤖 |
 | `modules` | Modules | 🔧 |
 | `ships` | Spaceships | 🚀 |
+| `ship_components` | Ship Components | ⚙ |
 | `equipment` | Equipment | 🎒 |
 | `medical` | Medical | 💉 |
 
-**New in v8:** `glossary_only` (flat glossary view from `g.glossary_clean`), `vehicles`, `cat_drones`, `modules`, and `ships` (all sourced from `g.catalog`).
+**New in v8:** `glossary_only` (flat glossary view from `g.glossary_clean`), `vehicles`, `cat_drones`, `modules`, `ships`, and `ship_components` (all sourced from `g.catalog`).
 
 ### Rule Groups (in `rules_grouped`)
 
@@ -303,7 +307,117 @@ const card = e.target.closest('[data-tog]');
 if (card) tog(card.dataset.tog);
 ```
 
-Card expand content sits in a sibling `<div class="exp" id="x{id}">` / `<div class="exb">` — **not** `.cb` (which was the v5 pattern). Do not mix the two patterns.
+Card structure:
+```html
+<div class="card [rar-*]" id="cID" data-tog="ID">
+  <div class="ch">Name <span class="xi">▼</span></div>  <!-- always visible header -->
+  <div class="cr2">…pills…</div>                        <!-- always visible row 2 -->
+  <div class="cr3"><div class="cr3l">…</div><div class="cr3r">price</div></div>
+  <div class="cb">…expanded content…</div>              <!-- hidden until toggled -->
+</div>
+```
+
+CSS: `.cb{display:none}` / `.card.x .cb{display:block}`. The `.cb` class is the v8 expand container — do **not** use `.exp`/`.exb` (those were older patterns).
+
+### Ship Component System (v8)
+
+Ship components are the building blocks installed in spaceship slot lists (`core[]`, `internal[]`, `external[]`). Each entry is a component code string in the format:
+
+```
+TYPE_CLASSIDX-CLASS_TIERIDX-QUALITY
+```
+
+Example: `ENGINEBALANCED_4-FRIGATE_2-AVERAGE`
+
+#### Key data structures
+
+| Constant | Purpose |
+|---|---|
+| `COMP_NAMES` | Map of type key → human display name (44 types) |
+| `COMP_Q` | Map of quality string → integer index (BASIC:0, AVERAGE:1, GOOD:2, UNIVERSAL:3, …) |
+| `COMP_QCOL` | Map of quality → inline CSS style string for badge coloring |
+| `COMP_CC` | Stat contributions per component type: `{stat:[base, per_q], …}` — value = base + per_q × q |
+| `ENG_SPD` | Engine types → speed base tier (all currently 2 = LOW); speed = base + q |
+| `SPD_STR` | Speed tier index → string: `['NONE','VERY LOW','LOW','MEDIUM','HIGH','VERY HIGH','ULTRA']` |
+| `SHIP_BASE` | Per-class base stats: `{structure, hull, crew_min, command}` |
+| `SENSOR_MULT` | Per-class sensor range multiplier (CORVETTE=1×, scaling to NOVA=32×) |
+| `SCOMP_DEF` | Compact component catalog: see below |
+| `SCOMP_CLASSES` | `['DRONE','FIGHTER','CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA']` |
+| `SCOMP_TIERS` | `['BASIC','AVERAGE','GOOD']` |
+
+#### SCOMP_DEF schema
+
+Each entry in `SCOMP_DEF` has:
+```js
+TYPE_KEY: {
+  name: 'Display Name',
+  classes: 'ALL' | ['CLASS', ...],  // which ship classes can use this
+  unit: [d,f,c,fr,cr,bc,ca,no],    // unit space per class [DRONE..NOVA]
+  pwr:  [d,f,c,fr,cr,bc,ca,no],    // power draw per class
+  price:[d,f,c,fr,cr,bc,ca,no],    // credit cost per class
+  tiers:[{statKey:value,...}, ...], // stat bonuses for [BASIC, AVERAGE, GOOD]
+}
+```
+
+A zero `unit` AND zero `price` for a class index means that class cannot use the component.
+
+#### calcShip(comps, cls)
+
+Accumulates all stat contributions for a ship's component list and ship class:
+1. Iterates each component code, parses type/quality, looks up `COMP_CC`
+2. Applies `stat += (base + per_q * q) * count` for all stats
+3. Engine speed: `tier = ENG_SPD[type] + q`; multiple engines stack (each adds +1 tier)
+4. After accumulation: scales sensor ranges by `SENSOR_MULT[cls]`; sets `detect_range`/`max_range` to `null` for DRONE/FIGHTER respectively
+5. Falls back to `CLASS_MIN_SPD[cls]` (all = 2 = LOW) if no engine found
+
+#### Speed tiers (engines only)
+
+Engine quality maps directly to speed: BASIC → LOW, AVERAGE → MEDIUM, GOOD → HIGH. A second engine of any type adds +1 tier. No ship should show VERY LOW or NONE (minimum fallback is LOW).
+
+#### Sensor ranges
+
+Ranges in `COMP_CC` are defined at **CORVETTE scale (1×)**. `calcShip` multiplies them by `SENSOR_MULT`:
+
+| Class | Multiplier |
+|---|---|
+| DRONE | 0.1× |
+| FIGHTER | 0.3× |
+| CORVETTE | 1× |
+| FRIGATE | 2× |
+| CRUISER | 4× |
+| BATTLECRUISER | 8× |
+| CARRIER | 16× |
+| NOVA | 32× |
+
+DRONEs only have combat range (detect/max = null). FIGHTERs have combat + detect (max = null).
+
+#### Three radar types
+
+| Type | Corvette combat | Corvette detect | Corvette max | Instruments (per quality) |
+|---|---|---|---|---|
+| `RADAR` | 100 | 1 000 | 10 000 | +1 / +2 / +3 |
+| `RADAR_COMBAT` | 300 | 3 000 | 9 000 | 0 / +1 / +2 |
+| `RADAR_DEEPSPACE` | 50 | 5 000 | 50 000 | +2 / +3 / +4 |
+
+Quality only affects `instruments` bonus; range values are fixed per type.
+
+#### buildShipComps()
+
+Expands `SCOMP_DEF` into the flat `g.catalog.ship_components` array at startup. Each entry has:
+
+```js
+{id, type, name, ship_class, quality, unit_size, pwr_draw, price, stats:{…}}
+```
+
+The full catalog is also exported as `ship_components.csv` in the repo root (34 columns, ~768 rows).
+
+#### Helper functions for components
+
+| Function | Purpose |
+|---|---|
+| `pComp(code)` | Parse a component code string → `{type, quality}` |
+| `compLine(code)` | Render a component as a name + quality badge HTML string |
+| `qBadge(q)` | Render a standalone quality badge HTML span |
 
 ### Ship Classes (v8)
 
