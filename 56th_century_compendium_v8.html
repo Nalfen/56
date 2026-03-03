@@ -1168,6 +1168,8 @@ const DB_COMP={
 };
 
 // Drone builder state — survives re-renders (module-level)
+let dbState={name:'Unnamed Drone',size:null,mob:null,atmo:false,core:[],internal:[],external:[],wpnPicker:null};
+let dbAdd={loc:null,type:null,tier:0,skills:[],wpnSearch:''};
 
 function parseSk(s){if(!s||s==='0')return{d:0,f:0};const m=String(s).match(/^(\d*)D([+-]\d+)?$/i);if(m)return{d:parseInt(m[1]||1),f:parseInt(m[2]||0)};return{d:0,f:parseInt(s)||0};}
 function fmtSk(d,f){if(!d&&!f)return'0';if(!d)return String(f);if(!f)return d+'D';return d+'D'+(f>0?'+':'')+f;}
