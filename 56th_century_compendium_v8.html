@@ -1205,7 +1205,7 @@ function calcDrone(){
     if(!def) continue;
     const t=def.tiers[comp.tier];
     if(!t) continue;
-    const zkey=comp.loc==='int'?'internal':comp.loc;
+    const zkey=comp.loc==='int'?'internal':comp.loc==='ext'?'external':comp.loc;
     const zone=DB_ZONE[zkey]||{dc_mod:0,cost_mod:1};
     r.cost+=Math.round((t.price||0)*zone.cost_mod);
     r.dc=Math.max(r.dc,(t.dc||0)+zone.dc_mod);
@@ -1279,7 +1279,7 @@ function dbTierDesc(type,t){
 }
 
 function renderDbZone(loc,stats){
-  const zkey=loc==='int'?'internal':loc;
+  const zkey=loc==='int'?'internal':loc==='ext'?'external':loc;
   const zone=DB_ZONE[zkey];
   const locKey=loc==='core'?'core':loc==='int'?'internal':'external';
   const comps=dbState[locKey];
@@ -1332,7 +1332,7 @@ function renderWpnPicker(comp,t,loc,idx){
   const wpns=(g.weapons||[]).filter(w=>wtype==='ENERGY'?isEnergy(w):!isEnergy(w));
   const q=(dbAdd.wpnSearch||'').toLowerCase();
   const filtered=q?wpns.filter(w=>(w.name||'').toLowerCase().includes(q)||(w.category||'').toLowerCase().includes(q)):wpns;
-  const zkey=loc==='int'?'internal':loc;
+  const zkey=loc==='int'?'internal':loc==='ext'?'external':loc;
   let h='<div class="db-wpn-picker">';
   h+='<div style="font-size:9px;color:'+(DB_ZONE[zkey]||{color:'#fff'}).color+';font-family:Orbitron,sans-serif;margin-bottom:4px;">'+wtype+' WEAPONS — SELECT</div>';
   h+='<input type="text" class="db-wpn-search" placeholder="Search..." value="'+esc(dbAdd.wpnSearch||'')+'" data-db="wpnsearch" style="width:100%;box-sizing:border-box;margin-bottom:4px;">';
