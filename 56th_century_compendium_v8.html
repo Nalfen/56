@@ -13,10 +13,10 @@ body{font-family:'Exo 2',sans-serif;background:var(--bg);color:var(--tx);display
 header{height:50px;background:linear-gradient(90deg,#060810,#0a0f1a,#060810);border-bottom:1px solid var(--a);display:flex;align-items:center;padding:0 14px;gap:12px;flex-shrink:0;}
 .logo{font-family:'Orbitron',monospace;font-size:13px;font-weight:900;color:var(--a);letter-spacing:3px;white-space:nowrap;text-shadow:0 0 10px rgba(0,200,255,.4);}
 .logo span{color:var(--a2);}
-#search{flex:1;max-width:460px;height:30px;background:#0a1018;border:1px solid var(--b);border-radius:3px;padding:0 10px 0 30px;color:var(--tx);font-family:'Share Tech Mono',monospace;font-size:12px;outline:none;transition:border-color .2s;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%235a7a95' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:9px center;}
+#search{flex:1;max-width:460px;height:30px;background:#0a1018;border:1px solid var(--b);border-radius:3px;padding:0 10px 0 30px;color:var(--tx);font-family:ShareTechMono,monospace;font-size:12px;outline:none;transition:border-color .2s;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%235a7a95' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:9px center;}
 #search:focus{border-color:var(--a);}
 #search::placeholder{color:var(--mu);}
-.res{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--mu);white-space:nowrap;}
+.res{font-family:ShareTechMono,monospace;font-size:11px;color:var(--mu);white-space:nowrap;}
 .layout{display:flex;flex:1;overflow:hidden;}
 aside{width:200px;flex-shrink:0;background:var(--s);border-right:1px solid var(--b);overflow-y:auto;padding:6px 0;}
 .nl{padding:5px 11px 2px;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--mu);text-transform:uppercase;}
@@ -26,9 +26,9 @@ aside{width:200px;flex-shrink:0;background:var(--s);border-right:1px solid var(-
 .ni{font-size:13px;width:17px;text-align:center;}
 main{flex:1;overflow-y:auto;padding:14px;background:var(--bg);}
 .stitle{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:var(--a);letter-spacing:2px;margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid var(--b);display:flex;align-items:center;gap:9px;flex-wrap:wrap;}
-.badge{font-size:10px;background:rgba(0,200,255,.1);border:1px solid rgba(0,200,255,.25);color:var(--a);padding:1px 7px;border-radius:10px;font-family:'Share Tech Mono',monospace;letter-spacing:0;font-weight:400;}
+.badge{font-size:10px;background:rgba(0,200,255,.1);border:1px solid rgba(0,200,255,.25);color:var(--a);padding:1px 7px;border-radius:10px;font-family:ShareTechMono,monospace;letter-spacing:0;font-weight:400;}
 .fbar{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:11px;align-items:center;}
-.fc{padding:2px 8px;border-radius:2px;font-size:10px;font-family:'Share Tech Mono',monospace;cursor:pointer;border:1px solid var(--b);background:var(--s);color:var(--mu);transition:all .13s;}
+.fc{padding:2px 8px;border-radius:2px;font-size:10px;font-family:ShareTechMono,monospace;cursor:pointer;border:1px solid var(--b);background:var(--s);color:var(--mu);transition:all .13s;}
 .fc:hover{border-color:var(--a);color:var(--tx);}
 .fc.active{background:rgba(0,200,255,.1);border-color:var(--a);color:var(--a);}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:8px;}
@@ -39,9 +39,9 @@ main{flex:1;overflow-y:auto;padding:14px;background:var(--bg);}
 .card.x{border-color:var(--a);}
 .ch{display:flex;align-items:flex-start;justify-content:space-between;gap:7px;}
 .cn{font-size:13px;font-weight:600;color:#e8f4ff;line-height:1.3;}
-.cs{font-size:10px;color:var(--mu);font-family:'Share Tech Mono',monospace;margin-top:2px;}
+.cs{font-size:10px;color:var(--mu);font-family:ShareTechMono,monospace;margin-top:2px;}
 .tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:5px;}
-.tag{font-size:9px;padding:1px 6px;border-radius:2px;font-family:'Share Tech Mono',monospace;white-space:nowrap;}
+.tag{font-size:9px;padding:1px 6px;border-radius:2px;font-family:ShareTechMono,monospace;white-space:nowrap;}
 .tb{background:rgba(0,200,255,.1);color:var(--a);border:1px solid rgba(0,200,255,.2);}
 .to{background:rgba(255,107,53,.1);color:var(--a2);border:1px solid rgba(255,107,53,.2);}
 .tw{background:rgba(255,255,255,.04);color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.15);}
@@ -54,21 +54,81 @@ main{flex:1;overflow-y:auto;padding:14px;background:var(--bg);}
 .card.x .xi{transform:rotate(180deg);color:var(--a);}
 .cb{display:none;margin-top:8px;padding-top:8px;border-top:1px solid var(--b);}
 .card.x .cb{display:block;}
+.db-setup{background:var(--c1);border:1px solid var(--b);border-radius:4px;padding:10px 12px;margin-bottom:10px;}
+.db-step{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-bottom:6px;}.db-step:last-child{margin-bottom:0;}
+.db-step-lbl{font-size:9px;font-family:Orbitron,sans-serif;color:var(--mu);letter-spacing:.1em;min-width:68px;flex-shrink:0;}
+.db-chip{font-size:10px;padding:3px 10px;border-radius:3px;background:rgba(255,255,255,.03);border:1px solid var(--b);color:var(--mu);cursor:pointer;}
+.db-chip:hover{border-color:var(--a);color:var(--a);}
+.db-chip.sel{background:rgba(0,200,255,.1);border-color:var(--a);color:var(--a);font-weight:600;}
+.db-chip.sel-o{background:rgba(255,107,53,.1);border-color:var(--a2);color:var(--a2);font-weight:600;}
+.db-zones{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin-bottom:10px;}
+.db-zone{background:var(--c1);border:1px solid var(--b);border-radius:4px;padding:10px 12px;}
+.db-zone-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--b);}
+.db-zone-title{font-size:10px;font-family:Orbitron,sans-serif;letter-spacing:.07em;}
+.db-zone-slots{font-size:10px;font-family:ShareTechMono,monospace;}
+.db-zone-slots.ok{color:var(--gr);}.db-zone-slots.warn{color:var(--a2);}.db-zone-slots.over{color:var(--re);}
+.db-comp-row{display:flex;align-items:center;gap:6px;padding:4px 6px;background:rgba(255,255,255,.02);border:1px solid var(--b);border-radius:3px;margin-bottom:4px;}
+.db-comp-name{flex:1;font-size:10px;color:var(--tx);}
+.db-comp-tier{font-size:9px;padding:1px 5px;border-radius:2px;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);color:#34d399;}
+.db-comp-meta{font-size:9px;color:var(--mu);font-family:ShareTechMono,monospace;}
+.db-rm{font-size:11px;color:var(--mu);cursor:pointer;padding:0 3px;border:none;background:none;line-height:1;}.db-rm:hover{color:var(--re);}
+.db-add-btn{width:100%;margin-top:4px;padding:5px;font-size:10px;font-family:Orbitron,sans-serif;letter-spacing:.05em;background:rgba(0,200,255,.04);border:1px dashed rgba(0,200,255,.2);color:rgba(0,200,255,.4);border-radius:3px;cursor:pointer;}
+.db-add-btn:hover{border-color:var(--a);color:var(--a);background:rgba(0,200,255,.08);}
+.db-add-panel{margin-top:8px;padding:10px;background:rgba(0,0,0,.35);border:1px solid rgba(0,200,255,.3);border-radius:3px;}
+.db-add-row{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px;}
+.db-add-lbl{font-size:9px;font-family:Orbitron,sans-serif;color:var(--mu);width:100%;letter-spacing:.06em;margin-bottom:1px;}
+.db-skill-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:3px;max-height:140px;overflow-y:auto;margin-bottom:6px;}
+.db-skill-cat{font-size:8px;font-family:Orbitron,sans-serif;color:var(--mu);letter-spacing:.06em;grid-column:1/-1;margin-top:4px;padding-top:4px;border-top:1px solid var(--b);}
+.db-skill-cat:first-child{margin-top:0;padding-top:0;border-top:none;}
+.db-skill-chip{font-size:9px;padding:2px 5px;border-radius:2px;background:rgba(255,255,255,.02);border:1px solid var(--b);color:var(--mu);cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.db-skill-chip.sel{background:rgba(168,85,247,.1);border-color:var(--a3);color:var(--a3);}
+.db-skill-chip.maxed{opacity:.35;cursor:not-allowed;}
+.db-tier-desc{font-size:10px;color:var(--tx);background:rgba(255,255,255,.02);border:1px solid var(--b);border-radius:2px;padding:6px 8px;margin-bottom:6px;line-height:1.6;}
+.db-add-row-btns{display:flex;gap:6px;}
+.db-confirm{font-size:10px;padding:4px 12px;background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.3);color:#34d399;border-radius:2px;cursor:pointer;}
+.db-confirm:hover{background:rgba(52,211,153,.18);}
+.db-cancel{font-size:10px;padding:4px 10px;background:none;border:1px solid var(--b);color:var(--mu);border-radius:2px;cursor:pointer;}
+.db-cancel:hover{color:var(--re);border-color:var(--re);}
+.db-stats-panel{background:var(--c1);border:1px solid var(--b);border-radius:4px;padding:14px 16px;}
+.db-sname{font-size:14px;font-family:Orbitron,sans-serif;color:var(--a);margin-bottom:2px;}
+.db-ssub{font-size:10px;color:var(--mu);margin-bottom:10px;}
+.db-stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:5px;margin-bottom:8px;}
+.db-stat-box{background:rgba(255,255,255,.02);border:1px solid var(--b);border-radius:3px;padding:5px 8px;}
+.db-stat-lbl{font-size:8px;color:var(--mu);font-family:Orbitron,sans-serif;letter-spacing:.07em;margin-bottom:2px;}
+.db-stat-val{font-size:13px;font-family:ShareTechMono,monospace;color:var(--tx);}
+.db-stat-val.ok{color:#34d399;}.db-stat-val.warn{color:var(--a2);}.db-stat-val.crit{color:var(--re);}
+.db-pwr-wrap{margin-bottom:8px;}
+.db-pwr-lbl{display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-bottom:3px;font-family:ShareTechMono,monospace;}
+.db-pwr-bar{height:6px;border-radius:3px;background:rgba(255,255,255,.06);}
+.db-pwr-fill{height:6px;border-radius:3px;transition:width .2s;}
+.db-divider{border:none;border-top:1px solid var(--b);margin:8px 0;}
+.db-warn{font-size:10px;color:var(--a2);margin-bottom:3px;display:flex;align-items:center;gap:5px;}
+.db-ok{font-size:10px;color:#34d399;margin-bottom:3px;display:flex;align-items:center;gap:5px;}
+.db-info{font-size:10px;color:var(--tx);margin-bottom:3px;line-height:1.5;}
+.db-footer{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap;}
+.db-cost-val{font-size:17px;font-family:ShareTechMono,monospace;color:#34d399;}
+.db-dc-badge{font-size:11px;font-family:Orbitron,sans-serif;color:var(--a);background:rgba(0,200,255,.08);border:1px solid rgba(0,200,255,.2);padding:3px 10px;border-radius:2px;}
+.db-name-inp{font-size:11px;font-family:ShareTechMono,monospace;background:rgba(255,255,255,.04);border:1px solid var(--b);border-radius:2px;color:var(--tx);padding:3px 8px;width:160px;}
+.db-name-inp:focus{outline:none;border-color:var(--a);}
+.db-reset-btn{font-size:9px;font-family:Orbitron,sans-serif;color:var(--mu);background:none;border:1px solid var(--b);border-radius:2px;padding:3px 8px;cursor:pointer;letter-spacing:.05em;}
+.db-reset-btn:hover{color:var(--re);border-color:var(--re);}
+.db-empty{text-align:center;padding:40px 20px;color:var(--mu);}
+.db-empty-icon{font-size:36px;margin-bottom:8px;}.db-empty-msg{font-size:11px;font-family:ShareTechMono,monospace;}
 .desc{font-size:11px;line-height:1.6;color:var(--tx);}
 .placeholder-desc{font-size:10px;line-height:1.5;color:var(--mu);font-style:italic;border-left:2px solid rgba(255,107,53,.3);padding-left:7px;margin-bottom:8px;}
 .fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:4px;margin-top:6px;}
 .f{background:rgba(255,255,255,.02);border:1px solid var(--b);border-radius:2px;padding:4px 7px;}
-.fl{font-size:9px;color:var(--mu);font-family:'Share Tech Mono',monospace;letter-spacing:.8px;text-transform:uppercase;margin-bottom:1px;}
-.fv{font-size:11px;color:#e8f4ff;font-family:'Share Tech Mono',monospace;}
+.fl{font-size:9px;color:var(--mu);font-family:ShareTechMono,monospace;letter-spacing:.8px;text-transform:uppercase;margin-bottom:1px;}
+.fv{font-size:11px;color:#e8f4ff;font-family:ShareTechMono,monospace;}
 .gitem{display:flex;gap:10px;padding:7px 11px;background:var(--card);border:1px solid var(--b);border-radius:3px;margin-bottom:4px;}
 .gitem:hover{border-color:rgba(0,200,255,.08);}
 .gn{font-weight:600;font-size:12px;color:#e8f4ff;min-width:140px;}
-.ga{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--a2);min-width:70px;padding-top:1px;}
+.ga{font-family:ShareTechMono,monospace;font-size:10px;color:var(--a2);min-width:70px;padding-top:1px;}
 .gd{font-size:11px;color:var(--tx);line-height:1.5;flex:1;}
 .empty{text-align:center;padding:50px 20px;color:var(--mu);}
 .hl{background:rgba(0,200,255,.15);color:var(--a);border-radius:1px;padding:0 1px;}
 .ssub{font-family:'Orbitron',monospace;font-size:10px;color:var(--a2);letter-spacing:1.5px;padding:11px 0 5px;text-transform:uppercase;}
-.spec-tag{font-size:9px;padding:1px 6px;border-radius:2px;font-family:'Share Tech Mono',monospace;cursor:help;border:1px solid rgba(255,107,53,.35);background:rgba(255,107,53,.1);color:var(--a2);display:inline-block;margin:1px;}
+.spec-tag{font-size:9px;padding:1px 6px;border-radius:2px;font-family:ShareTechMono,monospace;cursor:help;border:1px solid rgba(255,107,53,.35);background:rgba(255,107,53,.1);color:var(--a2);display:inline-block;margin:1px;}
 .rule-group{margin-bottom:8px;border:1px solid var(--b);border-radius:3px;overflow:hidden;}
 .rgh{background:rgba(0,200,255,.06);padding:9px 13px;font-family:'Orbitron',monospace;font-size:11px;color:var(--a);letter-spacing:1.5px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;}
 .rgh:hover{background:rgba(0,200,255,.1);}
@@ -77,12 +137,12 @@ main{flex:1;overflow-y:auto;padding:14px;background:var(--bg);}
 .rule-group.open .rgh .arr{transform:rotate(180deg);}
 .rsec{border-top:1px solid rgba(255,255,255,.04);padding:8px 13px;}
 .rsec:first-child{border-top:none;}
-.rst{font-size:9px;font-family:'Share Tech Mono',monospace;color:var(--ye);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:5px;}
+.rst{font-size:9px;font-family:ShareTechMono,monospace;color:var(--ye);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:5px;}
 .re{font-size:11.5px;line-height:1.6;color:var(--tx);padding:2px 0;}
 .rkv{display:flex;gap:10px;padding:2px 0;}
-.rk{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--a3);min-width:90px;flex-shrink:0;padding-top:2px;}
+.rk{font-family:ShareTechMono,monospace;font-size:10px;color:var(--a3);min-width:90px;flex-shrink:0;padding-top:2px;}
 .rv{font-size:11px;line-height:1.55;color:var(--tx);flex:1;}
-.stab{width:100%;border-collapse:collapse;font-size:10px;font-family:'Share Tech Mono',monospace;margin:6px 0 12px;}
+.stab{width:100%;border-collapse:collapse;font-size:10px;font-family:ShareTechMono,monospace;margin:6px 0 12px;}
 .stab th{color:var(--mu);font-weight:400;padding:3px 7px;border-bottom:1px solid var(--b);text-align:center;}
 .stab th:first-child{text-align:left;}
 .stab td{padding:3px 7px;border-bottom:1px solid rgba(255,255,255,.03);text-align:center;font-size:10px;}
@@ -90,22 +150,22 @@ main{flex:1;overflow-y:auto;padding:14px;background:var(--bg);}
 .avg{color:#e8f4ff;}.minmax{color:var(--mu);}
 .trait-row{display:flex;gap:8px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:11px;}
 .trait-row:last-child{border-bottom:none;}
-.trait-lbl{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--a3);min-width:80px;padding-top:2px;text-transform:uppercase;}
+.trait-lbl{font-family:ShareTechMono,monospace;font-size:9px;color:var(--a3);min-width:80px;padding-top:2px;text-transform:uppercase;}
 .trait-val{color:var(--tx);flex:1;line-height:1.45;}
 .mfr-bar{display:flex;align-items:center;gap:8px;margin-bottom:10px;padding:6px 10px;background:rgba(0,200,255,.03);border:1px solid rgba(0,200,255,.12);border-radius:3px;flex-wrap:wrap;}
-.mfr-lbl{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--mu);}
-.mfr-sel{background:#0a1018;border:1px solid var(--b);border-radius:2px;padding:3px 8px;color:var(--tx);font-family:'Share Tech Mono',monospace;font-size:11px;outline:none;cursor:pointer;}
+.mfr-lbl{font-family:ShareTechMono,monospace;font-size:10px;color:var(--mu);}
+.mfr-sel{background:#0a1018;border:1px solid var(--b);border-radius:2px;padding:3px 8px;color:var(--tx);font-family:ShareTechMono,monospace;font-size:11px;outline:none;cursor:pointer;}
 .mfr-sel:focus{border-color:var(--a);}
-.mfr-note{font-size:9px;color:var(--mu);font-family:'Share Tech Mono',monospace;}
+.mfr-note{font-size:9px;color:var(--mu);font-family:ShareTechMono,monospace;}
 .opt-table{width:100%;border-collapse:collapse;font-size:11px;margin-top:4px;}
-.opt-table th{color:var(--mu);font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.5px;padding:3px 7px;border-bottom:1px solid var(--b);text-align:left;white-space:nowrap;}
+.opt-table th{color:var(--mu);font-family:ShareTechMono,monospace;font-size:9px;letter-spacing:.5px;padding:3px 7px;border-bottom:1px solid var(--b);text-align:left;white-space:nowrap;}
 .opt-table td{padding:5px 7px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:top;}
 .opt-table tr:hover td{background:rgba(255,255,255,.02);}
 .dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
 .dot-y{background:var(--gr);}.dot-n{background:rgba(255,255,255,.1);}
 .srow{display:flex;gap:8px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:11px;}
 .srow:last-child{border-bottom:none;}
-.sl{color:var(--mu);font-family:'Share Tech Mono',monospace;font-size:9px;min-width:90px;padding-top:2px;text-transform:uppercase;}
+.sl{color:var(--mu);font-family:ShareTechMono,monospace;font-size:9px;min-width:90px;padding-top:2px;text-transform:uppercase;}
 .sv{color:var(--tx);line-height:1.45;flex:1;}
 .srow.sm .sl{color:var(--gr);}.srow.si .sl{color:var(--a);}.srow.sM .sl{color:var(--a2);}.srow.sMa .sl{color:var(--a3);}.srow.sb .sl{color:var(--re);}
 ::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--b);border-radius:3px;}::-webkit-scrollbar-thumb:hover{background:var(--mu);}
@@ -131,7 +191,7 @@ main{flex:1;overflow-y:auto;padding:14px;background:var(--bg);}
 .def-extreme{color:#ef4444;}
 /* Defense block */
 .def-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:5px;}
-.def-pill{display:flex;align-items:center;gap:3px;padding:2px 7px 2px 5px;border-radius:2px;font-family:'Share Tech Mono',monospace;font-size:10px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02);}
+.def-pill{display:flex;align-items:center;gap:3px;padding:2px 7px 2px 5px;border-radius:2px;font-family:ShareTechMono,monospace;font-size:10px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02);}
 .def-pill.dp-none{border-color:rgba(58,74,90,.4);color:#3a4a5a;}
 .def-pill.dp-low{border-color:rgba(90,138,106,.4);color:#5a8a6a;}
 .def-pill.dp-medium{border-color:rgba(34,197,94,.3);color:#22c55e;}
@@ -147,30 +207,30 @@ main{flex:1;overflow-y:auto;padding:14px;background:var(--bg);}
 .evo-t1 .evo-tlbl{color:#22c55e;}
 .evo-t2 .evo-tlbl{color:var(--a);}
 .evo-t3 .evo-tlbl{color:var(--a3);}
-.evo-cost{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--mu);margin-top:3px;}
+.evo-cost{font-family:ShareTechMono,monospace;font-size:9px;color:var(--mu);margin-top:3px;}
 /* Icon styling */
 .ic{display:inline-block;font-size:10px;margin-right:2px;opacity:.75;}
 /* Compact weapon header pills */
 .wpn-pills{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px;}
-.wpn-pill{font-family:'Share Tech Mono',monospace;font-size:9px;padding:1px 6px;border-radius:2px;white-space:nowrap;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:var(--tx);}
+.wpn-pill{font-family:ShareTechMono,monospace;font-size:9px;padding:1px 6px;border-radius:2px;white-space:nowrap;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:var(--tx);}
 .wpill-dmg{border-color:rgba(255,107,53,.3)!important;color:var(--a2)!important;}
 .wpill-pwr{border-color:rgba(251,191,36,.25)!important;color:var(--ye)!important;}
 .wpill-cst{border-color:rgba(34,197,94,.2)!important;color:#6ee7a0!important;}
 .wpill-avl{border-color:rgba(90,122,149,.3)!important;color:var(--mu)!important;}
 /* Evo rules table */
 .evo-aff-table{width:100%;border-collapse:collapse;font-size:10px;margin-top:6px;}
-.evo-aff-table th{color:var(--mu);font-family:'Share Tech Mono',monospace;font-size:9px;padding:3px 7px;border-bottom:1px solid var(--b);text-align:left;}
+.evo-aff-table th{color:var(--mu);font-family:ShareTechMono,monospace;font-size:9px;padding:3px 7px;border-bottom:1px solid var(--b);text-align:left;}
 .evo-aff-table td{padding:3px 7px;border-bottom:1px solid rgba(255,255,255,.03);vertical-align:top;}
 .evo-aff-table tr:hover td{background:rgba(255,255,255,.02);}
 
 /* ── New compact card row layouts ── */
 .ch{display:flex;justify-content:space-between;align-items:flex-start;gap:6px;padding-bottom:2px;}
 .cn{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:var(--tx);letter-spacing:.3px;}
-.cs-right{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--mu);white-space:nowrap;padding-top:2px;text-align:right;}
+.cs-right{font-family:ShareTechMono,monospace;font-size:9px;color:var(--mu);white-space:nowrap;padding-top:2px;text-align:right;}
 .cr2{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px;}
 .cr3{display:flex;justify-content:space-between;align-items:flex-end;margin-top:4px;gap:6px;}
 .cr3l{display:flex;flex-wrap:wrap;gap:3px;flex:1;}
-.cr3r{font-family:'Share Tech Mono',monospace;font-size:9px;color:#6ee7a0;white-space:nowrap;text-align:right;}
+.cr3r{font-family:ShareTechMono,monospace;font-size:9px;color:#6ee7a0;white-space:nowrap;text-align:right;}
 </style>
 </head>
 <body>
@@ -208,6 +268,9 @@ main{flex:1;overflow-y:auto;padding:14px;background:var(--bg);}
   <button class="nb" data-s="modules"><span class="ni">🔧</span>Modules</button>
   <button class="nb" data-s="ships"><span class="ni">🚀</span>Spaceships</button>
   <button class="nb" data-s="ship_components"><span class="ni">⚙</span>Ship Components</button>
+  <div class="nl" style="margin-top:5px;">Builder</div>
+  <button class="nb" data-s="drone_builder"><span class="ni">🤖</span>Drone Builder</button>
+  <button class="nb" data-s="drone_parts"><span class="ni">🔩</span>Drone Parts</button>
   <div class="nl" style="margin-top:5px;">Gear</div>
   <button class="nb" data-s="equipment"><span class="ni">🎒</span>Equipment</button>
   <button class="nb" data-s="medical"><span class="ni">💉</span>Medical</button>
@@ -243,12 +306,63 @@ document.addEventListener('click',e=>{
   if(card){const el=document.getElementById(card.dataset.tog);if(el)el.classList.toggle('x');return;}
   const rg=e.target.closest('[data-rgtog]');
   if(rg){const el=document.getElementById(rg.dataset.rgtog);if(el)el.classList.toggle('open');return;}
+  // ── Drone Builder interactions ─────────────────────────────────────────────
+  const dbEl=e.target.closest('[data-db]');
+  if(dbEl){
+    const v=dbEl.dataset.db;
+    if(v.startsWith('size:')){dbState.size=v.slice(5);dbAdd={loc:null,type:null,tier:0,skills:[]};render();}
+    else if(v.startsWith('mob:')){dbState.mob=v.slice(4);dbAdd={loc:null,type:null,tier:0,skills:[]};render();}
+    else if(v==='atmo'){dbState.atmo=!dbState.atmo;render();}
+    else if(v.startsWith('open:')){dbAdd={loc:v.slice(5),type:null,tier:0,skills:[]};render();}
+    else if(v==='close'){dbAdd.loc=null;render();}
+    else if(v.startsWith('atype:')){dbAdd.type=v.slice(6);dbAdd.tier=0;dbAdd.skills=[];render();}
+    else if(v.startsWith('atier:')){
+      dbAdd.tier=parseInt(v.slice(6));
+      // Keep valid skills only if tier changes skill count
+      const def=DB_COMP[dbAdd.type];
+      if(def){const maxSk=def.tiers[dbAdd.tier].skills_n||0;if(dbAdd.skills.length>maxSk)dbAdd.skills=dbAdd.skills.slice(0,maxSk);}
+      render();
+    }
+    else if(v.startsWith('askill:')){
+      const sk=v.slice(7);
+      const idx=dbAdd.skills.indexOf(sk);
+      const def=DB_COMP[dbAdd.type];
+      const maxSk=def?def.tiers[dbAdd.tier].skills_n||0:0;
+      if(idx>=0) dbAdd.skills.splice(idx,1);
+      else if(dbAdd.skills.length<maxSk) dbAdd.skills.push(sk);
+      render();
+    }
+    else if(v==='confirm'){
+      if(dbAdd.type&&dbAdd.loc){
+        const comp={type:dbAdd.type,tier:dbAdd.tier};
+        if(dbAdd.type==='SKILL_MODULE') comp.skills=[...dbAdd.skills];
+        const locKey=dbAdd.loc==='core'?'core':dbAdd.loc==='int'?'internal':'external';
+        dbState[locKey].push(comp);
+        dbAdd={loc:null,type:null,tier:0,skills:[]};
+        render();
+      }
+    }
+    else if(v.startsWith('rm:')){
+      const parts=v.split(':');
+      const loc=parts[1], idx=parseInt(parts[2]);
+      const locKey=loc==='core'?'core':loc==='int'?'internal':'external';
+      dbState[locKey].splice(idx,1);
+      render();
+    }
+    else if(v==='reset'){
+      dbState={name:'Unnamed Drone',size:null,mob:null,atmo:false,core:[],internal:[],external:[]};
+      dbAdd={loc:null,type:null,tier:0,skills:[]};
+      render();
+    }
+    return;
+  }
 });
 document.addEventListener('change',e=>{
   const sel=e.target.closest('.mfr-sel[data-sec]');
   if(sel){mfrState[sel.dataset.sec]=sel.value;render();}
 });
 let st;document.getElementById('search').addEventListener('input',e=>{clearTimeout(st);st=setTimeout(()=>{sq=e.target.value.trim().toLowerCase();render();},110);});
+document.addEventListener('input',e=>{const ni=e.target.closest('#db-name-inp');if(ni)dbState.name=ni.value;});
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function esc(s){if(s===null||s===undefined)return '';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
@@ -696,6 +810,350 @@ function buildShipComps(){
 }
 if(!g.catalog) g.catalog={};
 g.catalog.ship_components=buildShipComps();
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// ─── Drone Builder ────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const DB_SIZES={
+  TINY:  {name:'Tiny',   core:4,  int:4,  ext:4,  dur:4,  sys:2,  soak:0, spd_mod:2,  price:2000,   dc:1},
+  SMALL: {name:'Small',  core:6,  int:6,  ext:6,  dur:6,  sys:3,  soak:0, spd_mod:1,  price:5000,   dc:2},
+  MED:   {name:'Medium', core:10, int:10, ext:10, dur:10, sys:4,  soak:0, spd_mod:0,  price:12000,  dc:3},
+  LARGE: {name:'Large',  core:14, int:14, ext:14, dur:15, sys:6,  soak:1, spd_mod:-2, price:30000,  dc:4},
+  XL:    {name:'X-Large',core:18, int:18, ext:18, dur:22, sys:8,  soak:2, spd_mod:-4, price:80000,  dc:5},
+  HUGE:  {name:'Huge',   core:24, int:24, ext:24, dur:35, sys:10, soak:3, spd_mod:-6, price:200000, dc:6},
+};
+const DB_MOB={
+  STATIC:{name:'Stationary', base_mode:null,  base_spd:0,  alt_mode:null, alt_spd:0, price:0,     dc:0},
+  WALK:  {name:'Walker',     base_mode:'Walk',base_spd:10, alt_mode:null, alt_spd:0, price:2000,  dc:1},
+  CLIMB: {name:'Climber',    base_mode:'Walk',base_spd:10, alt_mode:'Climb',alt_spd:6,price:3000, dc:1},
+  HOVER: {name:'Hover',      base_mode:'Hover',base_spd:14,alt_mode:null, alt_spd:0, price:5000,  dc:2},
+  FLY:   {name:'Flyer',      base_mode:'Fly', base_spd:20, alt_mode:null, alt_spd:0, price:10000, dc:3},
+};
+const DB_SKILLS={
+  Physical:['Athletics','Craft','Heavy Weapons','Martial Arts','Might','Piloting','Repair','Resilience','Scavenge','Survival'],
+  Mental:  ['Academic','Cyberintel','Engineering','Galactic Knowledge','Hacking','Medicine','Navigation','Parascience','Science','Technology'],
+  Social:  ['Acting','Charm','Etiquette','Flair','Intimidation','Leadership','Negotiation','Spiritual','Streetwise','Subterfuge'],
+  Acuity:  ['Awareness','Binding','Concealment','Dexterity','Gunslinger','Intuition','Marksman','Operator','Search','Tactics'],
+};
+const DB_COMP={
+  POWER_CORE:{name:'Power Core',icon:'⚡',loc:['core'],
+    tiers:[
+      {name:'Micro Cell',    pwr_give:6,  pwr:0,slots:1,price:500,   dc:1,note:'Tiny & Small chassis only',size_limit:['TINY','SMALL']},
+      {name:'Standard Cell', pwr_give:12, pwr:0,slots:2,price:1500,  dc:2},
+      {name:'Power Bank',    pwr_give:22, pwr:0,slots:3,price:4000,  dc:3},
+      {name:'Reactor Core',  pwr_give:40, pwr:0,slots:4,price:12000, dc:5},
+      {name:'Fusion Reactor',pwr_give:70, pwr:0,slots:6,price:35000, dc:7},
+    ]},
+  SKILL_MODULE:{name:'Skill Module',icon:'🧠',loc:['core','int'],unique:true,
+    tiers:[
+      {name:'Basic AI',   skills_n:1,rank:3,pwr:3, slots:2,price:3000,  dc:3,sys_bonus:1},
+      {name:'Standard AI',skills_n:3,rank:4,pwr:5, slots:3,price:9000,  dc:5,sys_bonus:2},
+      {name:'Advanced AI',skills_n:5,rank:6,pwr:8, slots:4,price:25000, dc:6,sys_bonus:3},
+      {name:'Tactical AI',skills_n:8,rank:7,pwr:12,slots:5,price:70000, dc:8,sys_bonus:4},
+    ]},
+  SENSOR_ARRAY:{name:'Sensor Array',icon:'📡',loc:['core','int','ext'],
+    tiers:[
+      {name:'Basic',     awareness:1,range:'10m', pwr:2,slots:2,price:1000,  dc:2},
+      {name:'Advanced',  awareness:2,range:'30m', pwr:4,slots:3,price:4000,  dc:4},
+      {name:'Military',  awareness:3,range:'100m',pwr:6,slots:4,price:12000, dc:5},
+      {name:'Deep Scan', awareness:4,range:'300m',pwr:8,slots:5,price:30000, dc:6},
+    ]},
+  ARMOR_PLATING:{name:'Armor Plating',icon:'🛡',loc:['ext'],unique:true,
+    tiers:[
+      {name:'Light',   defense:'LOW',    soak:2, spd_mod:-1,dur_bonus:2, pwr:0,slots:2,price:2000,  dc:2},
+      {name:'Combat',  defense:'MEDIUM', soak:4, spd_mod:-2,dur_bonus:4, pwr:0,slots:4,price:5000,  dc:3},
+      {name:'Heavy',   defense:'HIGH',   soak:6, spd_mod:-4,dur_bonus:8, pwr:0,slots:6,price:15000, dc:5},
+      {name:'Siege',   defense:'EXTREME',soak:10,spd_mod:-6,dur_bonus:12,pwr:0,slots:8,price:45000, dc:7},
+    ]},
+  WEAPON_MOUNT:{name:'Weapon Mount',icon:'🔫',loc:['ext','int'],loc_dc_mod:{int:1},
+    tiers:[
+      {name:'Light Mount',  weapon_sz:'Small',   weapon_n:1,pwr:2,slots:2,price:1500,  dc:2},
+      {name:'Medium Mount', weapon_sz:'Medium',  weapon_n:1,pwr:3,slots:3,price:4000,  dc:3},
+      {name:'Heavy Mount',  weapon_sz:'Large',   weapon_n:1,pwr:4,slots:4,price:10000, dc:5},
+      {name:'Auto-Turret',  weapon_sz:'Medium',  weapon_n:2,pwr:6,slots:5,price:25000, dc:6,auto_aim:true},
+      {name:'Ordnance Bay', weapon_sz:'Ordnance',weapon_n:1,pwr:3,slots:4,price:15000, dc:5},
+    ]},
+  MANIPULATOR_ARMS:{name:'Manipulator Arms',icon:'🦾',loc:['ext'],
+    tiers:[
+      {name:'Basic Limb',     arms:1,str:4, pwr:2,slots:2,price:2000,  dc:2},
+      {name:'Dual Arms',      arms:2,str:6, pwr:3,slots:3,price:5000,  dc:3},
+      {name:'Heavy Arms',     arms:2,str:10,pwr:4,slots:4,price:12000, dc:4},
+      {name:'Precision Limbs',arms:2,str:6, pwr:4,slots:4,price:18000, dc:5,fine_motor:true},
+    ]},
+  COMM_UNIT:{name:'Communication Unit',icon:'📻',loc:['int','ext'],
+    tiers:[
+      {name:'Basic Comms', comm_range:'500m',      ecm:0,pwr:1,slots:1,price:500,   dc:1},
+      {name:'Long Range',  comm_range:'50km',       ecm:0,pwr:2,slots:2,price:2000,  dc:2},
+      {name:'Encrypted',   comm_range:'50km',       ecm:1,pwr:3,slots:2,price:6000,  dc:3},
+      {name:'Quantum Link',comm_range:'Unlimited',  ecm:2,pwr:4,slots:3,price:20000, dc:5},
+    ]},
+  UTILITY_MODULE:{name:'Utility Module',icon:'🔧',loc:['int','ext'],
+    tiers:[
+      {name:'Tool Set',     note:'Craft & Repair tools',          pwr:1,slots:2,price:1500,  dc:2},
+      {name:'Storage Bay',  note:'5-item cargo capacity',         pwr:0,slots:3,price:1000,  dc:1},
+      {name:'Med Unit',     note:'Field medicine capability',     pwr:3,slots:3,price:5000,  dc:3},
+      {name:'Scan Array',   note:'Science & analysis suite',      pwr:2,slots:3,price:4000,  dc:3},
+      {name:'EW Pod',       note:'Electronic warfare suite',      pwr:4,slots:3,price:15000, dc:5},
+    ]},
+  SPECIAL_PACKAGE:{name:'Special Package',icon:'✨',loc:['ext','int'],
+    tiers:[
+      {name:'Stealth Coating',  note:'DC+1 for others to detect',     pwr:2,slots:3,price:8000,  dc:4},
+      {name:'Underwater Kit',   note:'Waterproof + Swim 8m/r',        pwr:1,slots:4,price:5000,  dc:4,swim_spd:8},
+      {name:'Extreme Environ.', note:'Temp, cold & radiation resist.', pwr:0,slots:3,price:6000,  dc:3},
+      {name:'EMP Shielding',    note:'Immune to EMP effects',          pwr:1,slots:3,price:10000, dc:5},
+    ]},
+  SECONDARY_DRIVE:{name:'Secondary Drive',icon:'⚙',loc:['ext'],
+    tiers:[
+      {name:'Swim Drive',   mode:'Swim', speed:8, pwr:3,slots:3,price:4000,  dc:3},
+      {name:'Wall Crawlers',mode:'Climb',speed:8, pwr:2,slots:2,price:3000,  dc:3},
+      {name:'Booster Jets', mode:'Fly',  speed:12,pwr:4,slots:4,price:10000, dc:5,note:'Limited fuel'},
+    ]},
+};
+
+// Drone builder state — survives re-renders (module-level)
+let dbState={name:'Unnamed Drone',size:null,mob:null,atmo:false,core:[],internal:[],external:[]};
+let dbAdd={loc:null,type:null,tier:0,skills:[]};
+
+function calcDrone(){
+  if(!dbState.size||!dbState.mob) return null;
+  const sz=DB_SIZES[dbState.size];
+  const mob=DB_MOB[dbState.mob];
+  const r={
+    dur:sz.dur, sys:sz.sys, soak:sz.soak, defense:'NONE',
+    prim_spd:mob.base_spd+sz.spd_mod, prim_mode:mob.base_mode,
+    alt_mode:mob.alt_mode, alt_spd:mob.alt_spd,
+    extra_modes:[],
+    pwr_avail:0, pwr_used:0,
+    core_used:0, int_used:0, ext_used:0,
+    core_max:sz.core, int_max:sz.int, ext_max:sz.ext,
+    awareness:0, sensor_range:null,
+    comms:null, ecm:0,
+    skills:[], weapons:[], arms:null,
+    dc:Math.max(sz.dc, mob.dc),
+    cost:sz.price+mob.price,
+    warns:[],
+  };
+  const all=[
+    ...dbState.core.map(c=>({...c,loc:'core'})),
+    ...dbState.internal.map(c=>({...c,loc:'int'})),
+    ...dbState.external.map(c=>({...c,loc:'ext'})),
+  ];
+  let spd_pen=0;
+  for(const comp of all){
+    const def=DB_COMP[comp.type];
+    const t=def.tiers[comp.tier];
+    r.cost+=t.price;
+    r.dc=Math.max(r.dc, t.dc+(def.loc_dc_mod&&def.loc_dc_mod[comp.loc]||0));
+    if(comp.loc==='core') r.core_used+=t.slots;
+    else if(comp.loc==='int') r.int_used+=t.slots;
+    else r.ext_used+=t.slots;
+    r.pwr_used+=(t.pwr||0);
+    r.pwr_avail+=(t.pwr_give||0);
+    if(t.dur_bonus) r.dur+=t.dur_bonus;
+    if(t.sys_bonus) r.sys+=t.sys_bonus;
+    if(t.defense) r.defense=t.defense;
+    if(t.soak) r.soak+=t.soak;
+    if(t.spd_mod) spd_pen+=t.spd_mod;
+    if(t.awareness!=null&&t.awareness>r.awareness){r.awareness=t.awareness;r.sensor_range=t.range;}
+    if(t.comm_range) r.comms=t.comm_range;
+    if(t.ecm) r.ecm+=t.ecm;
+    if(comp.type==='SKILL_MODULE'&&comp.skills) r.skills.push(...comp.skills.map(s=>s+' '+t.rank));
+    if(comp.type==='WEAPON_MOUNT'){
+      const wl=t.weapon_sz+(t.weapon_n>1?' ×'+t.weapon_n:'')+(t.auto_aim?' (auto-aim)':'');
+      r.weapons.push(wl);
+    }
+    if(comp.type==='MANIPULATOR_ARMS') r.arms={n:t.arms,str:t.str,fine:t.fine_motor};
+    if(t.swim_spd) r.extra_modes.push('Swim '+t.swim_spd+'m/r');
+    if(comp.type==='SECONDARY_DRIVE') r.extra_modes.push(t.mode+' '+t.speed+'m/r'+(t.note?' ('+t.note+')':''));
+  }
+  if(mob.base_mode) r.prim_spd=Math.max(0,r.prim_spd+spd_pen);
+  if(dbState.mob==='STATIC') r.prim_spd=0;
+  if(dbState.atmo&&dbState.mob==='FLY'){r.dc++;r.cost+=15000;}
+  // Validate
+  if(!all.some(c=>c.type==='POWER_CORE')) r.warns.push('No Power Core — drone cannot function');
+  if(r.pwr_used>r.pwr_avail) r.warns.push('Power deficit: '+(r.pwr_used-r.pwr_avail)+' over capacity');
+  if(r.core_used>r.core_max) r.warns.push('Core overloaded ('+r.core_used+'/'+r.core_max+' slots)');
+  if(r.int_used>r.int_max) r.warns.push('Internal overloaded ('+r.int_used+'/'+r.int_max+' slots)');
+  if(r.ext_used>r.ext_max) r.warns.push('External overloaded ('+r.ext_used+'/'+r.ext_max+' slots)');
+  return r;
+}
+
+function dbTierDesc(type,t){
+  const p=[];
+  if(t.pwr_give) p.push('⚡ +'+t.pwr_give+' pwr generated');
+  if(t.pwr) p.push('⚡ '+t.pwr+' pwr draw');
+  p.push('📦 '+t.slots+' slot'+(t.slots>1?'s':''));
+  p.push('💰 '+fmt(t.price)+' Cr');
+  p.push('DC '+t.dc);
+  if(t.defense) p.push('🛡 Defense: '+t.defense+'  Soak: +'+t.soak+(t.spd_mod?' Speed '+t.spd_mod+'m/r':''));
+  if(t.dur_bonus) p.push('Durability +'+t.dur_bonus);
+  if(t.awareness) p.push('👁 Awareness +'+t.awareness+' · Range '+t.range);
+  if(t.weapon_sz) p.push('🔫 '+t.weapon_sz+' weapon'+(t.weapon_n>1?' ×'+t.weapon_n:'')+(t.auto_aim?' + auto-aim':''));
+  if(t.arms) p.push('🦾 '+t.arms+' arm'+(t.arms>1?'s':'')+' STR '+t.str+(t.fine_motor?' (fine motor)':''));
+  if(t.comm_range) p.push('📻 Range '+t.comm_range+(t.ecm?' · ECM +'+t.ecm:''));
+  if(t.skills_n) p.push('🧠 '+t.skills_n+' skill'+(t.skills_n>1?'s':'')+' at rank '+t.rank+' · System +'+t.sys_bonus);
+  if(t.mode) p.push(t.mode+' '+t.speed+'m/r'+(t.note?' ('+t.note+')':''));
+  if(t.note&&!t.mode) p.push(t.note);
+  if(t.swim_spd) p.push('Swim '+t.swim_spd+'m/r');
+  if(t.size_limit) p.push('⚠ '+t.size_limit.join('/')+' chassis only');
+  return p.join('  ·  ');
+}
+
+function renderDbZone(loc,title,color,stats){
+  const locKey=loc==='core'?'core':loc==='int'?'internal':'external';
+  const comps=dbState[locKey];
+  const used=stats[loc+'_used'], max=stats[loc+'_max'];
+  const over=used>max, near=!over&&used/max>0.8;
+  let h='<div class="db-zone">';
+  h+='<div class="db-zone-hd">';
+  h+='<span class="db-zone-title" style="color:'+color+'">'+title+'</span>';
+  h+='<span class="db-zone-slots '+(over?'over':near?'warn':'ok')+'">'+used+' / '+max+' slots</span>';
+  h+='</div>';
+  if(comps.length===0) h+='<div style="font-size:10px;color:var(--mu);font-style:italic;margin-bottom:6px;padding:2px 0;">Empty</div>';
+  comps.forEach((comp,i)=>{
+    const def=DB_COMP[comp.type];
+    const t=def.tiers[comp.tier];
+    h+='<div class="db-comp-row">';
+    h+='<span class="db-comp-name">'+def.icon+' '+def.name+'</span>';
+    h+='<span class="db-comp-tier">'+esc(t.name)+'</span>';
+    if(comp.type==='SKILL_MODULE'&&comp.skills&&comp.skills.length){
+      h+='<span class="db-comp-meta" style="color:var(--a3);max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="'+esc(comp.skills.join(', '))+'">'+esc(comp.skills.slice(0,2).join(', '))+(comp.skills.length>2?' +':'')+'</span>';
+    } else {
+      h+='<span class="db-comp-meta">'+t.slots+'U '+t.pwr+'P</span>';
+    }
+    h+='<button class="db-rm" data-db="rm:'+loc+':'+i+'" title="Remove component">✕</button>';
+    h+='</div>';
+  });
+  // Add panel or Add button
+  if(dbAdd.loc===loc){
+    h+=renderDbAddPanel(loc);
+  } else {
+    h+='<button class="db-add-btn" data-db="open:'+loc+'">+ Add Component</button>';
+  }
+  h+='</div>';
+  return h;
+}
+
+function renderDbAddPanel(loc){
+  const isUnique=t=>DB_COMP[t].unique&&[...dbState.core,...dbState.internal,...dbState.external].some(c=>c.type===t);
+  const availTypes=Object.entries(DB_COMP).filter(([k,d])=>d.loc.includes(loc)&&!isUnique(k));
+  let h='<div class="db-add-panel">';
+  h+='<div class="db-add-row">';
+  h+='<span class="db-add-lbl">COMPONENT TYPE</span>';
+  availTypes.forEach(([k,d])=>{
+    h+='<button class="db-chip'+(dbAdd.type===k?' sel':'')+'" data-db="atype:'+k+'">'+d.icon+' '+d.name+'</button>';
+  });
+  h+='</div>';
+  if(dbAdd.type){
+    const def=DB_COMP[dbAdd.type];
+    const sz=dbState.size;
+    h+='<div class="db-add-row">';
+    h+='<span class="db-add-lbl">TIER</span>';
+    def.tiers.forEach((t,i)=>{
+      const sizeOk=!t.size_limit||t.size_limit.includes(sz);
+      if(!sizeOk) return;
+      h+='<button class="db-chip'+(dbAdd.tier===i?' sel':'')+'" data-db="atier:'+i+'">'+esc(t.name)+'</button>';
+    });
+    h+='</div>';
+    const t=def.tiers[dbAdd.tier];
+    h+='<div class="db-tier-desc">'+dbTierDesc(dbAdd.type,t)+'</div>';
+    // Skill picker
+    if(dbAdd.type==='SKILL_MODULE'){
+      const maxSk=t.skills_n;
+      const selCount=dbAdd.skills.length;
+      h+='<div style="font-size:9px;color:var(--a3);margin-bottom:4px;font-family:Orbitron,sans-serif;letter-spacing:.06em;">SELECT SKILLS ('+selCount+' / '+maxSk+')</div>';
+      h+='<div class="db-skill-grid">';
+      Object.entries(DB_SKILLS).forEach(([cat,skills])=>{
+        h+='<div class="db-skill-cat">'+cat+'</div>';
+        skills.forEach(sk=>{
+          const sel=dbAdd.skills.includes(sk);
+          const maxed=!sel&&selCount>=maxSk;
+          h+='<button class="db-skill-chip'+(sel?' sel':maxed?' maxed':'')+'" data-db="askill:'+sk+'" '+(maxed?'disabled':'')+'>'+esc(sk)+'</button>';
+        });
+      });
+      h+='</div>';
+    }
+    const canConfirm=dbAdd.type&&(!DB_COMP[dbAdd.type].unique||true)&&(dbAdd.type!=='SKILL_MODULE'||dbAdd.skills.length===t.skills_n);
+    h+='<div class="db-add-row-btns">';
+    h+='<button class="db-confirm" data-db="confirm" '+(canConfirm?'':'disabled style="opacity:.4;cursor:not-allowed;"')+'>✓ Add</button>';
+    h+='<button class="db-cancel" data-db="close">✗ Cancel</button>';
+    if(dbAdd.type==='SKILL_MODULE'&&dbAdd.skills.length!==t.skills_n) h+='<span style="font-size:9px;color:var(--a2);margin-left:4px;">Select exactly '+t.skills_n+' skill'+(t.skills_n>1?'s':'')+'</span>';
+    h+='</div>';
+  }
+  h+='</div>';
+  return h;
+}
+
+function renderDbStats(st){
+  const defCol={NONE:'var(--mu)',LOW:'#4ade80',MEDIUM:'#34d399',HIGH:'#facc15',EXTREME:'#f87171'};
+  const col=defCol[st.defense]||'var(--mu)';
+  const pct=st.pwr_avail?Math.min(100,Math.round(st.pwr_used/st.pwr_avail*100)):0;
+  const pwrColor=pct>95?'#f87171':pct>80?'#fb923c':'#34d399';
+  let h='<div class="db-stats-panel">';
+  h+='<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px;">';
+  h+='<div><input id="db-name-inp" class="db-name-inp" value="'+esc(dbState.name)+'" placeholder="Drone name..." maxlength="40"><div class="db-ssub">'+esc(DB_SIZES[dbState.size].name)+' · '+esc(DB_MOB[dbState.mob].name)+(dbState.atmo?' · Atmospheric':'')+'</div></div>';
+  h+='<button class="db-reset-btn" data-db="reset">↺ Reset</button>';
+  h+='</div>';
+  // Stat grid
+  const speedStr=st.prim_mode?st.prim_mode+' '+st.prim_spd+'m/r':'Stationary';
+  h+='<div class="db-stat-grid">';
+  h+='<div class="db-stat-box"><div class="db-stat-lbl">DEFENSE</div><div class="db-stat-val" style="color:'+col+';">'+st.defense+'</div></div>';
+  h+='<div class="db-stat-box"><div class="db-stat-lbl">SOAK</div><div class="db-stat-val">'+st.soak+'</div></div>';
+  h+='<div class="db-stat-box"><div class="db-stat-lbl">DURABILITY</div><div class="db-stat-val">'+st.dur+'</div></div>';
+  h+='<div class="db-stat-box"><div class="db-stat-lbl">SYSTEM</div><div class="db-stat-val">'+st.sys+'</div></div>';
+  h+='<div class="db-stat-box"><div class="db-stat-lbl">SPEED</div><div class="db-stat-val ok">'+speedStr+'</div></div>';
+  if(st.alt_mode) h+='<div class="db-stat-box"><div class="db-stat-lbl">'+st.alt_mode.toUpperCase()+'</div><div class="db-stat-val ok">'+st.alt_spd+'m/r</div></div>';
+  st.extra_modes.forEach(m=>{const[md,...rest]=m.split(' ');h+='<div class="db-stat-box"><div class="db-stat-lbl">'+esc(md.toUpperCase())+'</div><div class="db-stat-val ok">'+esc(rest.join(' '))+'</div></div>';});
+  h+='</div>';
+  // Power
+  h+='<div class="db-pwr-wrap">';
+  h+='<div class="db-pwr-lbl"><span>⚡ POWER</span><span style="color:'+pwrColor+';">'+st.pwr_used+' / '+st.pwr_avail+' pwr</span></div>';
+  h+='<div class="db-pwr-bar"><div class="db-pwr-fill" style="width:'+pct+'%;background:'+pwrColor+';"></div></div>';
+  h+='</div>';
+  // Slots
+  const slotRow=(label,used,max)=>{const ov=used>max,n=!ov&&used/max>0.8;return'<span style="font-size:10px;font-family:ShareTechMono,monospace;color:'+(ov?'var(--re)':n?'var(--a2)':'var(--mu)')+'">'+label+' '+used+'/'+max+'</span>';};
+  h+='<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;">'+slotRow('Core',st.core_used,st.core_max)+slotRow('Internal',st.int_used,st.int_max)+slotRow('External',st.ext_used,st.ext_max)+'</div>';
+  h+='<hr class="db-divider">';
+  // Skills
+  if(st.skills.length){h+='<div class="db-info" style="color:#a78bfa;">🧠 '+esc(st.skills.join(' · '))+'</div>';}
+  // Sensors
+  if(st.awareness){h+='<div class="db-info">📡 Awareness +'+st.awareness+(st.sensor_range?' · Range '+st.sensor_range:'')+'</div>';}
+  // Weapons
+  if(st.weapons.length){h+='<div class="db-info">🔫 Weapons: '+esc(st.weapons.join(' | '))+'</div>';}
+  // Arms
+  if(st.arms){h+='<div class="db-info">🦾 '+st.arms.n+' arm'+(st.arms.n>1?'s':'')+' STR '+st.arms.str+(st.arms.fine?' (fine motor)':'')+'</div>';}
+  // Comms
+  if(st.comms){h+='<div class="db-info">📻 Comms: '+esc(st.comms)+(st.ecm?' · ECM +'+st.ecm:'')+'</div>';}
+  // Warnings
+  if(st.warns.length){
+    h+='<hr class="db-divider">';
+    st.warns.forEach(w=>{h+='<div class="db-warn">⚠ '+esc(w)+'</div>';});
+  } else {
+    h+='<hr class="db-divider">';
+    h+='<div class="db-ok">✓ Build valid</div>';
+  }
+  // Footer
+  h+='<div class="db-footer">';
+  h+='<span class="db-cost-val">'+fmt(st.cost)+' Cr</span>';
+  h+='<span class="db-dc-badge">Craft DC '+st.dc+'</span>';
+  h+='</div>';
+  h+='</div>';
+  return h;
+}
+
+// Build drone_parts catalog (all component tiers as flat entries)
+function buildDroneParts(){
+  const out=[];
+  Object.entries(DB_COMP).forEach(([type,def])=>{
+    def.tiers.forEach((t,ti)=>{
+      out.push({id:type+'_'+ti,type,cat_name:def.name,icon:def.icon,tier_name:t.name,loc:def.loc,unique:!!def.unique,...t});
+    });
+  });
+  return out;
+}
+g.catalog.drone_parts=buildDroneParts();
+
 
 // ─── Render ───────────────────────────────────────────────────────────────────
 function render(){
@@ -1626,6 +2084,80 @@ function render(){
       });
       html+='</div></div>';
     });
+  }
+
+  else if(cs==='drone_parts'){
+    // ── Drone Parts Catalog ─────────────────────────────────────────────────
+    const all=g.catalog&&g.catalog.drone_parts||[];
+    html+='<div class="fbar"><button class="fc'+(af===''?' active':'')+'" data-cat="ALL">All</button>';
+    Object.entries(DB_COMP).forEach(([k,d])=>{if(all.some(p=>p.type===k))html+='<button class="fc'+(af===k?' active':'')+'" data-cat="'+k+'">'+d.icon+' '+d.name+'</button>';});
+    html+='</div><div class="grid">';
+    all.forEach((p,i)=>{
+      if(!ms([p.cat_name,p.tier_name,p.note||'',p.loc.join(' ')])) return;
+      if(af&&af!==p.type) return;
+      cnt++;
+      const cid='dp'+i;
+      const locColors={core:'#00c8ff',int:'#a855f7',ext:'#ff6b35'};
+      html+='<div class="card" id="'+cid+'" data-tog="'+cid+'">';
+      html+='<div class="ch">'+p.icon+' '+hl(p.cat_name,sq)+' <span class="xi">▼</span></div>';
+      html+='<div class="cr2">';
+      html+='<span class="wpn-pill" style="color:#a78bfa;">'+hl(p.tier_name,sq)+'</span>';
+      p.loc.forEach(l=>{html+='<span class="wpn-pill" style="color:'+locColors[l]+';font-size:9px;">'+l.toUpperCase()+'</span>';});
+      if(p.unique) html+='<span class="wpn-pill" style="color:var(--ye);font-size:9px;">UNIQUE</span>';
+      html+='</div>';
+      html+='<div class="cr3"><div class="cr3l">';
+      html+='<span class="wpn-pill">📦 '+p.slots+' slots</span>';
+      if(p.pwr_give) html+='<span class="wpn-pill" style="color:#facc15;">⚡ +'+p.pwr_give+' pwr</span>';
+      if(p.pwr) html+='<span class="wpn-pill" style="color:var(--a2);">⚡ '+p.pwr+' draw</span>';
+      html+='<span class="wpn-pill" style="color:var(--a);">DC '+p.dc+'</span>';
+      html+='</div><div class="cr3r" style="color:#34d399;font-family:ShareTechMono,monospace;font-size:11px;">'+fmt(p.price)+' Cr</div></div>';
+      html+='<div class="cb">';
+      if(p.defense) html+='<div class="fg"><div class="f"><div class="fl">Defense</div><div class="fv">'+p.defense+'</div></div><div class="f"><div class="fl">Soak</div><div class="fv">+'+p.soak+'</div></div>'+(p.spd_mod?'<div class="f"><div class="fl">Speed</div><div class="fv">'+p.spd_mod+'m/r</div></div>':'')+(p.dur_bonus?'<div class="f"><div class="fl">Durability</div><div class="fv">+'+p.dur_bonus+'</div></div>':'')+'</div>';
+      if(p.awareness) html+='<div class="fg"><div class="f"><div class="fl">Awareness</div><div class="fv">+'+p.awareness+'</div></div><div class="f"><div class="fl">Range</div><div class="fv">'+p.range+'</div></div></div>';
+      if(p.weapon_sz) html+='<div class="fg"><div class="f"><div class="fl">Weapon Size</div><div class="fv">'+p.weapon_sz+'</div></div><div class="f"><div class="fl">Mounts</div><div class="fv">'+p.weapon_n+(p.auto_aim?' (auto-aim)':'')+'</div></div></div>';
+      if(p.arms) html+='<div class="fg"><div class="f"><div class="fl">Arms</div><div class="fv">'+p.arms+'</div></div><div class="f"><div class="fl">STR</div><div class="fv">'+p.str+(p.fine_motor?' (fine motor)':'')+'</div></div></div>';
+      if(p.comm_range) html+='<div class="fg"><div class="f"><div class="fl">Comms Range</div><div class="fv">'+p.comm_range+'</div></div>'+(p.ecm?'<div class="f"><div class="fl">ECM</div><div class="fv">+'+p.ecm+'</div></div>':'')+'</div>';
+      if(p.skills_n) html+='<div class="fg"><div class="f"><div class="fl">Skills</div><div class="fv">'+p.skills_n+'</div></div><div class="f"><div class="fl">Rank</div><div class="fv">'+p.rank+'</div></div><div class="f"><div class="fl">System Bonus</div><div class="fv">+'+p.sys_bonus+'</div></div></div>';
+      if(p.mode) html+='<div class="fg"><div class="f"><div class="fl">Drive Mode</div><div class="fv">'+p.mode+'</div></div><div class="f"><div class="fl">Speed</div><div class="fv">'+p.speed+'m/r</div></div></div>';
+      if(p.swim_spd) html+='<div class="fg"><div class="f"><div class="fl">Swim Speed</div><div class="fv">'+p.swim_spd+'m/r</div></div></div>';
+      if(p.note) html+='<div class="desc" style="margin-top:6px;">'+esc(p.note)+'</div>';
+      if(p.size_limit) html+='<div style="font-size:9px;color:var(--a2);margin-top:4px;">⚠ '+p.size_limit.join(' / ')+' chassis only</div>';
+      html+='</div></div>';
+    });
+    html+='</div>';
+  }
+
+  else if(cs==='drone_builder'){
+    // ── Drone Builder ───────────────────────────────────────────────────────
+    cnt=1; // suppress empty-search message
+    // Setup bar
+    html+='<div class="db-setup">';
+    html+='<div class="db-step"><span class="db-step-lbl">CHASSIS SIZE</span>';
+    Object.entries(DB_SIZES).forEach(([k,v])=>{
+      html+='<button class="db-chip'+(dbState.size===k?' sel':'')+'" data-db="size:'+k+'">'+v.name+'</button>';
+    });
+    html+='</div>';
+    html+='<div class="db-step"><span class="db-step-lbl">MOBILITY</span>';
+    Object.entries(DB_MOB).forEach(([k,v])=>{
+      html+='<button class="db-chip'+(dbState.mob===k?' sel':'')+'" data-db="mob:'+k+'">'+v.name+'</button>';
+    });
+    if(dbState.mob==='FLY') html+='<button class="db-chip'+(dbState.atmo?' sel-o':'')+'" data-db="atmo">✈ Atmospheric</button>';
+    html+='</div>';
+    if(dbState.size&&dbState.mob){
+      html+='<div style="font-size:10px;color:var(--mu);margin-top:4px;">Chassis: '+fmt(DB_SIZES[dbState.size].price)+' Cr · Mobility: '+fmt(DB_MOB[dbState.mob].price)+' Cr · Base DC '+Math.max(DB_SIZES[dbState.size].dc,DB_MOB[dbState.mob].dc)+'</div>';
+    }
+    html+='</div>'; // db-setup
+    if(!dbState.size||!dbState.mob){
+      html+='<div class="db-empty"><div class="db-empty-icon">🤖</div><div class="db-empty-msg">Select a chassis size and mobility type to begin</div></div>';
+    } else {
+      const st=calcDrone();
+      html+='<div class="db-zones">';
+      html+=renderDbZone('core','⬡ CORE','#00c8ff',st);
+      html+=renderDbZone('int','◈ INTERNAL','#a855f7',st);
+      html+=renderDbZone('ext','◇ EXTERNAL','#ff6b35',st);
+      html+='</div>';
+      html+=renderDbStats(st);
+    }
   }
 
   if(!cnt&&sq){html+='<div class="empty"><div style="font-size:32px;margin-bottom:8px;">🔍</div><div style="font-family:\'Share Tech Mono\',monospace;font-size:11px;">No results for &quot;'+esc(sq)+'&quot;</div></div>';}
