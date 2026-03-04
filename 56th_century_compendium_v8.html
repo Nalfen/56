@@ -906,6 +906,25 @@ const DB_COMP={
       {name:'Booster Pack',  mode:'Leap',speed:15,pwr:5,slots:3,price:8000, dc:4,dur:4, rarity:'RARE',    legality:'RESTRICTED',note:'5 bursts before recharge'},
       {name:'Thruster Array',mode:'Leap',speed:25,pwr:8,slots:4,price:20000,dc:6,dur:5, rarity:'LIMITED', legality:'MILITARY',  note:'Unlimited short burst jumps'},
     ]},
+  DRIVE_OVERHAUL:{name:'Drive Overhaul',icon:'⚙',loc:['core','int'],
+    tiers:[
+      {name:'Tuning Kit',      spd_mod:2,  pwr:0,slots:1,price:1000, dc:2,dur:3, rarity:'COMMON',  legality:'LEGAL',     note:'Fine-tunes primary drive for +2 speed'},
+      {name:'Performance Pkg.',spd_mod:5,  pwr:1,slots:2,price:4500, dc:3,dur:4, rarity:'UNCOMMON',legality:'LEGAL',     note:'Upgraded drive components for +5 speed'},
+      {name:'Racing Config.',  spd_mod:9,  pwr:2,slots:2,price:13000,dc:5,dur:3, rarity:'RARE',    legality:'RESTRICTED',note:'+9 speed, reduced structural integrity'},
+      {name:'Overdrive Sys.',  spd_mod:15, pwr:4,slots:3,price:38000,dc:7,dur:2, rarity:'LIMITED', legality:'MILITARY',  note:'Extreme performance — redlines drive, very fragile'},
+    ]},
+  WEIGHT_REDUCTION:{name:'Weight Reduction',icon:'⬇',loc:['ext','int'],
+    tiers:[
+      {name:'Alloy Subframe',spd_mod:2,  dur_bonus:-3,pwr:0,slots:1,price:2000, dc:2,dur:3, rarity:'COMMON',  legality:'LEGAL',note:'Lightweight alloy replaces heavy elements'},
+      {name:'Carbon Frame',  spd_mod:4,  dur_bonus:-5,pwr:0,slots:1,price:7000, dc:4,dur:3, rarity:'UNCOMMON',legality:'LEGAL',note:'Ultra-light carbon composite chassis'},
+      {name:'Aero Shell',    spd_mod:7,  dur_bonus:-4,pwr:0,slots:2,price:18000,dc:5,dur:4, rarity:'RARE',    legality:'LEGAL',note:'Aerodynamic shell — cuts drag and mass'},
+    ]},
+  CARGO_HARDPOINT:{name:'Cargo Hardpoint',icon:'🪝',loc:['ext'],
+    tiers:[
+      {name:'Light Payload', spd_mod:-2,dur_bonus:0,pwr:0,slots:2,price:500,  dc:1,dur:5, rarity:'COMMON',  legality:'LEGAL',note:'20 kg carry capacity'},
+      {name:'Cargo Bay',     spd_mod:-4,dur_bonus:0,pwr:0,slots:3,price:1500, dc:2,dur:6, rarity:'COMMON',  legality:'LEGAL',note:'100 kg carry capacity'},
+      {name:'Heavy Bay',     spd_mod:-6,dur_bonus:2,pwr:0,slots:5,price:5000, dc:3,dur:8, rarity:'UNCOMMON',legality:'LEGAL',note:'500 kg carry, reinforced frame'},
+    ]},
   // ── SENSING ───────────────────────────────────────────────────────────────
   SENSOR_OPTICAL:{name:'Optical Sensor',icon:'👁',loc:['core','int','ext'],
     tiers:[
@@ -947,22 +966,22 @@ const DB_COMP={
   // ── DEFENSE ───────────────────────────────────────────────────────────────
   ARMOR_COMBAT:{name:'Combat Armor',icon:'🛡',loc:['ext'],exclusive:true,
     tiers:[
-      {name:'Light Plate',  phys:'LOW',   energy:'LOW',   tech:'NONE',  spirit:'NONE', soak_bonus:2, spd_mod:-1,dur_bonus:3,  pwr:0,slots:2,price:2000,  dc:2,dur:6, rarity:'COMMON',  legality:'LEGAL'},
-      {name:'Combat Shell', phys:'MEDIUM',energy:'LOW',   tech:'NONE',  spirit:'NONE', soak_bonus:4, spd_mod:-2,dur_bonus:6,  pwr:0,slots:4,price:5000,  dc:3,dur:8, rarity:'UNCOMMON',legality:'LEGAL'},
-      {name:'Heavy Plate',  phys:'HIGH',  energy:'MEDIUM',tech:'NONE',  spirit:'NONE', soak_bonus:6, spd_mod:-3,dur_bonus:10, pwr:0,slots:6,price:15000, dc:5,dur:10,rarity:'RARE',    legality:'RESTRICTED'},
-      {name:'Siege Armor',  phys:'EXTREME',energy:'HIGH', tech:'NONE',  spirit:'NONE', soak_bonus:10,spd_mod:-5,dur_bonus:15, pwr:0,slots:8,price:45000, dc:7,dur:14,rarity:'LIMITED', legality:'MILITARY'},
+      {name:'Light Plate',  phys:'LOW',   energy:'LOW',   tech:'NONE',  spirit:'NONE', soak_bonus:'1D',   spd_mod:-1,dur_bonus:3,  pwr:0,slots:2,price:2000,  dc:2,dur:6, rarity:'COMMON',  legality:'LEGAL'},
+      {name:'Combat Shell', phys:'MEDIUM',energy:'LOW',   tech:'NONE',  spirit:'NONE', soak_bonus:'1D+2', spd_mod:-2,dur_bonus:6,  pwr:0,slots:4,price:5000,  dc:3,dur:8, rarity:'UNCOMMON',legality:'LEGAL'},
+      {name:'Heavy Plate',  phys:'HIGH',  energy:'MEDIUM',tech:'NONE',  spirit:'NONE', soak_bonus:'2D',   spd_mod:-3,dur_bonus:10, pwr:0,slots:6,price:15000, dc:5,dur:10,rarity:'RARE',    legality:'RESTRICTED'},
+      {name:'Siege Armor',  phys:'EXTREME',energy:'HIGH', tech:'NONE',  spirit:'NONE', soak_bonus:'3D',   spd_mod:-5,dur_bonus:15, pwr:0,slots:8,price:45000, dc:7,dur:14,rarity:'LIMITED', legality:'MILITARY'},
     ]},
   ARMOR_TECH:{name:'Tech-Resist Armor',icon:'🔮',loc:['ext'],exclusive:true,
     tiers:[
-      {name:'Faraday Shell',  phys:'NONE',energy:'NONE',  tech:'LOW',   spirit:'NONE', soak_bonus:1, spd_mod:0, dur_bonus:2, pwr:1,slots:2,price:3000, dc:3,dur:5, rarity:'UNCOMMON',legality:'LEGAL'},
-      {name:'ECM Plating',    phys:'NONE',energy:'LOW',   tech:'MEDIUM',spirit:'NONE', soak_bonus:2, spd_mod:-1,dur_bonus:4, pwr:2,slots:4,price:8000, dc:4,dur:7, rarity:'RARE',    legality:'RESTRICTED'},
-      {name:'Nullfield Hull', phys:'LOW', energy:'MEDIUM',tech:'HIGH',  spirit:'NONE', soak_bonus:4, spd_mod:-2,dur_bonus:8, pwr:3,slots:6,price:25000,dc:6,dur:10,rarity:'LIMITED', legality:'MILITARY'},
+      {name:'Faraday Shell',  phys:'NONE',energy:'NONE',  tech:'LOW',   spirit:'NONE', soak_bonus:'1D',   spd_mod:0, dur_bonus:2, pwr:1,slots:2,price:3000, dc:3,dur:5, rarity:'UNCOMMON',legality:'LEGAL'},
+      {name:'ECM Plating',    phys:'NONE',energy:'LOW',   tech:'MEDIUM',spirit:'NONE', soak_bonus:'1D+1', spd_mod:-1,dur_bonus:4, pwr:2,slots:4,price:8000, dc:4,dur:7, rarity:'RARE',    legality:'RESTRICTED'},
+      {name:'Nullfield Hull', phys:'LOW', energy:'MEDIUM',tech:'HIGH',  spirit:'NONE', soak_bonus:'2D',   spd_mod:-2,dur_bonus:8, pwr:3,slots:6,price:25000,dc:6,dur:10,rarity:'LIMITED', legality:'MILITARY'},
     ]},
   ARMOR_SPIRIT:{name:'Spiritual Shielding',icon:'✨',loc:['ext'],exclusive:true,
     tiers:[
-      {name:'Null Coating',      phys:'NONE',energy:'NONE',tech:'NONE',spirit:'LOW',    soak_bonus:1,spd_mod:0, dur_bonus:2, pwr:2,slots:2,price:5000,  dc:4,dur:4, rarity:'RARE',      legality:'LEGAL'},
-      {name:'Warding Shell',     phys:'NONE',energy:'NONE',tech:'NONE',spirit:'MEDIUM', soak_bonus:3,spd_mod:-1,dur_bonus:5, pwr:3,slots:4,price:15000, dc:6,dur:6, rarity:'LIMITED',   legality:'RESTRICTED'},
-      {name:'Parascience Shield',phys:'NONE',energy:'NONE',tech:'LOW', spirit:'EXTREME',soak_bonus:6,spd_mod:-2,dur_bonus:8, pwr:5,slots:6,price:50000, dc:8,dur:8, rarity:'CLASSIFIED',legality:'MILITARY'},
+      {name:'Null Coating',      phys:'NONE',energy:'NONE',tech:'NONE',spirit:'LOW',    soak_bonus:'1D',   spd_mod:0, dur_bonus:2, pwr:2,slots:2,price:5000,  dc:4,dur:4, rarity:'RARE',      legality:'LEGAL'},
+      {name:'Warding Shell',     phys:'NONE',energy:'NONE',tech:'NONE',spirit:'MEDIUM', soak_bonus:'1D+2', spd_mod:-1,dur_bonus:5, pwr:3,slots:4,price:15000, dc:6,dur:6, rarity:'LIMITED',   legality:'RESTRICTED'},
+      {name:'Parascience Shield',phys:'NONE',energy:'NONE',tech:'LOW', spirit:'EXTREME',soak_bonus:'2D+2', spd_mod:-2,dur_bonus:8, pwr:5,slots:6,price:50000, dc:8,dur:8, rarity:'CLASSIFIED',legality:'MILITARY'},
     ]},
   SHIELD_ENERGY:{name:'Energy Shield',icon:'💠',loc:['core','int'],
     tiers:[
@@ -972,9 +991,22 @@ const DB_COMP={
     ]},
   REACTIVE_ARMOR:{name:'Reactive Armor',icon:'💥',loc:['ext'],
     tiers:[
-      {name:'ERA Panels',   phys:'LOW',   energy:'NONE',tech:'NONE',spirit:'NONE',soak_bonus:2,spd_mod:0,dur_bonus:3,pwr:0,slots:2,price:3000, dc:3,dur:4, rarity:'UNCOMMON',legality:'RESTRICTED',note:'Single-use blast absorption per panel'},
-      {name:'NERA Array',   phys:'MEDIUM',energy:'LOW', tech:'NONE',spirit:'NONE',soak_bonus:4,spd_mod:-1,dur_bonus:5,pwr:1,slots:4,price:10000,dc:4,dur:5,rarity:'RARE',    legality:'MILITARY',  note:'Active counter-explosion system'},
-      {name:'Trophy System',phys:'HIGH',  energy:'MEDIUM',tech:'NONE',spirit:'NONE',soak_bonus:6,spd_mod:-1,dur_bonus:8,pwr:3,slots:5,price:30000,dc:6,dur:6,rarity:'LIMITED',legality:'MILITARY',  note:'Intercepts incoming projectiles'},
+      {name:'ERA Panels',   phys:'LOW',   energy:'NONE',tech:'NONE',spirit:'NONE',soak_bonus:'1D',   spd_mod:0, dur_bonus:3,pwr:0,slots:2,price:3000, dc:3,dur:4, rarity:'UNCOMMON',legality:'RESTRICTED',note:'Single-use blast absorption per panel'},
+      {name:'NERA Array',   phys:'MEDIUM',energy:'LOW', tech:'NONE',spirit:'NONE',soak_bonus:'1D+2', spd_mod:-1,dur_bonus:5,pwr:1,slots:4,price:10000,dc:4,dur:5, rarity:'RARE',    legality:'MILITARY',  note:'Active counter-explosion system'},
+      {name:'Trophy System',phys:'HIGH',  energy:'MEDIUM',tech:'NONE',spirit:'NONE',soak_bonus:'2D+2',spd_mod:-1,dur_bonus:8,pwr:3,slots:5,price:30000,dc:6,dur:6, rarity:'LIMITED', legality:'MILITARY',  note:'Intercepts incoming projectiles'},
+    ]},
+  HULL_REINFORCE:{name:'Hull Reinforcement',icon:'🔩',loc:['ext'],
+    tiers:[
+      {name:'Ablative Panels', dur_bonus:4,  soak_bonus:'1D',   spd_mod:0, pwr:0,slots:2,price:1500, dc:2,dur:3, rarity:'COMMON',  legality:'LEGAL',   note:'Sacrificial outer plates — consumed on heavy impact'},
+      {name:'Composite Lining',dur_bonus:8,  soak_bonus:'1D+2', spd_mod:-1,pwr:0,slots:3,price:5000, dc:3,dur:4, rarity:'UNCOMMON',legality:'LEGAL',   note:'Layered composite hull reinforcement'},
+      {name:'Carbyne Weave',   dur_bonus:14, soak_bonus:'2D',   spd_mod:-2,pwr:0,slots:4,price:14000,dc:5,dur:5, rarity:'RARE',    legality:'LEGAL',   note:'Ultra-dense molecular-weave shell'},
+      {name:'Nanite Hull',     dur_bonus:22, soak_bonus:'2D+2', spd_mod:-1,pwr:2,slots:5,price:40000,dc:7,dur:6, rarity:'LIMITED', legality:'MILITARY',note:'Self-sealing nanomaterial hull'},
+    ]},
+  REPAIR_SYS:{name:'Auto-Repair System',icon:'🩺',loc:['core','int'],
+    tiers:[
+      {name:'Patch Kit',      dur_bonus:3, sys_bonus:0,pwr:1,slots:1,price:1200, dc:2,dur:3, rarity:'COMMON',  legality:'LEGAL',note:'Restores 1 Dur per scene'},
+      {name:'Nano-Repair',    dur_bonus:6, sys_bonus:1,pwr:2,slots:2,price:4500, dc:4,dur:4, rarity:'UNCOMMON',legality:'LEGAL',note:'Restores 2 Dur per scene'},
+      {name:'Auto-Repair Bay',dur_bonus:12,sys_bonus:1,pwr:4,slots:3,price:15000,dc:6,dur:5, rarity:'RARE',    legality:'LEGAL',note:'Restores 3 Dur per scene, continues post-combat'},
     ]},
   // ── WEAPONS ───────────────────────────────────────────────────────────────
   WEAPON_MOUNT:{name:'Weapon Mount',icon:'🔫',loc:['ext','int'],
@@ -1157,13 +1189,21 @@ const DB_COMP={
       {name:'Radiation Shld',pwr:2,slots:2,price:4000, dc:3,dur:4, rarity:'UNCOMMON',legality:'LEGAL',note:'Radiation and vacuum rated'},
       {name:'Extreme Env.',  pwr:3,slots:3,price:12000,dc:4,dur:5, rarity:'RARE',    legality:'LEGAL',note:'Rated for extreme environments, corrosive, high pressure'},
     ]},
+  // ── PROCESSING ───────────────────────────────────────────────────────────
+  NEURAL_PROC:{name:'Neural Processor',icon:'🖥',loc:['core','int'],
+    tiers:[
+      {name:'Co-Processor',    sys_bonus:2, pwr:1,slots:1,price:1500,  dc:2,dur:3, rarity:'COMMON',    legality:'LEGAL',     note:'Dedicated co-processing unit'},
+      {name:'Neural Matrix',   sys_bonus:4, pwr:2,slots:2,price:6000,  dc:3,dur:4, rarity:'UNCOMMON',  legality:'LEGAL',     note:'Neural-network processing accelerator'},
+      {name:'Quantum Proc.',   sys_bonus:7, pwr:4,slots:3,price:20000, dc:5,dur:5, rarity:'RARE',      legality:'RESTRICTED',note:'Quantum-coherent computation array'},
+      {name:'Singularity Core',sys_bonus:12,pwr:7,slots:4,price:70000, dc:8,dur:6, rarity:'CLASSIFIED',legality:'MILITARY',  note:'Recursive self-optimizing processing matrix'},
+    ]},
   // ── AI ────────────────────────────────────────────────────────────────────
-  SKILL_MODULE:{name:'Skill Module',icon:'🧠',loc:['core','int'],exclusive:true,
+  SKILL_MODULE:{name:'Skill Module',icon:'🧠',loc:['core','int'],
     tiers:[
       {name:'Basic AI',   skills_n:1,rank:3,pwr:3, slots:2,price:3000,  dc:3,dur:3, sys_bonus:1, rarity:'UNCOMMON',  legality:'LEGAL'},
-      {name:'Standard AI',skills_n:3,rank:4,pwr:5, slots:3,price:9000,  dc:5,dur:4, sys_bonus:2, rarity:'RARE',      legality:'LEGAL'},
-      {name:'Advanced AI',skills_n:5,rank:6,pwr:8, slots:4,price:25000, dc:6,dur:5, sys_bonus:3, rarity:'LIMITED',   legality:'RESTRICTED'},
-      {name:'Tactical AI',skills_n:8,rank:7,pwr:12,slots:5,price:70000, dc:8,dur:6, sys_bonus:4, rarity:'CLASSIFIED',legality:'MILITARY'},
+      {name:'Standard AI',skills_n:1,rank:4,pwr:5, slots:3,price:9000,  dc:5,dur:4, sys_bonus:2, rarity:'RARE',      legality:'LEGAL'},
+      {name:'Advanced AI',skills_n:1,rank:6,pwr:8, slots:4,price:25000, dc:6,dur:5, sys_bonus:3, rarity:'LIMITED',   legality:'RESTRICTED'},
+      {name:'Tactical AI',skills_n:1,rank:7,pwr:12,slots:5,price:70000, dc:8,dur:6, sys_bonus:4, rarity:'CLASSIFIED',legality:'MILITARY'},
     ]},
 };
 
@@ -1220,7 +1260,7 @@ function calcDrone(){
     r.energy=maxDef(r.energy,t.energy);
     r.tech=maxDef(r.tech,t.tech);
     r.spirit=maxDef(r.spirit,t.spirit);
-    if(t.soak_bonus) r.soak_f+=t.soak_bonus;
+    if(t.soak_bonus){const sb=parseSk(String(t.soak_bonus));r.soak_d+=sb.d;r.soak_f+=sb.f;}
     if(t.spd_mod) spd_pen+=t.spd_mod;
     if(t.awareness!=null&&t.awareness>r.awareness){r.awareness=t.awareness;r.sensor_range=t.range;}
     if(t.comm_range) r.comms=t.comm_range;
@@ -1263,7 +1303,7 @@ function dbTierDesc(type,t){
   if(t.spirit&&t.spirit!=='NONE') defs.push('SPRT:'+t.spirit);
   if(defs.length) p.push('🛡 '+defs.join(' '));
   if(t.soak_bonus) p.push('Soak +'+t.soak_bonus);
-  if(t.dur_bonus) p.push('Durability +'+t.dur_bonus);
+  if(t.dur_bonus) p.push('Durability '+(t.dur_bonus>0?'+':'')+t.dur_bonus);
   if(t.spd_mod) p.push('Speed '+t.spd_mod+'m/r');
   if(t.awareness) p.push('👁 Awareness +'+t.awareness+' Range '+t.range);
   if(t.weapon_type) p.push('🔫 '+t.weapon_type+' '+t.weapon_size+(t.needs_ammo?' (needs ammo)':'')+(t.auto_aim?' auto-aim':''));
@@ -1330,8 +1370,14 @@ function renderDbZone(loc,stats){
 
 function renderWpnPicker(comp,t,loc,idx){
   const wtype=t.weapon_type;
+  const WPN_SZ=['Tiny','Small','Medium','Large','Ex. Large','Huge','Massive','Colossal'];
+  const maxSzIdx=WPN_SZ.indexOf(t.weapon_size);
   const isEnergy=w=>{const tp=((w.type||w.dmg_type||w.damage||'').toUpperCase());return tp.includes('ENERGY')||tp.includes('LASER')||tp.includes('PLASMA');};
-  const wpns=(g.weapons||[]).filter(w=>wtype==='ENERGY'?isEnergy(w):!isEnergy(w));
+  const wpns=(g.weapons||[]).filter(w=>{
+    const szIdx=WPN_SZ.indexOf(w.size||'Small');
+    const szOk=maxSzIdx<0||szIdx<0||szIdx<=maxSzIdx;
+    return szOk&&(wtype==='ENERGY'?isEnergy(w):!isEnergy(w));
+  });
   const q=(dbAdd.wpnSearch||'').toLowerCase();
   const filtered=q?wpns.filter(w=>(w.name||'').toLowerCase().includes(q)||(w.category||'').toLowerCase().includes(q)):wpns;
   const zkey=loc==='int'?'internal':loc==='ext'?'external':loc;
@@ -1455,6 +1501,19 @@ function renderDbStats(st){
       if(m.weapon) h+=' → <span style="color:var(--a2);">'+esc(m.weapon)+'</span>';
       else h+=' <span style="color:var(--mu);font-style:italic;">no weapon selected</span>';
       h+='</div>';
+      if(m.weapon){
+        const wd=(g.weapons||[]).find(w=>w.name===m.weapon);
+        if(wd){
+          h+='<div style="margin:2px 0 6px 12px;padding:5px 8px;background:rgba(0,0,0,.3);border-left:2px solid '+(m.weapon_type==='ENERGY'?'#a855f7':'#ff6b35')+';border-radius:0 4px 4px 0;font-family:ShareTechMono,monospace;font-size:9px;display:flex;flex-wrap:wrap;gap:5px;align-items:center;">';
+          if(wd.damage) h+='<span style="color:#fb923c;font-weight:bold;">'+esc(wd.damage)+'</span>';
+          if(wd.range_short) h+='<span style="color:var(--mu);">Rng '+esc(wd.range_short)+'/'+esc(wd.range_med)+'/'+esc(wd.range_long)+'m</span>';
+          if(wd.ammo) h+='<span style="color:var(--mu);">Ammo:'+esc(wd.ammo)+'</span>';
+          if(wd.rof&&wd.rof.trim()) h+='<span style="color:var(--mu);">RoF:'+esc(wd.rof)+'</span>';
+          if(wd.special&&wd.special.trim()) h+='<span style="color:#60a5fa;">'+esc(wd.special)+'</span>';
+          if(wd.legality) h+='<span style="color:var(--ye);">'+esc(wd.legality)+'</span>';
+          h+='</div>';
+        }
+      }
     });
   }
   if(st.warns.length){
@@ -2436,8 +2495,8 @@ function render(){
     filtered.forEach((p,i)=>{
       const cid='dp'+i;
       html+='<div class="card '+rarCls(p.rarity)+'" id="'+cid+'" data-tog="'+cid+'">';
-      html+='<div class="ch"><div><div class="cn">'+p.icon+' '+hl(p.cat_name,sq)+'</div>';
-      html+='<div class="cs">'+hl(p.tier_name,sq)+'</div></div><span class="xi">▼</span></div>';
+      html+='<div class="ch"><div><div class="cn">'+p.icon+' '+hl(p.tier_name,sq)+'</div>';
+      html+='<div class="cs">'+hl(p.cat_name,sq)+'</div></div><span class="xi">▼</span></div>';
       html+='<div class="cr2">';
       p.loc.forEach(l=>{html+='<span class="wpn-pill" style="color:'+locColors[l]+';font-size:9px;">'+l.toUpperCase()+'</span>';});
       if(p.rarity) html+='<span class="wpn-pill" style="color:'+(rarCol[p.rarity]||'#fff')+';font-size:9px;">'+p.rarity+'</span>';
@@ -2459,7 +2518,7 @@ function render(){
         defs.forEach(([k,v])=>{html+='<div class="f"><div class="fl">'+k+' Def</div><div class="fv" style="color:'+(defCol[v]||'#fff')+';">'+v+'</div></div>';});
         if(p.soak_bonus) html+='<div class="f"><div class="fl">Soak Bonus</div><div class="fv">+'+p.soak_bonus+'</div></div>';
         if(p.spd_mod) html+='<div class="f"><div class="fl">Speed Mod</div><div class="fv">'+p.spd_mod+'m/r</div></div>';
-        if(p.dur_bonus) html+='<div class="f"><div class="fl">Durability</div><div class="fv">+'+p.dur_bonus+'</div></div>';
+        if(p.dur_bonus) html+='<div class="f"><div class="fl">Durability</div><div class="fv">'+(p.dur_bonus>0?'+':'')+p.dur_bonus+'</div></div>';
         html+='</div>';
       }
       if(p.awareness) html+='<div class="fg"><div class="f"><div class="fl">Awareness</div><div class="fv">+'+p.awareness+'</div></div><div class="f"><div class="fl">Range</div><div class="fv">'+p.range+'</div></div></div>';
