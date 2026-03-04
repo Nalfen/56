@@ -323,7 +323,11 @@ document.addEventListener('click',e=>{
     else if(v==='atmo'){dbState.atmo=!dbState.atmo;render();}
     else if(v.startsWith('open:')){dbState.wpnPicker=null;dbAdd={loc:v.slice(5),type:null,tier:0,skills:[],wpnSearch:''};render();}
     else if(v==='close'){dbAdd.loc=null;render();}
-    else if(v.startsWith('atype:')){dbAdd.type=v.slice(6);dbAdd.tier=0;dbAdd.skills=[];render();}
+    else if(v.startsWith('atype:')){
+      const newType=v.slice(6);const szDat2=dbState.size?DB_SIZES[dbState.size]:null;
+      const firstValid=(DB_COMP[newType]||{tiers:[]}).tiers.findIndex(t=>!szDat2||(t.slots||0)<=szDat2.max_comp);
+      dbAdd.type=newType;dbAdd.tier=Math.max(0,firstValid<0?0:firstValid);dbAdd.skills=[];render();
+    }
     else if(v.startsWith('atier:')){
       dbAdd.tier=parseInt(v.slice(6));
       // Keep valid skills only if tier changes skill count
@@ -828,12 +832,12 @@ g.catalog.ship_components=buildShipComps();
 // ═══════════════════════════════════════════════════════════════════════════════
 
 const DB_SIZES={
-  TINY:  {name:'Tiny',   slots:12, dur:4,  sys:2,  soak:'0',    spd_mod:2,  price:2000,   dc:1},
-  SMALL: {name:'Small',  slots:18, dur:6,  sys:3,  soak:'0',    spd_mod:1,  price:5000,   dc:2},
-  MED:   {name:'Medium', slots:30, dur:10, sys:4,  soak:'1',    spd_mod:0,  price:12000,  dc:3},
-  LARGE: {name:'Large',  slots:42, dur:15, sys:6,  soak:'1D',   spd_mod:-2, price:30000,  dc:4},
-  XL:    {name:'X-Large',slots:54, dur:22, sys:8,  soak:'1D+1', spd_mod:-4, price:80000,  dc:5},
-  HUGE:  {name:'Huge',   slots:72, dur:35, sys:10, soak:'1D+2', spd_mod:-6, price:200000, dc:6},
+  TINY:  {name:'Tiny',   slots:12, max_comp:4,  dur:4,  sys:2,  soak:'0',    spd_mod:2,  price:2000,   dc:1},
+  SMALL: {name:'Small',  slots:18, max_comp:6,  dur:6,  sys:3,  soak:'0',    spd_mod:1,  price:5000,   dc:2},
+  MED:   {name:'Medium', slots:30, max_comp:12, dur:10, sys:4,  soak:'1',    spd_mod:0,  price:12000,  dc:3},
+  LARGE: {name:'Large',  slots:42, max_comp:18, dur:15, sys:6,  soak:'1D',   spd_mod:-2, price:30000,  dc:4},
+  XL:    {name:'X-Large',slots:54, max_comp:24, dur:22, sys:8,  soak:'1D+1', spd_mod:-4, price:80000,  dc:5},
+  HUGE:  {name:'Huge',   slots:72, max_comp:72, dur:35, sys:10, soak:'1D+2', spd_mod:-6, price:200000, dc:6},
 };
 const DB_MOB={
   STATIC:{name:'Stationary', base_mode:null,  base_spd:0,  alt_mode:null, alt_spd:0, price:0,     dc:0},
@@ -877,6 +881,12 @@ const DB_COMP={
       {name:'Power Buffer', pwr_give:6, autonomy:'4 hours', pwr:0,slots:2,price:2000, dc:2,dur:4, rarity:'UNCOMMON',legality:'LEGAL',note:'Rechargeable via Solar Panel or dock station'},
       {name:'Hypercharged', pwr_give:12,autonomy:'12 hours',pwr:0,slots:3,price:7000, dc:4,dur:5, rarity:'RARE',    legality:'LEGAL',note:'Rechargeable via Solar Panel or dock station'},
     ]},
+  FUSION_CORE:{name:'Fusion Core',icon:'⚛',loc:['core'],
+    tiers:[
+      {name:'Micro Fusion',   pwr_give:25,autonomy:'Unlimited',pwr:0,slots:5, price:18000, dc:5,dur:6, rarity:'RARE',      legality:'RESTRICTED',note:'Compact fusion cell — constant output, no refuelling'},
+      {name:'Standard Fusion',pwr_give:45,autonomy:'Unlimited',pwr:0,slots:8, price:55000, dc:7,dur:8, rarity:'LIMITED',   legality:'MILITARY',  note:'Military-grade fusion generator — unlimited power'},
+      {name:'Military Fusion',pwr_give:80,autonomy:'Unlimited',pwr:0,slots:12,price:150000,dc:9,dur:10,rarity:'CLASSIFIED',legality:'MILITARY',  note:'Classified fusion reactor — extreme output, no operational limits'},
+    ]},
   // ── PROPULSION (secondary drives) ─────────────────────────────────────────
   DRIVE_AQUATIC:{name:'Aquatic Drive',icon:'🌊',loc:['ext'],
     tiers:[
@@ -918,8 +928,8 @@ const DB_COMP={
     tiers:[
       {name:'Tuning Kit',      spd_mod:2,  pwr:0,slots:1,price:1000, dc:2,dur:3, rarity:'COMMON',  legality:'LEGAL',     note:'Fine-tunes primary drive for +2 speed'},
       {name:'Performance Pkg.',spd_mod:5,  pwr:1,slots:2,price:4500, dc:3,dur:4, rarity:'UNCOMMON',legality:'LEGAL',     note:'Upgraded drive components for +5 speed'},
-      {name:'Racing Config.',  spd_mod:9,  pwr:2,slots:2,price:13000,dc:5,dur:3, rarity:'RARE',    legality:'RESTRICTED',note:'+9 speed, reduced structural integrity'},
-      {name:'Overdrive Sys.',  spd_mod:15, pwr:4,slots:5,price:38000,dc:7,dur:2, rarity:'LIMITED', legality:'MILITARY',  note:'Extreme performance — redlines drive, very fragile'},
+      {name:'Racing Config.',  spd_mod:9,  dur_bonus:-4,pwr:2,slots:2,price:13000,dc:5,dur:3, rarity:'RARE',    legality:'RESTRICTED',note:'+9 speed, reduced structural integrity'},
+      {name:'Overdrive Sys.',  spd_mod:15, dur_bonus:-8,pwr:4,slots:5,price:38000,dc:7,dur:2, rarity:'LIMITED', legality:'MILITARY',  note:'Extreme performance — redlines drive, very fragile'},
     ]},
   WEIGHT_REDUCTION:{name:'Weight Reduction',icon:'⬇',loc:['ext','int'],
     tiers:[
@@ -1298,6 +1308,7 @@ function calcDrone(){
   if(r.slots_used>r.slots_max) r.warns.push('Slot overload: '+r.slots_used+'/'+r.slots_max+' slots used');
   const kMounts=r.mounts.filter(m=>m.needs_ammo);
   if(kMounts.length&&!r.ammo_cap) r.warns.push('Kinetic weapon mounts require Ammo Storage');
+  if(sz){const mc=sz.max_comp;for(const comp of all){const def=DB_COMP[comp.type];if(!def)continue;const t=def.tiers[comp.tier];if(t&&(t.slots||0)>mc)r.warns.push(def.name+' ('+t.name+') exceeds max component size for '+sz.name+' chassis (max '+mc+' slots)');}}
   return r;
 }
 
@@ -1418,7 +1429,12 @@ function renderWpnPicker(comp,t,loc,idx){
 
 function renderDbAddPanel(loc){
   const isExclusive=k=>DB_COMP[k].exclusive&&[...dbState.core,...dbState.internal,...dbState.external].some(c=>c.type===k);
-  const availTypes=Object.entries(DB_COMP).filter(([k,d])=>d.loc.includes(loc)&&!isExclusive(k));
+  const szDat=dbState.size?DB_SIZES[dbState.size]:null;
+  const availTypes=Object.entries(DB_COMP).filter(([k,d])=>{
+    if(!d.loc.includes(loc)||isExclusive(k)) return false;
+    if(szDat&&d.tiers.every(t=>(t.slots||0)>szDat.max_comp)) return false;
+    return true;
+  });
   let h='<div class="db-add-panel">';
   h+='<div class="db-add-row">';
   h+='<span class="db-add-lbl">COMPONENT TYPE</span>';
@@ -1434,6 +1450,7 @@ function renderDbAddPanel(loc){
     def.tiers.forEach((t,i)=>{
       const sizeOk=!t.size_limit||t.size_limit.includes(sz);
       if(!sizeOk) return;
+      if(szDat&&(t.slots||0)>szDat.max_comp) return;
       h+='<button class="db-chip'+(dbAdd.tier===i?' sel':'')+'" data-db="atier:'+i+'">'+esc(t.name)+'</button>';
     });
     h+='</div>';
@@ -2559,7 +2576,7 @@ function render(){
     html+='<div class="db-setup">';
     html+='<div class="db-step"><span class="db-step-lbl">CHASSIS SIZE</span>';
     Object.entries(DB_SIZES).forEach(([k,v])=>{
-      html+='<button class="db-chip'+(dbState.size===k?' sel':'')+'" data-db="size:'+k+'">'+v.name+'<span style="font-size:8px;color:var(--mu);display:block;">'+v.slots+' slots</span></button>';
+      html+='<button class="db-chip'+(dbState.size===k?' sel':'')+'" data-db="size:'+k+'">'+v.name+'<span style="font-size:8px;color:var(--mu);display:block;">'+v.slots+' slots · max '+v.max_comp+'/comp</span></button>';
     });
     html+='</div>';
     html+='<div class="db-step"><span class="db-step-lbl">MOBILITY</span>';
@@ -2572,6 +2589,7 @@ function render(){
     html+='<button class="db-chip'+(dbState.pwr_type==='POWER_CELL'?' sel':'')+'" data-db="pwr:POWER_CELL">⚡ Power Cell<span style="font-size:8px;color:var(--mu);display:block;">Core slot</span></button>';
     html+='<button class="db-chip'+(dbState.pwr_type==='SOLAR_PANEL'?' sel':'')+'" data-db="pwr:SOLAR_PANEL">☀ Solar Panel<span style="font-size:8px;color:var(--mu);display:block;">External slot</span></button>';
     html+='<button class="db-chip'+(dbState.pwr_type==='ENERGY_BANK'?' sel':'')+'" data-db="pwr:ENERGY_BANK">🔋 Energy Bank<span style="font-size:8px;color:var(--mu);display:block;">Core/Int slot</span></button>';
+    html+='<button class="db-chip'+(dbState.pwr_type==='FUSION_CORE'?' sel':'')+'" data-db="pwr:FUSION_CORE">⚛ Fusion Core<span style="font-size:8px;color:var(--mu);display:block;">Core slot · Unlimited</span></button>';
     html+='</div>';
     if(dbState.size&&dbState.mob){
       const sz=DB_SIZES[dbState.size];const mob=DB_MOB[dbState.mob];
