@@ -592,8 +592,8 @@ const SHIP_BASE={DRONE:{structure:1,hull:5,crew_min:0,command:0},FIGHTER:{struct
 // pwr_draw = passive power consumed by this component
 const COMP_CC={
   // Power systems
-  POWER:          {pwr_create:[20,5],system:[3,1],pwr_draw:[0,0]},
-  POWER_CORONTHIA:{pwr_create:[25,8],system:[4,2],fuel_cons:[3,2],pwr_draw:[0,0]},  // burns coronthia crystals
+  POWER:          {pwr_create:[20,5],energy_storage:[6,4],system:[3,1],pwr_draw:[0,0]},
+  POWER_CORONTHIA:{pwr_create:[35,18],system:[4,2],fuel_cons:[8,5],pwr_draw:[0,0]},  // burns coronthia fuel cells — requires FUELTANK
   ENERGYTANK:     {energy_storage:[10,5],pwr_draw:[0,0]},
   // Frame
   HULL:           {structure:[-1,1],command:[1,-1],pwr_draw:[0,0]},  // BASIC penalises structure, GOOD hull is heavy (-command)
@@ -696,121 +696,122 @@ function calcShip(comps,cls){
 // classes: 'ALL' or array of allowed ship classes
 const SCOMP_DEF={
   ENGINEBALANCED:{name:'Balanced Engine',classes:'ALL',
-    unit:[5,8,13,20,30,44,65,95],pwr:[4,6,10,15,22,32,47,69],price:[80000,160000,380000,850000,1900000,4300000,9600000,21500000],
-    tiers:[{handling:1,speed:'LOW'},{handling:2,speed:'MEDIUM'},{handling:3,speed:'HIGH'}]},
+    unit:[3,4,7,10,15,22,33,48],pwr:[4,6,10,15,22,32,47,69],price:[160000,320000,760000,1700000,3800000,8600000,19200000,43000000],
+    tiers:[{handling:1,speed:'LOW',rarity:'RARE'},{handling:2,speed:'MEDIUM',rarity:'LIMITED'},{handling:3,speed:'HIGH',rarity:'UNIQUE'}]},
   ENGINECOMBAT:{name:'Combat Engine',classes:'ALL',
-    unit:[5,8,13,20,30,44,65,95],pwr:[5,8,12,18,26,38,56,82],price:[100000,200000,480000,1080000,2400000,5400000,12100000,27200000],
-    tiers:[{warfare:1,speed:'LOW'},{warfare:2,speed:'MEDIUM'},{warfare:3,speed:'HIGH'}]},
+    unit:[3,4,7,10,15,22,33,48],pwr:[5,8,12,18,26,38,56,82],price:[200000,400000,960000,2160000,4800000,10800000,24200000,54400000],
+    tiers:[{warfare:1,speed:'LOW',rarity:'RARE'},{warfare:2,speed:'MEDIUM',rarity:'LIMITED'},{warfare:3,speed:'HIGH',rarity:'UNIQUE'}]},
   ENGINEHANDLING:{name:'Handling Engine',classes:'ALL',
-    unit:[5,8,13,20,30,44,65,95],pwr:[4,6,10,15,22,32,47,69],price:[90000,180000,430000,960000,2160000,4860000,10900000,24500000],
-    tiers:[{handling:2,speed:'LOW'},{handling:2,speed:'MEDIUM'},{handling:2,speed:'HIGH'}]},
-  POWER:{name:'Power Core',classes:'ALL',
-    unit:[4,6,10,15,22,32,47,69],pwr:[0,0,0,0,0,0,0,0],price:[120000,240000,570000,1280000,2900000,6500000,14600000,32800000],
-    tiers:[{pwr_create:20,system:3},{pwr_create:25,system:4},{pwr_create:30,system:5}]},
-  POWER_CORONTHIA:{name:'Coronthia Power Core',classes:'ALL',
-    unit:[4,6,10,15,22,32,47,69],pwr:[0,0,0,0,0,0,0,0],price:[200000,400000,950000,2100000,4700000,10600000,23800000,53500000],
-    tiers:[{pwr_create:25,system:4,fuel_cons:3},{pwr_create:33,system:6,fuel_cons:5},{pwr_create:41,system:8,fuel_cons:7}]},
+    unit:[3,4,7,10,15,22,33,48],pwr:[4,6,10,15,22,32,47,69],price:[180000,360000,860000,1920000,4320000,9720000,21800000,49000000],
+    tiers:[{handling:2,speed:'LOW',rarity:'RARE'},{handling:2,speed:'MEDIUM',rarity:'LIMITED'},{handling:2,speed:'HIGH',rarity:'UNIQUE'}]},
+  POWER:{name:'Fusion Core',classes:'ALL',
+    unit:[2,3,5,8,11,16,24,35],pwr:[0,0,0,0,0,0,0,0],price:[240000,480000,1140000,2560000,5800000,13000000,29200000,65600000],
+    tiers:[{pwr_create:20,energy_storage:6,system:3,rarity:'RARE'},{pwr_create:25,energy_storage:10,system:4,rarity:'LIMITED'},{pwr_create:30,energy_storage:14,system:5,rarity:'UNIQUE'}]},
+  POWER_CORONTHIA:{name:'Coronthia Power Core',classes:'ALL',note:'Requires Fuel Tank',
+    unit:[2,3,5,8,11,16,24,35],pwr:[0,0,0,0,0,0,0,0],price:[400000,800000,1900000,4200000,9400000,21200000,47600000,107000000],
+    tiers:[{pwr_create:35,system:4,fuel_cons:8,rarity:'RARE'},{pwr_create:53,system:6,fuel_cons:13,rarity:'LIMITED'},{pwr_create:71,system:8,fuel_cons:18,rarity:'UNIQUE'}]},
   SHIELD:{name:'Shield',classes:'ALL',
-    unit:[4,6,10,15,22,32,47,69],pwr:[3,5,8,12,17,25,37,54],price:[80000,160000,380000,850000,1900000,4300000,9600000,21500000],
-    tiers:[{shield_max:15,shield_recharge:3},{shield_max:20,shield_recharge:4},{shield_max:25,shield_recharge:5}]},
+    unit:[2,3,5,8,11,16,24,35],pwr:[3,5,8,12,17,25,37,54],price:[160000,320000,760000,1700000,3800000,8600000,19200000,43000000],
+    tiers:[{shield_max:15,shield_recharge:3,rarity:'UNCOMMON'},{shield_max:20,shield_recharge:4,rarity:'RARE'},{shield_max:25,shield_recharge:5,rarity:'LIMITED'}]},
   ECM:{name:'ECM',classes:'ALL',
-    unit:[3,5,8,12,17,25,37,54],pwr:[3,5,8,12,17,25,37,54],price:[60000,120000,285000,640000,1430000,3220000,7230000,16250000],
-    tiers:[{ecm:1},{ecm:2},{ecm:3}]},
+    unit:[2,3,4,6,9,13,19,27],pwr:[3,5,8,12,17,25,37,54],price:[120000,240000,570000,1280000,2860000,6440000,14460000,32500000],
+    tiers:[{ecm:1,rarity:'UNCOMMON'},{ecm:2,rarity:'RARE'},{ecm:3,rarity:'LIMITED'}]},
   SYSTEM:{name:'System',classes:'ALL',
-    unit:[3,5,8,12,17,25,37,54],pwr:[3,5,8,12,17,25,37,54],price:[60000,120000,285000,640000,1430000,3220000,7230000,16250000],
-    tiers:[{system:3},{system:4},{system:5}]},
+    unit:[2,3,4,6,9,13,19,27],pwr:[3,5,8,12,17,25,37,54],price:[120000,240000,570000,1280000,2860000,6440000,14460000,32500000],
+    tiers:[{system:3,rarity:'UNCOMMON'},{system:4,rarity:'RARE'},{system:5,rarity:'LIMITED'}]},
   WARFARESUITE:{name:'Warfare Suite',classes:'ALL',
-    unit:[3,5,8,12,17,25,37,54],pwr:[2,3,5,8,11,16,24,35],price:[80000,160000,380000,850000,1900000,4300000,9600000,21500000],
-    tiers:[{warfare:2},{warfare:3},{warfare:4}]},
+    unit:[2,3,4,6,9,13,19,27],pwr:[2,3,5,8,11,16,24,35],price:[160000,320000,760000,1700000,3800000,8600000,19200000,43000000],
+    tiers:[{warfare:2,rarity:'UNCOMMON'},{warfare:3,rarity:'RARE'},{warfare:4,rarity:'LIMITED'}]},
   HULL:{name:'Hull',classes:'ALL',
-    unit:[-5,-8,-12,-18,-27,-40,-58,-85],pwr:[0,0,0,0,0,0,0,0],price:[40000,80000,190000,430000,960000,2160000,4850000,10900000],
-    tiers:[{structure:-1,command:1},{structure:0,command:0},{structure:1,command:-1}]},
+    unit:[-3,-4,-6,-9,-14,-20,-29,-43],pwr:[0,0,0,0,0,0,0,0],price:[80000,160000,380000,860000,1920000,4320000,9700000,21800000],
+    tiers:[{structure:-1,command:1,rarity:'COMMON'},{structure:0,command:0,rarity:'COMMON'},{structure:1,command:-1,rarity:'UNCOMMON'}]},
   STRUCTURE:{name:'Structure',classes:'ALL',
-    unit:[2,3,5,8,11,16,24,35],pwr:[0,0,0,0,0,0,0,0],price:[30000,60000,143000,320000,720000,1620000,3640000,8180000],
-    tiers:[{structure:1},{structure:2},{structure:3}]},
+    unit:[1,2,3,4,6,8,12,18],pwr:[0,0,0,0,0,0,0,0],price:[60000,120000,286000,640000,1440000,3240000,7280000,16360000],
+    tiers:[{structure:1,rarity:'COMMON'},{structure:2,rarity:'COMMON'},{structure:3,rarity:'UNCOMMON'}]},
   BRIDGE:{name:'Bridge',classes:['CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[4,6,10,15,22,32,47,69],pwr:[2,3,5,8,11,16,24,35],price:[100000,200000,480000,1080000,2400000,5400000,12100000,27200000],
-    tiers:[{command:-1},{command:0},{command:1}]},
+    unit:[2,3,5,8,11,16,24,35],pwr:[2,3,5,8,11,16,24,35],price:[200000,400000,960000,2160000,4800000,10800000,24200000,54400000],
+    tiers:[{command:-1,rarity:'UNCOMMON'},{command:0,rarity:'RARE'},{command:1,rarity:'RARE'}]},
   NAVBRIDGE:{name:'Nav Bridge',classes:['CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[4,6,10,15,22,32,47,69],pwr:[2,3,5,8,11,16,24,35],price:[80000,160000,380000,850000,1900000,4300000,9600000,21500000],
-    tiers:[{instruments:1},{instruments:2},{instruments:3}]},
+    unit:[2,3,5,8,11,16,24,35],pwr:[2,3,5,8,11,16,24,35],price:[160000,320000,760000,1700000,3800000,8600000,19200000,43000000],
+    tiers:[{instruments:1,rarity:'UNCOMMON'},{instruments:2,rarity:'RARE'},{instruments:3,rarity:'RARE'}]},
   COMBRIDGE:{name:'Comms Bridge',classes:['CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[3,5,8,12,17,25,37,54],pwr:[2,3,5,8,11,16,24,35],price:[90000,180000,430000,960000,2160000,4860000,10900000,24500000],
-    tiers:[{warfare:1},{warfare:2},{warfare:3}]},
+    unit:[2,3,4,6,9,13,19,27],pwr:[2,3,5,8,11,16,24,35],price:[180000,360000,860000,1920000,4320000,9720000,21800000,49000000],
+    tiers:[{warfare:1,rarity:'UNCOMMON'},{warfare:2,rarity:'RARE'},{warfare:3,rarity:'RARE'}]},
   AIRLOCKBRIDGE:{name:'Airlock Bridge',classes:['CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[3,5,8,12,17,25,37,54],pwr:[1,2,3,5,7,10,15,22],price:[50000,100000,238000,535000,1200000,2700000,6060000,13600000],
-    tiers:[{command:1},{command:1},{command:1}]},
+    unit:[2,3,4,6,9,13,19,27],pwr:[1,2,3,5,7,10,15,22],price:[100000,200000,476000,1070000,2400000,5400000,12120000,27200000],
+    tiers:[{command:1,rarity:'COMMON'},{command:1,rarity:'UNCOMMON'},{command:1,rarity:'UNCOMMON'}]},
   INSTRUMENTS:{name:'Instruments',classes:'ALL',
-    unit:[3,5,8,12,17,25,37,54],pwr:[2,3,5,8,11,16,24,35],price:[60000,120000,285000,640000,1430000,3220000,7230000,16250000],
-    tiers:[{instruments:1,detect_range:100,max_range:200},{instruments:2,detect_range:200,max_range:400},{instruments:3,detect_range:300,max_range:600}]},
+    unit:[2,3,4,6,9,13,19,27],pwr:[2,3,5,8,11,16,24,35],price:[120000,240000,570000,1280000,2860000,6440000,14460000,32500000],
+    tiers:[{instruments:1,detect_range:100,max_range:200,rarity:'UNCOMMON'},{instruments:2,detect_range:200,max_range:400,rarity:'RARE'},{instruments:3,detect_range:300,max_range:600,rarity:'RARE'}]},
   RADAR:{name:'Radar',classes:'ALL',
-    unit:[2,3,5,8,11,16,24,35],pwr:[1,2,3,5,7,10,15,22],price:[40000,80000,190000,430000,960000,2160000,4850000,10900000],
-    tiers:[{instruments:1,combat_range:100,detect_range:50},{instruments:2,combat_range:150,detect_range:75},{instruments:3,combat_range:200,detect_range:100}]},
+    unit:[1,2,3,4,6,8,12,18],pwr:[1,2,3,5,7,10,15,22],price:[80000,160000,380000,860000,1920000,4320000,9700000,21800000],
+    tiers:[{instruments:1,combat_range:100,detect_range:50,rarity:'COMMON'},{instruments:2,combat_range:150,detect_range:75,rarity:'UNCOMMON'},{instruments:3,combat_range:200,detect_range:100,rarity:'RARE'}]},
   RADAR_COMBAT:{name:'Combat Radar',classes:'ALL',
-    unit:[2,3,5,8,11,16,24,35],pwr:[1,2,3,5,7,10,15,22],price:[60000,120000,285000,640000,1430000,3220000,7230000,16250000],
-    tiers:[{instruments:0,combat_range:300,detect_range:3000,max_range:9000},{instruments:1,combat_range:300,detect_range:3000,max_range:9000},{instruments:2,combat_range:300,detect_range:3000,max_range:9000}]},
+    unit:[1,2,3,4,6,8,12,18],pwr:[1,2,3,5,7,10,15,22],price:[120000,240000,570000,1280000,2860000,6440000,14460000,32500000],
+    tiers:[{instruments:0,combat_range:300,detect_range:3000,max_range:9000,rarity:'UNCOMMON'},{instruments:1,combat_range:300,detect_range:3000,max_range:9000,rarity:'RARE'},{instruments:2,combat_range:300,detect_range:3000,max_range:9000,rarity:'LIMITED'}]},
   RADAR_DEEPSPACE:{name:'Deep Space Radar',classes:'ALL',
-    unit:[2,3,5,8,11,16,24,35],pwr:[1,2,3,5,7,10,15,22],price:[80000,160000,380000,850000,1900000,4300000,9600000,21500000],
-    tiers:[{instruments:2,combat_range:50,detect_range:5000,max_range:50000},{instruments:3,combat_range:50,detect_range:5000,max_range:50000},{instruments:4,combat_range:50,detect_range:5000,max_range:50000}]},
+    unit:[1,2,3,4,6,8,12,18],pwr:[1,2,3,5,7,10,15,22],price:[160000,320000,760000,1700000,3800000,8600000,19200000,43000000],
+    tiers:[{instruments:2,combat_range:50,detect_range:5000,max_range:50000,rarity:'RARE'},{instruments:3,combat_range:50,detect_range:5000,max_range:50000,rarity:'LIMITED'},{instruments:4,combat_range:50,detect_range:5000,max_range:50000,rarity:'LIMITED'}]},
   ENGINEERING:{name:'Engineering',classes:['CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[3,5,8,12,17,25,37,54],pwr:[2,3,5,8,11,16,24,35],price:[60000,120000,285000,640000,1430000,3220000,7230000,16250000],
-    tiers:[{engineering:1},{engineering:2},{engineering:3}]},
+    unit:[2,3,4,6,9,13,19,27],pwr:[2,3,5,8,11,16,24,35],price:[120000,240000,570000,1280000,2860000,6440000,14460000,32500000],
+    tiers:[{engineering:1,rarity:'UNCOMMON'},{engineering:2,rarity:'RARE'},{engineering:3,rarity:'RARE'}]},
   CONSTRUCTION:{name:'Construction Arms',classes:['CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[3,5,8,12,17,25,37,54],pwr:[2,3,5,8,11,16,24,35],price:[80000,160000,380000,850000,1900000,4300000,9600000,21500000],
-    tiers:[{engineering:1},{engineering:2},{engineering:3}]},
+    unit:[2,3,4,6,9,13,19,27],pwr:[2,3,5,8,11,16,24,35],price:[160000,320000,760000,1700000,3800000,8600000,19200000,43000000],
+    tiers:[{engineering:1,rarity:'UNCOMMON'},{engineering:2,rarity:'RARE'},{engineering:3,rarity:'LIMITED'}]},
   JUMPDRIVE:{name:'Jump Drive',classes:['CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[5,8,13,20,30,44,65,95],pwr:[0,0,0,0,0,0,0,0],price:[300000,600000,1430000,3200000,7200000,16200000,36400000,81800000],
-    tiers:[{jump_range:1,pwr_activation:5},{jump_range:2,pwr_activation:5},{jump_range:3,pwr_activation:5}]},
+    unit:[3,4,7,10,15,22,33,48],pwr:[0,0,0,0,0,0,0,0],price:[600000,1200000,2860000,6400000,14400000,32400000,72800000,163600000],
+    tiers:[{jump_range:1,pwr_activation:5,rarity:'LIMITED'},{jump_range:2,pwr_activation:5,rarity:'LIMITED'},{jump_range:3,pwr_activation:5,rarity:'UNIQUE'}]},
   ENERGYTANK:{name:'Energy Tank',classes:'ALL',
-    unit:[3,5,8,12,17,25,37,54],pwr:[0,0,0,0,0,0,0,0],price:[40000,80000,190000,430000,960000,2160000,4850000,10900000],
-    tiers:[{energy_storage:10},{energy_storage:20},{energy_storage:30}]},
+    unit:[2,3,4,6,9,13,19,27],pwr:[0,0,0,0,0,0,0,0],price:[80000,160000,380000,860000,1920000,4320000,9700000,21800000],
+    tiers:[{energy_storage:10,rarity:'COMMON'},{energy_storage:20,rarity:'UNCOMMON'},{energy_storage:30,rarity:'RARE'}]},
   FUELTANK:{name:'Fuel Tank',classes:'ALL',
-    unit:[3,5,8,12,17,25,37,54],pwr:[0,0,0,0,0,0,0,0],price:[30000,60000,143000,320000,720000,1620000,3640000,8180000],
-    tiers:[{fuel_units:100},{fuel_units:200},{fuel_units:300}]},
+    unit:[2,3,4,6,9,13,19,27],pwr:[0,0,0,0,0,0,0,0],price:[60000,120000,286000,640000,1440000,3240000,7280000,16360000],
+    tiers:[{fuel_units:100,rarity:'COMMON'},{fuel_units:200,rarity:'COMMON'},{fuel_units:300,rarity:'UNCOMMON'}]},
   LIFESUPPORT:{name:'Life Support',classes:['FIGHTER','CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[3,5,8,12,17,25,37,54],pwr:[2,3,5,8,11,16,24,35],price:[50000,100000,238000,535000,1200000,2700000,6060000,13600000],
-    tiers:[{life_ppl:5,life_hrs:720},{life_ppl:10,life_hrs:8760},{life_ppl:15,life_hrs:16800}]},
+    unit:[2,3,4,6,9,13,19,27],pwr:[2,3,5,8,11,16,24,35],price:[100000,200000,476000,1070000,2400000,5400000,12120000,27200000],
+    tiers:[{life_ppl:5,life_hrs:720,rarity:'COMMON'},{life_ppl:10,life_hrs:8760,rarity:'UNCOMMON'},{life_ppl:15,life_hrs:16800,rarity:'RARE'}]},
   CREWSPACE:{name:'Crew Quarters',classes:['CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[0,0,3,5,8,12,17,25],pwr:[0,0,1,2,3,5,7,10],price:[0,0,143000,320000,720000,1620000,3640000,8180000],
-    tiers:[{crew_max:5},{crew_max:10},{crew_max:15}]},
+    unit:[0,0,2,3,4,6,9,13],pwr:[0,0,1,2,3,5,7,10],price:[0,0,286000,640000,1440000,3240000,7280000,16360000],
+    tiers:[{crew_max:5,rarity:'COMMON'},{crew_max:10,rarity:'UNCOMMON'},{crew_max:15,rarity:'RARE'}]},
   CREWAUTOMATION:{name:'Crew Automation',classes:'ALL',
-    unit:[3,5,8,12,17,25,37,54],pwr:[1,2,3,5,7,10,15,22],price:[100000,200000,475000,1070000,2400000,5400000,12100000,27200000],
-    tiers:[{crew_min_reduction:2},{crew_min_reduction:3},{crew_min_reduction:4}]},
+    unit:[2,3,4,6,9,13,19,27],pwr:[1,2,3,5,7,10,15,22],price:[200000,400000,950000,2140000,4800000,10800000,24200000,54400000],
+    tiers:[{crew_min_reduction:2,rarity:'UNCOMMON'},{crew_min_reduction:3,rarity:'RARE'},{crew_min_reduction:4,rarity:'LIMITED'}]},
   PASSENGERSSPACE:{name:'Passenger Space',classes:'ALL',
-    unit:[0,0,4,6,10,15,22,32],pwr:[0,0,1,2,3,5,7,10],price:[0,0,190000,430000,960000,2160000,4850000,10900000],
-    tiers:[{passengers:10},{passengers:20},{passengers:30}]},
+    unit:[0,0,2,3,5,8,11,16],pwr:[0,0,1,2,3,5,7,10],price:[0,0,380000,860000,1920000,4320000,9700000,21800000],
+    tiers:[{passengers:10,rarity:'COMMON'},{passengers:20,rarity:'UNCOMMON'},{passengers:30,rarity:'RARE'}]},
   CARGOSPACE:{name:'Cargo Space',classes:'ALL',
-    unit:[2,3,5,8,11,16,24,35],pwr:[1,2,3,5,7,10,15,22],price:[20000,40000,95000,214000,480000,1080000,2430000,5460000],
-    tiers:[{cargo:1},{cargo:1},{cargo:1}]},
+    unit:[1,2,3,4,6,8,12,18],pwr:[1,2,3,5,7,10,15,22],price:[40000,80000,190000,428000,960000,2160000,4860000,10920000],
+    tiers:[{cargo:1,rarity:'COMMON'},{cargo:1,rarity:'COMMON'},{cargo:1,rarity:'COMMON'}]},
   MEDBAY:{name:'Med Bay',classes:['CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[3,5,8,12,17,25,37,54],pwr:[2,3,5,8,11,16,24,35],price:[50000,100000,238000,535000,1200000,2700000,6060000,13600000],
-    tiers:[{},{},{}]},
+    unit:[2,3,4,6,9,13,19,27],pwr:[2,3,5,8,11,16,24,35],price:[100000,200000,476000,1070000,2400000,5400000,12120000,27200000],
+    tiers:[{rarity:'COMMON'},{rarity:'UNCOMMON'},{rarity:'RARE'}]},
   ESCAPEPOD:{name:'Escape Pod',classes:'ALL',
-    unit:[2,3,5,8,11,16,24,35],pwr:[0,0,0,0,0,0,0,0],price:[20000,40000,95000,214000,480000,1080000,2430000,5460000],
-    tiers:[{},{},{}]},
+    unit:[1,2,3,4,6,8,12,18],pwr:[0,0,0,0,0,0,0,0],price:[40000,80000,190000,428000,960000,2160000,4860000,10920000],
+    tiers:[{rarity:'COMMON'},{rarity:'COMMON'},{rarity:'COMMON'}]},
   LANDING:{name:'Landing System',classes:['FIGHTER','CORVETTE','FRIGATE','CRUISER'],
-    unit:[3,5,8,12,17,25,37,54],pwr:[0,0,0,0,0,0,0,0],price:[40000,80000,190000,430000,960000,2160000,4850000,10900000],
-    tiers:[{pwr_activation:2},{pwr_activation:3},{pwr_activation:4}]},
+    unit:[2,3,4,6,9,13,19,27],pwr:[0,0,0,0,0,0,0,0],price:[80000,160000,380000,860000,1920000,4320000,9700000,21800000],
+    tiers:[{pwr_activation:2,rarity:'UNCOMMON'},{pwr_activation:3,rarity:'RARE'},{pwr_activation:4,rarity:'RARE'}]},
   ATMOSPHERIC:{name:'Atmospheric Package',classes:['FIGHTER','CORVETTE','FRIGATE','CRUISER'],
-    unit:[5,8,13,20,30,44,65,95],pwr:[0,0,0,0,0,0,0,0],price:[80000,160000,380000,850000,1900000,4300000,9600000,21500000],
-    tiers:[{pwr_activation:4},{pwr_activation:6},{pwr_activation:8}]},
+    unit:[3,4,7,10,15,22,33,48],pwr:[0,0,0,0,0,0,0,0],price:[160000,320000,760000,1700000,3800000,8600000,19200000,43000000],
+    tiers:[{pwr_activation:4,rarity:'UNCOMMON'},{pwr_activation:6,rarity:'RARE'},{pwr_activation:8,rarity:'LIMITED'}]},
   BAY_FIGHTER:{name:'Fighter Bay',classes:['CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[0,0,15,22,32,47,69,100],pwr:[0,0,2,3,5,8,11,16],price:[0,0,715000,1600000,3600000,8100000,18200000,40900000],
-    tiers:[{},{},{}]},
+    unit:[0,0,8,11,16,24,35,50],pwr:[0,0,2,3,5,8,11,16],price:[0,0,1430000,3200000,7200000,16200000,36400000,81800000],
+    tiers:[{rarity:'RARE'},{rarity:'LIMITED'},{rarity:'UNIQUE'}]},
   BAY_CORVETTE:{name:'Corvette Bay',classes:['FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[0,0,0,30,44,65,95,140],pwr:[0,0,0,3,5,8,11,16],price:[0,0,0,3200000,7200000,16200000,36400000,81800000],
-    tiers:[{},{},{}]},
+    unit:[0,0,0,15,22,33,48,70],pwr:[0,0,0,3,5,8,11,16],price:[0,0,0,6400000,14400000,32400000,72800000,163600000],
+    tiers:[{rarity:'RARE'},{rarity:'LIMITED'},{rarity:'UNIQUE'}]},
   BAY_DRONE:{name:'Drone Bay',classes:'ALL',
-    unit:[4,6,10,15,22,32,47,69],pwr:[1,2,3,5,7,10,15,22],price:[100000,200000,475000,1070000,2400000,5400000,12100000,27200000],
-    tiers:[{},{},{}]},
+    unit:[2,3,5,8,11,16,24,35],pwr:[1,2,3,5,7,10,15,22],price:[200000,400000,950000,2140000,4800000,10800000,24200000,54400000],
+    tiers:[{rarity:'UNCOMMON'},{rarity:'RARE'},{rarity:'LIMITED'}]},
   COCKPIT:{name:'Cockpit',classes:['DRONE','FIGHTER'],
-    unit:[3,5,0,0,0,0,0,0],pwr:[1,2,0,0,0,0,0,0],price:[30000,60000,0,0,0,0,0,0],
-    tiers:[{handling:1},{handling:1},{handling:1}]},
+    unit:[2,3,0,0,0,0,0,0],pwr:[1,2,0,0,0,0,0,0],price:[60000,120000,0,0,0,0,0,0],
+    tiers:[{handling:1,rarity:'COMMON'},{handling:1,rarity:'COMMON'},{handling:1,rarity:'UNCOMMON'}]},
 };
 const SCOMP_CLASSES=['DRONE','FIGHTER','CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'];
 const SCOMP_TIERS=['BASIC','AVERAGE','GOOD'];
 // Build flat component entry array from compact SCOMP_DEF
 function buildShipComps(){
+  const RARITY_MULT={COMMON:1,UNCOMMON:1.5,RARE:3,LIMITED:8,UNIQUE:20};
   const out=[];
   Object.entries(SCOMP_DEF).forEach(([type,def])=>{
     SCOMP_CLASSES.forEach((cls,si)=>{
@@ -818,7 +819,12 @@ function buildShipComps(){
       SCOMP_TIERS.forEach((qual,ti)=>{
         const u=def.unit[si]||0, pw=def.pwr[si]||0, pr=def.price[si]||0;
         if(!u&&!pr) return; // skip zero-cost/zero-size entries (class not applicable)
-        out.push({id:`${type}_${si+1}-${cls}_${ti+1}-${qual}`,type,name:def.name,ship_class:cls,quality:qual,unit_size:u,pwr_draw:pw,price:pr,stats:def.tiers[ti]||{}});
+        const tierDef=def.tiers[ti]||{};
+        const rarity=tierDef.rarity||'COMMON';
+        const rmult=RARITY_MULT[rarity]||1;
+        const stats={};
+        Object.entries(tierDef).forEach(([k,v])=>{if(k!=='rarity')stats[k]=v;});
+        out.push({id:`${type}_${si+1}-${cls}_${ti+1}-${qual}`,type,name:def.name,ship_class:cls,quality:qual,unit_size:u,pwr_draw:pw,price:Math.round(pr*rmult),rarity,note:def.note||null,stats});
       });
     });
   });
@@ -2472,17 +2478,23 @@ function render(){
       html+='<div style="margin-bottom:16px;">';
       html+='<div class="nl">'+esc(SCOMP_DEF[type].name)+'</div>';
       html+='<div class="grid">';
+      const rarCol={COMMON:'#9ca3af',UNCOMMON:'#4ade80',RARE:'#60a5fa',LIMITED:'#a78bfa',UNIQUE:'#fbbf24'};
       group.forEach(c=>{
         const cid='sc'+c.id.replace(/\W/g,'_');
         const col=clsTx[c.ship_class]||'#d1d5db';
         const qbadge=qBadge(c.quality);
         const statRows=Object.entries(c.stats||{}).filter(([,v])=>v!==0&&v!==''&&v!==null);
-        html+='<div class="card" id="'+cid+'" data-tog="'+cid+'">';
+        html+='<div class="card '+rarCls(c.rarity||'')+'" id="'+cid+'" data-tog="'+cid+'">';
         // Header — always visible
         html+='<div class="ch"><div>';
         html+='<div class="cn">'+hl(c.name,sq)+'</div>';
         html+='<div class="cs" style="color:'+col+';">'+(clsEmoji[c.ship_class]||'')+' '+esc(c.ship_class)+'</div>';
         html+='</div><div style="display:flex;align-items:center;gap:4px;">'+qbadge+'<span class="xi">▼</span></div></div>';
+        // Rarity row — always visible
+        html+='<div class="cr2">';
+        if(c.rarity) html+='<span class="wpn-pill" style="color:'+(rarCol[c.rarity]||'#9ca3af')+';font-size:9px;">'+c.rarity+'</span>';
+        if(c.note) html+='<span class="wpn-pill" style="color:#fbbf24;font-size:9px;">⚠ '+esc(c.note)+'</span>';
+        html+='</div>';
         // Summary row — always visible
         html+='<div class="cr3"><div class="cr3l">';
         html+='<span class="wpn-pill"><span style="color:var(--mu)">SIZE</span> '+(c.unit_size>0?'+':'')+c.unit_size+'</span>';
