@@ -312,6 +312,14 @@ document.addEventListener('click',e=>{
     const v=dbEl.dataset.db;
     if(v.startsWith('size:')){dbState.size=v.slice(5);dbState.wpnPicker=null;dbAdd={loc:null,type:null,tier:0,skills:[],wpnSearch:''};render();}
     else if(v.startsWith('mob:')){dbState.mob=v.slice(4);dbAdd={loc:null,type:null,tier:0,skills:[]};render();}
+    else if(v.startsWith('pwr:')){
+      dbState.pwr_type=v.slice(4);
+      dbState.core=[];dbState.internal=[];dbState.external=[];dbState.wpnPicker=null;
+      const locKey=dbState.pwr_type==='SOLAR_PANEL'?'external':'core';
+      dbState[locKey].push({type:dbState.pwr_type,tier:0});
+      dbAdd={loc:null,type:null,tier:0,skills:[],wpnSearch:''};
+      render();
+    }
     else if(v==='atmo'){dbState.atmo=!dbState.atmo;render();}
     else if(v.startsWith('open:')){dbState.wpnPicker=null;dbAdd={loc:v.slice(5),type:null,tier:0,skills:[],wpnSearch:''};render();}
     else if(v==='close'){dbAdd.loc=null;render();}
@@ -353,7 +361,7 @@ document.addEventListener('click',e=>{
     else if(v==='wpnsel'){if(dbState.wpnPicker){const{zone,idx}=dbState.wpnPicker;const lk=zone==='core'?'core':zone==='int'?'internal':'external';if(dbState[lk][idx])dbState[lk][idx].weapon=dbEl.dataset.wpn;}render();}
     else if(v==='wpndone'||v==='wpnclose'){dbState.wpnPicker=null;render();}
     else if(v==='reset'){
-      dbState={name:'Unnamed Drone',size:null,mob:null,atmo:false,core:[],internal:[],external:[],wpnPicker:null};
+      dbState={name:'Unnamed Drone',size:null,mob:null,pwr_type:null,atmo:false,core:[],internal:[],external:[],wpnPicker:null};
       dbAdd={loc:null,type:null,tier:0,skills:[],wpnSearch:''};
       render();
     }
@@ -1208,7 +1216,7 @@ const DB_COMP={
 };
 
 // Drone builder state — survives re-renders (module-level)
-let dbState={name:'Unnamed Drone',size:null,mob:null,atmo:false,core:[],internal:[],external:[],wpnPicker:null};
+let dbState={name:'Unnamed Drone',size:null,mob:null,pwr_type:null,atmo:false,core:[],internal:[],external:[],wpnPicker:null};
 let dbAdd={loc:null,type:null,tier:0,skills:[],wpnSearch:''};
 
 function parseSk(s){if(!s||s==='0')return{d:0,f:0};const m=String(s).match(/^(\d*)D([+-]\d+)?$/i);if(m)return{d:parseInt(m[1]||1),f:parseInt(m[2]||0)};return{d:0,f:parseInt(s)||0};}
@@ -1457,7 +1465,7 @@ function renderDbStats(st){
   const pwrColor=pct>95?'#f87171':pct>80?'#fb923c':'#34d399';
   let h='<div class="db-stats-panel">';
   h+='<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px;">';
-  h+='<div><input id="db-name-inp" class="db-name-inp" value="'+esc(dbState.name)+'" placeholder="Drone name..." maxlength="40"><div class="db-ssub">'+esc(DB_SIZES[dbState.size].name)+' · '+esc(DB_MOB[dbState.mob].name)+(dbState.atmo?' · Atmospheric':'')+'</div></div>';
+  h+='<div><input id="db-name-inp" class="db-name-inp" value="'+esc(dbState.name)+'" placeholder="Drone name..." maxlength="40"><div class="db-ssub">'+esc(DB_SIZES[dbState.size].name)+' · '+esc(DB_MOB[dbState.mob].name)+(dbState.atmo?' · Atmospheric':'')+(dbState.pwr_type?' · '+DB_COMP[dbState.pwr_type].name:'')+'</div></div>';
   h+='<button class="db-reset-btn" data-db="reset">↺ Reset</button>';
   h+='</div>';
   const speedStr=st.prim_mode?st.prim_mode+' '+st.prim_spd+'m/r':'Stationary';
@@ -2552,13 +2560,18 @@ function render(){
     });
     if(dbState.mob==='FLY') html+='<button class="db-chip'+(dbState.atmo?' sel-o':'')+'" data-db="atmo">✈ Atmospheric</button>';
     html+='</div>';
+    html+='<div class="db-step"><span class="db-step-lbl">POWER SOURCE</span>';
+    html+='<button class="db-chip'+(dbState.pwr_type==='POWER_CELL'?' sel':'')+'" data-db="pwr:POWER_CELL">⚡ Power Cell<span style="font-size:8px;color:var(--mu);display:block;">Core slot</span></button>';
+    html+='<button class="db-chip'+(dbState.pwr_type==='SOLAR_PANEL'?' sel':'')+'" data-db="pwr:SOLAR_PANEL">☀ Solar Panel<span style="font-size:8px;color:var(--mu);display:block;">External slot</span></button>';
+    html+='<button class="db-chip'+(dbState.pwr_type==='ENERGY_BANK'?' sel':'')+'" data-db="pwr:ENERGY_BANK">🔋 Energy Bank<span style="font-size:8px;color:var(--mu);display:block;">Core/Int slot</span></button>';
+    html+='</div>';
     if(dbState.size&&dbState.mob){
       const sz=DB_SIZES[dbState.size];const mob=DB_MOB[dbState.mob];
       html+='<div style="font-size:10px;color:var(--mu);margin-top:4px;">Chassis '+fmt(sz.price)+' Cr · Mobility '+fmt(mob.price)+' Cr · Base DC '+Math.max(sz.dc,mob.dc)+' · '+sz.slots+' total slots</div>';
     }
     html+='</div>';
-    if(!dbState.size||!dbState.mob){
-      html+='<div class="db-empty"><div class="db-empty-icon">🤖</div><div class="db-empty-msg">Select a chassis size and mobility type to begin</div></div>';
+    if(!dbState.size||!dbState.mob||!dbState.pwr_type){
+      html+='<div class="db-empty"><div class="db-empty-icon">🤖</div><div class="db-empty-msg">Select a chassis size, mobility type, and power source to begin</div></div>';
     } else {
       const st=calcDrone();
       html+='<div class="db-zones">';
