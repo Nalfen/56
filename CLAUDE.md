@@ -17,6 +17,7 @@ The project is released under **CC0 1.0 Universal** (public domain).
 ├── 56th_century_compendium_v8.html   # Version 8 (current/latest)
 ├── ship_components.csv               # Exported flat ship component catalog (generated)
 ├── inject_engines.py                 # Dev helper: injects ENGINE codes into ship data
+├── drone_redesign.py                 # Dev helper: generates/exports drone component data
 └── LICENSE                           # CC0 1.0 Universal
 ```
 
@@ -105,6 +106,7 @@ All game data lives in the `const g = {...}` constant. Top-level keys:
 | `g.catalog.modules` | Drone & vehicle modules `{name, size, availability, description, cost}` |
 | `g.catalog.ships` | Spaceships `{name, class, role, description, power, total_size, total_cost, core_size, core:[], internal_size, internal:[], external_size, external:[]}` |
 | `g.catalog.ship_components` | Flat array of ship component catalog entries — built at startup by `buildShipComps()` from `SCOMP_DEF` |
+| `g.catalog.drone_parts` | Flat array of drone component tier entries — built at startup by `buildDroneParts()` from `DB_COMP` |
 
 ---
 
@@ -135,8 +137,10 @@ All game data lives in the `const g = {...}` constant. Top-level keys:
 | `ship_components` | Ship Components | ⚙ |
 | `equipment` | Equipment | 🎒 |
 | `medical` | Medical | 💉 |
+| `drone_parts` | Drone Parts | 🔩 |
+| `drone_builder` | Drone Builder | 🤖 |
 
-**New in v8:** `glossary_only` (flat glossary view from `g.glossary_clean`), `vehicles`, `cat_drones`, `modules`, `ships`, and `ship_components` (all sourced from `g.catalog`).
+**New in v8:** `glossary_only` (flat glossary view from `g.glossary_clean`), `vehicles`, `cat_drones`, `modules`, `ships`, and `ship_components` (all sourced from `g.catalog`), plus the interactive `drone_parts` catalog and `drone_builder` tool.
 
 ### Rule Groups (in `rules_grouped`)
 
@@ -425,6 +429,143 @@ Spaceships in `g.catalog.ships` are grouped by `class` field and rendered in thi
 `DRONE` → `FIGHTER` → `CORVETTE` → `FRIGATE` → `CRUISER` → `BATTLECRUISER` → `CARRIER` → `NOVA`
 
 Each ship has three slot lists: `core[]`, `internal[]`, `external[]` with corresponding `*_size` fields. Component names use `snake_case` and are humanized for display.
+
+### Drone Builder System (v8)
+
+The `drone_builder` section is an **interactive drone construction tool** — not a static data view. It lets users configure a custom drone by selecting chassis, mobility, power source, and components, then shows computed stats in real time.
+
+The `drone_parts` section is a **filterable catalog** of all component tiers sourced from `g.catalog.drone_parts`.
+
+#### Drone Builder global state
+
+| Variable | Purpose |
+|---|---|
+| `dbState` | Active drone build: `{name, size, mob, pwr_type, atmo, core:[], internal:[], external:[], wpnPicker}` |
+| `dbAdd` | Pending component being configured: `{loc, type, tier, skills:[], wpnSearch}` |
+
+`dbState` is reset to defaults on the Reset button or when size/mobility is reselected. `dbAdd` tracks the "add component" flow — zone → type → tier → confirm.
+
+#### Key drone constants
+
+| Constant | Purpose |
+|---|---|
+| `DB_SIZES` | Chassis sizes: `{TINY, SMALL, MED, LARGE, XL, HUGE}` — each has `{name, slots, max_comp, dur, sys, soak, spd_mod, price, dc}` |
+| `DB_MOB` | Mobility types: `{STATIC, WALK, CLIMB, HOVER, FLY}` — each has `{name, base_mode, base_spd, alt_mode, alt_spd, price, dc}` |
+| `DB_ZONE` | Zone modifiers: `{core, internal, external}` — each has `{label, color, dc_mod, cost_mod, info}` |
+| `DB_DEF_RANKS` | Defense tier order: `['NONE','LOW','MEDIUM','HIGH','EXTREME']` |
+| `DB_SKILLS` | Available skills by attribute: `{Physical, Mental, Social, Acuity}` — used by `SKILL_MODULE` picker |
+| `DB_COMP` | All drone component definitions — see below |
+
+#### Zone system
+
+Components are installed in one of three zones, each modifying DC and cost:
+
+| Zone | DC mod | Cost mod | Notes |
+|---|---|---|---|
+| `core` | +1 | ×1.30 | Protected — cyan colour |
+| `internal` | 0 | ×1.00 | Standard — purple colour |
+| `external` | −1 | ×0.85 | Exposed — orange colour |
+
+Each component's `loc` array in `DB_COMP` controls which zones it can be placed in (e.g. `['core']`, `['ext']`, `['core','int']`).
+
+#### DB_COMP structure
+
+Each entry in `DB_COMP` has:
+```js
+TYPE_KEY: {
+  name: 'Display Name',
+  icon: '⚡',           // emoji icon
+  loc:  ['core'|'int'|'ext', ...],  // allowed zones
+  exclusive: true,      // (optional) only one allowed per build
+  tiers: [              // array of tier objects
+    {
+      name: 'Tier Name',
+      slots: N,         // slot cost
+      pwr:   N,         // power draw (0 for power sources)
+      pwr_give: N,      // power generated (power sources only)
+      price: N,
+      dc:    N,         // DC contribution
+      dur:   N,         // durability of this component
+      rarity: 'COMMON'|'UNCOMMON'|'RARE'|'LIMITED'|'CLASSIFIED',
+      legality: 'LEGAL'|'PERMIT REQUIRED'|'RESTRICTED'|'ILLEGAL'|'CLASSIFIED',
+      // optional stat fields:
+      autonomy: '…',    // power autonomy string
+      note:     '…',    // display note
+      spd_mod:  N,      // speed modifier (+ or -)
+      dur_bonus: N,     // durability bonus (+ or -)
+      sys_bonus: N,     // systems bonus
+      soak_bonus: '…',  // soak dice bonus string
+      phys/energy/tech/spirit: 'NONE'|'LOW'|…,  // defense tiers
+      awareness: N, range: '…',  // sensor awareness + range
+      comm_range: '…', ecm: N,   // comms
+      ammo_cap: N,               // ammo capacity for kinetic mounts
+      mode: '…', speed: N,       // secondary drive mode + speed
+      weapon_type: 'KINETIC'|'ENERGY', weapon_size: '…',
+      needs_ammo: bool, auto_aim: bool,  // weapon mount flags
+      arms: N, str: N, fine_motor: bool, // manipulation arms
+      skills_n: N, rank: '…',   // skill module — N skills at rank
+    }, …
+  ]
+}
+```
+
+#### DB_COMP categories
+
+| Category | Component keys |
+|---|---|
+| POWER | `POWER_CELL`, `SOLAR_PANEL`, `ENERGY_BANK`, `FUSION_CORE`, `CORONTHIA_REACTOR`, `FUEL_CELL` |
+| PROPULSION | `DRIVE_AQUATIC`, `DRIVE_CLIMBER`, `DRIVE_TRACKED`, `DRIVE_HOVER`, `DRIVE_FLYER`, `JUMP_JETS`, `DRIVE_OVERHAUL`, `WEIGHT_REDUCTION`, `CARGO_HARDPOINT` |
+| SENSING | Sensor/awareness components (cameras, scanners, etc.) |
+| DEFENSE | Armor/shielding components for PHYS/ENERGY/TECH/SPIRIT defense |
+| WEAPONS | `WEAPON_MOUNT` (kinetic/energy mounts) |
+| COMBAT SUPPORT | `AMMO_STORAGE` and tactical support components |
+| MANIPULATION | `ARM_GRIPPER`, `ARM_PRECISION`, `ARM_HEAVY` |
+| HACKING | Electronic warfare / hacking modules |
+| COMMS | Communication and ECM modules |
+| MEDICAL | Onboard medical components |
+| ENGINEERING | Repair and crafting modules |
+| UTILITY | General utility components |
+| PROCESSING | CPU / processing upgrades |
+| AI | `SKILL_MODULE` and autonomous AI cores |
+
+#### calcDrone(dbState)
+
+Accumulates stats for the current drone build:
+1. Starts from chassis base stats (`DB_SIZES[size]`) and mobility base stats (`DB_MOB[mob]`)
+2. For each component in `core`, `internal`, `external`:
+   - Applies zone cost modifier (`cost_mod`) and DC modifier (`dc_mod`)
+   - Accumulates slots, power draw/generation, defense tiers (taking max), soak, speed mods
+   - Handles special component types: `WEAPON_MOUNT` → mounts list, `SKILL_MODULE` → skills list, arm types → arms record
+3. Speed modifiers: negative mods are multiplied by `SPD_MULT[mob]` (e.g. FLY=2.0×, HOVER=1.5×, WALK=1.0×); positive mods are applied flat
+4. Atmospheric flag (FLY only): adds +15 000 Cr and +1 DC
+5. Generates `warns[]` for: no power source, Coronthia without Fuel Cell, power deficit, slot overload, kinetic mounts without ammo storage, oversized components
+
+Returns `null` if size or mob is not yet selected.
+
+#### buildDroneParts()
+
+Expands `DB_COMP` into the flat `g.catalog.drone_parts` array at startup. Each entry is a component tier object spread with additional fields: `{id, type, cat_name, icon, tier_name, loc, exclusive, …tier_fields}`.
+
+#### Drone builder helper functions
+
+| Function | Purpose |
+|---|---|
+| `calcDrone()` | Compute all stats for `dbState` — returns result object or `null` |
+| `parseSk(s)` | Parse a soak/skill dice string (e.g. `'1D+2'`) → `{d, f}` |
+| `fmtSk(d, f)` | Format dice result back to string (e.g. `{d:1,f:2}` → `'1D+2'`) |
+| `dbTierDesc(type, t)` | Render a tier's stat summary as HTML for the picker panel |
+| `buildDroneParts()` | Build flat `drone_parts` catalog from `DB_COMP` at startup |
+
+#### Drone builder interaction flow
+
+1. User selects **Chassis Size** → sets `dbState.size`, resets components
+2. User selects **Mobility** → sets `dbState.mob` (FLY shows atmospheric toggle)
+3. User selects **Power Source** → sets `dbState.pwr_type`, pre-populates core with that power source
+4. User clicks a zone's **+ Add** button → sets `dbAdd.loc`, shows component type picker
+5. User selects component type → sets `dbAdd.type`, shows tier picker filtered by max_comp
+6. User selects tier → sets `dbAdd.tier`; for `SKILL_MODULE`, shows skill multi-picker
+7. User clicks **Add** → pushes `{type, tier, [skills]}` onto `dbState[loc]`
+8. Stats panel re-renders via `calcDrone()` on every change
 
 ### Versioning Convention
 
