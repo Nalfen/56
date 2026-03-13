@@ -1706,6 +1706,27 @@ function render(){
           html+='<td style="font-size:10px;">'+esc(desc)+'</td></tr>';
         });
         html+='</tbody></table></div>';
+        // Medical manufacturers
+        html+='<div class="rsec"><div class="rst">MEDICAL MANUFACTURERS</div>';
+        html+='<table class="opt-table"><thead><tr><th style="min-width:140px;">Manufacturer</th><th>Abbr.</th><th>Stat Modifications</th><th>Notes</th></tr></thead><tbody>';
+        MEDICAL_MFRS.forEach(mName=>{
+          const m=(g.medical_manufacturers||{})[mName];
+          if(!m){html+='<tr><td style="color:#e8f4ff;font-weight:600;">'+esc(mName)+'</td><td style="color:var(--mu);">—</td><td style="font-size:10px;color:var(--mu);">No modifications — base item stats</td><td></td></tr>';return;}
+          const mparts=[];
+          const sM=parseInt(m.size_mod||0),aM=parseInt(m.avail_mod||0),tM=parseInt(m.tox_mod||0),lM=parseInt(m.legality_mod||0);
+          const pM=parseFloat(m.price_mult||1);
+          if(sM>0)mparts.push('+'+sM+' size tier');if(sM<0)mparts.push(sM+' size tier');
+          if(aM>0)mparts.push('+'+aM+' avail tier');if(aM<0)mparts.push(aM+' avail tier');
+          if(tM>0)mparts.push('+'+tM+' toxicity');if(tM<0)mparts.push(tM+' toxicity');
+          if(lM>0)mparts.push('+'+lM+' legality tier');if(lM<0)mparts.push(lM+' legality tier');
+          if(pM&&pM!==1)mparts.push('×'+pM+' cost');
+          const statStr=mparts.length?mparts.join('; '):'No stat modifications';
+          html+='<tr><td style="color:#e8f4ff;font-weight:600;">'+esc(mName)+'</td>';
+          html+='<td style="color:var(--mu);font-family:ShareTechMono,monospace;font-size:10px;">'+esc(m.abbr||'—')+'</td>';
+          html+='<td style="font-size:10px;">'+esc(statStr)+'</td>';
+          html+='<td style="font-size:10px;color:var(--mu);">'+esc(m.desc||'')+'</td></tr>';
+        });
+        html+='</tbody></table></div>';
         html+='</div></div>';
       }
     }
