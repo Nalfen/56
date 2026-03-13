@@ -1800,6 +1800,12 @@ function render(){
     html+='</div>';
     if(!F.length){html+='<div class="empty">No weapons match your filters.</div>';}
     else{
+      html+='<table class="stab" style="margin-bottom:14px;"><thead><tr><th>Name</th><th>Category</th><th>Damage</th><th>Power</th><th>Type</th><th>Legality</th><th>Cost</th></tr></thead><tbody>';
+      F.forEach(w=>{
+        const isMelee=MELEE_CATS.has(w.category);
+        html+='<tr><td>'+hl(w.name,sq)+'</td><td class="minmax">'+hl(w.category||'—',sq)+'</td><td class="avg">'+hl(w.damage||'—',sq)+'</td><td>'+hl(w.power||'—',sq)+'</td><td>'+(isMelee?'<span style="color:var(--a3);">MELEE</span>':hl(w.dmg_type||'—',sq))+'</td><td>'+hl(w.legality||'—',sq)+'</td><td style="color:var(--gr);">'+fmt(w.cost)+'</td></tr>';
+      });
+      html+='</tbody></table>';
       html+='<div class="grid">';
       F.forEach((w,i)=>{
         const id='w'+i; const isMelee=MELEE_CATS.has(w.category);
@@ -1902,7 +1908,14 @@ function render(){
       const lbl=t.replace(' Armor','').replace('Forcefield Generator','FF GENERATOR').replace('Combat Forcefield','COMBAT FF').replace('Guardian Forcefield','GUARDIAN FF').replace(' Barrier',' BAR').replace('Basic Datacom','BASIC DC').replace('Full Datacom','FULL DC');
       html+=fcBtn(lbl,t,af);
     });
-    html+='</div><div class="grid">';
+    html+='</div>';
+    html+='<table class="stab" style="margin-bottom:14px;"><thead><tr><th>Name</th><th>Type</th><th>Soak</th><th>PHYS</th><th>ENRG</th><th>TECH</th><th>SPRT</th><th>Legality</th><th>Cost</th></tr></thead><tbody>';
+    F.forEach(a=>{
+      const dv=v=>v&&v!=='None'?v:'—';
+      html+='<tr><td>'+hl(a.name,sq)+'</td><td class="minmax">'+hl(a.type||'—',sq)+'</td><td class="avg">'+hl(a.soak||'—',sq)+'</td><td>'+hl(dv(a.def_physical),sq)+'</td><td>'+hl(dv(a.def_energy),sq)+'</td><td>'+hl(dv(a.def_tech),sq)+'</td><td>'+hl(dv(a.def_spiritual),sq)+'</td><td>'+hl(a.legality||'—',sq)+'</td><td style="color:var(--gr);">'+fmt(a.cost)+'</td></tr>';
+    });
+    html+='</tbody></table>';
+    html+='<div class="grid">';
     F.forEach((a,i)=>{
       const id='ar'+i; const arc=rarCls(a.availability);
       // Compact armor layout:
