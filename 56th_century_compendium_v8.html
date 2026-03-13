@@ -2049,7 +2049,13 @@ function render(){
     html+=mfrBar('datacoms',DATACOM_MFRS,curMfr);
     html+='<div class="fbar">'+fcBtn('ALL','ALL',af);
     dcTypes.forEach(t=>{html+=fcBtn(t,t,af);});
-    html+='</div><div class="grid">';
+    html+='</div>';
+    html+='<table class="stab" style="margin-bottom:14px;"><thead><tr><th>Name</th><th>Type</th><th>CPU</th><th>MEM</th><th>NAN</th><th>Soak</th><th>Size</th><th>Legality</th><th>Cost</th></tr></thead><tbody>';
+    F.forEach(dc=>{
+      html+='<tr><td>'+hl(dc.name,sq)+'</td><td class="avg">'+hl(dc.type||'—',sq)+'</td><td>'+hl(dc.cpu||'—',sq)+'</td><td>'+hl(dc.memory||'—',sq)+'</td><td>'+hl(dc.nanites!=null?String(dc.nanites):'—',sq)+'</td><td>'+hl(dc.soak||'—',sq)+'</td><td class="minmax">'+hl(dc.size||'—',sq)+'</td><td>'+hl(dc.legality||'—',sq)+'</td><td style="color:var(--gr);">'+fmt(dc.cost)+'</td></tr>';
+    });
+    html+='</tbody></table>';
+    html+='<div class="grid">';
     F.forEach((dc,i)=>{
       const id='dc'+i; const rc=rarCls(dc.availability);
       // Compact datacom layout:
@@ -2110,7 +2116,13 @@ function render(){
     cnt=F.length;
     html='<div class="stitle">💻 HACKING SOFTWARE <span class="badge">'+all.length+'</span></div><div class="fbar">';
     ['ALL','BASIC ACTIONS','ROUTINES','PROGRAMS','GADGETS'].forEach(c=>{html+=fcBtn(c,c,af);});
-    html+='</div><div class="grid">';
+    html+='</div>';
+    html+='<table class="stab" style="margin-bottom:14px;"><thead><tr><th>Name</th><th>Category</th><th>Type / Action</th><th>CPU</th><th>MEM</th><th>Cost</th><th>Avail</th><th>Legality</th></tr></thead><tbody>';
+    F.forEach(x=>{
+      html+='<tr><td>'+hl(x.name,sq)+'</td><td class="avg">'+hl(x.cat,sq)+'</td><td class="minmax">'+hl(x.type||x.action||'—',sq)+'</td><td>'+hl(x.cpu||'—',sq)+'</td><td>'+hl(x.memory||'—',sq)+'</td><td style="color:var(--gr);">'+(x.cost&&x.cost!='0'?fmt(x.cost):'—')+'</td><td>'+hl(x.availability||'—',sq)+'</td><td>'+hl(x.legality||'—',sq)+'</td></tr>';
+    });
+    html+='</tbody></table>';
+    html+='<div class="grid">';
     F.forEach((x,i)=>{
       const id='h'+i;const desc=x.desc||x.effect||'';
       html+='<div class="card" id="'+id+'" data-tog="'+id+'"><div class="ch"><div><div class="cn">'+hl(x.name,sq)+'</div><div class="cs">'+hl(x.type||x.action||'',sq)+'</div></div>';
