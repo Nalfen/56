@@ -157,6 +157,7 @@ main{flex:1;overflow-y:auto;padding:14px;background:var(--bg);}
 .mfr-sel{background:#0a1018;border:1px solid var(--b);border-radius:2px;padding:3px 8px;color:var(--tx);font-family:ShareTechMono,monospace;font-size:11px;outline:none;cursor:pointer;}
 .mfr-sel:focus{border-color:var(--a);}
 .mfr-note{font-size:9px;color:var(--mu);font-family:ShareTechMono,monospace;}
+.mfr-info{font-size:10px;color:var(--mu);font-family:ShareTechMono,monospace;padding:4px 10px 6px;letter-spacing:.03em;}
 .opt-table{width:100%;border-collapse:collapse;font-size:11px;margin-top:4px;}
 .opt-table th{color:var(--mu);font-family:ShareTechMono,monospace;font-size:9px;letter-spacing:.5px;padding:3px 7px;border-bottom:1px solid var(--b);text-align:left;white-space:nowrap;}
 .opt-table td{padding:5px 7px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:top;}
@@ -563,6 +564,57 @@ function mfrBar(sec,mfrList,cur){
   mfrList.forEach(m=>{s+='<option value="'+esc(m)+'"'+(cur===m?' selected':'')+'>'+esc(m)+'</option>';});
   s+='</select><span class="mfr-note">Items exceeding UNIQUE availability are omitted.</span></div>';
   return s;
+}
+function mfrInfo(sec,mfr){
+  if(mfr==='Generic')return '';
+  const m=(sec==='medical'?(g.medical_manufacturers||{})[mfr]:g.manufacturers[mfr]);
+  if(!m)return '';
+  const parts=[];
+  if(sec==='weapons'){
+    const maxD=parseInt(m.max_dmg_mod||0),minD=parseInt(m.min_dmg_mod||0);
+    if(maxD)parts.push((maxD>0?'+':'')+maxD+' max dmg');
+    if(minD)parts.push((minD>0?'+':'')+minD+' min dmg');
+    const pM=parseInt(m.power_mod||0);if(pM)parts.push((pM>0?'+':'')+pM+' power tier');
+    const rM=parseFloat(m.range_mult||1);if(rM&&rM!==1)parts.push('\xd7'+rM+' range');
+    const eM=parseInt(m.expertise_mod||0);
+    if(eM>0)parts.push('+'+eM+' expertise bonus');else if(eM<0)parts.push(eM+' expertise penalty');
+    if(m.special)parts.push('adds '+m.special.trim());
+  }else if(sec==='armor'){
+    const smaxM=parseInt(m.soak_max_mod||0),sminM=parseInt(m.soak_min_mod||0);
+    if(smaxM)parts.push((smaxM>0?'+':'')+smaxM+' max soak');
+    if(sminM)parts.push((sminM>0?'+':'')+sminM+' min soak');
+    const pD=parseInt(m.pdef_mod||0),eD=parseInt(m.edef_mod||0),tD=parseInt(m.tdef_mod||0),sD=parseInt(m.sdef_mod||0);
+    if(pD)parts.push((pD>0?'+':'')+pD+' phys def');
+    if(eD)parts.push((eD>0?'+':'')+eD+' energy def');
+    if(tD)parts.push((tD>0?'+':'')+tD+' tech def');
+    if(sD)parts.push((sD>0?'+':'')+sD+' spirit def');
+    if(m.special)parts.push('adds '+m.special.trim());
+  }else if(sec==='datacoms'){
+    const cpuM=parseInt(m.cpu_mod||0),memM=parseInt(m.mem_mod||0),nanM=parseInt(m.nan_mod||0);
+    const extM=parseInt(m.ext_mod||0),intM=parseInt(m.int_mod||0),coreM=parseInt(m.core_mod||0);
+    if(cpuM)parts.push((cpuM>0?'+':'')+cpuM+' CPU');
+    if(memM)parts.push((memM>0?'+':'')+memM+' MEM');
+    if(nanM)parts.push((nanM>0?'+':'')+nanM+' NAN');
+    if(extM)parts.push((extM>0?'+':'')+extM+' ext slots');
+    if(intM)parts.push((intM>0?'+':'')+intM+' int slots');
+    if(coreM)parts.push((coreM>0?'+':'')+coreM+' core slots');
+    const eM=parseInt(m.expertise_mod||0);
+    if(eM>0)parts.push('+'+eM+' expertise bonus');else if(eM<0)parts.push(eM+' expertise penalty');
+    const sM=parseInt(m.size_mod||0);if(sM)parts.push((sM>0?'+':'')+sM+' size tier');
+    if(m.special)parts.push('adds '+m.special.trim());
+  }else if(sec==='medical'){
+    const sM=parseInt(m.size_mod||0);if(sM)parts.push((sM>0?'+':'')+sM+' size tier');
+    const aM=parseInt(m.avail_mod||0);if(aM)parts.push((aM>0?'+':'')+aM+' availability');
+    const tM=parseInt(m.tox_mod||0);if(tM)parts.push((tM>0?'+':'')+tM+' toxicity');
+    const lM=parseInt(m.legality_mod||0);if(lM)parts.push((lM>0?'+':'')+lM+' legality tier');
+    const pM=parseFloat(m.price_mult||1);if(pM&&pM!==1)parts.push('\xd7'+pM+' cost');
+    if(m.desc)parts.push(m.desc);
+    return parts.length?'<div class="mfr-info">'+(m.abbr?esc(m.abbr)+' \u2014 ':'')+parts.map(esc).join(' \xb7 ')+'</div>':'';
+  }
+  const avM=parseInt(m.avail_mod||0),pM=parseFloat(m.price_mult||1);
+  if(avM)parts.push((avM>0?'+':'')+avM+' availability');
+  if(pM&&pM!==1)parts.push('\xd7'+pM+' cost');
+  return parts.length?'<div class="mfr-info">'+(m.abbr?esc(m.abbr)+' \u2014 ':'')+parts.map(esc).join(' \xb7 ')+'</div>':'';
 }
 
 const CAT_LBL={'Pistols and Handguns (Gunslinger)':'PISTOLS','Rifles (Marksman)':'RIFLES','Sniper Rifles and Tactical Weapons (Marksman)':'SNIPERS','Auto pistols and S.M.G (Gunslinger)':'SMG','Shotguns (Gunslinger)':'SHOTGUNS','Machine Guns (Heavy weapons)':'MACHINE GUNS','Launchers and AT Weapons (Heavy weapons)':'LAUNCHERS','Vehicle weapons(Heavy weapons)':'VEHICLE','Explosives (Engineering or Dexterity)':'EXPLOSIVES','Melee Weapons (Martial Arts)':'MELEE','Powered Melee Weapons (Martial Arts)':'PWR MELEE','Ranged / Throwing Weapons (Dexterity)':'THROWING'};
@@ -1646,8 +1698,8 @@ function render(){
           const rMult=parseFloat(m.range_mult||1);
           if(rMult&&rMult!==1)parts.push('×'+rMult+' range ('+Math.round(rMult*100)+'%)');
           const eM=parseInt(m.expertise_mod||0);
-          if(eM>0)parts.push('+'+eM+' expertise req.');
-          if(eM<0)parts.push(eM+' expertise req. (min 0)');
+          if(eM>0)parts.push('+'+eM+' expertise bonus');
+          if(eM<0)parts.push(eM+' expertise penalty (applies to all rolls)');
         }else{
           const smaxM=parseInt(m.soak_max_mod||0),sminM=parseInt(m.soak_min_mod||0);
           if(smaxM>0)parts.push('+'+smaxM+' max soak');
@@ -1830,7 +1882,14 @@ function render(){
     cnt=F.length;
     html='<div class="stitle">⚡ TALENTS <span class="badge">'+g.talents.length+'</span></div><div class="fbar">'+fcBtn('ALL','ALL',af);
     cats.forEach(c=>{html+=fcBtn(c,c,af);});
-    html+='</div><div class="grid">';
+    html+='</div>';
+    if(F.length){
+      html+='<div class="ssub">Quick Reference</div>';
+      html+='<table class="stab" style="margin-bottom:14px;"><thead><tr><th>Name</th><th>Category</th><th>Skill</th><th>Cost</th><th>Req.</th></tr></thead><tbody>';
+      F.forEach(t=>{html+='<tr><td>'+hl(t.name,sq)+'</td><td><span class="tag '+tc(t.category)+'">'+esc(t.category)+'</span></td><td>'+hl(t.skill||'—',sq)+'</td><td style="color:var(--ye);">'+esc(t.cost||'—')+'</td><td style="color:var(--mu);font-size:10px;">'+esc(t.req&&t.req!=='0'?t.req:'—')+'</td></tr>';});
+      html+='</tbody></table>';
+    }
+    html+='<div class="grid">';
     F.forEach((t,i)=>{
       const id='ta'+i;
       html+='<div class="card" id="'+id+'" data-tog="'+id+'"><div class="ch"><div><div class="cn">'+hl(t.name,sq)+'</div><div class="cs">'+hl(t.skill||'—',sq)+'</div></div><div style="display:flex;align-items:center;gap:3px;">'+(t.cost?'<span class="tag ty">'+esc(t.cost)+' pts</span>':'')+'<span class="xi">▼</span></div></div>';
@@ -1853,8 +1912,24 @@ function render(){
         html+='<div class="gitem" style="cursor:default;margin-bottom:10px;border-color:rgba(34,197,94,.3);"><div style="min-width:85px;font-size:10px;font-family:&apos;Share Tech Mono&apos;,monospace;color:#22c55e;font-weight:700;">HOW IT WORKS</div><div class="gd" style="font-size:10px;line-height:1.6;">'+(g.evolutions.rules_full||[]).slice(0,3).map(r=>esc(r)).join('<br><br>')+'<br><br><em style="color:var(--mu);">Full rules: Reference → Rules &amp; Glossary → Evolution</em></div></div>';
         html+='<div class="fbar" style="margin-top:10px;">'+fcBtn('ALL','ALL',af);
     types.forEach(t=>{html+=fcBtn(t,t,af);});
-    html+='</div><div class="grid">';
+    html+='</div>';
     const typeColor={GENETICS:'#22c55e',CYBERNETICS:'var(--a)',MAGIC:'var(--a3)'};
+    if(F.length){
+      html+='<div class="ssub">Quick Reference</div>';
+      html+='<table class="stab" style="margin-bottom:14px;"><thead><tr><th>Name</th><th>Type</th><th>Tier I</th><th>Tier II</th><th>Tier III</th><th>Top Avail.</th></tr></thead><tbody>';
+      F.forEach(grp=>{
+        const t1=grp.tiers['TIER I'],t2=grp.tiers['TIER II'],t3=grp.tiers['TIER III'];
+        const topAvail=(t3||t2||t1||{}).availability||'—';
+        const tc_col=typeColor[grp.evo_type]||'var(--mu)';
+        html+='<tr><td>'+hl(grp.name,sq)+'</td><td style="color:'+tc_col+';">'+esc(grp.evo_type)+'</td>';
+        html+='<td style="color:var(--gr);">'+(t1?fmt(t1.cost):'—')+'</td>';
+        html+='<td style="color:var(--gr);">'+(t2?fmt(t2.cost):'—')+'</td>';
+        html+='<td style="color:var(--gr);">'+(t3?fmt(t3.cost):'—')+'</td>';
+        html+='<td><span class="tag '+tc(topAvail)+'">'+esc(topAvail)+'</span></td></tr>';
+      });
+      html+='</tbody></table>';
+    }
+    html+='<div class="grid">';
     F.forEach((grp,i)=>{
       const id='ev'+i;
       const tc_color=typeColor[grp.evo_type]||'var(--mu)';
@@ -1895,6 +1970,7 @@ function render(){
     cnt=F.length;
     html='<div class="stitle">🔫 WEAPONS <span class="badge">'+cnt+'</span></div>';
     html+=mfrBar('weapons',availMfrs,curMfr);
+    html+=mfrInfo('weapons',curMfr);
     html+='<div class="fbar">'+fcBtn('ALL','ALL',af);
     allCats.forEach(c=>{html+=fcBtn(CAT_LBL[c]||c.split('(')[0].trim().toUpperCase(),c,af);});
     html+='</div>';
@@ -2005,6 +2081,7 @@ function render(){
     cnt=F.length;
     html='<div class="stitle">🛡 ARMOR <span class="badge">'+F.length+'</span></div>';
     html+=mfrBar('armor',ARMOR_MFRS,curMfr);
+    html+=mfrInfo('armor',curMfr);
     html+='<div class="fbar">'+fcBtn('ALL','ALL',af);
     validTypes.forEach(t=>{
       const lbl=t.replace(' Armor','').replace('Forcefield Generator','FF GENERATOR').replace('Combat Forcefield','COMBAT FF').replace('Guardian Forcefield','GUARDIAN FF').replace(' Barrier',' BAR').replace('Basic Datacom','BASIC DC').replace('Full Datacom','FULL DC');
@@ -2163,6 +2240,7 @@ function render(){
     cnt=F.length;
     html='<div class="stitle">📡 DATACOMS <span class="badge">'+g.datacoms.length+'</span></div>';
     html+=mfrBar('datacoms',DATACOM_MFRS,curMfr);
+    html+=mfrInfo('datacoms',curMfr);
     html+='<div class="fbar">'+fcBtn('ALL','ALL',af);
     dcTypes.forEach(t=>{html+=fcBtn(t,t,af);});
     html+='</div>';
@@ -2300,6 +2378,7 @@ function render(){
     const F=source.filter(m=>ms([m.name,m.effect,m.application,m.availability,m.legality]));cnt=F.length;
     html='<div class="stitle">💉 MEDICAL <span class="badge">'+cnt+'</span></div>';
     html+=mfrBar('medical',MEDICAL_MFRS,curMfr);
+    html+=mfrInfo('medical',curMfr);
     if(g.toxic_shock&&g.toxic_shock.rules){
       html+='<div class="gitem" style="cursor:default;margin-bottom:10px;border-color:rgba(239,68,68,.3);"><div style="min-width:85px;font-size:10px;font-family:\'Share Tech Mono\',monospace;color:var(--re);font-weight:700;">TOXIC SHOCK</div><div class="gd">'+esc(g.toxic_shock.rules)+'</div></div>';
       html+='<div class="ssub">Toxic Shock Table</div><table class="stab" style="margin-bottom:14px;"><thead><tr><th>Result</th><th style="text-align:left;">Disorder</th><th>Duration</th><th style="text-align:left;">Effect</th></tr></thead><tbody>';
