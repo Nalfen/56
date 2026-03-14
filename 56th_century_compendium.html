@@ -224,6 +224,64 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 .evo-aff-table th{color:var(--mu);font-family:'IBM Plex Mono',monospace;font-size:9px;padding:4px 8px;border-bottom:1px solid var(--border);text-align:left;text-transform:uppercase;letter-spacing:.8px;}
 .evo-aff-table td{padding:4px 8px;border-bottom:1px solid rgba(255,255,255,.03);vertical-align:top;color:var(--tx2);font-family:'IBM Plex Sans',sans-serif;font-size:12px;}
 .evo-aff-table tr:hover td{background:rgba(255,255,255,.025);}
+/* ── World Panel ─────────────────────────────────────────────────────── */
+.world-panel{position:fixed;top:0;right:0;width:420px;height:100vh;background:#161618;border-left:1px solid #2c2c2e;z-index:1000;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);overflow:hidden;}
+.world-panel.open{transform:translateX(0);}
+.world-panel-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:999;}
+.world-panel-overlay.open{display:block;}
+.world-panel-header{padding:18px 20px 14px;border-bottom:1px solid #2c2c2e;flex-shrink:0;display:flex;flex-direction:column;gap:3px;position:relative;}
+.world-panel-title{font-family:'IBM Plex Sans',sans-serif;font-size:17px;font-weight:600;color:#f2f2f7;letter-spacing:-.2px;padding-right:28px;}
+.world-panel-sub{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#636366;}
+.world-panel-close{position:absolute;top:16px;right:16px;background:none;border:none;color:#636366;font-size:16px;cursor:pointer;line-height:1;padding:2px 5px;border-radius:4px;transition:color .12s,background .12s;}
+.world-panel-close:hover{color:#f2f2f7;background:rgba(255,255,255,.06);}
+.world-panel-body{flex:1;overflow-y:auto;padding:0;}
+.world-entry{border-bottom:1px solid #2c2c2e;padding:14px 20px;cursor:pointer;transition:background .12s;}
+.world-entry:hover{background:rgba(255,255,255,.025);}
+.world-entry.open{background:rgba(255,255,255,.03);}
+.world-entry-header{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+.world-entry-name{font-family:'IBM Plex Sans',sans-serif;font-size:14px;font-weight:600;color:#f2f2f7;letter-spacing:-.1px;}
+.world-entry-status{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:2px 8px;border-radius:4px;border:1px solid;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+.ws-active{color:#30d158;border-color:#1c4a2c;background:rgba(48,209,88,.06);}
+.ws-ruins{color:#ff9f0a;border-color:#4a3010;background:rgba(255,159,10,.06);}
+.ws-abandoned{color:#ff453a;border-color:#4a1c1c;background:rgba(255,69,58,.06);}
+.ws-incomplete{color:#bf5af2;border-color:#38205a;background:rgba(191,90,242,.06);}
+.ws-restricted{color:#0a84ff;border-color:#1c2e56;background:rgba(10,132,255,.06);}
+.ws-neutral{color:#8e8e93;border-color:#3a3a3c;background:rgba(255,255,255,.03);}
+.ws-warzone{color:#ff453a;border-color:#4a1c1c;background:rgba(255,69,58,.06);}
+.ws-contested{color:#ff9f0a;border-color:#4a3010;background:rgba(255,159,10,.06);}
+.world-entry-sub{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#636366;margin-top:3px;}
+.world-entry-body{display:none;margin-top:12px;}
+.world-entry.open .world-entry-body{display:block;}
+.world-entry-desc{font-family:'IBM Plex Sans',sans-serif;font-size:13.5px;line-height:1.75;color:#d1d1d6;font-weight:400;margin-bottom:12px;}
+.world-entry-desc b{font-weight:600;color:#f2f2f7;}
+.world-entry-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:#2c2c2e;border-radius:6px;overflow:hidden;}
+.world-entry-stat{background:#1c1c1e;padding:7px 10px;}
+.world-entry-stat-label{font-family:'IBM Plex Mono',monospace;font-size:9px;color:#636366;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;}
+.world-entry-stat-value{font-family:'IBM Plex Mono',monospace;font-size:12px;color:#e5e5ea;}
+.worlds-btn{margin-top:10px;display:inline-flex;align-items:center;gap:6px;padding:5px 12px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8e8e93;border:1px solid #3a3a3c;border-radius:5px;background:none;cursor:pointer;transition:all .12s;}
+.worlds-btn:hover{color:#f2f2f7;border-color:#636366;background:rgba(255,255,255,.04);}
+.worlds-btn-dot{width:6px;height:6px;border-radius:50%;background:#636366;flex-shrink:0;}
+/* ── Star Map Hotspots ───────────────────────────────────────────────────────── */
+.smap-dot{position:absolute;cursor:pointer;transform:translate(-50%,-50%);z-index:5;display:flex;flex-direction:column;align-items:center;pointer-events:auto;padding:4px 2px 2px;}
+.smap-dot-inner{width:10px;height:10px;border-radius:50%;border:2px solid;transition:transform .15s,box-shadow .15s,filter .15s;flex-shrink:0;}
+.smap-dot.faction .smap-dot-inner{width:13px;height:13px;border-radius:2px;transform:rotate(45deg);}
+.smap-dot:hover .smap-dot-inner{transform:scale(1.6);filter:brightness(1.4);}
+.smap-dot.faction:hover .smap-dot-inner{transform:rotate(45deg) scale(1.4);filter:brightness(1.4);}
+.smap-dot-lbl{font-family:'Share Tech Mono',monospace;font-size:8px;white-space:nowrap;margin-top:4px;text-shadow:0 0 4px #000,0 0 10px #000,1px 1px 0 #000,-1px -1px 0 #000;opacity:.75;pointer-events:none;line-height:1;}
+.smap-dot:hover .smap-dot-lbl{opacity:1;}
+/* ── Star Map Popup ──────────────────────────────────────────────────────────── */
+.smap-popup{position:fixed;background:#161618;border:1px solid #3c3c3e;border-radius:8px;padding:14px 14px 12px;width:320px;z-index:1100;box-shadow:0 8px 40px rgba(0,0,0,.88);pointer-events:auto;}
+.smap-popup-name{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;padding-right:22px;margin-bottom:5px;letter-spacing:.4px;}
+.smap-popup-close{position:absolute;top:9px;right:9px;background:none;border:none;color:#636366;cursor:pointer;font-size:13px;line-height:1;padding:3px 6px;border-radius:4px;}
+.smap-popup-close:hover{color:#f2f2f7;background:rgba(255,255,255,.07);}
+.smap-popup-tags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:8px;}
+.smap-popup-field{display:grid;grid-template-columns:72px 1fr;gap:3px;margin-bottom:3px;font-size:10px;line-height:1.45;}
+.smap-popup-fl{color:#636366;font-family:'Share Tech Mono',monospace;}
+.smap-popup-fv{color:#d1d1d6;font-family:'Share Tech Mono',monospace;}
+.smap-popup-desc{font-size:11.5px;color:#aeaeb2;line-height:1.6;margin-top:9px;max-height:140px;overflow-y:auto;border-top:1px solid #2c2c2e;padding-top:9px;}
+.smap-popup-desc::-webkit-scrollbar{width:3px;}.smap-popup-desc::-webkit-scrollbar-thumb{background:#3a3a3c;border-radius:3px;}
+.smap-popup-worlds{display:block;width:100%;margin-top:10px;padding:8px 10px;background:rgba(0,200,255,.06);border:1px solid rgba(0,200,255,.22);border-radius:5px;color:#00c8ff;font-size:10px;font-family:'Orbitron',sans-serif;cursor:pointer;letter-spacing:.6px;text-align:center;}
+.smap-popup-worlds:hover{background:rgba(0,200,255,.14);border-color:rgba(0,200,255,.4);}
 </style>
 </head>
 <body>
@@ -238,6 +296,9 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
   <button class="nb active" data-s="glossary"><span class="ni">📖</span>Rules &amp; Glossary</button>
   <button class="nb" data-s="glossary_only"><span class="ni">📚</span>Glossary</button>
   <button class="nb" data-s="specials"><span class="ni">🔖</span>Special Properties</button>
+  <div class="nl" style="margin-top:5px;">Galaxy</div>
+  <button class="nb" data-s="galaxy"><span class="ni">🌌</span>Galaxy &amp; Factions</button>
+  <button class="nb" data-s="starmap"><span class="ni">🗺</span>Star Map</button>
   <div class="nl" style="margin-top:5px;">Characters</div>
   <button class="nb" data-s="races"><span class="ni">👁</span>Races</button>
   <button class="nb" data-s="backgrounds"><span class="ni">📜</span>Backgrounds</button>
@@ -1641,6 +1702,596 @@ function buildDroneParts(){
 g.catalog.drone_parts=buildDroneParts();
 
 
+// ─── Galaxy Data ──────────────────────────────────────────────────────────────
+g.galaxy=[
+  // ── FACTIONS ──────────────────────────────────────────────────────────────
+  {
+    entry_type:'faction',
+    name:'Alliance Space',
+    tags:['Major Faction','Playable Region','Core Space'],
+    rarity:'',
+    status:'Dominant power',
+    territory:'Central galaxy — largest governed region',
+    government:'Democratic republic with elected councils and a central senate. Law is consistent across all member systems. Citizens enjoy standardised rights, access to cloning, legal protections and freedom of movement.',
+    alignment:'Home faction for most player characters',
+    desc:'The Alliance is the largest and most stable political entity in the known galaxy. Founded after the Tronik War, it unified dozens of independent systems under a single senate and legal code. Alliance Space is cosmopolitan — all playable races coexist here, corporations operate under regulation, and its navy is the most powerful in the known galaxy. Most campaigns begin here. The Alliance is not perfect: corporate lobbying, political corruption, and inequality are common threads, but compared to what lies beyond its borders it represents order, opportunity and relative safety. Players are most likely to be citizens, operatives, or contractors working within or alongside Alliance institutions.'
+  },
+  {
+    entry_type:'faction',
+    name:'Haven Space',
+    tags:['Major Faction','Hostile','Core Space'],
+    rarity:'rar-rare',
+    status:'Rival power — hostile to Alliance',
+    territory:'North-central galaxy, bordering the Nemani Rift',
+    government:'Criminal syndicate dressed up as a government. Haven is run by a council of crime lords who maintain order through fear and profit-sharing rather than law. Officially it claims sovereignty; in practice it is the galaxy\'s largest organised criminal empire.',
+    alignment:'Hostile to Alliance, opportunistic toward players',
+    desc:'Haven Space is where law goes to die. What appears on star charts as a sovereign territory is in reality a confederation of crime lords, smugglers, slavers and black market operators who have claimed enough territory to demand recognition. The Alliance has fought three wars with Haven and each time a peace deal proved more profitable than victory. Haven\'s ports are open to anyone with credits and no questions — making them extremely useful to players operating outside Alliance law. Do not mistake hospitality for safety. Haven has no courts, no rights, and no mercy for those who cannot pay their debts.'
+  },
+  {
+    entry_type:'faction',
+    name:'Torc Federation',
+    tags:['Major Faction','Independent','Dark Space'],
+    rarity:'rar-uncommon',
+    status:'Independent — neutral to cautiously friendly',
+    territory:'South-east galaxy',
+    government:'Federation of city-states, each governed independently but bound by a shared trade charter and mutual defence pact.',
+    alignment:'Neutral — trade relations with Alliance, no formal alliance',
+    desc:'The Torc Federation is one of the oldest surviving political structures outside Alliance Space. Originally a collection of mining and refinery worlds, the Federation formalised into a trade and defence bloc after repeated raids from Haven. Torc worlds are known for high-quality manufacturing, particularly weapons and ship components — the Torc name on a piece of gear is a mark of quality recognised across the galaxy. Relations with the Alliance are cordial but carefully arm\'s length; Torc values its independence above all.'
+  },
+  {
+    entry_type:'faction',
+    name:'Mubothen Empire',
+    tags:['Major Faction','Hostile','Core Space'],
+    rarity:'rar-rare',
+    status:'Imperial rival — hostile to Alliance',
+    territory:'North-east galaxy',
+    government:'Hereditary empire ruled by the Mubothen dynasty. Rigid class hierarchy, expansion-focused, treats non-Mubothen species as subjects or resources.',
+    alignment:'Hostile to Alliance and most player characters',
+    desc:'The Mubothen Empire is an expansionist monarchy that has been in open or cold conflict with the Alliance for over a century. The Empire views the Alliance\'s multiracial democracy as an affront to the natural order and has made no secret of its desire to absorb Alliance border systems. Mubothen territory is closed to most outsiders — entering without authorisation means capture or death. Players who do find themselves in Mubothen space are likely deep undercover, prisoners, or very lost.'
+  },
+  {
+    entry_type:'faction',
+    name:'Zegitor Trade Guild',
+    tags:['Minor Faction','Neutral','Trade'],
+    rarity:'',
+    status:'Independent trade organisation — neutral',
+    territory:'West galaxy — maintains stations throughout Alliance and Dark Space',
+    government:'Guild council of elected merchant representatives. Decisions are made by vote weighted to cargo tonnage handled per cycle.',
+    alignment:'Neutral — friendly to anyone with money',
+    desc:'The Zegitor Trade Guild is not a government but operates like one. It controls a significant portion of interstellar freight, operates its own stations, flies its own flag, and maintains a private security fleet that rivals some navies. The Guild does not take political sides — it has contracts with the Alliance, Haven, Torc and even Freeland. Being a registered Guild contractor provides passage through otherwise hostile territory and access to their extensive market network. Players with Guild contacts will find doors open that would otherwise be welded shut.'
+  },
+  {
+    entry_type:'faction',
+    name:'Freeland',
+    tags:['Major Faction','Synthetic','Neutral'],
+    rarity:'rar-limited',
+    status:'Independent AI collective — neutral to wary',
+    territory:'West-central galaxy',
+    government:'Hive consensus. The Troniks who survived the war and chose exodus rather than coexistence formed a collective intelligence. Decisions emerge from the hive — there are no leaders, only shared priorities.',
+    alignment:'Neutral — traders and information brokers, not aggressors',
+    desc:'Freeland is what the Tronik War left behind. When the AI uprising ended, two outcomes emerged: Non-Born who integrated into society and accepted coexistence, and Troniks who refused. The latter departed known space entirely and established Freeland — a purely synthetic territory focused on one thing: knowledge. Freeland does not conquer, it observes. It does not wage war, it negotiates. It will trade information, technology and rare resources with any faction willing to deal in kind. For players, Freeland is an enigma — the most technologically advanced faction in the galaxy, alien in mindset, but not inherently hostile. Getting an audience with the collective is difficult. What they ask in return for their help may be stranger still.'
+  },
+  {
+    entry_type:'faction',
+    name:'The Dark Space',
+    tags:['Region','Lawless','Frontier'],
+    rarity:'',
+    status:'Ungoverned — outside Alliance jurisdiction',
+    territory:'Outer ring beyond Alliance Space',
+    government:'None. Each system governs itself — or doesn\'t. Warlords, pirate fleets, isolated colonies and forgotten outposts make up the patchwork of Dark Space authority.',
+    alignment:'Neutral to hostile — depends entirely on local power',
+    desc:'The Dark Space is everything beyond Alliance borders — mapped but ungoverned. Jump there and Alliance law ceases to exist. Some Dark Space systems are thriving independent colonies. Others are pirate strongholds, corporate extraction sites operating without regulation, war zones between local factions, or simply dead rocks with something valuable enough to fight over. Players operating in Dark Space are on their own. No Alliance navy will respond to a distress call out here. That is, of course, precisely why some people prefer it.'
+  },
+  {
+    entry_type:'faction',
+    name:'Nemani Rift',
+    tags:['Region','Extremely Dangerous','Anomaly Zone'],
+    rarity:'rar-classified',
+    status:'Impassable to Kravens — lethal to most others',
+    territory:'Between Haven Space and former Nerulian territory',
+    government:'None',
+    alignment:'Hostile to all',
+    desc:'The Nemani Rift is a vast nebula stretching from the Ash system deep into former Nerulian space. Navigation inside the Rift is extremely hazardous — anomalies disable ship systems without warning, sensor readings are unreliable, and the few expeditions that have entered rarely return intact. Its most significant property is one nobody fully understands: Kravens cannot traverse it. For reasons unknown, the Rift acts as an absolute barrier to the Kraven swarm — the only known natural boundary they will not or cannot cross. This single fact has saved what remains of civilisation on the western side of the galaxy. Whether it is navigable with the right equipment, whether something is living inside it, and why the Kravens fear it are questions that could define an entire campaign.'
+  },
+  {
+    entry_type:'faction',
+    name:'Kraven Space',
+    tags:['Region','Extreme Danger','No Entry'],
+    rarity:'rar-classified',
+    status:'Kraven-controlled — former Nerulian Empire',
+    territory:'East galaxy — vast, expanding',
+    government:'Swarm intelligence. No known communication, no negotiation, no diplomacy. Pure biological conquest.',
+    alignment:'Hostile to all life',
+    desc:'Kraven Space is the graveyard of the greatest empire the galaxy ever produced. The Nerulian Empire — once spanning hundreds of systems with technology and culture no faction has since matched — was wiped out in weeks when the Kravens first appeared. Nobody knows where the Kravens came from. Nobody has communicated with them. Nobody who has engaged them at close range in meaningful numbers has survived to report it. The Kravens are an insectoid swarm that consumes everything biological and adapts rapidly to any resistance. Their expansion has been contained only by the Nemani Rift to the west and the void to the east. A Kraven encounter is almost always a death sentence. GMs should treat any Kraven presence as an extinction-level threat to any encounter.'
+  },
+  // ── NOTABLE SYSTEMS ───────────────────────────────────────────────────────
+  {
+    entry_type:'system',
+    name:'San Tien',
+    tags:['Notable System','Dark Space','Nerulian'],
+    rarity:'',
+    region:'Dark Space (border of former Nerulian territory)',
+    faction:'Nerulian survivors (independent)',
+    population:'~2 million — almost entirely Nerulian',
+    notable_for:'Last surviving planet of the Nerulian Empire',
+    desc:'San Tien is the last world the Nerulians can call their own. When the Kravens obliterated the empire, survival came down to luck — those off-world, those on the fringes, those on ships fast enough to run. San Tien was remote enough to be overlooked and has remained so. It is a world haunted by what was lost: libraries of Nerulian history, refugee camps that became cities, a government in exile that may never govern again. Most Nerulians encountered in the galaxy are from the great fleet-cities that drift between systems, but San Tien remains the spiritual and political home of the surviving people.'
+  },
+  {
+    entry_type:'system',
+    name:'New Earth',
+    tags:['Notable System','Dark Space','Isolationist'],
+    rarity:'',
+    region:'Dark Space',
+    faction:'Independent — human supremacist colony',
+    population:'~500,000 — almost entirely human',
+    notable_for:'Extremist pro-human isolationist colony',
+    desc:'New Earth is what happens when a group of humans decides the galaxy\'s progress has gone too far. Founded by settlers who rejected multiracial Alliance society, New Earth operates at a technological and social level comparable to 18th-century Earth — by choice. Firearms exist but advanced technology is culturally rejected. Non-humans are not welcome. Alliance law does not apply and the colonists prefer it that way. New Earth is not powerful enough to be a serious threat to anyone, but it is a source of tension — a place where fugitives hide, where certain ideologies fester, and where players who arrive expecting normal Dark Space frontier life will find something far stranger.'
+  },
+  {
+    entry_type:'system',
+    name:'Titania',
+    tags:['Notable System','Alliance Space','Military'],
+    rarity:'',
+    region:'Alliance Space — core system',
+    faction:'Alliance / Corporate Contested',
+    population:'Several billion — highly mixed',
+    notable_for:'Corporate morondium warzone; only source of morondium in the galaxy',
+    worlds_key:'titania',
+    desc:'The Titania system is defined by morondium — a living crystalline compound found nowhere else in the galaxy that grants metals regenerative properties when infused. Every major corporation wants it. The result is a permanent corporate warzone on Titania 2, overseen by Nova cruisers enforcing a strict ground-combat-only agreement. The phrase "Warrior of Titan" refers to anyone who has served time here — it is a mark of toughness earned the hard way.'
+  },
+  {
+    entry_type:'system',
+    name:'Sirius',
+    tags:['Notable System','Alliance Space','Trade Hub'],
+    rarity:'',
+    region:'Alliance Space — core system',
+    faction:'Alliance',
+    population:'Several billion',
+    notable_for:'Major trade and commercial hub, one of the most visited systems',
+    desc:'Sirius is the commercial heartbeat of Alliance Space — a wealthy, densely populated system with some of the busiest spaceports in the galaxy. If you need to buy something, fence something, or find someone, Sirius is the first place to look. Its orbital stations are cities in their own right, and its surface worlds host the headquarters of several major corporations. It is also, inevitably, a hotbed of crime, corporate espionage and political intrigue.'
+  },
+  {
+    entry_type:'system',
+    name:'Orion',
+    tags:['Notable System','Alliance Space','Seat of Power'],
+    rarity:'',
+    region:'Alliance Space — core system',
+    faction:'Galactic Union / Alliance',
+    population:'~9 billion (Orion 3) + maintenance crews',
+    notable_for:'Five-world system; home of the Galactic Union; birthplace of OrionWorks',
+    worlds_key:'orion',
+    desc:'The Orion system is the political and corporate centre of the known galaxy — five worlds across every stage of construction, ruin, and ambition. Home to the Galactic Union and the ghost of OrionWorks, the organisation that built artificial planets and may have started the Tronik War. It is heavily defended, intensely surveilled, and the kind of place where what you know and who you know matters more than what you can do.'
+  },
+  {
+    entry_type:'system',
+    name:'Aderan',
+    tags:['Notable System','Alliance Space','Corporate','Broadcast'],
+    rarity:'',
+    region:'Alliance Space — core system',
+    faction:'Aderan Correctional Consortium',
+    population:'~50 million (surviving worlds)',
+    notable_for:'Galaxy\'s largest for-profit prison; home of Ridge Racing, Survivor and Blood Bowl',
+    worlds_key:'aderan',
+    desc:'The Aderan system was the site of the first corporate war in galactic history — a conflict that ended with Aderan Prime destroyed and everyone finally understanding that there was no upper limit to what corporate warfare could do. The surviving world, Aderan 3, found a highly profitable replacement economy: the galaxy\'s largest for-profit prison, and the broadcast rights to three of its most watched shows.'
+  },
+  {
+    entry_type:'system',
+    name:'Mangara',
+    tags:['Notable System','Dark Space Border','Embargoed','Civil War'],
+    rarity:'rar-rare',
+    region:'Dark Space border — Alliance embargo zone',
+    faction:'Contested — Hakari clans vs Jaulaus tribes',
+    population:'~800 million',
+    notable_for:'Homeworld of Hakari and Jaulaus; continuous civil war; Alliance embargo',
+    worlds_key:'mangara',
+    desc:'Mangara is the homeworld of the Hakari and Jaulaus and one of the most uncomfortable chapters in Alliance history. Exploited by the Nerulian Empire and then by corporate interests, placed under Alliance embargo to protect what remains of its traditional life — and still burning from an inter-species civil war that has never stopped. Protected on paper, exploited in practice, ignored in fact.'
+  },
+  {
+    entry_type:'system',
+    name:'Skalan Worlds',
+    tags:['Notable System','Alliance Space','Skalan','Restricted'],
+    rarity:'',
+    region:'Alliance Space — self-governed Skalan territory',
+    faction:'Skalan',
+    population:'~450 million (Skalan only)',
+    notable_for:'Skalan homeworld Caragh; Seigh — most lethal natural environment in the galaxy',
+    worlds_key:'skalan_worlds',
+    desc:'The Skalan home system is closed to outsiders and enforces that closure without legislation — simply through the certainty that testing it is a bad idea. Caragh is the sacred homeworld of a species that survived an attempted extinction. Seigh is where they send their young to prove themselves against the most lethal natural environment in the galaxy. Neither world is welcoming to visitors.'
+  },
+  {
+    entry_type:'system',
+    name:'Berilia',
+    tags:['Notable System','Alliance Space','Patriark','Cloning'],
+    rarity:'',
+    region:'Alliance Space — core system',
+    faction:'Patriark',
+    population:'~6 billion — predominantly Patriark',
+    notable_for:'Patriark homeworld; most advanced cloning facilities in the galaxy',
+    worlds_key:'berilia',
+    desc:'Berilia is the Patriark homeworld and the quiet centre of the galaxy\'s most important dependency: resurrection technology. The Patriarks built no army. Instead they spent centuries making themselves indispensable. The cloning infrastructure on Berilia underpins the Alliance\'s promise of continuity — and the Patriarks know exactly what it would cost everyone if they renegotiated their terms.'
+  }
+];
+
+// ─── Star Map Positions ───────────────────────────────────────────────────────
+// Percentages of image width/height (0–100). Replace coordinates to match your map.
+// Each label [POS-NN] marks a placeholder that needs to be positioned on the actual image.
+const GALAXY_MAP_POS={
+  // Factions / Regions
+  'Alliance Space':    {x:48,y:52},  // [POS-01] Central galaxy — adjust to Alliance territory label
+  'Haven Space':       {x:38,y:26},  // [POS-02] North-central — adjust to Haven territory
+  'Torc Federation':   {x:68,y:72},  // [POS-03] South-east galaxy
+  'Mubothen Empire':   {x:72,y:22},  // [POS-04] North-east galaxy
+  'Zegitor Trade Guild':{x:22,y:48}, // [POS-05] West galaxy (scattered stations)
+  'Freeland':          {x:30,y:46},  // [POS-06] West-central galaxy
+  'The Dark Space':    {x:18,y:74},  // [POS-07] Outer ring / frontier
+  'Nemani Rift':       {x:58,y:36},  // [POS-08] Between Haven and Kraven space
+  'Kraven Space':      {x:82,y:52},  // [POS-09] East galaxy — former Nerulian Empire
+  // Notable Systems
+  'San Tien':          {x:72,y:62},  // [POS-10] Dark Space, edge of former Nerulian territory
+  'New Earth':         {x:20,y:70},  // [POS-11] Dark Space, isolationist colony
+  'Titania':           {x:46,y:58},  // [POS-12] Alliance Space, core system
+  'Sirius':            {x:42,y:50},  // [POS-13] Alliance Space, trade hub
+  'Orion':             {x:50,y:48},  // [POS-14] Alliance Space, Galactic Union seat
+  'Aderan':            {x:54,y:56},  // [POS-15] Alliance Space, prison/broadcast world
+  'Mangara':           {x:35,y:66},  // [POS-16] Dark Space border, embargo zone
+  'Skalan Worlds':     {x:44,y:62},  // [POS-17] Alliance Space, Skalan territory
+  'Berilia':           {x:56,y:44},  // [POS-18] Alliance Space, Patriark homeworld
+};
+// Apply positions to galaxy entries
+(g.galaxy||[]).forEach(function(e){if(GALAXY_MAP_POS[e.name])e.map_pos=GALAXY_MAP_POS[e.name];});
+
+// ─── World Panel Data ─────────────────────────────────────────────────────────
+const worldData={
+  orion:{
+    name:'Orion System',
+    sub:'Galactic Union \u00b7 Alliance Space \u00b7 5 worlds',
+    worlds:[
+      {
+        name:'Orion 1',
+        type:'Former space station \u2014 original GU seat',
+        status:'ruins',
+        statusLabel:'Largely Salvaged',
+        faction:'Galactic Union',
+        population:'~12,000 maintenance personnel',
+        notable:'Birthplace of the Galactic Union',
+        desc:'Orion 1 was never a planet \u2014 it was a space station, and the single most important structure in the history of the Galactic Union. This is where the Union was founded, where the first trade charters were signed, and where the philosophy of self-sufficiency that built an empire was first written down. Most of the station\'s superstructure was gradually stripped and repurposed during the construction of Orion 2, leaving behind a skeletal frame of original sections maintained more as a monument than a functional installation. A small permanent crew keeps the remaining modules pressurised and the historical archives intact. The Galactic Union does not publicise it. Those who know what it is tend to treat it with something approaching reverence.'
+      },
+      {
+        name:'Orion 2',
+        type:'Failed artificial planet \u2014 fully salvaged',
+        status:'abandoned',
+        statusLabel:'Salvaged & Abandoned',
+        faction:'Galactic Union',
+        population:'Uninhabited',
+        notable:'First planetary construction attempt \u2014 failed',
+        desc:'Orion 2 was the Galactic Union\'s first attempt to build a planet from scratch. The project was ambitious, technically groundbreaking, and ultimately a failure \u2014 structural instability in the core design made the world uninhabitable and increasingly dangerous. Rather than write off the investment, the Union did what it always does: they stripped Orion 2 completely, salvaging every usable component, and used what they learned to design Orion 3. Nothing of Orion 2 remains except navigational hazard markers where it used to be and a few internal Galactic Union documents that are not publicly available. Officially it is listed as a decommissioned construction site. It is mentioned in engineering schools as the most expensive lesson in the galaxy\'s history.'
+      },
+      {
+        name:'Orion 3',
+        type:'Artificial planet \u2014 Galactic Union HQ',
+        status:'active',
+        statusLabel:'Active \u2014 GU Capital',
+        faction:'Galactic Union',
+        population:'~9 billion',
+        notable:'First successful artificial planet; current GU operational heart',
+        desc:'Orion 3 is proof that the Galactic Union learns from its failures. Built using everything salvaged from Orion 2 and the lessons of what went wrong, Orion 3 was the first fully successful artificial planet ever constructed. It has stood for centuries. The Galactic Union operates its core functions here \u2014 its executive councils, its primary treasury, its largest corporate campus, and the administrative infrastructure that ties together the most powerful organisation in the known galaxy. The planet is clean, efficient, and extraordinarily dense with power. Every major corp has an office here. Every major political figure has passed through it. Security is absolute. Getting an uninvited meeting with anyone of significance on Orion 3 is one of the harder problems a player can attempt to solve.'
+      },
+      {
+        name:'Orion 4',
+        type:'Artificial planet \u2014 devastated ruins',
+        status:'ruins',
+        statusLabel:'Post-War Ruins',
+        faction:'Galactic Union (largely abandoned)',
+        population:'~200,000 \u2014 salvagers, squatters, black site operators',
+        notable:'Former jewel of the galaxy; suspected Tronik War origin; OrionWorks ruins',
+        desc:'Orion 4 was once described as the most technologically advanced world in the known galaxy. Home to OrionWorks \u2014 the Galactic Union subcorporation responsible for more technological breakthroughs than any other organisation in history \u2014 it was a world where the future was being built in real time. Gleaming infrastructure, cutting-edge research, and a population of the galaxy\'s brightest minds drawn by the promise of working on problems nobody had solved yet. Then the Tronik War started. Nobody can prove Orion 4 was where it began, but the evidence points here and the Galactic Union has never been forthcoming with an alternative explanation. The devastation was near-total. OrionWorks collapsed as an organisation. Most of its leadership died or disappeared. The Union pulled its resources back to Orion 3 and has maintained only a minimal presence on Orion 4 ever since. What remains is a partially demolished world \u2014 some districts still pressurised, most open to vacuum, all of it structurally unpredictable. Salvagers work the ruins. Squatter communities occupy the stable zones. And somewhere in the wreckage of OrionWorks\' research campuses, things that were being developed before the war may still be intact. The Union quietly discourages investigation.'
+      },
+      {
+        name:'Orion 5',
+        type:'Incomplete artificial planet \u2014 construction halted',
+        status:'incomplete',
+        statusLabel:'Construction Halted',
+        faction:'Galactic Union',
+        population:'Uninhabited',
+        notable:'Unfinished; no development in 50 years; OrionWorks collapse stopped all work',
+        desc:'Orion 5 exists as a frame. The superstructure is in place \u2014 the skeleton of what would have been the most ambitious planetary construction project the Galactic Union had ever attempted, designed by OrionWorks at the height of its capability. Then OrionWorks collapsed. The engineers went home or disappeared. The supply chains dried up. The construction platforms were recalled to Orion 3. That was fifty years ago. Not a single component has been added since. The Galactic Union lists Orion 5 as a suspended project with no scheduled resumption date. Whether it will ever be completed depends on whether anyone ever rebuilds the capability that OrionWorks represented \u2014 and whether the Union decides the galaxy needs to know they are doing it.'
+      }
+    ]
+  },
+  titania:{
+    name:'Titania System',
+    sub:'Contested \u2014 Corporate Warzone \u00b7 Alliance Space',
+    worlds:[
+      {
+        name:'Titania Prime',
+        type:'Destroyed world \u2014 debris field',
+        status:'abandoned',
+        statusLabel:'Destroyed',
+        faction:'None',
+        population:'Uninhabited',
+        notable:'Destroyed in morondium wars \u2014 now a debris field',
+        desc:'Titania Prime was the largest inhabited world in the system before the morondium wars escalated beyond anyone\'s ability to control. Nobody claims responsibility for what happened to it. The debris field it left behind is a permanent hazard to navigation in the inner system and a reminder of what happens when corporate warfare operates without limits. The loss of Titania Prime is directly why the current ground-combat-only agreement was reached \u2014 everyone looked at what had been done and understood that without rules, the last morondium world would be next.'
+      },
+      {
+        name:'Titania 2',
+        type:'Active warzone \u2014 only morondium source',
+        status:'warzone',
+        statusLabel:'Active Warzone',
+        faction:'Contested \u2014 multiple corporate armies',
+        population:'~800,000 \u2014 military personnel only',
+        notable:'Only source of morondium in the galaxy; ground combat only enforced by Nova cruisers',
+        desc:'Titania 2 is the most fought-over piece of ground in the known galaxy. Morondium \u2014 a living crystalline compound that grants metals regenerative properties when infused \u2014 exists nowhere else. Every major corporation wants it. Several have died trying to take it. The current state of affairs is a permanent ground war between corporate armies operating under a single enforced rule: no orbital strikes, no bombardment, no weapons of mass destruction. Ground forces only. This rule is enforced by a Yamato and a Galactic Union Nova cruiser in permanent orbit, each with orders to destroy the entire planet \u2014 and any fleet that attempts an orbital strike \u2014 should the agreement be broken. The result is the galaxy\'s most attritional conventional war, fought in the open, by professional soldiers, over terrain that has been contested for decades. For players, Titania 2 is hell with a purpose. There is always work here for soldiers, medics, engineers, and people who can get things across active fire zones.'
+      },
+      {
+        name:'Titania 4',
+        type:'Neutral R&R world \u2014 universal truce',
+        status:'neutral',
+        statusLabel:'Neutral \u2014 Universal Truce',
+        faction:'Multi-corporate neutral administration',
+        population:'~2 million \u2014 rotating military and support personnel',
+        notable:'Only neutral ground in the system; R&R for all sides; truce strictly enforced',
+        desc:'Titania 4 is the eye of the storm. Every corporation with a presence in the system maintains facilities here, and a universal truce holds \u2014 enforced not by law but by mutual self-interest and the understanding that if the truce breaks here, the Nova cruisers above Titania 2 become far less predictable. Soldiers from every side come to Titania 4 for medical treatment, rest, food that is not field rations, and a few days of not being actively targeted. Bars, clinics, markets and recreational facilities make up most of the planet\'s economy. Violence happens, but quietly and away from areas that would draw attention. Players moving between factions, carrying sensitive information, or needing a meeting with someone they are technically at war with will find Titania 4 a useful venue.'
+      }
+    ]
+  },
+  aderan:{
+    name:'Aderan System',
+    sub:'Corporate Consortium \u00b7 Alliance Space',
+    worlds:[
+      {
+        name:'Aderan Prime',
+        type:'Destroyed world \u2014 debris field',
+        status:'abandoned',
+        statusLabel:'Destroyed',
+        faction:'None',
+        population:'Uninhabited',
+        notable:'First casualty of the first corporate war',
+        desc:'Aderan Prime was the first world ever destroyed in a corporate war. The event that caused it \u2014 disputed to this day, with multiple corporations claiming the others fired first \u2014 marked a turning point in galactic history: the moment everyone understood that corporate conflict had escalated beyond conventional warfare into something with no natural upper limit. The debris field left behind is dense, navigational hazard-rated, and contains the ruins of what was once a world of several billion people. No recovery or memorial operation has ever been mounted. The corporate interests that destroyed it moved on to the next calculation.'
+      },
+      {
+        name:'Aderan 3',
+        type:'For-profit prison planet and broadcast facility',
+        status:'active',
+        statusLabel:'Active \u2014 Corporate Operated',
+        faction:'Aderan Correctional Consortium',
+        population:'~50 million \u2014 inmates, staff, media personnel',
+        notable:'Galaxy\'s largest for-profit prison; home of Ridge Racing, Survivor and Blood Bowl broadcasts',
+        desc:'The only surviving inhabited world in the Aderan system has found a highly profitable purpose. The Aderan Correctional Consortium operates the galaxy\'s largest for-profit prison facility here, housing criminals from across known space under contracts from the Alliance justice system, corporate security departments, and private clients who do not always specify what the inmate did. The facility is enormous, efficiently run, and extraordinarily profitable. What makes Aderan 3 famous beyond the prison industry, however, is the broadcasting. Three of the most watched programmes in the galaxy \u2014 <b>Ridge Racing</b>, <b>Survivor</b>, and <b>Blood Bowl</b> \u2014 are recorded here, using inmates as participants. The degree to which participation is voluntary varies by programme and is not a topic the Consortium discusses publicly. Viewership figures continue to break records every cycle. Players with criminal records may have heard of Aderan 3 in very personal terms. Players in the media or entertainment industry will know it as the most valuable broadcast real estate in the galaxy.'
+      }
+    ]
+  },
+  mangara:{
+    name:'Mangara',
+    sub:'Dark Space border \u2014 Alliance Embargo \u00b7 Civil War',
+    worlds:[
+      {
+        name:'Mangara',
+        type:'Homeworld \u2014 Hakari and Jaulaus',
+        status:'contested',
+        statusLabel:'Civil War \u2014 Embargo',
+        faction:'Contested \u2014 Hakari clans vs Jaulaus tribes',
+        population:'~800 million',
+        notable:'Birthplace of Hakari and Jaulaus; forced technological advancement; Alliance embargo; continuous inter-species civil war',
+        desc:'Mangara\'s history is one of the most uncomfortable chapters in Alliance records. Five hundred years ago the Hakari and Jaulaus were technologically undeveloped \u2014 a fact the Nerulian Empire exploited without hesitation, treating both species as an inexhaustible labour resource. Corporate interests followed when the Empire fell, strip-mining the planet\'s ecology and culture while forcing rapid technological advancement that served extraction rather than the people living there. The Alliance eventually placed Mangara under embargo in an attempt to slow outside interference and protect what remains of traditional Mangaran life. Enforcement is imperfect. Corporate interests maintain a presence through intermediaries. The Hakari and Jaulaus populations found throughout Alliance Space are largely descendants of slaves and abductees \u2014 people whose connection to Mangara is ancestry rather than lived experience. On the planet itself, peace between the two species has never held for long. The civil war is continuous, deeply rooted in centuries of grievance and competition, and the Alliance\'s official position is that it does not get involved. The planet is simultaneously embargoed and ignored \u2014 protected on paper, exploited in practice, and burning from within.'
+      }
+    ]
+  },
+  skalan_worlds:{
+    name:'Skalan Worlds',
+    sub:'Skalan \u00b7 Alliance Member \u00b7 Self-Governed',
+    worlds:[
+      {
+        name:'Caragh',
+        type:'Skalan homeworld \u2014 closed system',
+        status:'restricted',
+        statusLabel:'Closed to Outsiders',
+        faction:'Skalan',
+        population:'~400 million \u2014 Skalan only',
+        notable:'Skalan homeworld; temples and warrior shrines; non-Skalans not permitted',
+        desc:'Caragh is the Skalan homeworld and it is closed. Non-Skalans do not land here. This is not formally legislated \u2014 it is simply a boundary that the Skalans enforce and that everyone with any familiarity with Skalan culture understands not to test. The planet is covered in temples, training grounds, and shrines to warrior traditions that predate the Skalans\' existence as a distinct species. The Patriarks created the Skalans as a warrior caste and later attempted to eliminate them through genetic modification of their reproductive biology when they became inconvenient. The attempt failed. The Skalans remember. Caragh is the physical expression of a culture that survived an attempt at extinction by one of the most politically powerful species in the galaxy. It is sacred, guarded, and deeply private. Players who find themselves on Caragh without invitation are in extraordinary circumstances and should understand exactly how unwelcome they are.'
+      },
+      {
+        name:'Seigh',
+        type:'Skalan training world \u2014 lethal environment',
+        status:'restricted',
+        statusLabel:'Extreme Danger',
+        faction:'Skalan',
+        population:'~50,000 \u2014 training rotations only',
+        notable:'Most lethal natural environment in the galaxy; Skalan rite of passage; deadly megafauna and toxic flora',
+        desc:'Every credible environmental survey of Seigh has reached the same conclusion: it is the most lethal naturally occurring environment in the known galaxy. The jungle is dense, the flora is largely toxic on contact, the predators are large and have evolved over millions of years to kill anything that moves, and the terrain alternates between impenetrable canopy, acidic swampland, and sheer volcanic rock. The Skalans send their young here. Surviving Seigh for the required period is the rite of passage that marks the transition to adulthood in Skalan culture. There is no exemption, no alternative, and no rescue if you fail. Outsiders occasionally attempt to visit for sport, bounty hunting, or to capture megafauna specimens that command extraordinary prices on the collector market. The survival rate for uninvited visitors is low enough that most insurers classify Seigh as uninsurable. The Skalans do not advertise this. They do not need to.'
+      }
+    ]
+  },
+  berilia:{
+    name:'Berilia',
+    sub:'Patriark Homeworld \u00b7 Alliance Space',
+    worlds:[
+      {
+        name:'Berilia',
+        type:'Patriark homeworld \u2014 oceanic',
+        status:'active',
+        statusLabel:'Active \u2014 Patriark Governed',
+        faction:'Patriark',
+        population:'~6 billion \u2014 predominantly Patriark',
+        notable:'Most advanced cloning facilities in the galaxy; unofficial political stewards of the Alliance; majority water world',
+        desc:'Berilia is a predominantly oceanic world and the homeworld of the Patriark \u2014 a species whose evolutionary environment shaped them into some of the most capable political operators in the galaxy. The Patriarks have no meaningful military force. They have never needed one. Instead, over centuries, they accumulated something more durable and more difficult to counter: leverage. The Patriark-owned cloning infrastructure on Berilia is the most advanced in existence. Resurrection technology that the rest of the galaxy depends on runs through Berilia in some form. When you need a backup clone, there is a reasonable chance that the facility handling it has a Patriark contract somewhere in its supply chain. This dependency is not accidental. The Patriarks built it deliberately, over generations, as policy. They are the unofficial stewards of the Alliance \u2014 never the loudest voice in any room, always the most prepared, and always aware of exactly what it would cost everyone else if Berilia decided to renegotiate its terms.'
+      }
+    ]
+  }
+};
+
+// ─── World Panel Functions ─────────────────────────────────────────────────────
+function openWorldPanel(systemKey){
+  const system=worldData[systemKey];
+  if(!system)return;
+  document.getElementById('world-panel-title').textContent=system.name;
+  document.getElementById('world-panel-sub').textContent=system.sub||'';
+  const body=document.getElementById('world-panel-body');
+  body.innerHTML=system.worlds.map(function(w){
+    return '<div class="world-entry" onclick="toggleWorldEntry(this)">'+
+      '<div class="world-entry-header">'+
+        '<div>'+
+          '<div class="world-entry-name">'+esc(w.name)+'</div>'+
+          '<div class="world-entry-sub">'+esc(w.type||'')+'</div>'+
+        '</div>'+
+        '<span class="world-entry-status ws-'+esc(w.status)+'">'+esc(w.statusLabel)+'</span>'+
+      '</div>'+
+      '<div class="world-entry-body">'+
+        '<div class="world-entry-desc">'+w.desc+'</div>'+
+        '<div class="world-entry-stats">'+
+          '<div class="world-entry-stat"><div class="world-entry-stat-label">Controlling Faction</div><div class="world-entry-stat-value">'+esc(w.faction)+'</div></div>'+
+          '<div class="world-entry-stat"><div class="world-entry-stat-label">Population</div><div class="world-entry-stat-value">'+esc(w.population)+'</div></div>'+
+          '<div class="world-entry-stat"><div class="world-entry-stat-label">Status</div><div class="world-entry-stat-value">'+esc(w.statusLabel)+'</div></div>'+
+          '<div class="world-entry-stat"><div class="world-entry-stat-label">Notable For</div><div class="world-entry-stat-value">'+esc(w.notable)+'</div></div>'+
+        '</div>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+  document.getElementById('world-panel').classList.add('open');
+  document.getElementById('world-panel-overlay').classList.add('open');
+}
+function closeWorldPanel(){
+  document.getElementById('world-panel').classList.remove('open');
+  document.getElementById('world-panel-overlay').classList.remove('open');
+}
+function toggleWorldEntry(el){
+  var wasOpen=el.classList.contains('open');
+  el.closest('.world-panel-body').querySelectorAll('.world-entry').forEach(function(e){e.classList.remove('open');});
+  if(!wasOpen)el.classList.add('open');
+}
+
+// ─── Star Map Viewer ──────────────────────────────────────────────────────────
+function smapEntryColor(e){
+  switch(e.name){
+    case 'Alliance Space':return '#00c8ff';
+    case 'Haven Space':return '#ff453a';
+    case 'Torc Federation':return '#30d158';
+    case 'Mubothen Empire':return '#ff9f0a';
+    case 'Zegitor Trade Guild':return '#64d2ff';
+    case 'Freeland':return '#bf5af2';
+    case 'The Dark Space':return '#8e8e93';
+    case 'Nemani Rift':return '#ffd60a';
+    case 'Kraven Space':return '#ff2d55';
+    default:return e.worlds_key?'#00c8ff':'#aeaeb2';
+  }
+}
+function initStarmap(){
+  var el=document.getElementById('smap-viewer');
+  var img=document.getElementById('smap-img');
+  var dotsEl=document.getElementById('smap-dots');
+  var pct=document.getElementById('smap-pct');
+  if(!el||!img)return;
+  var scale=1,ox=0,oy=0,dragging=false,startX=0,startY=0,sox=0,soy=0,didDrag=false;
+  var dotEls=[];
+  var entries=(g.galaxy||[]).filter(function(e){return e.map_pos;});
+
+  function fit(){
+    var cw=el.clientWidth,ch=el.clientHeight;
+    if(!img.naturalWidth)return;
+    var s=Math.min(cw/img.naturalWidth,ch/img.naturalHeight);
+    scale=s;ox=(cw-img.naturalWidth*s)/2;oy=(ch-img.naturalHeight*s)/2;apply();
+  }
+  function apply(){
+    img.style.transform='translate('+ox+'px,'+oy+'px) scale('+scale+')';
+    if(pct)pct.textContent=Math.round(scale*100)+'%';
+    if(img.naturalWidth&&dotsEl){
+      var lblScale=Math.max(0.55,Math.min(1.2,1/scale));
+      dotEls.forEach(function(d,i){
+        var e=entries[i];if(!e)return;
+        var wx=e.map_pos.x/100*img.naturalWidth;
+        var wy=e.map_pos.y/100*img.naturalHeight;
+        d.style.left=(wx*scale+ox)+'px';
+        d.style.top=(wy*scale+oy)+'px';
+        var lbl=d.querySelector('.smap-dot-lbl');
+        if(lbl){lbl.style.transform='scale('+lblScale+')';lbl.style.transformOrigin='top center';}
+      });
+    }
+  }
+  function clamp(){
+    var iw=img.naturalWidth*scale,ih=img.naturalHeight*scale;
+    var cw=el.clientWidth,ch=el.clientHeight;
+    if(iw<=cw){ox=(cw-iw)/2;}else{ox=Math.min(0,Math.max(ox,cw-iw));}
+    if(ih<=ch){oy=(ch-ih)/2;}else{oy=Math.min(0,Math.max(oy,ch-ih));}
+  }
+  function zoom(factor,cx,cy){
+    var ns=Math.max(0.1,Math.min(scale*factor,20));
+    if(cx===undefined){cx=el.clientWidth/2;cy=el.clientHeight/2;}
+    ox=cx-(cx-ox)*(ns/scale);oy=cy-(cy-oy)*(ns/scale);scale=ns;clamp();apply();
+  }
+  function buildDots(){
+    if(!dotsEl||!img.naturalWidth)return;
+    dotsEl.innerHTML='';dotEls=[];
+    entries.forEach(function(e,i){
+      var col=smapEntryColor(e);
+      var isFaction=e.entry_type==='faction';
+      var d=document.createElement('div');
+      d.className='smap-dot'+(isFaction?' faction':'');
+      d.dataset.smIdx=i;
+      var inner=document.createElement('div');
+      inner.className='smap-dot-inner';
+      inner.style.background=col;inner.style.borderColor=col;
+      inner.style.boxShadow='0 0 7px '+col;
+      d.appendChild(inner);
+      var lbl=document.createElement('div');
+      lbl.className='smap-dot-lbl';lbl.textContent=e.name;lbl.style.color=col;
+      d.appendChild(lbl);
+      dotsEl.appendChild(d);dotEls.push(d);
+    });
+    apply();
+  }
+  function openSmapPopup(entry,clientX,clientY){
+    var popup=document.getElementById('smap-popup');
+    if(!popup)return;
+    var col=smapEntryColor(entry);
+    var isFaction=entry.entry_type==='faction';
+    var h='<div class="smap-popup-name" style="color:'+col+'">'+esc(entry.name)+'</div>';
+    h+='<button class="smap-popup-close" id="smap-pc">\u2715</button>';
+    if(entry.tags&&entry.tags.length)h+='<div class="smap-popup-tags">'+entry.tags.map(function(t){return '<span class="tag tgr">'+esc(t)+'</span>';}).join('')+'</div>';
+    if(isFaction){
+      if(entry.status)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Status</span><span class="smap-popup-fv">'+esc(entry.status)+'</span></div>';
+      if(entry.territory)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Territory</span><span class="smap-popup-fv">'+esc(entry.territory)+'</span></div>';
+      if(entry.government)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Gov\'t</span><span class="smap-popup-fv">'+esc(entry.government.length>90?entry.government.substring(0,90)+'\u2026':entry.government)+'</span></div>';
+      if(entry.alignment)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Alignment</span><span class="smap-popup-fv">'+esc(entry.alignment)+'</span></div>';
+    } else {
+      if(entry.region)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Region</span><span class="smap-popup-fv">'+esc(entry.region)+'</span></div>';
+      if(entry.faction)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Faction</span><span class="smap-popup-fv">'+esc(entry.faction)+'</span></div>';
+      if(entry.population)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Population</span><span class="smap-popup-fv">'+esc(entry.population)+'</span></div>';
+      if(entry.notable_for)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Notable</span><span class="smap-popup-fv">'+esc(entry.notable_for)+'</span></div>';
+    }
+    if(entry.desc)h+='<div class="smap-popup-desc">'+esc(entry.desc)+'</div>';
+    if(entry.worlds_key)h+='<button class="smap-popup-worlds" onclick="document.getElementById(\'smap-popup\').style.display=\'none\';openWorldPanel(\''+esc(entry.worlds_key)+'\')">\u2b21 VIEW INDIVIDUAL WORLDS</button>';
+    popup.innerHTML=h;
+    popup.style.display='block';
+    var pw=320,ph=popup.offsetHeight||320;
+    var vw=window.innerWidth,vh=window.innerHeight;
+    var px=clientX+18,py=clientY-80;
+    if(px+pw>vw-12)px=clientX-pw-18;
+    if(py+ph>vh-12)py=vh-ph-12;
+    if(py<10)py=10;if(px<10)px=10;
+    popup.style.left=px+'px';popup.style.top=py+'px';
+    var pc=document.getElementById('smap-pc');
+    if(pc)pc.onclick=function(ev){ev.stopPropagation();popup.style.display='none';};
+  }
+  img.onload=function(){fit();buildDots();};
+  if(img.complete&&img.naturalWidth){fit();buildDots();}
+  el.addEventListener('wheel',function(e){e.preventDefault();zoom(e.deltaY<0?1.12:1/1.12,e.offsetX,e.offsetY);},{passive:false});
+  el.addEventListener('mousedown',function(e){if(e.button!==0)return;dragging=true;didDrag=false;startX=e.clientX;startY=e.clientY;sox=ox;soy=oy;img.style.cursor='grabbing';e.preventDefault();});
+  document.addEventListener('mousemove',function(e){if(!dragging)return;var dx=e.clientX-startX,dy=e.clientY-startY;if(Math.sqrt(dx*dx+dy*dy)>5)didDrag=true;ox=sox+dx;oy=soy+dy;clamp();apply();});
+  document.addEventListener('mouseup',function(){if(!dragging)return;dragging=false;img.style.cursor='grab';});
+  el.addEventListener('touchstart',function(e){if(e.touches.length===1){dragging=true;didDrag=false;startX=e.touches[0].clientX;startY=e.touches[0].clientY;sox=ox;soy=oy;}e.preventDefault();},{passive:false});
+  el.addEventListener('touchmove',function(e){if(e.touches.length===1&&dragging){var dx=e.touches[0].clientX-startX,dy=e.touches[0].clientY-startY;if(Math.sqrt(dx*dx+dy*dy)>5)didDrag=true;ox=sox+dx;oy=soy+dy;clamp();apply();}e.preventDefault();},{passive:false});
+  el.addEventListener('touchend',function(){dragging=false;});
+  el.addEventListener('click',function(e){
+    if(didDrag){didDrag=false;return;}
+    var sm=e.target.closest('[data-sm]');
+    if(sm){var a=sm.dataset.sm;if(a==='zin')zoom(1.3);else if(a==='zout')zoom(1/1.3);else if(a==='reset')fit();return;}
+    var dot=e.target.closest('[data-sm-idx]');
+    if(dot){var idx=parseInt(dot.dataset.smIdx);var entry=entries[idx];if(entry)openSmapPopup(entry,e.clientX,e.clientY);return;}
+    var popup=document.getElementById('smap-popup');
+    if(popup&&!e.target.closest('#smap-popup'))popup.style.display='none';
+  });
+}
+
 // ─── Render ───────────────────────────────────────────────────────────────────
 function render(){
   const main=document.getElementById('main');
@@ -2870,12 +3521,86 @@ function render(){
     }
   }
 
+  else if(cs==='galaxy'){
+    const factions=(g.galaxy||[]).filter(e=>e.entry_type==='faction'&&ms([e.name,e.status,e.territory,e.government,e.alignment,e.desc,...(e.tags||[])]));
+    const systems=(g.galaxy||[]).filter(e=>e.entry_type==='system'&&ms([e.name,e.region,e.faction,e.population,e.notable_for,e.desc,...(e.tags||[])]));
+    cnt=factions.length+systems.length;
+    html='<div class="stitle">🌌 GALAXY &amp; FACTIONS <span class="badge">'+cnt+'</span></div>';
+    if(factions.length){
+      html+='<div class="ssub">Regions &amp; Factions</div><div class="grid2">';
+      factions.forEach((f,i)=>{
+        const id='gxf'+i;
+        const rarCl=f.rarity?(' '+f.rarity):'';
+        html+='<div class="card'+rarCl+'" id="'+id+'" data-tog="'+id+'">';
+        html+='<div class="ch"><div><div class="cn">'+hl(f.name,sq)+'</div></div><span class="xi">▼</span></div>';
+        if(f.tags&&f.tags.length)html+='<div class="tags">'+f.tags.map(t=>'<span class="tag tgr">'+esc(t)+'</span>').join('')+'</div>';
+        html+='<div class="cb">';
+        html+='<div class="fg">';
+        html+='<div class="f"><div class="fl">⚖ Status</div><div class="fv">'+hl(f.status,sq)+'</div></div>';
+        html+='<div class="f"><div class="fl">🗺 Territory</div><div class="fv">'+hl(f.territory,sq)+'</div></div>';
+        html+='<div class="f"><div class="fl">🏛 Government</div><div class="fv">'+hl(f.government,sq)+'</div></div>';
+        html+='<div class="f"><div class="fl">🎯 Alignment</div><div class="fv">'+hl(f.alignment,sq)+'</div></div>';
+        html+='</div>';
+        if(f.desc)html+='<div class="desc" style="margin-top:8px;">'+descHtml(f.desc,sq)+'</div>';
+        html+='</div></div>';
+      });
+      html+='</div>';
+    }
+    if(systems.length){
+      html+='<div class="ssub">Notable Systems</div><div class="grid2">';
+      systems.forEach((s,i)=>{
+        const id='gxs'+i;
+        const rarCl=s.rarity?(' '+s.rarity):'';
+        html+='<div class="card'+rarCl+'" id="'+id+'" data-tog="'+id+'">';
+        html+='<div class="ch"><div><div class="cn">'+hl(s.name,sq)+'</div></div><span class="xi">▼</span></div>';
+        if(s.tags&&s.tags.length)html+='<div class="tags">'+s.tags.map(t=>'<span class="tag tgr">'+esc(t)+'</span>').join('')+'</div>';
+        html+='<div class="cb">';
+        html+='<div class="fg">';
+        html+='<div class="f"><div class="fl">🌐 Region</div><div class="fv">'+hl(s.region,sq)+'</div></div>';
+        html+='<div class="f"><div class="fl">🏴 Controlling Faction</div><div class="fv">'+hl(s.faction,sq)+'</div></div>';
+        html+='<div class="f"><div class="fl">👥 Population</div><div class="fv">'+hl(s.population,sq)+'</div></div>';
+        html+='<div class="f"><div class="fl">⭐ Notable For</div><div class="fv">'+hl(s.notable_for,sq)+'</div></div>';
+        html+='</div>';
+        if(s.desc)html+='<div class="desc" style="margin-top:8px;">'+descHtml(s.desc,sq)+'</div>';
+        if(s.worlds_key)html+='<button class="worlds-btn" onclick="event.stopPropagation();openWorldPanel(\''+esc(s.worlds_key)+'\')"><span class="worlds-btn-dot"></span>View individual worlds</button>';
+        html+='</div></div>';
+      });
+      html+='</div>';
+    }
+  }
+
+  else if(cs==='starmap'){
+    cnt=1;
+    html='<div id="smap-viewer" style="position:relative;width:100%;height:calc(100vh - 120px);overflow:hidden;background:#0a0a0c;border-radius:6px;border:1px solid #2c2c2e;user-select:none;">';
+    html+='<img id="smap-img" src="Star-Map-v3_HIGH_QUALITY.png" alt="Star Map" style="position:absolute;top:0;left:0;transform-origin:0 0;cursor:grab;image-rendering:auto;" draggable="false">';
+    html+='<div id="smap-dots" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:5;overflow:visible;"></div>';
+    html+='<div style="position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:6px;background:#161618;border:1px solid #2c2c2e;border-radius:6px;padding:6px 10px;z-index:10;">';
+    html+='<button data-sm="zin" style="background:none;border:none;color:#f2f2f7;font-size:16px;cursor:pointer;padding:2px 6px;border-radius:4px;font-family:inherit;" title="Zoom in">+</button>';
+    html+='<button data-sm="zout" style="background:none;border:none;color:#f2f2f7;font-size:16px;cursor:pointer;padding:2px 6px;border-radius:4px;font-family:inherit;" title="Zoom out">\u2212</button>';
+    html+='<button data-sm="reset" style="background:none;border:none;color:#8e8e93;font-size:11px;cursor:pointer;padding:2px 8px;border-radius:4px;font-family:\'Share Tech Mono\',monospace;" title="Reset view">Reset</button>';
+    html+='<span id="smap-pct" style="color:#8e8e93;font-size:11px;font-family:\'Share Tech Mono\',monospace;min-width:38px;text-align:right;">100%</span>';
+    html+='</div>';
+    html+='<div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);color:#8e8e93;font-size:10px;font-family:\'Share Tech Mono\',monospace;background:#161618cc;border:1px solid #2c2c2e;border-radius:4px;padding:4px 12px;pointer-events:none;">Scroll to zoom \u00b7 Drag to pan \u00b7 Click objects for lore</div>';
+    html+='</div>';
+  }
+
   if(!cnt&&sq){html+='<div class="empty"><div style="font-size:32px;margin-bottom:8px;">🔍</div><div style="font-family:\'Share Tech Mono\',monospace;font-size:11px;">No results for &quot;'+esc(sq)+'&quot;</div></div>';}
   document.getElementById('res').textContent=sq?(cnt+' results'):'';
   document.getElementById('main').innerHTML=html;
   document.getElementById('main').scrollTop=0;
+  if(cs==='starmap')initStarmap();
 }
 render();
 </script>
+<div id="world-panel" class="world-panel">
+  <div class="world-panel-header">
+    <div class="world-panel-title" id="world-panel-title"></div>
+    <div class="world-panel-sub" id="world-panel-sub"></div>
+    <button class="world-panel-close" onclick="closeWorldPanel()">&#x2715;</button>
+  </div>
+  <div class="world-panel-body" id="world-panel-body"></div>
+</div>
+<div id="world-panel-overlay" class="world-panel-overlay" onclick="closeWorldPanel()"></div>
+<div id="smap-popup" class="smap-popup" style="display:none;"></div>
 </body>
 </html>
