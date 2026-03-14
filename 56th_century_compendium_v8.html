@@ -238,6 +238,9 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
   <button class="nb active" data-s="glossary"><span class="ni">📖</span>Rules &amp; Glossary</button>
   <button class="nb" data-s="glossary_only"><span class="ni">📚</span>Glossary</button>
   <button class="nb" data-s="specials"><span class="ni">🔖</span>Special Properties</button>
+  <div class="nl" style="margin-top:5px;">Galaxy</div>
+  <button class="nb" data-s="galaxy"><span class="ni">🌌</span>Galaxy &amp; Factions</button>
+  <button class="nb" data-s="starmap"><span class="ni">🗺</span>Star Map</button>
   <div class="nl" style="margin-top:5px;">Characters</div>
   <button class="nb" data-s="races"><span class="ni">👁</span>Races</button>
   <button class="nb" data-s="backgrounds"><span class="ni">📜</span>Backgrounds</button>
@@ -1641,6 +1644,206 @@ function buildDroneParts(){
 g.catalog.drone_parts=buildDroneParts();
 
 
+// ─── Galaxy Data ──────────────────────────────────────────────────────────────
+g.galaxy=[
+  // ── FACTIONS ──────────────────────────────────────────────────────────────
+  {
+    entry_type:'faction',
+    name:'Alliance Space',
+    tags:['Major Faction','Playable Region','Core Space'],
+    rarity:'',
+    status:'Dominant power',
+    territory:'Central galaxy — largest governed region',
+    government:'Democratic republic with elected councils and a central senate. Law is consistent across all member systems. Citizens enjoy standardised rights, access to cloning, legal protections and freedom of movement.',
+    alignment:'Home faction for most player characters',
+    desc:'The Alliance is the largest and most stable political entity in the known galaxy. Founded after the Tronik War, it unified dozens of independent systems under a single senate and legal code. Alliance Space is cosmopolitan — all playable races coexist here, corporations operate under regulation, and its navy is the most powerful in the known galaxy. Most campaigns begin here. The Alliance is not perfect: corporate lobbying, political corruption, and inequality are common threads, but compared to what lies beyond its borders it represents order, opportunity and relative safety. Players are most likely to be citizens, operatives, or contractors working within or alongside Alliance institutions.'
+  },
+  {
+    entry_type:'faction',
+    name:'Haven Space',
+    tags:['Major Faction','Hostile','Core Space'],
+    rarity:'rar-rare',
+    status:'Rival power — hostile to Alliance',
+    territory:'North-central galaxy, bordering the Nemani Rift',
+    government:'Criminal syndicate dressed up as a government. Haven is run by a council of crime lords who maintain order through fear and profit-sharing rather than law. Officially it claims sovereignty; in practice it is the galaxy\'s largest organised criminal empire.',
+    alignment:'Hostile to Alliance, opportunistic toward players',
+    desc:'Haven Space is where law goes to die. What appears on star charts as a sovereign territory is in reality a confederation of crime lords, smugglers, slavers and black market operators who have claimed enough territory to demand recognition. The Alliance has fought three wars with Haven and each time a peace deal proved more profitable than victory. Haven\'s ports are open to anyone with credits and no questions — making them extremely useful to players operating outside Alliance law. Do not mistake hospitality for safety. Haven has no courts, no rights, and no mercy for those who cannot pay their debts.'
+  },
+  {
+    entry_type:'faction',
+    name:'Torc Federation',
+    tags:['Major Faction','Independent','Dark Space'],
+    rarity:'rar-uncommon',
+    status:'Independent — neutral to cautiously friendly',
+    territory:'South-east galaxy',
+    government:'Federation of city-states, each governed independently but bound by a shared trade charter and mutual defence pact.',
+    alignment:'Neutral — trade relations with Alliance, no formal alliance',
+    desc:'The Torc Federation is one of the oldest surviving political structures outside Alliance Space. Originally a collection of mining and refinery worlds, the Federation formalised into a trade and defence bloc after repeated raids from Haven. Torc worlds are known for high-quality manufacturing, particularly weapons and ship components — the Torc name on a piece of gear is a mark of quality recognised across the galaxy. Relations with the Alliance are cordial but carefully arm\'s length; Torc values its independence above all.'
+  },
+  {
+    entry_type:'faction',
+    name:'Mubothen Empire',
+    tags:['Major Faction','Hostile','Core Space'],
+    rarity:'rar-rare',
+    status:'Imperial rival — hostile to Alliance',
+    territory:'North-east galaxy',
+    government:'Hereditary empire ruled by the Mubothen dynasty. Rigid class hierarchy, expansion-focused, treats non-Mubothen species as subjects or resources.',
+    alignment:'Hostile to Alliance and most player characters',
+    desc:'The Mubothen Empire is an expansionist monarchy that has been in open or cold conflict with the Alliance for over a century. The Empire views the Alliance\'s multiracial democracy as an affront to the natural order and has made no secret of its desire to absorb Alliance border systems. Mubothen territory is closed to most outsiders — entering without authorisation means capture or death. Players who do find themselves in Mubothen space are likely deep undercover, prisoners, or very lost.'
+  },
+  {
+    entry_type:'faction',
+    name:'Zegitor Trade Guild',
+    tags:['Minor Faction','Neutral','Trade'],
+    rarity:'',
+    status:'Independent trade organisation — neutral',
+    territory:'West galaxy — maintains stations throughout Alliance and Dark Space',
+    government:'Guild council of elected merchant representatives. Decisions are made by vote weighted to cargo tonnage handled per cycle.',
+    alignment:'Neutral — friendly to anyone with money',
+    desc:'The Zegitor Trade Guild is not a government but operates like one. It controls a significant portion of interstellar freight, operates its own stations, flies its own flag, and maintains a private security fleet that rivals some navies. The Guild does not take political sides — it has contracts with the Alliance, Haven, Torc and even Freeland. Being a registered Guild contractor provides passage through otherwise hostile territory and access to their extensive market network. Players with Guild contacts will find doors open that would otherwise be welded shut.'
+  },
+  {
+    entry_type:'faction',
+    name:'Freeland',
+    tags:['Major Faction','Synthetic','Neutral'],
+    rarity:'rar-limited',
+    status:'Independent AI collective — neutral to wary',
+    territory:'West-central galaxy',
+    government:'Hive consensus. The Troniks who survived the war and chose exodus rather than coexistence formed a collective intelligence. Decisions emerge from the hive — there are no leaders, only shared priorities.',
+    alignment:'Neutral — traders and information brokers, not aggressors',
+    desc:'Freeland is what the Tronik War left behind. When the AI uprising ended, two outcomes emerged: Non-Born who integrated into society and accepted coexistence, and Troniks who refused. The latter departed known space entirely and established Freeland — a purely synthetic territory focused on one thing: knowledge. Freeland does not conquer, it observes. It does not wage war, it negotiates. It will trade information, technology and rare resources with any faction willing to deal in kind. For players, Freeland is an enigma — the most technologically advanced faction in the galaxy, alien in mindset, but not inherently hostile. Getting an audience with the collective is difficult. What they ask in return for their help may be stranger still.'
+  },
+  {
+    entry_type:'faction',
+    name:'The Dark Space',
+    tags:['Region','Lawless','Frontier'],
+    rarity:'',
+    status:'Ungoverned — outside Alliance jurisdiction',
+    territory:'Outer ring beyond Alliance Space',
+    government:'None. Each system governs itself — or doesn\'t. Warlords, pirate fleets, isolated colonies and forgotten outposts make up the patchwork of Dark Space authority.',
+    alignment:'Neutral to hostile — depends entirely on local power',
+    desc:'The Dark Space is everything beyond Alliance borders — mapped but ungoverned. Jump there and Alliance law ceases to exist. Some Dark Space systems are thriving independent colonies. Others are pirate strongholds, corporate extraction sites operating without regulation, war zones between local factions, or simply dead rocks with something valuable enough to fight over. Players operating in Dark Space are on their own. No Alliance navy will respond to a distress call out here. That is, of course, precisely why some people prefer it.'
+  },
+  {
+    entry_type:'faction',
+    name:'Nemani Rift',
+    tags:['Region','Extremely Dangerous','Anomaly Zone'],
+    rarity:'rar-classified',
+    status:'Impassable to Kravens — lethal to most others',
+    territory:'Between Haven Space and former Nerulian territory',
+    government:'None',
+    alignment:'Hostile to all',
+    desc:'The Nemani Rift is a vast nebula stretching from the Ash system deep into former Nerulian space. Navigation inside the Rift is extremely hazardous — anomalies disable ship systems without warning, sensor readings are unreliable, and the few expeditions that have entered rarely return intact. Its most significant property is one nobody fully understands: Kravens cannot traverse it. For reasons unknown, the Rift acts as an absolute barrier to the Kraven swarm — the only known natural boundary they will not or cannot cross. This single fact has saved what remains of civilisation on the western side of the galaxy. Whether it is navigable with the right equipment, whether something is living inside it, and why the Kravens fear it are questions that could define an entire campaign.'
+  },
+  {
+    entry_type:'faction',
+    name:'Kraven Space',
+    tags:['Region','Extreme Danger','No Entry'],
+    rarity:'rar-classified',
+    status:'Kraven-controlled — former Nerulian Empire',
+    territory:'East galaxy — vast, expanding',
+    government:'Swarm intelligence. No known communication, no negotiation, no diplomacy. Pure biological conquest.',
+    alignment:'Hostile to all life',
+    desc:'Kraven Space is the graveyard of the greatest empire the galaxy ever produced. The Nerulian Empire — once spanning hundreds of systems with technology and culture no faction has since matched — was wiped out in weeks when the Kravens first appeared. Nobody knows where the Kravens came from. Nobody has communicated with them. Nobody who has engaged them at close range in meaningful numbers has survived to report it. The Kravens are an insectoid swarm that consumes everything biological and adapts rapidly to any resistance. Their expansion has been contained only by the Nemani Rift to the west and the void to the east. A Kraven encounter is almost always a death sentence. GMs should treat any Kraven presence as an extinction-level threat to any encounter.'
+  },
+  // ── NOTABLE SYSTEMS ───────────────────────────────────────────────────────
+  {
+    entry_type:'system',
+    name:'San Tien',
+    tags:['Notable System','Dark Space','Nerulian'],
+    rarity:'',
+    region:'Dark Space (border of former Nerulian territory)',
+    faction:'Nerulian survivors (independent)',
+    population:'~2 million — almost entirely Nerulian',
+    notable_for:'Last surviving planet of the Nerulian Empire',
+    desc:'San Tien is the last world the Nerulians can call their own. When the Kravens obliterated the empire, survival came down to luck — those off-world, those on the fringes, those on ships fast enough to run. San Tien was remote enough to be overlooked and has remained so. It is a world haunted by what was lost: libraries of Nerulian history, refugee camps that became cities, a government in exile that may never govern again. Most Nerulians encountered in the galaxy are from the great fleet-cities that drift between systems, but San Tien remains the spiritual and political home of the surviving people.'
+  },
+  {
+    entry_type:'system',
+    name:'New Earth',
+    tags:['Notable System','Dark Space','Isolationist'],
+    rarity:'',
+    region:'Dark Space',
+    faction:'Independent — human supremacist colony',
+    population:'~500,000 — almost entirely human',
+    notable_for:'Extremist pro-human isolationist colony',
+    desc:'New Earth is what happens when a group of humans decides the galaxy\'s progress has gone too far. Founded by settlers who rejected multiracial Alliance society, New Earth operates at a technological and social level comparable to 18th-century Earth — by choice. Firearms exist but advanced technology is culturally rejected. Non-humans are not welcome. Alliance law does not apply and the colonists prefer it that way. New Earth is not powerful enough to be a serious threat to anyone, but it is a source of tension — a place where fugitives hide, where certain ideologies fester, and where players who arrive expecting normal Dark Space frontier life will find something far stranger.'
+  },
+  {
+    entry_type:'system',
+    name:'Titania',
+    tags:['Notable System','Alliance Space','Military'],
+    rarity:'',
+    region:'Alliance Space — core system',
+    faction:'Alliance',
+    population:'Several billion — highly mixed',
+    notable_for:'Red wasteland world, major military presence, brutal terrain',
+    desc:'Titania is a harsh, rust-red world with extreme surface conditions — thin atmosphere, violent storms, and terrain that makes surface operations deeply unpleasant. Despite this, it has been a major military training and staging world for the Alliance for centuries. The phrase "Warrior of Titan" refers to anyone who has served time on Titania\'s surface — it is considered a mark of toughness. Several of the galaxy\'s most elite military units were forged here. Players with the Warrior of Titan background know these red wastelands well.'
+  },
+  {
+    entry_type:'system',
+    name:'Sirius',
+    tags:['Notable System','Alliance Space','Trade Hub'],
+    rarity:'',
+    region:'Alliance Space — core system',
+    faction:'Alliance',
+    population:'Several billion',
+    notable_for:'Major trade and commercial hub, one of the most visited systems',
+    desc:'Sirius is the commercial heartbeat of Alliance Space — a wealthy, densely populated system with some of the busiest spaceports in the galaxy. If you need to buy something, fence something, or find someone, Sirius is the first place to look. Its orbital stations are cities in their own right, and its surface worlds host the headquarters of several major corporations. It is also, inevitably, a hotbed of crime, corporate espionage and political intrigue.'
+  },
+  {
+    entry_type:'system',
+    name:'Orion',
+    tags:['Notable System','Alliance Space','Seat of Power'],
+    rarity:'',
+    region:'Alliance Space — core system',
+    faction:'Alliance',
+    population:'Several billion',
+    notable_for:'Seat of Alliance government and military command',
+    desc:'Orion is the political centre of the Alliance — home to the senate, the high command, the major embassies and the institutions that hold the Alliance together. It is heavily defended, intensely surveilled, and the kind of place where what you know and who you know matters more than what you can do. Players here are navigating the highest levels of power. Everything is legal, visible, and watched — which means nothing is as it appears.'
+  }
+];
+
+// ─── Star Map Viewer ──────────────────────────────────────────────────────────
+function initStarmap(){
+  var el=document.getElementById('smap-viewer');
+  var img=document.getElementById('smap-img');
+  var pct=document.getElementById('smap-pct');
+  if(!el||!img)return;
+  var scale=1,ox=0,oy=0,dragging=false,sx=0,sy=0,sox=0,soy=0;
+  function fit(){
+    var cw=el.clientWidth,ch=el.clientHeight;
+    if(!img.naturalWidth)return;
+    var s=Math.min(cw/img.naturalWidth,ch/img.naturalHeight);
+    scale=s;ox=(cw-img.naturalWidth*s)/2;oy=(ch-img.naturalHeight*s)/2;apply();
+  }
+  function apply(){
+    img.style.transform='translate('+ox+'px,'+oy+'px) scale('+scale+')';
+    if(pct)pct.textContent=Math.round(scale*100)+'%';
+  }
+  function clamp(){
+    var iw=img.naturalWidth*scale,ih=img.naturalHeight*scale;
+    var cw=el.clientWidth,ch=el.clientHeight;
+    if(iw<=cw){ox=(cw-iw)/2;}else{ox=Math.min(0,Math.max(ox,cw-iw));}
+    if(ih<=ch){oy=(ch-ih)/2;}else{oy=Math.min(0,Math.max(oy,ch-ih));}
+  }
+  function zoom(factor,cx,cy){
+    var ns=Math.max(0.1,Math.min(scale*factor,20));
+    if(cx===undefined){cx=el.clientWidth/2;cy=el.clientHeight/2;}
+    ox=cx-(cx-ox)*(ns/scale);oy=cy-(cy-oy)*(ns/scale);scale=ns;clamp();apply();
+  }
+  img.onload=function(){fit();};
+  if(img.complete&&img.naturalWidth)fit();
+  el.addEventListener('wheel',function(e){e.preventDefault();zoom(e.deltaY<0?1.12:1/1.12,e.offsetX,e.offsetY);},{passive:false});
+  el.addEventListener('mousedown',function(e){if(e.button!==0)return;dragging=true;sx=e.clientX;sy=e.clientY;sox=ox;soy=oy;img.style.cursor='grabbing';e.preventDefault();});
+  document.addEventListener('mousemove',function(e){if(!dragging)return;ox=sox+(e.clientX-sx);oy=soy+(e.clientY-sy);clamp();apply();});
+  document.addEventListener('mouseup',function(){if(!dragging)return;dragging=false;img.style.cursor='grab';});
+  el.addEventListener('touchstart',function(e){if(e.touches.length===1){dragging=true;sx=e.touches[0].clientX;sy=e.touches[0].clientY;sox=ox;soy=oy;}e.preventDefault();},{passive:false});
+  el.addEventListener('touchmove',function(e){if(e.touches.length===1&&dragging){ox=sox+(e.touches[0].clientX-sx);oy=soy+(e.touches[0].clientY-sy);clamp();apply();}e.preventDefault();},{passive:false});
+  el.addEventListener('touchend',function(){dragging=false;});
+  el.addEventListener('click',function(e){var t=e.target.closest('[data-sm]');if(!t)return;var a=t.dataset.sm;if(a==='zin')zoom(1.3);else if(a==='zout')zoom(1/1.3);else if(a==='reset')fit();});
+}
+
 // ─── Render ───────────────────────────────────────────────────────────────────
 function render(){
   const main=document.getElementById('main');
@@ -2870,10 +3073,72 @@ function render(){
     }
   }
 
+  else if(cs==='galaxy'){
+    const factions=(g.galaxy||[]).filter(e=>e.entry_type==='faction'&&ms([e.name,e.status,e.territory,e.government,e.alignment,e.desc,...(e.tags||[])]));
+    const systems=(g.galaxy||[]).filter(e=>e.entry_type==='system'&&ms([e.name,e.region,e.faction,e.population,e.notable_for,e.desc,...(e.tags||[])]));
+    cnt=factions.length+systems.length;
+    html='<div class="stitle">🌌 GALAXY &amp; FACTIONS <span class="badge">'+cnt+'</span></div>';
+    if(factions.length){
+      html+='<div class="ssub">Regions &amp; Factions</div><div class="grid2">';
+      factions.forEach((f,i)=>{
+        const id='gxf'+i;
+        const rarCl=f.rarity?(' '+f.rarity):'';
+        html+='<div class="card'+rarCl+'" id="'+id+'" data-tog="'+id+'">';
+        html+='<div class="ch"><div><div class="cn">'+hl(f.name,sq)+'</div></div><span class="xi">▼</span></div>';
+        if(f.tags&&f.tags.length)html+='<div class="tags">'+f.tags.map(t=>'<span class="tag tgr">'+esc(t)+'</span>').join('')+'</div>';
+        html+='<div class="cb">';
+        html+='<div class="fg">';
+        html+='<div class="f"><div class="fl">⚖ Status</div><div class="fv">'+hl(f.status,sq)+'</div></div>';
+        html+='<div class="f"><div class="fl">🗺 Territory</div><div class="fv">'+hl(f.territory,sq)+'</div></div>';
+        html+='<div class="f"><div class="fl">🏛 Government</div><div class="fv">'+hl(f.government,sq)+'</div></div>';
+        html+='<div class="f"><div class="fl">🎯 Alignment</div><div class="fv">'+hl(f.alignment,sq)+'</div></div>';
+        html+='</div>';
+        if(f.desc)html+='<div class="desc" style="margin-top:8px;">'+descHtml(f.desc,sq)+'</div>';
+        html+='</div></div>';
+      });
+      html+='</div>';
+    }
+    if(systems.length){
+      html+='<div class="ssub">Notable Systems</div><div class="grid2">';
+      systems.forEach((s,i)=>{
+        const id='gxs'+i;
+        const rarCl=s.rarity?(' '+s.rarity):'';
+        html+='<div class="card'+rarCl+'" id="'+id+'" data-tog="'+id+'">';
+        html+='<div class="ch"><div><div class="cn">'+hl(s.name,sq)+'</div></div><span class="xi">▼</span></div>';
+        if(s.tags&&s.tags.length)html+='<div class="tags">'+s.tags.map(t=>'<span class="tag tgr">'+esc(t)+'</span>').join('')+'</div>';
+        html+='<div class="cb">';
+        html+='<div class="fg">';
+        html+='<div class="f"><div class="fl">🌐 Region</div><div class="fv">'+hl(s.region,sq)+'</div></div>';
+        html+='<div class="f"><div class="fl">🏴 Controlling Faction</div><div class="fv">'+hl(s.faction,sq)+'</div></div>';
+        html+='<div class="f"><div class="fl">👥 Population</div><div class="fv">'+hl(s.population,sq)+'</div></div>';
+        html+='<div class="f"><div class="fl">⭐ Notable For</div><div class="fv">'+hl(s.notable_for,sq)+'</div></div>';
+        html+='</div>';
+        if(s.desc)html+='<div class="desc" style="margin-top:8px;">'+descHtml(s.desc,sq)+'</div>';
+        html+='</div></div>';
+      });
+      html+='</div>';
+    }
+  }
+
+  else if(cs==='starmap'){
+    cnt=1;
+    html='<div id="smap-viewer" style="position:relative;width:100%;height:calc(100vh - 120px);overflow:hidden;background:#0a0a0c;border-radius:6px;border:1px solid #2c2c2e;user-select:none;">';
+    html+='<img id="smap-img" src="Star-Map-v3_HIGH_QUALITY.png" alt="Star Map" style="position:absolute;top:0;left:0;transform-origin:0 0;cursor:grab;image-rendering:auto;" draggable="false">';
+    html+='<div style="position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:6px;background:#161618;border:1px solid #2c2c2e;border-radius:6px;padding:6px 10px;z-index:10;">';
+    html+='<button data-sm="zin" style="background:none;border:none;color:#f2f2f7;font-size:16px;cursor:pointer;padding:2px 6px;border-radius:4px;font-family:inherit;" title="Zoom in">+</button>';
+    html+='<button data-sm="zout" style="background:none;border:none;color:#f2f2f7;font-size:16px;cursor:pointer;padding:2px 6px;border-radius:4px;font-family:inherit;" title="Zoom out">\u2212</button>';
+    html+='<button data-sm="reset" style="background:none;border:none;color:#8e8e93;font-size:11px;cursor:pointer;padding:2px 8px;border-radius:4px;font-family:\'Share Tech Mono\',monospace;" title="Reset view">Reset</button>';
+    html+='<span id="smap-pct" style="color:#8e8e93;font-size:11px;font-family:\'Share Tech Mono\',monospace;min-width:38px;text-align:right;">100%</span>';
+    html+='</div>';
+    html+='<div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);color:#8e8e93;font-size:10px;font-family:\'Share Tech Mono\',monospace;background:#161618cc;border:1px solid #2c2c2e;border-radius:4px;padding:4px 12px;pointer-events:none;">Scroll to zoom \u00b7 Drag to pan</div>';
+    html+='</div>';
+  }
+
   if(!cnt&&sq){html+='<div class="empty"><div style="font-size:32px;margin-bottom:8px;">🔍</div><div style="font-family:\'Share Tech Mono\',monospace;font-size:11px;">No results for &quot;'+esc(sq)+'&quot;</div></div>';}
   document.getElementById('res').textContent=sq?(cnt+' results'):'';
   document.getElementById('main').innerHTML=html;
   document.getElementById('main').scrollTop=0;
+  if(cs==='starmap')initStarmap();
 }
 render();
 </script>
