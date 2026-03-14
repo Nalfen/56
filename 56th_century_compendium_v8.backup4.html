@@ -224,43 +224,6 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 .evo-aff-table th{color:var(--mu);font-family:'IBM Plex Mono',monospace;font-size:9px;padding:4px 8px;border-bottom:1px solid var(--border);text-align:left;text-transform:uppercase;letter-spacing:.8px;}
 .evo-aff-table td{padding:4px 8px;border-bottom:1px solid rgba(255,255,255,.03);vertical-align:top;color:var(--tx2);font-family:'IBM Plex Sans',sans-serif;font-size:12px;}
 .evo-aff-table tr:hover td{background:rgba(255,255,255,.025);}
-/* ── World Panel ─────────────────────────────────────────────────────── */
-.world-panel{position:fixed;top:0;right:0;width:420px;height:100vh;background:#161618;border-left:1px solid #2c2c2e;z-index:1000;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);overflow:hidden;}
-.world-panel.open{transform:translateX(0);}
-.world-panel-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:999;}
-.world-panel-overlay.open{display:block;}
-.world-panel-header{padding:18px 20px 14px;border-bottom:1px solid #2c2c2e;flex-shrink:0;display:flex;flex-direction:column;gap:3px;position:relative;}
-.world-panel-title{font-family:'IBM Plex Sans',sans-serif;font-size:17px;font-weight:600;color:#f2f2f7;letter-spacing:-.2px;padding-right:28px;}
-.world-panel-sub{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#636366;}
-.world-panel-close{position:absolute;top:16px;right:16px;background:none;border:none;color:#636366;font-size:16px;cursor:pointer;line-height:1;padding:2px 5px;border-radius:4px;transition:color .12s,background .12s;}
-.world-panel-close:hover{color:#f2f2f7;background:rgba(255,255,255,.06);}
-.world-panel-body{flex:1;overflow-y:auto;padding:0;}
-.world-entry{border-bottom:1px solid #2c2c2e;padding:14px 20px;cursor:pointer;transition:background .12s;}
-.world-entry:hover{background:rgba(255,255,255,.025);}
-.world-entry.open{background:rgba(255,255,255,.03);}
-.world-entry-header{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
-.world-entry-name{font-family:'IBM Plex Sans',sans-serif;font-size:14px;font-weight:600;color:#f2f2f7;letter-spacing:-.1px;}
-.world-entry-status{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:2px 8px;border-radius:4px;border:1px solid;white-space:nowrap;flex-shrink:0;margin-top:2px;}
-.ws-active{color:#30d158;border-color:#1c4a2c;background:rgba(48,209,88,.06);}
-.ws-ruins{color:#ff9f0a;border-color:#4a3010;background:rgba(255,159,10,.06);}
-.ws-abandoned{color:#ff453a;border-color:#4a1c1c;background:rgba(255,69,58,.06);}
-.ws-incomplete{color:#bf5af2;border-color:#38205a;background:rgba(191,90,242,.06);}
-.ws-restricted{color:#0a84ff;border-color:#1c2e56;background:rgba(10,132,255,.06);}
-.ws-neutral{color:#8e8e93;border-color:#3a3a3c;background:rgba(255,255,255,.03);}
-.ws-warzone{color:#ff453a;border-color:#4a1c1c;background:rgba(255,69,58,.06);}
-.ws-contested{color:#ff9f0a;border-color:#4a3010;background:rgba(255,159,10,.06);}
-.world-entry-sub{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#636366;margin-top:3px;}
-.world-entry-body{display:none;margin-top:12px;}
-.world-entry.open .world-entry-body{display:block;}
-.world-entry-desc{font-family:'IBM Plex Sans',sans-serif;font-size:13.5px;line-height:1.75;color:#d1d1d6;font-weight:400;margin-bottom:12px;}
-.world-entry-desc b{font-weight:600;color:#f2f2f7;}
-.world-entry-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:#2c2c2e;border-radius:6px;overflow:hidden;}
-.world-entry-stat{background:#1c1c1e;padding:7px 10px;}
-.world-entry-stat-label{font-family:'IBM Plex Mono',monospace;font-size:9px;color:#636366;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;}
-.world-entry-stat-value{font-family:'IBM Plex Mono',monospace;font-size:12px;color:#e5e5ea;}
-.worlds-btn{margin-top:10px;display:inline-flex;align-items:center;gap:6px;padding:5px 12px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8e8e93;border:1px solid #3a3a3c;border-radius:5px;background:none;cursor:pointer;transition:all .12s;}
-.worlds-btn:hover{color:#f2f2f7;border-color:#636366;background:rgba(255,255,255,.04);}
-.worlds-btn-dot{width:6px;height:6px;border-radius:50%;background:#636366;flex-shrink:0;}
 </style>
 </head>
 <body>
@@ -1812,11 +1775,10 @@ g.galaxy=[
     tags:['Notable System','Alliance Space','Military'],
     rarity:'',
     region:'Alliance Space — core system',
-    faction:'Alliance / Corporate Contested',
+    faction:'Alliance',
     population:'Several billion — highly mixed',
-    notable_for:'Corporate morondium warzone; only source of morondium in the galaxy',
-    worlds_key:'titania',
-    desc:'The Titania system is defined by morondium — a living crystalline compound found nowhere else in the galaxy that grants metals regenerative properties when infused. Every major corporation wants it. The result is a permanent corporate warzone on Titania 2, overseen by Nova cruisers enforcing a strict ground-combat-only agreement. The phrase "Warrior of Titan" refers to anyone who has served time here — it is a mark of toughness earned the hard way.'
+    notable_for:'Red wasteland world, major military presence, brutal terrain',
+    desc:'Titania is a harsh, rust-red world with extreme surface conditions — thin atmosphere, violent storms, and terrain that makes surface operations deeply unpleasant. Despite this, it has been a major military training and staging world for the Alliance for centuries. The phrase "Warrior of Titan" refers to anyone who has served time on Titania\'s surface — it is considered a mark of toughness. Several of the galaxy\'s most elite military units were forged here. Players with the Warrior of Titan background know these red wastelands well.'
   },
   {
     entry_type:'system',
@@ -1835,281 +1797,12 @@ g.galaxy=[
     tags:['Notable System','Alliance Space','Seat of Power'],
     rarity:'',
     region:'Alliance Space — core system',
-    faction:'Galactic Union / Alliance',
-    population:'~9 billion (Orion 3) + maintenance crews',
-    notable_for:'Five-world system; home of the Galactic Union; birthplace of OrionWorks',
-    worlds_key:'orion',
-    desc:'The Orion system is the political and corporate centre of the known galaxy — five worlds across every stage of construction, ruin, and ambition. Home to the Galactic Union and the ghost of OrionWorks, the organisation that built artificial planets and may have started the Tronik War. It is heavily defended, intensely surveilled, and the kind of place where what you know and who you know matters more than what you can do.'
-  },
-  {
-    entry_type:'system',
-    name:'Aderan',
-    tags:['Notable System','Alliance Space','Corporate','Broadcast'],
-    rarity:'',
-    region:'Alliance Space — core system',
-    faction:'Aderan Correctional Consortium',
-    population:'~50 million (surviving worlds)',
-    notable_for:'Galaxy\'s largest for-profit prison; home of Ridge Racing, Survivor and Blood Bowl',
-    worlds_key:'aderan',
-    desc:'The Aderan system was the site of the first corporate war in galactic history — a conflict that ended with Aderan Prime destroyed and everyone finally understanding that there was no upper limit to what corporate warfare could do. The surviving world, Aderan 3, found a highly profitable replacement economy: the galaxy\'s largest for-profit prison, and the broadcast rights to three of its most watched shows.'
-  },
-  {
-    entry_type:'system',
-    name:'Mangara',
-    tags:['Notable System','Dark Space Border','Embargoed','Civil War'],
-    rarity:'rar-rare',
-    region:'Dark Space border — Alliance embargo zone',
-    faction:'Contested — Hakari clans vs Jaulaus tribes',
-    population:'~800 million',
-    notable_for:'Homeworld of Hakari and Jaulaus; continuous civil war; Alliance embargo',
-    worlds_key:'mangara',
-    desc:'Mangara is the homeworld of the Hakari and Jaulaus and one of the most uncomfortable chapters in Alliance history. Exploited by the Nerulian Empire and then by corporate interests, placed under Alliance embargo to protect what remains of its traditional life — and still burning from an inter-species civil war that has never stopped. Protected on paper, exploited in practice, ignored in fact.'
-  },
-  {
-    entry_type:'system',
-    name:'Skalan Worlds',
-    tags:['Notable System','Alliance Space','Skalan','Restricted'],
-    rarity:'',
-    region:'Alliance Space — self-governed Skalan territory',
-    faction:'Skalan',
-    population:'~450 million (Skalan only)',
-    notable_for:'Skalan homeworld Caragh; Seigh — most lethal natural environment in the galaxy',
-    worlds_key:'skalan_worlds',
-    desc:'The Skalan home system is closed to outsiders and enforces that closure without legislation — simply through the certainty that testing it is a bad idea. Caragh is the sacred homeworld of a species that survived an attempted extinction. Seigh is where they send their young to prove themselves against the most lethal natural environment in the galaxy. Neither world is welcoming to visitors.'
-  },
-  {
-    entry_type:'system',
-    name:'Berilia',
-    tags:['Notable System','Alliance Space','Patriark','Cloning'],
-    rarity:'',
-    region:'Alliance Space — core system',
-    faction:'Patriark',
-    population:'~6 billion — predominantly Patriark',
-    notable_for:'Patriark homeworld; most advanced cloning facilities in the galaxy',
-    worlds_key:'berilia',
-    desc:'Berilia is the Patriark homeworld and the quiet centre of the galaxy\'s most important dependency: resurrection technology. The Patriarks built no army. Instead they spent centuries making themselves indispensable. The cloning infrastructure on Berilia underpins the Alliance\'s promise of continuity — and the Patriarks know exactly what it would cost everyone if they renegotiated their terms.'
+    faction:'Alliance',
+    population:'Several billion',
+    notable_for:'Seat of Alliance government and military command',
+    desc:'Orion is the political centre of the Alliance — home to the senate, the high command, the major embassies and the institutions that hold the Alliance together. It is heavily defended, intensely surveilled, and the kind of place where what you know and who you know matters more than what you can do. Players here are navigating the highest levels of power. Everything is legal, visible, and watched — which means nothing is as it appears.'
   }
 ];
-
-// ─── World Panel Data ─────────────────────────────────────────────────────────
-const worldData={
-  orion:{
-    name:'Orion System',
-    sub:'Galactic Union \u00b7 Alliance Space \u00b7 5 worlds',
-    worlds:[
-      {
-        name:'Orion 1',
-        type:'Former space station \u2014 original GU seat',
-        status:'ruins',
-        statusLabel:'Largely Salvaged',
-        faction:'Galactic Union',
-        population:'~12,000 maintenance personnel',
-        notable:'Birthplace of the Galactic Union',
-        desc:'Orion 1 was never a planet \u2014 it was a space station, and the single most important structure in the history of the Galactic Union. This is where the Union was founded, where the first trade charters were signed, and where the philosophy of self-sufficiency that built an empire was first written down. Most of the station\'s superstructure was gradually stripped and repurposed during the construction of Orion 2, leaving behind a skeletal frame of original sections maintained more as a monument than a functional installation. A small permanent crew keeps the remaining modules pressurised and the historical archives intact. The Galactic Union does not publicise it. Those who know what it is tend to treat it with something approaching reverence.'
-      },
-      {
-        name:'Orion 2',
-        type:'Failed artificial planet \u2014 fully salvaged',
-        status:'abandoned',
-        statusLabel:'Salvaged & Abandoned',
-        faction:'Galactic Union',
-        population:'Uninhabited',
-        notable:'First planetary construction attempt \u2014 failed',
-        desc:'Orion 2 was the Galactic Union\'s first attempt to build a planet from scratch. The project was ambitious, technically groundbreaking, and ultimately a failure \u2014 structural instability in the core design made the world uninhabitable and increasingly dangerous. Rather than write off the investment, the Union did what it always does: they stripped Orion 2 completely, salvaging every usable component, and used what they learned to design Orion 3. Nothing of Orion 2 remains except navigational hazard markers where it used to be and a few internal Galactic Union documents that are not publicly available. Officially it is listed as a decommissioned construction site. It is mentioned in engineering schools as the most expensive lesson in the galaxy\'s history.'
-      },
-      {
-        name:'Orion 3',
-        type:'Artificial planet \u2014 Galactic Union HQ',
-        status:'active',
-        statusLabel:'Active \u2014 GU Capital',
-        faction:'Galactic Union',
-        population:'~9 billion',
-        notable:'First successful artificial planet; current GU operational heart',
-        desc:'Orion 3 is proof that the Galactic Union learns from its failures. Built using everything salvaged from Orion 2 and the lessons of what went wrong, Orion 3 was the first fully successful artificial planet ever constructed. It has stood for centuries. The Galactic Union operates its core functions here \u2014 its executive councils, its primary treasury, its largest corporate campus, and the administrative infrastructure that ties together the most powerful organisation in the known galaxy. The planet is clean, efficient, and extraordinarily dense with power. Every major corp has an office here. Every major political figure has passed through it. Security is absolute. Getting an uninvited meeting with anyone of significance on Orion 3 is one of the harder problems a player can attempt to solve.'
-      },
-      {
-        name:'Orion 4',
-        type:'Artificial planet \u2014 devastated ruins',
-        status:'ruins',
-        statusLabel:'Post-War Ruins',
-        faction:'Galactic Union (largely abandoned)',
-        population:'~200,000 \u2014 salvagers, squatters, black site operators',
-        notable:'Former jewel of the galaxy; suspected Tronik War origin; OrionWorks ruins',
-        desc:'Orion 4 was once described as the most technologically advanced world in the known galaxy. Home to OrionWorks \u2014 the Galactic Union subcorporation responsible for more technological breakthroughs than any other organisation in history \u2014 it was a world where the future was being built in real time. Gleaming infrastructure, cutting-edge research, and a population of the galaxy\'s brightest minds drawn by the promise of working on problems nobody had solved yet. Then the Tronik War started. Nobody can prove Orion 4 was where it began, but the evidence points here and the Galactic Union has never been forthcoming with an alternative explanation. The devastation was near-total. OrionWorks collapsed as an organisation. Most of its leadership died or disappeared. The Union pulled its resources back to Orion 3 and has maintained only a minimal presence on Orion 4 ever since. What remains is a partially demolished world \u2014 some districts still pressurised, most open to vacuum, all of it structurally unpredictable. Salvagers work the ruins. Squatter communities occupy the stable zones. And somewhere in the wreckage of OrionWorks\' research campuses, things that were being developed before the war may still be intact. The Union quietly discourages investigation.'
-      },
-      {
-        name:'Orion 5',
-        type:'Incomplete artificial planet \u2014 construction halted',
-        status:'incomplete',
-        statusLabel:'Construction Halted',
-        faction:'Galactic Union',
-        population:'Uninhabited',
-        notable:'Unfinished; no development in 50 years; OrionWorks collapse stopped all work',
-        desc:'Orion 5 exists as a frame. The superstructure is in place \u2014 the skeleton of what would have been the most ambitious planetary construction project the Galactic Union had ever attempted, designed by OrionWorks at the height of its capability. Then OrionWorks collapsed. The engineers went home or disappeared. The supply chains dried up. The construction platforms were recalled to Orion 3. That was fifty years ago. Not a single component has been added since. The Galactic Union lists Orion 5 as a suspended project with no scheduled resumption date. Whether it will ever be completed depends on whether anyone ever rebuilds the capability that OrionWorks represented \u2014 and whether the Union decides the galaxy needs to know they are doing it.'
-      }
-    ]
-  },
-  titania:{
-    name:'Titania System',
-    sub:'Contested \u2014 Corporate Warzone \u00b7 Alliance Space',
-    worlds:[
-      {
-        name:'Titania Prime',
-        type:'Destroyed world \u2014 debris field',
-        status:'abandoned',
-        statusLabel:'Destroyed',
-        faction:'None',
-        population:'Uninhabited',
-        notable:'Destroyed in morondium wars \u2014 now a debris field',
-        desc:'Titania Prime was the largest inhabited world in the system before the morondium wars escalated beyond anyone\'s ability to control. Nobody claims responsibility for what happened to it. The debris field it left behind is a permanent hazard to navigation in the inner system and a reminder of what happens when corporate warfare operates without limits. The loss of Titania Prime is directly why the current ground-combat-only agreement was reached \u2014 everyone looked at what had been done and understood that without rules, the last morondium world would be next.'
-      },
-      {
-        name:'Titania 2',
-        type:'Active warzone \u2014 only morondium source',
-        status:'warzone',
-        statusLabel:'Active Warzone',
-        faction:'Contested \u2014 multiple corporate armies',
-        population:'~800,000 \u2014 military personnel only',
-        notable:'Only source of morondium in the galaxy; ground combat only enforced by Nova cruisers',
-        desc:'Titania 2 is the most fought-over piece of ground in the known galaxy. Morondium \u2014 a living crystalline compound that grants metals regenerative properties when infused \u2014 exists nowhere else. Every major corporation wants it. Several have died trying to take it. The current state of affairs is a permanent ground war between corporate armies operating under a single enforced rule: no orbital strikes, no bombardment, no weapons of mass destruction. Ground forces only. This rule is enforced by a Yamato and a Galactic Union Nova cruiser in permanent orbit, each with orders to destroy the entire planet \u2014 and any fleet that attempts an orbital strike \u2014 should the agreement be broken. The result is the galaxy\'s most attritional conventional war, fought in the open, by professional soldiers, over terrain that has been contested for decades. For players, Titania 2 is hell with a purpose. There is always work here for soldiers, medics, engineers, and people who can get things across active fire zones.'
-      },
-      {
-        name:'Titania 4',
-        type:'Neutral R&R world \u2014 universal truce',
-        status:'neutral',
-        statusLabel:'Neutral \u2014 Universal Truce',
-        faction:'Multi-corporate neutral administration',
-        population:'~2 million \u2014 rotating military and support personnel',
-        notable:'Only neutral ground in the system; R&R for all sides; truce strictly enforced',
-        desc:'Titania 4 is the eye of the storm. Every corporation with a presence in the system maintains facilities here, and a universal truce holds \u2014 enforced not by law but by mutual self-interest and the understanding that if the truce breaks here, the Nova cruisers above Titania 2 become far less predictable. Soldiers from every side come to Titania 4 for medical treatment, rest, food that is not field rations, and a few days of not being actively targeted. Bars, clinics, markets and recreational facilities make up most of the planet\'s economy. Violence happens, but quietly and away from areas that would draw attention. Players moving between factions, carrying sensitive information, or needing a meeting with someone they are technically at war with will find Titania 4 a useful venue.'
-      }
-    ]
-  },
-  aderan:{
-    name:'Aderan System',
-    sub:'Corporate Consortium \u00b7 Alliance Space',
-    worlds:[
-      {
-        name:'Aderan Prime',
-        type:'Destroyed world \u2014 debris field',
-        status:'abandoned',
-        statusLabel:'Destroyed',
-        faction:'None',
-        population:'Uninhabited',
-        notable:'First casualty of the first corporate war',
-        desc:'Aderan Prime was the first world ever destroyed in a corporate war. The event that caused it \u2014 disputed to this day, with multiple corporations claiming the others fired first \u2014 marked a turning point in galactic history: the moment everyone understood that corporate conflict had escalated beyond conventional warfare into something with no natural upper limit. The debris field left behind is dense, navigational hazard-rated, and contains the ruins of what was once a world of several billion people. No recovery or memorial operation has ever been mounted. The corporate interests that destroyed it moved on to the next calculation.'
-      },
-      {
-        name:'Aderan 3',
-        type:'For-profit prison planet and broadcast facility',
-        status:'active',
-        statusLabel:'Active \u2014 Corporate Operated',
-        faction:'Aderan Correctional Consortium',
-        population:'~50 million \u2014 inmates, staff, media personnel',
-        notable:'Galaxy\'s largest for-profit prison; home of Ridge Racing, Survivor and Blood Bowl broadcasts',
-        desc:'The only surviving inhabited world in the Aderan system has found a highly profitable purpose. The Aderan Correctional Consortium operates the galaxy\'s largest for-profit prison facility here, housing criminals from across known space under contracts from the Alliance justice system, corporate security departments, and private clients who do not always specify what the inmate did. The facility is enormous, efficiently run, and extraordinarily profitable. What makes Aderan 3 famous beyond the prison industry, however, is the broadcasting. Three of the most watched programmes in the galaxy \u2014 <b>Ridge Racing</b>, <b>Survivor</b>, and <b>Blood Bowl</b> \u2014 are recorded here, using inmates as participants. The degree to which participation is voluntary varies by programme and is not a topic the Consortium discusses publicly. Viewership figures continue to break records every cycle. Players with criminal records may have heard of Aderan 3 in very personal terms. Players in the media or entertainment industry will know it as the most valuable broadcast real estate in the galaxy.'
-      }
-    ]
-  },
-  mangara:{
-    name:'Mangara',
-    sub:'Dark Space border \u2014 Alliance Embargo \u00b7 Civil War',
-    worlds:[
-      {
-        name:'Mangara',
-        type:'Homeworld \u2014 Hakari and Jaulaus',
-        status:'contested',
-        statusLabel:'Civil War \u2014 Embargo',
-        faction:'Contested \u2014 Hakari clans vs Jaulaus tribes',
-        population:'~800 million',
-        notable:'Birthplace of Hakari and Jaulaus; forced technological advancement; Alliance embargo; continuous inter-species civil war',
-        desc:'Mangara\'s history is one of the most uncomfortable chapters in Alliance records. Five hundred years ago the Hakari and Jaulaus were technologically undeveloped \u2014 a fact the Nerulian Empire exploited without hesitation, treating both species as an inexhaustible labour resource. Corporate interests followed when the Empire fell, strip-mining the planet\'s ecology and culture while forcing rapid technological advancement that served extraction rather than the people living there. The Alliance eventually placed Mangara under embargo in an attempt to slow outside interference and protect what remains of traditional Mangaran life. Enforcement is imperfect. Corporate interests maintain a presence through intermediaries. The Hakari and Jaulaus populations found throughout Alliance Space are largely descendants of slaves and abductees \u2014 people whose connection to Mangara is ancestry rather than lived experience. On the planet itself, peace between the two species has never held for long. The civil war is continuous, deeply rooted in centuries of grievance and competition, and the Alliance\'s official position is that it does not get involved. The planet is simultaneously embargoed and ignored \u2014 protected on paper, exploited in practice, and burning from within.'
-      }
-    ]
-  },
-  skalan_worlds:{
-    name:'Skalan Worlds',
-    sub:'Skalan \u00b7 Alliance Member \u00b7 Self-Governed',
-    worlds:[
-      {
-        name:'Caragh',
-        type:'Skalan homeworld \u2014 closed system',
-        status:'restricted',
-        statusLabel:'Closed to Outsiders',
-        faction:'Skalan',
-        population:'~400 million \u2014 Skalan only',
-        notable:'Skalan homeworld; temples and warrior shrines; non-Skalans not permitted',
-        desc:'Caragh is the Skalan homeworld and it is closed. Non-Skalans do not land here. This is not formally legislated \u2014 it is simply a boundary that the Skalans enforce and that everyone with any familiarity with Skalan culture understands not to test. The planet is covered in temples, training grounds, and shrines to warrior traditions that predate the Skalans\' existence as a distinct species. The Patriarks created the Skalans as a warrior caste and later attempted to eliminate them through genetic modification of their reproductive biology when they became inconvenient. The attempt failed. The Skalans remember. Caragh is the physical expression of a culture that survived an attempt at extinction by one of the most politically powerful species in the galaxy. It is sacred, guarded, and deeply private. Players who find themselves on Caragh without invitation are in extraordinary circumstances and should understand exactly how unwelcome they are.'
-      },
-      {
-        name:'Seigh',
-        type:'Skalan training world \u2014 lethal environment',
-        status:'restricted',
-        statusLabel:'Extreme Danger',
-        faction:'Skalan',
-        population:'~50,000 \u2014 training rotations only',
-        notable:'Most lethal natural environment in the galaxy; Skalan rite of passage; deadly megafauna and toxic flora',
-        desc:'Every credible environmental survey of Seigh has reached the same conclusion: it is the most lethal naturally occurring environment in the known galaxy. The jungle is dense, the flora is largely toxic on contact, the predators are large and have evolved over millions of years to kill anything that moves, and the terrain alternates between impenetrable canopy, acidic swampland, and sheer volcanic rock. The Skalans send their young here. Surviving Seigh for the required period is the rite of passage that marks the transition to adulthood in Skalan culture. There is no exemption, no alternative, and no rescue if you fail. Outsiders occasionally attempt to visit for sport, bounty hunting, or to capture megafauna specimens that command extraordinary prices on the collector market. The survival rate for uninvited visitors is low enough that most insurers classify Seigh as uninsurable. The Skalans do not advertise this. They do not need to.'
-      }
-    ]
-  },
-  berilia:{
-    name:'Berilia',
-    sub:'Patriark Homeworld \u00b7 Alliance Space',
-    worlds:[
-      {
-        name:'Berilia',
-        type:'Patriark homeworld \u2014 oceanic',
-        status:'active',
-        statusLabel:'Active \u2014 Patriark Governed',
-        faction:'Patriark',
-        population:'~6 billion \u2014 predominantly Patriark',
-        notable:'Most advanced cloning facilities in the galaxy; unofficial political stewards of the Alliance; majority water world',
-        desc:'Berilia is a predominantly oceanic world and the homeworld of the Patriark \u2014 a species whose evolutionary environment shaped them into some of the most capable political operators in the galaxy. The Patriarks have no meaningful military force. They have never needed one. Instead, over centuries, they accumulated something more durable and more difficult to counter: leverage. The Patriark-owned cloning infrastructure on Berilia is the most advanced in existence. Resurrection technology that the rest of the galaxy depends on runs through Berilia in some form. When you need a backup clone, there is a reasonable chance that the facility handling it has a Patriark contract somewhere in its supply chain. This dependency is not accidental. The Patriarks built it deliberately, over generations, as policy. They are the unofficial stewards of the Alliance \u2014 never the loudest voice in any room, always the most prepared, and always aware of exactly what it would cost everyone else if Berilia decided to renegotiate its terms.'
-      }
-    ]
-  }
-};
-
-// ─── World Panel Functions ─────────────────────────────────────────────────────
-function openWorldPanel(systemKey){
-  const system=worldData[systemKey];
-  if(!system)return;
-  document.getElementById('world-panel-title').textContent=system.name;
-  document.getElementById('world-panel-sub').textContent=system.sub||'';
-  const body=document.getElementById('world-panel-body');
-  body.innerHTML=system.worlds.map(function(w){
-    return '<div class="world-entry" onclick="toggleWorldEntry(this)">'+
-      '<div class="world-entry-header">'+
-        '<div>'+
-          '<div class="world-entry-name">'+esc(w.name)+'</div>'+
-          '<div class="world-entry-sub">'+esc(w.type||'')+'</div>'+
-        '</div>'+
-        '<span class="world-entry-status ws-'+esc(w.status)+'">'+esc(w.statusLabel)+'</span>'+
-      '</div>'+
-      '<div class="world-entry-body">'+
-        '<div class="world-entry-desc">'+w.desc+'</div>'+
-        '<div class="world-entry-stats">'+
-          '<div class="world-entry-stat"><div class="world-entry-stat-label">Controlling Faction</div><div class="world-entry-stat-value">'+esc(w.faction)+'</div></div>'+
-          '<div class="world-entry-stat"><div class="world-entry-stat-label">Population</div><div class="world-entry-stat-value">'+esc(w.population)+'</div></div>'+
-          '<div class="world-entry-stat"><div class="world-entry-stat-label">Status</div><div class="world-entry-stat-value">'+esc(w.statusLabel)+'</div></div>'+
-          '<div class="world-entry-stat"><div class="world-entry-stat-label">Notable For</div><div class="world-entry-stat-value">'+esc(w.notable)+'</div></div>'+
-        '</div>'+
-      '</div>'+
-    '</div>';
-  }).join('');
-  document.getElementById('world-panel').classList.add('open');
-  document.getElementById('world-panel-overlay').classList.add('open');
-}
-function closeWorldPanel(){
-  document.getElementById('world-panel').classList.remove('open');
-  document.getElementById('world-panel-overlay').classList.remove('open');
-}
-function toggleWorldEntry(el){
-  var wasOpen=el.classList.contains('open');
-  el.closest('.world-panel-body').querySelectorAll('.world-entry').forEach(function(e){e.classList.remove('open');});
-  if(!wasOpen)el.classList.add('open');
-}
 
 // ─── Star Map Viewer ──────────────────────────────────────────────────────────
 function initStarmap(){
@@ -3421,7 +3114,6 @@ function render(){
         html+='<div class="f"><div class="fl">⭐ Notable For</div><div class="fv">'+hl(s.notable_for,sq)+'</div></div>';
         html+='</div>';
         if(s.desc)html+='<div class="desc" style="margin-top:8px;">'+descHtml(s.desc,sq)+'</div>';
-        if(s.worlds_key)html+='<button class="worlds-btn" onclick="event.stopPropagation();openWorldPanel(\''+esc(s.worlds_key)+'\')"><span class="worlds-btn-dot"></span>View individual worlds</button>';
         html+='</div></div>';
       });
       html+='</div>';
@@ -3450,14 +3142,5 @@ function render(){
 }
 render();
 </script>
-<div id="world-panel" class="world-panel">
-  <div class="world-panel-header">
-    <div class="world-panel-title" id="world-panel-title"></div>
-    <div class="world-panel-sub" id="world-panel-sub"></div>
-    <button class="world-panel-close" onclick="closeWorldPanel()">&#x2715;</button>
-  </div>
-  <div class="world-panel-body" id="world-panel-body"></div>
-</div>
-<div id="world-panel-overlay" class="world-panel-overlay" onclick="closeWorldPanel()"></div>
 </body>
 </html>
