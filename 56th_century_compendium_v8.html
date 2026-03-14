@@ -1731,11 +1731,11 @@ function render(){
         html+='<div class="re" style="color:var(--mu);font-size:10px;margin-bottom:6px;">Selecting a manufacturer modifies the base item\'s stats at render time. Items whose availability would exceed UNIQUE after the manufacturer modifier are hidden.</div>';
         html+='<table class="opt-table"><thead><tr><th style="min-width:140px;">Manufacturer</th><th>Abbr.</th><th style="min-width:60px;">Type</th><th>Stat Modifications</th></tr></thead><tbody>';
         WPN_MFRS.forEach(mName=>{
-          if(mName==='Generic'){html+='<tr><td style="color:#e8f4ff;font-weight:600;">Generic</td><td style="color:var(--mu);">—</td><td style="font-size:9px;color:var(--mu);">All</td><td style="font-size:10px;color:var(--mu);">No modifications — base item stats</td></tr>';return;}
+          if(mName==='Generic'){html+='<tr><td style="color:var(--tx);font-weight:600;">Generic</td><td style="color:var(--mu);">—</td><td style="font-size:9px;color:var(--mu);">All</td><td style="font-size:10px;color:var(--mu);">No modifications — base item stats</td></tr>';return;}
           const m=g.manufacturers[mName];if(!m)return;
           const isMeleeOnly=WPN_MFRS_MELEE_ONLY.has(mName);
           const desc=mfrDesc(m,true);
-          html+='<tr><td style="color:#e8f4ff;font-weight:600;">'+esc(mName)+'</td>';
+          html+='<tr><td style="color:var(--tx);font-weight:600;">'+esc(mName)+'</td>';
           html+='<td style="color:var(--mu);font-family:ShareTechMono,monospace;font-size:10px;">'+esc(m.abbr||'')+'</td>';
           html+='<td style="font-size:9px;">'+( isMeleeOnly?'<span class="tag tp">MELEE ONLY</span>':'<span class="tag tgr">ALL</span>')+'</td>';
           html+='<td style="font-size:10px;">'+esc(desc)+'</td></tr>';
@@ -1745,10 +1745,10 @@ function render(){
         html+='<div class="rsec"><div class="rst">ARMOR MANUFACTURERS</div>';
         html+='<table class="opt-table"><thead><tr><th style="min-width:140px;">Manufacturer</th><th>Abbr.</th><th>Stat Modifications</th></tr></thead><tbody>';
         ARMOR_MFRS.forEach(mName=>{
-          if(mName==='Generic'){html+='<tr><td style="color:#e8f4ff;font-weight:600;">Generic</td><td style="color:var(--mu);">—</td><td style="font-size:10px;color:var(--mu);">No modifications — base item stats</td></tr>';return;}
+          if(mName==='Generic'){html+='<tr><td style="color:var(--tx);font-weight:600;">Generic</td><td style="color:var(--mu);">—</td><td style="font-size:10px;color:var(--mu);">No modifications — base item stats</td></tr>';return;}
           const m=g.manufacturers[mName];if(!m)return;
           const desc=mfrDesc(m,false);
-          html+='<tr><td style="color:#e8f4ff;font-weight:600;">'+esc(mName)+'</td>';
+          html+='<tr><td style="color:var(--tx);font-weight:600;">'+esc(mName)+'</td>';
           html+='<td style="color:var(--mu);font-family:ShareTechMono,monospace;font-size:10px;">'+esc(m.abbr||'')+'</td>';
           html+='<td style="font-size:10px;">'+esc(desc)+'</td></tr>';
         });
@@ -1758,7 +1758,7 @@ function render(){
         html+='<table class="opt-table"><thead><tr><th style="min-width:140px;">Manufacturer</th><th>Abbr.</th><th>Stat Modifications</th><th>Notes</th></tr></thead><tbody>';
         MEDICAL_MFRS.forEach(mName=>{
           const m=(g.medical_manufacturers||{})[mName];
-          if(!m){html+='<tr><td style="color:#e8f4ff;font-weight:600;">'+esc(mName)+'</td><td style="color:var(--mu);">—</td><td style="font-size:10px;color:var(--mu);">No modifications — base item stats</td><td></td></tr>';return;}
+          if(!m){html+='<tr><td style="color:var(--tx);font-weight:600;">'+esc(mName)+'</td><td style="color:var(--mu);">—</td><td style="font-size:10px;color:var(--mu);">No modifications — base item stats</td><td></td></tr>';return;}
           const mparts=[];
           const sM=parseInt(m.size_mod||0),aM=parseInt(m.avail_mod||0),tM=parseInt(m.tox_mod||0),lM=parseInt(m.legality_mod||0);
           const pM=parseFloat(m.price_mult||1);
@@ -1768,7 +1768,7 @@ function render(){
           if(lM>0)mparts.push('+'+lM+' legality tier');if(lM<0)mparts.push(lM+' legality tier');
           if(pM&&pM!==1)mparts.push('×'+pM+' cost');
           const statStr=mparts.length?mparts.join('; '):'No stat modifications';
-          html+='<tr><td style="color:#e8f4ff;font-weight:600;">'+esc(mName)+'</td>';
+          html+='<tr><td style="color:var(--tx);font-weight:600;">'+esc(mName)+'</td>';
           html+='<td style="color:var(--mu);font-family:ShareTechMono,monospace;font-size:10px;">'+esc(m.abbr||'—')+'</td>';
           html+='<td style="font-size:10px;">'+esc(statStr)+'</td>';
           html+='<td style="font-size:10px;color:var(--mu);">'+esc(m.desc||'')+'</td></tr>';
@@ -2056,7 +2056,7 @@ function render(){
       const dot=v=>'<span class="dot '+(v==='1'?'dot-y':'dot-n')+'"></span>';
       const costVal=parseFloat(o.cost||1);
       const costDisplay=costVal===Math.floor(costVal)?costVal.toFixed(0)+'×':costVal.toFixed(2)+'×';
-      html+='<tr><td style="color:#e8f4ff;font-weight:600;">'+hl(o.name,sq)+'</td>';
+      html+='<tr><td style="color:var(--tx);font-weight:600;">'+hl(o.name,sq)+'</td>';
       html+='<td style="text-align:center;">'+dot(o.wpn_ranged)+'</td>';
       html+='<td style="text-align:center;">'+dot(o.wpn_melee)+'</td>';
       html+='<td style="color:var(--ye);white-space:nowrap;">'+esc(costDisplay)+'</td>';
@@ -2156,7 +2156,7 @@ function render(){
       const costVal=parseFloat(o.cost||1);
       const costDisplay=costVal===Math.floor(costVal)?costVal.toFixed(0)+'×':costVal.toFixed(2)+'×';
       html+='<tr>';
-      html+='<td style="color:#e8f4ff;font-weight:600;font-size:11px;">'+hl(o.name,sq)+'</td>';
+      html+='<td style="color:var(--tx);font-weight:600;font-size:11px;">'+hl(o.name,sq)+'</td>';
       html+='<td style="text-align:center;">'+dot(o.armors)+'</td>';
       html+='<td style="text-align:center;">'+dot(o.forcefield)+'</td>';
       html+='<td style="text-align:center;">'+dot(o.datacom)+'</td>';
@@ -2386,7 +2386,7 @@ function render(){
     if(g.toxic_shock&&g.toxic_shock.rules){
       html+='<div class="gitem" style="cursor:default;margin-bottom:10px;border-color:rgba(239,68,68,.3);"><div style="min-width:85px;font-size:10px;font-family:\'Share Tech Mono\',monospace;color:var(--re);font-weight:700;">TOXIC SHOCK</div><div class="gd">'+esc(g.toxic_shock.rules)+'</div></div>';
       html+='<div class="ssub">Toxic Shock Table</div><table class="stab" style="margin-bottom:14px;"><thead><tr><th>Result</th><th style="text-align:left;">Disorder</th><th>Duration</th><th style="text-align:left;">Effect</th></tr></thead><tbody>';
-      (g.toxic_shock.table||[]).forEach(t=>{html+='<tr><td class="avg">'+esc(t.result)+'</td><td style="color:#e8f4ff;font-size:11px;">'+esc(t.name)+'</td><td class="avg">'+esc(t.duration)+'</td><td style="color:var(--tx);font-size:10px;">'+esc(t.effect)+'</td></tr>';});
+      (g.toxic_shock.table||[]).forEach(t=>{html+='<tr><td class="avg">'+esc(t.result)+'</td><td style="color:var(--tx);font-size:11px;">'+esc(t.name)+'</td><td class="avg">'+esc(t.duration)+'</td><td style="color:var(--tx);font-size:10px;">'+esc(t.effect)+'</td></tr>';});
       html+='</tbody></table>';
     }
     html+='<div class="grid">';
@@ -2595,7 +2595,7 @@ function render(){
         html+='<div class="card" style="border-color:'+bc+'" id="'+id+'" data-tog="'+id+'">';
         // Compact header: name | role
         html+='<div class="ch">';
-        html+='<div class="cn" style="color:'+classTx[cls]+'">'+hl(s.name||s.role,sq)+'</div>';
+        html+='<div class="cn">'+hl(s.name||s.role,sq)+'</div>';
         html+='<div class="cs-right" style="font-size:9px;color:#9ca3af;">'+esc(s.role||s.class)+'</div>';
         html+='</div>';
         // Row 2: class badge + type + speed + atmospheric
