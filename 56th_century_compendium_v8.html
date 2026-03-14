@@ -2426,41 +2426,53 @@ function render(){
 
   // ─── CATALOG: VEHICLES ───
   else if(cs==='vehicles'){
-    const vAvailCol={'COMMON':'var(--mu)','UNCOMMON':'var(--gr)','RARE':'var(--a)','LIMITED':'var(--ye)','UNIQUE':'var(--a3)','CLASSIFIED':'var(--re)'};
-    const allVTypes=[...new Set((g.catalog&&g.catalog.vehicles||[]).map(v=>v.type).filter(Boolean))];
-    const V=(g.catalog&&g.catalog.vehicles||[]).filter(v=>ms([v.name,v.manufacturer,v.size,v.availability,v.special,v.description,v.type,v.legality]));
-    const VF=!af?V:V.filter(v=>v.type===af);
-    cnt=VF.length;
+    const V=(g.catalog&&g.catalog.vehicles||[]).filter(v=>ms([v.name,v.manufacturer,v.size,v.availability,v.special,v.description,v.type]));
+    cnt=V.length;
     html='<div class="stitle">🚗 VEHICLES <span class="badge">'+cnt+'</span></div>';
-    html+='<div class="fbar">'+fcBtn('ALL','ALL',af);
-    allVTypes.forEach(t=>{html+=fcBtn(t,t,af);});
+    html+='<div class="grid">';
+    V.forEach(v=>{
+      const id='v-'+esc(v.name).replace(/\s/g,'_');
+      const rc=rarCls(v.availability);
+      html+='<div class="card '+rc+'" id="'+id+'" data-tog="'+id+'">';
+      html+='<div class="ch"><div class="cn">'+hl(v.name,sq)+'</div><div class="cs-right">'+hl(v.type||v.size||'',sq)+'</div></div>';
+      html+='<div class="cr2">';
+      if(v.manufacturer) html+='<span class="wpn-pill">'+hl(v.manufacturer,sq)+'</span>';
+      if(v.size&&v.type) html+='<span class="wpn-pill">📦 '+hl(v.size,sq)+'</span>';
+      if(v.availability) html+='<span class="wpn-pill wpill-avl">◈ '+hl(v.availability,sq)+'</span>';
+      html+='</div>';
+      html+='<div class="cr3"><div class="cr3l">';
+      if(v.durability!=null) html+='<span class="wpn-pill">❤ DUR '+v.durability+'</span>';
+      if(v.structure!=null) html+='<span class="wpn-pill">🏗 STR '+v.structure+'</span>';
+      if(v.speed!=null) html+='<span class="wpn-pill">💨 SPD '+v.speed+'</span>';
+      html+='</div>';
+      if(v.price||v.cost) html+='<div class="cr3r">'+fmt(v.price||v.cost)+' Cr</div>';
+      html+='</div>';
+      html+='<div class="cb">';
+      if(v.description) html+='<div class="rd" style="margin-bottom:8px;">'+hl(v.description,sq)+'</div>';
+      html+='<div class="fg">';
+      if(v.type) html+='<div class="f"><div class="fl">Type</div><div class="fv">'+hl(v.type,sq)+'</div></div>';
+      if(v.size) html+='<div class="f"><div class="fl">Size</div><div class="fv">'+hl(v.size,sq)+'</div></div>';
+      if(v.minimum_crew!=null) html+='<div class="f"><div class="fl">Min Crew</div><div class="fv">'+v.minimum_crew+'</div></div>';
+      if(v.maximum_crew!=null) html+='<div class="f"><div class="fl">Max Crew</div><div class="fv">'+v.maximum_crew+'</div></div>';
+      if(v.max_passengers!=null) html+='<div class="f"><div class="fl">Passengers</div><div class="fv">'+v.max_passengers+'</div></div>';
+      if(v.speed!=null) html+='<div class="f"><div class="fl">Speed</div><div class="fv">'+v.speed+'</div></div>';
+      if(v.handling!=null) html+='<div class="f"><div class="fl">Handling</div><div class="fv">'+v.handling+'</div></div>';
+      if(v.durability!=null) html+='<div class="f"><div class="fl">Durability</div><div class="fv">'+v.durability+'</div></div>';
+      if(v.structure!=null) html+='<div class="f"><div class="fl">Structure</div><div class="fv">'+v.structure+'</div></div>';
+      if(v.hull!=null) html+='<div class="f"><div class="fl">Hull</div><div class="fv">'+v.hull+'</div></div>';
+      if(v.deflect) html+='<div class="f"><div class="fl">Deflect</div><div class="fv">'+hl(v.deflect,sq)+'</div></div>';
+      if(v.soak) html+='<div class="f"><div class="fl">Soak</div><div class="fv">'+hl(v.soak,sq)+'</div></div>';
+      if(v.wall) html+='<div class="f"><div class="fl">Wall</div><div class="fv">'+hl(v.wall,sq)+'</div></div>';
+      if(v.integrity) html+='<div class="f"><div class="fl">Integrity</div><div class="fv">'+hl(v.integrity,sq)+'</div></div>';
+      if(v.cargo!=null) html+='<div class="f"><div class="fl">Cargo</div><div class="fv">'+v.cargo+'</div></div>';
+      if(v.system!=null) html+='<div class="f"><div class="fl">System</div><div class="fv">'+v.system+'</div></div>';
+      if(v.atmospheric_capability) html+='<div class="f"><div class="fl">Atmospheric</div><div class="fv">'+hl(v.atmospheric_capability,sq)+'</div></div>';
+      if(v.price||v.cost) html+='<div class="f"><div class="fl">Price</div><div class="fv" style="color:#6ee7a0;">'+fmt(v.price||v.cost)+' Cr</div></div>';
+      html+='</div>';
+      if(v.special) html+='<div style="margin-top:6px;padding-top:6px;border-top:1px solid var(--b);font-size:10px;color:#9ca3af;">'+hl(v.special,sq)+'</div>';
+      html+='</div></div>';
+    });
     html+='</div>';
-    if(!VF.length){html+='<div class="empty">No vehicles match your filters.</div>';}
-    else{
-      const vGrouped={};
-      VF.forEach(v=>{const k=v.type||'Other';if(!vGrouped[k])vGrouped[k]=[];vGrouped[k].push(v);});
-      const vTypeOrder=allVTypes.length?allVTypes:Object.keys(vGrouped);
-      html+='<div style="overflow-x:auto;"><table class="stab eq-tab" style="width:100%;">';
-      html+='<thead><tr><th>Name</th><th>Size</th><th>Avail</th><th>Legality</th><th style="text-align:right;">Cost</th><th>Notes</th></tr></thead><tbody>';
-      vTypeOrder.forEach(cat=>{
-        if(!vGrouped[cat]) return;
-        html+='<tr><td colspan="6" style="background:var(--b2);color:var(--tx);font-family:Orbitron,sans-serif;font-size:10px;letter-spacing:.08em;padding:8px 12px;border-top:1px solid var(--a);border-bottom:1px solid var(--brd);">'+esc(cat.toUpperCase())+'</td></tr>';
-        vGrouped[cat].forEach(v=>{
-          const ac=vAvailCol[v.availability]||'var(--mu)';
-          const price=v.price||v.cost;
-          const noteText=v.description||(v.special?v.special:'')||(v.notes?v.notes:'');
-          html+='<tr>';
-          html+='<td style="color:var(--a);font-weight:600;min-width:150px;">'+hl(v.name,sq)+'</td>';
-          html+='<td class="minmax" style="white-space:nowrap;">'+hl(v.size||'—',sq)+'</td>';
-          html+='<td style="color:'+ac+';white-space:nowrap;font-family:\'Share Tech Mono\',monospace;font-size:10px;letter-spacing:.05em;">'+hl(v.availability||'—',sq)+'</td>';
-          html+='<td style="white-space:nowrap;color:var(--tx);">'+hl(v.legality||'No Permit',sq)+'</td>';
-          html+='<td style="color:var(--gr);white-space:nowrap;text-align:right;font-family:\'Share Tech Mono\',monospace;">'+(price?fmt(price)+' cr':'—')+'</td>';
-          html+='<td style="color:var(--tx);opacity:.85;font-size:12px;line-height:1.55;min-width:220px;">'+hl(noteText,sq)+'</td>';
-          html+='</tr>';
-        });
-      });
-      html+='</tbody></table></div>';
-    }
   }
 
   // ─── CATALOG: DRONES ───
