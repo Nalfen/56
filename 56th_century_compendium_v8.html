@@ -2376,7 +2376,7 @@ function render(){
           html+='<td style="color:'+ac+';white-space:nowrap;">'+hl(e.availability||'—',sq)+'</td>';
           html+='<td style="white-space:nowrap;">'+hl(e.legality||'—',sq)+'</td>';
           html+='<td style="color:var(--gr);white-space:nowrap;">'+(e.cost&&e.cost!='0'?fmt(e.cost)+' cr':'—')+'</td>';
-          html+='<td style="opacity:.85;">'+hl(e.effect||'',sq)+'</td>';
+          html+='<td style="color:var(--tx);font-size:13px;line-height:1.55;min-width:220px;">'+hl(e.effect||'',sq)+'</td>';
           html+='</tr>';
         });
       });
