@@ -262,12 +262,13 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 .worlds-btn:hover{color:#f2f2f7;border-color:#636366;background:rgba(255,255,255,.04);}
 .worlds-btn-dot{width:6px;height:6px;border-radius:50%;background:#636366;flex-shrink:0;}
 /* ── Star Map Hotspots ───────────────────────────────────────────────────────── */
-.smap-dot{position:absolute;cursor:pointer;transform:translate(-50%,-50%);z-index:5;display:flex;flex-direction:column;align-items:center;pointer-events:auto;padding:4px 2px 2px;}
-.smap-dot-inner{width:10px;height:10px;border-radius:50%;border:2px solid;transition:transform .15s,box-shadow .15s,filter .15s;flex-shrink:0;}
-.smap-dot.faction .smap-dot-inner{width:13px;height:13px;border-radius:2px;transform:rotate(45deg);}
-.smap-dot:hover .smap-dot-inner{transform:scale(1.6);filter:brightness(1.4);}
-.smap-dot.faction:hover .smap-dot-inner{transform:rotate(45deg) scale(1.4);filter:brightness(1.4);}
-.smap-dot-lbl{font-family:'Share Tech Mono',monospace;font-size:8px;white-space:nowrap;margin-top:4px;text-shadow:0 0 4px #000,0 0 10px #000,1px 1px 0 #000,-1px -1px 0 #000;opacity:.75;pointer-events:none;line-height:1;}
+.smap-dot{position:absolute;cursor:pointer;transform:translate(-50%,-50%);z-index:5;display:flex;flex-direction:column;align-items:center;pointer-events:auto;padding:6px 3px 3px;}
+.smap-dot-inner{width:18px;height:18px;border-radius:50%;border:2px solid;transition:transform .15s,box-shadow .15s,filter .15s;flex-shrink:0;}
+.smap-dot.faction .smap-dot-inner{width:22px;height:22px;border-radius:3px;transform:rotate(45deg);}
+.smap-dot:hover .smap-dot-inner{transform:scale(1.5);filter:brightness(1.5);}
+.smap-dot.faction:hover .smap-dot-inner{transform:rotate(45deg) scale(1.4);filter:brightness(1.5);}
+.smap-dot-lbl{font-family:'Share Tech Mono',monospace;font-size:18px;white-space:nowrap;margin-top:6px;text-shadow:0 0 6px #000,0 0 14px #000,1px 1px 0 #000,-1px -1px 0 #000;opacity:.8;pointer-events:none;line-height:1;}
+.smap-dot.faction .smap-dot-lbl{font-size:22px;font-family:'Orbitron',sans-serif;letter-spacing:.5px;}
 .smap-dot:hover .smap-dot-lbl{opacity:1;}
 /* ── Star Map Popup ──────────────────────────────────────────────────────────── */
 .smap-popup{position:fixed;background:#161618;border:1px solid #3c3c3e;border-radius:8px;padding:14px 14px 12px;width:320px;z-index:1100;box-shadow:0 8px 40px rgba(0,0,0,.88);pointer-events:auto;}
@@ -2161,6 +2162,89 @@ function toggleWorldEntry(el){
 }
 
 // ─── Star Map Viewer ──────────────────────────────────────────────────────────
+// Build a lightweight procedural SVG galaxy (no external image required)
+function buildGalaxySVG(){
+  // Deterministic pseudo-random star field
+  var sd=1337;
+  function rng(){sd=(sd*1664525+1013904223)>>>0;return sd/4294967295;}
+  var W=2000,H=2000;
+  var stars='';
+  // Regular stars
+  for(var i=0;i<700;i++){
+    var sx=(rng()*W).toFixed(1),sy=(rng()*H).toFixed(1);
+    var sr=(rng()*1.3+0.2).toFixed(2),sop=(rng()*0.6+0.2).toFixed(2);
+    var sbr=rng();
+    var scol=sbr>0.97?'#c8e8ff':sbr>0.88?'#e0f2ff':'#ffffff';
+    stars+='<circle cx="'+sx+'" cy="'+sy+'" r="'+sr+'" fill="'+scol+'" opacity="'+sop+'"/>';
+  }
+  // Bright/large stars
+  for(var j=0;j<28;j++){
+    var bx=(rng()*W).toFixed(1),by=(rng()*H).toFixed(1);
+    var br2=(rng()*2.2+1.5).toFixed(2),bop=(rng()*0.45+0.55).toFixed(2);
+    stars+='<circle cx="'+bx+'" cy="'+by+'" r="'+br2+'" fill="#ffffff" opacity="'+bop+'"/>';
+  }
+  // Cross-flare on a few very bright stars
+  for(var k=0;k<6;k++){
+    var fx=(rng()*W).toFixed(1),fy=(rng()*H).toFixed(1);
+    stars+='<line x1="'+(parseFloat(fx)-6)+'" y1="'+fy+'" x2="'+(parseFloat(fx)+6)+'" y2="'+fy+'" stroke="#ffffff" stroke-width="0.6" opacity="0.5"/>';
+    stars+='<line x1="'+fx+'" y1="'+(parseFloat(fy)-6)+'" x2="'+fx+'" y2="'+(parseFloat(fy)+6)+'" stroke="#ffffff" stroke-width="0.6" opacity="0.5"/>';
+    stars+='<circle cx="'+fx+'" cy="'+fy+'" r="2.5" fill="#ffffff" opacity="0.9"/>';
+  }
+  return '<svg width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;pointer-events:none;display:block;">'
+    +'<defs>'
+    +'<filter id="sm-tf"><feGaussianBlur stdDeviation="80"/></filter>'
+    +'<filter id="sm-tf2"><feGaussianBlur stdDeviation="42"/></filter>'
+    +'<filter id="sm-rift"><feGaussianBlur stdDeviation="55"/></filter>'
+    +'<filter id="sm-sg"><feGaussianBlur stdDeviation="20" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'
+    +'<radialGradient id="sm-cg" cx="48%" cy="52%" r="55%">'
+    +'<stop offset="0%" stop-color="#1a3a6a" stop-opacity="0.35"/>'
+    +'<stop offset="55%" stop-color="#0a1535" stop-opacity="0.12"/>'
+    +'<stop offset="100%" stop-color="#000000" stop-opacity="0"/>'
+    +'</radialGradient>'
+    // Second core layer for spiral illusion
+    +'<radialGradient id="sm-cg2" cx="50%" cy="50%" r="40%">'
+    +'<stop offset="0%" stop-color="#4060cc" stop-opacity="0.15"/>'
+    +'<stop offset="100%" stop-color="#000000" stop-opacity="0"/>'
+    +'</radialGradient>'
+    +'</defs>'
+    // Background
+    +'<rect width="'+W+'" height="'+H+'" fill="#06060d"/>'
+    // Galaxy core glows
+    +'<ellipse cx="1000" cy="1000" rx="850" ry="700" fill="url(#sm-cg)"/>'
+    +'<ellipse cx="980" cy="1020" rx="420" ry="340" fill="url(#sm-cg2)"/>'
+    // ── Territory regions (blurred ellipses give soft borders) ──
+    // Alliance Space — cyan, central largest territory
+    +'<ellipse cx="960" cy="1040" rx="490" ry="410" fill="#00c8ff" opacity="0.055" filter="url(#sm-tf)"/>'
+    +'<ellipse cx="960" cy="1040" rx="240" ry="200" fill="#00c8ff" opacity="0.08" filter="url(#sm-tf2)"/>'
+    // Haven Space — red, north-central
+    +'<ellipse cx="760" cy="520" rx="310" ry="260" fill="#ff453a" opacity="0.09" filter="url(#sm-tf)"/>'
+    +'<ellipse cx="760" cy="520" rx="140" ry="118" fill="#ff453a" opacity="0.12" filter="url(#sm-tf2)"/>'
+    // Mubothen Empire — orange, north-east
+    +'<ellipse cx="1440" cy="440" rx="330" ry="275" fill="#ff9f0a" opacity="0.09" filter="url(#sm-tf)"/>'
+    +'<ellipse cx="1440" cy="440" rx="150" ry="125" fill="#ff9f0a" opacity="0.12" filter="url(#sm-tf2)"/>'
+    // Kraven Space — deep red, eastern threat (deliberately ominous / large)
+    +'<ellipse cx="1710" cy="980" rx="420" ry="500" fill="#880018" opacity="0.18" filter="url(#sm-tf)"/>'
+    +'<ellipse cx="1710" cy="980" rx="200" ry="230" fill="#cc1030" opacity="0.14" filter="url(#sm-tf2)"/>'
+    // Torc Federation — green, south-east
+    +'<ellipse cx="1360" cy="1440" rx="290" ry="248" fill="#30d158" opacity="0.09" filter="url(#sm-tf)"/>'
+    +'<ellipse cx="1360" cy="1440" rx="128" ry="108" fill="#30d158" opacity="0.12" filter="url(#sm-tf2)"/>'
+    // Freeland — purple, west-central (compact synthetic territory)
+    +'<ellipse cx="600" cy="920" rx="230" ry="220" fill="#bf5af2" opacity="0.09" filter="url(#sm-tf)"/>'
+    +'<ellipse cx="600" cy="920" rx="105" ry="100" fill="#bf5af2" opacity="0.11" filter="url(#sm-tf2)"/>'
+    // Zegitor Trade Guild — light blue, west (scattered stations)
+    +'<ellipse cx="440" cy="960" rx="190" ry="265" fill="#64d2ff" opacity="0.07" filter="url(#sm-tf)"/>'
+    // Dark Space — muted, outer south/frontier belt
+    +'<ellipse cx="340" cy="1500" rx="340" ry="270" fill="#3a4455" opacity="0.12" filter="url(#sm-tf)"/>'
+    +'<ellipse cx="820" cy="1720" rx="210" ry="155" fill="#2a3344" opacity="0.1" filter="url(#sm-tf)"/>'
+    // Nemani Rift — yellow nebula barrier (diagonal, between Haven/Mubothen and Kraven)
+    +'<line x1="870" y1="290" x2="1430" y2="1060" stroke="#ffd60a" stroke-width="170" opacity="0.055" filter="url(#sm-rift)" stroke-linecap="round"/>'
+    +'<line x1="895" y1="330" x2="1405" y2="1020" stroke="#ffcc00" stroke-width="75" opacity="0.065" filter="url(#sm-rift)" stroke-linecap="round"/>'
+    +'<line x1="920" y1="370" x2="1380" y2="980" stroke="#ffee88" stroke-width="30" opacity="0.04" filter="url(#sm-rift)" stroke-linecap="round"/>'
+    // Stars layer (on top of territories)
+    +'<g>'+stars+'</g>'
+    +'</svg>';
+}
+
 function smapEntryColor(e){
   switch(e.name){
     case 'Alliance Space':return '#00c8ff';
@@ -2175,121 +2259,149 @@ function smapEntryColor(e){
     default:return e.worlds_key?'#00c8ff':'#aeaeb2';
   }
 }
+function openSmapPopup(entry,clientX,clientY){
+  var popup=document.getElementById('smap-popup');
+  if(!popup)return;
+  var col=smapEntryColor(entry);
+  var isFaction=entry.entry_type==='faction';
+  var h='<div class="smap-popup-name" style="color:'+col+'">'+esc(entry.name)+'</div>';
+  h+='<button class="smap-popup-close" id="smap-pc">\u2715</button>';
+  if(entry.tags&&entry.tags.length)h+='<div class="smap-popup-tags">'+entry.tags.map(function(t){return '<span class="tag tgr">'+esc(t)+'</span>';}).join('')+'</div>';
+  if(isFaction){
+    if(entry.status)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Status</span><span class="smap-popup-fv">'+esc(entry.status)+'</span></div>';
+    if(entry.territory)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Territory</span><span class="smap-popup-fv">'+esc(entry.territory)+'</span></div>';
+    if(entry.government)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Gov\'t</span><span class="smap-popup-fv">'+esc(entry.government.length>90?entry.government.substring(0,90)+'\u2026':entry.government)+'</span></div>';
+    if(entry.alignment)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Alignment</span><span class="smap-popup-fv">'+esc(entry.alignment)+'</span></div>';
+  } else {
+    if(entry.region)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Region</span><span class="smap-popup-fv">'+esc(entry.region)+'</span></div>';
+    if(entry.faction)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Faction</span><span class="smap-popup-fv">'+esc(entry.faction)+'</span></div>';
+    if(entry.population)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Population</span><span class="smap-popup-fv">'+esc(entry.population)+'</span></div>';
+    if(entry.notable_for)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Notable</span><span class="smap-popup-fv">'+esc(entry.notable_for)+'</span></div>';
+  }
+  if(entry.desc)h+='<div class="smap-popup-desc">'+esc(entry.desc)+'</div>';
+  if(entry.worlds_key)h+='<button class="smap-popup-worlds" onclick="document.getElementById(\'smap-popup\').style.display=\'none\';openWorldPanel(\''+esc(entry.worlds_key)+'\')">\u2b21 VIEW INDIVIDUAL WORLDS</button>';
+  popup.innerHTML=h;
+  popup.style.display='block';
+  var pw=320,ph=popup.offsetHeight||320;
+  var vw=window.innerWidth,vh=window.innerHeight;
+  var px=clientX+18,py=clientY-80;
+  if(px+pw>vw-12)px=clientX-pw-18;
+  if(py+ph>vh-12)py=vh-ph-12;
+  if(py<10)py=10;if(px<10)px=10;
+  popup.style.left=px+'px';popup.style.top=py+'px';
+  var pc=document.getElementById('smap-pc');
+  if(pc)pc.onclick=function(ev){ev.stopPropagation();popup.style.display='none';};
+}
+
 function initStarmap(){
-  var el=document.getElementById('smap-viewer');
-  var img=document.getElementById('smap-img');
-  var dotsEl=document.getElementById('smap-dots');
+  var vp=document.getElementById('smap-viewport');
+  var cv=document.getElementById('smap-canvas');
+  if(!vp||!cv)return;
+  // Canvas logical size (matches buildGalaxySVG dimensions)
+  var CW=2000,CH=2000;
+  var scale=1,ox=0,oy=0,dragging=false,didDrag=false,startX=0,startY=0,sox=0,soy=0;
+  var pinchDist=0;
   var pct=document.getElementById('smap-pct');
-  if(!el||!img)return;
-  var scale=1,ox=0,oy=0,dragging=false,startX=0,startY=0,sox=0,soy=0,didDrag=false;
-  var dotEls=[];
   var entries=(g.galaxy||[]).filter(function(e){return e.map_pos;});
 
-  function fit(){
-    var cw=el.clientWidth,ch=el.clientHeight;
-    if(!img.naturalWidth)return;
-    var s=Math.min(cw/img.naturalWidth,ch/img.naturalHeight);
-    scale=s;ox=(cw-img.naturalWidth*s)/2;oy=(ch-img.naturalHeight*s)/2;apply();
-  }
-  function apply(){
-    img.style.transform='translate('+ox+'px,'+oy+'px) scale('+scale+')';
+  function applyT(){
+    cv.style.transform='translate('+ox+'px,'+oy+'px) scale('+scale+')';
     if(pct)pct.textContent=Math.round(scale*100)+'%';
-    if(img.naturalWidth&&dotsEl){
-      var lblScale=Math.max(0.55,Math.min(1.2,1/scale));
-      dotEls.forEach(function(d,i){
-        var e=entries[i];if(!e)return;
-        var wx=e.map_pos.x/100*img.naturalWidth;
-        var wy=e.map_pos.y/100*img.naturalHeight;
-        d.style.left=(wx*scale+ox)+'px';
-        d.style.top=(wy*scale+oy)+'px';
-        var lbl=d.querySelector('.smap-dot-lbl');
-        if(lbl){lbl.style.transform='scale('+lblScale+')';lbl.style.transformOrigin='top center';}
-      });
-    }
+  }
+  function fit(){
+    var vw=vp.clientWidth,vh=vp.clientHeight;
+    // Leave a little breathing room so the galaxy doesn't fill edge-to-edge
+    var s=Math.min(vw/CW,vh/CH)*0.92;
+    scale=s;ox=(vw-CW*s)/2;oy=(vh-CH*s)/2;applyT();
   }
   function clamp(){
-    var iw=img.naturalWidth*scale,ih=img.naturalHeight*scale;
-    var cw=el.clientWidth,ch=el.clientHeight;
-    if(iw<=cw){ox=(cw-iw)/2;}else{ox=Math.min(0,Math.max(ox,cw-iw));}
-    if(ih<=ch){oy=(ch-ih)/2;}else{oy=Math.min(0,Math.max(oy,ch-ih));}
+    var vw=vp.clientWidth,vh=vp.clientHeight;
+    var iw=CW*scale,ih=CH*scale;
+    // Allow panning up to 20% outside the canvas edge for comfort
+    var pad=Math.max(80,Math.min(vw,vh)*0.1);
+    if(iw<=vw){ox=(vw-iw)/2;}else{ox=Math.min(pad,Math.max(ox,vw-iw-pad));}
+    if(ih<=vh){oy=(vh-ih)/2;}else{oy=Math.min(pad,Math.max(oy,vh-ih-pad));}
   }
-  function zoom(factor,cx,cy){
-    var ns=Math.max(0.1,Math.min(scale*factor,20));
-    if(cx===undefined){cx=el.clientWidth/2;cy=el.clientHeight/2;}
-    ox=cx-(cx-ox)*(ns/scale);oy=cy-(cy-oy)*(ns/scale);scale=ns;clamp();apply();
+  function zoom(f,cx,cy){
+    if(cx===undefined){cx=vp.clientWidth/2;cy=vp.clientHeight/2;}
+    var ns=Math.max(0.25,Math.min(scale*f,8));
+    ox=cx-(cx-ox)*(ns/scale);oy=cy-(cy-oy)*(ns/scale);scale=ns;clamp();applyT();
   }
-  function buildDots(){
-    if(!dotsEl||!img.naturalWidth)return;
-    dotsEl.innerHTML='';dotEls=[];
-    entries.forEach(function(e,i){
-      var col=smapEntryColor(e);
-      var isFaction=e.entry_type==='faction';
-      var d=document.createElement('div');
-      d.className='smap-dot'+(isFaction?' faction':'');
-      d.dataset.smIdx=i;
-      var inner=document.createElement('div');
-      inner.className='smap-dot-inner';
-      inner.style.background=col;inner.style.borderColor=col;
-      inner.style.boxShadow='0 0 7px '+col;
-      d.appendChild(inner);
-      var lbl=document.createElement('div');
-      lbl.className='smap-dot-lbl';lbl.textContent=e.name;lbl.style.color=col;
-      d.appendChild(lbl);
-      dotsEl.appendChild(d);dotEls.push(d);
-    });
-    apply();
-  }
-  function openSmapPopup(entry,clientX,clientY){
-    var popup=document.getElementById('smap-popup');
-    if(!popup)return;
-    var col=smapEntryColor(entry);
-    var isFaction=entry.entry_type==='faction';
-    var h='<div class="smap-popup-name" style="color:'+col+'">'+esc(entry.name)+'</div>';
-    h+='<button class="smap-popup-close" id="smap-pc">\u2715</button>';
-    if(entry.tags&&entry.tags.length)h+='<div class="smap-popup-tags">'+entry.tags.map(function(t){return '<span class="tag tgr">'+esc(t)+'</span>';}).join('')+'</div>';
-    if(isFaction){
-      if(entry.status)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Status</span><span class="smap-popup-fv">'+esc(entry.status)+'</span></div>';
-      if(entry.territory)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Territory</span><span class="smap-popup-fv">'+esc(entry.territory)+'</span></div>';
-      if(entry.government)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Gov\'t</span><span class="smap-popup-fv">'+esc(entry.government.length>90?entry.government.substring(0,90)+'\u2026':entry.government)+'</span></div>';
-      if(entry.alignment)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Alignment</span><span class="smap-popup-fv">'+esc(entry.alignment)+'</span></div>';
-    } else {
-      if(entry.region)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Region</span><span class="smap-popup-fv">'+esc(entry.region)+'</span></div>';
-      if(entry.faction)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Faction</span><span class="smap-popup-fv">'+esc(entry.faction)+'</span></div>';
-      if(entry.population)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Population</span><span class="smap-popup-fv">'+esc(entry.population)+'</span></div>';
-      if(entry.notable_for)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Notable</span><span class="smap-popup-fv">'+esc(entry.notable_for)+'</span></div>';
+
+  // ── Input events ──
+  vp.addEventListener('wheel',function(e){
+    e.preventDefault();
+    zoom(e.deltaY<0?1.12:1/1.12,e.offsetX,e.offsetY);
+  },{passive:false});
+
+  vp.addEventListener('mousedown',function(e){
+    if(e.button!==0)return;
+    dragging=true;didDrag=false;
+    startX=e.clientX;startY=e.clientY;sox=ox;soy=oy;
+    vp.style.cursor='grabbing';
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove',function(e){
+    if(!dragging)return;
+    var dx=e.clientX-startX,dy=e.clientY-startY;
+    if(Math.sqrt(dx*dx+dy*dy)>4)didDrag=true;
+    ox=sox+dx;oy=soy+dy;clamp();applyT();
+  });
+  document.addEventListener('mouseup',function(){
+    if(!dragging)return;
+    dragging=false;vp.style.cursor='grab';
+  });
+
+  // Touch pan
+  vp.addEventListener('touchstart',function(e){
+    if(e.touches.length===1){
+      dragging=true;didDrag=false;
+      startX=e.touches[0].clientX;startY=e.touches[0].clientY;sox=ox;soy=oy;
+    } else if(e.touches.length===2){
+      dragging=false;
+      pinchDist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
     }
-    if(entry.desc)h+='<div class="smap-popup-desc">'+esc(entry.desc)+'</div>';
-    if(entry.worlds_key)h+='<button class="smap-popup-worlds" onclick="document.getElementById(\'smap-popup\').style.display=\'none\';openWorldPanel(\''+esc(entry.worlds_key)+'\')">\u2b21 VIEW INDIVIDUAL WORLDS</button>';
-    popup.innerHTML=h;
-    popup.style.display='block';
-    var pw=320,ph=popup.offsetHeight||320;
-    var vw=window.innerWidth,vh=window.innerHeight;
-    var px=clientX+18,py=clientY-80;
-    if(px+pw>vw-12)px=clientX-pw-18;
-    if(py+ph>vh-12)py=vh-ph-12;
-    if(py<10)py=10;if(px<10)px=10;
-    popup.style.left=px+'px';popup.style.top=py+'px';
-    var pc=document.getElementById('smap-pc');
-    if(pc)pc.onclick=function(ev){ev.stopPropagation();popup.style.display='none';};
-  }
-  img.onload=function(){fit();buildDots();};
-  if(img.complete&&img.naturalWidth){fit();buildDots();}
-  el.addEventListener('wheel',function(e){e.preventDefault();zoom(e.deltaY<0?1.12:1/1.12,e.offsetX,e.offsetY);},{passive:false});
-  el.addEventListener('mousedown',function(e){if(e.button!==0)return;dragging=true;didDrag=false;startX=e.clientX;startY=e.clientY;sox=ox;soy=oy;img.style.cursor='grabbing';e.preventDefault();});
-  document.addEventListener('mousemove',function(e){if(!dragging)return;var dx=e.clientX-startX,dy=e.clientY-startY;if(Math.sqrt(dx*dx+dy*dy)>5)didDrag=true;ox=sox+dx;oy=soy+dy;clamp();apply();});
-  document.addEventListener('mouseup',function(){if(!dragging)return;dragging=false;img.style.cursor='grab';});
-  el.addEventListener('touchstart',function(e){if(e.touches.length===1){dragging=true;didDrag=false;startX=e.touches[0].clientX;startY=e.touches[0].clientY;sox=ox;soy=oy;}e.preventDefault();},{passive:false});
-  el.addEventListener('touchmove',function(e){if(e.touches.length===1&&dragging){var dx=e.touches[0].clientX-startX,dy=e.touches[0].clientY-startY;if(Math.sqrt(dx*dx+dy*dy)>5)didDrag=true;ox=sox+dx;oy=soy+dy;clamp();apply();}e.preventDefault();},{passive:false});
-  el.addEventListener('touchend',function(){dragging=false;});
-  el.addEventListener('click',function(e){
+    e.preventDefault();
+  },{passive:false});
+  vp.addEventListener('touchmove',function(e){
+    if(e.touches.length===1&&dragging){
+      var dx=e.touches[0].clientX-startX,dy=e.touches[0].clientY-startY;
+      if(Math.sqrt(dx*dx+dy*dy)>4)didDrag=true;
+      ox=sox+dx;oy=soy+dy;clamp();applyT();
+    } else if(e.touches.length===2){
+      var d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+      var r=vp.getBoundingClientRect();
+      var cx=(e.touches[0].clientX+e.touches[1].clientX)/2-r.left;
+      var cy=(e.touches[0].clientY+e.touches[1].clientY)/2-r.top;
+      zoom(d/pinchDist,cx,cy);pinchDist=d;
+    }
+    e.preventDefault();
+  },{passive:false});
+  vp.addEventListener('touchend',function(){dragging=false;});
+
+  // Click delegation — buttons + dots
+  vp.addEventListener('click',function(e){
     if(didDrag){didDrag=false;return;}
     var sm=e.target.closest('[data-sm]');
-    if(sm){var a=sm.dataset.sm;if(a==='zin')zoom(1.3);else if(a==='zout')zoom(1/1.3);else if(a==='reset')fit();return;}
-    var dot=e.target.closest('[data-sm-idx]');
-    if(dot){var idx=parseInt(dot.dataset.smIdx);var entry=entries[idx];if(entry)openSmapPopup(entry,e.clientX,e.clientY);return;}
+    if(sm){
+      var a=sm.dataset.sm;
+      if(a==='zin')zoom(1.3);
+      else if(a==='zout')zoom(1/1.3);
+      else if(a==='reset')fit();
+      return;
+    }
+    var dot=e.target.closest('[data-smap-idx]');
+    if(dot){
+      var idx=parseInt(dot.dataset.smapIdx);
+      var entry=entries[idx];
+      if(entry)openSmapPopup(entry,e.clientX,e.clientY);
+      return;
+    }
     var popup=document.getElementById('smap-popup');
     if(popup&&!e.target.closest('#smap-popup'))popup.style.display='none';
   });
+
+  fit();
 }
 
 // ─── Render ───────────────────────────────────────────────────────────────────
@@ -3571,16 +3683,30 @@ function render(){
 
   else if(cs==='starmap'){
     cnt=1;
-    html='<div id="smap-viewer" style="position:relative;width:100%;height:calc(100vh - 120px);overflow:hidden;background:#0a0a0c;border-radius:6px;border:1px solid #2c2c2e;user-select:none;">';
-    html+='<img id="smap-img" src="Star-Map-v3_HIGH_QUALITY.png" alt="Star Map" style="position:absolute;top:0;left:0;transform-origin:0 0;cursor:grab;image-rendering:auto;" draggable="false">';
-    html+='<div id="smap-dots" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:5;overflow:visible;"></div>';
-    html+='<div style="position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:6px;background:#161618;border:1px solid #2c2c2e;border-radius:6px;padding:6px 10px;z-index:10;">';
-    html+='<button data-sm="zin" style="background:none;border:none;color:#f2f2f7;font-size:16px;cursor:pointer;padding:2px 6px;border-radius:4px;font-family:inherit;" title="Zoom in">+</button>';
-    html+='<button data-sm="zout" style="background:none;border:none;color:#f2f2f7;font-size:16px;cursor:pointer;padding:2px 6px;border-radius:4px;font-family:inherit;" title="Zoom out">\u2212</button>';
+    // Build inline hotspot dots — placed inside smap-canvas so they transform with the map
+    var smEntries=(g.galaxy||[]).filter(function(e){return e.map_pos;});
+    var dotsH='';
+    smEntries.forEach(function(e,i){
+      var col=smapEntryColor(e);
+      var isFaction=e.entry_type==='faction';
+      // Map percentage (0-100) → canvas pixels (0-2000)
+      var px=e.map_pos.x*20,py=e.map_pos.y*20;
+      dotsH+='<div class="smap-dot'+(isFaction?' faction':'')+'" data-smap-idx="'+i+'" style="left:'+px+'px;top:'+py+'px;">';
+      dotsH+='<div class="smap-dot-inner" style="background:'+col+';border-color:'+col+';box-shadow:0 0 10px '+col+',0 0 20px '+col+'44;"></div>';
+      dotsH+='<div class="smap-dot-lbl" style="color:'+col+';">'+esc(e.name)+'</div>';
+      dotsH+='</div>';
+    });
+    html='<div id="smap-viewport" style="position:relative;width:100%;height:calc(100vh - 120px);overflow:hidden;background:#06060d;border-radius:6px;border:1px solid #2c2c2e;user-select:none;cursor:grab;">';
+    // smap-canvas: one container that gets the CSS transform — SVG background + all dots live here
+    html+='<div id="smap-canvas" style="position:absolute;top:0;left:0;width:2000px;height:2000px;transform-origin:0 0;">'+buildGalaxySVG()+dotsH+'</div>';
+    // Controls overlay (outside canvas so they don't move/scale)
+    html+='<div style="position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:6px;background:#161618cc;border:1px solid #2c2c2e;border-radius:6px;padding:6px 10px;z-index:20;backdrop-filter:blur(8px);">';
+    html+='<button data-sm="zin" style="background:none;border:none;color:#f2f2f7;font-size:16px;cursor:pointer;padding:2px 6px;border-radius:4px;" title="Zoom in">+</button>';
+    html+='<button data-sm="zout" style="background:none;border:none;color:#f2f2f7;font-size:16px;cursor:pointer;padding:2px 6px;border-radius:4px;" title="Zoom out">\u2212</button>';
     html+='<button data-sm="reset" style="background:none;border:none;color:#8e8e93;font-size:11px;cursor:pointer;padding:2px 8px;border-radius:4px;font-family:\'Share Tech Mono\',monospace;" title="Reset view">Reset</button>';
-    html+='<span id="smap-pct" style="color:#8e8e93;font-size:11px;font-family:\'Share Tech Mono\',monospace;min-width:38px;text-align:right;">100%</span>';
+    html+='<span id="smap-pct" style="color:#8e8e93;font-size:11px;font-family:\'Share Tech Mono\',monospace;min-width:42px;text-align:right;">–</span>';
     html+='</div>';
-    html+='<div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);color:#8e8e93;font-size:10px;font-family:\'Share Tech Mono\',monospace;background:#161618cc;border:1px solid #2c2c2e;border-radius:4px;padding:4px 12px;pointer-events:none;">Scroll to zoom \u00b7 Drag to pan \u00b7 Click objects for lore</div>';
+    html+='<div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);color:#8e8e93;font-size:10px;font-family:\'Share Tech Mono\',monospace;background:#161618cc;border:1px solid #2c2c2e;border-radius:4px;padding:4px 12px;pointer-events:none;z-index:20;white-space:nowrap;">Scroll to zoom \u00b7 Drag to pan \u00b7 Click to explore</div>';
     html+='</div>';
   }
 
