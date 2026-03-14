@@ -261,6 +261,27 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 .worlds-btn{margin-top:10px;display:inline-flex;align-items:center;gap:6px;padding:5px 12px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8e8e93;border:1px solid #3a3a3c;border-radius:5px;background:none;cursor:pointer;transition:all .12s;}
 .worlds-btn:hover{color:#f2f2f7;border-color:#636366;background:rgba(255,255,255,.04);}
 .worlds-btn-dot{width:6px;height:6px;border-radius:50%;background:#636366;flex-shrink:0;}
+/* ── Star Map Hotspots ───────────────────────────────────────────────────────── */
+.smap-dot{position:absolute;cursor:pointer;transform:translate(-50%,-50%);z-index:5;display:flex;flex-direction:column;align-items:center;pointer-events:auto;padding:4px 2px 2px;}
+.smap-dot-inner{width:10px;height:10px;border-radius:50%;border:2px solid;transition:transform .15s,box-shadow .15s,filter .15s;flex-shrink:0;}
+.smap-dot.faction .smap-dot-inner{width:13px;height:13px;border-radius:2px;transform:rotate(45deg);}
+.smap-dot:hover .smap-dot-inner{transform:scale(1.6);filter:brightness(1.4);}
+.smap-dot.faction:hover .smap-dot-inner{transform:rotate(45deg) scale(1.4);filter:brightness(1.4);}
+.smap-dot-lbl{font-family:'Share Tech Mono',monospace;font-size:8px;white-space:nowrap;margin-top:4px;text-shadow:0 0 4px #000,0 0 10px #000,1px 1px 0 #000,-1px -1px 0 #000;opacity:.75;pointer-events:none;line-height:1;}
+.smap-dot:hover .smap-dot-lbl{opacity:1;}
+/* ── Star Map Popup ──────────────────────────────────────────────────────────── */
+.smap-popup{position:fixed;background:#161618;border:1px solid #3c3c3e;border-radius:8px;padding:14px 14px 12px;width:320px;z-index:1100;box-shadow:0 8px 40px rgba(0,0,0,.88);pointer-events:auto;}
+.smap-popup-name{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;padding-right:22px;margin-bottom:5px;letter-spacing:.4px;}
+.smap-popup-close{position:absolute;top:9px;right:9px;background:none;border:none;color:#636366;cursor:pointer;font-size:13px;line-height:1;padding:3px 6px;border-radius:4px;}
+.smap-popup-close:hover{color:#f2f2f7;background:rgba(255,255,255,.07);}
+.smap-popup-tags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:8px;}
+.smap-popup-field{display:grid;grid-template-columns:72px 1fr;gap:3px;margin-bottom:3px;font-size:10px;line-height:1.45;}
+.smap-popup-fl{color:#636366;font-family:'Share Tech Mono',monospace;}
+.smap-popup-fv{color:#d1d1d6;font-family:'Share Tech Mono',monospace;}
+.smap-popup-desc{font-size:11.5px;color:#aeaeb2;line-height:1.6;margin-top:9px;max-height:140px;overflow-y:auto;border-top:1px solid #2c2c2e;padding-top:9px;}
+.smap-popup-desc::-webkit-scrollbar{width:3px;}.smap-popup-desc::-webkit-scrollbar-thumb{background:#3a3a3c;border-radius:3px;}
+.smap-popup-worlds{display:block;width:100%;margin-top:10px;padding:8px 10px;background:rgba(0,200,255,.06);border:1px solid rgba(0,200,255,.22);border-radius:5px;color:#00c8ff;font-size:10px;font-family:'Orbitron',sans-serif;cursor:pointer;letter-spacing:.6px;text-align:center;}
+.smap-popup-worlds:hover{background:rgba(0,200,255,.14);border-color:rgba(0,200,255,.4);}
 </style>
 </head>
 <body>
@@ -1891,6 +1912,34 @@ g.galaxy=[
   }
 ];
 
+// ─── Star Map Positions ───────────────────────────────────────────────────────
+// Percentages of image width/height (0–100). Replace coordinates to match your map.
+// Each label [POS-NN] marks a placeholder that needs to be positioned on the actual image.
+const GALAXY_MAP_POS={
+  // Factions / Regions
+  'Alliance Space':    {x:48,y:52},  // [POS-01] Central galaxy — adjust to Alliance territory label
+  'Haven Space':       {x:38,y:26},  // [POS-02] North-central — adjust to Haven territory
+  'Torc Federation':   {x:68,y:72},  // [POS-03] South-east galaxy
+  'Mubothen Empire':   {x:72,y:22},  // [POS-04] North-east galaxy
+  'Zegitor Trade Guild':{x:22,y:48}, // [POS-05] West galaxy (scattered stations)
+  'Freeland':          {x:30,y:46},  // [POS-06] West-central galaxy
+  'The Dark Space':    {x:18,y:74},  // [POS-07] Outer ring / frontier
+  'Nemani Rift':       {x:58,y:36},  // [POS-08] Between Haven and Kraven space
+  'Kraven Space':      {x:82,y:52},  // [POS-09] East galaxy — former Nerulian Empire
+  // Notable Systems
+  'San Tien':          {x:72,y:62},  // [POS-10] Dark Space, edge of former Nerulian territory
+  'New Earth':         {x:20,y:70},  // [POS-11] Dark Space, isolationist colony
+  'Titania':           {x:46,y:58},  // [POS-12] Alliance Space, core system
+  'Sirius':            {x:42,y:50},  // [POS-13] Alliance Space, trade hub
+  'Orion':             {x:50,y:48},  // [POS-14] Alliance Space, Galactic Union seat
+  'Aderan':            {x:54,y:56},  // [POS-15] Alliance Space, prison/broadcast world
+  'Mangara':           {x:35,y:66},  // [POS-16] Dark Space border, embargo zone
+  'Skalan Worlds':     {x:44,y:62},  // [POS-17] Alliance Space, Skalan territory
+  'Berilia':           {x:56,y:44},  // [POS-18] Alliance Space, Patriark homeworld
+};
+// Apply positions to galaxy entries
+(g.galaxy||[]).forEach(function(e){if(GALAXY_MAP_POS[e.name])e.map_pos=GALAXY_MAP_POS[e.name];});
+
 // ─── World Panel Data ─────────────────────────────────────────────────────────
 const worldData={
   orion:{
@@ -2112,12 +2161,30 @@ function toggleWorldEntry(el){
 }
 
 // ─── Star Map Viewer ──────────────────────────────────────────────────────────
+function smapEntryColor(e){
+  switch(e.name){
+    case 'Alliance Space':return '#00c8ff';
+    case 'Haven Space':return '#ff453a';
+    case 'Torc Federation':return '#30d158';
+    case 'Mubothen Empire':return '#ff9f0a';
+    case 'Zegitor Trade Guild':return '#64d2ff';
+    case 'Freeland':return '#bf5af2';
+    case 'The Dark Space':return '#8e8e93';
+    case 'Nemani Rift':return '#ffd60a';
+    case 'Kraven Space':return '#ff2d55';
+    default:return e.worlds_key?'#00c8ff':'#aeaeb2';
+  }
+}
 function initStarmap(){
   var el=document.getElementById('smap-viewer');
   var img=document.getElementById('smap-img');
+  var dotsEl=document.getElementById('smap-dots');
   var pct=document.getElementById('smap-pct');
   if(!el||!img)return;
-  var scale=1,ox=0,oy=0,dragging=false,sx=0,sy=0,sox=0,soy=0;
+  var scale=1,ox=0,oy=0,dragging=false,startX=0,startY=0,sox=0,soy=0,didDrag=false;
+  var dotEls=[];
+  var entries=(g.galaxy||[]).filter(function(e){return e.map_pos;});
+
   function fit(){
     var cw=el.clientWidth,ch=el.clientHeight;
     if(!img.naturalWidth)return;
@@ -2127,6 +2194,18 @@ function initStarmap(){
   function apply(){
     img.style.transform='translate('+ox+'px,'+oy+'px) scale('+scale+')';
     if(pct)pct.textContent=Math.round(scale*100)+'%';
+    if(img.naturalWidth&&dotsEl){
+      var lblScale=Math.max(0.55,Math.min(1.2,1/scale));
+      dotEls.forEach(function(d,i){
+        var e=entries[i];if(!e)return;
+        var wx=e.map_pos.x/100*img.naturalWidth;
+        var wy=e.map_pos.y/100*img.naturalHeight;
+        d.style.left=(wx*scale+ox)+'px';
+        d.style.top=(wy*scale+oy)+'px';
+        var lbl=d.querySelector('.smap-dot-lbl');
+        if(lbl){lbl.style.transform='scale('+lblScale+')';lbl.style.transformOrigin='top center';}
+      });
+    }
   }
   function clamp(){
     var iw=img.naturalWidth*scale,ih=img.naturalHeight*scale;
@@ -2139,16 +2218,78 @@ function initStarmap(){
     if(cx===undefined){cx=el.clientWidth/2;cy=el.clientHeight/2;}
     ox=cx-(cx-ox)*(ns/scale);oy=cy-(cy-oy)*(ns/scale);scale=ns;clamp();apply();
   }
-  img.onload=function(){fit();};
-  if(img.complete&&img.naturalWidth)fit();
+  function buildDots(){
+    if(!dotsEl||!img.naturalWidth)return;
+    dotsEl.innerHTML='';dotEls=[];
+    entries.forEach(function(e,i){
+      var col=smapEntryColor(e);
+      var isFaction=e.entry_type==='faction';
+      var d=document.createElement('div');
+      d.className='smap-dot'+(isFaction?' faction':'');
+      d.dataset.smIdx=i;
+      var inner=document.createElement('div');
+      inner.className='smap-dot-inner';
+      inner.style.background=col;inner.style.borderColor=col;
+      inner.style.boxShadow='0 0 7px '+col;
+      d.appendChild(inner);
+      var lbl=document.createElement('div');
+      lbl.className='smap-dot-lbl';lbl.textContent=e.name;lbl.style.color=col;
+      d.appendChild(lbl);
+      dotsEl.appendChild(d);dotEls.push(d);
+    });
+    apply();
+  }
+  function openSmapPopup(entry,clientX,clientY){
+    var popup=document.getElementById('smap-popup');
+    if(!popup)return;
+    var col=smapEntryColor(entry);
+    var isFaction=entry.entry_type==='faction';
+    var h='<div class="smap-popup-name" style="color:'+col+'">'+esc(entry.name)+'</div>';
+    h+='<button class="smap-popup-close" id="smap-pc">\u2715</button>';
+    if(entry.tags&&entry.tags.length)h+='<div class="smap-popup-tags">'+entry.tags.map(function(t){return '<span class="tag tgr">'+esc(t)+'</span>';}).join('')+'</div>';
+    if(isFaction){
+      if(entry.status)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Status</span><span class="smap-popup-fv">'+esc(entry.status)+'</span></div>';
+      if(entry.territory)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Territory</span><span class="smap-popup-fv">'+esc(entry.territory)+'</span></div>';
+      if(entry.government)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Gov\'t</span><span class="smap-popup-fv">'+esc(entry.government.length>90?entry.government.substring(0,90)+'\u2026':entry.government)+'</span></div>';
+      if(entry.alignment)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Alignment</span><span class="smap-popup-fv">'+esc(entry.alignment)+'</span></div>';
+    } else {
+      if(entry.region)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Region</span><span class="smap-popup-fv">'+esc(entry.region)+'</span></div>';
+      if(entry.faction)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Faction</span><span class="smap-popup-fv">'+esc(entry.faction)+'</span></div>';
+      if(entry.population)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Population</span><span class="smap-popup-fv">'+esc(entry.population)+'</span></div>';
+      if(entry.notable_for)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Notable</span><span class="smap-popup-fv">'+esc(entry.notable_for)+'</span></div>';
+    }
+    if(entry.desc)h+='<div class="smap-popup-desc">'+esc(entry.desc)+'</div>';
+    if(entry.worlds_key)h+='<button class="smap-popup-worlds" onclick="document.getElementById(\'smap-popup\').style.display=\'none\';openWorldPanel(\''+esc(entry.worlds_key)+'\')">\u2b21 VIEW INDIVIDUAL WORLDS</button>';
+    popup.innerHTML=h;
+    popup.style.display='block';
+    var pw=320,ph=popup.offsetHeight||320;
+    var vw=window.innerWidth,vh=window.innerHeight;
+    var px=clientX+18,py=clientY-80;
+    if(px+pw>vw-12)px=clientX-pw-18;
+    if(py+ph>vh-12)py=vh-ph-12;
+    if(py<10)py=10;if(px<10)px=10;
+    popup.style.left=px+'px';popup.style.top=py+'px';
+    var pc=document.getElementById('smap-pc');
+    if(pc)pc.onclick=function(ev){ev.stopPropagation();popup.style.display='none';};
+  }
+  img.onload=function(){fit();buildDots();};
+  if(img.complete&&img.naturalWidth){fit();buildDots();}
   el.addEventListener('wheel',function(e){e.preventDefault();zoom(e.deltaY<0?1.12:1/1.12,e.offsetX,e.offsetY);},{passive:false});
-  el.addEventListener('mousedown',function(e){if(e.button!==0)return;dragging=true;sx=e.clientX;sy=e.clientY;sox=ox;soy=oy;img.style.cursor='grabbing';e.preventDefault();});
-  document.addEventListener('mousemove',function(e){if(!dragging)return;ox=sox+(e.clientX-sx);oy=soy+(e.clientY-sy);clamp();apply();});
+  el.addEventListener('mousedown',function(e){if(e.button!==0)return;dragging=true;didDrag=false;startX=e.clientX;startY=e.clientY;sox=ox;soy=oy;img.style.cursor='grabbing';e.preventDefault();});
+  document.addEventListener('mousemove',function(e){if(!dragging)return;var dx=e.clientX-startX,dy=e.clientY-startY;if(Math.sqrt(dx*dx+dy*dy)>5)didDrag=true;ox=sox+dx;oy=soy+dy;clamp();apply();});
   document.addEventListener('mouseup',function(){if(!dragging)return;dragging=false;img.style.cursor='grab';});
-  el.addEventListener('touchstart',function(e){if(e.touches.length===1){dragging=true;sx=e.touches[0].clientX;sy=e.touches[0].clientY;sox=ox;soy=oy;}e.preventDefault();},{passive:false});
-  el.addEventListener('touchmove',function(e){if(e.touches.length===1&&dragging){ox=sox+(e.touches[0].clientX-sx);oy=soy+(e.touches[0].clientY-sy);clamp();apply();}e.preventDefault();},{passive:false});
+  el.addEventListener('touchstart',function(e){if(e.touches.length===1){dragging=true;didDrag=false;startX=e.touches[0].clientX;startY=e.touches[0].clientY;sox=ox;soy=oy;}e.preventDefault();},{passive:false});
+  el.addEventListener('touchmove',function(e){if(e.touches.length===1&&dragging){var dx=e.touches[0].clientX-startX,dy=e.touches[0].clientY-startY;if(Math.sqrt(dx*dx+dy*dy)>5)didDrag=true;ox=sox+dx;oy=soy+dy;clamp();apply();}e.preventDefault();},{passive:false});
   el.addEventListener('touchend',function(){dragging=false;});
-  el.addEventListener('click',function(e){var t=e.target.closest('[data-sm]');if(!t)return;var a=t.dataset.sm;if(a==='zin')zoom(1.3);else if(a==='zout')zoom(1/1.3);else if(a==='reset')fit();});
+  el.addEventListener('click',function(e){
+    if(didDrag){didDrag=false;return;}
+    var sm=e.target.closest('[data-sm]');
+    if(sm){var a=sm.dataset.sm;if(a==='zin')zoom(1.3);else if(a==='zout')zoom(1/1.3);else if(a==='reset')fit();return;}
+    var dot=e.target.closest('[data-sm-idx]');
+    if(dot){var idx=parseInt(dot.dataset.smIdx);var entry=entries[idx];if(entry)openSmapPopup(entry,e.clientX,e.clientY);return;}
+    var popup=document.getElementById('smap-popup');
+    if(popup&&!e.target.closest('#smap-popup'))popup.style.display='none';
+  });
 }
 
 // ─── Render ───────────────────────────────────────────────────────────────────
@@ -3432,13 +3573,14 @@ function render(){
     cnt=1;
     html='<div id="smap-viewer" style="position:relative;width:100%;height:calc(100vh - 120px);overflow:hidden;background:#0a0a0c;border-radius:6px;border:1px solid #2c2c2e;user-select:none;">';
     html+='<img id="smap-img" src="Star-Map-v3_HIGH_QUALITY.png" alt="Star Map" style="position:absolute;top:0;left:0;transform-origin:0 0;cursor:grab;image-rendering:auto;" draggable="false">';
+    html+='<div id="smap-dots" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:5;overflow:visible;"></div>';
     html+='<div style="position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:6px;background:#161618;border:1px solid #2c2c2e;border-radius:6px;padding:6px 10px;z-index:10;">';
     html+='<button data-sm="zin" style="background:none;border:none;color:#f2f2f7;font-size:16px;cursor:pointer;padding:2px 6px;border-radius:4px;font-family:inherit;" title="Zoom in">+</button>';
     html+='<button data-sm="zout" style="background:none;border:none;color:#f2f2f7;font-size:16px;cursor:pointer;padding:2px 6px;border-radius:4px;font-family:inherit;" title="Zoom out">\u2212</button>';
     html+='<button data-sm="reset" style="background:none;border:none;color:#8e8e93;font-size:11px;cursor:pointer;padding:2px 8px;border-radius:4px;font-family:\'Share Tech Mono\',monospace;" title="Reset view">Reset</button>';
     html+='<span id="smap-pct" style="color:#8e8e93;font-size:11px;font-family:\'Share Tech Mono\',monospace;min-width:38px;text-align:right;">100%</span>';
     html+='</div>';
-    html+='<div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);color:#8e8e93;font-size:10px;font-family:\'Share Tech Mono\',monospace;background:#161618cc;border:1px solid #2c2c2e;border-radius:4px;padding:4px 12px;pointer-events:none;">Scroll to zoom \u00b7 Drag to pan</div>';
+    html+='<div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);color:#8e8e93;font-size:10px;font-family:\'Share Tech Mono\',monospace;background:#161618cc;border:1px solid #2c2c2e;border-radius:4px;padding:4px 12px;pointer-events:none;">Scroll to zoom \u00b7 Drag to pan \u00b7 Click objects for lore</div>';
     html+='</div>';
   }
 
@@ -3459,5 +3601,6 @@ render();
   <div class="world-panel-body" id="world-panel-body"></div>
 </div>
 <div id="world-panel-overlay" class="world-panel-overlay" onclick="closeWorldPanel()"></div>
+<div id="smap-popup" class="smap-popup" style="display:none;"></div>
 </body>
 </html>
