@@ -1917,26 +1917,26 @@ g.galaxy=[
 // Percentages of image width/height (0–100). Replace coordinates to match your map.
 // Each label [POS-NN] marks a placeholder that needs to be positioned on the actual image.
 const GALAXY_MAP_POS={
-  // Factions / Regions
-  'Alliance Space':    {x:48,y:52},  // [POS-01] Central galaxy — adjust to Alliance territory label
-  'Haven Space':       {x:38,y:26},  // [POS-02] North-central — adjust to Haven territory
-  'Torc Federation':   {x:68,y:72},  // [POS-03] South-east galaxy
-  'Mubothen Empire':   {x:72,y:22},  // [POS-04] North-east galaxy
-  'Zegitor Trade Guild':{x:22,y:48}, // [POS-05] West galaxy (scattered stations)
-  'Freeland':          {x:30,y:46},  // [POS-06] West-central galaxy
-  'The Dark Space':    {x:18,y:74},  // [POS-07] Outer ring / frontier
-  'Nemani Rift':       {x:58,y:36},  // [POS-08] Between Haven and Kraven space
-  'Kraven Space':      {x:82,y:52},  // [POS-09] East galaxy — former Nerulian Empire
+  // Factions / Regions — positions calibrated to Star-Map-v3_HIGH_QUALITY.png
+  'Alliance Space':    {x:45,y:51},
+  'Haven Space':       {x:33,y:12},
+  'Torc Federation':   {x:65,y:79},
+  'Mubothen Empire':   {x:68,y:8},
+  'Zegitor Trade Guild':{x:20,y:45},
+  'Freeland':          {x:28,y:42},
+  'The Dark Space':    {x:17,y:82},
+  'Nemani Rift':       {x:54,y:28},
+  'Kraven Space':      {x:79,y:52},
   // Notable Systems
-  'San Tien':          {x:72,y:62},  // [POS-10] Dark Space, edge of former Nerulian territory
-  'New Earth':         {x:20,y:70},  // [POS-11] Dark Space, isolationist colony
-  'Titania':           {x:46,y:58},  // [POS-12] Alliance Space, core system
-  'Sirius':            {x:42,y:50},  // [POS-13] Alliance Space, trade hub
-  'Orion':             {x:50,y:48},  // [POS-14] Alliance Space, Galactic Union seat
-  'Aderan':            {x:54,y:56},  // [POS-15] Alliance Space, prison/broadcast world
-  'Mangara':           {x:35,y:66},  // [POS-16] Dark Space border, embargo zone
-  'Skalan Worlds':     {x:44,y:62},  // [POS-17] Alliance Space, Skalan territory
-  'Berilia':           {x:56,y:44},  // [POS-18] Alliance Space, Patriark homeworld
+  'San Tien':          {x:69,y:66},
+  'New Earth':         {x:18,y:77},
+  'Titania':           {x:43,y:60},
+  'Sirius':            {x:39,y:50},
+  'Orion':             {x:47,y:46},
+  'Aderan':            {x:51,y:57},
+  'Mangara':           {x:32,y:71},
+  'Skalan Worlds':     {x:42,y:65},
+  'Berilia':           {x:53,y:39},
 };
 // Apply positions to galaxy entries
 (g.galaxy||[]).forEach(function(e){if(GALAXY_MAP_POS[e.name])e.map_pos=GALAXY_MAP_POS[e.name];});
@@ -2296,9 +2296,10 @@ function openSmapPopup(entry,clientX,clientY){
 function initStarmap(){
   var vp=document.getElementById('smap-viewport');
   var cv=document.getElementById('smap-canvas');
+  var img=document.getElementById('smap-img');
   if(!vp||!cv)return;
-  // Canvas logical size (matches buildGalaxySVG dimensions)
-  var CW=2000,CH=2000;
+  // Canvas logical size — read from the PNG's natural dimensions once loaded
+  var CW=1323,CH=886; // sensible defaults matching Star-Map-v3_HIGH_QUALITY.png
   var scale=1,ox=0,oy=0,dragging=false,didDrag=false,startX=0,startY=0,sox=0,soy=0;
   var pinchDist=0;
   var pct=document.getElementById('smap-pct');
@@ -2309,6 +2310,7 @@ function initStarmap(){
     if(pct)pct.textContent=Math.round(scale*100)+'%';
   }
   function fit(){
+    if(img&&img.naturalWidth){CW=img.naturalWidth;CH=img.naturalHeight;}
     var vw=vp.clientWidth,vh=vp.clientHeight;
     // Leave a little breathing room so the galaxy doesn't fill edge-to-edge
     var s=Math.min(vw/CW,vh/CH)*0.92;
@@ -2401,7 +2403,7 @@ function initStarmap(){
     if(popup&&!e.target.closest('#smap-popup'))popup.style.display='none';
   });
 
-  fit();
+  if(img){img.addEventListener('load',fit);if(img.complete&&img.naturalWidth)fit();else fit();}else{fit();}
 }
 
 // ─── Render ───────────────────────────────────────────────────────────────────
@@ -3689,16 +3691,20 @@ function render(){
     smEntries.forEach(function(e,i){
       var col=smapEntryColor(e);
       var isFaction=e.entry_type==='faction';
-      // Map percentage (0-100) → canvas pixels (0-2000)
-      var px=e.map_pos.x*20,py=e.map_pos.y*20;
-      dotsH+='<div class="smap-dot'+(isFaction?' faction':'')+'" data-smap-idx="'+i+'" style="left:'+px+'px;top:'+py+'px;">';
+      // Map percentage (0-100) → CSS % relative to canvas (which matches the PNG image dimensions)
+      dotsH+='<div class="smap-dot'+(isFaction?' faction':'')+'" data-smap-idx="'+i+'" style="left:'+e.map_pos.x+'%;top:'+e.map_pos.y+'%;">';
       dotsH+='<div class="smap-dot-inner" style="background:'+col+';border-color:'+col+';box-shadow:0 0 10px '+col+',0 0 20px '+col+'44;"></div>';
       dotsH+='<div class="smap-dot-lbl" style="color:'+col+';">'+esc(e.name)+'</div>';
       dotsH+='</div>';
     });
     html='<div id="smap-viewport" style="position:relative;width:100%;height:calc(100vh - 120px);overflow:hidden;background:#06060d;border-radius:6px;border:1px solid #2c2c2e;user-select:none;cursor:grab;">';
-    // smap-canvas: one container that gets the CSS transform — SVG background + all dots live here
-    html+='<div id="smap-canvas" style="position:absolute;top:0;left:0;width:2000px;height:2000px;transform-origin:0 0;">'+buildGalaxySVG()+dotsH+'</div>';
+    // smap-canvas: one container that gets the CSS transform — PNG image + all dots live here
+    // The inner wrapper is position:relative so dot % coords are relative to the image dimensions
+    html+='<div id="smap-canvas" style="position:absolute;top:0;left:0;transform-origin:0 0;">'
+      +'<div id="smap-inner" style="position:relative;line-height:0;">'
+      +'<img id="smap-img" src="Star-Map-v3_HIGH_QUALITY.png" alt="Star Map" style="display:block;pointer-events:none;max-width:none;" draggable="false">'
+      +dotsH
+      +'</div></div>';
     // Controls overlay (outside canvas so they don't move/scale)
     html+='<div style="position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:6px;background:#161618cc;border:1px solid #2c2c2e;border-radius:6px;padding:6px 10px;z-index:20;backdrop-filter:blur(8px);">';
     html+='<button data-sm="zin" style="background:none;border:none;color:#f2f2f7;font-size:16px;cursor:pointer;padding:2px 6px;border-radius:4px;" title="Zoom in">+</button>';
