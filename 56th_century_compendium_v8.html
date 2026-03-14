@@ -2351,37 +2351,34 @@ function render(){
     const allCats=[...new Set(g.equipment.map(e=>e.category).filter(Boolean))];
     const F=g.equipment.filter(e=>ms([e.name,e.effect,e.category,e.legality,e.availability,e.size])).filter(e=>!af||e.category===af);
     cnt=F.length;
+    const eqAvailCol={'COMMON':'var(--mu)','UNCOMMON':'var(--gr)','RARE':'var(--a)','LIMITED':'var(--ye)','UNIQUE':'var(--a3)','CLASSIFIED':'var(--re)'};
     html='<div class="stitle">🎒 EQUIPMENT <span class="badge">'+g.equipment.length+'</span></div>';
     html+='<div class="fbar">'+fcBtn('ALL','ALL',af);
     allCats.forEach(c=>{html+=fcBtn(c,c,af);});
     html+='</div>';
-    if(F.length){
-      html+='<div class="ssub">Quick Reference</div>';
-      html+='<div style="overflow-x:auto;margin-bottom:14px;"><table class="stab"><thead><tr><th>Name</th><th>Category</th><th>Size</th><th>Availability</th><th>Legality</th><th>Cost</th></tr></thead><tbody>';
-      F.forEach(e=>{html+='<tr><td>'+hl(e.name,sq)+'</td><td class="minmax">'+hl(e.category||'—',sq)+'</td><td>'+hl(e.size&&e.size!=='—'?e.size:'—',sq)+'</td><td>'+hl(e.availability||'—',sq)+'</td><td>'+hl(e.legality||'—',sq)+'</td><td style="color:var(--gr);">'+(e.cost&&e.cost!='0'?fmt(e.cost)+' Cr':'—')+'</td></tr>';});
+    if(!F.length){html+='<div class="empty">No items match your filters.</div>';}
+    else{
+      const grouped={};
+      F.forEach(e=>{const k=e.category||'Uncategorised';if(!grouped[k])grouped[k]=[];grouped[k].push(e);});
+      html+='<div style="overflow-x:auto;"><table class="stab" style="width:100%;">';
+      html+='<thead><tr><th>Name</th><th>Size</th><th>Avail</th><th>Legality</th><th style="text-align:right;">Cost</th><th>Notes</th></tr></thead><tbody>';
+      allCats.forEach(cat=>{
+        if(!grouped[cat]) return;
+        html+='<tr><td colspan="6" style="background:var(--b2);color:var(--tx);font-family:Orbitron,sans-serif;font-size:10px;letter-spacing:.08em;padding:7px 10px;border-top:1px solid var(--a);border-bottom:1px solid var(--brd);">'+esc(cat.toUpperCase())+'</td></tr>';
+        grouped[cat].forEach(e=>{
+          const ac=eqAvailCol[e.availability]||'var(--mu)';
+          html+='<tr>';
+          html+='<td style="color:var(--a);font-weight:600;">'+hl(e.name,sq)+'</td>';
+          html+='<td class="minmax">'+hl(e.size&&e.size!=='—'?e.size:'—',sq)+'</td>';
+          html+='<td style="color:'+ac+';font-family:ShareTechMono,monospace;font-size:10px;">'+hl(e.availability||'—',sq)+'</td>';
+          html+='<td>'+hl(e.legality||'—',sq)+'</td>';
+          html+='<td style="color:var(--gr);text-align:right;white-space:nowrap;">'+(e.cost&&e.cost!='0'?fmt(e.cost)+' cr':'—')+'</td>';
+          html+='<td style="font-size:11px;opacity:.85;max-width:340px;">'+hl(e.effect||'',sq)+'</td>';
+          html+='</tr>';
+        });
+      });
       html+='</tbody></table></div>';
     }
-    html+='<div class="grid">';
-    F.forEach((e,i)=>{
-      const id='eq'+i; const rc=rarCls(e.availability);
-      html+='<div class="card '+rc+'" id="'+id+'" data-tog="'+id+'">';
-      html+='<div class="ch"><div class="cn">'+hl(e.name,sq)+'</div><div class="cs-right">'+hl(e.legality||'—',sq)+'</div></div>';
-      html+='<div class="cr2">';
-      if(e.size&&e.size!=='—') html+='<span class="wpn-pill" style="opacity:.7;">📦 '+hl(e.size,sq)+'</span>';
-      if(e.category) html+='<span class="wpn-pill" style="opacity:.6;">'+hl(e.category,sq)+'</span>';
-      html+='</div>';
-      html+='<div class="cr3"><div class="cr3l">'+(e.availability?'<span class="wpn-pill wpill-avl">◈ '+hl(e.availability,sq)+'</span>':'')+'</div><div class="cr3r">'+(e.cost&&e.cost!='0'?fmt(e.cost)+' Cr':'—')+'</div></div>';
-      html+='<div class="cb">';
-      if(e.effect) html+='<div class="desc" style="margin-bottom:8px;">'+hl(e.effect,sq)+'</div>';
-      html+='<div class="fg">';
-      if(e.size&&e.size!=='—') html+='<div class="f"><div class="fl">📦 Size</div><div class="fv">'+hl(e.size,sq)+'</div></div>';
-      if(e.cost&&e.cost!='0')  html+='<div class="f"><div class="fl">© Cost</div><div class="fv">'+fmt(e.cost)+' Cr</div></div>';
-      if(e.legality)           html+='<div class="f"><div class="fl">⚖ Legality</div><div class="fv">'+hl(e.legality,sq)+'</div></div>';
-      if(e.availability)       html+='<div class="f"><div class="fl">◈ Avail</div><div class="fv">'+hl(e.availability,sq)+'</div></div>';
-      if(e.category)           html+='<div class="f"><div class="fl">🏷 Category</div><div class="fv">'+hl(e.category,sq)+'</div></div>';
-      html+='</div></div></div>';
-    });
-    html+='</div>';
   }
 
   else if(cs==='medical'){
