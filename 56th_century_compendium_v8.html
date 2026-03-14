@@ -147,6 +147,9 @@ main{flex:1;overflow-y:auto;padding:14px;background:var(--bg);}
 .stab th:first-child{text-align:left;}
 .stab td{padding:3px 7px;border-bottom:1px solid rgba(255,255,255,.03);text-align:center;font-size:10px;}
 .stab td:first-child{text-align:left;color:var(--a);font-size:9px;}
+.eq-tab th{text-align:left;padding:6px 12px;}.eq-tab th:last-child{text-align:left;}
+.eq-tab td{text-align:left;padding:9px 12px;font-size:12px;border-bottom:1px solid rgba(255,255,255,.06);vertical-align:top;}
+.eq-tab td:first-child{font-size:12px;}.eq-tab td:nth-child(5){text-align:right;}
 .avg{color:#e8f4ff;}.minmax{color:var(--mu);}
 .trait-row{display:flex;gap:8px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:11px;}
 .trait-row:last-child{border-bottom:none;}
@@ -2360,20 +2363,20 @@ function render(){
     else{
       const grouped={};
       F.forEach(e=>{const k=e.category||'Uncategorised';if(!grouped[k])grouped[k]=[];grouped[k].push(e);});
-      html+='<div style="overflow-x:auto;"><table class="stab" style="width:100%;">';
-      html+='<thead><tr><th>Name</th><th>Size</th><th>Avail</th><th>Legality</th><th style="text-align:right;">Cost</th><th>Notes</th></tr></thead><tbody>';
+      html+='<div style="overflow-x:auto;"><table class="stab eq-tab">';
+      html+='<thead><tr><th>Name</th><th>Size</th><th>Avail</th><th>Legality</th><th>Cost</th><th>Notes</th></tr></thead><tbody>';
       allCats.forEach(cat=>{
         if(!grouped[cat]) return;
-        html+='<tr><td colspan="6" style="background:var(--b2);color:var(--tx);font-family:Orbitron,sans-serif;font-size:10px;letter-spacing:.08em;padding:7px 10px;border-top:1px solid var(--a);border-bottom:1px solid var(--brd);">'+esc(cat.toUpperCase())+'</td></tr>';
+        html+='<tr><td colspan="6" style="background:var(--b2);color:var(--tx);font-family:Orbitron,sans-serif;font-size:10px;letter-spacing:.08em;padding:8px 12px;border-top:1px solid var(--a);border-bottom:1px solid var(--brd);">'+esc(cat.toUpperCase())+'</td></tr>';
         grouped[cat].forEach(e=>{
           const ac=eqAvailCol[e.availability]||'var(--mu)';
           html+='<tr>';
-          html+='<td style="color:var(--a);font-weight:600;">'+hl(e.name,sq)+'</td>';
-          html+='<td class="minmax">'+hl(e.size&&e.size!=='—'?e.size:'—',sq)+'</td>';
-          html+='<td style="color:'+ac+';font-family:ShareTechMono,monospace;font-size:10px;">'+hl(e.availability||'—',sq)+'</td>';
-          html+='<td>'+hl(e.legality||'—',sq)+'</td>';
-          html+='<td style="color:var(--gr);text-align:right;white-space:nowrap;">'+(e.cost&&e.cost!='0'?fmt(e.cost)+' cr':'—')+'</td>';
-          html+='<td style="font-size:11px;opacity:.85;max-width:340px;">'+hl(e.effect||'',sq)+'</td>';
+          html+='<td style="color:var(--a);font-weight:600;min-width:160px;">'+hl(e.name,sq)+'</td>';
+          html+='<td class="minmax" style="white-space:nowrap;">'+hl(e.size&&e.size!=='—'?e.size:'—',sq)+'</td>';
+          html+='<td style="color:'+ac+';white-space:nowrap;">'+hl(e.availability||'—',sq)+'</td>';
+          html+='<td style="white-space:nowrap;">'+hl(e.legality||'—',sq)+'</td>';
+          html+='<td style="color:var(--gr);white-space:nowrap;">'+(e.cost&&e.cost!='0'?fmt(e.cost)+' cr':'—')+'</td>';
+          html+='<td style="opacity:.85;">'+hl(e.effect||'',sq)+'</td>';
           html+='</tr>';
         });
       });
