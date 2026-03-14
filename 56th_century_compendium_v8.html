@@ -2355,6 +2355,12 @@ function render(){
     html+='<div class="fbar">'+fcBtn('ALL','ALL',af);
     allCats.forEach(c=>{html+=fcBtn(c,c,af);});
     html+='</div>';
+    if(F.length){
+      html+='<div class="ssub">Quick Reference</div>';
+      html+='<div style="overflow-x:auto;margin-bottom:14px;"><table class="stab"><thead><tr><th>Name</th><th>Category</th><th>Size</th><th>Availability</th><th>Legality</th><th>Cost</th></tr></thead><tbody>';
+      F.forEach(e=>{html+='<tr><td>'+hl(e.name,sq)+'</td><td class="minmax">'+hl(e.category||'—',sq)+'</td><td>'+hl(e.size&&e.size!=='—'?e.size:'—',sq)+'</td><td>'+hl(e.availability||'—',sq)+'</td><td>'+hl(e.legality||'—',sq)+'</td><td style="color:var(--gr);">'+(e.cost&&e.cost!='0'?fmt(e.cost)+' Cr':'—')+'</td></tr>';});
+      html+='</tbody></table></div>';
+    }
     html+='<div class="grid">';
     F.forEach((e,i)=>{
       const id='eq'+i; const rc=rarCls(e.availability);
