@@ -2248,6 +2248,360 @@ const worldData={
   }
 };
 
+// ─── Galactic Catalogue Data ──────────────────────────────────────────────────
+g.catalogue_systems=[
+  {
+    id:'orion',name:'Orion System',region:'Alliance Space',classification:'Core System',
+    faction:'Galactic Union / Alliance',status:'active',
+    tags:['Alliance Space','Seat of Power','Heavily Defended','Political Centre'],
+    desc:'The Orion system is the political and corporate centre of the known galaxy — five worlds across every stage of construction, ruin, and ambition. Home to the Galactic Union and the ghost of OrionWorks, the organisation that built artificial planets and may have started the Tronik War. It is heavily defended, intensely surveilled, and the kind of place where what you know and who you know matters more than what you can do.',
+    planets:[
+      {id:'orion_1',name:'Orion 1',type:'Space Station — Skeletal Frame',status:'ruins',statusLabel:'Largely Salvaged',
+       atmosphere:'Breathable',atm_note:'Maintained sections only — outer ring is hard vacuum',
+       climate:'Controlled (Station)',gravity:'Standard',grav_note:'Artificial gravity — fails in outer ring sections',
+       faction:'Galactic Union',population:'~12,000 maintenance personnel',
+       demographics:'Mixed — predominantly GU administrative staff',
+       government:'GU Archival Commission',tech_level:'Advanced',
+       economy:'Historical preservation, archival maintenance',
+       access:'Restricted',access_note:'GU Level 2 clearance required — heritage site designation',
+       hazards:['Structural instability in outer modules','Vacuum exposure in unsecured sections','Decompression risk in unsealed corridors'],
+       notable_locations:[
+         {name:'Founding Chamber',desc:'The original chamber where the Galactic Union charter was first signed. Maintained under preservation fields. The original furniture and documents remain. Access Level 3.'},
+         {name:'Central Archives',desc:'Earliest GU operational records. Some documents are flagged restricted with no public explanation. Access logs show entries that do not match any registered personnel.'}
+       ],
+       hooks:['Archive access logs show someone has been reviewing the founding documents — but no registered visit matches the timestamps.','A decommissioned module in the outer ring is still transmitting on an old GU frequency. Nobody has investigated it in thirty years.','A researcher claims a key founding document was removed from the archive. The GU says it never existed.'],
+       desc:'Orion 1 was never a planet — it was a space station, and the single most important structure in the history of the Galactic Union. This is where the Union was founded, where the first trade charters were signed, and where the philosophy of self-sufficiency that built an empire was first written down. Most of the station\'s superstructure was gradually stripped and repurposed during the construction of Orion 2, leaving behind a skeletal frame maintained more as a monument than a functional installation.'},
+      {id:'orion_2',name:'Orion 2',type:'Failed Artificial Planet — Navigational Hazard',status:'abandoned',statusLabel:'Salvaged & Abandoned',
+       atmosphere:'None',atm_note:'Core collapsed — no breathable zones remain',climate:'Void',
+       gravity:'None',grav_note:'Fragmented mass — gravitational field unstable and unpredictable',
+       faction:'Galactic Union (nominal)',population:'Uninhabited',demographics:'None',
+       government:'None — navigational hazard zone',tech_level:'N/A',economy:'None',
+       access:'Forbidden',access_note:'Active navigational hazard — approach prohibited within 200km',
+       hazards:['Gravitational instability — unpredictable micro-gravity wells','High-velocity debris field','No rescue capability within effective range','Electromagnetic interference from core remnants'],
+       notable_locations:[{name:'Construction Core Remnant',desc:'The original structural skeleton of the failed planet. Partially accessible by skilled pilots but structurally unpredictable. The GU uses it as a cautionary case study in engineering schools.'}],
+       hooks:['Something in the debris field is still powered. It shouldn\'t be.','A salvager who went to recover material from the debris never came back. The ship came back. The salvager didn\'t.','The GU\'s official account of why Orion 2 failed has been challenged by newly declassified engineering documents suggesting sabotage.'],
+       desc:'Orion 2 was the Galactic Union\'s first attempt to build a planet from scratch — ambitious, technically groundbreaking, and ultimately a failure. Structural instability in the core design made the world uninhabitable and increasingly dangerous. Rather than write off the investment, the Union stripped it completely, salvaged every usable component, and used what they learned to design Orion 3. Nothing remains except navigational hazard markers and the most expensive lesson in the galaxy\'s history.'},
+      {id:'orion_3',name:'Orion 3',type:'Artificial Planet — GU Capital',status:'active',statusLabel:'Active — GU Capital',
+       atmosphere:'Breathable',atm_note:'Fully engineered — maintained at precise composition',
+       climate:'Temperate (Engineered)',gravity:'Standard',grav_note:'Artificially generated and maintained — highly stable',
+       faction:'Galactic Union',population:'~9 billion',
+       demographics:'Mixed — all playable races, heavily cosmopolitan',
+       government:'Galactic Union Executive Council',tech_level:'Advanced',
+       economy:'Administration, finance, corporate HQ, legal services, high-end manufacturing',
+       access:'Permit Required',access_note:'Visitor permits mandatory — background checks standard. Certain districts require additional clearance.',
+       hazards:['Pervasive surveillance — assume all public conversations monitored','Corporate espionage operations constant — multiple competing cells active','Political intrigue — wrong associations can end careers or lives','Security forces react fast and with lethal force'],
+       notable_locations:[
+         {name:'GU Senate Chambers',desc:'The central legislative body of the Galactic Union. Open sessions attended by representatives from every member system. The real decisions are made elsewhere.'},
+         {name:'Central Treasury',desc:'The financial heart of the GU. Manages the largest reserve of credits and physical assets in the galaxy. Effectively impregnable.'},
+         {name:'Corporate Quarter',desc:'The district where every major corporation maintains its primary GU offices. Heavily policed, intensely political. The density of power here is difficult to overstate.'},
+         {name:'The Understrata',desc:'The lower levels of Orion 3 — maintenance corridors and service infrastructure housing the city\'s underclass. Off the tourist maps but very much part of the economy.'}
+       ],
+       hooks:['A GU senator needs something moved off-planet quietly. Whatever it is, it\'s worth enough that two other parties are already aware it\'s moving.','A corporate contract dispute can only be resolved by physical access to documents in the Central Archive. Getting in requires a legitimate cover.','A GU intelligence officer has gone quiet. Their last communication mentioned something about Orion 4 and a name that shouldn\'t be alive.'],
+       desc:'Orion 3 is proof that the Galactic Union learns from its failures. Built using everything salvaged from Orion 2, it was the first fully successful artificial planet ever constructed and has stood for centuries. The GU operates its core functions here — executive councils, primary treasury, largest corporate campus, and the administrative infrastructure that ties together the most powerful organisation in the known galaxy. The planet is clean, efficient, and extraordinarily dense with power. Every major corporation has an office here. Security is absolute.'},
+      {id:'orion_4',name:'Orion 4',type:'Artificial Planet — Devastated Ruins',status:'ruins',statusLabel:'Post-War Ruins',
+       atmosphere:'Thin',atm_note:'Partial atmosphere remains — most pressurised sections breached. Respirator advised in unpowered zones.',
+       climate:'Variable (Collapsed Infrastructure)',gravity:'Standard',grav_note:'Gravity generators still functional in some districts — fails without warning in others',
+       faction:'Galactic Union (nominal — mostly abandoned)',population:'~200,000 — salvagers, squatters, black site operators',
+       demographics:'Mostly human and Non-Born — transient, no reliable census data',
+       government:'None — zone-by-zone control by various groups',
+       tech_level:'Variable (Cutting-Edge remnants in ruins / Primitive survival conditions in inhabited zones)',
+       economy:'Salvage, black market research, off-books operations',
+       access:'Open (nominally)',access_note:'No official entry restrictions but GU patrols question anyone approaching classified research districts.',
+       hazards:['Structural collapse — entire districts can depressurise without warning','Gravity field failure zones','Hostile squatter gangs in unstable zones','Unknown activated technology in unsecured OrionWorks facilities','Vacuum exposure in breached sections','Radiation from unshielded power cores'],
+       notable_locations:[
+         {name:'OrionWorks Research Campus (Ruins)',desc:'The former home of the most technologically advanced research organisation in the galaxy. Most is destroyed. Some is not. What remained in the labs when everyone left is an open question.'},
+         {name:'The Pressurised Zones',desc:'Six districts that still maintain atmosphere and gravity. Populated by salvagers, squatters, and people with very good reasons not to be anywhere that has a census.'},
+         {name:'Sector 7 (Classified)',desc:'A GU-marked restricted zone in the heart of the former research campus. No public documentation exists on what is there. GU patrols actively redirect anyone approaching it.'}
+       ],
+       hooks:['A buyer has commissioned the recovery of a specific piece of OrionWorks technology. The description is vague. The payment is extraordinary. The seller clearly already knows exactly where it is.','The GU has quietly placed a team on Orion 4. They are not listed in any accessible personnel database. They have been there for six months.','Something in the ruins is broadcasting a signal that matches a communication format only OrionWorks used — and OrionWorks has been defunct for fifty years.'],
+       desc:'Orion 4 was once the most technologically advanced world in the known galaxy. Home to OrionWorks, it was a world where the future was being built in real time — gleaming infrastructure, cutting-edge research, and the galaxy\'s brightest minds. Then the Tronik War started. The devastation was near-total. OrionWorks collapsed. Most of its leadership died or disappeared. What remains is a partially demolished world — some districts still pressurised, most open to vacuum, all of it structurally unpredictable. Somewhere in the wreckage, things that were being developed before the war may still be intact. The Union quietly discourages investigation.'},
+      {id:'orion_5',name:'Orion 5',type:'Incomplete Artificial Planet — Construction Frame',status:'incomplete',statusLabel:'Construction Halted',
+       atmosphere:'None',atm_note:'Frame only — no life support infrastructure installed',
+       climate:'Void',gravity:'None',grav_note:'Structural skeleton only — no gravity systems installed',
+       faction:'Galactic Union',population:'Uninhabited',demographics:'None',
+       government:'GU (ownership only — no administration)',tech_level:'N/A',economy:'None',
+       access:'Restricted',access_note:'Construction zone designation — no authorised civilian access. Frame is completely unsecured.',
+       hazards:['No life support — full EVA required throughout','Loose construction materials','Structural instability in incomplete sections','Long-term vacuum exposure in all areas'],
+       notable_locations:[{name:'Primary Superstructure Hub',desc:'The central node of the planetary frame. The engineering work here represents the height of OrionWorks\' design capability. Everything connects to this point. Nothing beyond it has ever been installed.'}],
+       hooks:['Someone is secretly using sections of Orion 5 as a meeting location. No surveillance, no life support, total deniability — if you can get there.','A GU procurement order for Orion 5 construction materials was quietly reactivated six months ago. Nobody who knows what it means will discuss it.','A plan to complete Orion 5 exists. Someone is trying to find it before the GU can bury it again.'],
+       desc:'Orion 5 exists as a frame. The superstructure is in place — the skeleton of what would have been the most ambitious planetary construction project the GU had ever attempted, designed by OrionWorks at the height of its capability. Then OrionWorks collapsed. The engineers went home or disappeared. The supply chains dried up. That was fifty years ago. Not a single component has been added since. The GU lists it as a suspended project with no scheduled resumption date.'}
+    ]
+  },
+  {
+    id:'titania',name:'Titania System',region:'Alliance Space',classification:'Core System — Contested Zone',
+    faction:'Alliance / Corporate Contested',status:'warzone',
+    tags:['Alliance Space','Corporate Warzone','Morondium','Military','Infamous'],
+    desc:'The Titania system is defined by morondium — a living crystalline compound found nowhere else in the galaxy that grants metals regenerative properties when infused. Every major corporation wants it. The result is a permanent corporate warzone on Titania 2, overseen by Nova cruisers enforcing a strict ground-combat-only agreement. The phrase "Warrior of Titan" refers to anyone who has served time here — a mark of toughness earned the hard way.',
+    planets:[
+      {id:'titania_prime',name:'Titania Prime',type:'Destroyed World — Debris Field',status:'abandoned',statusLabel:'Destroyed',
+       atmosphere:'None',atm_note:'Completely destroyed — debris field only',climate:'Void',
+       gravity:'None',grav_note:'Fragmented — residual unstable gravity wells from largest debris masses',
+       faction:'None',population:'Uninhabited',demographics:'None',
+       government:'None',tech_level:'N/A',economy:'None — classified as navigational hazard',
+       access:'Forbidden',access_note:'Active navigational hazard — military exclusion zone. Alliance navy enforces standoff.',
+       hazards:['High-velocity debris field — extreme navigation hazard','Residual weapons contamination from the corporate war','Unpredictable gravitational micro-wells','Classified: unknown contamination reported in outer debris ring'],
+       notable_locations:[{name:'The Graveyard (Inner Ring)',desc:'The densest section of the debris field, where the largest planetary fragments cluster. Rich in recoverable materials but extraordinarily dangerous to navigate without specialised equipment.'}],
+       hooks:['A salvager claims to have found something in the debris field — not ore, not wreckage. Something that was built. The claim was filed and then officially withdrawn. The salvager has since disappeared.','Three independent investigations suggest the destruction of Titania Prime was deliberate — one side chose to destroy the planet rather than let the other have it.','Alliance intelligence is tracking a regular shuttle run into the debris field. Nobody knows what it\'s collecting or who it reports to.'],
+       desc:'Titania Prime was the largest inhabited world in the system before the morondium wars escalated beyond anyone\'s ability to control. Nobody claims responsibility for what happened to it. The debris field it left behind is a permanent hazard to navigation and a reminder of what happens when corporate warfare operates without limits. The loss of Titania Prime is directly why the current ground-combat-only agreement was reached — everyone looked at what had been done and understood that without rules, the last morondium world would be next.'},
+      {id:'titania_2',name:'Titania 2',type:'Terrestrial — Active Warzone',status:'warzone',statusLabel:'Active Warzone',
+       atmosphere:'Breathable',atm_note:'Breathable but heavily polluted in warzone sectors — respirators recommended in combat zones',
+       climate:'Temperate (Degraded)',gravity:'Standard',
+       faction:'Contested — Multiple Corporate Armies',population:'~800,000 — military personnel only',
+       demographics:'Predominantly human — mixed corporate deployments from across known space',
+       government:'None — contested control, multi-corporate military administration',
+       tech_level:'Standard (Military)',
+       economy:'Morondium extraction (ongoing despite conflict), military logistics, weapons supply',
+       access:'Military Only',access_note:'Civilian access prohibited. Entry without corporate military credential risks immediate engagement by all parties.',
+       hazards:['Active combat operations — all zones contested','Morondium dust inhalation — cumulative neurological toxin','Unexploded ordnance throughout all sectors','Corporate intelligence ops — assume surveillance by multiple parties','Supply interdiction — food and medical resupply are active combat targets'],
+       notable_locations:[
+         {name:'The Extraction Zone (Sector 7)',desc:'The primary morondium deposit site. Whoever controls this sector controls the only active export point. It changes hands on average twice per week.'},
+         {name:'Forward Operating Bases (Multiple)',desc:'Each major corporate faction maintains at least one FOB on Titania 2. Locations shift as territory does. Maps are obsolete within days of issue.'},
+         {name:'The Meatgrinder (Trench Network)',desc:'A network of trenches and fortifications in the central plain, established decades ago and never fully abandoned. Some of the oldest sections have become almost permanent infrastructure. Veterans call this place home.'}
+       ],
+       hooks:['A corporate intelligence officer on Titania 2 has been feeding information to a rival faction. The situation is about to break open in a way that could shift territorial control entirely.','Someone needs something moved from a forward base to an extraction ship. The route crosses three contested sectors and two active fronts.','A morondium researcher claims to have found a secondary deposit outside the current warzone. Every faction will try to acquire — or eliminate — them.'],
+       desc:'Titania 2 is the most fought-over piece of ground in the known galaxy. Morondium — a living crystalline compound that grants metals regenerative properties when infused — exists nowhere else. The current state of affairs is a permanent ground war between corporate armies operating under a single enforced rule: no orbital strikes, no bombardment, no weapons of mass destruction. Ground forces only. This rule is enforced by a Yamato-class and a GU Nova cruiser in permanent orbit, each with orders to destroy any fleet that attempts an orbital strike. For players, Titania 2 is hell with a purpose. There is always work here for soldiers, medics, engineers, and people who can get things across active fire zones.'},
+      {id:'titania_4',name:'Titania 4',type:'Terrestrial — Neutral Zone',status:'neutral',statusLabel:'Neutral — Universal Truce',
+       atmosphere:'Breathable',atm_note:'Clean — distance from the warzone keeps atmospheric contamination minimal',
+       climate:'Temperate',gravity:'Standard',
+       faction:'Multi-Corporate Neutral Administration',population:'~2 million — rotating military and support personnel',
+       demographics:'Highly mixed — all corporate factions represented simultaneously',
+       government:'Joint Administration Council (rotating corporate chairs)',
+       tech_level:'Standard',economy:'Medical services, rest and recreation, food production, neutral logistics hub',
+       access:'Open',access_note:'Universal truce enforced by mutual agreement and profit motive. Violence is handled quietly and away from public areas.',
+       hazards:['Intelligence operations from all sides — assume you are being watched at all times','Corporate-sponsored violence occurs but is kept away from areas that would draw attention','Debt collection — Titania 4 is where financial disputes from the warzone get settled','Information is a commodity and a weapon here'],
+       notable_locations:[
+         {name:'The Strip',desc:'The main commercial district. Bars, clinics, black market vendors, and recreational facilities catering to every taste and budget. The truce holds here because it is too profitable to break.'},
+         {name:'Neutral Medical (NMed)',desc:'The largest independent field hospital in the known galaxy. Treats all patients regardless of corporate affiliation. Technically neutral — in practice, the intelligence value of a fully-staffed trauma facility cannot be overstated.'},
+         {name:'The Counting Houses',desc:'Financial services district — where corporate contracts are negotiated, morondium futures traded, and the real decisions about Titania 2 are made, off the battlefield.'}
+       ],
+       hooks:['A soldier from one side is being held by the other side\'s debt collectors in a way that technically doesn\'t violate the truce. Getting them out without starting something bigger requires creativity.','A medical staff member at NMed has been recording corporate intelligence under cover of patient care. Multiple parties have noticed. All of them want the recordings.','A neutral arms dealer on Titania 4 is about to broker a deal that will significantly shift the balance of power on Titania 2. Several parties want to either broker competing deals or prevent this one.'],
+       desc:'Titania 4 is the eye of the storm. Every corporation with a presence in the system maintains facilities here, and a universal truce holds — enforced not by law but by mutual self-interest and the understanding that if the truce breaks here, the Nova cruisers above Titania 2 become far less predictable. Soldiers from every side come here for medical treatment, rest, food that is not field rations, and a few days of not being actively targeted.'}
+    ]
+  },
+  {
+    id:'sirius',name:'Sirius System',region:'Alliance Space',classification:'Core System — Commercial Hub',
+    faction:'Alliance',status:'active',
+    tags:['Alliance Space','Trade Hub','Commercial Centre','Cosmopolitan','Crime'],
+    desc:'Sirius is the commercial heartbeat of Alliance Space — a wealthy, densely populated system with some of the busiest spaceports in the galaxy. If you need to buy something, fence something, or find someone, Sirius is the first place to look. Its orbital stations are cities in their own right, and its surface worlds host the headquarters of several major corporations.',
+    planets:[
+      {id:'sirius_prime',name:'Sirius Prime',type:'Terrestrial — Major Ecumenopolis',status:'active',statusLabel:'Active — Alliance Core World',
+       atmosphere:'Breathable',atm_note:'Heavily managed air quality in upper tiers — pollution a persistent issue in lower districts',
+       climate:'Temperate (Urban Heat Island)',gravity:'Standard',
+       faction:'Alliance',population:'~8 billion',
+       demographics:'Highly mixed — all playable races, significant Non-Born community',
+       government:'Alliance Planetary Council (significant corporate lobby)',
+       tech_level:'Advanced',
+       economy:'Interstellar trade, financial services, corporate HQ, black market, entertainment, manufacturing',
+       access:'Open',access_note:'Open entry with standard Alliance identity verification. Criminal records flagged on entry — but flags can be managed.',
+       hazards:['Organised crime networks throughout lower districts','Corporate espionage — competing intelligence cells active citywide','Trafficking operations in port districts','Police corruption endemic in certain precincts'],
+       notable_locations:[
+         {name:'The Grand Spaceports',desc:'Three orbital and two surface terminals processing billions of tons of cargo annually. The busiest single transit points in Alliance Space. Every major trading house maintains a presence here.'},
+         {name:'The Exchange',desc:'The galaxy\'s largest commodities market. What gets priced here affects prices everywhere else. A dozen intelligence agencies maintain listening operations in the building at all times.'},
+         {name:'The Warren (Lower Districts)',desc:'The underside of Sirius Prime — old city sections not visible from orbit. Crime organisations, independent operators, and people who need to not be found call the Warren home. Also home to some of the best food in the system.'},
+         {name:'Corporate Row',desc:'The headquarters district for several of the galaxy\'s largest corporations. Publicly accessible, intensely surveilled, and the scene of the most aggressive corporate competition in the galaxy.'}
+       ],
+       hooks:['A shipment from Haven has arrived under a false manifest. Whoever is waiting for it in the Warren has not shown up. The cargo is now drawing attention from multiple parties.','A financial analyst has discovered a discrepancy in Exchange records suggesting systematic manipulation of morondium futures. The analyst is now missing.','A corporate executive needs extraction from their own organisation\'s building. They will pay extremely well. They will not explain why.'],
+       desc:'Sirius Prime is the commercial heart of Alliance Space — an ecumenopolis where old city districts layer upon each other across centuries of construction. The upper tiers gleam with corporate towers and efficient transit. The lower levels are a different world entirely. The spaceports never sleep. The Exchange sets the price of half the galaxy\'s goods. And somewhere in the Warren, every deal that cannot be made in daylight finds its way to a table.'},
+      {id:'sirius_stations',name:'Sirius Orbital Network',type:'Orbital Station Network',status:'active',statusLabel:'Active — Station Hub',
+       atmosphere:'Breathable',atm_note:'Maintained station atmosphere across all connected habitats',
+       climate:'Controlled (Station)',gravity:'Standard',grav_note:'Artificial gravity throughout — rotational backup in older sections',
+       faction:'Alliance / Private Corporate',population:'~500 million — permanent residents across all stations',
+       demographics:'Mixed — heavy Non-Born and Patriark presence in administrative roles',
+       government:'Station Council Federation',tech_level:'Advanced',
+       economy:'Shipping logistics, warehousing, passenger transit, ship servicing, corporate office space',
+       access:'Open (varies by station)',access_note:'Most stations open with standard ID check. Corporate-owned sections require corporate affiliation.',
+       hazards:['Decompression risk in older station sections','Smuggling operations throughout the cargo logistics chain','Corporate security forces with minimal external oversight','Station politics can turn lethal — committee seats are contested violently'],
+       notable_locations:[
+         {name:'Central Hub Station',desc:'The largest single structure in the Sirius system. Population rivalling small cities. Contains system-wide control, coordination, and the central customs authority.'},
+         {name:'The Free Docks',desc:'Unaffiliated docking sections where small operators, independent traders, and people who prefer not to have their cargo logged operate. Alliance administration maintains minimal presence here by convention.'}
+       ],
+       hooks:['A shipping container was flagged by customs and then un-flagged by someone with administrative access. The original flag gave a destination that is a cold address.','A station section has been quietly bought by a shell corporation. The previous tenants — a small community of independent traders — have begun disappearing.'],
+       desc:'The Sirius orbital station network is, in practical terms, a series of cities in space. Collectively they house half a billion people, process a significant portion of all interstellar cargo moving through the core systems, and host the offices of dozens of corporations and hundreds of independent operators. The Free Docks at the system\'s edge are where independent operators work without the scrutiny the main terminals carry.'}
+    ]
+  },
+  {
+    id:'aderan',name:'Aderan System',region:'Alliance Space',classification:'Core System — Corporate Operated',
+    faction:'Aderan Correctional Consortium',status:'active',
+    tags:['Alliance Space','Corporate','Prison Planet','Broadcast','Infamous'],
+    desc:'The Aderan system was the site of the first corporate war in galactic history — a conflict that ended with Aderan Prime destroyed and everyone finally understanding that there was no upper limit to what corporate warfare could do. The surviving world found a highly profitable replacement economy.',
+    planets:[
+      {id:'aderan_prime',name:'Aderan Prime',type:'Destroyed World — Debris Field',status:'abandoned',statusLabel:'Destroyed',
+       atmosphere:'None',climate:'Void',gravity:'None',grav_note:'Fragmented mass — residual unstable gravity wells',
+       faction:'None',population:'Uninhabited',demographics:'None',government:'None',
+       tech_level:'N/A',economy:'None — informal memorial site',
+       access:'Forbidden',access_note:'Navigational hazard designation. No official memorial. Alliance discourages unscheduled approaches.',
+       hazards:['Active debris field — navigational hazard rated extreme','Residual weapons contamination in dense sections','Gravitational instability from fragmented core'],
+       notable_locations:[{name:'Ground Zero (Estimated)',desc:'The approximate centre of the event that destroyed the planet. Several independent groups have placed physical markers here. Alliance navy periodically removes them.'}],
+       hooks:['A historian is building a case that the Alliance covered up which corporation was responsible for the planet\'s destruction. The evidence they need is in a corporate archive that has changed hands three times since the war.','A corporation\'s legal department claims that something of theirs is in the debris field. They will pay significant money for its recovery but will not specify what it is.'],
+       desc:'Aderan Prime was the first world ever destroyed in a corporate war. The event — disputed to this day, with multiple corporations claiming the others fired first — marked a turning point in galactic history: the moment everyone understood that corporate conflict had escalated beyond conventional warfare into something with no natural upper limit. No recovery or memorial operation has ever been mounted. The corporate interests that destroyed it moved on to the next calculation.'},
+      {id:'aderan_3',name:'Aderan 3',type:'Terrestrial — For-Profit Prison & Media Planet',status:'active',statusLabel:'Active — Corporate Operated',
+       atmosphere:'Breathable',atm_note:'Standard breathable — Consortium manages atmospheric integrity for broadcast quality',
+       climate:'Variable (Multi-Zone)',gravity:'Standard',
+       faction:'Aderan Correctional Consortium',population:'~50 million — inmates, staff, media personnel',
+       demographics:'Mixed — global inmate population draws from across Alliance Space',
+       government:'Aderan Correctional Consortium (private corporation)',
+       tech_level:'Advanced (selectively applied)',
+       economy:'Incarceration services, broadcast rights, entertainment, corporate security contracts',
+       access:'Restricted',access_note:'Access by contract arrangement only — media and staff credentials required. Unauthorised approach treated as hostile intrusion.',
+       hazards:['Inmate population — organised criminal networks, gang hierarchy, constant violence','Consortium security forces — well-equipped, loyal to profit not law','Broadcast zones — being filmed has legal and social consequences outside the facility','Blackmail risk — Consortium security records everything'],
+       notable_locations:[
+         {name:'The Facility (General Population)',desc:'The world\'s largest incarceration complex. Divided into numbered sectors with varying conditions. Sector 1 is relatively comfortable. Sector 9 is where the broadcast shows are recorded.'},
+         {name:'Ridge Track (Broadcast)',desc:'The course used for Ridge Racing — one of the galaxy\'s most watched programmes. Inmates participate. The degree to which this is voluntary is not discussed publicly.'},
+         {name:'Blood Bowl Arena',desc:'Broadcast capacity 80,000. Sellout broadcast audience across Alliance Space every cycle. The Consortium considers this its flagship cultural export. Casualty rates are part of the format.'},
+         {name:'Survivor Zones',desc:'A series of terrain environments in the planet\'s southern continent where Survivor is recorded. The terrain is unmodified. The conditions are unmodified. The casualty rate is part of the format.'}
+       ],
+       hooks:['An Alliance senator\'s family member is in the Facility. They cannot use official channels to secure extraction without the story breaking. They will pay for a quiet solution.','A journalist who went to Aderan 3 to document conditions has stopped filing reports. Their last known location was Sector 9.','Someone inside the Facility has information that is extremely valuable to multiple external parties. Getting it out requires getting someone in — and the Consortium monitors all communications.'],
+       desc:'The only surviving inhabited world in the Aderan system has found a highly profitable purpose. The Aderan Correctional Consortium operates the galaxy\'s largest for-profit prison facility here, housing criminals from across known space under contracts from the Alliance justice system, corporate security departments, and private clients who do not always specify what the inmate did. What makes Aderan 3 famous beyond the prison industry is the broadcasting. Three of the most watched programmes in the galaxy — Ridge Racing, Survivor, and Blood Bowl — are recorded here, using inmates as participants.'}
+    ]
+  },
+  {
+    id:'berilia',name:'Berilia System',region:'Alliance Space',classification:'Core System — Patriark Territory',
+    faction:'Patriark',status:'active',
+    tags:['Alliance Space','Patriark','Cloning','Oceanic','Political','Leverage'],
+    desc:'Berilia is the Patriark homeworld and the quiet centre of the galaxy\'s most important dependency: resurrection technology. The Patriarks built no army. Instead they spent centuries making themselves indispensable. The cloning infrastructure on Berilia underpins the Alliance\'s promise of continuity — and the Patriarks know exactly what it would cost everyone if they renegotiated their terms.',
+    planets:[
+      {id:'berilia_prime',name:'Berilia',type:'Terrestrial — Oceanic World (Patriark Homeworld)',status:'active',statusLabel:'Active — Patriark Governed',
+       atmosphere:'Breathable',atm_note:'Clean oceanic atmosphere — notably high oxygen, low particulates. Pleasant to most species.',
+       climate:'Oceanic (Temperate to Warm)',gravity:'Low',grav_note:'Below standard — Patriark physiology adapted. Non-Patriarks find the low gravity pleasant.',
+       faction:'Patriark',population:'~6 billion — predominantly Patriark',
+       demographics:'~85% Patriark, remainder mixed — diplomatic staff and medical tourism',
+       government:'Patriark Directorate (consensus-based oligarchy)',
+       tech_level:'Cutting-Edge',
+       economy:'Cloning and resurrection services, biological research, pharmaceutical production, political consultation',
+       access:'Permit Required',access_note:'Visitor permits available but processed with comprehensive background checks. The Patriarks are careful about who they let in.',
+       hazards:['Patriark political manipulation — every interaction may be an intelligence-gathering exercise','Legal frameworks heavily favour Patriark citizens on home soil','Corporate surveillance targeting cloning research is constant','The dependency economy means the Patriarks hold significant leverage over anyone needing their services'],
+       notable_locations:[
+         {name:'The Cloning Spires',desc:'The most advanced cloning and resurrection facilities in the galaxy. The actual processes are proprietary and kept from outside observation. The output — reliable resurrection across multiple species — is a dependency the Alliance cannot afford to disrupt.'},
+         {name:'The Archive of Lives',desc:'Records of every individual who has passed through Berilia\'s cloning facilities. The archive is extraordinarily sensitive. The Patriarks maintain it as a private resource. Others have tried to access it. None successfully.'},
+         {name:'Berilia Wet Docks',desc:'The main port — built to accommodate the oceanic environment. Ships dock at surface platforms; cargo and passengers are ferried by submersible to the main cities below. An unusual and disorienting entry experience.'},
+         {name:'The Directorate Hall',desc:'The seat of Patriark governance. Accessible to invited diplomatic visitors. The real decisions that affect the galaxy are made here by people who have been planning them for decades.'}
+       ],
+       hooks:['The Archive of Lives contains a record that a very powerful individual would pay a great deal to access — or to ensure remains inaccessible. The Patriarks have not agreed to either party\'s request.','A cloning facility on Berilia has produced an anomalous result. The Patriark Directorate has quarantined the information. The anomaly is relevant to an ongoing investigation on the other side of the galaxy.','A political figure needs something extracted from Berilia without the Patriarks being aware it has happened. Getting on-planet without a background check requires a legend that will survive Patriark intelligence scrutiny.'],
+       desc:'Berilia is a predominantly oceanic world and the homeworld of the Patriark — a species whose evolutionary environment shaped them into some of the most capable political operators in the galaxy. The Patriarks have no meaningful military force. They have never needed one. Instead, over centuries, they accumulated something more durable and more difficult to counter: leverage. The Patriark-owned cloning infrastructure on Berilia is the most advanced in existence. Resurrection technology that the rest of the galaxy depends on runs through Berilia in some form. The Patriarks built this dependency deliberately, over generations, as policy.'}
+    ]
+  },
+  {
+    id:'mangara',name:'Mangara System',region:'Dark Space Border',classification:'Embargoed System — Alliance Exclusion Zone',
+    faction:'Contested — Hakari Clans vs Jaulaus Tribes',status:'contested',
+    tags:['Dark Space Border','Embargoed','Civil War','Hakari','Jaulaus','Restricted'],
+    desc:'Mangara is the homeworld of the Hakari and Jaulaus and one of the most uncomfortable chapters in Alliance history. Exploited by the Nerulian Empire and then by corporate interests, placed under Alliance embargo to protect what remains of its traditional life — and still burning from an inter-species civil war that has never stopped.',
+    planets:[
+      {id:'mangara_prime',name:'Mangara',type:'Terrestrial — Civil War Zone',status:'contested',statusLabel:'Civil War — Embargo',
+       atmosphere:'Breathable',atm_note:'Breathable but degraded — centuries of industrial exploitation visible in atmosphere quality',
+       climate:'Tropical (Degraded)',gravity:'High',grav_note:'Slightly above standard — both native species\' physiology adapted over millennia',
+       faction:'Contested — Hakari Clans / Jaulaus Tribes',population:'~800 million',
+       demographics:'Mixed Hakari and Jaulaus — no reliable census, both groups distributed across territories',
+       government:'None — clan and tribal governance, no unified authority',
+       tech_level:'Industrial (Forced — imported not developed)',
+       economy:'Subsistence agriculture, conflict economy, illicit corporate extraction via intermediaries',
+       access:'Restricted',access_note:'Alliance embargo — ships require Alliance waiver to enter system. Landing without waiver treated as hostile. Corporate vessels operate through legitimate-looking intermediaries.',
+       hazards:['Active inter-species civil war — all outsiders treated as potential threats by both factions','Alliance patrol ships operate in-system — entry without waiver risks boarding','Corporate intelligence extraction operations — unknown actors active throughout','Ecological degradation — significant terrain sectors toxic from historical extraction','Deep population hostility to outsiders runs across both species'],
+       notable_locations:[
+         {name:'The Contested Line',desc:'The rough border between current Hakari-dominant and Jaulaus-dominant territories. It has moved continuously for centuries. Crossing it without appropriate cultural knowledge is extremely hazardous.'},
+         {name:'Old Extraction Sites',desc:'The ruins of Nerulian-era and corporate mining and extraction operations, now mostly abandoned. Both species consider them sacred ground — reminders of what was taken from them.'},
+         {name:'Port Neutral',desc:'A small, barely-functional port that somehow both sides allow to operate. Corporate intermediaries, smugglers, and the occasional genuine relief worker pass through here. The Alliance doesn\'t officially acknowledge its existence.'}
+       ],
+       hooks:['A Hakari clan leader has agreed to meet a Jaulaus elder to negotiate a ceasefire. Both parties need a neutral third party to facilitate — and to ensure the meeting isn\'t intercepted by factions within either group who want the war to continue.','A corporate intermediary operating through Port Neutral is running an extraction operation the Alliance would move to stop if it had evidence. Acquiring that evidence means going to Mangara.','A Hakari who grew up in Alliance Space has inherited a leadership position in their ancestral clan. They need help returning to a world they\'ve never seen — and navigating a culture they know only from stories.'],
+       desc:'Mangara\'s history is one of the most uncomfortable chapters in Alliance records. Five hundred years ago the Hakari and Jaulaus were technologically undeveloped — a fact the Nerulian Empire exploited without hesitation, treating both species as an inexhaustible labour resource. Corporate interests followed when the Empire fell. The Alliance eventually placed Mangara under embargo in an attempt to slow outside interference. Enforcement is imperfect. The civil war is continuous, deeply rooted in centuries of grievance and competition, and the Alliance\'s official position is that it does not get involved. The planet is simultaneously embargoed and ignored — protected on paper, exploited in practice, and burning from within.'}
+    ]
+  },
+  {
+    id:'skalan_worlds',name:'Skalan Worlds',region:'Alliance Space',classification:'Self-Governed Territory — Closed System',
+    faction:'Skalan',status:'restricted',
+    tags:['Alliance Space','Skalan','Restricted','Closed','Extreme Danger','Self-Governed'],
+    desc:'The Skalan home system is closed to outsiders and enforces that closure without legislation — simply through the certainty that testing it is a bad idea. Caragh is the sacred homeworld of a species that survived an attempted extinction. Seigh is where they send their young to prove themselves against the most lethal natural environment in the galaxy.',
+    planets:[
+      {id:'caragh',name:'Caragh',type:'Terrestrial — Skalan Homeworld',status:'restricted',statusLabel:'Closed to Outsiders',
+       atmosphere:'Breathable',atm_note:'Pristine — no industrial pollution, ecosystem maintained as sacred',
+       climate:'Variable (Multi-Biome — Temperate / Jungle / Coastal)',gravity:'High',grav_note:'Noticeably above standard — Skalan physiology adapted. Non-Skalans experience fatigue under extended exposure.',
+       faction:'Skalan',population:'~400 million — Skalan only',
+       demographics:'Skalan exclusively — no known non-Skalan permanent residents',
+       government:'Warrior Council (elected by combat reputation)',
+       tech_level:'Advanced (selectively applied — industrial tech rejected in sacred zones)',
+       economy:'Internal subsistence, cultural production, military training — nothing exported',
+       access:'Forbidden',access_note:'Non-Skalans not permitted. Not formally legislated — enforced by the certainty that testing it is inadvisable. Skalan patrol vessels intercept any unauthorised approach.',
+       hazards:['Extreme hostility to non-Skalan visitors throughout','Skalan warrior culture — insult has immediate physical consequences','Alliance legal structures do not apply here','No diplomatic protection for non-Skalans who enter without invitation'],
+       notable_locations:[
+         {name:'Temple of the First Warrior',desc:'The most sacred structure in Skalan culture. Non-Skalans have never been permitted inside. Its location is known. Its contents are not.'},
+         {name:'Training Grounds',desc:'Extensive martial training facilities covering much of the planet\'s northern continent. The quality of what is produced here is evident to anyone who has encountered Skalan warriors.'},
+         {name:'The City of Memory',desc:'Built to commemorate every Skalan who died during the Patriarks\' attempted genetic extinction. The records kept here are the most complete surviving documentation of what was done.'}
+       ],
+       hooks:['A Skalan warrior needs help with something they cannot pursue through official channels without it becoming a Skalan political issue. They have chosen to work with outsiders specifically because of this.','A Patriark diplomatic mission to Caragh has gone silent. The Patriarks are reluctant to acknowledge it officially. The Skalans have issued no statement. Whatever happened in that meeting, both parties want it to remain unknown.','Evidence from the City of Memory archives is relevant to a current political dispute in the Alliance. Getting access requires navigating Skalan culture, not Alliance law.'],
+       desc:'Caragh is the Skalan homeworld and it is closed. Non-Skalans do not land here. This is not formally legislated — it is simply a boundary that the Skalans enforce and that everyone with any familiarity with Skalan culture understands not to test. The planet is covered in temples, training grounds, and shrines to warrior traditions that predate the Skalans\' existence as a distinct species. The Patriarks created the Skalans as a warrior caste and later attempted to eliminate them through genetic modification. The attempt failed. The Skalans remember.'},
+      {id:'seigh',name:'Seigh',type:'Terrestrial — Extreme Survival Environment',status:'restricted',statusLabel:'Extreme Danger',
+       atmosphere:'Breathable',atm_note:'Breathable but carries spores, pollen, and biological agents causing cumulative harm without proper filtration',
+       climate:'Tropical Jungle — Extreme (Toxic Flora, Megafauna)',gravity:'High',grav_note:'Above standard — same as Caragh. Escape from predators is significantly harder than expected.',
+       faction:'Skalan',population:'~50,000 — training rotations only',
+       demographics:'Skalan young adults completing rite of passage',
+       government:'None — survival conditions',
+       tech_level:'None (Skalans enter with minimal equipment by cultural mandate)',
+       economy:'None',
+       access:'Forbidden',access_note:'Skalan jurisdiction. Non-Skalans are not invited and the fauna does not distinguish. Skalan vessels enforce no-entry for outsiders.',
+       hazards:['Most lethal natural environment in the known galaxy (consensus survey rating)','Multiple apex predator species with no natural fear of prey','Toxic and corrosive flora — skin contact with many plant species causes immediate harm','Acidic swampland — large sections physically corrosive to standard materials','Volcanic terrain with unpredictable activity','Biological spore agents requiring constant respiratory filtration','No rescue or medical extraction for non-Skalans — ever'],
+       notable_locations:[
+         {name:'The Deep Jungle',desc:'The interior of the continent-scale jungle. Navigation is extremely difficult without cultural knowledge of the terrain. Predator density at this depth has never been successfully surveyed — no survey team has survived to report it.'},
+         {name:'The Acid Flats',desc:'A vast expanse of chemical-saturated wetland that can dissolve standard armour alloys over a period of hours. The path through it is known to Skalan trainees and transmitted only orally.'},
+         {name:'The Summit',desc:'The highest point on Seigh — the goal of the rite of passage. What is found there is known only to those who complete the training. No outsider has reached it and returned.'}
+       ],
+       hooks:['A bounty hunter is tracking a target who fled to Seigh. They need either local knowledge (which means Skalan contacts) or extraordinary survivability. Preferably both.','A collector is offering an extraordinary sum for a live specimen of one of Seigh\'s apex predators. The logistics of getting one off-planet without Skalan knowledge are left as an exercise to the contractor.','A Skalan trainee failed to return from their passage. Their family will not publicly acknowledge it — cultural rules forbid it — but they have reached out through an intermediary.'],
+       desc:'Every credible environmental survey of Seigh has reached the same conclusion: it is the most lethal naturally occurring environment in the known galaxy. The jungle is dense, the flora is largely toxic on contact, the predators are large and have evolved over millions of years to kill anything that moves, and the terrain alternates between impenetrable canopy, acidic swampland, and sheer volcanic rock. The Skalans send their young here. Surviving Seigh for the required period is the rite of passage that marks the transition to adulthood in Skalan culture. The survival rate for uninvited visitors is low enough that most insurers classify Seigh as uninsurable.'}
+    ]
+  },
+  {
+    id:'san_tien',name:'San Tien System',region:'Dark Space (Nerulian Border)',classification:'Independent System — Nerulian Remnant',
+    faction:'Nerulian Survivors (Independent)',status:'active',
+    tags:['Dark Space','Nerulian','Refugees','Remnant','Independent','Archive'],
+    desc:'San Tien is the last world the Nerulians can call their own. When the Kravens obliterated the empire, survival came down to luck — those off-world, those on the fringes, those on ships fast enough to run. San Tien was remote enough to be overlooked and has remained so. It is a world haunted by what was lost.',
+    planets:[
+      {id:'san_tien_prime',name:'San Tien',type:'Terrestrial — Refugee World',status:'active',statusLabel:'Active — Independent',
+       atmosphere:'Breathable',atm_note:'Thin at altitude — breathable at ground level throughout',
+       climate:'Temperate to Arid',gravity:'Standard',
+       faction:'Nerulian Government in Exile',population:'~2 million — almost entirely Nerulian',
+       demographics:'~98% Nerulian — small number of permanent non-Nerulian residents, mostly academics and diplomats',
+       government:'Nerulian Government in Exile (Council of Survivors)',
+       tech_level:'Advanced (Nerulian technology predates Alliance — much is unique)',
+       economy:'Cultural preservation, historical archiving, small-scale manufacturing, knowledge trade',
+       access:'Open (cautiously)',access_note:'San Tien accepts visitors but screens them carefully. Nerulian distrust of outsiders is deep-rooted given their history.',
+       hazards:['Proximity to Kraven Space — the border is not immovable','Haven Space pirates operate in nearby systems and occasionally probe the border','Internal political tensions — Government in Exile vs those who believe there is nothing left to govern','Nerulian technology not understood by outsiders — some remains active in unexpected locations'],
+       notable_locations:[
+         {name:'The Archive City',desc:'The primary settlement on San Tien — built around the most comprehensive surviving collection of Nerulian cultural records, history, and pre-Kraven technology. The most important library the galaxy didn\'t know existed.'},
+         {name:'The Memorial Shore',desc:'A coastal site maintained as a permanent memorial to the worlds lost in the Kraven invasion. The Nerulians count their dead here. The number is still being updated.'},
+         {name:'The Dry Docks',desc:'Where the great fleet-cities that drift between systems are maintained and repaired when they return to San Tien. The technology here is unlike anything produced in Alliance Space — older, different, and in several cases more capable.'}
+       ],
+       hooks:['A Nerulian archivist has found references in pre-Kraven records to technology that appears to describe a Kraven counter. They need help verifying it and quietly getting the information to someone who can act on it without triggering a political incident.','A fleet-city that should have arrived at San Tien six months ago has not appeared. No communication, no distress signal. The route it took passes close to the Nemani Rift.','The Alliance wants access to the Archive City\'s pre-Kraven technology records. The Nerulians are considering whether to negotiate. Neither side entirely trusts the other, and both sides have good reasons for that.'],
+       desc:'San Tien is the last world the Nerulians can call their own. It is a world haunted by what was lost: libraries of Nerulian history, refugee camps that became cities, a government in exile that may never govern again. Most Nerulians encountered in the galaxy are from the great fleet-cities that drift between systems, but San Tien remains the spiritual and political home of the surviving people. The archive kept here is the most significant cultural repository of a civilisation that no longer has a civilisation — a last record of everything the Kravens destroyed.'}
+    ]
+  },
+  {
+    id:'new_earth',name:'New Earth System',region:'Dark Space',classification:'Independent System — Isolationist Colony',
+    faction:'Independent — Human Supremacist Colony',status:'active',
+    tags:['Dark Space','Human Supremacist','Isolationist','Low-Tech','Hostile to Non-Humans'],
+    desc:'New Earth is what happens when a group of humans decides the galaxy\'s progress has gone too far. Founded by settlers who rejected multiracial Alliance society, New Earth operates at a technological and social level comparable to 18th-century Earth — by choice. Firearms exist but advanced technology is culturally rejected. Non-humans are not welcome.',
+    planets:[
+      {id:'new_earth_prime',name:'New Earth',type:'Terrestrial — Isolationist Colony',status:'active',statusLabel:'Active — Isolationist',
+       atmosphere:'Breathable',atm_note:'Clean — technological rejection means no industrial pollution',
+       climate:'Temperate to Cold',gravity:'Standard',
+       faction:'New Earth Colonial Council',population:'~500,000 — almost entirely human',
+       demographics:'~99% human — any non-human discovery results in expulsion or worse',
+       government:'Colonial Council (elected, human-only franchise)',
+       tech_level:'Pre-Industrial (by choice)',
+       economy:'Agriculture, small-scale manufacturing, barter-based internal trade',
+       access:'Hostile',access_note:'Non-humans not permitted. Outsiders treated with extreme suspicion. Advanced technology confiscated on arrival. Alliance law does not apply.',
+       hazards:['Extreme ideological hostility to non-humans — discovery means violence','Advanced technology confiscated — entering with FTL or combat tech invites aggression','No Alliance legal protection — colonial law is the only law','Surveillance by colonial militia throughout populated areas'],
+       notable_locations:[
+         {name:'Founder\'s Rest (Capital)',desc:'The main settlement. Architecturally and technologically resembles a 17th-18th century Earth settlement. The colonial council meets here. Outside visitors are watched closely.'},
+         {name:'The Perimeter',desc:'The outer edge of the settled territory where the colonial militia patrols. People can enter New Earth without going through Founder\'s Rest, but the militia patrols are irregular and aggressive.'},
+         {name:'The Hidden District',desc:'Rumoured to exist beneath Founder\'s Rest — a section where people who do not entirely share the colony\'s ideology keep themselves quiet. Its existence is unverified.'}
+       ],
+       hooks:['Someone in New Earth has information relevant to a case being built outside Alliance jurisdiction. Getting to them without alerting the colonial council requires not looking like what you are.','A person with a non-human appearance needs to be extracted from New Earth. They have been living there under cover for years. Something has changed that means the cover is about to break.','A cache of pre-Industrial era cultural records valuable to Earth-history academics has been located inside New Earth. Acquiring the materials without the colonists knowing why you want them requires a convincing cover.'],
+       desc:'New Earth is what happens when a group of humans decides the galaxy\'s progress has gone too far. Founded by settlers who rejected multiracial Alliance society, it is a place where fugitives hide, where certain ideologies fester, and where players who arrive expecting normal Dark Space frontier life will find something far stranger. It is not powerful enough to be a serious threat to anyone — but it is exactly dangerous enough to be a problem for anyone who looks wrong, sounds wrong, or carries the wrong equipment.'}
+    ]
+  }
+];
+
+// Load any saved catalogue edits from localStorage
+(function(){try{var s=localStorage.getItem('gc_systems');if(s){var d=JSON.parse(s);if(Array.isArray(d))g.catalogue_systems=d;}}catch(e){}})();
+
 // ─── World Panel Functions ─────────────────────────────────────────────────────
 function openWorldPanel(systemKey){
   const system=worldData[systemKey];
@@ -2532,6 +2886,380 @@ function initStarmap(){
 
   if(img){img.addEventListener('load',fit);if(img.complete&&img.naturalWidth)fit();else fit();}else{fit();}
 }
+
+// ─── Galactic Catalogue State ─────────────────────────────────────────────────
+var gcOpenSystems=new Set();
+var gcPanelSys=null,gcPanelPlanet=null;
+var gcModalMode='',gcModalTargetSys=null,gcModalTargetPlanet=null;
+
+// ─── Galactic Catalogue Helpers ───────────────────────────────────────────────
+function gcAtmClass(atm){
+  var a=(atm||'').toLowerCase();
+  if(a.includes('breathable')||a.includes('controlled')||a.includes('maintained'))return 'gc-chip-green';
+  if(a.includes('thin'))return 'gc-chip-yellow';
+  if(a.includes('toxic')||a.includes('corrosive'))return 'gc-chip-orange';
+  if(a.includes('exotic'))return 'gc-chip-purple';
+  return 'gc-chip-grey';
+}
+function gcAtmColor(atm){
+  var a=(atm||'').toLowerCase();
+  if(a.includes('breathable')||a.includes('controlled'))return 'green';
+  if(a.includes('thin'))return 'yellow';
+  if(a.includes('toxic')||a.includes('corrosive'))return 'orange';
+  if(a.includes('exotic'))return 'purple';
+  return '';
+}
+function gcAccessClass(acc){
+  var a=(acc||'').toLowerCase();
+  if(a.includes('open'))return 'gc-chip-green';
+  if(a.includes('permit'))return 'gc-chip-yellow';
+  if(a.includes('restricted')||a.includes('military'))return 'gc-chip-orange';
+  if(a.includes('forbidden')||a.includes('closed')||a.includes('hostile'))return 'gc-chip-red';
+  return 'gc-chip-grey';
+}
+function gcAccessColor(acc){
+  var a=(acc||'').toLowerCase();
+  if(a.includes('open'))return 'green';
+  if(a.includes('permit'))return 'yellow';
+  if(a.includes('restricted')||a.includes('military'))return 'orange';
+  if(a.includes('forbidden')||a.includes('closed')||a.includes('hostile'))return 'red';
+  return '';
+}
+function gcGravColor(grav){
+  var g=(grav||'').toLowerCase();
+  if(g.includes('low')||g.includes('micro'))return 'blue';
+  if(g.includes('high'))return 'orange';
+  if(g.includes('crushing'))return 'red';
+  return '';
+}
+function gcTechColor(tech){
+  var t=(tech||'').toLowerCase();
+  if(t.includes('cutting'))return 'purple';
+  if(t.includes('advanced'))return 'blue';
+  if(t.includes('industrial')||t.includes('primitive'))return 'orange';
+  return '';
+}
+function gcFactionColor(name){
+  var m={'Alliance Space':'#0a84ff','Haven Space':'#ff453a','Torc Federation':'#30d158','Mubothen Empire':'#ff9f0a','Zegitor Trade Guild':'#64d2ff','Freeland':'#bf5af2','The Dark Space':'#8e8e93','Nemani Rift':'#ffd60a','Kraven Space':'#ff2d55'};
+  return m[name]||'#8e8e93';
+}
+
+// ─── Galactic Catalogue Stat Helper ──────────────────────────────────────────
+function gcStat(label,value,colorClass,note){
+  return '<div class="gc-stat"><div class="gc-stat-l">'+esc(label)+'</div><div class="gc-stat-v'+(colorClass?' '+colorClass:'')+'">'+esc(value||'—')+'</div>'+(note?'<div class="gc-stat-note">'+esc(note)+'</div>':'')+'</div>';
+}
+
+// ─── Galactic Catalogue Toggle ────────────────────────────────────────────────
+function gcToggleSystem(id){
+  var card=document.getElementById('gcs_'+id);
+  if(!card)return;
+  if(card.classList.contains('open')){card.classList.remove('open');gcOpenSystems.delete(id);}
+  else{card.classList.add('open');gcOpenSystems.add(id);}
+}
+
+// ─── Planet Detail Panel ──────────────────────────────────────────────────────
+function gcOpenPlanet(si,pi){
+  var sys=(g.catalogue_systems||[])[si];if(!sys)return;
+  var p=(sys.planets||[])[pi];if(!p)return;
+  gcPanelSys=si;gcPanelPlanet=pi;
+  document.querySelectorAll('.gc-planet-row').forEach(function(r){r.classList.remove('sel');});
+  var row=document.getElementById('gcp_'+sys.id+'_'+pi);
+  if(row)row.classList.add('sel');
+  var panel=document.getElementById('gc-panel');
+  if(!panel)return;
+  var h='';
+  h+='<div class="gc-panel-top">';
+  h+='<button class="gc-panel-close" onclick="gcClosePanel()">✕</button>';
+  h+='<div class="gc-panel-system">'+esc(sys.name)+' — '+esc(sys.region)+'</div>';
+  h+='<div class="gc-panel-pname">'+esc(p.name)+'</div>';
+  h+='<div class="gc-panel-ptype">'+esc(p.type||'')+'</div>';
+  h+='<div class="gc-panel-acts">';
+  h+='<span class="world-entry-status ws-'+esc(p.status||'active')+'">'+esc(p.statusLabel||p.status||'')+'</span>';
+  h+='<button class="gc-edit-btn" onclick="gcOpenEditPlanet('+si+','+pi+')">✎ Edit World</button>';
+  h+='</div></div>';
+  h+='<div class="gc-panel-body">';
+  // Physical overview
+  h+='<div class="gc-psec"><div class="gc-psec-title">Physical Overview</div>';
+  h+='<div class="gc-stat-g">';
+  h+=gcStat('Atmosphere',p.atmosphere,gcAtmColor(p.atmosphere),p.atm_note);
+  h+=gcStat('Climate',p.climate);
+  h+=gcStat('Gravity',p.gravity,gcGravColor(p.gravity),p.grav_note);
+  h+=gcStat('Planet Type',p.type);
+  h+='</div></div>';
+  // Civilisation
+  h+='<div class="gc-psec"><div class="gc-psec-title">Civilisation</div>';
+  h+='<div class="gc-stat-g">';
+  h+=gcStat('Population',p.population);
+  h+=gcStat('Demographics',p.demographics);
+  h+=gcStat('Government',p.government);
+  h+=gcStat('Controlling Faction',p.faction);
+  h+=gcStat('Tech Level',p.tech_level,gcTechColor(p.tech_level));
+  h+=gcStat('Economy',p.economy);
+  h+='</div></div>';
+  // Access
+  h+='<div class="gc-psec"><div class="gc-psec-title">Access &amp; Entry</div>';
+  h+='<div class="gc-stat-g">';
+  h+=gcStat('Access Level',p.access,gcAccessColor(p.access));
+  h+=gcStat('Entry Notes',p.access_note);
+  h+='</div></div>';
+  // Description
+  if(p.desc){
+    h+='<div class="gc-psec"><div class="gc-psec-title">Overview</div>';
+    h+='<div class="gc-desc-block">'+descHtml(p.desc,'')+'</div></div>';
+  }
+  // Hazards
+  if(p.hazards&&p.hazards.length){
+    h+='<div class="gc-psec"><div class="gc-psec-title">Hazards &amp; Dangers</div>';
+    h+='<div class="gc-hazard-wrap">';
+    (p.hazards||[]).forEach(function(hz){h+='<span class="gc-hazard">'+esc(hz)+'</span>';});
+    h+='</div></div>';
+  }
+  // Notable locations
+  if(p.notable_locations&&p.notable_locations.length){
+    h+='<div class="gc-psec"><div class="gc-psec-title">Notable Locations</div>';
+    h+='<div class="gc-loc-list">';
+    (p.notable_locations||[]).forEach(function(loc){
+      h+='<div class="gc-loc"><div class="gc-loc-name">'+esc(loc.name)+'</div><div class="gc-loc-desc">'+esc(loc.desc)+'</div></div>';
+    });
+    h+='</div></div>';
+  }
+  // Plot hooks
+  if(p.hooks&&p.hooks.length){
+    h+='<div class="gc-psec"><div class="gc-psec-title">Plot Hooks</div>';
+    h+='<div class="gc-hook-list">';
+    (p.hooks||[]).forEach(function(hk,i){
+      h+='<div class="gc-hook"><div class="gc-hook-num">HOOK '+(i+1)+'</div>'+esc(hk)+'</div>';
+    });
+    h+='</div></div>';
+  }
+  h+='</div>';
+  panel.innerHTML=h;
+  panel.classList.add('open');
+  document.getElementById('gc-panel-ov').classList.add('open');
+}
+function gcClosePanel(){
+  var panel=document.getElementById('gc-panel');
+  if(panel)panel.classList.remove('open');
+  var ov=document.getElementById('gc-panel-ov');
+  if(ov)ov.classList.remove('open');
+  document.querySelectorAll('.gc-planet-row').forEach(function(r){r.classList.remove('sel');});
+  gcPanelSys=null;gcPanelPlanet=null;
+}
+
+// ─── Faction Modal ────────────────────────────────────────────────────────────
+function gcOpenFaction(fi){
+  var factions=(g.galaxy||[]).filter(function(e){return e.entry_type==='faction';});
+  var f=factions[fi];if(!f)return;
+  gcModalMode='view_faction';gcModalTargetSys=null;gcModalTargetPlanet=null;
+  var h='';
+  if(f.tags&&f.tags.length)h+='<div class="tags" style="margin-bottom:12px;">'+f.tags.map(function(t){return '<span class="tag tgr">'+esc(t)+'</span>';}).join('')+'</div>';
+  h+='<div class="gc-stat-g" style="margin-bottom:14px;">';
+  if(f.status)h+=gcStat('Status',f.status);
+  if(f.territory)h+=gcStat('Territory',f.territory);
+  if(f.alignment)h+=gcStat('Alignment',f.alignment);
+  h+='</div>';
+  if(f.government){h+='<div class="gc-sec-div">Government</div><div class="gc-desc-block" style="margin-bottom:12px;">'+esc(f.government)+'</div>';}
+  if(f.desc){h+='<div class="gc-sec-div">Overview</div><div class="gc-desc-block">'+esc(f.desc)+'</div>';}
+  gcOpenModal(f.name,h,false);
+}
+
+// ─── Edit / Add Modal ─────────────────────────────────────────────────────────
+function gcOpenModal(title,body,showDel){
+  var m=document.getElementById('gc-modal');if(!m)return;
+  document.getElementById('gc-modal-title').textContent=title;
+  document.getElementById('gc-modal-bd').innerHTML=body;
+  var del=document.getElementById('gc-modal-del');
+  if(del)del.style.display=showDel?'':'none';
+  m.classList.add('open');
+}
+function gcCloseModal(){
+  var m=document.getElementById('gc-modal');if(m)m.classList.remove('open');
+}
+function gcSaveModal(){
+  if(gcModalMode==='add_system'||gcModalMode==='edit_system')gcSaveSystem();
+  else if(gcModalMode==='add_planet'||gcModalMode==='edit_planet')gcSavePlanet();
+}
+function gcDeleteCurrent(){
+  if(gcModalMode==='edit_system'){if(!confirm('Delete this system and all its worlds?'))return;g.catalogue_systems.splice(gcModalTargetSys,1);gcSaveToStorage();gcCloseModal();gcClosePanel();render();}
+  else if(gcModalMode==='edit_planet'){if(!confirm('Delete this world?'))return;var s=g.catalogue_systems[gcModalTargetSys];if(s)s.planets.splice(gcModalTargetPlanet,1);gcSaveToStorage();gcCloseModal();gcClosePanel();render();}
+}
+
+function gcStatusOpts(cur){
+  return ['active','warzone','contested','restricted','ruins','abandoned','incomplete','neutral'].map(function(o){return '<option value="'+o+'"'+(o===cur?' selected':'')+'>'+o[0].toUpperCase()+o.slice(1)+'</option>';}).join('');
+}
+function gcAtmOpts(cur){
+  return ['Breathable','Thin','Toxic','Corrosive','None','Exotic','Controlled (Station)'].map(function(o){return '<option value="'+o+'"'+(o===cur?' selected':'')+'>'+o+'</option>';}).join('');
+}
+function gcGravOpts(cur){
+  return ['Microgravity','Low','Standard','High','Crushing','None'].map(function(o){return '<option value="'+o+'"'+(o===cur?' selected':'')+'>'+o+'</option>';}).join('');
+}
+function gcTechOpts(cur){
+  return ['Primitive','Pre-Industrial','Industrial','Standard','Advanced','Cutting-Edge','N/A','Variable'].map(function(o){return '<option value="'+o+'"'+(o===cur?' selected':'')+'>'+o+'</option>';}).join('');
+}
+function gcAccessOpts(cur){
+  return ['Open','Permit Required','Restricted','Military Only','Closed','Forbidden','Hostile'].map(function(o){return '<option value="'+o+'"'+(o===cur?' selected':'')+'>'+o+'</option>';}).join('');
+}
+
+function gcOpenAddSystem(){
+  gcModalMode='add_system';gcModalTargetSys=null;gcModalTargetPlanet=null;
+  var h='<div class="gc-f"><label class="gc-fl">System Name</label><input class="gc-inp" id="gcm-name" placeholder="e.g. Proxima System"></div>';
+  h+='<div class="gc-f-row"><div class="gc-f"><label class="gc-fl">Region</label><input class="gc-inp" id="gcm-region" placeholder="e.g. Alliance Space"></div>';
+  h+='<div class="gc-f"><label class="gc-fl">Classification</label><input class="gc-inp" id="gcm-class" placeholder="e.g. Core System"></div></div>';
+  h+='<div class="gc-f-row"><div class="gc-f"><label class="gc-fl">Controlling Faction</label><input class="gc-inp" id="gcm-faction" placeholder="e.g. Alliance"></div>';
+  h+='<div class="gc-f"><label class="gc-fl">Status</label><select class="gc-sel" id="gcm-status">'+gcStatusOpts('active')+'</select></div></div>';
+  h+='<div class="gc-f"><label class="gc-fl">Tags (comma separated)</label><input class="gc-inp" id="gcm-tags" placeholder="Alliance Space, Trade Hub"></div>';
+  h+='<div class="gc-f"><label class="gc-fl">Description</label><textarea class="gc-ta" id="gcm-desc" rows="5" placeholder="System overview..."></textarea></div>';
+  gcOpenModal('Add New System',h,false);
+}
+function gcOpenEditSystem(si){
+  var sys=(g.catalogue_systems||[])[si];if(!sys)return;
+  gcModalMode='edit_system';gcModalTargetSys=si;gcModalTargetPlanet=null;
+  var h='<div class="gc-f"><label class="gc-fl">System Name</label><input class="gc-inp" id="gcm-name" value="'+esc(sys.name||'')+'"></div>';
+  h+='<div class="gc-f-row"><div class="gc-f"><label class="gc-fl">Region</label><input class="gc-inp" id="gcm-region" value="'+esc(sys.region||'')+'"></div>';
+  h+='<div class="gc-f"><label class="gc-fl">Classification</label><input class="gc-inp" id="gcm-class" value="'+esc(sys.classification||'')+'"></div></div>';
+  h+='<div class="gc-f-row"><div class="gc-f"><label class="gc-fl">Controlling Faction</label><input class="gc-inp" id="gcm-faction" value="'+esc(sys.faction||'')+'"></div>';
+  h+='<div class="gc-f"><label class="gc-fl">Status</label><select class="gc-sel" id="gcm-status">'+gcStatusOpts(sys.status)+'</select></div></div>';
+  h+='<div class="gc-f"><label class="gc-fl">Tags (comma separated)</label><input class="gc-inp" id="gcm-tags" value="'+esc((sys.tags||[]).join(', '))+'"></div>';
+  h+='<div class="gc-f"><label class="gc-fl">Description</label><textarea class="gc-ta" id="gcm-desc" rows="5">'+esc(sys.desc||'')+'</textarea></div>';
+  gcOpenModal('Edit System — '+sys.name,h,true);
+}
+function gcSaveSystem(){
+  var name=(document.getElementById('gcm-name')||{}).value;if(!name||!name.trim())return;name=name.trim();
+  var sysData={
+    name:name,
+    region:(document.getElementById('gcm-region').value||'').trim(),
+    classification:(document.getElementById('gcm-class').value||'').trim(),
+    faction:(document.getElementById('gcm-faction').value||'').trim(),
+    status:document.getElementById('gcm-status').value,
+    tags:(document.getElementById('gcm-tags').value||'').split(',').map(function(t){return t.trim();}).filter(Boolean),
+    desc:(document.getElementById('gcm-desc').value||'').trim()
+  };
+  if(gcModalMode==='add_system'){
+    sysData.id=name.toLowerCase().replace(/[^a-z0-9]+/g,'_');
+    sysData.planets=[];
+    if(!g.catalogue_systems)g.catalogue_systems=[];
+    g.catalogue_systems.push(sysData);
+  } else {
+    var orig=g.catalogue_systems[gcModalTargetSys];
+    sysData.id=orig.id;sysData.planets=orig.planets||[];
+    g.catalogue_systems[gcModalTargetSys]=sysData;
+  }
+  gcSaveToStorage();gcCloseModal();render();
+  if(gcModalMode==='add_system')gcOpenSystems.add(sysData.id);
+}
+
+function gcPlanetModal(p){
+  p=p||{};
+  var h='<div class="gc-f-row"><div class="gc-f"><label class="gc-fl">World Name</label><input class="gc-inp" id="gcm-name" value="'+esc(p.name||'')+'" placeholder="e.g. Proxima Prime"></div>';
+  h+='<div class="gc-f"><label class="gc-fl">Status</label><select class="gc-sel" id="gcm-status">'+gcStatusOpts(p.status||'active')+'</select></div></div>';
+  h+='<div class="gc-f-row"><div class="gc-f"><label class="gc-fl">Planet Type</label><input class="gc-inp" id="gcm-type" value="'+esc(p.type||'')+'" placeholder="e.g. Terrestrial — Colony World"></div>';
+  h+='<div class="gc-f"><label class="gc-fl">Status Label</label><input class="gc-inp" id="gcm-statuslabel" value="'+esc(p.statusLabel||'')+'" placeholder="e.g. Active — Alliance"></div></div>';
+  h+='<div class="gc-sec-div">Physical Environment</div>';
+  h+='<div class="gc-f-row3"><div class="gc-f"><label class="gc-fl">Atmosphere</label><select class="gc-sel" id="gcm-atm">'+gcAtmOpts(p.atmosphere||'Breathable')+'</select></div>';
+  h+='<div class="gc-f"><label class="gc-fl">Climate</label><input class="gc-inp" id="gcm-climate" value="'+esc(p.climate||'')+'" placeholder="e.g. Temperate"></div>';
+  h+='<div class="gc-f"><label class="gc-fl">Gravity</label><select class="gc-sel" id="gcm-grav">'+gcGravOpts(p.gravity||'Standard')+'</select></div></div>';
+  h+='<div class="gc-f-row"><div class="gc-f"><label class="gc-fl">Atmosphere Notes</label><input class="gc-inp" id="gcm-atm-note" value="'+esc(p.atm_note||'')+'" placeholder="Additional detail..."></div>';
+  h+='<div class="gc-f"><label class="gc-fl">Gravity Notes</label><input class="gc-inp" id="gcm-grav-note" value="'+esc(p.grav_note||'')+'" placeholder="Additional detail..."></div></div>';
+  h+='<div class="gc-sec-div">Civilisation</div>';
+  h+='<div class="gc-f-row"><div class="gc-f"><label class="gc-fl">Population</label><input class="gc-inp" id="gcm-pop" value="'+esc(p.population||'')+'" placeholder="e.g. ~500 million"></div>';
+  h+='<div class="gc-f"><label class="gc-fl">Demographics</label><input class="gc-inp" id="gcm-demo" value="'+esc(p.demographics||'')+'" placeholder="e.g. Mixed — predominantly human"></div></div>';
+  h+='<div class="gc-f-row"><div class="gc-f"><label class="gc-fl">Government</label><input class="gc-inp" id="gcm-gov" value="'+esc(p.government||'')+'" placeholder="e.g. Alliance Planetary Council"></div>';
+  h+='<div class="gc-f"><label class="gc-fl">Controlling Faction</label><input class="gc-inp" id="gcm-faction" value="'+esc(p.faction||'')+'" placeholder="e.g. Alliance"></div></div>';
+  h+='<div class="gc-f-row"><div class="gc-f"><label class="gc-fl">Tech Level</label><select class="gc-sel" id="gcm-tech">'+gcTechOpts(p.tech_level||'Standard')+'</select></div>';
+  h+='<div class="gc-f"><label class="gc-fl">Economy</label><input class="gc-inp" id="gcm-economy" value="'+esc(p.economy||'')+'" placeholder="e.g. Trade, Manufacturing"></div></div>';
+  h+='<div class="gc-f-row"><div class="gc-f"><label class="gc-fl">Access Level</label><select class="gc-sel" id="gcm-access">'+gcAccessOpts(p.access||'Open')+'</select></div>';
+  h+='<div class="gc-f"><label class="gc-fl">Access Notes</label><input class="gc-inp" id="gcm-access-note" value="'+esc(p.access_note||'')+'" placeholder="Entry requirements..."></div></div>';
+  h+='<div class="gc-sec-div">Description</div>';
+  h+='<div class="gc-f"><textarea class="gc-ta" id="gcm-desc" rows="5" placeholder="Planet lore and overview...">'+esc(p.desc||'')+'</textarea></div>';
+  h+='<div class="gc-sec-div">Hazards</div>';
+  h+='<div id="gcm-hazards-list" class="gc-list-field">';
+  (p.hazards&&p.hazards.length?p.hazards:['','']).forEach(function(hz){
+    h+='<div class="gc-list-item"><input class="gc-inp gc-list-inp" placeholder="Hazard description" value="'+esc(hz)+'"><button class="gc-list-rm" onclick="this.closest(\'.gc-list-item\').remove()">✕</button></div>';
+  });
+  h+='</div><button class="gc-list-add" onclick="gcListAdd(\'gcm-hazards-list\',\'input\',\'Hazard description\')">+ Add Hazard</button>';
+  h+='<div class="gc-sec-div">Notable Locations</div>';
+  h+='<div id="gcm-locs-list">';
+  (p.notable_locations&&p.notable_locations.length?p.notable_locations:[{name:'',desc:''}]).forEach(function(loc,i){
+    h+=gcLocEditBlock(loc.name,loc.desc,i);
+  });
+  h+='</div><button class="gc-list-add" onclick="gcLocAdd()">+ Add Location</button>';
+  h+='<div class="gc-sec-div">Plot Hooks</div>';
+  h+='<div id="gcm-hooks-list" class="gc-list-field">';
+  (p.hooks&&p.hooks.length?p.hooks:['','']).forEach(function(hk){
+    h+='<div class="gc-list-item"><textarea class="gc-ta gc-list-inp" placeholder="Plot hook..." rows="2">'+esc(hk)+'</textarea><button class="gc-list-rm" onclick="this.closest(\'.gc-list-item\').remove()">✕</button></div>';
+  });
+  h+='</div><button class="gc-list-add" onclick="gcListAdd(\'gcm-hooks-list\',\'textarea\',\'Plot hook...\')">+ Add Hook</button>';
+  return h;
+}
+function gcLocEditBlock(name,desc,i){
+  return '<div class="gc-loc-edit"><div style="margin-bottom:6px;"><input class="gc-inp" placeholder="Location name" value="'+esc(name||'')+'"></div>'
+    +'<div style="display:flex;gap:5px;align-items:flex-start;"><textarea class="gc-ta" placeholder="Location description..." rows="2" style="flex:1;">'+esc(desc||'')+'</textarea>'
+    +'<button class="gc-list-rm" onclick="this.closest(\'.gc-loc-edit\').remove()">✕</button></div></div>';
+}
+function gcLocAdd(){
+  var list=document.getElementById('gcm-locs-list');if(!list)return;
+  var d=document.createElement('div');d.innerHTML=gcLocEditBlock('','',list.children.length);
+  list.appendChild(d.firstChild);
+}
+function gcListAdd(listId,tag,placeholder){
+  var list=document.getElementById(listId);if(!list)return;
+  var d=document.createElement('div');d.className='gc-list-item';
+  d.innerHTML='<'+tag+' class="gc-inp gc-list-inp" placeholder="'+esc(placeholder)+'"'+(tag==='textarea'?' rows="2"':'')+'>'+(tag==='textarea'?'<\/textarea>':'');
+  d.innerHTML+='<button class="gc-list-rm" onclick="this.closest(\'.gc-list-item\').remove()">✕</button>';
+  list.appendChild(d);
+}
+function gcOpenAddPlanet(si){
+  gcModalMode='add_planet';gcModalTargetSys=si;gcModalTargetPlanet=null;
+  var sys=(g.catalogue_systems||[])[si];
+  gcOpenModal('Add World'+(sys?' — '+sys.name:''),gcPlanetModal(null),false);
+}
+function gcOpenEditPlanet(si,pi){
+  gcModalMode='edit_planet';gcModalTargetSys=si;gcModalTargetPlanet=pi;
+  var sys=(g.catalogue_systems||[])[si];
+  var p=(sys&&sys.planets||[])[pi];
+  gcOpenModal('Edit — '+(p?p.name:'World'),gcPlanetModal(p),true);
+}
+function gcSavePlanet(){
+  var name=(document.getElementById('gcm-name').value||'').trim();if(!name)return;
+  var hazards=[],locs=[],hooks=[];
+  document.querySelectorAll('#gcm-hazards-list .gc-list-item input').forEach(function(inp){var v=(inp.value||'').trim();if(v)hazards.push(v);});
+  document.querySelectorAll('#gcm-locs-list .gc-loc-edit').forEach(function(block){
+    var nm=(block.querySelector('input').value||'').trim();
+    var ds=(block.querySelector('textarea').value||'').trim();
+    if(nm)locs.push({name:nm,desc:ds});
+  });
+  document.querySelectorAll('#gcm-hooks-list .gc-list-item textarea').forEach(function(ta){var v=(ta.value||'').trim();if(v)hooks.push(v);});
+  var planet={
+    id:name.toLowerCase().replace(/[^a-z0-9]+/g,'_'),
+    name:name,
+    type:(document.getElementById('gcm-type').value||'').trim(),
+    status:document.getElementById('gcm-status').value,
+    statusLabel:(document.getElementById('gcm-statuslabel').value||'').trim(),
+    atmosphere:document.getElementById('gcm-atm').value,
+    atm_note:(document.getElementById('gcm-atm-note').value||'').trim(),
+    climate:(document.getElementById('gcm-climate').value||'').trim(),
+    gravity:document.getElementById('gcm-grav').value,
+    grav_note:(document.getElementById('gcm-grav-note').value||'').trim(),
+    population:(document.getElementById('gcm-pop').value||'').trim(),
+    demographics:(document.getElementById('gcm-demo').value||'').trim(),
+    government:(document.getElementById('gcm-gov').value||'').trim(),
+    faction:(document.getElementById('gcm-faction').value||'').trim(),
+    tech_level:document.getElementById('gcm-tech').value,
+    economy:(document.getElementById('gcm-economy').value||'').trim(),
+    access:document.getElementById('gcm-access').value,
+    access_note:(document.getElementById('gcm-access-note').value||'').trim(),
+    desc:(document.getElementById('gcm-desc').value||'').trim(),
+    hazards:hazards,notable_locations:locs,hooks:hooks
+  };
+  var sys=g.catalogue_systems[gcModalTargetSys];if(!sys)return;
+  if(!sys.planets)sys.planets=[];
+  if(gcModalMode==='add_planet'){sys.planets.push(planet);}
+  else{planet.id=(sys.planets[gcModalTargetPlanet]||{}).id||planet.id;sys.planets[gcModalTargetPlanet]=planet;}
+  gcSaveToStorage();gcCloseModal();render();
+  if(sys.id){gcOpenSystems.add(sys.id);var card=document.getElementById('gcs_'+sys.id);if(card)card.classList.add('open');}
+  if(gcModalMode==='edit_planet')gcOpenPlanet(gcModalTargetSys,gcModalTargetPlanet);
+}
+function gcSaveToStorage(){try{localStorage.setItem('gc_systems',JSON.stringify(g.catalogue_systems));}catch(e){}}
 
 // ─── Render ───────────────────────────────────────────────────────────────────
 function render(){
@@ -3774,50 +4502,84 @@ function render(){
   }
 
   else if(cs==='galaxy'){
-    const factions=(g.galaxy||[]).filter(e=>e.entry_type==='faction'&&ms([e.name,e.status,e.territory,e.government,e.alignment,e.desc,...(e.tags||[])]));
-    const systems=(g.galaxy||[]).filter(e=>e.entry_type==='system'&&ms([e.name,e.region,e.faction,e.population,e.notable_for,e.desc,...(e.tags||[])]));
-    cnt=factions.length+systems.length;
-    html='<div class="stitle">🌌 GALAXY &amp; FACTIONS <span class="badge">'+cnt+'</span></div>';
-    if(factions.length){
-      html+='<div class="ssub">Regions &amp; Factions</div><div class="grid2">';
-      factions.forEach((f,i)=>{
-        const id='gxf'+i;
-        const rarCl=f.rarity?(' '+f.rarity):'';
-        html+='<div class="card'+rarCl+'" id="'+id+'" data-tog="'+id+'">';
-        html+='<div class="ch"><div><div class="cn">'+hl(f.name,sq)+'</div></div><span class="xi">▼</span></div>';
-        if(f.tags&&f.tags.length)html+='<div class="tags">'+f.tags.map(t=>'<span class="tag tgr">'+esc(t)+'</span>').join('')+'</div>';
-        html+='<div class="cb">';
-        html+='<div class="fg">';
-        html+='<div class="f"><div class="fl">⚖ Status</div><div class="fv">'+hl(f.status,sq)+'</div></div>';
-        html+='<div class="f"><div class="fl">🗺 Territory</div><div class="fv">'+hl(f.territory,sq)+'</div></div>';
-        html+='<div class="f"><div class="fl">🏛 Government</div><div class="fv">'+hl(f.government,sq)+'</div></div>';
-        html+='<div class="f"><div class="fl">🎯 Alignment</div><div class="fv">'+hl(f.alignment,sq)+'</div></div>';
-        html+='</div>';
-        if(f.desc)html+='<div class="desc" style="margin-top:8px;">'+descHtml(f.desc,sq)+'</div>';
-        html+='</div></div>';
+    var catSystems=g.catalogue_systems||[];
+    var gcFactions=(g.galaxy||[]).filter(function(e){return e.entry_type==='faction';});
+    // Unique regions for filter
+    var gcRegions=[...new Set(catSystems.map(function(s){return s.region;}))];
+    // Filter by region (af)
+    var gcFiltered=catSystems;
+    if(af){gcFiltered=gcFiltered.filter(function(sys){return sys.region===af||(sys.tags||[]).includes(af);});}
+    // Search filter
+    if(sq){
+      gcFiltered=gcFiltered.filter(function(sys){
+        if(ms([sys.name,sys.region,sys.faction,sys.classification,sys.desc,...(sys.tags||[])]))return true;
+        return (sys.planets||[]).some(function(p){
+          return ms([p.name,p.type,p.desc,p.faction,p.economy,p.demographics,p.government,p.atmosphere,p.climate,p.access,...(p.hazards||[]),...((p.notable_locations||[]).flatMap(function(l){return [l.name,l.desc];})),...(p.hooks||[])]);
+        });
+      });
+    }
+    cnt=gcFiltered.length;
+    // Header
+    html='<div class="gc-header"><div class="stitle" style="margin-bottom:0;">🌌 GALACTIC CATALOGUE <span class="badge">'+cnt+' Systems</span></div>';
+    html+='<button class="gc-add-btn" onclick="gcOpenAddSystem()">＋ Add System</button></div>';
+    // Region filter chips
+    html+='<div class="fbar">'+fcBtn('All Regions','',af);
+    gcRegions.forEach(function(r){html+=fcBtn(r,r,af);});
+    html+='</div>';
+    // Factions bar
+    if(gcFactions.length){
+      html+='<div style="margin-bottom:6px;font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--mu3);text-transform:uppercase;letter-spacing:1.5px;">Factions — click for details</div>';
+      html+='<div class="gc-faction-bar">';
+      gcFactions.forEach(function(f,fi){
+        var col=gcFactionColor(f.name);
+        html+='<button class="gc-faction-pill" style="color:'+col+';border-color:'+col+'55;background:'+col+'12;" onclick="gcOpenFaction('+fi+')">'+esc(f.name)+'</button>';
       });
       html+='</div>';
     }
-    if(systems.length){
-      html+='<div class="ssub">Notable Systems</div><div class="grid2">';
-      systems.forEach((s,i)=>{
-        const id='gxs'+i;
-        const rarCl=s.rarity?(' '+s.rarity):'';
-        html+='<div class="card'+rarCl+'" id="'+id+'" data-tog="'+id+'">';
-        html+='<div class="ch"><div><div class="cn">'+hl(s.name,sq)+'</div></div><span class="xi">▼</span></div>';
-        if(s.tags&&s.tags.length)html+='<div class="tags">'+s.tags.map(t=>'<span class="tag tgr">'+esc(t)+'</span>').join('')+'</div>';
-        html+='<div class="cb">';
-        html+='<div class="fg">';
-        html+='<div class="f"><div class="fl">🌐 Region</div><div class="fv">'+hl(s.region,sq)+'</div></div>';
-        html+='<div class="f"><div class="fl">🏴 Controlling Faction</div><div class="fv">'+hl(s.faction,sq)+'</div></div>';
-        html+='<div class="f"><div class="fl">👥 Population</div><div class="fv">'+hl(s.population,sq)+'</div></div>';
-        html+='<div class="f"><div class="fl">⭐ Notable For</div><div class="fv">'+hl(s.notable_for,sq)+'</div></div>';
+    // Systems list
+    if(!gcFiltered.length){
+      html+='<div class="empty"><div style="font-size:28px;margin-bottom:8px;">🌌</div><div style="font-family:\'IBM Plex Mono\',monospace;font-size:11px;">'+(sq?'No systems match "'+esc(sq)+'"':'No systems found')+'</div></div>';
+    } else {
+      gcFiltered.forEach(function(sys){
+        var realIdx=(g.catalogue_systems||[]).indexOf(sys);
+        var isOpen=gcOpenSystems.has(sys.id);
+        html+='<div class="gc-system-card'+(isOpen?' open':'')+'" id="gcs_'+esc(sys.id)+'">';
+        // Header
+        html+='<div class="gc-system-header" onclick="gcToggleSystem(\''+esc(sys.id)+'\')">';
+        html+='<div class="gc-system-info">';
+        html+='<div class="gc-system-name">'+hl(sys.name,sq)+'</div>';
+        html+='<div class="gc-system-meta">'+esc(sys.region||'')+(sys.classification?' · '+esc(sys.classification):'')+(sys.faction?' · '+esc(sys.faction):'')+'</div>';
         html+='</div>';
-        if(s.desc)html+='<div class="desc" style="margin-top:8px;">'+descHtml(s.desc,sq)+'</div>';
-        if(s.worlds_key)html+='<button class="worlds-btn" onclick="event.stopPropagation();openWorldPanel(\''+esc(s.worlds_key)+'\')"><span class="worlds-btn-dot"></span>View individual worlds</button>';
+        html+='<div class="gc-system-right">';
+        html+='<span class="world-entry-status ws-'+esc(sys.status||'active')+'">'+esc((sys.status||'active')[0].toUpperCase()+(sys.status||'active').slice(1))+'</span>';
+        html+='<span class="gc-system-count">'+((sys.planets||[]).length)+' world'+((sys.planets||[]).length!==1?'s':'')+'</span>';
+        html+='<button class="gc-edit-btn" onclick="event.stopPropagation();gcOpenEditSystem('+realIdx+')">✎</button>';
+        html+='<span class="gc-arr">▼</span>';
+        html+='</div></div>';
+        // Tags (always visible)
+        if(sys.tags&&sys.tags.length){
+          html+='<div class="gc-sys-tags">';
+          html+=sys.tags.map(function(t){return '<span class="tag tgr">'+esc(t)+'</span>';}).join('');
+          html+='</div>';
+        }
+        // Collapsible body
+        html+='<div class="gc-system-body">';
+        if(sys.desc)html+='<div class="gc-system-desc">'+descHtml(sys.desc,sq)+'</div>';
+        if((sys.planets||[]).length){
+          html+='<div class="gc-planets-head"><span>World</span><span>Type</span><span style="text-align:right;">Atmosphere</span><span style="text-align:right;">Access</span></div>';
+          (sys.planets||[]).forEach(function(p,pi){
+            var isSel=(gcPanelSys===realIdx&&gcPanelPlanet===pi);
+            html+='<div class="gc-planet-row'+(isSel?' sel':'')+'" id="gcp_'+esc(sys.id)+'_'+pi+'" onclick="gcOpenPlanet('+realIdx+','+pi+')">';
+            html+='<div class="gc-planet-name">'+hl(p.name,sq)+'</div>';
+            html+='<div class="gc-planet-type">'+esc(p.type||'—')+'</div>';
+            html+='<div class="gc-planet-chips"><span class="gc-chip '+gcAtmClass(p.atmosphere)+'">'+esc(p.atmosphere||'—')+'</span></div>';
+            html+='<div class="gc-planet-chips"><span class="gc-chip '+gcAccessClass(p.access)+'">'+esc(p.access||'—')+'</span></div>';
+            html+='</div>';
+          });
+        }
+        html+='<div class="gc-add-planet-row" onclick="gcOpenAddPlanet('+realIdx+')">＋ Add World</div>';
         html+='</div></div>';
       });
-      html+='</div>';
     }
   }
 
@@ -3872,5 +4634,23 @@ render();
 </div>
 <div id="world-panel-overlay" class="world-panel-overlay" onclick="closeWorldPanel()"></div>
 <div id="smap-popup" class="smap-popup" style="display:none;"></div>
+<!-- Galactic Catalogue Planet Panel -->
+<div id="gc-panel" class="gc-panel"></div>
+<div id="gc-panel-ov" class="gc-panel-ov" onclick="gcClosePanel()"></div>
+<!-- Galactic Catalogue Edit / Add Modal -->
+<div id="gc-modal" class="gc-modal-bg" onclick="if(event.target===this)gcCloseModal()">
+  <div class="gc-modal">
+    <div class="gc-modal-hd">
+      <span class="gc-modal-hd-title" id="gc-modal-title"></span>
+      <button class="gc-modal-close" onclick="gcCloseModal()">✕</button>
+    </div>
+    <div class="gc-modal-bd" id="gc-modal-bd"></div>
+    <div class="gc-modal-ft">
+      <button class="gc-btn-del" id="gc-modal-del" style="display:none;" onclick="gcDeleteCurrent()">Delete</button>
+      <button class="gc-btn-cancel" onclick="gcCloseModal()">Cancel</button>
+      <button class="gc-btn-save" onclick="gcSaveModal()">Save</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
