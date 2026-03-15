@@ -338,7 +338,7 @@ const g={"specials": {"BLIND": {"name": "Blind", "desc": "BLIND applies a LARGE 
 
 // ─── State ────────────────────────────────────────────────────────────────────
 let cs='glossary', sq='', af='';
-const mfrState={weapons:'Generic',armor:'Generic',datacoms:'Generic',medical:'Generic'};
+const mfrState={weapons:'Generic',armor:'Generic',datacoms:'Generic',medical:'Generic',kintechDef:'physical'};
 
 // ─── Tooltip ──────────────────────────────────────────────────────────────────
 const TT=document.getElementById('tt');
@@ -429,6 +429,8 @@ document.addEventListener('click',e=>{
 document.addEventListener('change',e=>{
   const sel=e.target.closest('.mfr-sel[data-sec]');
   if(sel){mfrState[sel.dataset.sec]=sel.value;render();}
+  const defBtn=e.target.closest('.ktc-def-btn[data-def]');
+  if(defBtn){mfrState.kintechDef=defBtn.dataset.def;render();return;}
 });
 let st;document.getElementById('search').addEventListener('input',e=>{clearTimeout(st);st=setTimeout(()=>{sq=e.target.value.trim().toLowerCase();render();},110);});
 document.addEventListener('input',e=>{const ni=e.target.closest('#db-name-inp');if(ni){dbState.name=ni.value;return;}if(e.target.dataset&&e.target.dataset.db==='wpnsearch'){dbAdd.wpnSearch=e.target.value;render();}});
@@ -592,8 +594,13 @@ function applyArmorMfr(item, mfrName){
     const flat  = w.soak_min + sminMod;
     if(dice >= 0 && flat >= 0) w.soak = dice + 'D + ' + flat;
   }
-  // Special — Kintech armor: add OPT+ if item already has OPT, else add OPT
+  // Special — Kintech armor: +1 tier to chosen defense (max High) + add OPT/OPT+
   if(m.armor_def_choice){
+    const defFieldMap={physical:'def_physical',energy:'def_energy',tech:'def_tech',spiritual:'def_spiritual'};
+    const defKey=defFieldMap[mfrState.kintechDef||'physical']||'def_physical';
+    let boosted=defShift(w[defKey]||'None',3);
+    if(boosted==='Extreme')boosted='High'; // cap at High
+    w[defKey]=boosted;
     const ex = w.special||'';
     const hasOPT = /\bOPT\b/.test(ex);
     w.special = hasOPT ? ex.replace(/\bOPT\b/, 'OPT+') : (ex ? ex+' OPT' : 'OPT');
@@ -643,7 +650,7 @@ function mfrInfo(sec,mfr){
     if(eM>0)parts.push('+'+eM+' expertise bonus');else if(eM<0)parts.push(eM+' expertise penalty');
     if(m.special)parts.push('adds '+m.special.trim());
   }else if(sec==='armor'){
-    if(m.armor_def_choice){parts.push('+1 tier to one chosen def (max High)');parts.push('adds OPT or OPT+');}
+    if(m.armor_def_choice){const defLbl={physical:'Physical',energy:'Energy',tech:'Tech',spiritual:'Spiritual'};parts.push('+1 tier to '+( defLbl[mfrState.kintechDef]||'chosen')+' def (max High)');parts.push('adds OPT or OPT+');}
     else{
       const smaxM=parseInt(m.soak_max_mod||0),sminM=parseInt(m.soak_min_mod||0);
       if(smaxM)parts.push((smaxM>0?'+':'')+smaxM+' max soak');
@@ -2856,6 +2863,12 @@ function render(){
     html='<div class="stitle">🛡 ARMOR <span class="badge">'+F.length+'</span></div>';
     html+=mfrBar('armor',ARMOR_MFRS,curMfr);
     html+=mfrInfo('armor',curMfr);
+    if(curMfr==='Kintech'){
+      const defOpts=[{k:'physical',lbl:'🛡 Physical'},{k:'energy',lbl:'⚡ Energy'},{k:'tech',lbl:'💻 Tech'},{k:'spiritual',lbl:'✨ Spiritual'}];
+      html+='<div class="fbar" style="margin-top:4px;"><span style="font-size:10px;color:var(--mu);font-family:\'IBM Plex Mono\',monospace;margin-right:6px;">DEF BOOST:</span>';
+      defOpts.forEach(d=>{const act=mfrState.kintechDef===d.k?' active':'';html+='<button class="fc ktc-def-btn'+act+'" data-def="'+d.k+'">'+d.lbl+'</button>';});
+      html+='</div>';
+    }
     html+='<div class="fbar">'+fcBtn('ALL','ALL',af);
     validTypes.forEach(t=>{
       const lbl=t.replace(' Armor','').replace('Forcefield Generator','FF GENERATOR').replace('Combat Forcefield','COMBAT FF').replace('Guardian Forcefield','GUARDIAN FF').replace(' Barrier',' BAR').replace('Basic Datacom','BASIC DC').replace('Full Datacom','FULL DC');
