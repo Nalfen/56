@@ -282,8 +282,14 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 .gc-edit-btn:hover{color:var(--tx2);border-color:var(--mu);background:rgba(255,255,255,.05);}
 .gc-arr{font-size:10px;color:var(--mu3);transition:transform .2s;margin-left:2px;}
 .gc-system-card.open .gc-arr{transform:rotate(180deg);}
-.gc-sys-tags{display:flex;flex-wrap:wrap;gap:3px;padding:0 16px 10px;}
-.gc-system-body{border-top:1px solid var(--border);display:none;}
+.gc-sys-tags{display:flex;flex-wrap:wrap;gap:3px;padding:0 16px 8px;}
+.gc-sys-excerpt{padding:0 16px 8px;font-size:12px;line-height:1.6;color:var(--mu);font-family:'IBM Plex Sans',sans-serif;}
+.gc-sys-quickbar{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px;border-bottom:1px solid var(--border);}
+.gc-sys-qworld{display:flex;align-items:center;gap:4px;flex-wrap:nowrap;}
+.gc-sys-qname{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--mu3);margin-right:1px;}
+.gc-sys-qpop{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--mu3);margin-left:2px;}
+.gc-chip-sm{font-size:9px;padding:1px 5px;}
+.gc-system-body{border-top:none;display:none;}
 .gc-system-card.open .gc-system-body{display:block;}
 .gc-system-desc{padding:12px 16px;font-size:13px;line-height:1.7;color:var(--mu);border-bottom:1px solid var(--border);}
 .gc-planets-head{display:grid;grid-template-columns:minmax(110px,1.4fr) 1fr auto auto;gap:8px;padding:5px 16px;border-bottom:1px solid var(--border);background:rgba(0,0,0,.15);}
@@ -2037,6 +2043,61 @@ g.galaxy=[
     notable_for:'Patriark homeworld; most advanced cloning facilities in the galaxy',
     worlds_key:'berilia',
     desc:'Berilia is the Patriark homeworld and the quiet centre of the galaxy\'s most important dependency: resurrection technology. The Patriarks built no army. Instead they spent centuries making themselves indispensable. The cloning infrastructure on Berilia underpins the Alliance\'s promise of continuity — and the Patriarks know exactly what it would cost everyone if they renegotiated their terms.'
+  },
+  {
+    entry_type:'system',
+    name:'Ishtar',
+    tags:['Notable System','Alliance Space','Arms Corp','Industrial','Hostile Environment'],
+    rarity:'',
+    region:'Alliance Space — core system',
+    faction:'Arms Corp',
+    population:'~800 million — almost entirely industrial workforce',
+    notable_for:'Arms Corp HQ; largest manufacturing world in the galaxy; volcanic terrain; toxic atmosphere',
+    desc:'Ishtar exists to produce. The volcanic geology provides near-limitless geothermal energy. The crust is mineral-dense enough that raw materials are extracted metres from where they are processed. The atmosphere is permanently toxic from centuries of unregulated industrial output — workers wear breathers outside sealed zones. The weapons that come out of Ishtar\'s foundries are carried by soldiers on every side of every war in the galaxy.'
+  },
+  {
+    entry_type:'system',
+    name:'Damph',
+    tags:['Notable System','Alliance Space','Coronthia','Industrial','Worker Clans'],
+    rarity:'',
+    region:'Alliance Space — frontier system',
+    faction:'Independent worker clans / corporate extraction',
+    population:'~200 million — almost entirely industrial',
+    notable_for:'Only known source of Coronthia in the galaxy; frozen surface; intense blue-collar worker culture',
+    desc:'Damph is a frozen hellhole that happens to sit on the only known deposits of Coronthia in the galaxy — a super-dense fuel compound of extraordinary power and extraordinary instability. The workers who extract it know exactly how much leverage that gives them. Governed by a patchwork of worker clans — tough, territorial, deeply suspicious of outsiders, and fiercely proud of what they do. Corporate interests are present but operate carefully.'
+  },
+  {
+    entry_type:'system',
+    name:'Alsa',
+    tags:['Notable System','Alliance Space','Agricultural','Food Supply','Strategic'],
+    rarity:'',
+    region:'Alliance Space — core system',
+    faction:'Alliance — agricultural consortium',
+    population:'~3 billion',
+    notable_for:'Most fertile worlds in the galaxy; primary food source for Alliance Space',
+    desc:'Alsa is where the galaxy eats. The system\'s worlds are extraordinarily fertile — geology, climate and water distribution aligned in a combination that produces agricultural output unmatched anywhere in known space. Most of the food consumed across Alliance Space originates here in some form. Alsa is quiet, green, and largely pastoral — and the most heavily insured system in the Alliance, protected by standing navy contracts that make attacking it extremely inadvisable.'
+  },
+  {
+    entry_type:'system',
+    name:'Ash',
+    tags:['Notable System','Alliance Space','Nemani Rift','Military','Frontier','Salvage'],
+    rarity:'rar-uncommon',
+    region:'Alliance Space — Nemani Rift frontier',
+    faction:'Alliance military + independent operators',
+    population:'~150 million and fluctuating',
+    notable_for:'Gateway to the Nemani Rift; military staging point; salvage culture; glory-seekers and rift pilots',
+    desc:'Ash would be an unremarkable frontier system if it were not sitting at the edge of the Nemani Rift. The Alliance military maintains a permanent and substantial presence here — monitoring the Rift and ensuring that whatever is on the other side stays on the other side. Around the military has grown an ecosystem of salvage yards, scrappers, black market dealers, and pilots who come here specifically to attempt the Rift. Most of those pilots do not come back. The ones who do come back wealthy, famous, or permanently changed.'
+  },
+  {
+    entry_type:'system',
+    name:'Palentium',
+    tags:['Notable System','Alliance Space','Tourism','Corruption','Historic','Tropical'],
+    rarity:'',
+    region:'Alliance Space — core system',
+    faction:'Alliance — heavily corporate-influenced',
+    population:'~4 billion',
+    notable_for:'First human-discovered planet in Alliance Space; tropical climate; luxury tourism; pervasive corruption',
+    desc:'Palentium was the first planet humans set foot on in what is now Alliance Space — a fact the tourism industry has milked for centuries. The world is genuinely beautiful: tropical, warm, blessed with long coastlines and an atmosphere that requires no modification. The corruption is so deeply embedded into Palentium\'s institutions that most residents treat it as a natural feature of the climate. Everything is for sale on Palentium if you know who to ask.'
   }
 ];
 
@@ -2064,9 +2125,26 @@ const GALAXY_MAP_POS={
   'Mangara':           {x:32,y:71},
   'Skalan Worlds':     {x:42,y:65},
   'Berilia':           {x:53,y:39},
+  'Ishtar':            {x:49,y:54},
+  'Damph':             {x:57,y:44},
+  'Alsa':              {x:50,y:62},
+  'Ash':               {x:53,y:32},
+  'Palentium':         {x:44,y:43},
 };
 // Apply positions to galaxy entries
 (g.galaxy||[]).forEach(function(e){if(GALAXY_MAP_POS[e.name])e.map_pos=GALAXY_MAP_POS[e.name];});
+
+// ─── Stargate Links ───────────────────────────────────────────────────────────
+// Pairs of system names connected by a star gate (tachyonic-speed travel superstructure).
+// Rendered as dotted lines on the star map overlay.
+const STARGATE_LINKS=[
+  ['Orion','Sirius'],
+  ['Orion','Berilia'],
+  ['Sirius','Palentium'],
+  ['Sirius','Aderan'],
+  ['Berilia','Damph'],
+  ['Alsa','Ishtar'],
+];
 
 // ─── World Panel Data ─────────────────────────────────────────────────────────
 const worldData={
@@ -2076,13 +2154,13 @@ const worldData={
     worlds:[
       {
         name:'Orion 1',
-        type:'Former space station \u2014 original GU seat',
-        status:'ruins',
-        statusLabel:'Largely Salvaged',
-        faction:'Galactic Union',
-        population:'~12,000 maintenance personnel',
-        notable:'Birthplace of the Galactic Union',
-        desc:'Orion 1 was never a planet \u2014 it was a space station, and the single most important structure in the history of the Galactic Union. This is where the Union was founded, where the first trade charters were signed, and where the philosophy of self-sufficiency that built an empire was first written down. Most of the station\'s superstructure was gradually stripped and repurposed during the construction of Orion 2, leaving behind a skeletal frame of original sections maintained more as a monument than a functional installation. A small permanent crew keeps the remaining modules pressurised and the historical archives intact. The Galactic Union does not publicise it. Those who know what it is tend to treat it with something approaching reverence.'
+        type:'Space station \u2014 major spaceport and trade hub',
+        status:'active',
+        statusLabel:'Active \u2014 Major Spaceport',
+        faction:'Galactic Union / Alliance Navy',
+        population:'~850,000 permanent staff, transit crews and traders',
+        notable:'Largest spaceport in the Orion system; primary trade hub; extensive military substations',
+        desc:'Orion 1 is one of the largest spaceport structures in Alliance Space \u2014 and one of the most visibly incomplete. When the Galactic Union began construction of the artificial worlds that would follow, vast sections of the original station were stripped for materials and never fully replaced. What remains is a sprawling, partially-rebuilt installation that has grown organically around its surviving core: a major trade hub handling traffic from across the Orion system and beyond, with warehousing, transit facilities, commercial districts, and a dense network of military substations installed by the Alliance navy to defend the system\'s primary entry point. The station is loud, busy, and structurally mismatched \u2014 new construction built directly against stripped-out frames, some corridors unpressurised, others running at full capacity day and night. The GU historical archive occupies one of the original founding modules, carefully preserved amid the commercial noise of everything built around it. Orion 1 is not pretty. It is functional, essential, and impossible to avoid if you are doing business in the Orion system.'
       },
       {
         name:'Orion 2',
@@ -2256,21 +2334,23 @@ g.catalogue_systems=[
     tags:['Alliance Space','Seat of Power','Heavily Defended','Political Centre'],
     desc:'The Orion system is the political and corporate centre of the known galaxy — five worlds across every stage of construction, ruin, and ambition. Home to the Galactic Union and the ghost of OrionWorks, the organisation that built artificial planets and may have started the Tronik War. It is heavily defended, intensely surveilled, and the kind of place where what you know and who you know matters more than what you can do.',
     planets:[
-      {id:'orion_1',name:'Orion 1',type:'Space Station — Skeletal Frame',status:'ruins',statusLabel:'Largely Salvaged',
-       atmosphere:'Breathable',atm_note:'Maintained sections only — outer ring is hard vacuum',
-       climate:'Controlled (Station)',gravity:'Standard',grav_note:'Artificial gravity — fails in outer ring sections',
-       faction:'Galactic Union',population:'~12,000 maintenance personnel',
-       demographics:'Mixed — predominantly GU administrative staff',
-       government:'GU Archival Commission',tech_level:'Advanced',
-       economy:'Historical preservation, archival maintenance',
-       access:'Restricted',access_note:'GU Level 2 clearance required — heritage site designation',
-       hazards:['Structural instability in outer modules','Vacuum exposure in unsecured sections','Decompression risk in unsealed corridors'],
+      {id:'orion_1',name:'Orion 1',type:'Space Station — Major Spaceport & Trade Hub',status:'active',statusLabel:'Active — Major Spaceport',
+       atmosphere:'Breathable',atm_note:'Maintained throughout commercial sections — outer salvaged ring retains hard vacuum in unrepaired zones',
+       climate:'Controlled (Station)',gravity:'Standard',grav_note:'Artificial gravity throughout commercial core — patchy in outer salvaged sections',
+       faction:'Galactic Union / Alliance Navy',population:'~850,000 permanent staff, transit crews and traders',
+       demographics:'Highly mixed — all races, heavy transient population, significant Non-Born labour presence',
+       government:'GU Spaceport Authority (civilian) / Alliance Navy Garrison Command (military)',tech_level:'Advanced',
+       economy:'Interstellar trade, cargo transit, warehousing, ship servicing, military logistics',
+       access:'Open',access_note:'Open entry with standard Alliance ID check. GU Archive section requires Level 2 clearance. Military substations are restricted.',
+       hazards:['Structural mismatch — old salvaged frames next to new construction create unpredictable load stress','Vacuum exposure in outer ring sections not yet repaired','Crowding and crime in the commercial transit zones','Intelligence operations from multiple factions — the volume of trade makes surveillance difficult to avoid'],
        notable_locations:[
-         {name:'Founding Chamber',desc:'The original chamber where the Galactic Union charter was first signed. Maintained under preservation fields. The original furniture and documents remain. Access Level 3.'},
-         {name:'Central Archives',desc:'Earliest GU operational records. Some documents are flagged restricted with no public explanation. Access logs show entries that do not match any registered personnel.'}
+         {name:'Commercial Transit Core',desc:'The beating heart of Orion 1\'s trade operation. Multiple docking arms, warehousing, traders and brokers operating day-cycle around the clock. The busiest single transit point in the Orion system.'},
+         {name:'Military Substations (Network)',desc:'The Alliance navy operates a distributed network of substations throughout the station\'s structure, each positioned to control approach vectors into the system. Well-armed, permanently staffed, and not welcoming to casual visitors.'},
+         {name:'GU Historical Archive',desc:'One of the original founding modules, preserved in place amid the commercial sprawl that grew up around it. The Galactic Union charter was signed here. Access Level 2. Some records are restricted with no explanation on file.'},
+         {name:'The Salvaged Ring',desc:'The outer sections never rebuilt after materials were stripped for the artificial world projects. Some corridors are hard vacuum. Others have been squatted by traders who prefer not to be registered. The GU Spaceport Authority maintains minimal presence here.'}
        ],
-       hooks:['Archive access logs show someone has been reviewing the founding documents — but no registered visit matches the timestamps.','A decommissioned module in the outer ring is still transmitting on an old GU frequency. Nobody has investigated it in thirty years.','A researcher claims a key founding document was removed from the archive. The GU says it never existed.'],
-       desc:'Orion 1 was never a planet — it was a space station, and the single most important structure in the history of the Galactic Union. This is where the Union was founded, where the first trade charters were signed, and where the philosophy of self-sufficiency that built an empire was first written down. Most of the station\'s superstructure was gradually stripped and repurposed during the construction of Orion 2, leaving behind a skeletal frame maintained more as a monument than a functional installation.'},
+       hooks:['A cargo shipment cleared customs and then disappeared inside the station before reaching its registered berth. The manifest lists a consignee that does not exist.','Archive access logs show someone has been reviewing the founding documents — no registered visit matches the timestamps.','One of the military substations went on comms blackout six hours ago. The official explanation is a maintenance fault. Station crew who work that section say the corridor was sealed before the fault was reported.'],
+       desc:'Orion 1 is one of the largest spaceport structures in Alliance Space — and one of the most visibly incomplete. When the GU began construction of the artificial worlds that followed, vast sections of the original station were stripped for materials and never replaced. What grew in their place is a sprawling, partially-rebuilt trade hub handling traffic from across the Orion system and beyond: warehousing, transit facilities, commercial districts, and a dense network of military substations installed by the Alliance navy to defend the system\'s primary entry point. The station is loud, busy, and structurally mismatched — new construction built directly against stripped-out frames, some corridors unpressurised, others running at full capacity. The GU historical archive sits in one of the original founding modules, carefully preserved amid the commercial noise of everything built around it.'},
       {id:'orion_2',name:'Orion 2',type:'Failed Artificial Planet — Navigational Hazard',status:'abandoned',statusLabel:'Salvaged & Abandoned',
        atmosphere:'None',atm_note:'Core collapsed — no breathable zones remain',climate:'Void',
        gravity:'None',grav_note:'Fragmented mass — gravitational field unstable and unpredictable',
@@ -2570,6 +2650,148 @@ g.catalogue_systems=[
        ],
        hooks:['A Nerulian archivist has found references in pre-Kraven records to technology that appears to describe a Kraven counter. They need help verifying it and quietly getting the information to someone who can act on it without triggering a political incident.','A fleet-city that should have arrived at San Tien six months ago has not appeared. No communication, no distress signal. The route it took passes close to the Nemani Rift.','The Alliance wants access to the Archive City\'s pre-Kraven technology records. The Nerulians are considering whether to negotiate. Neither side entirely trusts the other, and both sides have good reasons for that.'],
        desc:'San Tien is the last world the Nerulians can call their own. It is a world haunted by what was lost: libraries of Nerulian history, refugee camps that became cities, a government in exile that may never govern again. Most Nerulians encountered in the galaxy are from the great fleet-cities that drift between systems, but San Tien remains the spiritual and political home of the surviving people. The archive kept here is the most significant cultural repository of a civilisation that no longer has a civilisation — a last record of everything the Kravens destroyed.'}
+    ]
+  },
+  {
+    id:'ishtar',name:'Ishtar System',region:'Alliance Space',classification:'Core System — Industrial Centre',
+    faction:'Arms Corp',status:'active',
+    tags:['Alliance Space','Arms Corp','Industrial','Toxic Environment','Manufacturing','Corporate'],
+    desc:'Ishtar exists to produce. The volcanic geology provides near-limitless geothermal energy. The crust is mineral-dense enough that raw materials are extracted metres from where they are processed. The atmosphere is permanently toxic from centuries of unregulated industrial output. The weapons that come out of Ishtar\'s foundries are carried by soldiers on every side of every war in the galaxy.',
+    planets:[
+      {id:'ishtar_prime',name:'Ishtar',type:'Terrestrial — Volcanic Industrial World',status:'active',statusLabel:'Active — Arms Corp Controlled',
+       atmosphere:'Toxic',atm_note:'Permanently toxic from centuries of unregulated industrial output — breathers mandatory outside sealed zones',
+       climate:'Volcanic (Extreme Heat, Acid Rain)',gravity:'Standard',
+       faction:'Arms Corp',population:'~800 million — almost entirely industrial workforce',
+       demographics:'Mixed — predominantly human, significant Hakari labour contingent',
+       government:'Arms Corp Industrial Directorate',tech_level:'Advanced (Industrial Application)',
+       economy:'Weapons manufacturing, heavy industry, geothermal energy, raw material extraction',
+       access:'Restricted',access_note:'Arms Corp employment credential or contractor license required. Tourist access does not exist.',
+       hazards:['Toxic atmosphere — breather mandatory at all times outside sealed zones','Volcanic activity — eruption zones shift without reliable warning','Acid precipitation in certain atmospheric bands','Industrial accident rate significantly above Alliance average','Arms Corp security forces with lethal escalation policy','Geothermal venting — some districts are periodically unworkable'],
+       notable_locations:[
+         {name:'The Foundry Districts',desc:'The core of Ishtar\'s weapons production capacity. Dozens of enormous manufacturing complexes producing the full range of Arms Corp weaponry. The noise and heat are extreme even inside sealed areas.'},
+         {name:'Arms Corp HQ (Ishtar Campus)',desc:'The primary administrative and research hub for the largest weapons manufacturer in the galaxy. Security is military-grade. Visitor access is not offered.'},
+         {name:'Residential Sealed Zones',desc:'The pressurised living areas where the workforce spends its off-shifts. Designed for efficiency, not comfort. The waiting list to transfer out is years long. Arms Corp pays well because it has to.'},
+         {name:'The Extraction Front',desc:'The active mining zones where raw materials come out of the crust. Geologically unstable, worked in shifts around the clock, and statistically the most dangerous workplace in Alliance Space.'}
+       ],
+       hooks:['An Arms Corp internal audit has flagged a production discrepancy — weapons are leaving Ishtar that do not appear on any export manifest. Someone inside the company is running a side operation.','A worker organiser has been gathering signatures for a collective action petition. Arms Corp has noticed. The organiser has been moved to a different district. Their contacts are looking for someone to find them.','A new alloy developed in Arms Corp\'s Ishtar research division has been stolen before it reached production. The thief got off-world. The alloy\'s application is not being disclosed.'],
+       desc:'Ishtar is one of the most productive worlds in the known galaxy and one of the least pleasant to live on. Nobody who works here chose it for the scenery. Arms Corp pays well because it has to — the working conditions are brutal, the life expectancy is below average, and the waiting list for transfer off-world is years long. The sky is a permanent orange-brown. The air outside a sealed zone will kill you. The weapons produced here are on every battlefield in the galaxy.'}
+    ]
+  },
+  {
+    id:'damph',name:'Damph System',region:'Alliance Space',classification:'Resource System — Coronthia Monopoly',
+    faction:'Independent worker clans / corporate extraction',status:'active',
+    tags:['Alliance Space','Coronthia','Industrial','Worker Clans','Frozen World','Restricted'],
+    desc:'Damph is a frozen hellhole that happens to sit on the only known deposits of Coronthia in the galaxy. Without Damph, a significant portion of the galaxy\'s most powerful ships stop moving. The workers who extract it know exactly how much leverage that gives them. Governed by a patchwork of worker clans — tough, territorial, deeply suspicious of outsiders, and fiercely proud of what they do.',
+    planets:[
+      {id:'damph_prime',name:'Damph',type:'Terrestrial — Frozen Industrial World',status:'active',statusLabel:'Active — Worker Clan Governed',
+       atmosphere:'Breathable',atm_note:'Breathable but extremely cold — thermal suits required outside pressurised zones',
+       climate:'Frozen (Extreme Cold)',gravity:'Standard',
+       faction:'Independent worker clans / corporate extraction (contested)',population:'~200 million — almost entirely industrial',
+       demographics:'Mixed — predominantly human and Hakari, several generations of clan families',
+       government:'Clan Council (rotating chairs by extraction volume — largest producing clan holds primary vote)',
+       tech_level:'Industrial',
+       economy:'Coronthia extraction and export, heavy equipment maintenance, clan-run supply logistics',
+       access:'Restricted',access_note:'Clan vetting required for landing. Corporate vessels operate under clan-issued extraction licenses. Unsanctioned arrivals are treated as claim-jumpers.',
+       hazards:['Extreme cold — unsurvivable exposure without thermal suits','Coronthia instability — extraction and transport accidents are common and severe','Clan territorial disputes — boundaries are not always marked and are always enforced','Corporate intelligence operations — multiple factions maintain covert presence','Coronthia is restricted in most Alliance atmospheres; transit documentation scrutinised heavily'],
+       notable_locations:[
+         {name:'The Deep Seams',desc:'The primary Coronthia extraction sites, kilometres below the frozen surface. The most dangerous workplaces on Damph. The clans that work the Deep Seams have the most political weight — and the most casualties.'},
+         {name:'Clan Central (Vethara Station)',desc:'The largest pressurised settlement on Damph, built at the intersection of the three largest clan territories. Hosts the Clan Council, the main trading post, and the only medical facility with full surgical capability.'},
+         {name:'Corporate Liaison Offices',desc:'Where the corporations do their business with the clans, under conditions dictated by the clans. The offices are comfortable. The negotiations are not.'},
+         {name:'The Storage Flats',desc:'Vast insulated storage fields on the surface where processed Coronthia is held before transit. Well-defended. The clans treat any approach without authorisation as hostile.'}
+       ],
+       hooks:['A corporate buyer has been offering above-market rates for Coronthia through an intermediary the clans don\'t recognise. The clan that accepted the first payment has since had two council members disappear.','A new Coronthia seam has been identified outside the established clan territories. Three clans are quietly positioning to claim it. The Clan Council hasn\'t been told.','Someone is transporting Coronthia off Damph outside the licensed shipping channels. The clans know the volume is wrong. They want to know who and how before they escalate to the Alliance.'],
+       desc:'Damph is governed by a patchwork of worker clans — tough, territorial, deeply suspicious of outsiders, and fiercely proud of what they do. Corporate interests are present but operate carefully. Anyone who has tried to simply take control of Damph has found the clans remarkably unified on the subject of not allowing that. The planet is cold, hostile, and absolutely essential to the galaxy\'s most powerful drive systems. The clans understand their position exactly.'}
+    ]
+  },
+  {
+    id:'alsa',name:'Alsa System',region:'Alliance Space',classification:'Core System — Agricultural Heartland',
+    faction:'Alliance — agricultural consortium',status:'active',
+    tags:['Alliance Space','Agricultural','Food Supply','Strategic','Heavily Defended','Pastoral'],
+    desc:'Alsa is where the galaxy eats. The system\'s worlds are extraordinarily fertile — geology, climate and water distribution aligned in a combination that produces agricultural output unmatched anywhere in known space. Most of the food consumed across Alliance Space originates here in some form. Quiet, green, and vastly important.',
+    planets:[
+      {id:'alsa_prime',name:'Alsa Prime',type:'Terrestrial — Primary Agricultural World',status:'active',statusLabel:'Active — Agricultural Consortium',
+       atmosphere:'Breathable',atm_note:'Pristine — no industrial pollution, ecosystem rigorously protected by consortium charter',
+       climate:'Temperate to Subtropical (Multi-Biome)',gravity:'Standard',
+       faction:'Alliance — Alsa Agricultural Consortium',population:'~2.1 billion',
+       demographics:'Mixed — predominantly human with significant Patriark and Hakari communities',
+       government:'Agricultural Consortium Council (chartered Alliance body)',tech_level:'Advanced (agricultural application)',
+       economy:'Grain production, protein cultivation, processed food export, water export, agricultural research',
+       access:'Open',access_note:'Open with standard Alliance ID. Agricultural zone access requires consortium permit. Naval exclusion zones around orbital platforms enforced.',
+       hazards:['Alliance navy patrols — the system is a designated strategic asset, naval response is fast','Corporate sabotage operations — several major corps have historical interest in disrupting Alsa supply chains','Ecological protection law is absolute — violations carry severe penalties','Weather manipulation infrastructure — regional climate is actively managed, interference is criminal'],
+       notable_locations:[
+         {name:'The Breadplains',desc:'The central agricultural zone of Alsa Prime — hundreds of thousands of square kilometres of managed cultivation producing the bulk of the system\'s export crop. Heavily mechanised, lightly populated, and the reason the galaxy eats.'},
+         {name:'Consortium Administration (Alsa City)',desc:'The seat of the Agricultural Consortium. Manages production quotas, export contracts, and the insurance frameworks that protect Alsa\'s output. Every major food distribution corporation has an office here.'},
+         {name:'Alliance Naval Station Alsa',desc:'The permanent military presence protecting the system. Sized for deterrence, not just patrol — attacking Alsa would mean fighting a standing fleet. This is deliberate.'},
+         {name:'The Seed Vaults',desc:'The most comprehensive collection of agricultural genetic material in the known galaxy. Maintained as a strategic reserve. Location partially classified.'}
+       ],
+       hooks:['A fungal blight has appeared in a classified cultivation zone. The consortium is containing it quietly. If the scale of the contamination becomes public, food futures across the galaxy will move.','An Alliance naval officer stationed at Alsa is running private cargo through the exclusion zone. Small volumes, regular schedule. Whatever it is, it\'s not listed on any manifest.','A researcher at the Seed Vaults has flagged an anomaly in the genetic records — a strain of cultivar that should not exist was registered thirty years ago under a corporate license that has since been dissolved.'],
+       desc:'Alsa Prime is the most fertile world in the known galaxy. The combination of geology, climate and hydrology that produces this output is not fully understood and has never been successfully replicated elsewhere. The Agricultural Consortium operates it under Alliance charter with the explicit strategic priority of keeping the supply chain intact. Three Alliance navy cruisers are on permanent station in the system. Disrupting Alsa\'s output is one of the most inadvisable things anyone could attempt in the known galaxy.'},
+      {id:'alsa_2',name:'Alsa Secondary Worlds',type:'Agricultural Cluster — Multiple Cultivated Bodies',status:'active',statusLabel:'Active — Consortium Managed',
+       atmosphere:'Breathable',atm_note:'Maintained atmospheres across all inhabited bodies',
+       climate:'Variable by body — temperate to arid',gravity:'Standard',
+       faction:'Alliance — Alsa Agricultural Consortium',population:'~900 million across all bodies',
+       demographics:'Mixed Alliance demographic — primarily rural and agricultural worker communities',
+       government:'Consortium subsidiary administration',tech_level:'Industrial (agricultural)',
+       economy:'Secondary crop production, livestock, aquaculture, processing facilities',
+       access:'Open',access_note:'Standard Alliance access. Remote agricultural bodies have limited infrastructure — arrivals are noted.',
+       hazards:['Extreme isolation — emergency response times on remote bodies are long','Consortium security on commercial zones is assertive','Weather dependency — these worlds have less managed climate than Alsa Prime'],
+       notable_locations:[
+         {name:'Processing Stations',desc:'Where raw agricultural output is processed for interstellar shipping. Enormous, busy, and surrounded by the constant traffic of freighters and bulk haulers.'}
+       ],
+       hooks:['A freighter that completed a standard Alsa run has arrived at its destination short. Not missing cargo — missing crew. One person. No sign of foul play, no record of disembarkation.'],
+       desc:'The secondary worlds of the Alsa system extend the system\'s agricultural capacity well beyond Alsa Prime alone. Each body is cultivated for specific outputs that complement the primary world\'s production. Together they make the Alsa system the single most productive food-production system in known space by volume. The scale of what moves through here daily is difficult to overstate — and difficult to audit completely.'}
+    ]
+  },
+  {
+    id:'ash',name:'Ash System',region:'Alliance Space — Nemani Rift frontier',classification:'Frontier System — Rift Gateway',
+    faction:'Alliance military + independent operators',status:'active',
+    tags:['Alliance Space','Nemani Rift','Military','Frontier','Salvage','Danger','Gateway'],
+    desc:'Ash sits at the edge of the Nemani Rift. The Alliance military maintains a permanent and substantial presence here — monitoring the Rift and ensuring whatever is on the other side stays there. Around the military has grown an ecosystem of salvage yards, scrappers, and pilots who come specifically to attempt the Rift. Most do not come back. The ones who do come back wealthy, famous, or permanently changed.',
+    planets:[
+      {id:'ash_prime',name:'Ash',type:'Terrestrial — Frontier Colony',status:'active',statusLabel:'Active — Military Staging',
+       atmosphere:'Breathable',atm_note:'Thin but breathable at standard altitude — weather is severe and unpredictable',
+       climate:'Arid to Temperate (Unstable — Rift proximity affects local weather patterns)',gravity:'Standard',
+       faction:'Alliance military / independent operators',population:'~150 million and fluctuating',
+       demographics:'Highly mixed transient population — military personnel, salvagers, independent pilots, traders, researchers',
+       government:'Alliance Military Command (Zone 7 jurisdiction) / civilian municipal councils in non-military zones',
+       tech_level:'Standard (Military) / Variable (civilian)',
+       economy:'Military logistics, salvage, Rift-adjacent research, independent trade, black market',
+       access:'Restricted',access_note:'Standard Alliance access to civilian zones. Military zones require appropriate credential. Rift approach vectors are regulated — launching without clearance is treated as hostile.',
+       hazards:['Nemani Rift proximity — spatial anomalies, communication disruption and navigation errors increase near the Rift boundary','Missing persons — Rift pilots who do not return are common. The search-and-rescue operation is understaffed by design.','Intelligence operations — the strategic position of Ash means it is extensively monitored by multiple parties','Salvage disputes — territorial conflicts among salvage operators are frequent and sometimes violent','Alliance military operating procedures — in Rift exclusion zones, challenge-response is short'],
+       notable_locations:[
+         {name:'Rift Station Alpha (Military)',desc:'The primary Alliance monitoring installation for the Nemani Rift. Permanently staffed, heavily armed, and not open to civilian visitors. The intelligence gathered here is among the most restricted in the Alliance.'},
+         {name:'The Departure Yards',desc:'Where Rift pilots fuel up, equip, and say their goodbyes. The culture here is unique — a combination of technical professionalism, fatalism, and the particular energy of people who have decided to do something they know is probably going to kill them.'},
+         {name:'Salvage Basin',desc:'The primary civilian economic zone. Salvage operators bring finds here for assessment, trade and processing. A significant portion of the goods traded have unclear provenance. The Alliance inspectors are aware of this. Their interest in it varies.'},
+         {name:'The Wall',desc:'The informal name for the Rift boundary as it appears in local space — a visible spatial distortion line that can be observed with the naked eye under the right conditions. Looking at it for extended periods is not recommended.'}
+       ],
+       hooks:['A Rift pilot came back from a run with cargo that cannot be identified. It\'s not in any Alliance registry. The pilot hasn\'t explained where it\'s from and is refusing all questions. Multiple parties have shown up at the Departure Yards asking about it.','The Alliance military has extended the Rift exclusion zone without announcement. Salvagers who were operating in the area they\'ve absorbed are being quietly redirected. What the military found in that zone is not being disclosed.','A research team that went to study spatial anomalies near the Rift boundary has missed its check-in by 72 hours. The military says it has no information about their location. That\'s not quite the same as saying they don\'t know.'],
+       desc:'Ash has the particular energy of a place where people go to do something they know is probably going to kill them, surrounded by others who respect that decision. The Alliance military is the largest employer and the largest source of structure. The independent operators fill in every gap the military leaves — some of them legitimate, some of them not, all of them aware that proximity to the Rift means proximity to things the galaxy does not yet understand.'}
+    ]
+  },
+  {
+    id:'palentium',name:'Palentium System',region:'Alliance Space',classification:'Core System — Tourist World',
+    faction:'Alliance — heavily corporate-influenced',status:'active',
+    tags:['Alliance Space','Tourism','Corruption','Historic','Tropical','Corporate','Crime'],
+    desc:'Palentium was the first planet humans set foot on in Alliance Space — a fact the tourism industry has milked for centuries. The world is genuinely beautiful: tropical, warm, long coastlines, no atmospheric modification required. The corruption is so deeply embedded it is treated as a feature of the climate. Everything is for sale if you know who to ask.',
+    planets:[
+      {id:'palentium_prime',name:'Palentium',type:'Terrestrial — Tropical Paradise & Corruption Hub',status:'active',statusLabel:'Active — Corporate Influenced',
+       atmosphere:'Breathable',atm_note:'Clean and warm — the atmosphere is a genuine selling point of the tourism industry',
+       climate:'Tropical to Subtropical',gravity:'Low',grav_note:'Slightly below standard — contributes to the pleasant physical sensation the tourism industry highlights',
+       faction:'Alliance (nominal) / corporate interests (practical)',population:'~4 billion',
+       demographics:'Highly mixed — all Alliance races, significant permanent corporate expatriate community, rotating tourist population',
+       government:'Palentium Planetary Council (formally Alliance-chartered; practically, major decisions require corporate approval)',
+       tech_level:'Advanced',
+       economy:'Luxury tourism, financial services, offshore corporate administration, entertainment, hospitality',
+       access:'Open',access_note:'Open with standard Alliance ID. Criminal records are flagged on entry — but flags can be managed for the right fee.',
+       hazards:['Pervasive corruption — every institution has a price, which means every institution is also a liability','Law enforcement is enthusiastically underpaid and comprehensively for sale','Political office is an investment vehicle — decisions are made for financial return, not public interest','Intelligence operations from multiple major corporations — the offshore financial sector means sensitive information passes through constantly','Tourist-targeting crime is endemic in resort zones — well-organised and ignored by local enforcement'],
+       notable_locations:[
+         {name:'The Coastal Resorts (Gold Coast)',desc:'The headline tourism product. Luxury accommodations, private beaches, every amenity. The prices are extraordinary. The service is genuine. The staff all have a secondary income of some kind.'},
+         {name:'The Financial District (Palentium City)',desc:'Where the offshore corporate administration happens. Shell companies, trust structures, financial instruments that do not exist in most other jurisdictions. If you need money to disappear or reappear with different paperwork, Palentium City is where it happens.'},
+         {name:'The Old Landing Site',desc:'The original site of the first human footfall in Alliance Space, now a tourist monument of modest grandeur. The historical records associated with the site are impeccably maintained and selectively edited.'},
+         {name:'The Interior',desc:'Away from the coastal resorts, Palentium\'s interior is lush, beautiful, and largely ignored by the tourism industry. It is where the people who make the tourism industry work actually live. Conditions vary dramatically from the coastal image.'}
+       ],
+       hooks:['A corporate financial instrument structured through Palentium\'s offshore sector is being investigated by Alliance financial intelligence. The investigation needs physical documents that exist only on-planet. Getting access to them requires a relationship with someone who has them — and who values something else more than the fee they\'re currently being paid to keep them private.','A senior Alliance official is on holiday at one of the resort complexes. They are being blackmailed. The material being used doesn\'t exist in any system the Alliance can access. The official needs it recovered quietly, without the blackmailer knowing who moved against them.','A historical archivist claims the official record of the first landing has been falsified — that what actually happened during the original survey mission has been removed from public record and replaced. The evidence is somewhere in the Old Landing Site administration system.'],
+       desc:'Palentium is one of the most visited worlds in Alliance Space and one of the most thoroughly corrupt. The tourism industry is genuine and the scenery is real. The institutions are not. Law enforcement is underpaid because underpaid enforcement is easier to work with. Political office is contested because it generates return. The financial sector exists because some transactions need a location where the paperwork does not follow standard Alliance trail requirements. Players who arrive expecting Alliance law to protect them will be educated quickly and expensively.'}
     ]
   },
   {
@@ -3023,12 +3245,12 @@ function gcOpenPlanet(si,pi){
     });
     h+='</div></div>';
   }
-  // Plot hooks
+  // Rumours & Observed Facts
   if(p.hooks&&p.hooks.length){
-    h+='<div class="gc-psec"><div class="gc-psec-title">Plot Hooks</div>';
+    h+='<div class="gc-psec"><div class="gc-psec-title">Rumours &amp; Observed Facts</div>';
     h+='<div class="gc-hook-list">';
     (p.hooks||[]).forEach(function(hk,i){
-      h+='<div class="gc-hook"><div class="gc-hook-num">HOOK '+(i+1)+'</div>'+esc(hk)+'</div>';
+      h+='<div class="gc-hook"><div class="gc-hook-num">RUMOUR '+(i+1)+'</div>'+esc(hk)+'</div>';
     });
     h+='</div></div>';
   }
@@ -3183,12 +3405,12 @@ function gcPlanetModal(p){
     h+=gcLocEditBlock(loc.name,loc.desc,i);
   });
   h+='</div><button class="gc-list-add" onclick="gcLocAdd()">+ Add Location</button>';
-  h+='<div class="gc-sec-div">Plot Hooks</div>';
+  h+='<div class="gc-sec-div">Rumours &amp; Observed Facts</div>';
   h+='<div id="gcm-hooks-list" class="gc-list-field">';
   (p.hooks&&p.hooks.length?p.hooks:['','']).forEach(function(hk){
-    h+='<div class="gc-list-item"><textarea class="gc-ta gc-list-inp" placeholder="Plot hook..." rows="2">'+esc(hk)+'</textarea><button class="gc-list-rm" onclick="this.closest(\'.gc-list-item\').remove()">✕</button></div>';
+    h+='<div class="gc-list-item"><textarea class="gc-ta gc-list-inp" placeholder="Rumour or observed fact..." rows="2">'+esc(hk)+'</textarea><button class="gc-list-rm" onclick="this.closest(\'.gc-list-item\').remove()">✕</button></div>';
   });
-  h+='</div><button class="gc-list-add" onclick="gcListAdd(\'gcm-hooks-list\',\'textarea\',\'Plot hook...\')">+ Add Hook</button>';
+  h+='</div><button class="gc-list-add" onclick="gcListAdd(\'gcm-hooks-list\',\'textarea\',\'Rumour or observed fact...\')">+ Add Rumour</button>';
   return h;
 }
 function gcLocEditBlock(name,desc,i){
@@ -4562,6 +4784,26 @@ function render(){
           html+=sys.tags.map(function(t){return '<span class="tag tgr">'+esc(t)+'</span>';}).join('');
           html+='</div>';
         }
+        // Description excerpt (always visible)
+        if(sys.desc){
+          var exc=sys.desc.length>220?sys.desc.substring(0,220).replace(/\s+\S*$/,'')+'…':sys.desc;
+          html+='<div class="gc-sys-excerpt">'+esc(exc)+'</div>';
+        }
+        // Planet quick stats (always visible)
+        var activePlanets=(sys.planets||[]).filter(function(p){return p.status==='active'||p.status==='neutral';});
+        var totalPop=(sys.planets||[]).map(function(p){return p.population||'';}).filter(Boolean);
+        if(totalPop.length||(sys.planets||[]).length){
+          html+='<div class="gc-sys-quickbar">';
+          (sys.planets||[]).forEach(function(p){
+            if(!p.atmosphere&&!p.access&&!p.status)return;
+            html+='<span class="gc-sys-qworld"><span class="gc-sys-qname">'+esc(p.name)+'</span>';
+            if(p.atmosphere)html+='<span class="gc-chip gc-chip-sm '+gcAtmClass(p.atmosphere)+'">'+esc(p.atmosphere)+'</span>';
+            if(p.access)html+='<span class="gc-chip gc-chip-sm '+gcAccessClass(p.access)+'">'+esc(p.access)+'</span>';
+            if(p.population)html+='<span class="gc-sys-qpop">'+esc(p.population)+'</span>';
+            html+='</span>';
+          });
+          html+='</div>';
+        }
         // Collapsible body
         html+='<div class="gc-system-body">';
         if(sys.desc)html+='<div class="gc-system-desc">'+descHtml(sys.desc,sq)+'</div>';
@@ -4597,12 +4839,23 @@ function render(){
       dotsH+='<div class="smap-dot-lbl" style="color:'+col+';">'+esc(e.name)+'</div>';
       dotsH+='</div>';
     });
+    // Build stargate SVG overlay lines
+    var sgH='<svg id="smap-sg-svg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible;" viewBox="0 0 100 100" preserveAspectRatio="none">';
+    var posMap={};
+    smEntries.forEach(function(e){if(e.map_pos)posMap[e.name]=e.map_pos;});
+    STARGATE_LINKS.forEach(function(pair){
+      var a=posMap[pair[0]],b=posMap[pair[1]];
+      if(!a||!b)return;
+      sgH+='<line x1="'+a.x+'" y1="'+a.y+'" x2="'+b.x+'" y2="'+b.y+'" stroke="#00c8ff" stroke-width="0.35" stroke-dasharray="1.4,1.1" opacity="0.55" stroke-linecap="round"/>';
+    });
+    sgH+='</svg>';
     html='<div id="smap-viewport" style="position:relative;width:100%;height:calc(100vh - 120px);overflow:hidden;background:#06060d;border-radius:6px;border:1px solid #2c2c2e;user-select:none;cursor:grab;">';
     // smap-canvas: one container that gets the CSS transform — PNG image + all dots live here
     // The inner wrapper is position:relative so dot % coords are relative to the image dimensions
     html+='<div id="smap-canvas" style="position:absolute;top:0;left:0;transform-origin:0 0;">'
       +'<div id="smap-inner" style="position:relative;line-height:0;">'
       +'<img id="smap-img" src="Star-Map-v3_HIGH_QUALITY.png" alt="Star Map" style="display:block;pointer-events:none;max-width:none;" draggable="false">'
+      +sgH
       +dotsH
       +'</div></div>';
     // Controls overlay (outside canvas so they don't move/scale)
@@ -4612,7 +4865,7 @@ function render(){
     html+='<button data-sm="reset" style="background:none;border:none;color:#8e8e93;font-size:11px;cursor:pointer;padding:2px 8px;border-radius:4px;font-family:\'Share Tech Mono\',monospace;" title="Reset view">Reset</button>';
     html+='<span id="smap-pct" style="color:#8e8e93;font-size:11px;font-family:\'Share Tech Mono\',monospace;min-width:42px;text-align:right;">–</span>';
     html+='</div>';
-    html+='<div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);color:#8e8e93;font-size:10px;font-family:\'Share Tech Mono\',monospace;background:#161618cc;border:1px solid #2c2c2e;border-radius:4px;padding:4px 12px;pointer-events:none;z-index:20;white-space:nowrap;">Scroll to zoom \u00b7 Drag to pan \u00b7 Click to explore</div>';
+    html+='<div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);color:#8e8e93;font-size:10px;font-family:\'Share Tech Mono\',monospace;background:#161618cc;border:1px solid #2c2c2e;border-radius:4px;padding:4px 12px;pointer-events:none;z-index:20;white-space:nowrap;display:flex;align-items:center;gap:14px;">Scroll to zoom \u00b7 Drag to pan \u00b7 Click to explore<span style="display:flex;align-items:center;gap:5px;"><svg width="22" height="8" viewBox="0 0 22 8"><line x1="1" y1="4" x2="21" y2="4" stroke="#00c8ff" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/></svg><span style="color:#00c8ff;opacity:.8;">Star gate link</span></span></div>';
     html+='</div>';
   }
 
