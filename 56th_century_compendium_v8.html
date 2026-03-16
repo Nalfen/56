@@ -3249,6 +3249,235 @@ g.catalogue_systems=[
        hooks:['A ship arrived at Cetune three days ago and has not filed a departure plan or communicated with the station. The crew have not left the vessel. The Station Authority is getting concerned.','Someone at the Crossroads Bar is buying information about specific frontier routes with more money than the routes are worth commercially. The question of why is attracting attention.'],
        desc:'Cetune Station is everyone\'s stop and nobody\'s home — a waypoint that draws its community from the constant flow of transit. The Station Authority runs it with the pragmatism of a community that knows its survival depends entirely on remaining useful and remaining neutral. They have enforced the no-conflict zone against parties who did not believe they were serious, and they have not done it twice to the same party.'}
     ]
+  },
+  // ─── DRAGON TAIL'S EXPANSE ──────────────────────────────────────────
+  {
+    id:'sunstrope',name:'Sunstrope System',region:"Dragon Tail's Expanse",classification:'Frontier System — Pirate Territory',
+    faction:'Independent / Pirate Clans',status:'active',
+    tags:["Dragon Tail's Expanse",'Pirate Territory','Frontier','Dangerous','Independent'],
+    desc:'Sunstrope is the most consistently inhabited system in the Dragon Tail\'s Expanse and the closest thing the region has to a capital — not by any formal designation but because the largest pirate confederation operating in the Expanse calls it home. The system has a reputation that ensures legitimate traders give it wide berth, which suits its current residents perfectly.',
+    planets:[
+      {id:'sunstrope_prime',name:'Sunstrope',type:'Terrestrial — Pirate Confederation Base',status:'active',statusLabel:'Active — Pirate Controlled',
+       atmosphere:'Breathable',atm_note:'Breathable throughout — thick lower atmosphere with persistent cloud cover',
+       climate:'Humid, Overcast',gravity:'Standard',
+       faction:'Dragon Tail Pirate Confederation',population:'~600,000 — pirates, support crews, families, traders who prefer anonymity',
+       demographics:'Mixed — predominantly human, significant Skalan and Non-Born presence',
+       government:'Confederation Council (rotating captains, decisions by weight of guns)',tech_level:'Mixed — captured and salvaged technology spans multiple generations',
+       economy:'Piracy, salvage, illegal goods trade, protection rackets, privateering-for-hire',
+       access:'Hostile to outsiders',access_note:'Visitors without confederation sponsorship are boarded on approach. Having something worth trading is the fastest path to temporary welcome.',
+       hazards:['Active piracy — ships in this system without confederation transponders are considered targets','Confederation internal politics — rival captains settle disputes violently','No external legal protection','Captured goods and persons are a commodity here'],
+       notable_locations:[
+         {name:'The Confederation Dock',desc:'The largest port in the Dragon Tail\'s Expanse — a sprawling, improvised facility built over generations. Every ship here tells a story about where it was taken from.'},
+         {name:'The Council Table',desc:'Where captains meet to divide territory, resolve disputes, and plan operations. Technically open to any captain who can get there — in practice, only those with fleets worth counting have a real seat.'},
+         {name:'The Free Market',desc:'Stolen goods, salvaged technology, and services of every kind change hands here without documentation. The best prices for certain categories of items in this sector of the galaxy are found at the Free Market.'}
+       ],
+       hooks:['A captive being held on Sunstrope has family in Alliance Space who have hired a recovery team. The person being recovered may not want to be recovered.','Confederation captains are bidding on a contract that one of the major corporations is offering through deniable channels. The job is the kind that requires private military capability rather than ordinary crime.','A map to a pre-war Nerulian cache was obtained during a recent raid. Several captains want it exclusively. The person who raided the ship is now trying to sell the information before any of them decide it is easier to simply take it.'],
+       desc:'Sunstrope has been pirate territory for as long as anyone currently alive can remember. The Confederation is not an organisation with a charter — it\'s an agreement between captains that cooperation is more profitable than constant conflict. It works, more or less. The system sustains itself on what passes through the Dragon Tail\'s Expanse and what can be taken from the edges of more organised space. For players, Sunstrope is a place where legitimate credentials are irrelevant and capability is everything.'}
+    ]
+  },
+  {
+    id:'carth',name:'Carth System',region:"Dragon Tail's Expanse",classification:'Frontier System — Abandoned Industrial',
+    faction:'None — Derelict',status:'abandoned',
+    tags:["Dragon Tail's Expanse",'Abandoned','Industrial Ruin','Salvage','Dangerous'],
+    desc:'Carth was an industrial system that operated for roughly two centuries before the economics stopped working. The corporations that owned it pulled out progressively over thirty years, leaving behind infrastructure they could not profitably recover. What remains is a system of derelict facilities, unstable orbital platforms, and the accumulated refuse of a large-scale extraction operation.',
+    planets:[
+      {id:'carth_prime',name:'Carth',type:'Terrestrial — Abandoned Industrial World',status:'abandoned',statusLabel:'Abandoned — Derelict',
+       atmosphere:'Toxic',atm_note:'Atmospheric contamination from centuries of unregulated industrial discharge — respirator mandatory outside sealed zones',
+       climate:'Degraded — Industrial Waste',gravity:'Standard',
+       faction:'None — derelict',population:'~2,000 — independent salvagers, squatters, people hiding',
+       demographics:'Transient — anyone who stays long-term has a specific reason',
+       government:'None',tech_level:'None (remnant equipment from multiple eras)',economy:'Salvage, scavenging',
+       access:'Open (technically)',access_note:'No restriction — the system\'s hazardous state is its own deterrent.',
+       hazards:['Atmospheric toxicity — immediate without respiratory protection','Structural instability in all abandoned facilities','Unexploded industrial equipment and automated systems still active after decades','Toxic groundwater throughout — no safe surface water sources','Zero emergency or medical support'],
+       notable_locations:[
+         {name:'The Processing Complex',desc:'The largest surviving structure on Carth — a continent-scale industrial processing facility. Partially powered by autonomous systems that never received a shutdown command. Salvagers know to listen for the sounds that indicate which sections are still active.'},
+         {name:'Orbital Platform Wreckage',desc:'The remains of the orbital industrial platforms — most descended over the decades and impacted the surface, creating a secondary salvage field layered on top of the ground-level ruins.'}
+       ],
+       hooks:['A salvager has found something in the Processing Complex that was not manufactured on Carth and predates the industrial occupation. They cannot identify it and they cannot move it.','Corporate records indicate that something was deliberately left in the Carth system when the corporations withdrew — something not worth taking but too dangerous to abandon in accessible space. The records are vague on what.'],
+       desc:'Carth is a monument to extraction economics — a system consumed entirely by the industrial process and discarded when consumption was complete. Salvagers who know what they are doing can find useful technology here, sometimes cutting-edge relative to what was available when the systems were installed. The hazards are significant. The payoff, for the right team, can be considerable.'}
+    ]
+  },
+  {
+    id:'briea',name:'Briea System',region:"Dragon Tail's Expanse",classification:'Frontier System — Contested Territory',
+    faction:'Contested — Multiple Pirate Factions',status:'warzone',
+    tags:["Dragon Tail's Expanse",'Contested','Pirate War','Frontier','Strategic Resource'],
+    desc:'Briea is currently the site of an ongoing conflict between two pirate factions over a resource deposit that both sides believe is worth killing for. The system has changed hands four times in the past three years. Local civilian population has largely evacuated. What remains is a low-grade war zone with excellent salvage potential for anyone willing to operate in active fire.',
+    planets:[
+      {id:'briea_prime',name:'Briea',type:'Terrestrial — Active Conflict Zone',status:'warzone',statusLabel:'Active Warzone — Pirate Conflict',
+       atmosphere:'Breathable',atm_note:'Breathable but carries smoke and combustion debris in contested zones',
+       climate:'Temperate (Disrupted)',gravity:'Standard',
+       faction:'Contested — Dragon Tail factions',population:'~20,000 — combat forces from both sides, no civilian population remaining',
+       demographics:'Exclusively combatants and logistics personnel',
+       government:'None — disputed control changes weekly',tech_level:'Mixed (pirate-quality — taken from various sources)',
+       economy:'Resource extraction contested by both factions, salvage of ongoing combat debris',
+       access:'Hostile',access_note:'No safe entry. Both factions treat unidentified vessels as enemies. Even known allies of one side are at risk from the other.',
+       hazards:['Active combat operations throughout','Unexploded ordnance and weapon mines throughout contested zones','No medical or emergency support','Both factions prone to "friendly" interrogation of anyone not immediately identifiable as theirs'],
+       notable_locations:[
+         {name:'The Deposit Site',desc:'What both factions are fighting over — a significant rare mineral deposit with applications in advanced propulsion systems. Currently under neither faction\'s firm control; contested daily.'},
+         {name:'The Wreck Field',desc:'Four years of ongoing conflict has produced a significant debris field of destroyed ships and equipment. For salvagers with the appropriate risk tolerance, some of what is in the field is worth recovering.'}
+       ],
+       hooks:['One faction has made a discreet approach looking for outside contractors to perform a specific operation — not combat, but extraction of an asset currently behind the opposing line.','A third party has been quietly supplying both factions with materiel, extending the conflict deliberately. Finding out who and why is worth something to several interested parties.'],
+       desc:'Briea would be unremarkable frontier territory except for what is in the ground. The two factions currently destroying each other over it were allied until eighteen months ago. The conflict has become self-sustaining — both sides have invested too much to walk away, and neither trusts the other enough to negotiate. Outside parties with the right capabilities and the right introductions can find work here, if they accept that the work environment is actively trying to kill them.'}
+    ]
+  },
+  {
+    id:'soth_l4',name:'Soth L4 System',region:"Dragon Tail's Expanse",classification:'Frontier System — Navigation Hazard Zone',
+    faction:'None',status:'hazard',
+    tags:["Dragon Tail's Expanse",'Navigation Hazard','Stellar Anomaly','Frontier','Unexplored'],
+    desc:'Soth L4 is a system notation rather than a proper name — the fourth catalogued system in the Soth survey cluster, designated L-type for its unstable stellar configuration. The star is a variable that cycles through significant energy output fluctuations on an irregular schedule. Most navigators route around it. The few who don\'t either have good reason or didn\'t check their charts.',
+    planets:[
+      {id:'soth_l4_zone',name:'Soth L4 Survey Zone',type:'Stellar System — Variable Star Hazard',status:'hazard',statusLabel:'Active Navigation Hazard',
+       atmosphere:'None',atm_note:'No habitable bodies — all planetary matter has been degraded by stellar variability over geological time',
+       climate:'Void (Extreme Radiation During Flare Cycles)',gravity:'Variable',grav_note:'Standard gravitational dynamics but stellar mass variability creates anomalous gravitational effects during peak cycles',
+       faction:'None',population:'Uninhabited',demographics:'None',
+       government:'None — navigational hazard designation on all standard charts',tech_level:'N/A',economy:'None',
+       access:'Open (not recommended)',access_note:'No restrictions — the hazard is the deterrent. Shielded research vessels make periodic transit during low-cycle periods.',
+       hazards:['Stellar flare events — unpredictable, lethal to unshielded vessels','Electromagnetic disruption during flare cycles renders navigation instruments unreliable','No shelter or refuge anywhere in the system','Flare cycle prediction models have margins of error that are operationally significant'],
+       notable_locations:[{name:'Survey Point Alpha',desc:'The closest habitable approach distance during documented low-cycle periods. The original Soth survey team placed a beacon here. It has been replaced three times after destruction by flare events.'}],
+       hooks:['Something is transmitting from within the Soth L4 system — not a survey beacon, not a navigation warning. The signal pattern does not match any known format.','A research team needs escort through Soth L4 during a calculated low-cycle window. The calculation was done by the same group whose previous window estimate put a ship in the middle of a major flare event.'],
+       desc:'Soth L4 is on the charts with a hazard designation and not much else. The stellar variability that makes it dangerous also makes it intermittently navigable — there are windows when transit is relatively safe. What is inside the system that might be worth the risk is unknown because nobody has successfully surveyed the inner system during a low cycle and returned with usable data. Whether there is anything there worth the risk has not been established. Several parties appear to believe there might be.'}
+    ]
+  },
+  // ─── FREELAND ───────────────────────────────────────────────────────
+  {
+    id:'gnoth_q714',name:'Gnoth Q714 System',region:'Freeland',classification:'Freeland System — Corporate Free Zone',
+    faction:'Independent (Freeland Charter)',status:'active',
+    tags:['Freeland','Corporate Free Zone','Independent','Trade','Grey Market'],
+    desc:'Gnoth Q714 is a Freeland charter system — one of the scattered independent worlds that form the loose collective known as Freeland. Charter systems operate under a minimal governance framework: no corporate monopolies, no Alliance oversight, and a strong cultural tradition of non-interference in others\' business. Q714 has grown into a significant trade node precisely because of what it refuses to regulate.',
+    planets:[
+      {id:'gnoth_q714_prime',name:'Gnoth Q714',type:'Terrestrial — Freeland Trade World',status:'active',statusLabel:'Active — Freeland Charter',
+       atmosphere:'Breathable',atm_note:'Standard — mild',
+       climate:'Temperate',gravity:'Standard',
+       faction:'Gnoth Q714 Charter Council',population:'~2 million',
+       demographics:'Mixed — significant transient population, all species represented',
+       government:'Charter Council (elected, minimal mandate — primarily trade law)',tech_level:'Standard',
+       economy:'Free trade, brokerage, information services, light manufacturing, transit trade',
+       access:'Open',access_note:'Open entry under Freeland charter. No identity verification required beyond ship registration. Registration itself is not verified beyond its own claim.',
+       hazards:['No extradition — Alliance warrants are not recognised','Corporate interests operate here without regulation, which cuts both ways','Debt enforcement is private and can be aggressive','Information security is entirely self-managed — no privacy laws'],
+       notable_locations:[
+         {name:'The Charter House',desc:'The Charter Council\'s administrative seat — also the location of the only functioning law court in the system. Cases that reach this court tend to be financial disputes; the outcomes are commercially pragmatic rather than strictly just.'},
+         {name:'The Freezone Docks',desc:'The largest port in Gnoth Q714, operating under a specific charter provision that makes cargo manifests optional. The busiest section of the busiest system in this part of Freeland.'}
+       ],
+       hooks:['A corporate fugitive from Alliance Space has been living quietly in Gnoth Q714 for two years. Someone has just arrived looking for them with resources that suggest they intend to be thorough about it.','A Charter Council vote about allowing an Alliance enforcement presence is scheduled for next week. The factions on both sides of the debate have hired outside parties to ensure the vote goes their way.'],
+       desc:'Gnoth Q714 is what Freeland looks like when it works — a functioning society built around the principle that people left to handle their own affairs mostly manage. The Charter Council keeps trade flowing and handles the disputes that cannot be resolved privately. Alliance citizens sometimes describe Freeland systems as lawless. The people who live here describe Alliance Space as surveillant. Both descriptions contain some truth.'}
+    ]
+  },
+  {
+    id:'lides_h45',name:'Lides H45 System',region:'Freeland',classification:'Freeland System — Agricultural',
+    faction:'Independent (Freeland Charter)',status:'active',
+    tags:['Freeland','Agricultural','Independent','Quiet','Productive'],
+    desc:'Lides H45 is a Freeland agricultural system — one of the quieter charter worlds with a productive economy based on food and raw material production rather than trade. It supplies several nearby systems and maintains the kind of community-scale governance that larger systems cannot sustain.',
+    planets:[
+      {id:'lides_h45_prime',name:'Lides H45',type:'Terrestrial — Agricultural World',status:'active',statusLabel:'Active — Agricultural Charter',
+       atmosphere:'Breathable',atm_note:'Clean, rich — excellent growing conditions',
+       climate:'Temperate to Warm, Seasonal',gravity:'Standard',
+       faction:'Lides H45 Agricultural Council',population:'~800,000',
+       demographics:'Mixed — predominantly settled families, some transient harvest workers',
+       government:'Agricultural Council (community elected, focused on land use and resource management)',tech_level:'Standard to Low (by choice in many areas)',
+       economy:'Food production, raw material export, small-scale manufacturing',
+       access:'Open',access_note:'Open entry. Charter Council registers visitors but does not restrict them.',
+       hazards:['Remote — emergency services are self-provided','Weather events on agricultural worlds can be severe','Charter independence means dispute resolution is locally managed — outside legal frameworks don\'t apply'],
+       notable_locations:[
+         {name:'The Growing Fields',desc:'Extensive agricultural land managed by a cooperative structure that predates the Freeland charter. Visitors consistently report that the food here is among the best they have encountered anywhere.'},
+         {name:'The Waystation',desc:'Lides H45\'s primary port — more of a large farmyard with docking facilities than a commercial spaceport. The atmosphere is unhurried. People who arrive in a rush tend to slow down.'}
+       ],
+       hooks:['A crop failure affecting half the system\'s output has been traced to deliberate sabotage. The Council suspects a corporation trying to create dependency as a prelude to a buyout offer.','A family has been living on Lides H45 for twenty years under assumed identities. Someone has found them. The reason they fled and the reason they were found are both things a party might want to understand before deciding whose side to be on.'],
+       desc:'Lides H45 is a Freeland system that chose not to be a trade hub. The community that built it wanted something quieter: agricultural land, self-governance, and distance from the busier parts of the galaxy. They have maintained that for generations. It is a peaceful system in the specific sense that peace has been a priority rather than a side effect — and in Freeland, that requires active maintenance.'}
+    ]
+  },
+  {
+    id:'mivenia',name:'Mivenia System',region:'Freeland',classification:'Freeland System — Technical Hub',
+    faction:'Independent (Freeland Charter)',status:'active',
+    tags:['Freeland','Technical Hub','Engineering','Independent','Innovative'],
+    desc:'Mivenia has built a reputation as the best place outside Alliance Space to get a ship repaired, a weapon modified, or a technological problem solved without paperwork. Engineers who could not work in the regulated Alliance environment have been coming to Mivenia for decades. The result is an extraordinary concentration of technical capability operating under no oversight at all.',
+    planets:[
+      {id:'mivenia_prime',name:'Mivenia',type:'Terrestrial — Engineering World',status:'active',statusLabel:'Active — Technical Charter',
+       atmosphere:'Breathable',atm_note:'Standard — mild haze in the engineering districts from workshop output',
+       climate:'Temperate',gravity:'Standard',
+       faction:'Mivenia Engineering Collective',population:'~3 million',
+       demographics:'Mixed — unusually high concentration of Non-Born and Hakari engineers',
+       government:'Engineering Collective (self-governing, disputes resolved by technical arbitration)',tech_level:'Advanced to Cutting Edge',
+       economy:'Ship repair and modification, weapons engineering, technology development, bespoke manufacturing',
+       access:'Open',access_note:'Open entry under charter. Engineering work is by agreement — no jobs the Collective collectively refuses to take.',
+       hazards:['No oversight means military hardware of every classification can be worked on here — so can its owners','Test events — new technology is tested on Mivenia\'s test ranges and the results are not always contained','Corporate attempts to acquire key personnel are ongoing and sometimes not subtle'],
+       notable_locations:[
+         {name:'The Workshop Rings',desc:'The industrial heart of Mivenia — a series of concentric engineering districts where every type of technical work is available. Visiting a ship yard here is an education in what ships look like when someone smart decided the regulations were getting in the way.'},
+         {name:'The Collective Hall',desc:'Where the engineering community meets, debates, and occasionally argues violently about technical philosophy. Also where contracts are formalised and disputes resolved. Both of the previous statements are handled with equal seriousness.'}
+       ],
+       hooks:['A prototype weapon system has been brought to Mivenia for finishing work. Three parties want either the finished product or the plans. The engineers who took the contract are now regretting how much attention it has attracted.','An engineer who left Alliance Space after a corporate dispute has completed something on Mivenia that their former employer very much wants — or wants destroyed before anyone else gets it.'],
+       desc:'Mivenia is where good engineers go when they want to build things without asking permission. The Collective has maintained the charter not out of political principle but because unrestricted technical work is profitable and because the alternative — corporate or state oversight — would destroy what makes Mivenia valuable. The Alliance monitors Mivenia from a cautious distance and occasionally makes formal protests about the technology that comes out of it. The Collective acknowledges the protests and continues.'}
+    ]
+  },
+  {
+    id:'zunide',name:'Zunide System',region:'Freeland',classification:'Freeland System — Frontier Outpost',
+    faction:'Independent (Freeland Charter)',status:'active',
+    tags:['Freeland','Frontier Outpost','Remote','Independent','Resilient'],
+    desc:'Zunide is on the edge of the Freeland cluster — a frontier outpost that marks the approximate boundary between Freeland and the broader uncharted frontier. It is small, self-sufficient, and deeply committed to remaining that way. Charter systems further in sometimes route resupply through Zunide specifically because it has no political entanglements.',
+    planets:[
+      {id:'zunide_prime',name:'Zunide',type:'Terrestrial — Frontier Outpost',status:'active',statusLabel:'Active — Frontier Charter',
+       atmosphere:'Breathable',atm_note:'Thin at altitude — breathable throughout inhabited zones',
+       climate:'Cold, Rocky',gravity:'Low',grav_note:'Below standard — residents adapt over time; visitors sometimes find movement unexpectedly easy',
+       faction:'Zunide Outpost Council',population:'~150,000',
+       demographics:'Mixed — heavily transient population of frontier operators',
+       government:'Outpost Council (minimal structure — primarily resource management and emergency response)',tech_level:'Basic to Standard',
+       economy:'Resupply, cold storage, equipment rental, frontier guide services',
+       access:'Open',access_note:'Open under charter. The Council does not ask questions and does not provide answers to parties who arrive asking about previous visitors.',
+       hazards:['Frontier adjacent — what comes back from the deep frontier sometimes carries things that shouldn\'t come back','Cold environment — equipment failures in low temperatures have severe consequences','Resource limited — serious emergencies cannot be addressed with what is available here'],
+       notable_locations:[
+         {name:'The Outpost',desc:'Zunide\'s primary settlement — functional, warm, and stocked with everything a frontier operator needs. The welcome is practical rather than warm but entirely genuine: the community here depends on transit trade and looks after the people it depends on.'},
+         {name:'The Last Light',desc:'The bar and information exchange at the edge of the settlement. What goes out of Zunide into the frontier and what comes back in both pass through here. The proprietor knows more about frontier conditions than any published chart.'}
+       ],
+       hooks:['A ship came back from the frontier carrying something that the crew will not discuss and will not allow to be examined. The Outpost Council has quietly asked for outside help making a determination before it becomes a community problem.','A long-overdue frontier expedition is two months past its expected return. The party that hired them has arrived to investigate. The Last Light proprietor has some observations but is uncertain who to share them with.'],
+       desc:'Zunide is a system that knows what it is and has made peace with it. Frontier outposts succeed by being necessary and not becoming a destination — Zunide has maintained that balance well. The community is tight, the information flows freely among the residents, and the policy toward outsiders is one of professional welcome and careful neutrality. It is the last reliable stop before the deep frontier and the first thing returning from it. That position is worth maintaining.'}
+    ]
+  },
+  // ─── ZEGITOR TRADE GUILD ────────────────────────────────────────────
+  {
+    id:'valtis',name:'Valtis System',region:'Zegitor Trade Guild',classification:'Guild System — Primary Hub',
+    faction:'Zegitor Trade Guild',status:'active',
+    tags:['Zegitor Trade Guild','Trade Hub','Neutral','Commercial','Wealthy'],
+    desc:'Valtis is the primary commercial hub of the Zegitor Trade Guild — the galaxy\'s largest independent trade organisation operating outside both Alliance jurisdiction and corporate frameworks. The Guild is studiously neutral in all political conflicts and extraordinarily wealthy because of that neutrality. Valtis is where major Guild contracts are brokered and where the Guild\'s administrative functions are centred.',
+    planets:[
+      {id:'valtis_prime',name:'Valtis',type:'Terrestrial — Guild Commercial Capital',status:'active',statusLabel:'Active — Guild Primary Hub',
+       atmosphere:'Breathable',atm_note:'Standard — Guild maintains air quality standards throughout commercial zones',
+       climate:'Temperate',gravity:'Standard',
+       faction:'Zegitor Trade Guild',population:'~5 billion',
+       demographics:'Highly mixed — the Guild\'s neutrality makes Valtis the most cosmopolitan system outside Orion 3',
+       government:'Guild Directorate (commercial governance — legally binding contracts, neutral arbitration)',tech_level:'Advanced',
+       economy:'Interstellar trade brokerage, contract arbitration, financial services, neutral logistics coordination',
+       access:'Open (with Guild registry)',access_note:'Open entry with Guild visitor registry. Registry is non-discriminatory — the only requirement is a valid commercial purpose.',
+       hazards:['Guild contracts are legally binding in ways that Alliance law is not — violation has consequences','Corporate intelligence operations are present but the Guild\'s own security is formidable','Financial manipulation — the sums involved here are large enough to be destabilising if mishandled','The Guild maintains armed forces for contract enforcement that most political entities would call a navy'],
+       notable_locations:[
+         {name:'The Exchange Floor',desc:'The single largest commercial trading operation in any neutral territory. Guild-brokered contracts for goods, services, and logistics across the galaxy are formalised here. The volume of what is agreed here in a single day affects prices across multiple systems.'},
+         {name:'The Arbitration Court',desc:'The Guild\'s dispute resolution function. Neutral, technically sophisticated, and final — Guild arbitration rulings are honoured by parties who would ignore court orders because the alternative is having the Guild\'s enforcement arm involved.'},
+         {name:'The Diplomatic Quarter',desc:'Every major faction in the galaxy maintains a diplomatic presence on Valtis specifically because the Guild will work with all of them simultaneously without it becoming a problem.'}
+       ],
+       hooks:['A Guild contract dispute has escalated into something the arbitration court cannot cleanly resolve. Both parties have hired outside assets to ensure the resolution goes their way.','A major contract that would route significant resources through Valtis is being contested by a party that claims prior agreement. The Guild has commissioned outside investigation to determine who is lying.','Guild intelligence has identified that a party on Valtis is planning to use the neutral territory to conduct an operation against another party — violating the Guild\'s fundamental operating principle. The Guild\'s response to this is typically decisive.'],
+       desc:'Valtis is neutral in the way that the galaxy\'s wealthiest organisation can afford to be neutral — not because it lacks capability for involvement but because non-involvement is more profitable than any side it could take. The Guild has maintained this position for two centuries by being useful to everyone and by responding to violations of that neutrality with the kind of enforcement response that makes future violations less likely. The system is wealthy, orderly, and commercially sophisticated in a way that most political entities envy.'}
+    ]
+  },
+  {
+    id:'nopenop',name:'Nopenop System',region:'Zegitor Trade Guild',classification:'Guild System — Secondary Operations',
+    faction:'Zegitor Trade Guild',status:'active',
+    tags:['Zegitor Trade Guild','Operations Centre','Logistics','Guild','Secondary Hub'],
+    desc:'Nopenop handles the operational side of the Zegitor Trade Guild — logistics, fleet management, and the physical infrastructure of moving enormous volumes of trade goods across the galaxy. Where Valtis is the Guild\'s commercial brain, Nopenop is its working hands. It is a less glamorous system than Valtis and considerably more useful day-to-day.',
+    planets:[
+      {id:'nopenop_prime',name:'Nopenop',type:'Terrestrial — Guild Operations Centre',status:'active',statusLabel:'Active — Guild Operations',
+       atmosphere:'Breathable',atm_note:'Standard — industrial operational activity keeps air quality at acceptable but not pristine levels',
+       climate:'Temperate',gravity:'Standard',
+       faction:'Zegitor Trade Guild',population:'~2 billion',
+       demographics:'Mixed — heavy Non-Born presence in logistics and automated systems operations',
+       government:'Guild Operations Directorate',tech_level:'Advanced (Industrial and Logistics)',
+       economy:'Logistics management, fleet maintenance, cargo processing, Guild supply chain operations',
+       access:'Open (Guild registry — operational focus)',access_note:'Open with Guild registry. Commercial visitors are directed to Valtis. Operational contracts and logistics work are handled here.',
+       hazards:['Security operations are continuous and well-resourced — the Guild\'s physical assets are concentrated here','Industrial operations hazards — large-scale cargo handling, ship servicing','The volume of goods moving through Nopenop makes it a target for theft operations that are correspondingly sophisticated','Being in the middle of the Guild\'s logistics chain without authorisation tends to produce problems quickly'],
+       notable_locations:[
+         {name:'The Transit Yards',desc:'Hundreds of square kilometres of cargo processing infrastructure. The sheer volume of material handled here at any given time is difficult to comprehend at human scale.'},
+         {name:'Fleet Operations Command',desc:'Where the Guild\'s fleet movements are coordinated — convoys, escorts, commercial transport routes, and the Guild\'s own enforcement vessels. More ships are managed from this building than most navies control.'}
+       ],
+       hooks:['A cargo manifest discrepancy has been detected — something came through Nopenop\'s transit yards that did not match any filed contract. The Guild wants it found before it becomes a problem that damages their commercial reputation.','A Guild fleet coordinator has gone quiet — routine monitoring suggests they are still at their station but communications have dropped. The last thing they logged was a query about a specific shipment.'],
+       desc:'Nopenop is the part of the Guild that makes the money-making part possible. Without the logistics infrastructure here, the contracts brokered on Valtis are agreements without execution. The Guild treats its operational arm with the same commercial seriousness it applies to everything else — Nopenop is well-funded, efficiently run, and protected because disrupting it has exactly the financial consequences that any entity contemplating disruption would prefer to avoid.'}
+    ]
   }
 
 // Load any saved catalogue edits from localStorage
