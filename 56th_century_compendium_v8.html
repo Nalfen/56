@@ -468,6 +468,8 @@ document.querySelectorAll('.nb').forEach(b=>{b.addEventListener('click',()=>{
 document.addEventListener('click',e=>{
   const btn=e.target.closest('.fc[data-cat]');
   if(btn){af=btn.dataset.cat==='ALL'?'':btn.dataset.cat;render();return;}
+  const defBtn=e.target.closest('.ktc-def-btn[data-def]');
+  if(defBtn){mfrState.kintechDef=defBtn.dataset.def;render();return;}
   const card=e.target.closest('[data-tog]');
   if(card){const el=document.getElementById(card.dataset.tog);if(el)el.classList.toggle('x');return;}
   const rg=e.target.closest('[data-rgtog]');
@@ -540,8 +542,6 @@ document.addEventListener('click',e=>{
 document.addEventListener('change',e=>{
   const sel=e.target.closest('.mfr-sel[data-sec]');
   if(sel){mfrState[sel.dataset.sec]=sel.value;render();}
-  const defBtn=e.target.closest('.ktc-def-btn[data-def]');
-  if(defBtn){mfrState.kintechDef=defBtn.dataset.def;render();return;}
 });
 let st;document.getElementById('search').addEventListener('input',e=>{clearTimeout(st);st=setTimeout(()=>{sq=e.target.value.trim().toLowerCase();render();},110);});
 document.addEventListener('input',e=>{const ni=e.target.closest('#db-name-inp');if(ni){dbState.name=ni.value;return;}if(e.target.dataset&&e.target.dataset.db==='wpnsearch'){dbAdd.wpnSearch=e.target.value;render();}});
