@@ -265,6 +265,25 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 .gc-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
 .gc-add-btn{padding:5px 13px;background:rgba(10,132,255,.1);border:1px solid rgba(10,132,255,.3);border-radius:5px;color:var(--bl);font-family:'IBM Plex Mono',monospace;font-size:11px;cursor:pointer;transition:all .12s;letter-spacing:.2px;}
 .gc-add-btn:hover{background:rgba(10,132,255,.2);border-color:rgba(10,132,255,.5);}
+/* Galaxy section overview grid */
+.gc-sections-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:4px;}
+.gc-sec-card{background:var(--bg2);border:1px solid var(--border);border-left:3px solid;border-radius:8px;padding:14px 16px;cursor:pointer;transition:border-color .15s,background .15s;position:relative;}
+.gc-sec-card:hover{background:#1c1c1e;border-color:var(--border2);}
+.gc-sec-name{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;letter-spacing:.3px;margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;}
+.gc-sec-cnt{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--mu3);font-weight:400;letter-spacing:0;}
+.gc-sec-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:7px;}
+.gc-sec-excerpt{font-family:'Exo 2',sans-serif;font-size:11px;color:#8e8e93;line-height:1.55;}
+.gc-sec-arrow{position:absolute;bottom:12px;right:14px;font-size:14px;opacity:.5;}
+/* Galaxy section detail view */
+.gc-back-btn{background:none;border:none;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:11px;padding:0 0 12px;display:flex;align-items:center;gap:5px;letter-spacing:.5px;}
+.gc-back-btn:hover{opacity:.8;}
+.gc-faction-detail{border:1px solid var(--border);border-radius:6px;overflow:hidden;margin:8px 0 12px;}
+.gc-fd-row{display:grid;grid-template-columns:110px 1fr;border-bottom:1px solid var(--border);}
+.gc-fd-row:last-child{border-bottom:none;}
+.gc-fd-lbl{padding:8px 12px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:#636366;background:#161618;}
+.gc-fd-val{padding:8px 12px;font-size:12px;color:#c7c7cc;font-family:'Exo 2',sans-serif;line-height:1.5;}
+.gc-faction-desc{font-size:13px;line-height:1.7;color:#c7c7cc;font-family:'Exo 2',sans-serif;margin:0 0 20px;padding:14px 16px;background:#1c1c1e;border-radius:6px;border-left:3px solid;}
+.gc-sys-section-hd{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid;}
 .gc-faction-bar{display:flex;flex-wrap:nowrap;gap:5px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch;}
 .gc-faction-bar::-webkit-scrollbar{height:3px;}.gc-faction-bar::-webkit-scrollbar-thumb{background:#3a3a3c;border-radius:3px;}
 .gc-faction-pill{flex-shrink:0;padding:5px 12px;border-radius:5px;font-family:'IBM Plex Mono',monospace;font-size:11px;cursor:pointer;border:1px solid;transition:all .12s;background:transparent;letter-spacing:.2px;}
@@ -467,7 +486,7 @@ function mvt(e){let x=e.clientX+14,y=e.clientY+14;const w=TT.offsetWidth,h=TT.of
 // ─── Nav & filter bar clicks (event delegation — no inline string issues) ─────
 document.querySelectorAll('.nb').forEach(b=>{b.addEventListener('click',()=>{
   document.querySelectorAll('.nb').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active');cs=b.dataset.s;af='';sq='';
+  b.classList.add('active');cs=b.dataset.s;af='';sq='';gcSection=null;
   document.getElementById('search').value='';render();
 });});
 // Filter bar clicks use data-cat attributes to avoid any quoting issues
@@ -1938,6 +1957,28 @@ g.galaxy=[
     alignment:'Hostile to all life',
     desc:'Kraven Space is the graveyard of the greatest empire the galaxy ever produced. The Nerulian Empire — once spanning hundreds of systems with technology and culture no faction has since matched — was wiped out in weeks when the Kravens first appeared. Nobody knows where the Kravens came from. Nobody has communicated with them. Nobody who has engaged them at close range in meaningful numbers has survived to report it. The Kravens are an insectoid swarm that consumes everything biological and adapts rapidly to any resistance. Their expansion has been contained only by the Nemani Rift to the west and the void to the east. A Kraven encounter is almost always a death sentence. GMs should treat any Kraven presence as an extinction-level threat to any encounter.'
   },
+  {
+    entry_type:'faction',
+    name:'The Endless Darkness',
+    tags:['Region','Extreme Danger','Unknown','Deep Void'],
+    rarity:'rar-classified',
+    status:'Unmapped — no known survivors beyond the rim',
+    territory:'Beyond the eastern galactic rim — the true extragalactic void',
+    government:'None. No civilisation has survived long enough to establish any order.',
+    alignment:'Hostile to all life by nature',
+    desc:'The Endless Darkness is not a faction but a direction — the void that begins where even Kraven Space ends. Beyond the eastern galactic rim, stars thin to nothing and something else begins. The few expeditions that have crossed the rim report the same sequence: total sensor failure after several light-years, navigation drifting without reference points, and crew logs that grow increasingly fragmented before going silent. No expedition that has traveled more than three weeks past the rim has returned. What lies in the Darkness is unknown. Whether the Kravens originated there — or are fleeing from something within it — remains one of the most classified and disturbing open questions in galactic intelligence. The Alliance designates all Endless Darkness research at Level Seven Restricted, one of the very few classifications all other surviving factions agreed to honour without negotiation. Some believe the Darkness is simply empty. Others note that empty things do not return ships in pieces.'
+  },
+  {
+    entry_type:'faction',
+    name:"Nuzonia's Dream",
+    tags:['Region','Anomaly','Spiritual','Independent','Refugee Haven'],
+    rarity:'rar-limited',
+    status:'Disputed territory — spiritual and cultural significance',
+    territory:"South galaxy — centred on the Nuzonia Nebula, between Torc Federation and Zegitor space",
+    government:"Loose theocratic council of the Nuzoni Order — an interfaith spiritual movement. Decisions emerge from week-long ritual gatherings held across the nebula's inhabited worlds. No military command structure.",
+    alignment:'Peaceful — wary of outsiders, non-aggressive, neutral in all known conflicts',
+    desc:"Nuzonia's Dream refers both to the Nuzonia Nebula — a vast region of luminous coloured gas clouds housing dozens of stable, life-supporting worlds — and to the philosophical movement it inspired. Nuzonia was a Nerulian prophet who predicted, three centuries before the Kraven catastrophe, that the survivors of a great darkness would find refuge in a place of impossible beauty. When Nerulian refugees began arriving in the nebula after the fall of the empire, some declared the prophecy fulfilled. Others followed — mystics, pacifists, those tired of war, and those with nowhere else to go. Today, Nuzonia's Dream is a patchwork of independent worlds bound by spiritual belief rather than political structure. It has no standing army and no formal borders. It survives by being strategically unimportant to everyone around it and quietly hosting enough cultural value — ancient Nerulian archives, unique biotech, and navigational knowledge of the nebula's interior — that destroying it would cost more than leaving it alone. For players, Nuzonia's Dream is a safe haven, a source of ancient knowledge, and a place where questions about the Kravens, the Nerulians, and the true history of the galaxy may find unexpected answers."
+  },
   // ── NOTABLE SYSTEMS ───────────────────────────────────────────────────────
   {
     entry_type:'system',
@@ -2115,6 +2156,8 @@ const GALAXY_MAP_POS={
   'The Dark Space':    {x:17,y:82},
   'Nemani Rift':       {x:54,y:28},
   'Kraven Space':      {x:79,y:52},
+  'The Endless Darkness':{x:93,y:50},
+  "Nuzonia's Dream":   {x:55,y:82},
   // Notable Systems
   'San Tien':          {x:69,y:66},
   'New Earth':         {x:18,y:77},
@@ -2144,6 +2187,22 @@ const STARGATE_LINKS=[
   ['Sirius','Aderan'],
   ['Berilia','Damph'],
   ['Alsa','Ishtar'],
+];
+
+// ─── Galaxy Sections ─────────────────────────────────────────────────────────
+// Ordered sections for the Galactic Catalogue main view.
+// factionName: matches g.galaxy entry.name; sysRegex: tests sys.region and sys.faction
+const GALAXY_SECTIONS=[
+  {key:'Alliance Space',       factionName:'Alliance Space',       color:'#0a84ff', sysRegex:/alliance/i},
+  {key:'Dark Space',           factionName:'The Dark Space',       color:'#8e8e93', sysRegex:/dark space/i},
+  {key:'Mubothen Empire',      factionName:'Mubothen Empire',      color:'#ff9f0a', sysRegex:/mubothen/i},
+  {key:'The Endless Darkness', factionName:'The Endless Darkness', color:'#6e40c9', sysRegex:/endless darkness/i},
+  {key:'Freeland',             factionName:'Freeland',             color:'#bf5af2', sysRegex:/freeland/i},
+  {key:'Zegitor Trade Guild',  factionName:'Zegitor Trade Guild',  color:'#64d2ff', sysRegex:/zegitor/i},
+  {key:'Torc Federation',      factionName:'Torc Federation',      color:'#30d158', sysRegex:/torc/i},
+  {key:'Kraven Space',         factionName:'Kraven Space',         color:'#ff2d55', sysRegex:/kraven/i},
+  {key:"Nuzonia's Dream",      factionName:"Nuzonia's Dream",      color:'#ffd60a', sysRegex:/nuzonia/i},
+  {key:'Others',               factionName:null,                   color:'#636366', sysRegex:null},
 ];
 
 // ─── World Panel Data ─────────────────────────────────────────────────────────
@@ -2959,6 +3018,8 @@ function smapEntryColor(e){
     case 'The Dark Space':return '#8e8e93';
     case 'Nemani Rift':return '#ffd60a';
     case 'Kraven Space':return '#ff2d55';
+    case 'The Endless Darkness':return '#6e40c9';
+    case "Nuzonia's Dream":return '#ffd60a';
     default:return e.worlds_key?'#00c8ff':'#aeaeb2';
   }
 }
@@ -3008,12 +3069,16 @@ function initStarmap(){
   var pct=document.getElementById('smap-pct');
   var entries=(g.galaxy||[]).filter(function(e){return e.map_pos;});
 
+  function setInnerSize(){
+    var inner=document.getElementById('smap-inner');
+    if(inner){inner.style.width=CW+'px';inner.style.height=CH+'px';}
+  }
   function applyT(){
     cv.style.transform='translate('+ox+'px,'+oy+'px) scale('+scale+')';
     if(pct)pct.textContent=Math.round(scale*100)+'%';
   }
   function fit(){
-    if(img&&img.naturalWidth){CW=img.naturalWidth;CH=img.naturalHeight;}
+    if(img&&img.naturalWidth){CW=img.naturalWidth;CH=img.naturalHeight;setInnerSize();}
     var vw=vp.clientWidth,vh=vp.clientHeight;
     // Leave a little breathing room so the galaxy doesn't fill edge-to-edge
     var s=Math.min(vw/CW,vh/CH)*0.92;
@@ -3106,6 +3171,7 @@ function initStarmap(){
     if(popup&&!e.target.closest('#smap-popup'))popup.style.display='none';
   });
 
+  setInnerSize();
   if(img){img.addEventListener('load',fit);if(img.complete&&img.naturalWidth)fit();else fit();}else{fit();}
 }
 
@@ -3113,6 +3179,7 @@ function initStarmap(){
 var gcOpenSystems=new Set();
 var gcPanelSys=null,gcPanelPlanet=null;
 var gcModalMode='',gcModalTargetSys=null,gcModalTargetPlanet=null;
+var gcSection=null; // null = section overview, number = selected GALAXY_SECTIONS index
 
 // ─── Galactic Catalogue Helpers ───────────────────────────────────────────────
 function gcAtmClass(atm){
@@ -3162,7 +3229,7 @@ function gcTechColor(tech){
   return '';
 }
 function gcFactionColor(name){
-  var m={'Alliance Space':'#0a84ff','Haven Space':'#ff453a','Torc Federation':'#30d158','Mubothen Empire':'#ff9f0a','Zegitor Trade Guild':'#64d2ff','Freeland':'#bf5af2','The Dark Space':'#8e8e93','Nemani Rift':'#ffd60a','Kraven Space':'#ff2d55'};
+  var m={'Alliance Space':'#0a84ff','Haven Space':'#ff453a','Torc Federation':'#30d158','Mubothen Empire':'#ff9f0a','Zegitor Trade Guild':'#64d2ff','Freeland':'#bf5af2','The Dark Space':'#8e8e93','Nemani Rift':'#ffd60a','Kraven Space':'#ff2d55','The Endless Darkness':'#6e40c9',"Nuzonia's Dream":'#ffd60a'};
   return m[name]||'#8e8e93';
 }
 
@@ -3172,6 +3239,8 @@ function gcStat(label,value,colorClass,note){
 }
 
 // ─── Galactic Catalogue Toggle ────────────────────────────────────────────────
+function gcSetSection(idx){gcSection=(idx===null||idx===undefined)?null:idx;af='';sq='';render();}
+
 function gcToggleSystem(id){
   var card=document.getElementById('gcs_'+id);
   if(!card)return;
@@ -4725,103 +4794,132 @@ function render(){
 
   else if(cs==='galaxy'){
     var catSystems=g.catalogue_systems||[];
-    var gcFactions=(g.galaxy||[]).filter(function(e){return e.entry_type==='faction';});
-    // Unique regions for filter
-    var gcRegions=[...new Set(catSystems.map(function(s){return s.region;}))];
-    // Filter by region (af)
-    var gcFiltered=catSystems;
-    if(af){gcFiltered=gcFiltered.filter(function(sys){return sys.region===af||(sys.tags||[]).includes(af);});}
-    // Search filter
-    if(sq){
-      gcFiltered=gcFiltered.filter(function(sys){
-        if(ms([sys.name,sys.region,sys.faction,sys.classification,sys.desc,...(sys.tags||[])]))return true;
-        return (sys.planets||[]).some(function(p){
-          return ms([p.name,p.type,p.desc,p.faction,p.economy,p.demographics,p.government,p.atmosphere,p.climate,p.access,...(p.hazards||[]),...((p.notable_locations||[]).flatMap(function(l){return [l.name,l.desc];})),...(p.hooks||[])]);
+    // Helper: get systems belonging to a section
+    function gcSectionSystems(sec){
+      if(!sec.sysRegex){
+        // Others: systems that don't match any named section
+        return catSystems.filter(function(s){
+          return !GALAXY_SECTIONS.slice(0,-1).some(function(gs){
+            return gs.sysRegex&&(gs.sysRegex.test(s.region||'')||gs.sysRegex.test(s.faction||''));
+          });
         });
-      });
+      }
+      return catSystems.filter(function(s){return sec.sysRegex.test(s.region||'')||sec.sysRegex.test(s.faction||'');});
     }
-    cnt=gcFiltered.length;
-    // Header
-    html='<div class="gc-header"><div class="stitle" style="margin-bottom:0;">🌌 GALACTIC CATALOGUE <span class="badge">'+cnt+' Systems</span></div>';
-    html+='<button class="gc-add-btn" onclick="gcOpenAddSystem()">＋ Add System</button></div>';
-    // Region filter chips
-    html+='<div class="fbar">'+fcBtn('All Regions','',af);
-    gcRegions.forEach(function(r){html+=fcBtn(r,r,af);});
-    html+='</div>';
-    // Factions bar
-    if(gcFactions.length){
-      html+='<div style="margin-bottom:6px;font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:var(--mu3);text-transform:uppercase;letter-spacing:1.5px;">Factions — click for details</div>';
-      html+='<div class="gc-faction-bar">';
-      gcFactions.forEach(function(f,fi){
-        var col=gcFactionColor(f.name);
-        html+='<button class="gc-faction-pill" style="color:'+col+';border-color:'+col+'55;background:'+col+'12;" onclick="gcOpenFaction('+fi+')">'+esc(f.name)+'</button>';
-      });
-      html+='</div>';
-    }
-    // Systems list
-    if(!gcFiltered.length){
-      html+='<div class="empty"><div style="font-size:28px;margin-bottom:8px;">🌌</div><div style="font-family:\'IBM Plex Mono\',monospace;font-size:11px;">'+(sq?'No systems match "'+esc(sq)+'"':'No systems found')+'</div></div>';
-    } else {
-      gcFiltered.forEach(function(sys){
-        var realIdx=(g.catalogue_systems||[]).indexOf(sys);
+    // Helper: render a list of systems
+    function gcRenderSystems(systems){
+      var h='';
+      systems.forEach(function(sys){
+        var realIdx=catSystems.indexOf(sys);
         var isOpen=gcOpenSystems.has(sys.id);
-        html+='<div class="gc-system-card'+(isOpen?' open':'')+'" id="gcs_'+esc(sys.id)+'">';
-        // Header
-        html+='<div class="gc-system-header" onclick="gcToggleSystem(\''+esc(sys.id)+'\')">';
-        html+='<div class="gc-system-info">';
-        html+='<div class="gc-system-name">'+hl(sys.name,sq)+'</div>';
-        html+='<div class="gc-system-meta">'+esc(sys.region||'')+(sys.classification?' · '+esc(sys.classification):'')+(sys.faction?' · '+esc(sys.faction):'')+'</div>';
-        html+='</div>';
-        html+='<div class="gc-system-right">';
-        html+='<span class="world-entry-status ws-'+esc(sys.status||'active')+'">'+esc((sys.status||'active')[0].toUpperCase()+(sys.status||'active').slice(1))+'</span>';
-        html+='<span class="gc-system-count">'+((sys.planets||[]).length)+' world'+((sys.planets||[]).length!==1?'s':'')+'</span>';
-        html+='<button class="gc-edit-btn" onclick="event.stopPropagation();gcOpenEditSystem('+realIdx+')">✎</button>';
-        html+='<span class="gc-arr">▼</span>';
-        html+='</div></div>';
-        // Tags (always visible)
-        if(sys.tags&&sys.tags.length){
-          html+='<div class="gc-sys-tags">';
-          html+=sys.tags.map(function(t){return '<span class="tag tgr">'+esc(t)+'</span>';}).join('');
-          html+='</div>';
-        }
-        // Description excerpt (always visible)
-        if(sys.desc){
-          var exc=sys.desc.length>220?sys.desc.substring(0,220).replace(/\s+\S*$/,'')+'…':sys.desc;
-          html+='<div class="gc-sys-excerpt">'+esc(exc)+'</div>';
-        }
-        // Planet quick stats (always visible)
-        var activePlanets=(sys.planets||[]).filter(function(p){return p.status==='active'||p.status==='neutral';});
+        h+='<div class="gc-system-card'+(isOpen?' open':'')+'" id="gcs_'+esc(sys.id)+'">';
+        h+='<div class="gc-system-header" onclick="gcToggleSystem(\''+esc(sys.id)+'\')">';
+        h+='<div class="gc-system-info">';
+        h+='<div class="gc-system-name">'+hl(sys.name,sq)+'</div>';
+        h+='<div class="gc-system-meta">'+esc(sys.region||'')+(sys.classification?' · '+esc(sys.classification):'')+(sys.faction?' · '+esc(sys.faction):'')+'</div>';
+        h+='</div>';
+        h+='<div class="gc-system-right">';
+        h+='<span class="world-entry-status ws-'+esc(sys.status||'active')+'">'+esc((sys.status||'active')[0].toUpperCase()+(sys.status||'active').slice(1))+'</span>';
+        h+='<span class="gc-system-count">'+((sys.planets||[]).length)+' world'+((sys.planets||[]).length!==1?'s':'')+'</span>';
+        h+='<button class="gc-edit-btn" onclick="event.stopPropagation();gcOpenEditSystem('+realIdx+')">✎</button>';
+        h+='<span class="gc-arr">▼</span>';
+        h+='</div></div>';
+        if(sys.tags&&sys.tags.length)h+='<div class="gc-sys-tags">'+sys.tags.map(function(t){return '<span class="tag tgr">'+esc(t)+'</span>';}).join('')+'</div>';
+        if(sys.desc){var exc=sys.desc.length>220?sys.desc.substring(0,220).replace(/\s+\S*$/,'')+'…':sys.desc;h+='<div class="gc-sys-excerpt">'+esc(exc)+'</div>';}
         var totalPop=(sys.planets||[]).map(function(p){return p.population||'';}).filter(Boolean);
         if(totalPop.length||(sys.planets||[]).length){
-          html+='<div class="gc-sys-quickbar">';
+          h+='<div class="gc-sys-quickbar">';
           (sys.planets||[]).forEach(function(p){
             if(!p.atmosphere&&!p.access&&!p.status)return;
-            html+='<span class="gc-sys-qworld"><span class="gc-sys-qname">'+esc(p.name)+'</span>';
-            if(p.atmosphere)html+='<span class="gc-chip gc-chip-sm '+gcAtmClass(p.atmosphere)+'">'+esc(p.atmosphere)+'</span>';
-            if(p.access)html+='<span class="gc-chip gc-chip-sm '+gcAccessClass(p.access)+'">'+esc(p.access)+'</span>';
-            if(p.population)html+='<span class="gc-sys-qpop">'+esc(p.population)+'</span>';
-            html+='</span>';
+            h+='<span class="gc-sys-qworld"><span class="gc-sys-qname">'+esc(p.name)+'</span>';
+            if(p.atmosphere)h+='<span class="gc-chip gc-chip-sm '+gcAtmClass(p.atmosphere)+'">'+esc(p.atmosphere)+'</span>';
+            if(p.access)h+='<span class="gc-chip gc-chip-sm '+gcAccessClass(p.access)+'">'+esc(p.access)+'</span>';
+            if(p.population)h+='<span class="gc-sys-qpop">'+esc(p.population)+'</span>';
+            h+='</span>';
           });
-          html+='</div>';
+          h+='</div>';
         }
-        // Collapsible body
-        html+='<div class="gc-system-body">';
-        if(sys.desc)html+='<div class="gc-system-desc">'+descHtml(sys.desc,sq)+'</div>';
+        h+='<div class="gc-system-body">';
+        if(sys.desc)h+='<div class="gc-system-desc">'+descHtml(sys.desc,sq)+'</div>';
         if((sys.planets||[]).length){
-          html+='<div class="gc-planets-head"><span>World</span><span>Type</span><span style="text-align:right;">Atmosphere</span><span style="text-align:right;">Access</span></div>';
+          h+='<div class="gc-planets-head"><span>World</span><span>Type</span><span style="text-align:right;">Atmosphere</span><span style="text-align:right;">Access</span></div>';
           (sys.planets||[]).forEach(function(p,pi){
             var isSel=(gcPanelSys===realIdx&&gcPanelPlanet===pi);
-            html+='<div class="gc-planet-row'+(isSel?' sel':'')+'" id="gcp_'+esc(sys.id)+'_'+pi+'" onclick="gcOpenPlanet('+realIdx+','+pi+')">';
-            html+='<div class="gc-planet-name">'+hl(p.name,sq)+'</div>';
-            html+='<div class="gc-planet-type">'+esc(p.type||'—')+'</div>';
-            html+='<div class="gc-planet-chips"><span class="gc-chip '+gcAtmClass(p.atmosphere)+'">'+esc(p.atmosphere||'—')+'</span></div>';
-            html+='<div class="gc-planet-chips"><span class="gc-chip '+gcAccessClass(p.access)+'">'+esc(p.access||'—')+'</span></div>';
-            html+='</div>';
+            h+='<div class="gc-planet-row'+(isSel?' sel':'')+'" id="gcp_'+esc(sys.id)+'_'+pi+'" onclick="gcOpenPlanet('+realIdx+','+pi+')">';
+            h+='<div class="gc-planet-name">'+hl(p.name,sq)+'</div>';
+            h+='<div class="gc-planet-type">'+esc(p.type||'—')+'</div>';
+            h+='<div class="gc-planet-chips"><span class="gc-chip '+gcAtmClass(p.atmosphere)+'">'+esc(p.atmosphere||'—')+'</span></div>';
+            h+='<div class="gc-planet-chips"><span class="gc-chip '+gcAccessClass(p.access)+'">'+esc(p.access||'—')+'</span></div>';
+            h+='</div>';
           });
         }
-        html+='<div class="gc-add-planet-row" onclick="gcOpenAddPlanet('+realIdx+')">＋ Add World</div>';
-        html+='</div></div>';
+        h+='<div class="gc-add-planet-row" onclick="gcOpenAddPlanet('+realIdx+')">＋ Add World</div>';
+        h+='</div></div>';
       });
+      return h;
+    }
+
+    if(gcSection===null){
+      // ── Section overview grid ──
+      cnt=GALAXY_SECTIONS.length;
+      html='<div class="gc-header"><div class="stitle" style="margin-bottom:0;">🌌 GALACTIC CATALOGUE</div>';
+      html+='<button class="gc-add-btn" onclick="gcOpenAddSystem()">＋ Add System</button></div>';
+      html+='<div class="gc-sections-grid">';
+      GALAXY_SECTIONS.forEach(function(sec,si){
+        var fac=(g.galaxy||[]).find(function(e){return e.name===sec.factionName;});
+        var sysCnt=gcSectionSystems(sec).length;
+        var tags=fac?(fac.tags||[]):[];
+        var desc=fac?fac.desc:'Systems and factions not categorised under any major power.';
+        var excerpt=desc.length>160?desc.substring(0,160).replace(/\s+\S*$/,'')+'…':desc;
+        html+='<div class="gc-sec-card" style="border-left-color:'+sec.color+';" onclick="gcSetSection('+si+')">';
+        html+='<div class="gc-sec-name" style="color:'+sec.color+';">'+esc(sec.key)+'<span class="gc-sec-cnt">'+sysCnt+' system'+(sysCnt!==1?'s':'')+'</span></div>';
+        if(tags.length)html+='<div class="gc-sec-tags">'+tags.slice(0,4).map(function(t){return '<span class="tag tgr">'+esc(t)+'</span>';}).join('')+'</div>';
+        html+='<div class="gc-sec-excerpt">'+esc(excerpt)+'</div>';
+        html+='<div class="gc-sec-arrow" style="color:'+sec.color+';">→</div>';
+        html+='</div>';
+      });
+      html+='</div>';
+    } else {
+      // ── Section detail view ──
+      var sec=GALAXY_SECTIONS[gcSection];
+      var fac=sec&&sec.factionName?(g.galaxy||[]).find(function(e){return e.name===sec.factionName;}):null;
+      var col=sec?sec.color:'#8e8e93';
+      var sectionSystems=gcSectionSystems(sec);
+      // Apply search
+      if(sq){
+        sectionSystems=sectionSystems.filter(function(sys){
+          if(ms([sys.name,sys.region,sys.faction,sys.classification,sys.desc,...(sys.tags||[])]))return true;
+          return (sys.planets||[]).some(function(p){
+            return ms([p.name,p.type,p.desc,p.faction,p.economy,p.demographics,p.government,p.atmosphere,p.climate,p.access,...(p.hazards||[]),...((p.notable_locations||[]).flatMap(function(l){return [l.name,l.desc];})),...(p.hooks||[])]);
+          });
+        });
+      }
+      cnt=sectionSystems.length;
+      // Back button + title
+      html='<button onclick="gcSetSection(null)" class="gc-back-btn" style="color:'+col+';">← GALACTIC CATALOGUE</button>';
+      html+='<div class="stitle" style="color:'+col+';margin-bottom:6px;">'+esc(sec.key)+'</div>';
+      // Faction details panel
+      if(fac){
+        var tagStr=(fac.tags||[]).map(function(t){return '<span class="tag tgr">'+esc(t)+'</span>';}).join('');
+        if(tagStr)html+='<div style="margin:4px 0 10px;display:flex;flex-wrap:wrap;gap:4px;">'+tagStr+'</div>';
+        html+='<div class="gc-faction-detail">';
+        if(fac.status)html+='<div class="gc-fd-row"><div class="gc-fd-lbl">Status</div><div class="gc-fd-val">'+esc(fac.status)+'</div></div>';
+        if(fac.territory)html+='<div class="gc-fd-row"><div class="gc-fd-lbl">Territory</div><div class="gc-fd-val">'+esc(fac.territory)+'</div></div>';
+        if(fac.government)html+='<div class="gc-fd-row"><div class="gc-fd-lbl">Government</div><div class="gc-fd-val">'+esc(fac.government)+'</div></div>';
+        if(fac.alignment)html+='<div class="gc-fd-row"><div class="gc-fd-lbl">Alignment</div><div class="gc-fd-val">'+esc(fac.alignment)+'</div></div>';
+        html+='</div>';
+        if(fac.desc)html+='<div class="gc-faction-desc" style="border-left-color:'+col+'44;">'+descHtml(fac.desc,sq)+'</div>';
+      } else {
+        html+='<div style="font-size:13px;line-height:1.7;color:#8e8e93;font-family:\'Exo 2\',sans-serif;margin:8px 0 18px;">Systems and factions not categorised under any major power.</div>';
+      }
+      // Systems header
+      html+='<div class="gc-sys-section-hd" style="color:'+col+';border-bottom-color:'+col+'33;">Systems ('+sectionSystems.length+')</div>';
+      html+='<div class="gc-header" style="margin-bottom:8px;"><div></div><button class="gc-add-btn" onclick="gcOpenAddSystem()">＋ Add System</button></div>';
+      if(!sectionSystems.length){
+        html+='<div class="empty"><div style="font-size:28px;margin-bottom:8px;">🌌</div><div style="font-family:\'Share Tech Mono\',monospace;font-size:11px;">'+(sq?'No systems match "'+esc(sq)+'"':'No systems recorded in this region yet')+'</div></div>';
+      } else {
+        html+=gcRenderSystems(sectionSystems);
+      }
     }
   }
 
