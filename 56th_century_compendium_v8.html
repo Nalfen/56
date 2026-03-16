@@ -2961,8 +2961,103 @@ g.catalogue_systems=[
        hooks:['Someone in New Earth has information relevant to a case being built outside Alliance jurisdiction. Getting to them without alerting the colonial council requires not looking like what you are.','A person with a non-human appearance needs to be extracted from New Earth. They have been living there under cover for years. Something has changed that means the cover is about to break.','A cache of pre-Industrial era cultural records valuable to Earth-history academics has been located inside New Earth. Acquiring the materials without the colonists knowing why you want them requires a convincing cover.'],
        desc:'New Earth is what happens when a group of humans decides the galaxy\'s progress has gone too far. Founded by settlers who rejected multiracial Alliance society, it is a place where fugitives hide, where certain ideologies fester, and where players who arrive expecting normal Dark Space frontier life will find something far stranger. It is not powerful enough to be a serious threat to anyone — but it is exactly dangerous enough to be a problem for anyone who looks wrong, sounds wrong, or carries the wrong equipment.'}
     ]
+  },
+  // ─── ALLIANCE SPACE: ANDROMEDE & SYSTEM 5 ─────────────────────────
+  {
+    id:'andromede',name:'Andromede System',region:'Alliance Space',classification:'Core System — Naval Command',
+    faction:'Alliance Navy',status:'active',
+    tags:['Alliance Space','Military','Naval HQ','Restricted','Strategic'],
+    desc:'Andromede is where the Alliance Navy maintains its primary strategic command infrastructure. Not flashy, not open to visitors — the system exists for one purpose: to ensure that the most powerful fleet in the known galaxy is organised, supplied, and ready. Most civilians who visit Andromede do so by accident and leave quickly.',
+    planets:[
+      {id:'andromede_prime',name:'Andromede',type:'Terrestrial — Alliance Naval Command',status:'active',statusLabel:'Active — Restricted Military',
+       atmosphere:'Breathable',atm_note:'Standard — well maintained in all inhabited zones',
+       climate:'Temperate',gravity:'Standard',
+       faction:'Alliance Navy',population:'~12 million — military personnel and support contractors',
+       demographics:'Mixed — predominantly human and Patriark command staff, diverse enlisted personnel',
+       government:'Alliance Naval Command Authority',tech_level:'Military Advanced',
+       economy:'Military operations, naval logistics, weapons research, advanced ship systems development',
+       access:'Restricted',access_note:'Military credentials or authorised contractor clearance required. Civilian landing zones exist but are heavily monitored.',
+       hazards:['Alliance navy security response is extremely fast and heavily armed','Intelligence operations from every major faction — this is the most surveilled world in the galaxy after Orion 3','Restricted zones with lethal automated defence systems','Political sensitivity — wrong conversations on Andromede have ended careers and lives'],
+       notable_locations:[
+         {name:'Naval High Command (NHC)',desc:'The operational brain of the Alliance Navy. Deep underground, heavily shielded, permanently staffed at full capacity. No civilian access — ever.'},
+         {name:'The Proving Grounds',desc:'Extensive military testing range covering the planet\'s uninhabited northern continent. New weapons systems, ship components, and combat doctrines are evaluated here before deployment.'},
+         {name:'The Contractor Ring',desc:'The orbital and surface zones where civilian contractors operate. Ship builders, weapons manufacturers, and tech firms maintain offices here. Enormously profitable if you can get a contract. Intensely competitive.'}
+       ],
+       hooks:['A naval officer has gone missing from Andromede and the Navy has classified the investigation before it began. Someone outside is looking for them.','A contractor has overheard something they were not supposed to and is now trying to quietly disappear before it catches up with them.','A weapons system test on the Proving Grounds has produced results the Navy is not discussing. The test was supposed to be routine.'],
+       desc:'Andromede does not appear on civilian navigation charts in any detail. The Alliance Navy operates its strategic command from here — the centre of the most powerful military organisation in the known galaxy. Civilians who come to Andromede are contractors, diplomats with specific agendas, or people who made a navigation error. The navy\'s presence here is so complete that the local civilian population is essentially an extended support community for military operations. There is nothing to see, which is exactly how the Navy likes it.'}
+    ]
+  },
+  {
+    id:'system_5',name:'System 5',region:'Alliance Space',classification:'Core System — Tronik War Memorial',
+    faction:'Alliance (Joint Administration)',status:'active',
+    tags:['Alliance Space','Tronik War','Memorial','Neutral Zone','Historical','Contested Past'],
+    desc:'System 5 has no official name — just its designation. The system was at the centre of the Tronik War and the Alliance has never been able to agree on what to call it. Three worlds were destroyed or rendered permanently uninhabitable. Two survive. The system is simultaneously a memorial, a political battlefield over historical memory, and a functioning civilian population trying to live with what surrounds them.',
+    planets:[
+      {id:'system5_remnants',name:'The Remnant Fields',type:'Debris Fields — Three Destroyed Worlds',status:'abandoned',statusLabel:'Destroyed',
+       atmosphere:'None',atm_note:'Three separate debris clouds — no atmosphere remaining on any',
+       climate:'Void',gravity:'None',grav_note:'Each debris field generates minor unstable gravity wells — navigation requires current hazard charts',
+       faction:'None',population:'Uninhabited',demographics:'None',
+       government:'None — Alliance navigational hazard designation',tech_level:'N/A',economy:'None — informal salvage operations exist but are legally grey',
+       access:'Forbidden',access_note:'Alliance navigational restriction in all three fields. Unofficial salvage runs operate with one eye on navy patrol patterns.',
+       hazards:['Three overlapping debris fields','Residual Tronik War weapons contamination — some areas remain active after decades','Gravitational instability from fragmented masses','Unknown salvage competition — multiple parties operating in the fields simultaneously'],
+       notable_locations:[{name:'The Convergence Zone',desc:'Where the outer edges of all three debris fields overlap. The densest navigational hazard in the system and the site of several famous Tronik War engagements. Memorial buoys placed by veterans\' groups are periodically destroyed by debris impacts and replaced.'}],
+       hooks:['A salvager has found something in the Convergence Zone that should not exist — a sealed Tronik War-era research pod, intact, broadcasting on an old military frequency.','A memorial vessel is planning to enter the debris field for a ceremony. The Alliance is not officially blocking it. Three parties with very different reasons want it stopped.'],
+       desc:'What remains of three Alliance worlds destroyed during the Tronik War. Official designation: Hazard Fields A, B and C. Unofficial name among veterans: The Three Graves. The debris fields are well-mapped but no safe path exists through them. The Alliance maintains the navigational hazard designation and discourages all entry. Salvagers who know the patrol patterns work the fields quietly.'},
+      {id:'system5_haven',name:'System 5 Station',type:'Space Station — Memorial & Administrative Hub',status:'active',statusLabel:'Active — Memorial Zone',
+       atmosphere:'Breathable',atm_note:'Station-maintained throughout all public areas',
+       climate:'Controlled',gravity:'Standard',grav_note:'Artificial gravity — uniform throughout',
+       faction:'Alliance (Joint Civilian-Military Administration)',population:'~200,000 permanent residents and rotating memorial visitors',
+       demographics:'Highly mixed — veterans, historians, journalists, family members of war dead',
+       government:'Joint Memorial Administration Council',tech_level:'Standard',
+       economy:'Memorial tourism, historical research, small-scale trade, veteran support services',
+       access:'Open',access_note:'Open to all with standard Alliance ID. Memorial zones require respectful conduct — security enforces this actively.',
+       hazards:['Historical and political tensions run extremely high — debates about Tronik War responsibility turn violent with some regularity','Intelligence operations — this station is a significant information hub for anyone studying the war','Veteran communities with deep grievances and sometimes unstable individuals'],
+       notable_locations:[
+         {name:'The Memorial Hall',desc:'The largest structure on the station. Contains the official Alliance record of Tronik War casualties — 847 million names. Visitors can be found here at every hour.'},
+         {name:'The Archive (Contested)',desc:'Historical records of the war — some classified, some disputed, some suppressed. Academics and intelligence services both want what is in here. The administration manages access carefully.'},
+         {name:'Veterans\' Quarter',desc:'The section of the station where long-term veteran residents have established permanent communities. Self-policing, deeply private about internal matters, and extremely protective of each other.'}
+       ],
+       hooks:['A classified section of the Archive has been accessed by an unauthorised identity. The records accessed concern the war\'s actual origin — not the official version.','A veteran on the station has recognised a face from the war. The face belongs to someone who was officially listed as a casualty forty years ago.','A political delegation is visiting System 5 to push a resolution that would formally assign blame for the Tronik War. The people on this station have opinions about that.'],
+       desc:'System 5 Station was built after the war as a permanent memorial administration point and has grown into a community in its own right. Veterans live out their years here. Historians come to access the archive — what is accessible of it. Families come to find a name on the Memorial Hall wall. It is a place where the Tronik War is never quite over, where the official history is contested quietly and sometimes loudly, and where the gap between what is recorded and what actually happened is felt every day.'}
+    ]
+  },
+  // ─── ALLIANCE SPACE: BLACK HOLES ────────────────────────────────────
+  {
+    id:'big_blackhole',name:'B.I.G. (Beningen Ingratias Garlan)',region:'Alliance Space',classification:'Stellar Phenomenon — Black Hole',
+    faction:'None',status:'hazard',
+    tags:['Alliance Space','Black Hole','Stellar Hazard','Navigational Warning','Named'],
+    desc:'The Beningen Ingratias Garlan black hole — universally shortened to B.I.G. — sits at the edge of the inner Alliance core systems. It was named after the explorer who discovered it and did not survive the encounter. The naming was a posthumous gesture by the survey team that recovered the ship\'s log. B.I.G. is now a well-documented navigational hazard with clearly mapped exclusion zones.',
+    planets:[
+      {id:'big_exclusion',name:'B.I.G. Exclusion Zone',type:'Stellar Phenomenon — Black Hole & Accretion Disc',status:'hazard',statusLabel:'Active Navigational Hazard',
+       atmosphere:'None',atm_note:'Hard void — no atmosphere possible at any approach range within exclusion zone',
+       climate:'Void (Extreme Radiation)',gravity:'Extreme',grav_note:'Tidal forces sufficient to structurally damage standard vessels at inner exclusion boundary. Effects measurable well beyond mapped hazard zone.',
+       faction:'None',population:'Uninhabited — no stable matter within exclusion zone',demographics:'None',
+       government:'None — Alliance navigational authority enforces exclusion',tech_level:'N/A',economy:'None',
+       access:'Forbidden',access_note:'Alliance-mandated exclusion zone enforced by automated beacon network. Specialised research vessels may apply for approach permits — approval rate is low.',
+       hazards:['Extreme tidal forces — structural damage to standard vessels inside inner boundary','Accretion disc radiation — lethal without specialised shielding','Gravitational lensing creates navigational anomalies for light-minutes in all directions','Hawking radiation flux elevates background radiation throughout surrounding space'],
+       notable_locations:[{name:'The Garlan Research Platform',desc:'A fortified deep-space platform positioned at the outer edge of the safe approach zone. Operated jointly by Alliance Science Authority and the GU Physics Institute. Heavily shielded, permanently crewed by specialists, and extremely interesting to intelligence services who assume the research done here has military applications.'}],
+       hooks:['A research transmission from the Garlan Platform has gone silent — not the platform itself, just a specific encrypted data channel. The last transmission contained a fragment the receiving station\'s analysts are still trying to decode.','Someone has been filing approach permit applications for B.I.G. under a corporate research designation. The stated research parameters do not match any known scientific programme.'],
+       desc:'B.I.G. is as thoroughly mapped as a black hole can be. The exclusion zone is clearly marked. The research platform at its edge has been in operation for over two centuries. The Alliance treats it as a known hazard, a research asset, and a reminder that the galaxy contains things that simply cannot be engaged with on normal terms. The name has taken on cultural resonance — "B.I.G." in navigation slang has become shorthand for any problem that is too large and dense to go through directly.'}
+    ]
+  },
+  {
+    id:'garson_blackhole',name:'Garson Black Hole',region:'Alliance Space',classification:'Stellar Phenomenon — Black Hole',
+    faction:'None',status:'hazard',
+    tags:['Alliance Space','Black Hole','Stellar Hazard','Navigational Warning','Gravitational Anomaly'],
+    desc:'The Garson Black Hole is older and less characterised than B.I.G. — it sits in a more isolated region of Alliance Space and has been formally studied only intermittently. Named after the Garson cartographic survey that first plotted its position, it has recently attracted renewed scientific and intelligence interest due to anomalous readings near its outer accretion boundary.',
+    planets:[
+      {id:'garson_exclusion',name:'Garson Exclusion Zone',type:'Stellar Phenomenon — Black Hole',status:'hazard',statusLabel:'Active Navigational Hazard — Anomalous Activity',
+       atmosphere:'None',atm_note:'Hard void throughout',
+       climate:'Void (Extreme Radiation)',gravity:'Extreme',grav_note:'Tidal forces comparable to B.I.G. but less well-characterised — inner boundary may not be precisely mapped',
+       faction:'None',population:'Uninhabited',demographics:'None',
+       government:'None — minimal Alliance enforcement presence compared to B.I.G.',tech_level:'N/A',economy:'None',
+       access:'Forbidden',access_note:'Alliance exclusion designation. Enforcement is less consistent than at B.I.G. — the remoteness means patrols are infrequent.',
+       hazards:['Extreme tidal forces','Unexplained periodic gravitational pulse anomalies near outer boundary — cause undetermined','Lower quality navigational data — approach charts updated less frequently than B.I.G.','Reduced rescue and emergency response capability in the region'],
+       notable_locations:[{name:'Anomaly Point Seven',desc:'The location where gravitational pulse readings have been recorded on multiple independent surveys. The pulses do not match any known natural black hole behaviour. The Alliance Science Authority has classified the survey data pending further investigation. The previous survey team\'s full report has not been released.'}],
+       hooks:['The previous survey mission to Garson Anomaly Point Seven was recalled before completing its work. The recalled team members are reluctant to explain why. One of them has recently left Alliance Space entirely.','A private research firm has filed a claim for survey rights to Garson Black Hole\'s outer boundary zone. The Alliance approved it after unusual speed through normal bureaucratic process. Someone wants that survey done quietly.'],
+       desc:'The Garson Black Hole has never received the same research attention as B.I.G. — it is more remote, less convenient to reach, and until recently the readings from it were unremarkable. The anomalous gravitational pulses recorded near its outer boundary in the last decade have changed that assessment quietly and without public announcement. The Alliance Science Authority\'s classification of the survey data has not gone unnoticed by independent researchers or by intelligence agencies that monitor what the Alliance Science Authority decides to classify.'}
+    ]
   }
-];
 
 // Load any saved catalogue edits from localStorage
 (function(){try{var s=localStorage.getItem('gc_systems');if(s){var d=JSON.parse(s);if(Array.isArray(d))g.catalogue_systems=d;}}catch(e){}})();
