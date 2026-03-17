@@ -2420,7 +2420,7 @@ const STARGATE_LINKS=[
 // Ordered sections for the Galactic Catalogue main view.
 // factionName: matches g.galaxy entry.name; sysRegex: tests sys.region and sys.faction
 const GALAXY_SECTIONS=[
-  {key:'Alliance Space',           factionName:'Alliance Space',           color:'#0a84ff', sysRegex:/alliance/i},
+  {key:'Alliance Space',           factionName:'Alliance Space',           color:'#0a84ff', sysRegex:/^alliance space/i},
   {key:'Dark Space',               factionName:'The Dark Space',           color:'#8e8e93', sysRegex:/dark space/i},
   {key:'Mubothen Empire',          factionName:'Mubothen Empire',          color:'#ff9f0a', sysRegex:/mubothen/i},
   {key:'The Endless Darkness',     factionName:'The Endless Darkness',     color:'#6e40c9', sysRegex:/endless darkness/i},
@@ -2659,7 +2659,7 @@ g.factions=[
     category:'Megacorporation',
     subcategory:'Big 3',
     alignment:'Legal',
-    hq:'Classified — believed to be in eastern Alliance Space',
+    hq:'Sirius',
     presence:['Alliance Space','Eastern galaxy','Significant presence in frontier regions'],
     desc:'Yamato is the least publicly visible of the Big 3 and the one most analysts find difficult to accurately characterise. It is not primarily a manufacturer, not primarily a finance operation, and not primarily a military contractor — it does all three, but its defining characteristic is integration. Yamato subsidiaries and affiliated brands appear throughout the economy in ways that often obscure the parent connection. Yotoma, its technology division, is semi-independent and widely known. The rest of Yamato operates with deliberate opacity. What is known: Yamato has the longest corporate history of the Big 3, predating the Alliance itself, and has outlasted multiple political entities that once tried to regulate it.',
     known_for:['Deliberate opacity — corporate structure is intentionally difficult to map','Yotoma — its semi-independent technology division','The longest corporate history of the Big 3','Subsidiaries and affiliated brands throughout all economic sectors','Resilience — has outlasted multiple governments that attempted regulatory action'],
@@ -2735,8 +2735,8 @@ g.factions=[
     category:'Corporation',
     subcategory:'Exploration & Manufacturing',
     alignment:'Legal',
-    hq:'Torc Prime (Torc Federation)',
-    presence:['Torc Federation — dominant','Alliance Space — commercial','Frontier regions — exploration focus'],
+    hq:'Torc Prime (Torc Federation) — Alliance Space HQ: Orion 3',
+    presence:['Torc Federation — dominant','Alliance Space — commercial (Orion 3 HQ)','Frontier regions — exploration focus'],
     desc:'TORC Corp is the commercial and industrial arm of the Torc Federation — though it maintains operational independence from the Federation government and sells freely to anyone that can pay. TORC\'s product philosophy is practical: design things that work under any conditions, can be serviced with available tools, and do not require the manufacturer\'s support to keep running. The result is equipment that is rarely the most advanced available but is disproportionately trusted by people who work in environments where failure has direct consequences. TORC products are standard kit for long-range exploration crews, colonial operations, and frontier settlers. The Harsh Corp brand — acquired by TORC but kept as a distinct label — handles the urban personal protection market.',
     known_for:['Field-serviceable equipment designed for frontier and colonial use','The TORC quality standard — recognised galaxy-wide','Harsh Corp (subsidiary) — urban clothing and personal defence market','Standard kit for exploration crews and colonial operations','Willingness to sell to any customer without restriction'],
     regions:['Torc Federation','Alliance Space','Frontier'],
@@ -3100,7 +3100,7 @@ g.factions=[
     category:'Corporation',
     subcategory:'Asteroid Mining & Extraction',
     alignment:'Legal',
-    hq:'Orion belt operations (Alliance Space)',
+    hq:'Ishtar',
     presence:['Alliance Space — dominant asteroid mining','Frontier mineral extraction zones'],
     desc:"Solistar is the largest asteroid mining corporation in the galaxy. Its operations span the major asteroid belts within Alliance Space and extend into frontier zones where extraction rights have been established ahead of formal settlement. The business model is straightforward: find the ore, extract it, ship it, sell it. Solistar does this at a scale and efficiency that has eliminated most independent asteroid mining competition within Alliance Space. Its relationship with the Zegitor Trade Guild is close — Solistar is among the Guild's largest commercial clients — and its supply contracts with Arms Corp manufacturing on Ishtar represent one of the most significant bilateral commercial relationships in the Alliance economy.",
     known_for:['Largest asteroid mining operation in the galaxy','Dominant market position within Alliance Space extraction zones','Major supplier to Arms Corp manufacturing on Ishtar','Close commercial relationship with Zegitor Trade Guild','Frontier zone operations ahead of formal settlement — extraction rights established early'],
@@ -3116,7 +3116,7 @@ g.factions=[
     category:'Outlaw',
     subcategory:'Loyalist Insurgency',
     alignment:'Hostile (to Patriark and Alliance)',
-    hq:'Unknown — cells throughout Alliance Space',
+    hq:'Unknown — believed to be outside Alliance Space in ungoverned territory',
     presence:['Distributed cells — Alliance Space','Safe houses in Haven Space and frontier worlds'],
     desc:"The Skalan Order is the organised remnant of Skalan loyalists who survived the genetic editing that destroyed their race's future. The Patriark's decision to apply the Skalan gene-edit — whether as punishment, containment, or policy has never been officially characterised — ended the Skalan as a viable self-sustaining population. The Order exists to ensure this is not forgotten and to pursue the long-term goal of making those responsible answer for it. Its methods are not public. Its membership is not public. It does not make public statements or claims responsibility for actions. Analysts who have studied the Order over time note that it demonstrates consistent patience: it operates on timescales longer than most institutions plan for.",
     known_for:['Skalan loyalists organised around the goal of Patriark accountability','The Skalan gene-edit — the defining historical grievance','Operational secrecy — no public statements, no claimed actions','Patient long-term operation across timescales most institutions do not plan for','Cells throughout Alliance Space; haven in ungoverned space'],
@@ -8108,9 +8108,9 @@ function render(){
           return !GALAXY_SECTIONS.slice(0,-1).some(function(gs){
             return gs.sysRegex&&(gs.sysRegex.test(s.region||'')||gs.sysRegex.test(s.faction||''));
           });
-        });
+        }).sort(function(a,b){return(a.name||'').localeCompare(b.name||'');});
       }
-      return catSystems.filter(function(s){return sec.sysRegex.test(s.region||'')||sec.sysRegex.test(s.faction||'');});
+      return catSystems.filter(function(s){return sec.sysRegex.test(s.region||'')||sec.sysRegex.test(s.faction||'');}).sort(function(a,b){return(a.name||'').localeCompare(b.name||'');});
     }
     // Helper: get planet type icon
     function gcPlanetIcon(p){
