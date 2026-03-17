@@ -107,6 +107,7 @@ All game data lives in the `const g = {...}` constant. Top-level keys:
 | `g.catalog.ships` | Spaceships `{name, class, role, description, power, total_size, total_cost, core_size, core:[], internal_size, internal:[], external_size, external:[]}` |
 | `g.catalog.ship_components` | Flat array of ship component catalog entries — built at startup by `buildShipComps()` from `SCOMP_DEF` |
 | `g.catalog.drone_parts` | Flat array of drone component tier entries — built at startup by `buildDroneParts()` from `DB_COMP` |
+| `g.factions` | Array of faction/organisation lore entries — see Factions section below |
 
 ---
 
@@ -139,6 +140,7 @@ All game data lives in the `const g = {...}` constant. Top-level keys:
 | `medical` | Medical | 💉 |
 | `drone_parts` | Drone Parts | 🔩 |
 | `drone_builder` | Drone Builder | 🤖 |
+| `factions` | Factions | 🏴 |
 
 **New in v8:** `glossary_only` (flat glossary view from `g.glossary_clean`), `vehicles`, `cat_drones`, `modules`, `ships`, and `ship_components` (all sourced from `g.catalog`), plus the interactive `drone_parts` catalog and `drone_builder` tool.
 
@@ -158,6 +160,68 @@ All game data lives in the `const g = {...}` constant. Top-level keys:
 | SPACE COMBAT | Ship combat job order, roles, movement, damage, environment |
 
 The **SPACE COMBAT** group covers: job order, all five ship roles (Commander/Engineer/Navigator/Pilot/Gunner), role advantage/disadvantage, space movement & sensor ranges, damage/trauma/repairs, environmental rules (gravity, suffocation), and galactic regions.
+
+---
+
+## Factions (`g.factions`)
+
+`g.factions` is a flat array of lore/organisation entries rendered in the `factions` section. It covers megacorporations, governments, criminal organisations, manufacturers, trade bodies, and local factions. **This is the canonical place to edit faction descriptions, known-for lists, and lore text.**
+
+### Faction entry schema
+
+```js
+{
+  id:            'snake_case_id',          // unique key (used for card id)
+  name:          'Full Name',
+  short:         'Abbrev',                 // shown in header if different from name
+  category:      'Corporation',            // see categories below
+  subcategory:   'Weapons & Tactical',     // freeform descriptor tag
+  alignment:     'Legal',                  // drives badge colour (see fAlignCls)
+  hq:            'Planet (Region)',
+  presence:      ['Region A', 'Region B'], // displayed as bullet list in card
+  desc:          'Long lore paragraph.',   // main body text — edit this for lore fixes
+  known_for:     ['Bullet 1', '…'],        // shown as a bulleted list
+  regions:       ['Alliance Space'],       // used for search matching
+  status:        'Active',
+  legal_standing:'Fully legal; …'
+}
+```
+
+### Faction categories (filter chips)
+
+| Category | Badge colour |
+|---|---|
+| `Megacorporation` | Purple (`.tp`) |
+| `Corporation` | Cyan (`.tb`) |
+| `Political / Religious` | Orange (`.to`) |
+| `Political / Synthetic` | Orange (`.to`) |
+| `Trade Organization` | Green (`.tg`) |
+| `Local Faction` | White (`.tw`) |
+| `Outlaw` | Red (`.tr`) |
+
+### Alignment badge colours (`fAlignCls`)
+
+| Alignment string contains | Badge class |
+|---|---|
+| `illegal` / `hostile` / `criminal` | `.tr` red |
+| `restricted` / `grey` | `.ty` yellow |
+| `legal` | `.tg` green |
+| `independent` | `.tb` cyan |
+| `neutral` | `.tw` white |
+| `defunct` | `.tgr` muted |
+
+### Faction groupings in `g.factions`
+
+Entries are ordered in the array under comment blocks:
+- `// ── BIG 3 MEGACORPORATIONS ──` — Galactic Union, Arms Corp, Yamato
+- `// ── WEAPONS MANUFACTURERS ──` — Malivaux, Kintech, Nakamura, Zang'Hai, TORC, Voran, etc.
+- Further groups follow for governments, outlaws, trade bodies, etc.
+
+> **Important:** Manufacturers appear **twice** in the codebase — once here in `g.factions` for lore/description, and separately in `g.manufacturers` (a dict) for stat modifiers applied to items at render time. Editing `g.factions` affects the Factions page only. Editing `g.manufacturers` affects weapon/armor/item stats.
+
+### Search fields
+
+The factions render function matches against: `name`, `short`, `category`, `subcategory`, `alignment`, `hq`, `desc`, `legal_standing`, all entries in `known_for[]`, `presence[]`, and `regions[]`.
 
 ---
 
