@@ -108,6 +108,8 @@ All game data lives in the `const g = {...}` constant. Top-level keys:
 | `g.catalog.ship_components` | Flat array of ship component catalog entries — built at startup by `buildShipComps()` from `SCOMP_DEF` |
 | `g.catalog.drone_parts` | Flat array of drone component tier entries — built at startup by `buildDroneParts()` from `DB_COMP` |
 | `g.factions` | Array of faction/organisation lore entries — see Factions section below |
+| `g.galaxy` | Array of galactic region/faction overview entries (used by `galaxy` and `starmap` sections) |
+| `g.catalogue_systems` | Array of star system entries with planet lists — detailed world data for the Galactic Catalogue |
 
 ---
 
@@ -118,6 +120,8 @@ All game data lives in the `const g = {...}` constant. Top-level keys:
 | `glossary` | Rules & Glossary | 📖 |
 | `glossary_only` | Glossary | 📚 |
 | `specials` | Special Properties | 🔖 |
+| `galaxy` | Galactic Catalogue | 🌌 |
+| `starmap` | Star Map | 🗺 |
 | `races` | Races | 👁 |
 | `backgrounds` | Backgrounds | 📜 |
 | `occupations` | Occupations | 💼 |
@@ -222,6 +226,143 @@ Entries are ordered in the array under comment blocks:
 ### Search fields
 
 The factions render function matches against: `name`, `short`, `category`, `subcategory`, `alignment`, `hq`, `desc`, `legal_standing`, all entries in `known_for[]`, `presence[]`, and `regions[]`.
+
+---
+
+## Galactic Catalogue & Star Map
+
+Two navigation sections cover the in-universe galaxy. They share data but serve different purposes.
+
+### `galaxy` section — Galactic Catalogue
+
+Displays galactic regions as collapsible faction banners, each containing a list of star systems. Star systems expand to show individual planets/bodies.
+
+**Data sources:**
+
+| Constant / key | Purpose |
+|---|---|
+| `g.galaxy` | Array of region/faction overview entries (`entry_type:'faction'`) — lore for each galactic region |
+| `g.catalogue_systems` | Array of star system entries — the actual systems and planets shown in the catalogue |
+| `GALAXY_SECTIONS` | Ordered array of section descriptors that group `catalogue_systems` by region/faction |
+
+#### `g.galaxy` entry schema (region/faction overview)
+
+```js
+{
+  entry_type: 'faction',    // always 'faction' for region entries
+  name:       'Alliance Space',
+  tags:       ['Major Faction', 'Playable Region', 'Core Space'],
+  rarity:     '',           // optional rar-* class string
+  status:     '…',
+  territory:  '…',
+  span:       '…',          // e.g. "~340 inhabited systems"
+  discovered: '…',
+  population_est: '…',
+  government: '…',
+  desc:       '…',          // long lore text (multi-paragraph, \n separated)
+  history:    '…',          // optional history paragraph
+  known_for:  ['…', '…'],
+  notable_systems: ['…'],
+  lore_notes: ['…'],        // optional flavour/rumour bullets
+  map_pos:    {x: 45, y: 32}, // % coords on the star map PNG (used by starmap section)
+}
+```
+
+#### `g.catalogue_systems` entry schema
+
+```js
+{
+  id:             'orion',
+  name:           'Orion System',
+  region:         'Alliance Space',    // matched against GALAXY_SECTIONS sysRegex
+  classification: 'Core System',
+  faction:        'Galactic Union / Alliance',
+  status:         'active',            // active | abandoned | restricted | destroyed
+  tags:           ['Alliance Space', 'Seat of Power', …],
+  desc:           '…',                 // system overview paragraph
+  planets: [
+    {
+      id:          'orion_1',
+      name:        'Orion 1',
+      type:        'Space Station, Major Spaceport & Trade Hub',
+      status:      'active',
+      statusLabel: 'Active, Major Spaceport',
+      atmosphere:  'Breathable',       // drives gcAtmClass badge colour
+      atm_note:    '…',
+      climate:     '…',
+      gravity:     'Standard',
+      grav_note:   '…',
+      faction:     '…',
+      population:  '…',
+      demographics:'…',
+      government:  '…',
+      tech_level:  'Advanced',
+      economy:     '…',
+      access:      'Open',             // drives gcAccessClass badge colour
+      access_note: '…',
+      hazards:     ['…'],
+      notable_locations: [{name:'…', desc:'…'}],
+      hooks:       ['…'],              // plot hook bullets
+      desc:        '…',               // planet body text
+    }
+  ]
+}
+```
+
+#### `GALAXY_SECTIONS` constant
+
+Ordered array defining how catalogue sections are grouped and coloured. Each entry:
+
+```js
+{
+  key:         'Alliance Space',           // display label
+  factionName: 'Alliance Space',           // matched against g.galaxy[].name
+  color:       '#0a84ff',                  // accent colour for the section banner
+  sysRegex:    /^alliance space/i,         // tests sys.region and sys.faction
+}
+```
+
+The last entry always has `sysRegex: null` — it catches all systems not matched by any earlier section ("Others").
+
+Current sections (in order): Alliance Space, Dark Space, Mubothen Empire, The Endless Darkness, Freeland, Zegitor Trade Guild, Torc Federation, Kraven Space, Nuzonia's Dream, The Solar Expanse, Erbrother Nebula, Dragon Tail's Expanse, Realmsinger Region, Tronik Network, Gravemist Nebula, Proxima Sector, Others.
+
+#### Planet type icons (`gcPlanetIcon`)
+
+| Icon | Condition |
+|---|---|
+| ☠️ | Abandoned + kraven/consumed type |
+| 💀 | Destroyed / debris field / ruins |
+| ☄️ | Asteroid belt / field |
+| 🔧 | Incomplete / construction frame |
+| 🧊 | Ice giant / ice world |
+| 🪐 | Gas giant |
+| 🛸 | Station / orbital / spaceport |
+| 🔵 | Artificial planet / world |
+| 🌊 | Ocean world |
+| ✨ | Floating / space ruins |
+| 🌍 | Breathable atmosphere |
+| 🌑 | Rocky / barren / fallback |
+
+---
+
+### `starmap` section — Star Map
+
+An interactive pan/zoom map. Uses:
+
+- `g.galaxy` entries that have a `map_pos: {x, y}` field — rendered as glowing hotspot dots
+- `STARGATE_LINKS` — array of `[nameA, nameB]` pairs drawn as dotted cyan lines between map positions
+
+```js
+const STARGATE_LINKS = [
+  ['Orion', 'Sirius'],
+  ['Orion', 'Berilia'],
+  // …
+];
+```
+
+The map image itself is `Star-Map-v3_HIGH_QUALITY.png` (external asset, same directory). Dot coordinates are percentages relative to the image dimensions. Clicking a dot opens a detail panel. `initStarmap()` is called after render to attach pan/zoom event listeners.
+
+> **Note:** `g.galaxy` and `g.factions` are separate arrays. `g.galaxy` holds region-scale overviews (Alliance Space, Kraven Space, etc.) with map positions. `g.factions` holds corporation/organisation lore entries (Malivaux, Arms Corp, etc.). They serve different UI sections and should be edited independently.
 
 ---
 
