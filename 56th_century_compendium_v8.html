@@ -670,7 +670,7 @@ function descHtml(descStr,sq){
     const text=descStr.slice(12).trim();
     return '<div class="placeholder-desc">'+hl(text,sq)+'</div>';
   }
-  const paras=descStr.split(/\n\n+/);
+  const paras=descStr.split(/\n+/);
   if(paras.length===1)return '<div class="desc" style="margin-bottom:8px;">'+hl(descStr,sq)+'</div>';
   return '<div class="desc" style="margin-bottom:8px;">'+paras.map(p=>p.trim()).filter(Boolean).map(p=>'<p>'+hl(p,sq)+'</p>').join('')+'</div>';
 }
@@ -8356,17 +8356,18 @@ function render(){
       html+='<div class="grid">';
       fFiltered.forEach(function(f){
         var id='fc_'+esc(f.id);
-        html+='<div class="card" id="'+id+'">';
+        html+='<div class="card" id="'+id+'" data-tog="'+id+'">';
         html+='<div class="ch">'+hl(f.name,sq);
         if(f.short&&f.short!==f.name)html+=' <span style="font-size:10px;color:var(--mu);font-family:\'Share Tech Mono\',monospace;">('+esc(f.short)+')</span>';
-        html+='</div>';
+        html+='<span class="xi">▼</span></div>';
         html+='<div class="cr2">';
         html+='<span class="tag '+fCatCls(f.category)+'">'+esc(f.category)+'</span>';
         if(f.subcategory)html+='<span class="tag tgr">'+esc(f.subcategory)+'</span>';
         if(f.alignment)html+='<span class="tag '+fAlignCls(f.alignment)+'">'+esc(f.alignment)+'</span>';
         html+='</div>';
         if(f.hq){html+='<div class="cr2" style="margin-top:4px;"><span style="font-size:10px;color:var(--mu);font-family:\'Share Tech Mono\',monospace;margin-right:4px;">HQ</span><span style="font-size:11px;color:#c0c0c0;font-family:\'Exo 2\',sans-serif;">'+esc(f.hq)+'</span></div>';}
-        if(f.status)html+='<div class="fg" style="margin:8px 0;"><div class="f"><div class="fl">STATUS</div><div class="fv">'+esc(f.status)+'</div></div></div>';
+        html+='<div class="cb">';
+        if(f.status)html+='<div class="fg" style="margin-bottom:8px;"><div class="f"><div class="fl">Status</div><div class="fv">'+esc(f.status)+'</div></div></div>';
         if(f.desc)html+='<div style="font-size:12px;line-height:1.7;color:#c0c0c0;font-family:\'Exo 2\',sans-serif;margin-bottom:10px;">'+descHtml(f.desc,sq)+'</div>';
         if(f.presence&&f.presence.length){
           html+='<div style="margin-bottom:8px;"><div style="font-size:10px;color:var(--a);font-family:\'Orbitron\',sans-serif;letter-spacing:.05em;margin-bottom:4px;">PRESENCE</div>';
@@ -8380,8 +8381,8 @@ function render(){
           f.known_for.forEach(function(k){html+='<li style="font-size:12px;color:#a0a0a0;font-family:\'Exo 2\',sans-serif;margin-bottom:3px;">'+esc(k)+'</li>';});
           html+='</ul></div>';
         }
-        if(f.legal_standing)html+='<div style="margin-top:8px;"><div style="font-size:10px;color:var(--a);font-family:\'Orbitron\',sans-serif;letter-spacing:.05em;margin-bottom:4px;">LEGAL STANDING</div><div style="font-size:12px;color:#a0a0a0;font-family:\'Exo 2\',sans-serif;">'+esc(f.legal_standing)+'</div></div>';
-        html+='</div>';
+        if(f.legal_standing)html+='<div class="fg"><div class="f"><div class="fl">Legal Standing</div><div class="fv" style="font-size:11px;">'+esc(f.legal_standing)+'</div></div></div>';
+        html+='</div></div>';
       });
       html+='</div>';
     }
