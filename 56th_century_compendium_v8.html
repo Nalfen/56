@@ -2282,8 +2282,8 @@ const GALAXY_SECTIONS=[
   {key:'The Solar Expanse',        factionName:'The Solar Expanse',        color:'#ff9500', sysRegex:/solar expanse/i},
   {key:'Erbrother Nebula',         factionName:'Erbrother Nebula',         color:'#5ac8fa', sysRegex:/erbrother/i},
   {key:"Dragon Tail's Expanse",    factionName:"Dragon Tail's Expanse",    color:'#ff6961', sysRegex:/dragon tail/i},
-  {key:'Realmsingers Empire',      factionName:'Realmsingers Empire',      color:'#c084fc', sysRegex:/realmsingers/i},
-  {key:'Tronic Network',           factionName:'Tronic Network',           color:'#34c759', sysRegex:/tronic network/i},
+  {key:'Realmsinger Region',        factionName:'Realmsingers Empire',      color:'#c084fc', sysRegex:/realmsinger/i},
+  {key:'Tronik Network',            factionName:'Tronik Network',           color:'#34c759', sysRegex:/tronik network/i},
   {key:'Gravemist Nebula',         factionName:'Gravemist Nebula',         color:'#636366', sysRegex:/gravemist/i},
   {key:'Proxima Sector',           factionName:'Proxima Sector',           color:'#ffe066', sysRegex:/proxima sector/i},
   {key:'Others',                   factionName:null,                       color:'#636366', sysRegex:null},
@@ -3932,6 +3932,26 @@ g.catalogue_systems=[
        desc:'Pholla is the last full stop before the sentence ends. The community here is small, self-selected, and shaped by the knowledge that they are at the edge of what anyone knows. People come here for specific reasons — to launch deep expeditions, to be as far from the rest of the galaxy as possible while still having breathable air, or because they were heading deeper and ran out of capacity to go further. The deep expanse beyond is real, large, and almost entirely uncharted. What is out there is not known.'}
     ]
   },
+  {
+    id:'grulania',name:'Grulania System',region:'Solar Expanse',classification:'Deep Frontier — Extreme North Terminus',
+    faction:'None confirmed',status:'unknown',
+    tags:['Solar Expanse','Extreme Frontier','Alien Biosphere','Uncontacted','Unknown'],
+    proximity:'Extreme north — the furthest known system in the Solar Expanse, well beyond Pholla. No human settlement confirmed. Entirely outside the range of any organised resupply or rescue capability. Nearest catalogued system is Pholla, itself an extreme frontier outpost.',
+    desc:'Grulania is a system designation derived from long-range survey data — a handful of readings that confirmed a stellar body and at least one orbiting mass of sufficient size to register on instruments at the distances involved. Whether the system is habitable, inhabited, or relevant to human interests in any way has not been determined by direct observation. No expedition has returned from an attempt to reach it. Three expeditions are confirmed to have departed toward Grulania\'s coordinates over the past century. None returned. Their fate is unknown.',
+    planets:[
+      {id:'grulania_body',name:'Grulania (Survey Designation)',type:'Unknown — Long-Range Survey Data Only',status:'unknown',statusLabel:'Unvisited — Classification Uncertain',
+       atmosphere:'Unknown',atm_note:'Long-range spectroscopic data suggests atmospheric composition unlike any world in the known catalogue — the readings have been challenged on instrument error grounds, but three independent surveys produced similar results',
+       climate:'Unknown — possible extreme conditions',gravity:'Unknown',
+       faction:'None confirmed',population:'No evidence of humanoid habitation — spectroscopic data contains anomalies that do not correspond to known natural processes and have not been attributed to instrument error',
+       demographics:'Unknown',
+       government:'None',tech_level:'Unknown',economy:'Unknown',
+       access:'Effectively unreachable',access_note:'No known safe route. The three expedition attempts that headed for Grulania\'s coordinates did not return. Whether the obstacle is navigational, environmental, or something else is not known.',
+       hazards:['Unknown — three expeditions failed without returning data on what they encountered','Extreme distance from any support or rescue capability — a ship in distress here is a ship lost','Deep Solar Expanse navigation in this region relies on charts derived from long-range survey, not direct observation','The spectroscopic anomalies — if genuine — suggest conditions unlike anything in the accessible catalogue'],
+       notable_locations:[{name:'Survey Reference Point (Grulania)',desc:'The navigational coordinates derived from long-range survey — the only reliable data that exists. The system\'s actual nature is unknown. What the spectroscopic anomalies indicate has never been verified at close range. The coordinates are filed with the Alliance Survey Office with a Do Not Approach designation that carries no legal force this far out.'}],
+       hooks:['A navigator claims to have been to Grulania and returned — the first person to make this claim with any credibility. Their ship shows evidence of extreme stress. They are not discussing what they found, but they are clearly not going back.','The spectroscopic anomaly data from Grulania has been re-analysed using new equipment. The new analysis does not clarify what the readings represent. It does confirm they are not instrument error.','Someone is quietly recruiting crew for a fourth expedition to Grulania. The terms are exceptional. The expedition leader has not explained where they got the funding.'],
+       desc:'Grulania exists at the edge of what any instrument can reliably read at distance, which is the only way it has been observed. Three expeditions went toward it. None came back. The spectroscopic data is anomalous in ways that scientists have not agreed on an interpretation for. It could be instrument artefact. It could be a world with atmospheric and surface chemistry unlike anything in the catalogue. It could be something else entirely. The only way to know requires going there, and the record on going there is not encouraging.'}
+    ]
+  },
   // ─── GRAVEMIST NEBULA ───────────────────────────────────────────────
   {
     id:'basagoth',name:'Basagoth Station',region:'Gravemist Nebula',classification:'Pirate Station — Nebula Border',
@@ -4361,6 +4381,7 @@ g.catalogue_systems=[
        desc:'Conso is where the Tronik War ended and where the Alliance decided it would not start again. The garrison here is not symbolic — it is substantial, well-equipped, and maintains the readiness posture of a command that takes its strategic position seriously. Civilian life coexists with the military presence in the practical way that it does in systems where the military has been there for generations and the economy has built around it. The junction between the Network and System 5 has been Alliance-controlled since the war ended. The Alliance has shown no indication it intends to change this.'}
     ]
   }
+];
 
 // Load any saved catalogue edits from localStorage
 (function(){try{var s=localStorage.getItem('gc_systems');if(s){var d=JSON.parse(s);if(Array.isArray(d))g.catalogue_systems=d;}}catch(e){}})();
