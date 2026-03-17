@@ -4040,6 +4040,326 @@ g.catalogue_systems=[
        hooks:['The Peavis Community Council has received information suggesting the Science Authority intends to expand its Erbrother presence into Peavis. They are looking for outside help in making their opposition to this effective.','Someone arrived on Peavis three months ago and has become part of the community. A party has arrived looking for them. The community\'s response to inquiries about their residents has been unwelcoming.'],
        desc:'Peavis is a community of people who came to the Erbrother Nebula because they wanted the world to have some difficulty finding them. The nebula navigation is not completely deterrent but it is deterrent enough to make it selective. The Science Authority\'s presence in Phoxitis is a source of sustained unease — not because the Authority has done anything to Peavis, but because the residents understand that institutional presence tends to expand and that their privacy has a specific value they would prefer to maintain.'}
     ]
+  },
+  // ─── DARK SPACE: REMAINING SYSTEMS ──────────────────────────────────
+  {
+    id:'asteroid_eater',name:'Asteroid Eater',region:'Dark Space',classification:'Stellar Phenomenon — Black Hole',
+    faction:'None',status:'hazard',
+    tags:['Dark Space','Black Hole','Stellar Hazard','Named','Navigation Warning'],
+    desc:'The Asteroid Eater is the large black hole at the centre of Dark Space — named by the first navigators who plotted its position after observing it consume a dense asteroid field in its accretion disc. It sits at the gravitational heart of the region, and its influence shapes the orbital mechanics of everything in Dark Space. Navigation around it is essential knowledge for anyone operating in the region.',
+    planets:[
+      {id:'asteroid_eater_zone',name:'Asteroid Eater Exclusion Zone',type:'Stellar Phenomenon — Large Black Hole',status:'hazard',statusLabel:'Active Navigation Hazard',
+       atmosphere:'None',atm_note:'Hard void — extreme radiation throughout exclusion zone',
+       climate:'Void (Extreme)',gravity:'Extreme',grav_note:'Tidal forces detectable at extraordinary range — the largest known black hole in accessible galactic space',
+       faction:'None',population:'Uninhabited — no stable structure possible within exclusion zone',demographics:'None',
+       government:'None',tech_level:'N/A',economy:'None',
+       access:'Forbidden',access_note:'No approach designation — Alliance and independent navigators maintain wide exclusion by convention. The event horizon is visible from several Dark Space systems on clear instrument readings.',
+       hazards:['Extreme tidal forces — larger and more powerful than B.I.G. or Garson','Accretion disc activity — the active consumption of material creates unpredictable energy events','Gravitational influence measurable throughout Dark Space — all orbital calculations in the region account for it','Electromagnetic interference from accretion disc activity affects communications at significant range'],
+       notable_locations:[{name:'The Feeding Zone',desc:'The accretion disc of the Asteroid Eater — the active consumption zone from which the black hole takes its name. Material entering this zone is consumed within hours. The spectacle of the consumption is visible from multiple Dark Space systems and is one of the few things about Dark Space that tourists have been known to travel to see.'}],
+       hooks:['An unusual object has been observed entering the Asteroid Eater\'s accretion disc — not an asteroid. The object\'s trajectory suggests it was placed there deliberately rather than arriving naturally.','A navigation anomaly near the Asteroid Eater\'s exclusion zone outer boundary has been consistent enough that three independent navigators have filed reports. The anomaly is not in any current model of the black hole\'s behaviour.'],
+       desc:'The Asteroid Eater is Dark Space\'s defining feature — the gravitational anchor of the entire region and a constant presence in every navigation calculation made here. Its name came from the observation that prompted its cataloguing: a ship that transited the region noticed an asteroid field entering the accretion disc and timed the consumption. The name stuck. The phenomenon has not stopped. It is the largest known black hole in accessible galactic space and the reason Dark Space\'s orbital mechanics are as complex as they are.'}
+    ]
+  },
+  {
+    id:'new_oshana',name:'New Oshana System',region:'Dark Space',classification:'Dark Space System — Former Colony',
+    faction:'Independent (Embattled)',status:'active',
+    tags:['Dark Space','Former Colony','Independent','Survival','Hard Conditions'],
+    desc:'New Oshana was founded by colonists who believed the frontier would offer freedom that the Alliance could not provide. They were correct about the Alliance not being present. The freedom they found included freedom from infrastructure, emergency response, and legal protection. The colony has survived through a combination of determination and necessity that has produced a community unlike anything in organised space.',
+    planets:[
+      {id:'new_oshana_prime',name:'New Oshana',type:'Terrestrial — Independent Dark Space Colony',status:'active',statusLabel:'Active — Frontier Colony',
+       atmosphere:'Breathable',atm_note:'Breathable — thin at altitude',
+       climate:'Arid to Temperate — Harsh',gravity:'Standard',
+       faction:'New Oshana Settler Council',population:'~150,000',
+       demographics:'Mixed — original diverse colonial population and descendants',
+       government:'Settler Council (direct democracy with significant community cultural enforcement)',tech_level:'Basic to Standard',
+       economy:'Agriculture, small-scale mining, frontier services, trade with passing vessels',
+       access:'Open (warily)',access_note:'Open entry — the community is cautious about outsiders based on hard historical experience but maintains trade relationships.',
+       hazards:['Dark Space proximity — the Black Angel\'s influence via the Nerulian Emperor\'s control extends to attitude about independent systems nearby','Periodic raiding from Dark Space frontier pirates','Resource limitations — the colony has never had enough of everything','Distance from any organised support'],
+       notable_locations:[{name:'Founder\'s Settlement',desc:'The original landing site of the colonial mission — maintained as a historical marker and administrative centre. The records here document two generations of survival that most academics consider extraordinary given the circumstances.'}],
+       hooks:['The Nerulian Emperor has made a formal claim on New Oshana — not military action, but a declaration that the system is within Nerulian historical territory. The Alliance has not responded. The Settler Council is trying to understand whether this is a prelude to action.','A stranger has arrived at New Oshana with resources and an agenda. They are being hospitable and asking questions that suggest intelligence collection rather than commercial interest.'],
+       desc:'New Oshana is a colony that survived when it shouldn\'t have. The original colonists arrived under-supplied and over-optimistic. What they built over two generations is functional, self-sufficient at a basic level, and deeply aware of the fact that nobody is coming to help them. The community has a toughness that comes from that awareness — not aggressive, but entirely without illusions about what the galaxy provides.'}
+    ]
+  },
+  {
+    id:'manola',name:'Manola System',region:'Dark Space',classification:'Dark Space System — Nerulian Remnant',
+    faction:'Nerulian Diaspora (independent)',status:'active',
+    tags:['Dark Space','Nerulian','Diaspora','Remnant','Independent'],
+    desc:'Manola is one of the Dark Space systems settled by Nerulian survivors after the Kraven invasion — far enough from the Kraven border to be considered relatively safe, close enough to San Tien\'s cultural orbit to maintain Nerulian identity. It is a quieter system than San Tien, with a smaller population and a stronger desire to simply be left alone to rebuild.',
+    planets:[
+      {id:'manola_prime',name:'Manola',type:'Terrestrial — Nerulian Diaspora World',status:'active',statusLabel:'Active — Nerulian Independent',
+       atmosphere:'Breathable',atm_note:'Standard breathable',
+       climate:'Temperate to Cool',gravity:'Standard',
+       faction:'Manola Nerulian Council',population:'~400,000',
+       demographics:'~90% Nerulian, small mixed remainder',
+       government:'Nerulian Council (survivor community governance structure)',tech_level:'Standard (Nerulian base)',
+       economy:'Agriculture, manufacturing, Nerulian technology maintenance, limited external trade',
+       access:'Open (guardedly)',access_note:'Visitors accepted but monitored carefully. Nerulian cultural norms apply — ignorance of them is not an excuse.',
+       hazards:['Cultural sensitivity — Nerulian survivor communities have reasons for their wariness','Dark Space proximity — general frontier risks apply','Nerulian technology is old and different in ways that create unexpected interaction with modern systems'],
+       notable_locations:[{name:'The Rebuild Quarter',desc:'The section of Manola\'s primary settlement dedicated to cultural reconstruction — art, language preservation, craft traditions that were nearly lost in the invasion. The people working here are doing something that they consider important enough to have dedicated their lives to it.'}],
+       hooks:['A Nerulian survivor community on Manola has received a message from deep in Kraven Space. It uses old Nerulian communication protocols. The Council is trying to determine if it is genuine before responding or reporting it.'],
+       desc:'Manola exists in the quiet space between survival and rebuilding. The Nerulian community here is past the immediate crisis of the diaspora and working on the longer project of being a culture rather than just survivors. It is slow work, valued work, and work that outside interference tends to complicate. Players who come here with urgency will find that Manola moves at its own pace and for its own reasons.'}
+    ]
+  },
+  {
+    id:'cish',name:'Cish System',region:'Dark Space',classification:'Dark Space System — Independent Contested',
+    faction:'Contested — Multiple Dark Space Factions',status:'warzone',
+    tags:['Dark Space','Contested','Warzone','Dark Space Politics','Strategic Position'],
+    desc:'Cish sits at a strategic junction in Dark Space navigation — the system\'s position makes it relevant to anyone trying to move through the region efficiently. This has made it a target for every faction with an interest in controlling Dark Space movement. The resulting conflict has been ongoing for years with no clear resolution.',
+    planets:[
+      {id:'cish_prime',name:'Cish',type:'Terrestrial — Contested Dark Space Junction',status:'warzone',statusLabel:'Contested — Low-Intensity War',
+       atmosphere:'Breathable',atm_note:'Breathable — combat operations have created localised atmospheric contamination in contested zones',
+       climate:'Temperate (Degraded)',gravity:'Standard',
+       faction:'Contested — multiple Dark Space factions',population:'~200,000 — civilian population and military forces',
+       demographics:'Mixed — original civilian population caught between competing military presences',
+       government:'Contested — different factions claim authority over different zones',tech_level:'Mixed (Military)',
+       economy:'Strategic goods movement, military logistics, what civilian commerce survives between the fronts',
+       access:'Dangerous',access_note:'No safe entry without faction identification. Unidentified vessels from any approach vector are treated as hostile by at least one party.',
+       hazards:['Active multi-faction conflict throughout','Civilian population caught between competing forces — collateral damage is ongoing','No consistent rule of law — depends entirely on which faction controls a given area','Strategic value means this conflict has outside interest funding both sides'],
+       notable_locations:[{name:'The Junction Point',desc:'The navigational feature that makes Cish strategically valuable — a transit corridor used by Dark Space traffic. Currently effectively closed due to the conflict. Whoever controls the Junction Point controls the most important navigational feature in this part of Dark Space.'}],
+       hooks:['A faction controlling the Junction Point is willing to grant passage in exchange for a service. The service is something the other factions would consider an act of war against them.','A civilian community on Cish needs evacuation. Getting them out requires navigating three active fronts with opposing factions that are all nominally in contact with outside parties.'],
+       desc:'Cish is what happens when a geographic feature is worth more than the cost of conflict. The Junction Point\'s navigational value has sustained a multi-faction war for years because no party is willing to let another control it and none is capable of holding it decisively. The civilian population continues to live in the gaps between fronts. Dark Space players will find Cish a place where everything is negotiable and nothing is safe.'}
+    ]
+  },
+  {
+    id:'haran',name:'Haran System',region:'Dark Space',classification:'Dark Space System — Abandoned Corporate',
+    faction:'None (Post-Corporate)',status:'abandoned',
+    tags:['Dark Space','Abandoned','Corporate Ruins','Salvage','Post-Corporate'],
+    desc:'Haran was a corporate extraction operation that was abandoned when the economics deteriorated and the Dark Space security situation became too costly to maintain. The corporate withdrawal was rapid and incomplete — infrastructure was left in place, some equipment is still running, and the small resident workforce that was not evacuated in time has been managing on its own for years.',
+    planets:[
+      {id:'haran_prime',name:'Haran',type:'Terrestrial — Abandoned Corporate World',status:'abandoned',statusLabel:'Abandoned — Survivor Community',
+       atmosphere:'Breathable',atm_note:'Standard breathable — maintained without corporate oversight by remaining population',
+       climate:'Cold Temperate',gravity:'Standard',
+       faction:'Haran Survivor Community',population:'~8,000 — people who didn\'t make it out',
+       demographics:'Mixed — the accident of who was in the evacuation zone and who wasn\'t',
+       government:'Survivor Committee (ad hoc, functional)',tech_level:'Standard (maintained)',
+       economy:'Subsistence — maintaining what the corporation left running, limited salvage for trade',
+       access:'Open',access_note:'Open — the survivor community welcomes contact from outside. They need resupply and have things to trade.',
+       hazards:['Corporate infrastructure not maintained to specification — failure risk is ongoing and unpredictable','Dark Space frontier risks apply fully — no corporate security presence','Resource depletion — the survivors have been living on finite supplies for years','Corporate legal status uncertain — who owns what is still technically contested'],
+       notable_locations:[{name:'The Left-Behind Quarter',desc:'Where the survivors have made their community — in the housing and facilities the corporation built for workers, maintained by the workers after the corporation left. The ingenuity of the maintenance is remarkable and occasionally alarming.'}],
+       hooks:['Corporate representatives have arrived at Haran to assess the assets the company left behind. The survivor community has been living in those assets for three years and has views about who owns what.','The equipment still running on Haran has been producing something other than what it was designed for — a byproduct of the autonomous operation. The survivors aren\'t sure what it is. It might be valuable. It might be a problem.'],
+       desc:'Haran is what the frontier looks like when the corporate model fails completely. The survivors who were left behind did not have a plan for the scenario — they had to make one. Three years in, the plan is working at a basic level. What they need is resupply, outside contact, and either a legal resolution of the ownership question or someone powerful enough to make the corporate claim go away. What they do not need is another party arriving with their own agenda for what Haran\'s infrastructure should be used for.'}
+    ]
+  },
+  {
+    id:'cassidir',name:'Cassidir System',region:'Dark Space',classification:'Dark Space System — Black Angel Proximity',
+    faction:'Nerulian Empire (indirect influence)',status:'active',
+    tags:['Dark Space','Nerulian Empire','Black Angel','Dangerous','Imperial Influence','Dark'],
+    desc:'Cassidir sits in the shadow of the Nerulian Emperor\'s reach — close enough to the Dark Space region under his influence that the Black Angel\'s presence is felt here, not directly but as an absence of the opposition that would otherwise organise against him. The systems near Cassidir have learned not to challenge the Emperor\'s interests. The systems that forgot this lesson are not discussed in polite company.',
+    planets:[
+      {id:'cassidir_prime',name:'Cassidir',type:'Terrestrial — Imperial Periphery',status:'active',statusLabel:'Active — Imperial Periphery',
+       atmosphere:'Breathable',atm_note:'Standard breathable — permanently overcast from dust storms',
+       climate:'Arid, Dust Storm Prone',gravity:'Standard',
+       faction:'Nominally Independent (Imperial periphery)',population:'~500,000',
+       demographics:'Mixed with significant Nerulian-heritage population',
+       government:'Local Council (operating under implicit Imperial permission)',tech_level:'Standard',
+       economy:'Trade, agriculture in protected lowlands, services for traffic moving through the region',
+       access:'Open',access_note:'Nominally open — the implicit requirement is not attracting the Emperor\'s attention by doing anything he would object to.',
+       hazards:['Imperial interest — being noticed by the Nerulian Emperor\'s intelligence apparatus is dangerous','The Black Angel\'s influence: anything that challenges Imperial interests in this region tends to encounter problems that are difficult to attribute to any specific cause','Local governance operates under constraints that are not written anywhere but are understood by everyone','Alliance law has limited practical force here — enforcement would require the Alliance to confront Imperial interests, which it has declined to do'],
+       notable_locations:[
+         {name:'The Trading Quarter',desc:'The economic heart of Cassidir — where goods moving through the Imperial periphery change hands. Some of those goods are things that would not change hands in Alliance Space. Nobody asks.'},
+         {name:'The Quiet District',desc:'Where the population that remembers the last time someone in Cassidir challenged Imperial interests lives. The community here is extremely careful about what it says and who it says it to.'}
+       ],
+       hooks:['Alliance intelligence is looking for an asset in Cassidir who has been operating against Imperial interests. The asset needs extraction before Imperial intelligence identifies them.','A merchant on Cassidir has something the Nerulian Emperor wants returned. They do not know this yet. Players who learn about this before the merchant does have a decision to make about how to use the information.','The Black Angel has been observed — not directly, but through its effects — acting in Cassidir in a way that does not match its previous operational pattern. Imperial intelligence is confused. The confusion is visible if you know what to look for.'],
+       desc:'Cassidir exists in the Emperor\'s penumbra. It is not under direct Imperial control — it has its own government and its own nominal independence. But the Black Angel\'s presence in the wider region has produced a consistent behavioural pattern in systems like Cassidir: accommodation of Imperial interests, avoidance of anything that might attract Imperial attention, and a collective understanding that certain topics are not discussed. It is a functional system operating under constraints that are never stated and always present.'}
+    ]
+  },
+  // ─── NUZONIA'S DREAM ─────────────────────────────────────────────────
+  {
+    id:'puthea',name:'Puthea System',region:"Nuzonia's Dream",classification:'Unexplored — Nuzonia Expedition Record',
+    faction:'Unknown',status:'unknown',
+    tags:["Nuzonia's Dream",'Unexplored','Nuzonia Expedition','Unknown','Remote'],
+    desc:'Puthea was documented by the Nuzonia expedition — the only credible account of the deep Dream region. Expedition records describe a system of unusual orbital geometry and multiple habitable bodies in apparent long-term ecological stasis. Whether the stasis is natural or intervention-maintained is one of many questions the expedition\'s brief visit could not resolve.',
+    planets:[
+      {id:'puthea_survey',name:'Puthea Survey Data',type:'Unknown — Expedition Record Only',status:'unknown',statusLabel:'Documented — Unverified',
+       atmosphere:'Believed Breathable',atm_note:'Expedition records indicate breathable conditions — stasis-maintained ecosystems suggest atmospheric stability',
+       climate:'Variable — Ecological Stasis',gravity:'Below Standard',grav_note:'Expedition records note consistent below-standard gravity across all surveyed bodies',
+       faction:'Unknown',population:'Unknown — expedition found no evidence of current habitation but found evidence of previous habitation',demographics:'Unknown',
+       government:'Unknown',tech_level:'Unknown',economy:'Unknown',
+       access:'Effectively inaccessible — Dream region navigation',access_note:'No reliable route — only the Nuzonia expedition has navigated this region. Expedition charts are incomplete.',
+       hazards:['Navigation — the Dream region is not reliably chartable with current technology','Unknown conditions — expedition records are the only data source and were collected under time pressure','The evidence of previous habitation raises unanswered questions about what happened to that population'],
+       notable_locations:[{name:'The Still Worlds',desc:'What the expedition called the multiple habitable bodies of Puthea — worlds with active ecosystems that appear to have been in the same state for an indeterminate time. Flora, fauna, no apparent succession process. Ecologists who reviewed the expedition data described it as one of the most puzzling natural observations they had encountered.'}],
+       hooks:['The Nuzonia expedition\'s full data set on Puthea has not been published — only summaries. A researcher who has read the complete internal records is not discussing certain sections of them.'],
+       desc:'Puthea is what the Nuzonia expedition found when it went somewhere no one else had gone. The ecological stasis — if that is what it is — has no known analogue anywhere in catalogued space. The previous habitation evidence has no identified population. The expedition was there for days. What they did not understand could fill a library, and might be worth filling one about.'}
+    ]
+  },
+  {
+    id:'betravir',name:'Betravir System',region:"Nuzonia's Dream",classification:'Unexplored — Nuzonia Expedition Record',
+    faction:'Unknown',status:'unknown',
+    tags:["Nuzonia's Dream",'Unexplored','Nuzonia Expedition','Unknown','Anomalous'],
+    desc:'Betravir was the most anomalous system the Nuzonia expedition encountered — a system where physical laws appeared to operate normally on large scales but produced consistent small-scale deviations that the expedition\'s instruments recorded but could not explain. The expedition spent longer here than planned because the anomalies kept producing new data that the team felt they needed to document.',
+    planets:[
+      {id:'betravir_survey',name:'Betravir Survey Data',type:'Unknown — Anomalous System',status:'unknown',statusLabel:'Documented — Anomalous',
+       atmosphere:'Believed Breathable',atm_note:'Expedition records indicate breathable atmosphere — particulate effects from anomalous physics produced visible light diffraction',
+       climate:'Temperate — Visually Anomalous',gravity:'Standard at scale — locally variable',grav_note:'Gravitational anomalies at small scale — the expedition described it as "physics thinking about it differently in here"',
+       faction:'Unknown',population:'Unknown',demographics:'Unknown',
+       government:'Unknown',tech_level:'Unknown',economy:'Unknown',
+       access:'Effectively inaccessible',access_note:'Dream region navigation required.',
+       hazards:['Physics anomalies — effects on biological systems over extended exposure unknown','Navigation anomalies in the system complicate transit and departure','The specific effect that delayed the expedition suggests the anomalies may interact with decision-making in some way'],
+       notable_locations:[{name:'The Anomaly Field',desc:'The region of the system where the expedition\'s instruments produced the most consistent anomalous readings. The team lead\'s personal log describes three attempts to leave the system, each of which produced a reason to stay and investigate more. Whether that reflects the anomalies\' properties or human scientific curiosity is recorded as an open question.'}],
+       hooks:['A physicist who reviewed the Betravir anomaly data has published a speculative paper suggesting the anomalies indicate something artificial producing the effect. The paper has attracted both significant academic interest and a legal challenge from the institution that funded the Nuzonia expedition.'],
+       desc:'Betravir is the part of the Nuzonia expedition that its scientists found hardest to leave and hardest to explain. The anomalies they documented do not fit any current theoretical framework for naturally occurring physics. Whether that means the current frameworks are incomplete or that the anomalies have a non-natural origin is the question that has been generating academic debate ever since the expedition returned.'}
+    ]
+  },
+  {
+    id:'lumia',name:'Lumia System',region:"Nuzonia's Dream",classification:'Unexplored — Nuzonia Expedition Record',
+    faction:'Unknown — Evidence of Intelligence',status:'unknown',
+    tags:["Nuzonia's Dream",'Unexplored','Nuzonia Expedition','Intelligent Life','First Contact Possibility'],
+    desc:'Lumia was where the Nuzonia expedition found the clearest evidence that the Dream region has or had intelligent inhabitants — structures of clearly non-natural origin, distributed across the system in a pattern that suggested intentional placement. The expedition did not encounter anyone. The structures were empty. Whether they are abandoned or simply unoccupied is one of the galaxy\'s significant open questions.',
+    planets:[
+      {id:'lumia_survey',name:'Lumia Survey Data',type:'Unknown — Evidence of Intelligent Habitation',status:'unknown',statusLabel:'Documented — Non-Natural Structures',
+       atmosphere:'Breathable',atm_note:'Breathable — the expedition spent surface time here without environmental hazard',
+       climate:'Cool, Rocky',gravity:'Standard',
+       faction:'Unknown',population:'Unknown — structures found, no current inhabitants encountered',demographics:'Unknown',
+       government:'Unknown',tech_level:'Unknown — structures are of unknown technological basis',economy:'Unknown',
+       access:'Effectively inaccessible',access_note:'Dream region navigation required.',
+       hazards:['Unknown purpose of the structures — no assessment of whether they are passive or active','First contact protocols apply if inhabitants are present — mishandling could have consequences','The structures\' material properties are unknown — what they are made of was not determined during the brief expedition visit'],
+       notable_locations:[{name:'The Formation Array',desc:'The largest grouping of structures found by the expedition — fourteen structures arranged in a geometric pattern across a mountain plateau. The expedition photographed them extensively. What they are for is not known. They did not respond to any contact attempt the expedition tried.'}],
+       hooks:['The Nuzonia expedition\'s contact attempts at Lumia were the classified portion of the mission report. What was tried, what happened, and why it was classified has never been disclosed.','A Dream region map from a source other than Nuzonia\'s expedition has appeared on the market. It includes Lumia and additional detail that could not have come from the expedition\'s published records.'],
+       desc:'Lumia is the piece of the Nuzonia expedition\'s findings that has generated the most speculation and the least public information. Structures of non-natural origin, clearly intentionally placed, empty on arrival. The expedition\'s official position is that the structures are most likely ancient and their builders long gone. The classified sections of the expedition report, whose existence has been confirmed but whose contents remain restricted, are widely believed to tell a different story.'}
+    ]
+  },
+  {
+    id:'nypsos_f47',name:'Nypsos F47 System',region:"Nuzonia's Dream",classification:'Dream Region — Dark Space Adjacent',
+    faction:'Unknown',status:'unknown',
+    tags:["Nuzonia's Dream",'Dark Space Adjacent','Frontier','Unknown','Border Region'],
+    desc:'Nypsos F47 is positioned at the edge of the Dream region closest to Dark Space — a location that places it in the overlap between two poorly understood regions of space. The designation reflects its survey status: F for frontier, 47 for position in the grid of the survey that briefly catalogued this sector. Almost nothing is known about it.',
+    planets:[
+      {id:'nypsos_prime',name:'Nypsos F47',type:'Unknown — Border Region',status:'unknown',statusLabel:'Catalogued — Unvisited',
+       atmosphere:'Unknown',atm_note:'No survey data',
+       climate:'Unknown',gravity:'Unknown',
+       faction:'Unknown',population:'Unknown',demographics:'Unknown',
+       government:'Unknown',tech_level:'Unknown',economy:'Unknown',
+       access:'Remote and uncatalogued',access_note:'No known route — the border position between Dream region and Dark Space makes approach from either direction difficult.',
+       hazards:['Total intelligence blackout — no data','Dark Space proximity brings unknown risks associated with that region','Dream region navigation hazards apply from one direction','Potentially subject to Imperial periphery dynamics from Dark Space side'],
+       notable_locations:[{name:'Survey Grid Reference F47',desc:'A navigational coordinate in a distant survey grid. That is the entirety of what exists in the official record for Nypsos F47.'}],
+       hooks:['A ship claiming to have come from the direction of Nypsos F47 has arrived somewhere navigable. The crew\'s account of where they came from is inconsistent in ways that suggest they are either confused or deliberately vague.'],
+       desc:'Nypsos F47 is close to nothing and not close to anything known to be good. Its position between Dream region uncertainty and Dark Space danger makes it theoretically accessible from both directions and reliably reached from neither. It is the kind of system that appears in navigation databases as a coordinate and a question mark.'}
+    ]
+  },
+  {
+    id:'zelmolla',name:'Zelmolla System',region:"Nuzonia's Dream",classification:'Dream Region — Dark Space Adjacent',
+    faction:'Unknown',status:'unknown',
+    tags:["Nuzonia's Dream",'Dark Space Adjacent','Unknown','Border Region','Deep Frontier'],
+    desc:'Zelmolla shares Nypsos F47\'s border position between the Dream region and Dark Space, but has one additional piece of documentation: a brief long-range scan from a Dark Space survey vessel that recorded what appears to be electromagnetic activity inconsistent with a dead system. The scan was not followed up. Whether the activity represents technology, unusual natural phenomena, or something else was not determined.',
+    planets:[
+      {id:'zelmolla_prime',name:'Zelmolla',type:'Unknown — Possible Activity Detected',status:'unknown',statusLabel:'Catalogued — Activity Detected',
+       atmosphere:'Unknown',atm_note:'No direct survey data',
+       climate:'Unknown',gravity:'Unknown',
+       faction:'Unknown',population:'Unknown — electromagnetic activity detected',demographics:'Unknown',
+       government:'Unknown',tech_level:'Unknown — electromagnetic pattern suggests possible technological activity',economy:'Unknown',
+       access:'Remote — border region',access_note:'No established route from either Dream region or Dark Space.',
+       hazards:['Unknown — electromagnetic activity of unknown origin','Dark Space proximity with all associated risks','Dream region navigation challenges','If the electromagnetic activity is technological in origin, unknown party of unknown capability and disposition'],
+       notable_locations:[{name:'Signal Source (Estimated Position)',desc:'The estimated origin point of the electromagnetic activity detected in the Dark Space survey scan. The confidence interval on the position is significant — the survey was at long range.'}],
+       hooks:['The electromagnetic activity from Zelmolla has been detected again — this time from two independent sources at different positions, allowing triangulation. The signal is consistent with what was detected before. Someone is in that system or was there recently.'],
+       desc:'Zelmolla is the Dream region system with the one additional datum: something appears to be happening there. What that something is — natural, artificial, inhabited, automated — is not known. The one piece of evidence that distinguishes it from Nypsos F47 is either significant or a navigational anomaly. Resolving that question requires going there, which the border position makes difficult and the unknown nature of the signal makes risky. Both of those things also describe it as exactly the kind of place that certain parties find compelling.'}
+    ]
+  },
+  // ─── TRONIK NETWORK ──────────────────────────────────────────────────
+  {
+    id:'dr345_0',name:'DR345-0 System',region:'Tronik Network',classification:'Tronik Network — Designation System',
+    faction:'Alliance (historical claim, nominal)',status:'active',
+    tags:['Tronik Network','Designation System','Post-War','Historical','Alliance Border'],
+    desc:'DR345-0 is named with the designation system used for Tronik Network systems — the alphanumeric codes assigned during the post-Tronik War survey that catalogued the systems between Freeland and System 5. The Tronik Network was the site of the war\'s most intense fighting and these systems bear the evidence of it. DR345-0 is on the Freeland border and has developed the most normal community of any Network system.',
+    planets:[
+      {id:'dr345_prime',name:'DR345-0',type:'Terrestrial — Post-War Recovery World',status:'active',statusLabel:'Active — Post-War Recovery',
+       atmosphere:'Breathable',atm_note:'Breathable but with trace contamination from the war period — acceptable and declining year on year',
+       climate:'Temperate (Recovering)',gravity:'Standard',
+       faction:'DR345-0 Community Council (Alliance-affiliated)',population:'~500,000',
+       demographics:'Mixed — settlement drawn from both Freeland and Alliance populations',
+       government:'Community Council',tech_level:'Standard',
+       economy:'Post-war reconstruction, agriculture, frontier trade, historical site management',
+       access:'Open',access_note:'Open under nominal Alliance affiliation.',
+       hazards:['Unexploded Tronik War ordnance — still being cleared from rural areas','Post-war trauma in the older population has produced cultural patterns that visitors should understand before engaging','Some areas remain physically unsafe from war damage that hasn\'t been cleared'],
+       notable_locations:[
+         {name:'The Clearing Ground',desc:'The ongoing ordnance clearance operation — a permanent team working through the rural zones. The war produced an extraordinary volume of unexploded material. The team is professionally matter-of-fact about their work.'},
+         {name:'The War Memorial Network',desc:'DR345-0 has more Tronik War memorials per square kilometre than any other system. The community has processed the war through memorial practice rather than forgetting.'}
+       ],
+       hooks:['An ordnance clearance team has found something in a rural area that is not Tronik War ordnance — it predates the war by centuries. The historical significance and the danger are both significant.'],
+       desc:'DR345-0 is the Tronik Network system that has made the most progress toward normalcy. The war ended here a long time ago and the community has had generations to build something from the aftermath. The memorials are thick on the ground because the fighting was thick on the ground. But the community is not defined by what happened — it has used what happened to build a culture of remembrance that coexists with active life. It is the best case scenario for a Tronik Network system.'}
+    ]
+  },
+  {
+    id:'lift_n',name:'L.I.F.T.N System',region:'Tronik Network',classification:'Tronik Network — Industrial Remnant',
+    faction:'Corporate (Post-Tronik)',status:'active',
+    tags:['Tronik Network','Industrial','Corporate Remnant','Post-War','Unusual Name'],
+    desc:'L.I.F.T.N. — the name is an acronym from the industrial consortium that operated the system before the Tronik War, now defunct — is the most industrially developed Tronik Network system. The war damaged the infrastructure but did not destroy it, and successive corporate interests have operated here continuously since, attracted by the existing investment and the system\'s position as the Network\'s manufacturing centre.',
+    planets:[
+      {id:'liftn_prime',name:'L.I.F.T.N.',type:'Terrestrial — Industrial Centre',status:'active',statusLabel:'Active — Industrial Corporate',
+       atmosphere:'Breathable',atm_note:'Heavy industrial atmosphere — visible air quality issues in manufacturing districts, managed in residential zones',
+       climate:'Industrial (Temperate base with significant thermal output)',gravity:'Standard',
+       faction:'L.I.F.T.N. Industrial Consortium',population:'~3 million',
+       demographics:'Mixed — heavy industrial workforce composition',
+       government:'Industrial Consortium (corporate governance)',tech_level:'Advanced (Industrial)',
+       economy:'Heavy manufacturing, industrial processing, Tronik Network logistics, component production',
+       access:'Restricted',access_note:'Consortium industrial zone — worker or contractor credentials required.',
+       hazards:['Industrial environment — standard hazards at scale','Corporate governance with limited external accountability','War-era infrastructure — some of the original installations are centuries old and the maintenance history is complicated','Labour conditions that are legally acceptable and practically difficult'],
+       notable_locations:[{name:'The Original Installation',desc:'The pre-Tronik War industrial complex — repaired, expanded, and continuously operated since the war ended. Parts of it date to the industrial consortium that gave the system its name. The engineering here is genuinely impressive in a purely utilitarian way.'}],
+       hooks:['The Industrial Consortium has acquired rights to a section of the system that was previously designated as a Tronik War heritage site. The acquisition appears legally clean. The previous designation was revoked with suspicious speed.'],
+       desc:'L.I.F.T.N. works in the uncomplicated way that industrial centres work — it produces things, the things are sold, the profit funds continued production. The Tronik War is part of the system\'s history in the specific sense that the industrial infrastructure survived it and someone kept the furnaces running. The consortium that runs it now is the fourth to hold it. The furnaces are the continuity.'}
+    ]
+  },
+  {
+    id:'niezh',name:'Niezh System',region:'Tronik Network',classification:'Tronik Network — Contested Heritage',
+    faction:'Disputed — Tronik War Claim',status:'active',
+    tags:['Tronik Network','Tronik War','Heritage Dispute','Contested','Post-War Politics'],
+    desc:'Niezh is the Tronik Network system with the most active post-war political dispute — multiple parties claim the system based on pre-war ownership, wartime alliance, and post-war settlement rights. The legal status has been contested for decades and has produced a community that lives under permanently ambiguous governance while various parties argue about who is in charge.',
+    planets:[
+      {id:'niezh_prime',name:'Niezh',type:'Terrestrial — Disputed Jurisdiction',status:'active',statusLabel:'Active — Disputed Jurisdiction',
+       atmosphere:'Breathable',atm_note:'Standard breathable',
+       climate:'Temperate',gravity:'Standard',
+       faction:'Disputed — Three Claimant Parties',population:'~700,000',
+       demographics:'Mixed — the population reflects the overlapping claims, with communities identifying with different claimant factions',
+       government:'Provisional Administration Council (compromise body, contested legitimacy)',tech_level:'Standard',
+       economy:'Agriculture, services, moderate industry — all operations conducted under uncertain legal framework',
+       access:'Open (with complications)',access_note:'Open entry — but all operations in the system require navigating the competing legal frameworks, each of which has different implications for contracts, ownership, and liability.',
+       hazards:['Three overlapping legal systems — what is legal under one may be illegal under another','Community tensions between populations identifying with different claimants','All economic activity operates under the risk that the jurisdiction question resolves against the party you dealt with','Outside parties who get involved in the dispute tend to find it more complicated than initially presented'],
+       notable_locations:[{name:'The Provisional Hall',desc:'The Provisional Administration Council\'s seat — a compromise building on neutral ground that neither of the major claimant factions will admit to accepting. The administration it houses functions, somewhat. The question of what authority it rests on remains unanswered.'}],
+       hooks:['The jurisdiction dispute is close to a resolution — one of the claimants has made a move that appears legally decisive. The other two claimants are each independently looking for outside help to contest it.','A property dispute on Niezh has produced a situation where the same physical asset is legally owned by two different parties under two different claim frameworks. Both owners want the asset. The asset is currently in a third party\'s possession.'],
+       desc:'Niezh is governed by whoever is winning the current legal argument, which changes. The population has adapted to this by developing an exceptional facility for operating under ambiguous authority — Niezh\'s citizens are among the most legally sophisticated in the Network because they have had to be. The dispute will resolve eventually. Whether the resolution will be based on law, political force, or simple exhaustion is not clear.'}
+    ]
+  },
+  {
+    id:'monda',name:'Monda System',region:'Tronik Network',classification:'Tronik Network — Quiet Zone',
+    faction:'Independent',status:'active',
+    tags:['Tronik Network','Quiet','Independent','Post-War Recovery','Stable'],
+    desc:'Monda is the Tronik Network system that avoided the worst of the war by virtue of not being strategically significant. The fighting largely passed it by. What it has instead of war history is a long quiet — generations of ordinary life conducted in a region defined by extraordinary events that did not quite reach it. This has produced a community that is notably stable compared to its neighbours.',
+    planets:[
+      {id:'monda_prime',name:'Monda',type:'Terrestrial — Stable Independent World',status:'active',statusLabel:'Active — Independent Stable',
+       atmosphere:'Breathable',atm_note:'Clean — the lack of war damage and industrial development has left Monda\'s atmosphere in good condition',
+       climate:'Temperate, Seasonal',gravity:'Standard',
+       faction:'Monda Independent Council',population:'~1 million',
+       demographics:'Mixed — stable community with low transient population relative to Network neighbours',
+       government:'Independent Council',tech_level:'Standard',
+       economy:'Agriculture, small-scale manufacturing, services, trade with Network neighbours',
+       access:'Open',access_note:'Open entry — Monda has no particular reason to restrict visitors and moderate commercial reasons to welcome them.',
+       hazards:['The quiet here attracts parties who want to conduct operations away from scrutiny','Stability is relative — the Network\'s instability is not far away','Resource limitations compared to systems with more industrial development'],
+       notable_locations:[{name:'The Market Town',desc:'Monda\'s primary commercial centre — the agricultural and trade hub of a system that built its economy on what grows in good soil. Nothing remarkable here by galactic standards. Entirely pleasant by local ones.'}],
+       hooks:['Something from outside has decided to use Monda\'s relative quiet as a base of operations. The Council is aware something is happening but not what. The community\'s stability is the thing being exploited.','A Network-wide agreement on something political is being proposed and Monda\'s vote is the swing. Multiple parties have arrived to make their case. The Council is taking its time.'],
+       desc:'Monda\'s stability in the Tronik Network is both its defining characteristic and its most valuable asset. A system that had the fortune not to be significant during the war and the subsequent good sense to stay uncontested is rare in this part of space. The community is aware of how unusual their situation is and is careful about it without being paranoid. It is, by the standards available in the Tronik Network, a good place to live.'}
+    ]
+  },
+  {
+    id:'conso',name:'Conso System',region:'Tronik Network',classification:'Tronik Network — Strategic Junction',
+    faction:'Alliance (maintained garrison)',status:'active',
+    tags:['Tronik Network','Alliance Military','Strategic','Post-War','Junction Point'],
+    desc:'Conso sits at the junction between the Tronik Network and System 5 — the most strategically significant position in the Network and the reason the Alliance maintains a permanent garrison here. The Tronik War ended in part because of what happened at Conso, and the Alliance has never stopped treating its control of this system as non-negotiable.',
+    planets:[
+      {id:'conso_prime',name:'Conso',type:'Terrestrial — Alliance Garrison World',status:'active',statusLabel:'Active — Alliance Military Garrison',
+       atmosphere:'Breathable',atm_note:'Standard — maintained to military specification in garrison zones',
+       climate:'Temperate',gravity:'Standard',
+       faction:'Alliance Military Command / Civilian Administration',population:'~800,000 — mixed military and civilian',
+       demographics:'Mixed — significant military population, civilian community supporting military presence',
+       government:'Joint Military-Civilian Administration (military authority primary)',tech_level:'Military Advanced',
+       economy:'Military operations, strategic logistics, civilian support services, trade goods movement through the junction',
+       access:'Open (under military observation)',access_note:'Civilian entry open with Alliance ID. Military zones restricted. All arrivals logged and assessed — the junction position means intelligence interest is high.',
+       hazards:['Alliance military presence is significant and permanently alert — mistakes are handled quickly','Intelligence operations from multiple parties active in the system due to strategic position','History of the war site produces periodic destabilisation events — veterans, revisionist groups, investigators','The junction position means what happens on Conso affects everything on both sides of it'],
+       notable_locations:[
+         {name:'Garrison Command',desc:'The Alliance military headquarters for Tronik Network operations. Maintains permanent readiness posture. The strategic lessons of the Tronik War are institutionally embedded here.'},
+         {name:'The Junction Memorial',desc:'The memorial to the Tronik War action at Conso — the engagement that effectively ended the war. Both sides have memorials. They are positioned at opposite ends of the city. Both are maintained carefully.'}
+       ],
+       hooks:['A Tronik War veteran has arrived at Conso with information they say proves that the official account of the battle here is wrong in a specific and significant way. They want the Alliance military to listen. The Alliance military does not want to listen.','The junction point is being used for something that the official transit logs do not account for. The discrepancy is small but consistent. Alliance intelligence is investigating internally. Someone has noticed them investigating.'],
+       desc:'Conso is where the Tronik War ended and where the Alliance decided it would not start again. The garrison here is not symbolic — it is substantial, well-equipped, and maintains the readiness posture of a command that takes its strategic position seriously. Civilian life coexists with the military presence in the practical way that it does in systems where the military has been there for generations and the economy has built around it. The junction between the Network and System 5 has been Alliance-controlled since the war ended. The Alliance has shown no indication it intends to change this.'}
+    ]
   }
 
 // Load any saved catalogue edits from localStorage
