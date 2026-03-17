@@ -288,15 +288,15 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 .gc-faction-bar::-webkit-scrollbar{height:3px;}.gc-faction-bar::-webkit-scrollbar-thumb{background:#3a3a3c;border-radius:3px;}
 .gc-faction-pill{flex-shrink:0;padding:5px 12px;border-radius:5px;font-family:'IBM Plex Mono',monospace;font-size:11px;cursor:pointer;border:1px solid;transition:all .12s;background:transparent;letter-spacing:.2px;}
 .gc-faction-pill:hover{filter:brightness(1.35);}
-.gc-system-card{border:1px solid var(--border);border-radius:8px;margin-bottom:8px;overflow:hidden;background:var(--bg2);}
+.gc-system-card{border:1px solid var(--border);border-radius:8px;margin-bottom:10px;overflow:hidden;background:var(--bg2);}
 .gc-system-card.open{border-color:var(--border2);}
-.gc-system-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;cursor:pointer;gap:10px;transition:background .12s;}
-.gc-system-header:hover{background:rgba(255,255,255,.025);}
+.gc-system-header{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;cursor:pointer;gap:10px;transition:background .12s;}
+.gc-system-header:hover{background:rgba(255,255,255,.03);}
 .gc-system-info{flex:1;min-width:0;}
-.gc-system-name{font-family:'IBM Plex Sans',sans-serif;font-size:15px;font-weight:600;color:var(--tx);letter-spacing:-.2px;}
+.gc-system-name{font-family:'IBM Plex Sans',sans-serif;font-size:16px;font-weight:700;color:var(--tx);letter-spacing:-.2px;}
 .gc-system-meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--mu2);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .gc-system-right{display:flex;align-items:center;gap:7px;flex-shrink:0;}
-.gc-system-count{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--mu3);background:#242426;border:1px solid #3a3a3c;border-radius:4px;padding:2px 7px;}
+.gc-system-count{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--a);background:rgba(0,200,255,.08);border:1px solid rgba(0,200,255,.25);border-radius:4px;padding:2px 8px;}
 .gc-edit-btn{padding:3px 8px;background:none;border:1px solid var(--border);border-radius:4px;color:var(--mu2);font-size:12px;cursor:pointer;transition:all .12s;font-family:'IBM Plex Mono',monospace;line-height:1.3;}
 .gc-edit-btn:hover{color:var(--tx2);border-color:var(--mu);background:rgba(255,255,255,.05);}
 .gc-arr{font-size:10px;color:var(--mu3);transition:transform .2s;margin-left:2px;}
@@ -313,10 +313,15 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 .gc-system-desc{padding:12px 16px;font-size:13px;line-height:1.7;color:var(--mu);border-bottom:1px solid var(--border);}
 .gc-planets-head{display:grid;grid-template-columns:minmax(110px,1.4fr) 1fr auto auto;gap:8px;padding:5px 16px;border-bottom:1px solid var(--border);background:rgba(0,0,0,.15);}
 .gc-planets-head span{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--mu3);text-transform:uppercase;letter-spacing:1px;}
-.gc-planet-row{display:grid;grid-template-columns:minmax(110px,1.4fr) 1fr auto auto;gap:8px;align-items:center;padding:9px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;}
-.gc-planet-row:hover{background:rgba(255,255,255,.025);}
-.gc-planet-row.sel{background:rgba(10,132,255,.07);border-left:2px solid var(--bl);padding-left:14px;}
-.gc-planet-name{font-family:'IBM Plex Sans',sans-serif;font-size:13.5px;font-weight:600;color:var(--tx);}
+.gc-planets-hint{padding:5px 16px 7px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--mu3);border-bottom:1px solid var(--border);letter-spacing:.3px;background:rgba(0,200,255,.025);}
+.gc-planet-row{display:grid;grid-template-columns:minmax(110px,1.4fr) 1fr auto auto;gap:8px;align-items:center;padding:9px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s,border-left-color .15s;border-left:2px solid transparent;position:relative;}
+.gc-planet-row:hover{background:rgba(0,200,255,.05);border-left-color:rgba(0,200,255,.45);}
+.gc-planet-row:hover::after{content:'→ details';position:absolute;right:12px;top:50%;transform:translateY(-50%);font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--a);opacity:.65;letter-spacing:.4px;}
+.gc-planet-row.sel{background:rgba(10,132,255,.09);border-left:2px solid var(--bl);padding-left:14px;}
+.gc-planet-row.sec{padding-left:26px;}
+.gc-planet-row.sec .gc-planet-name{color:var(--mu);}
+.gc-planet-icon{font-size:13px;margin-right:6px;line-height:1;flex-shrink:0;}
+.gc-planet-name{font-family:'IBM Plex Sans',sans-serif;font-size:13.5px;font-weight:600;color:var(--tx);display:flex;align-items:center;}
 .gc-planet-type{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--mu);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .gc-planet-chips{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;}
 .gc-chip{font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;border:1px solid;white-space:nowrap;}
@@ -424,11 +429,11 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 .gc-region-kf-title{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--mu3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;}
 .gc-region-kf-list{display:flex;flex-direction:column;gap:4px;}
 .gc-region-kf-item{font-size:12.5px;color:var(--tx2);padding:5px 10px;background:#1a1a1c;border-left:2px solid var(--a);border-radius:0 4px 4px 0;line-height:1.5;}
-.gc-region-acc{margin-bottom:8px;border:1px solid var(--border);border-radius:6px;overflow:hidden;}
-.gc-region-acc-hd{padding:9px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;background:#161618;transition:background .12s;user-select:none;}
-.gc-region-acc-hd:hover{background:#1c1c1e;}
-.gc-region-acc-title{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--mu3);text-transform:uppercase;letter-spacing:1.5px;}
-.gc-region-acc-arr{font-size:10px;color:var(--mu3);transition:transform .2s;}
+.gc-region-acc{margin-bottom:8px;border:1px solid var(--border2);border-radius:6px;overflow:hidden;}
+.gc-region-acc-hd{padding:10px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;background:#1a1a1c;transition:background .12s;user-select:none;}
+.gc-region-acc-hd:hover{background:#222226;}
+.gc-region-acc-title{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:1.5px;}
+.gc-region-acc-arr{font-size:12px;color:var(--a);transition:transform .2s;opacity:.8;}
 .gc-region-acc.open .gc-region-acc-arr{transform:rotate(180deg);}
 .gc-region-acc-body{display:none;padding:12px 14px;border-top:1px solid var(--border);}
 .gc-region-acc.open .gc-region-acc-body{display:block;}
@@ -2186,20 +2191,20 @@ g.galaxy=[
   {
     entry_type:'faction',
     name:'Proxima Sector',
-    tags:['Region','Newly Mapped','Mixed Factions','High Magic','Corporate','Mercenary','Anomalous'],
+    tags:['Region','Newly Mapped','Mixed Factions','High Magic','Corporate','Mercenary','Anomalous','Human Origin'],
     rarity:'rar-rare',
     status:'Recently mapped — multiple competing factions, no unified authority',
     territory:'Outer edge of reachable space — approximately three months from Palentium at standard jump; accessible in days via the Heaven gate',
     span:'~15 systems with varying levels of inhabitation and access',
-    discovered:'Formally designated by Alliance Survey Office 5287 CE; evidence suggests multiple systems were inhabited independently for centuries prior to official discovery',
+    discovered:'Solar was known to humanity from the beginning — it is the origin system. The other systems of the Proxima Sector were formally designated by Alliance Survey Office 5287 CE, almost 800 years after the sector had been unvisited by any human. Evidence suggests multiple systems were inhabited independently for centuries prior to official Alliance discovery.',
     population_est:'Unknown across the sector; individual worlds vary enormously',
     government:'No unified authority. Individual systems govern themselves under radically different structures — from corporate-controlled to mercenary-administered to ungoverned. No Alliance jurisdiction.',
     alignment:'Mixed and variable — depends entirely on which system; some worlds are in active conflict with each other',
-    desc:"The Proxima Sector sits on the outer edge of what most galactic charts consider reachable space — roughly three months from Palentium at standard jump speed, or several days through the Heaven gate if access can be obtained. It was formally mapped only two decades ago, though evidence across multiple systems suggests independent habitation stretching back centuries. What the surveys found was unusually varied even by frontier standards: a world of extraordinary magical concentration drawing competing spiritual factions; a former luxury resort world now controlled entirely by mercenary syndicates; a world called Zoana with no record in any pre-survey database despite showing signs of long-term civilised habitation; and Solar — identified conclusively by stellar cartographers as the origin system of humanity's most ancient recorded history. The discovery of Solar has been received with deep institutional discomfort in Alliance scientific and intelligence circles.",
-    history:'The Proxima Sector was reached through a combination of increasingly capable long-range survey equipment and the Heaven gate — a stardrive transit point whose existence was not publicly acknowledged until it was used in the formal survey mission. Multiple systems in the sector show evidence of historical contact with each other despite having no recorded shared history, suggesting the sector had its own internal development cycle that proceeded independently of the main galactic community for an extended period. The Alliance has mounted three follow-up survey missions. None of the published results have addressed the Solar question or the Zoana question in any substantive way.',
-    known_for:['Solar — identified as the original home system of humanity; publicly discouraged from discussion in Alliance scientific institutions','Zoana — a habitation-positive world with no pre-survey records despite evidence of long civilised occupation','The highest measured magical concentration of any known world in the sector, attracting multiple competing spiritual and inquisitorial factions','A former resort world now administered entirely by mercenary consortiums','The Heaven gate — a transit point enabling access that makes the sector reachable in days rather than months'],
-    notable_systems:['Solar — humanity\'s ancient origin system; access quietly discouraged; the system itself is believed to be largely uninhabited but archaeologically significant','Zoana — the unrecorded world; small current population; no explanation for its absence from pre-survey records has been published','The Magical Concentration World (unnamed in public records) — site of active conflict between the Bottenbak cult and the Berilian Order\'s inquisitors','The Resort World (unnamed in public records) — formerly a luxury destination; now mercenary-controlled; offers services to parties who can pay and have no interest in Alliance jurisdiction'],
-    lore_notes:['The Galactic Union held an internal review of the Solar discovery data for fourteen months before allowing any publication. The version published omits seventeen pages of analysis that appear in the internal version. What those pages contain has not been leaked.','Zoana\'s absence from all pre-survey records is not simply a gap — it is a specific absence. The navigational databases that should contain it were actively checked by survey analysts who confirmed the coordinates were present but listed as empty space. Something overwrote those records, or they were never written in the first place.','The Heaven gate was not discovered by the formal survey mission. It was already known to at least one party — based on analysis of the survey mission\'s route planning, which incorporated navigational knowledge of the gate that the mission logs do not explain how the planners obtained.']
+    desc:"The Proxima Sector is the first sector humanity ever knew and the last sector it returned to. It contains Solar — the origin system, the world of Earth, the place the generation ship Palentium departed from in 2530 CE on its 1,922-year journey to the world that now bears its name. For nearly 800 years after that departure, the sector went unvisited: the Saturn colony that remained behind collapsed during the voyage, and what was left of humanity was aboard the generation ship. The Alliance survey mission of 5287 CE found Solar as a ghost system — abandoned for eight centuries, its planets preserved by vacuum and time. What the surveys found beyond Solar was stranger still: a world of extraordinary magical concentration; a corporate exploitation world called Zoana with no record in any pre-survey database despite clear signs of long civilisation; the Heaven anomaly with its floating ruins; and a former resort world now controlled by mercenary syndicates. The sector sits at three months from Palentium at standard jump — or days through the Heaven gate, if access can be obtained. It rewards those who reach it with questions that the Alliance has conspicuously declined to answer in public.",
+    history:'Solar was the first system humanity ever mapped — because it was home. The generation ship that left the Saturnian system in 2530 CE carried navigational records of the Solar System and its immediate stellar neighbourhood. The Proxima Sector as a designation did not exist until the Alliance survey mission of 5287 CE formally chartered its boundaries. What the survey found was a sector that had continued to develop in humanities absence: independent habitations, internal trade, a magical site of the first order, and a corporate exploitation world that had no pre-survey existence in any database. The Alliance has mounted three follow-up missions. The published findings do not address the Solar discovery in any substantive way, and the questions that the discovery raises — about what happened during the 800 years of absence, about what was and was not preserved, about who else knew the sector existed — remain officially unanswered.',
+    known_for:['Solar — humanity\'s origin system; abandoned ghost world; rediscovered in 5287 CE after 800 years; the departure point of the generation ship Palentium in 2530 CE','Zoana — a habitation-positive world with no pre-survey records despite evidence of long civilised occupation','The Heaven ruins — floating magical anomaly of unknown origin, controlled by the Bottenbak Cult','A former resort world now administered entirely by mercenary consortiums','The Heaven gate — a transit point that makes the sector accessible in days rather than months from Palentium'],
+    notable_systems:['Solar — the origin system of humanity; abandoned 2530 CE; rediscovered 5287 CE; all planets archaeologically preserved; access managed by Alliance Archaeological Preservation Authority','Zoana — the unrecorded world; no explanation for its absence from pre-survey records has been published','Heaven — the floating ruins system; magical anomaly; Bottenbak Cult controlled; ongoing conflict with Berilian Order Inquisition','The Asar Resort System — formerly a luxury destination; now mercenary-controlled'],
+    lore_notes:['The Galactic Union held an internal review of the Solar discovery data for fourteen months before allowing any publication. The version published omits seventeen pages of analysis that appear in the internal version. What those pages contain has not been leaked. The most discussed hypothesis among researchers who know the gap exists is that the pages concern what was found in the Titan colony data logs — specifically what the last humans in the Solar System knew, and what they communicated, in the period between the generation ship\'s departure and the colony\'s collapse.','Zoana\'s absence from all pre-survey records is not simply a gap — it is a specific absence. The navigational databases that should contain it were actively checked by survey analysts who confirmed the coordinates were present but listed as empty space. Something overwrote those records, or they were never written in the first place. No one has publicly proposed a mechanism by which this could happen accidentally.','The Heaven gate was not discovered by the formal survey mission. It was already known to at least one party — based on analysis of the survey mission\'s route planning, which incorporated navigational knowledge of the gate that the mission logs do not explain how the planners obtained. Whether the gate existed before the departure in 2530 CE is a question that the mission reports do not address and the Galactic Union has not been asked about publicly.']
   },
   // ── NOTABLE SYSTEMS ───────────────────────────────────────────────────────
   {
@@ -2762,24 +2767,24 @@ g.catalogue_systems=[
        ],
        hooks:['Debt collection on Titania 4 operates in a legal grey area that both corporate factions tolerate because it occasionally works in their favour — soldiers from any side can find themselves held by the other side\'s financial representatives without it technically constituting a truce violation. This is common enough that experienced fighters carry debt documentation as a matter of personal survival practice.','It has been reported across decades by medical staff who have worked at NMed that the facility is extensively monitored by every major corporate intelligence operation in the system — the patient population makes it the most information-rich location in the Titania theatre. This is treated as an occupational hazard of working there rather than an exceptional situation.','The Counting Houses on Titania 4 are where the real war is conducted — every major territorial shift on Titania 2 below has been preceded by a corresponding shift in the financial instruments traded on Titania 4 above, typically several weeks in advance. Analysts who track both markets simultaneously have predicted engagements before they occurred.'],
        desc:'Titania 4 is the eye of the storm. Every corporation with a presence in the system maintains facilities here, and a universal truce holds — enforced not by law but by mutual self-interest and the understanding that if the truce breaks here, the Nova cruisers above Titania 2 become far less predictable. Soldiers from every side come here for medical treatment, rest, food that is not field rations, and a few days of not being actively targeted.'},
-      {id:'titania_3',name:'Titania 3',type:'Rocky World — Barren',status:'active',statusLabel:'Uninhabited',
+      {id:'titania_3',name:'Carnath',type:'Rocky World — Barren',status:'active',statusLabel:'Uninhabited',
        atmosphere:'None',climate:'Void',gravity:'Low',
        faction:'None — corporate survey claims disputed',population:'Uninhabited',demographics:'None',government:'None',tech_level:'N/A',economy:'None',
        access:'Open',access_note:'Unrestricted access. Several corporate survey teams have landed. None have established permanent presence.',
        hazards:['No atmosphere — full EVA required at all times','Micrometeorite impacts more frequent than average due to proximity to Titania Prime debris field','Corporate survey teams operating here may be armed'],
-       desc:'A small, airless rocky world sitting between Titania 2 and Titania 4. Its proximity to the Titania Prime debris field means its surface shows heavier cratering than expected for its size. Several corporations have quietly surveyed it for morondium traces but found nothing commercially significant. Occasionally used as an observation post during periods of intense fighting on Titania 2.'},
-      {id:'titania_5',name:'Titania 5',type:'Gas Giant — Outer System',status:'active',statusLabel:'Uninhabited',
+       desc:'A small, airless rocky world sitting between the warzone of Titania 2 and the neutral ground of Titania 4. The name Carnath was assigned by a survey team over a decade ago and has stuck in usage despite no official designation process. Its proximity to the Titania Prime debris field means its surface shows heavier cratering than expected for its size. Several corporations have quietly surveyed it for morondium traces but found nothing commercially significant. Occasionally used as an observation post during periods of intense fighting on Titania 2.'},
+      {id:'titania_5',name:'Veroth',type:'Gas Giant — Outer System',status:'active',statusLabel:'Uninhabited',
        atmosphere:'None',atm_note:'Hydrogen-helium gas envelope',climate:'Gas Giant',gravity:'High',
        faction:'None',population:'Uninhabited',demographics:'None',government:'None',tech_level:'N/A',economy:'None',
        access:'Open',access_note:'No infrastructure. Some vessels use its moons as observation stations.',
        hazards:['Gas giant atmosphere — lethal pressure below cloud deck','Radiation belt','Strong gravitational gradient'],
-       desc:'A large gas giant in the outer Titania system with a system of moons, several of which have been proposed as observation or staging platforms for corporate military planning. None have been formally developed, though survey teams have mapped them.'},
-      {id:'titania_6',name:'Titania 6',type:'Ice World — Outer System',status:'active',statusLabel:'Uninhabited',
+       desc:'A large banded gas giant in the outer Titania system, informally named Veroth by navigators running the approach corridor. Several of its moons have been proposed as observation or staging platforms for corporate military planning — the distance from the warzone makes them theoretically useful for operations that require deniable positioning. None have been formally developed, though survey teams have mapped them. Veroth itself is useful primarily as a gravitational reference on approach.'},
+      {id:'titania_6',name:'Sorellis',type:'Ice World — Outer System',status:'active',statusLabel:'Uninhabited',
        atmosphere:'None',climate:'Frozen',gravity:'Low',
        faction:'None',population:'Uninhabited',demographics:'None',government:'None',tech_level:'N/A',economy:'None',
        access:'Open',access_note:'Extreme outer system. No navigation infrastructure.',
        hazards:['Extreme cold — cryogenic surface temperatures','No atmosphere','Extreme distance from system centre'],
-       desc:'The outermost known body in the Titania system — a frozen, airless world of water-ice and silicate rock. It sits at the very edge of the star\'s habitable gravitational range and is so remote that even corporate survey teams consider it not worth the transit time.'}
+       desc:'The outermost known body in the Titania system, named Sorellis in navigational records — a frozen, airless world of water-ice and silicate rock at the very edge of the star\'s gravitational influence. So remote that even corporate survey teams with resource extraction interests have decided the transit time does not justify the potential return. It sits in permanent darkness, unchanged by everything that has happened in the system closer to the sun.'}
     ]
   },
   {
@@ -2821,24 +2826,24 @@ g.catalogue_systems=[
        ],
        hooks:['Station workers across the Sirius orbital network consistently report that cargo flagged by customs inspectors is regularly cleared through administrative override — a pattern so established that it has its own informal name in dock culture. The cold addresses used as cover destinations recur across years of records, suggesting an ongoing and organised operation rather than isolated incidents.','Shell corporation acquisition of station sections in the Sirius orbital network has been documented repeatedly over the decades, always following the same pattern: quiet purchase, displacement of independent operators, and transition to use by parties who are not publicly identifiable. The independent trader communities who have been displaced rarely remain accessible for follow-up questions.'],
        desc:'The Sirius orbital station network is, in practical terms, a series of cities in space. Collectively they house half a billion people, process a significant portion of all interstellar cargo moving through the core systems, and host the offices of dozens of corporations and hundreds of independent operators. The Free Docks at the system\'s edge are where independent operators work without the scrutiny the main terminals carry.'},
-      {id:'sirius_ii',name:'Sirius II',type:'Rocky World — Dense Metal Core',status:'active',statusLabel:'Active — Automated Mining',
+      {id:'sirius_ii',name:'Pyreth',type:'Rocky World — Dense Metal Core',status:'active',statusLabel:'Active — Automated Mining',
        atmosphere:'None',climate:'Extreme Heat',gravity:'Standard',grav_note:'Unusually dense core for its size — standard surface gravity despite small diameter',
        faction:'Sirius Mining Consortium (corporate)',population:'~120 — automated station crew',demographics:'Mostly Non-Born operators, small human technical rotation',government:'Corporate Station Authority',tech_level:'Advanced (Automated)',economy:'Heavy metal extraction — iron, nickel, platinum-group ore processing',
        access:'Restricted',access_note:'Corporate property. Contractor access by arrangement. The Consortium discourages unscheduled visits.',
        hazards:['Extreme surface temperatures on daylight side — well above equipment operating limits','No atmosphere — full EVA','Automated mining equipment creates surface hazard zones'],
-       desc:'A small but exceptionally dense rocky world close to Sirius, mined by the Sirius Mining Consortium for its high-grade metallic ore deposits. A skeleton crew of mostly Non-Born operators manages the automated extraction network from a pressurised station on the terminator line. The ore is processed on-world and shipped in bulk to Alliance Space manufacturing systems.'},
-      {id:'sirius_iii',name:'Sirius III',type:'Gas Giant — Commercial Fuel Stop',status:'active',statusLabel:'Active — Fuel Skimming Operations',
+       desc:'A small but exceptionally dense rocky world close to Sirius — known as Pyreth to navigators and mining crews, though the Sirius Mining Consortium\'s official documentation uses the older navigational designation. Pyreth\'s unusually dense metallic core makes it valuable despite its size. A skeleton crew of mostly Non-Born operators manages the automated extraction network from a pressurised station on the terminator line. The ore is processed on-world and shipped in bulk to Alliance Space manufacturing systems.'},
+      {id:'sirius_iii',name:'Calodan',type:'Gas Giant — Commercial Fuel Stop',status:'active',statusLabel:'Active — Fuel Skimming Operations',
        atmosphere:'None',atm_note:'Hydrogen-helium envelope',climate:'Gas Giant (Banded)',gravity:'High',
        faction:'Zegitor Trade Guild (fuel licensing)',population:'~400 — fuel skimming platform crew',demographics:'Mixed — Guild-licensed operators',government:'Guild Licensed Operations Authority',tech_level:'Advanced (Fuel)',economy:'Hydrogen fuel extraction — sells to passing vessels at commercial rates',
        access:'Open',access_note:'Fuel skimming platform open to commercial vessels. Guild-licensed rates apply. Emergency fuel available without prior arrangement.',
        hazards:['Gas giant atmospheric hazards below platform altitude','Radiation belt activity varies','Platform is functional but not designed for extended habitation'],
-       desc:'A large gas giant that serves as a commercial fuel stop for vessels transiting the Sirius system. A Guild-licensed fuel skimming platform operates in its upper atmosphere, extracting and processing hydrogen fuel at commercial rates. It is one of the busiest non-orbital commercial stops in the system — ships that prefer not to dock at the orbital network often fuel here instead.'},
-      {id:'sirius_iv',name:'Sirius IV',type:'Ice Giant — Outer System',status:'active',statusLabel:'Uninhabited',
+       desc:'Known as Calodan to the navigators and freight crews who fuel here — a large gas giant serving as the primary commercial fuel stop for vessels transiting the Sirius system. A Guild-licensed skimming platform operates in its upper atmosphere, extracting and processing hydrogen at commercial rates. Calodan is one of the busiest non-orbital commercial stops in the system; ships that prefer not to dock at the orbital network — for whatever reason — fuel here instead. The platform crew maintains carefully neutral relationships with everyone.'},
+      {id:'sirius_iv',name:'Celendris',type:'Ice Giant — Outer System',status:'active',statusLabel:'Uninhabited',
        atmosphere:'None',atm_note:'Methane-water ice envelope',climate:'Extreme Cold',gravity:'Standard',
        faction:'None',population:'Uninhabited',demographics:'None',government:'None',tech_level:'N/A',economy:'None — theoretical ice mining interest, no active operations',
        access:'Open',access_note:'Outer system — no infrastructure. Alliance survey completed.',
        hazards:['Extreme cold','No infrastructure','Far from system emergency response'],
-       desc:'An ice giant in the outer Sirius system, blue-green in colour due to methane ice in its atmosphere. Alliance survey teams have catalogued it as a candidate for future water-ice extraction but no commercial operation has been established. It sits at the outer edge of the system\'s charted navigation routes.'}
+       desc:'An ice giant in the outer Sirius system, named Celendris in navigational records — blue-green in colouration due to methane ice in its upper atmosphere. Alliance survey teams have catalogued it as a candidate for future water-ice extraction but no commercial operation has been established. It sits at the outer edge of the system\'s charted routes, a pale reference point for ships approaching from the deep system.'}
     ]
   },
   {
@@ -2874,24 +2879,24 @@ g.catalogue_systems=[
        ],
        hooks:['It is broadly known in Alliance political circles that the Aderan Correctional Consortium holds incarceration contracts on individuals from several powerful families — contracts placed through intermediaries that obscure the political connection. The Consortium is believed to use this knowledge as leverage in ways that never become public.','Journalists who have attempted to document conditions in the Facility\'s Sector 9 have a consistent record of stopping communication shortly after arrival and not being heard from again. The Consortium\'s explanation is always the same: the journalist chose not to file. The pattern is old enough that media organisations now consider Sector 9 assignments a one-way assignment.','It is known among information brokers in Alliance Space that the Facility on Aderan 3 houses individuals who carry significant knowledge — people who were incarcerated specifically to remove them from circulation rather than to punish a crime. The Consortium monitors all communication, which is why that knowledge has never successfully left.'],
        desc:'The only surviving inhabited world in the Aderan system has found a highly profitable purpose. The Aderan Correctional Consortium operates the galaxy\'s largest for-profit prison facility here, housing criminals from across known space under contracts from the Alliance justice system, corporate security departments, and private clients who do not always specify what the inmate did. What makes Aderan 3 famous beyond the prison industry is the broadcasting. Three of the most watched programmes in the galaxy — Ridge Racing, Survivor, and Blood Bowl — are recorded here, using inmates as participants.'},
-      {id:'aderan_2',name:'Aderan 2',type:'Rocky World — Barren',status:'active',statusLabel:'Uninhabited',
+      {id:'aderan_2',name:'Ashvel',type:'Rocky World — Barren',status:'active',statusLabel:'Uninhabited',
        atmosphere:'Thin',atm_note:'Trace carbon dioxide — negligible pressure',climate:'Cold, Barren',gravity:'Low',
        faction:'None',population:'Uninhabited',demographics:'None',government:'None',tech_level:'N/A',economy:'None',
        access:'Open',access_note:'Unrestricted — nothing of commercial value confirmed.',
        hazards:['Thin atmosphere provides no radiation shielding','Surface temperature extremes','No infrastructure within recovery range'],
-       desc:'A small, barren rocky world between the Aderan Prime debris field and the surviving worlds of the system. It was surveyed before the first corporate war and found unremarkable. The Consortium has not expressed interest in it. It orbits in silence, unchanged by everything that has happened in the system around it.'},
-      {id:'aderan_iv',name:'Aderan IV',type:'Gas Giant — Outer System',status:'active',statusLabel:'Uninhabited',
+       desc:'A small, barren rocky world between the Aderan Prime debris field and the surviving worlds of the system. Called Ashvel in navigational logs — the name predates the corporate war, when it was surveyed and found unremarkable. The Consortium has not expressed interest in it. It orbits in silence, unchanged by everything that has happened in the system around it: the corporate war, the destruction, the prison empire, the broadcasting.'},
+      {id:'aderan_iv',name:'Gorthon',type:'Gas Giant — Outer System',status:'active',statusLabel:'Uninhabited',
        atmosphere:'None',atm_note:'Dense hydrogen-helium envelope with ammonia cloud bands',climate:'Gas Giant',gravity:'High',
        faction:'None',population:'Uninhabited',demographics:'None',government:'None',tech_level:'N/A',economy:'None — no fuel licensing in this system',
        access:'Open',access_note:'No commercial infrastructure. Outer system.',
        hazards:['Standard gas giant hazards — pressure, radiation, gravity gradient'],
-       desc:'A large gas giant in the outer Aderan system. Unlike the Sirius system, no commercial fuel operation has been established here — the Aderan system\'s reputation for corporate conflict and the Consortium\'s tight grip on access have made independent operators reluctant to invest. The giant orbits without infrastructure, observed by the Consortium\'s security network as a matter of routine.'},
-      {id:'aderan_v',name:'Aderan V',type:'Ice World — Outer System',status:'active',statusLabel:'Uninhabited',
+       desc:'A large gas giant in the outer Aderan system, named Gorthon in navigational records. Unlike Sirius, no commercial fuel operation has been established here — the Aderan system\'s reputation for corporate conflict and the Consortium\'s tight grip on access have made independent operators reluctant to invest in infrastructure they might not be allowed to use. Gorthon orbits without infrastructure, observed by the Consortium\'s security network as a matter of routine patrol coverage.'},
+      {id:'aderan_v',name:'Crethis',type:'Ice World — Outer System',status:'active',statusLabel:'Uninhabited',
        atmosphere:'None',climate:'Frozen',gravity:'Low',
        faction:'None',population:'Uninhabited',demographics:'None',government:'None',tech_level:'N/A',economy:'None',
        access:'Open',access_note:'Extreme outer system.',
        hazards:['Extreme cold','Isolation'],
-       desc:'A frozen outer world at the edge of the Aderan system\'s charted territory. Primarily ice and rock. The only notable feature is that its distance from the system\'s commercial activity makes it an occasional rendezvous point for vessels that prefer not to be logged in the Consortium\'s approach records.'}
+       desc:'A frozen outer world named Crethis at the edge of the Aderan system\'s charted territory — primarily ice and rock, far enough from the system\'s activity to be effectively invisible to the Consortium\'s monitoring network. Its distance from everything commercial makes it an occasional rendezvous point for vessels that prefer not to appear in Aderan\'s approach records. Whether the Consortium is aware of this use is a question that experienced operators leave unanswered.'}
     ]
   },
   {
@@ -4136,14 +4141,14 @@ g.catalogue_systems=[
       access:'Restricted (Guild operational)',access_note:'Guild logistics operations only. Not open to commercial visitors.',
       hazards:['Airless — all operations sealed','Industrial cargo handling at scale'],
       desc:'The secondary rocky body of the Nopenop system, used by the Guild as bulk cargo staging for overflow from the main transit yards. When Nopenop\'s primary facilities are at capacity — which is frequently — cargo is routed here for temporary holding before onward movement. The Guild built the facility without fanfare; it works, and that is the Nopenop standard.'},
-     {id:'nopenop_outer',name:'ZTG-N Outer Gas Body',type:'Gas Giant — Guild Fleet Anchorage',status:'active',statusLabel:'Active — Guild Fleet',
+     {id:'nopenop_outer',name:'Nothavar',type:'Gas Giant — Guild Fleet Anchorage',status:'active',statusLabel:'Active — Guild Fleet',
       atmosphere:'Hydrogen/Helium',atm_note:'Standard gas giant',
       climate:'Gas Giant',gravity:'High',
       faction:'Zegitor Trade Guild',population:'~300 — fleet anchorage crew',demographics:'Guild fleet personnel',
       government:'Zegitor Trade Guild',tech_level:'Advanced (Military-Grade)',economy:'Fleet anchorage and maintenance — Guild enforcement vessels',
       access:'Restricted (Guild fleet)',access_note:'Guild military vessel anchorage. Not accessible to commercial or non-Guild traffic.',
       hazards:['Guild enforcement vessels present — heavily armed'],
-      desc:'The outer gas giant of the Nopenop system, where the Guild maintains its primary fleet anchorage for the enforcement vessels that protect Guild operations and contracts. The size of the fleet here is not publicly disclosed. Parties who have had the opportunity to observe it from a distance tend to revise their assumptions about the Guild\'s military capability in an upward direction.'}
+      desc:'Named Nothavar in Guild navigational records — the outer gas giant of the Nopenop system, where the Guild maintains its primary fleet anchorage for the enforcement vessels that protect Guild operations and contracts. The size of the fleet here is not publicly disclosed. Parties who have had the opportunity to observe Nothavar from a distance tend to revise their assumptions about the Guild\'s military capability in an upward direction.'}
     ]
   },
   // ─── KRAVEN SPACE (FORMER NERULIAN EMPIRE) ──────────────────────────
@@ -4163,22 +4168,22 @@ g.catalogue_systems=[
        notable_locations:[{name:'Ruins of Bah Station',desc:'What can be identified from long-range scan as the remnants of the Nerulian system station — buried under decades of Kraven biological processing. Nerulian historians consider it one of the significant archaeological losses of the invasion.'}],
        hooks:['Nerulian archivists at San Tien have documented references to objects and structures on Bah that were considered culturally and strategically significant before the invasion — items that were not evacuated because the invasion came faster than any response could be organised. The question of what remains buried under the Kraven bio-layer on Bah is one the Archive returns to periodically, without resolution.','Long-range observation of Kraven-held systems routinely produces behavioural data that does not cleanly match established models — Kraven behaviour in any given system changes over time in ways that suggest adaptation rather than static patterns. Analysts who specialise in Kraven behaviour treat small deviations as significant data rather than noise, because the Kraven\'s history of adaptation means small deviations have preceded major shifts before.'],
        desc:'Bah is consumed. The Nerulian world that existed here — its people, its culture, its physical infrastructure — was processed by the Kraven invasion in the early stages of the offensive that destroyed the empire. Nothing has returned to reclaim it. The Nemani Rift is the only thing that has stopped the Kraven from extending further westward from systems like Bah. For Nerulian survivors, Bah is a name that represents the beginning of everything that followed.'},
-     {id:'bah_k1',name:'K-BH-1',type:'Rocky Body — Kraven Territory',status:'abandoned',statusLabel:'Consumed — Kraven Territory',
+     {id:'bah_k1',name:'Bahrel',type:'Rocky Body — Kraven Territory',status:'abandoned',statusLabel:'Consumed — Kraven Territory',
       atmosphere:'None',atm_note:'Airless — Kraven bio-processes have not engaged with this body',
       climate:'Barren',gravity:'Low',
       faction:'Kraven',population:'Uninhabited — no Kraven bio-interest noted',demographics:'None',
       government:'None',tech_level:'N/A',economy:'None',
-      access:'Forbidden',access_note:'Kraven territory. Alliance designation K-BH-1 applied by long-range survey.',
+      access:'Forbidden',access_note:'Kraven territory. Alliance external designation K-BH-1; Nerulian name Bahrel recorded in San Tien archives.',
       hazards:['Kraven space — proximity to active Kraven territory'],
-      desc:'A small rocky body in the Bah system, catalogued by Alliance long-range survey under the K-designation system for Kraven-held territory. The Kraven bio-processing that consumed the primary world has shown no interest in this body. It remains an inert rock in a dead system.'},
-     {id:'bah_k2',name:'K-BH-2',type:'Gas Giant — Kraven Territory',status:'abandoned',statusLabel:'Consumed — Kraven Territory',
+      desc:'Known as Bahrel in Nerulian records — a small rocky companion to the primary world, catalogued in the San Tien archive under the Bah system survey records. The Nerulians had no settled presence here; it was surveyed and deemed of marginal industrial value. The Kraven bio-processing that consumed the primary world has shown no interest in this body. It remains an inert rock in a dead system, its Nerulian name surviving in archive records even as the civilisation that gave it that name did not.'},
+     {id:'bah_k2',name:'Othalveth',type:'Gas Giant — Kraven Territory',status:'abandoned',statusLabel:'Consumed — Kraven Territory',
       atmosphere:'Hydrogen/Helium',atm_note:'Standard gas giant — no Kraven bio-activity detected from long-range survey',
       climate:'Gas Giant',gravity:'High',
       faction:'Kraven',population:'Uninhabited',demographics:'None',
       government:'None',tech_level:'N/A',economy:'None',
-      access:'Forbidden',access_note:'Kraven space.',
+      access:'Forbidden',access_note:'Kraven space. Nerulian name Othalveth; Alliance external designation K-BH-2.',
       hazards:['Kraven space proximity'],
-      desc:'The outer gas giant of the Bah system, designated K-BH-2 in the Alliance survey catalogue of Kraven-held space. Long-range observation has detected no Kraven bio-activity on or near this body. The Kraven appear to have no interest in gas giants as a resource category, which is one of the few things about them that simplifies navigation in their territory.'}
+      desc:'Named Othalveth in Nerulian navigational records — the outer gas giant of the Bah system, used as a fuel reference point and likely a source of hydrogen extraction for the system\'s transit operations. The Nerulian name translates loosely as "the far wanderer." The Kraven have shown no interest in it. It remains one of the only unchanged things in a system that has been entirely transformed.'}
     ]
   },
   {
@@ -4197,22 +4202,22 @@ g.catalogue_systems=[
        notable_locations:[{name:'Sub-Strata Research Complex (estimated)',desc:'Long-range seismic surveys suggest significant intact underground structure. The depth and composition of the Kraven bio-layer above it makes access effectively impossible with current technology. What was being researched here before the invasion is documented only in fragmentary records at the San Tien Archive.'}],
        hooks:['The San Tien Archive maintains records of transmissions received on Nerulian-era encrypted frequencies that cannot be attributed to any known source — fragments that, when analysed, appear consistent with automated system outputs rather than deliberate communication. The academic consensus is that some portion of Sicon\'s automated research infrastructure survived the invasion and continues to operate, transmitting into space with no receiver capable of acting on the data.','The proposal to attempt a physical penetration of Sicon\'s underground facilities is discussed periodically in intelligence and academic circles as the highest-value impossible mission in the known galaxy. The research that the Nerulian Empire was conducting there at the time of the invasion — documented in fragmentary records that survived to San Tien — included multiple programmes that Alliance science has not been able to replicate in the decades since. Each generation of analysts produces a new version of the proposal and reaches the same conclusion about its feasibility.'],
        desc:'Sicon represents the most significant single loss of scientific knowledge in the Kraven invasion. The empire\'s research establishment was concentrated here and nowhere else. Everything they were working on, everything they had developed — if any of it survived in the underground facilities, it is sitting under Kraven territory and has been for decades. Whether that knowledge is recoverable is not a question that can be answered without someone going to find out.'},
-     {id:'sicon_k1',name:'K-SC-1',type:'Rocky Body — Kraven Territory',status:'abandoned',statusLabel:'Consumed — Kraven Territory',
+     {id:'sicon_k1',name:'Vethar-Sicon',type:'Rocky Body — Kraven Territory',status:'abandoned',statusLabel:'Consumed — Kraven Territory',
       atmosphere:'Thin Toxic',atm_note:'Trace atmosphere, possibly modified by Kraven bio-processes interacting with outgassing — unbreathable',
       climate:'Barren',gravity:'Low',
       faction:'Kraven',population:'Uninhabited',demographics:'None',
       government:'None',tech_level:'N/A',economy:'None',
-      access:'Forbidden',access_note:'Kraven space. Alliance designation K-SC-1.',
+      access:'Forbidden',access_note:'Kraven space. Nerulian name Vethar-Sicon; Alliance external designation K-SC-1.',
       hazards:['Kraven space proximity','Possible Kraven bio-spillover from primary world'],
-      desc:'The inner rocky body of the Sicon system, designated K-SC-1. Long-range spectroscopy has detected trace atmospheric anomalies consistent with Kraven bio-process outgassing from the primary world drifting outward — an unusual finding that analysts monitoring Kraven territory note as a potential indicator of exceptionally active bio-processing on the primary world.'},
-     {id:'sicon_k2',name:'K-SC-2',type:'Gas Giant — Kraven Territory',status:'abandoned',statusLabel:'Kraven Territory',
+      desc:'Known in Nerulian records as Vethar-Sicon — "the lesser companion of Sicon" — this rocky inner body was used for raw material extraction to supply the research complex on the primary world. Long-range spectroscopy has detected trace atmospheric anomalies consistent with Kraven bio-process outgassing drifting outward from Sicon — an unusual indicator of particularly intense bio-processing on the primary world. The Nerulian extraction infrastructure on Vethar-Sicon\'s surface was presumably minimal and is not expected to have survived.'},
+     {id:'sicon_k2',name:'Ilorath',type:'Gas Giant — Kraven Territory',status:'abandoned',statusLabel:'Kraven Territory',
       atmosphere:'Hydrogen/Helium',atm_note:'Standard gas giant',
       climate:'Gas Giant',gravity:'High',
       faction:'Kraven',population:'Uninhabited',demographics:'None',
       government:'None',tech_level:'N/A',economy:'None',
-      access:'Forbidden',access_note:'Kraven space.',
+      access:'Forbidden',access_note:'Kraven space. Nerulian name Ilorath; Alliance external designation K-SC-2.',
       hazards:['Kraven space proximity'],
-      desc:'The outer gas giant of the Sicon system, designated K-SC-2. As with other Kraven-held gas giants, no Kraven bio-activity has been detected here by long-range survey. The Nerulian name for this body, if one existed, has been lost with the rest of the system\'s records.'}
+      desc:'Named Ilorath in Nerulian navigational records — the outer gas giant of the Sicon system. The Nerulian research establishment on Sicon would have required fuel; Ilorath was the extraction source. San Tien archive records note fuel routing through the Ilorath skimming platform as a standard logistical notation in the pre-invasion operational records of the Sicon research complex. No Kraven bio-activity has been detected here. The platform is gone.'}
     ]
   },
   {
@@ -4231,22 +4236,22 @@ g.catalogue_systems=[
        notable_locations:[{name:'The Old City (Lost)',desc:'What Nerulian records describe as one of the most architecturally significant urban environments ever built. The location is known from records. Whether anything physical remains is unknown. Several Nerulian survivor communities hold annual commemorations oriented toward Shev\'s coordinates.'}],
        hooks:['Nerulian artists whose work depicts Shev with architectural and environmental detail that exceeds any surviving documentary record are a recurring presence in diaspora communities — work that can only be explained by access to sources not in any public archive, or by something else that the artists consistently decline to discuss. The question of how the knowledge was obtained has been asked and not answered across multiple generations.','The commemorative pilgrimage tradition oriented toward Shev\'s coordinates has included vessels that have crossed from observation into confrontation with Kraven patrol patterns — incidents documented in Alliance military records that the communities responsible for the vessels have never publicly acknowledged. The pattern suggests that grief, over enough time, produces actions that the communities would not have chosen to explain in advance.'],
        desc:'The loss of Shev is the Nerulian cultural wound that does not heal. Survivors speak of it differently than other consumed systems — not with the flat political language of military defeat but with a grief that does not diminish with time. The memorial tradition oriented toward Shev\'s coordinates is maintained by survivor communities throughout the galaxy. The Kraven who destroyed it have no concept of what it meant.'},
-     {id:'shev_k1',name:'K-SH-1',type:'Rocky Body — Kraven Territory',status:'abandoned',statusLabel:'Consumed — Kraven Territory',
+     {id:'shev_k1',name:'Shevren',type:'Rocky Body — Kraven Territory',status:'abandoned',statusLabel:'Consumed — Kraven Territory',
       atmosphere:'None',atm_note:'Airless',
       climate:'Barren',gravity:'Low',
       faction:'Kraven',population:'Uninhabited',demographics:'None',
       government:'None',tech_level:'N/A',economy:'None',
-      access:'Forbidden',access_note:'Kraven space. Alliance designation K-SH-1.',
+      access:'Forbidden',access_note:'Kraven space. Nerulian name Shevren recovered from diaspora memorial art; Alliance external designation K-SH-1.',
       hazards:['Kraven space proximity'],
-      desc:'The inner rocky body of the Shev system, designated K-SH-1 in the Alliance survey catalogue. The Nerulian name for this body is not recorded in any surviving archive. What the Nerulians called it, and whether they had any relationship with it, are among the many things lost when Shev was consumed.'},
-     {id:'shev_k2',name:'K-SH-2',type:'Gas Giant — Kraven Territory',status:'abandoned',statusLabel:'Kraven Territory',
+      desc:'Known as Shevren in recovered Nerulian records — a diminutive companion to the primary world, airless and uninhabited. The name was recovered not from administrative records but from diaspora memorial art: a body of work depicting the Shev system from cultural memory that includes astronomical detail precise enough for researchers to reconstruct the system\'s pre-invasion configuration. Shevren appears in several such works, named in accompanying text. Whether the Nerulians had any practical relationship with it is not known. It is remembered because Shev is remembered.'},
+     {id:'shev_k2',name:'Valon',type:'Gas Giant — Kraven Territory',status:'abandoned',statusLabel:'Kraven Territory',
       atmosphere:'Hydrogen/Helium',atm_note:'Standard gas giant',
       climate:'Gas Giant',gravity:'High',
       faction:'Kraven',population:'Uninhabited',demographics:'None',
       government:'None',tech_level:'N/A',economy:'None',
-      access:'Forbidden',access_note:'Kraven space.',
+      access:'Forbidden',access_note:'Kraven space. Nerulian name Valon; Alliance external designation K-SH-2.',
       hazards:['Kraven space proximity'],
-      desc:'The outer gas giant of the Shev system, designated K-SH-2. Nerulian survivors who maintain the memorial tradition oriented toward Shev\'s coordinates are aware of this body\'s existence — it appears in some of the artistic depictions of the system produced from memory and cultural record. Its Nerulian name is unknown.'}
+      desc:'Named Valon in Nerulian astronomical records recovered from the San Tien Archive — the outer gas giant of the Shev system. Valon appears in multiple diaspora memorial depictions of the Shev system, typically rendered as a background presence in images focused on the primary world. Its role in the system\'s pre-invasion life was functional and unremarkable; its significance now is that it is a named thing in a named system that survivors carry in their memory.'}
     ]
   },
   {
@@ -4265,22 +4270,22 @@ g.catalogue_systems=[
        notable_locations:[{name:'The Ghost Yards',desc:'Long-range scan suggests orbital structures of significant size still exist above Capio — the remnants of the naval shipyards. They are within Kraven territory. Whether they are occupied, studied, or simply ignored by the Kraven is not known.'}],
        hooks:['Alliance naval intelligence has maintained for decades the assessment that the Nerulian fleet under construction at Capio when the invasion began included at least one vessel class that significantly exceeded anything produced before or since — based on fragmentary production records and eyewitness accounts from survivors who saw the partially-completed hulls before the invasion consumed them. What made them remarkable has never been established from the available fragments, which is itself considered the most significant gap in Alliance naval technical knowledge.','Kraven behaviour analysis applied to Capio has produced an unresolved debate among specialists: the pattern of Kraven activity around the Ghost Yards is inconsistent with the simple occupation-and-ignore pattern observed in most other consumed systems, suggesting some form of interaction with the existing structures. Whether the Kravens are studying, using, or simply encountering the orbital remnants in ways that affect their behaviour is not established.'],
        desc:'Capio is where the Nerulian fleet was born and where it ended. The naval tradition that built the most capable warships the galaxy had seen before the Kravens arrived was centred here. The yards produced vessels that Alliance naval architects still reference as design benchmarks. Everything that was being built when the Kravens arrived was consumed with everything else. The Ghost Yards orbiting above — if they still exist — represent the physical remains of an industrial capability that has not been matched since.'},
-     {id:'capio_k1',name:'K-CP-1',type:'Rocky Body — Kraven Territory',status:'abandoned',statusLabel:'Consumed — Kraven Territory',
+     {id:'capio_k1',name:'Capeth',type:'Rocky Body — Kraven Territory',status:'abandoned',statusLabel:'Consumed — Kraven Territory',
       atmosphere:'None',atm_note:'Airless',
       climate:'Barren',gravity:'Low',
       faction:'Kraven',population:'Uninhabited',demographics:'None',
       government:'None',tech_level:'N/A',economy:'None',
-      access:'Forbidden',access_note:'Kraven space. Alliance designation K-CP-1. Previous Nerulian designation: unknown.',
+      access:'Forbidden',access_note:'Kraven space. Nerulian name Capeth; Alliance external designation K-CP-1.',
       hazards:['Kraven space proximity'],
-      desc:'The inner rocky body of the Capio system, designated K-CP-1. The Nerulians may have used this body for material extraction to supply the naval yards — the proximity would have made it economically logical — but no documentation survives to confirm this. Whether any infrastructure remains on its surface is unknown.'},
-     {id:'capio_k2',name:'K-CP-2',type:'Gas Giant — Kraven Territory',status:'abandoned',statusLabel:'Kraven Territory',
+      desc:'Known as Capeth in Nerulian naval records — the inner rocky body of the Capio system. The proximity to the naval yards makes material extraction from Capeth economically logical, and fragmentary supply chain records from the San Tien Archive reference raw material sourcing from the inner system body. The scale of the Nerulian naval construction program at Capio would have required significant material throughput. Whether any extraction infrastructure remains on Capeth\'s surface is unknown — the Kraven have no interest in rocky bodies, but they consumed everything around it.'},
+     {id:'capio_k2',name:'Mahror',type:'Gas Giant — Kraven Territory',status:'abandoned',statusLabel:'Kraven Territory',
       atmosphere:'Hydrogen/Helium',atm_note:'Standard gas giant',
       climate:'Gas Giant',gravity:'High',
       faction:'Kraven',population:'Uninhabited',demographics:'None',
       government:'None',tech_level:'N/A',economy:'None',
-      access:'Forbidden',access_note:'Kraven space.',
+      access:'Forbidden',access_note:'Kraven space. Nerulian name Mahror; Alliance external designation K-CP-2.',
       hazards:['Kraven space proximity'],
-      desc:'The outer gas giant of the Capio system, designated K-CP-2. Alliance naval intelligence notes that the Nerulian yards at Capio would have required significant fuel supplies — this body was likely a primary source. Whether any orbital fuel infrastructure remains in degraded form is not established from available long-range data.'}
+      desc:'Named Mahror in Nerulian naval records — the outer gas giant of the Capio system and the fuel supply for the empire\'s most important shipyard complex. The scale of operations at the Capio yards required continuous hydrogen fuel; Mahror\'s extraction platform was a critical node in the naval supply chain. Alliance naval intelligence analysts note that any surviving orbital infrastructure near Mahror would be of significant historical interest. Long-range survey has not identified any such structure, but the survey resolution at this distance into Kraven space is limited.'}
     ]
   },
   {
@@ -4299,22 +4304,22 @@ g.catalogue_systems=[
        notable_locations:[{name:'The Green Grave',desc:'What Nerulian records describe as the most fertile agricultural land in the empire — a continent of exceptional soil and climate. Kraven bio-transformation has processed this environment into its current state. The transformation is considered ecologically complete.'}],
        hooks:['Agricultural genetics researchers who study Nerulian food systems have documented in the San Tien Archive detailed descriptions of crop varieties that contained traits — disease resistance, yield characteristics, adaptation profiles — that have not been replicated in any Alliance crop development programme despite the traits being clearly desirable and the Archive descriptions being technically precise. The varieties were cultivated on Sarag and exist nowhere else. The loss is considered by the relevant research community to be one of the most significant agricultural knowledge losses in recorded history.'],
        desc:'Sarag\'s loss was strategic as well as cultural. When the Kravens took the empire\'s food system, they took its ability to sustain an extended defence. The agricultural empire the Nerulians had built over centuries was consumed in the same weeks as their military. Sarag is remembered not just as a loss but as a turning point — the moment when survival rather than resistance became the only viable goal.'},
-     {id:'sarag_k1',name:'K-SG-1',type:'Rocky Body — Kraven Territory',status:'abandoned',statusLabel:'Consumed — Kraven Territory',
+     {id:'sarag_k1',name:'Sarel',type:'Rocky Body — Kraven Territory',status:'abandoned',statusLabel:'Consumed — Kraven Territory',
       atmosphere:'Thin Toxic',atm_note:'Minimal atmosphere with Kraven bio-process contamination drifting from the primary world',
       climate:'Barren',gravity:'Low',
       faction:'Kraven',population:'Uninhabited',demographics:'None',
       government:'None',tech_level:'N/A',economy:'None',
-      access:'Forbidden',access_note:'Kraven space. Alliance designation K-SG-1.',
+      access:'Forbidden',access_note:'Kraven space. Nerulian name Sarel; Alliance external designation K-SG-1.',
       hazards:['Kraven space proximity','Atmospheric trace contamination'],
-      desc:'The inner rocky body of the Sarag system, designated K-SG-1. The Nerulian agricultural system that made Sarag the empire\'s food heartland was confined to the primary world; this body was surveyed but not settled. It sits in Kraven space, inert and unchanged, while the world it orbits the same sun as has been entirely transformed.'},
-     {id:'sarag_k2',name:'K-SG-2',type:'Gas Giant — Kraven Territory',status:'abandoned',statusLabel:'Kraven Territory',
+      desc:'Known as Sarel in Nerulian survey records — the inner rocky body of the Sarag system. The Nerulian agricultural civilization on Sarag had no need of Sarel; it was surveyed, found to have no arable potential, and left alone. It sits in Kraven space now, inert and unchanged, while the agricultural world it shares a sun with has been entirely transformed into Kraven biomass. Trace atmospheric contamination has drifted from Sarag — a reminder of the bio-processing happening in the inner system.'},
+     {id:'sarag_k2',name:'Tolverath',type:'Gas Giant — Kraven Territory',status:'abandoned',statusLabel:'Kraven Territory',
       atmosphere:'Hydrogen/Helium',atm_note:'Standard gas giant',
       climate:'Gas Giant',gravity:'High',
       faction:'Kraven',population:'Uninhabited',demographics:'None',
       government:'None',tech_level:'N/A',economy:'None',
-      access:'Forbidden',access_note:'Kraven space.',
+      access:'Forbidden',access_note:'Kraven space. Nerulian name Tolverath; Alliance external designation K-SG-2.',
       hazards:['Kraven space proximity'],
-      desc:'The outer gas giant of the Sarag system, designated K-SG-2. The Nerulians whose agricultural world orbited the same star may have used this body for fuel; the agricultural support infrastructure would have included transport and logistics systems that required it. Whatever they built here is gone with everything else.'}
+      desc:'Named Tolverath in Nerulian navigational records — the outer gas giant of the Sarag system. The agricultural transport network that moved food from Sarag to other Nerulian worlds would have used Tolverath as a fuel source for the long-haul transit vessels that sustained the empire\'s food distribution system. Whatever fuel infrastructure existed at Tolverath is gone. The gas giant itself is unchanged — a passive witness to the destruction of the most productive food system the Nerulian Empire produced.'}
     ]
   },
   {
@@ -4333,22 +4338,22 @@ g.catalogue_systems=[
        notable_locations:[{name:'Nerulian Deep Station (Lost)',desc:'Records from the San Tien Archive describe a significant deep-sea installation on Agua Prime — Nerulian marine engineering at its most advanced. Whether it survived the invasion in any form is unknown.'}],
        hooks:['Long-range marine survey instruments capable of detecting Agua Prime\'s oceanic conditions from outside Kraven territory have produced data across multiple independent surveys suggesting that the deep-water ecosystem is evolving in ways that do not match Kraven bio-pattern behaviour in any other system — changes that suggest either autonomous adaptation by the aquatic Kraven variants or something in the deep water that is affecting Kraven behaviour in ways that are not understood.'],
        desc:'Agua is where the Kraven demonstrated that their consumption patterns adapt to any environment. The aquatic variants that appeared in Agua\'s ocean systems have not been observed anywhere else in Kraven territory. What they represent for Kraven capability development — whether an isolated adaptation or a template for future expansion — is a question that military analysts cannot answer without data that requires entry into Kraven territory to collect.'},
-     {id:'agua_k1',name:'K-AQ-1',type:'Rocky Body — Kraven Territory',status:'abandoned',statusLabel:'Kraven Territory',
+     {id:'agua_k1',name:'Aqueth',type:'Rocky Body — Kraven Territory',status:'abandoned',statusLabel:'Kraven Territory',
       atmosphere:'None',atm_note:'Airless',
       climate:'Barren',gravity:'Low',
       faction:'Kraven',population:'Uninhabited',demographics:'None',
       government:'None',tech_level:'N/A',economy:'None',
-      access:'Forbidden',access_note:'Kraven space. Alliance designation K-AQ-1.',
+      access:'Forbidden',access_note:'Kraven space. Nerulian name Aqueth; Alliance external designation K-AQ-1.',
       hazards:['Kraven space proximity'],
-      desc:'A small rocky body in the Agua system, designated K-AQ-1. The Nerulian marine culture centred on Agua\'s ocean worlds had no known use for this dry and airless rock. The Kraven have likewise shown no interest in it. It remains the one unchanged thing in a system that has been thoroughly transformed.'},
-     {id:'agua_k2',name:'K-AQ-2',type:'Rocky Ocean World — Kraven Aquatic Territory',status:'abandoned',statusLabel:'Consumed — Kraven Aquatic Biome',
+      desc:'Known as Aqueth in Nerulian survey records — a dry, airless rocky body in the Agua system. The Nerulian marine culture centred on Agua\'s ocean worlds had no use for a waterless rock; it was noted, named, and left alone. The Kraven have likewise shown no interest in it. Aqueth remains the one unchanged body in a system that has been thoroughly transformed — an inert witness to everything that happened around it.'},
+     {id:'agua_k2',name:'Marea-Vel',type:'Ocean World — Kraven Aquatic Territory',status:'abandoned',statusLabel:'Consumed — Kraven Aquatic Biome',
       atmosphere:'Toxic',atm_note:'Transformed by Kraven bio-processes — atmospheric chemistry reflects interaction between Kraven biological processing and the oceanic environment of this secondary ocean world',
       climate:'Kraven Aquatic Biome',gravity:'Standard',
-      faction:'Kraven',population:'Unknownn — Kraven aquatic variant presence unverified on this body',demographics:'Kraven',
+      faction:'Kraven',population:'None — Kraven aquatic variant presence unverified on this body',demographics:'Kraven',
       government:'None',tech_level:'N/A',economy:'None',
-      access:'Forbidden',access_note:'Kraven space. The Kraven aquatic variants documented at Agua Prime may have spread to this secondary ocean world.',
+      access:'Forbidden',access_note:'Kraven space. The Kraven aquatic variants documented at Agua Prime may have spread here.',
       hazards:['Kraven space','Possible Kraven aquatic variant presence','Toxic atmosphere'],
-      desc:'A secondary ocean world in the Agua system, also consumed by Kraven bio-processes. The Nerulian marine culture maintained settlements on multiple ocean worlds in this system; this body\'s Nerulian population was consumed along with the primary world\'s. Long-range survey suggests similar biological transformation to the primary, though whether the distinctive Kraven aquatic variants are present here has not been verified.'}
+      desc:'Named Marea-Vel in Nerulian records — the secondary ocean world of the Agua system, meaning "lesser sea" in the old Nerulian coastal tongue. The Nerulian marine culture maintained settlements across multiple ocean worlds in this system; Marea-Vel\'s population was smaller than Agua Prime\'s but significant. It was consumed along with everything else. Long-range survey suggests atmospheric transformation similar to the primary world, though whether the distinctive Kraven aquatic variants observed at Agua Prime have spread here has not been verified.'}
     ]
   },
   {
@@ -4367,22 +4372,22 @@ g.catalogue_systems=[
        notable_locations:[{name:'Central Relay Ruins',desc:'The physical remains of the communication relay network that connected the Nerulian Empire. The strategic importance of its destruction in the first hours of the invasion cannot be overstated — it is the reason the empire could not coordinate a response to the attack.'}],
        hooks:['Signals received on old Nerulian communication frequencies that cannot be attributed to any San Tien transmitter or known diaspora installation have been documented in Alliance communication logs spanning several decades — with source triangulations pointing consistently toward the former location of Bet\'s central relay network. The signals are fragmented, irregular, and undecodable with current Nerulian protocol keys, which has not prevented their existence from being a significant and unresolved item in the intelligence community\'s Kraven Space monitoring files.'],
        desc:'Bet was taken first, and taking it first was probably the single decision that made the Kraven invasion as devastating as it was. Without the communication network, the empire\'s systems could not warn each other, could not coordinate defence, could not request aid. By the time any individual world understood what was happening at scale, it was already too late. The silence that replaced the network is still felt by Nerulian survivors as a specific kind of wound.'},
-     {id:'bet_k1',name:'K-BT-1',type:'Rocky Body — Kraven Territory',status:'abandoned',statusLabel:'Consumed — Kraven Territory',
+     {id:'bet_k1',name:'Bethar',type:'Rocky Body — Kraven Territory',status:'abandoned',statusLabel:'Consumed — Kraven Territory',
       atmosphere:'None',atm_note:'Airless',
       climate:'Barren',gravity:'Low',
       faction:'Kraven',population:'Uninhabited',demographics:'None',
       government:'None',tech_level:'N/A',economy:'None',
-      access:'Forbidden',access_note:'Kraven space. Alliance designation K-BT-1.',
+      access:'Forbidden',access_note:'Kraven space. Nerulian name Bethar; Alliance external designation K-BT-1.',
       hazards:['Kraven space proximity'],
-      desc:'The inner rocky body of the Bet system, designated K-BT-1. The communication relay network that made Bet strategically critical was on the primary world; this body had no role in that infrastructure. It exists as an unremarkable rock in the system where the Nerulian Empire\'s ability to respond to its own destruction was severed.'},
-     {id:'bet_k2',name:'K-BT-2',type:'Gas Giant — Kraven Territory',status:'abandoned',statusLabel:'Kraven Territory',
+      desc:'Known as Bethar in Nerulian records — the inner rocky body of the Bet system. The communication relay network that made Bet strategically critical was on the primary world; Bethar had no role in that infrastructure. It exists as an unremarkable rock in the system where the Nerulian Empire\'s ability to respond to its own destruction was severed. The anomalous signals triangulated toward the Bet system do not originate from Bethar.'},
+     {id:'bet_k2',name:'Soloth',type:'Gas Giant — Kraven Territory',status:'abandoned',statusLabel:'Kraven Territory',
       atmosphere:'Hydrogen/Helium',atm_note:'Standard gas giant',
       climate:'Gas Giant',gravity:'High',
       faction:'Kraven',population:'Uninhabited',demographics:'None',
       government:'None',tech_level:'N/A',economy:'None',
-      access:'Forbidden',access_note:'Kraven space.',
+      access:'Forbidden',access_note:'Kraven space. Nerulian name Soloth; Alliance external designation K-BT-2.',
       hazards:['Kraven space proximity'],
-      desc:'The outer gas giant of the Bet system, designated K-BT-2. The anomalous signals received on old Nerulian communication frequencies that analysts have triangulated toward the Bet system do not originate from this body — long-range survey places the likely source on the primary world\'s surface.'}
+      desc:'Named Soloth in Nerulian navigational records — the outer gas giant of the Bet system. The communication relay infrastructure on Bet Prime required fuel for the relay vessels and maintenance craft that kept the network operational; Soloth was the supply source. The anomalous signals received on old Nerulian communication frequencies that analysts have triangulated toward the Bet system do not originate from Soloth — long-range survey places the likely source on the primary world\'s surface.'}
     ]
   },
   {
@@ -4401,22 +4406,22 @@ g.catalogue_systems=[
        notable_locations:[{name:'The Smelting Complexes',desc:'Long-range scan identifies what appear to be the physical remains of the processing complexes — enormous structures partially consumed and partially preserved by Kraven bio-processing. They may contain recoverable Nerulian manufacturing technology if anyone could get to them.'}],
        hooks:['Materials scientists who study the Nerulian Empire\'s industrial output have identified from surviving manufactured objects a specific alloy whose formula is not documented in any archived record — an alloy whose properties are considered extraordinary by current standards and that appears to have been produced exclusively on Ghash. The theoretical possibility that uncontaminated samples exist in shielded sections of the Smelting Complexes is considered real by the research community. The practical possibility of accessing them is not.','Kraven behavioural analysis applied to Ghash has produced an ongoing disagreement among specialists about whether the pattern of Kraven activity around the industrial ruins represents active interaction with the structures or simply elevated presence as a consequence of the system\'s biological density. The disagreement has not been resolved by the available data and cannot be resolved without direct observation from within Kraven territory.'],
        desc:'Ghash built what the Nerulian Empire needed to sustain its ambitions. When it fell, everything that depended on it fell with it. The industrial infrastructure — enormous, complex, deeply integrated into the empire\'s supply chain — is now buried under Kraven bio-layer and the atmospheric chemistry of both industrial contamination and biological transformation. It is, like all of Kraven Space, simultaneously a graveyard and a territory that functions for its current inhabitants in ways that the previous ones would find completely alien.'},
-     {id:'ghash_k1',name:'K-GH-1',type:'Rocky Body — Kraven Territory',status:'abandoned',statusLabel:'Consumed — Kraven Territory',
+     {id:'ghash_k1',name:'Ghareth',type:'Rocky Body — Kraven Territory',status:'abandoned',statusLabel:'Consumed — Kraven Territory',
       atmosphere:'Thin Toxic',atm_note:'Industrial contamination drifted from primary world — trace heavy metals and chemical compounds',
       climate:'Barren',gravity:'Low',
       faction:'Kraven',population:'Uninhabited',demographics:'None',
       government:'None',tech_level:'N/A',economy:'None',
-      access:'Forbidden',access_note:'Kraven space. Alliance designation K-GH-1.',
+      access:'Forbidden',access_note:'Kraven space. Nerulian name Ghareth; Alliance external designation K-GH-1.',
       hazards:['Kraven space proximity','Trace industrial contamination in atmosphere'],
-      desc:'The inner rocky body of the Ghash system, designated K-GH-1. Long-range spectroscopy has detected trace industrial contamination consistent with heavy metal compounds drifting from the primary world\'s industrial history — contamination that predates the Kraven invasion and persists in this body\'s thin atmosphere. The Nerulians used this body for raw material extraction to feed the Ghash smelting complexes.'},
-     {id:'ghash_k2',name:'K-GH-2',type:'Gas Giant — Kraven Territory',status:'abandoned',statusLabel:'Kraven Territory',
+      desc:'Known as Ghareth in Nerulian industrial records — the inner rocky body of the Ghash system and a primary source of raw material for the Ghash smelting complexes. Long-range spectroscopy has detected trace industrial contamination consistent with heavy metal compounds drifting from Ghash Prime\'s industrial history — contamination that predates the Kraven invasion by centuries and persists in Ghareth\'s thin atmosphere. The extraction operations on Ghareth fed the industrial machinery that sustained the Nerulian Empire\'s construction capability. When Ghash fell, so did Ghareth\'s purpose.'},
+     {id:'ghash_k2',name:'Tolmaveth',type:'Gas Giant — Kraven Territory',status:'abandoned',statusLabel:'Kraven Territory',
       atmosphere:'Hydrogen/Helium',atm_note:'Standard gas giant',
       climate:'Gas Giant',gravity:'High',
       faction:'Kraven',population:'Uninhabited',demographics:'None',
       government:'None',tech_level:'N/A',economy:'None',
-      access:'Forbidden',access_note:'Kraven space.',
+      access:'Forbidden',access_note:'Kraven space. Nerulian name Tolmaveth; Alliance external designation K-GH-2.',
       hazards:['Kraven space proximity'],
-      desc:'The outer gas giant of the Ghash system, designated K-GH-2. The Nerulian heavy industrial operations on Ghash Prime required continuous fuel supply; this body almost certainly hosted a significant extraction platform. Whether any trace of that infrastructure remains is unknown — Ghash\'s Kraven bio-layer is among the densest observed, and what lies beneath it at surface level is not visible to long-range survey.'}
+      desc:'Named Tolmaveth in Nerulian navigational records — the outer gas giant of the Ghash system. The scale of Ghash Prime\'s industrial operations demanded continuous fuel supply; the Tolmaveth extraction platform was one of the largest in the empire\'s fuel supply network. Significant orbital infrastructure would have been built here. Whether any trace of it remains is unknown — Ghash\'s Kraven bio-layer is among the densest observed in their territory, and what lies beneath the transformation at surface level is not visible to long-range survey. Tolmaveth itself remains unchanged.'}
     ]
   },
   // ─── PROXIMA SECTOR ──────────────────────────────────────────────────
@@ -4442,22 +4447,22 @@ g.catalogue_systems=[
        ],
        hooks:['The Bottenbak Cult and the Berilian Order Inquisition are known to have communicated indirectly through third-party carriers on multiple occasions despite their ongoing armed conflict — both organisations use couriers with no institutional affiliation for messages they consider too sensitive to transmit through channels either party could intercept. The practice is established enough that there is an informal market for neutral couriers willing to make the transit through the perimeter conflict zone.','Researchers who have been granted access to the Archive of Ascent and subsequently lost contact with their originating institutions are documented at a frequency that has made academic bodies cautious about approving applications for access without extensive safeguards. The Bottenbak Cult\'s explanation — that the researcher departed of their own accord — is consistent across all cases and consistently unverifiable, as the researchers do not appear at any subsequent location in any accessible record.','Changes in the Bottenbak Council\'s public communication pattern, correlated against Berilian Order Inquisition patrol intensity increases in the Heaven system, have been noted by observers who track both simultaneously. The correlation has held across several cycles, suggesting that the Inquisition has access to information about conditions inside the ruins that the Cult does not publish — or that the Inquisition can observe the ruins in ways that are not apparent from outside.'],
        desc:'Heaven defies physics and defies easy categorisation. The ruins float in space, breathe, and seem to respond to the people inside them in ways that researchers cannot systematically quantify. The Bottenbak Cult has built a theology around what they found here and defends it with the conviction of people who have seen the evidence with their own eyes. The Berilian Order considers that theology dangerous and its practitioners heretics. The result is a system in a permanent low-level state of religious conflict around something that both sides agree is genuinely, undeniably strange.'},
-     {id:'heaven_rock_a',name:'Heaven Outer Body A',type:'Rocky World — Anomalous Properties',status:'active',statusLabel:'Active — Cult Claimed',
+     {id:'heaven_rock_a',name:'Hesrath',type:'Rocky World — Anomalous Properties',status:'active',statusLabel:'Active — Cult Claimed',
       atmosphere:'None',atm_note:'Airless — but navigation instruments behave anomalously in proximity, consistent with the broader system\'s physical irregularities',
       climate:'Barren',gravity:'Variable',grav_note:'Gravitational readings fluctuate — same anomalous pattern as the ruins field',
       faction:'Bottenbak Cult (territorial claim)',population:'Uninhabited',demographics:'None',
       government:'Bottenbak Cult',tech_level:'N/A',economy:'None',
       access:'Restricted',access_note:'Cult territorial claim — within the system\'s anomalous zone. Berilian Order has contested this claim.',
       hazards:['Gravitational anomalies — same pattern as the broader system','Navigation instrument unreliability'],
-      desc:'One of the few conventional rocky bodies in the Heaven system, claimed by the Bottenbak Cult as part of their territorial control of the system. Navigation instruments behave anomalously near it in the same way they do throughout the system. The Cult has placed no permanent presence here but considers it part of their sacred territory.'},
-     {id:'heaven_rock_b',name:'Heaven Outer Body B',type:'Gas Giant — Anomalous Readings',status:'active',statusLabel:'Active — System Boundary',
+      desc:'Named Hesrath by the Bottenbak Cult — one of the few conventional rocky bodies in the Heaven system. The Cult claimed it as sacred territory on the grounds that the anomalous properties of the system extend to this body. Navigation instruments behave erratically near Hesrath in the same way they do throughout the system. The Cult has placed no permanent presence here but uses the name in ceremonial mapping of the Heaven system\'s sacred boundary.'},
+     {id:'heaven_rock_b',name:'Eon-Hem',type:'Gas Giant — Anomalous Readings',status:'active',statusLabel:'Active — System Boundary',
       atmosphere:'Hydrogen/Helium',atm_note:'Standard gas giant composition — but the gas giant itself produces electromagnetic readings inconsistent with standard gas giant physics',
       climate:'Gas Giant (Anomalous)',gravity:'High',grav_note:'Standard high gravity but with anomalous periodic fluctuations',
       faction:'None claimed',population:'Uninhabited',demographics:'None',
       government:'None',tech_level:'N/A',economy:'None',
       access:'Open (navigation hazard)',access_note:'No formal restrictions but the anomalous electromagnetic output interferes with navigation at close range.',
       hazards:['Electromagnetic anomalies affecting navigation instruments','Gas giant approach hazards'],
-      desc:'The outer gas giant of the Heaven system, notable for producing electromagnetic readings that scientists studying the anomalous system have been unable to attribute to standard gas giant physics. The Bottenbak Cult considers its readings to be a boundary marker — a point where the sacred properties of the Heaven system meet normal space. Alliance scientists have a different vocabulary for the same observation and no better explanation.'}
+      desc:'Named Eon-Hem by the Bottenbak Cult — "the threshold of the far" in their theological vocabulary — the outer gas giant of the Heaven system. Eon-Hem produces electromagnetic readings that scientists have been unable to attribute to standard gas giant physics. The Cult considers it a boundary marker: the point where the sacred properties of the Heaven system end and normal space begins. Alliance scientists have a different vocabulary for the same observation and no better explanation of what is causing the readings.'}
     ]
   },
   {
@@ -4481,22 +4486,22 @@ g.catalogue_systems=[
        ],
        hooks:['Documentation of Zoana worker contract terms has reached Alliance legal advocates on multiple occasions through couriers willing to transit corporate security — terms that, under Alliance law, would constitute unlawful labour conditions in every jurisdiction the Alliance recognises. The documentation has been reviewed, confirmed as genuine, and consistently failed to produce regulatory action, which advocates who work on the issue attribute to the political influence of the corporations involved rather than any deficiency in the evidence.','The pattern of corporate sabotage between competing factions on Zoana has escalated through several distinct phases across two decades — each phase producing a crisis in shared infrastructure, a temporary resolution through external pressure, and a subsequent escalation. Workers who have lived through multiple cycles treat the joint administration committee\'s deadlocks as predictable and the damage to shared infrastructure as an expected background condition of life on the planet.'],
        desc:'Zoana is what happens at the intersection of valuable resources, minimal regulation, and corporate competition. The exploitation of what is here has been ongoing for two decades. The corporations involved have made the calculations about local population welfare and environmental impact and reached the same conclusion each time: the current arrangement is acceptable until it stops being profitable. Players on Zoana will find people who need help and corporations that do not want them to provide it.'},
-     {id:'zoana_ii',name:'Zoana-II',type:'Rocky World — Additional Extraction Site',status:'active',statusLabel:'Active — Corporate Operations',
+     {id:'zoana_ii',name:'Zoana Minor',type:'Rocky World — Additional Extraction Site',status:'active',statusLabel:'Active — Corporate Operations',
       atmosphere:'None',atm_note:'Airless',
       climate:'Barren',gravity:'Low',
       faction:'Multiple Corporations (contested)',population:'~800 — corporate extraction crews',demographics:'Corporate workers',
       government:'Corporate Joint Administration (same as primary)',tech_level:'Standard (Industrial)',economy:'Secondary mineral extraction — less productive than primary world but disputed by same factions',
       access:'Restricted (corporate)',access_note:'Corporate contractor affiliation required. The same jurisdiction disputes from the primary world apply here.',
       hazards:['Corporate security forces','Airless environment — full suit required','Same jurisdictional disputes as primary world'],
-      desc:'The second rocky body of the Zoana system, drawn into the same corporate extraction competition as the primary world. Less productive but close enough to the existing operations to be worth contesting. Workers here experience the same conditions as on Zoana Prime with the added risk of the airless environment and the occasional escalation when competing corporate security forces occupy the same site.'},
-     {id:'zoana_outer',name:'Zoana Outer Gas Body',type:'Gas Giant — Contested Fuel Rights',status:'active',statusLabel:'Active — Corporate Fuel Operations',
+      desc:'Called Zoana Minor by the workers and operators who live here — a distinction that does not appear in any corporate official documentation, which refers to it only as a secondary extraction site. Less productive than Zoana Prime but close enough to the existing operations to be worth the jurisdictional fighting. Workers here experience the same conditions as on the primary world with the added hazard of the airless environment and the occasional escalation when competing corporate security forces occupy the same extraction site.'},
+     {id:'zoana_outer',name:'Zoana-Gath',type:'Gas Giant — Contested Fuel Rights',status:'active',statusLabel:'Active — Corporate Fuel Operations',
       atmosphere:'Hydrogen/Helium',atm_note:'Standard gas giant',
       climate:'Gas Giant',gravity:'High',
       faction:'Corporate (contested)',population:'~200 — fuel platform crew',demographics:'Corporate workers',
       government:'Corporate Joint Administration',tech_level:'Standard (Industrial)',economy:'Fuel extraction — contested by the same factions as the planetary operations',
       access:'Restricted',access_note:'Corporate fuel platform — access requires contractor clearance.',
       hazards:['Corporate jurisdiction disputes extend to this platform','Gas giant operations'],
-      desc:'The outer gas giant of the Zoana system, where a fuel extraction platform operates under the same contested corporate jurisdiction as everything else in the system. The three corporations have been unable to agree on fuel distribution terms for two years. The platform operates anyway because none of the three parties can afford to have it not operate.'}
+      desc:'Named Zoana-Gath by the fuel platform crew in the absence of any corporate agreed designation — the outer gas giant of the Zoana system. A fuel extraction platform operates here under the same contested corporate jurisdiction as everything else in the system. The three corporations have been unable to agree on fuel distribution terms for two years. The platform operates anyway because none of the three parties can afford to have it not operate.'}
     ]
   },
   {
@@ -4539,109 +4544,110 @@ g.catalogue_systems=[
     ]
   },
   {
-    id:'solar',name:'Solar System',region:'Proxima Sector',classification:'Historic System — Original Human Home',
-    faction:'Alliance (Special Historical Designation)',status:'active',
-    tags:['Proxima Sector','Human Origin','Historical','Earth','Alliance','Sacred Site'],
-    desc:'The Solar System is the system of origin of humanity — the same star and planets that produced the species that now spans the galaxy. Earth, the original human homeworld, orbits here in its ancestral position. The Alliance maintains the system under a special historical preservation designation. Most humans who visit experience something that does not map cleanly to any other kind of emotion.',
+    id:'solar',name:'Solar System',region:'Proxima Sector',classification:'Ancient Origin System — Abandoned Ghost World',
+    faction:'Alliance Archaeological Preservation Authority',status:'active',
+    tags:['Proxima Sector','Human Origin','Abandoned','Ghost System','Archaeological Site','Sol'],
+    desc:'The Solar System is where humanity began and where it ended — for a time. Earth, the original homeworld, was abandoned in 2530 CE when its biosphere finally failed beyond the point of human habitation. Mars, where terraforming was attempted and ultimately abandoned, went dark around the same time. The last surviving human presence was the Saturn colony — the main settlement of the species in its final pre-departure years. In 2530 CE, the generation ship Palentium departed from the Saturnian system carrying what was left of humanity on a 1,922-year journey that would end at a world that now bears the ship\'s name. The Saturn colony collapsed during that journey, its power systems failing without the expertise and resources of the departed population. By the time the generation ship reached Palentium in 4452 CE, the Solar System had been dark for centuries. It was rediscovered by Alliance survey teams in 5287 CE — nearly 800 years abandoned, its worlds preserved by vacuum and time into something between an archaeological site and a monument. The Alliance has maintained it under special preservation designation since. Most humans who visit experience something that does not map cleanly to any other kind of emotion.',
     planets:[
-      {id:'earth',name:'Earth',type:'Terrestrial — Original Human Homeworld',status:'active',statusLabel:'Active — Historical Preservation',
-       atmosphere:'Breathable',atm_note:'Maintained through active intervention — the industrial history of old Earth required centuries of remediation before natural atmospheric function was restored',
-       climate:'Temperate (Restored)',gravity:'Standard',
-       faction:'Alliance Historical Preservation Authority',population:'~500 million — significantly reduced from historical peak',
-       demographics:'Predominantly human — the decision to maintain Earth as a historical world limits commercial development',
-       government:'Alliance Historical Preservation Authority (joint with Earth Planetary Council)',tech_level:'Standard to Advanced (controlled — industrial development prohibited in preservation zones)',
-       economy:'Heritage tourism, historical research, cultural preservation, limited sustainable agriculture',
-       access:'Open (regulated)',access_note:'Open access with Alliance ID. Industrial and commercial development permits are almost never granted. The political process for landing a manufacturing facility on Earth has defeated several corporations that tried.',
-       hazards:['Political sensitivity — Earth heritage politics are intense and have ended careers across Alliance Space','Religious and cultural significance for dozens of human-heritage traditions means that any incident here has amplified consequences','Preservation law enforcement is among the most thorough in Alliance Space'],
+      {id:'earth',name:'Earth',type:'Terrestrial — Original Human Homeworld (Abandoned)',status:'abandoned',statusLabel:'Abandoned — Biosphere Failure',
+       atmosphere:'Degraded',atm_note:'The atmosphere remains partially breathable in lower elevations but the biosphere has been in systemic collapse since before the 2530 departure — industrial toxins, collapsed oxygen-producing ecosystems, and centuries of unmanaged atmospheric chemistry have left it marginal at best and lethal in many zones. Respirator required outside sealed areas.',
+       climate:'Variable — Degraded Ecosystems',gravity:'Standard',
+       faction:'Alliance Archaeological Preservation Authority',population:'Uninhabited — abandoned since 2530 CE',
+       demographics:'None — Alliance survey and preservation teams conduct short rotations only',
+       government:'Alliance Archaeological Preservation Authority',tech_level:'Standard (Preservation Only)',
+       economy:'None — archaeological preservation site',
+       access:'Restricted',access_note:'Access requires Alliance Archaeological Authority permits. Short-rotation research teams only. The surface is treated as an active archaeological site. No permanent habitation permitted.',
+       hazards:['Atmosphere — degraded and toxic in many zones; respirator essential outside sealed preservation shelters','Structural collapse — centuries of abandonment have made most built structures unreliable or lethal to enter without survey','The biosphere collapse that drove the 2530 departure is not reversed; some ecological hazards remain active','The emotional weight of the site — not a safety hazard, but reported by virtually every team that has worked here'],
        notable_locations:[
-         {name:'Old Cities (Multiple)',desc:'Earth\'s historical urban centres — some restored, some preserved as ruins, all designated as heritage sites. Walking through the streets of any of them produces the specific sensation of standing in the origin of something.'},
-         {name:'The First Launch Site',desc:'The location from which humanity first left its home system. Maintained as the single most significant heritage site on Earth. The original infrastructure is preserved under protective housing. People who come here from across the galaxy stand quietly and then leave without saying very much.'},
-         {name:'The Natural World Preserves',desc:'Large areas of Earth have been returned to pre-industrial ecological state. The variety of life on Earth\'s surface is itself a biological heritage site.'}
+         {name:'The Old Cities (Ruins)',desc:'The great urban centres of ancient Earth — now centuries into decay. Alliance preservation teams have stabilised the most structurally sound sections of several cities. Walking through them is the most disorienting archaeological experience in the known galaxy: recognisable human architecture, completely empty, frozen in the last years of habitation. The streets are intact. The vehicles are still there. The departure was not orderly.'},
+         {name:'The Final Departure Record',desc:'The location from which the generation ship Palentium launched its last transport shuttles from the Saturnian system had no equivalent on Earth\'s surface — the planet had already been abandoned when the ship departed. But the Preservation Authority has identified and marked what it believes is the last permanently inhabited location on Earth, abandoned shortly before 2530 CE. A small sealed monument stands there.'},
+         {name:'The Collapsed Ecosystems',desc:'Large sections of Earth\'s surface show the ecology of a world that was dying before it was abandoned — soil chemistry altered by centuries of industrial use, collapsed forest zones, dry riverbeds, and coastal areas that no longer match the pre-industrial maps. The scale of what was done to the planet is visible from orbit.'}
        ],
-       hooks:['Earth Planetary Council disputes about development in preservation zones are a recurring feature of Alliance political life — each generation produces a version of the same conflict between development interest and preservation mandate, resolved through processes that are publicly transparent and privately contested. The consequences of being identified as operating politically on Earth are significant enough that the outside parties who work these cases do so through structures designed to survive attribution.','Archaeological finds in Earth\'s old city zones that are inconsistent with established historical models have been quarantined by the Preservation Authority on multiple documented occasions across different sites — a pattern that historians who study the official record note has produced a systematic gap in the public archaeological literature about certain periods of Earth history. The quarantines are procedurally legitimate and their cumulative effect on what is publicly known about those periods is striking.','The argument that Alliance historical records about Earth\'s final pre-space centuries have been edited is not fringe scholarship — it is the quiet consensus among historians who have compared surviving primary sources with the official record and found discrepancies that cannot be explained by the normal processes of historical selection. What was altered, and why those specific periods required alteration, is the question that the historians who believe in the alteration cannot agree on.'],
-       desc:'Earth is simultaneously the most familiar and the most alien place a human can visit — the world that produced everything, maintained and preserved and visited by billions of descendants who have never lived anything like the life of anyone who originally walked its surface. Non-humans who visit Earth often describe a quiet they do not expect — the sense of standing at the origin of something that now fills the galaxy. The Alliance protects it carefully. The preservation is imperfect, the history is complicated, and the politics are continuous. It is still Earth.'},
-     {id:'mercury',name:'Mercury',type:'Rocky World — Innermost Planet',status:'active',statusLabel:'Active — Historical Preservation',
-      atmosphere:'None',atm_note:'Essentially no atmosphere — exosphere of solar-wind particles only. Extreme temperature variance between day and sunlit side (+430°C) and night side (−180°C).',
+       hooks:['Archaeological teams working Earth\'s abandoned urban zones have found evidence of accelerated and apparently planned removal of specific categories of material in the final years before abandonment — systematic clearances of certain record types, laboratories, and personal archives that do not match the pattern of general departure. The Preservation Authority has classified the relevant findings. Researchers who have seen them before classification describe the pattern as suggesting someone knew what was coming and chose what to take.','The question of whether Earth\'s biosphere failure was entirely natural — the result of centuries of industrial activity and ecological mismanagement — or whether it was accelerated by deliberate action in the final decades before 2530 is not a fringe question in the academic community that studies the departure. The data is incomplete. The relevant records were among those most systematically removed. The conclusion that the evidence supports the deliberate-acceleration hypothesis is held quietly by researchers who understand the political implications of saying it publicly.','Structures on Earth that should have been uninhabited for centuries have shown signs of very recent disturbance in Alliance survey sweeps conducted across multiple years. The Preservation Authority attributes these findings to settlement and equipment instability. The survey teams that made the initial reports used different language before the official finding was issued.'],
+       desc:'Earth is the origin of everything and the monument to what was lost. The world that produced the species now spanning the galaxy was abandoned in 2530 CE — its biosphere too far gone, its population too reduced, the resources needed to reverse the damage beyond what remained. The people who left were not the last humans; they were the last humans in the solar system, on their way to being the last humans anywhere. What they left behind was a planet in collapse: cities intact, roads empty, the ecosystem failing in slow motion. Nearly a thousand years of abandonment later, it is preserved and studied. The silence here is not peaceful. It is the silence of the end of a chapter that began before recorded history.'},
+     {id:'mercury',name:'Mercury',type:'Rocky World — Innermost Planet',status:'abandoned',statusLabel:'Uninhabited — Never Settled',
+      atmosphere:'None',atm_note:'Essentially no atmosphere — exosphere of solar-wind particles only. Extreme temperature variance between sunlit side (+430°C) and night side (−180°C).',
       climate:'Extreme — Airless, Tidally Influenced',gravity:'Low',grav_note:'0.38g — the smallest and innermost planet of the Solar System',
-      faction:'Alliance Historical Preservation Authority',population:'~2,000 — research outpost and historical survey teams',demographics:'Scientists, historians, support staff',
-      government:'Alliance Historical Preservation Authority',tech_level:'Advanced (Research)',economy:'Scientific research, mineral survey, historical documentation',
-      access:'Open (regulated)',access_note:'Alliance regulated — research permits required for surface operations. The cratered surface is considered a heritage record of the early solar system.',
-      hazards:['Extreme thermal cycling — equipment must handle the full range','No atmosphere — full environmental suit required','Solar radiation — proximity to Sol makes radiation shielding essential','Micrometeorite impacts — no atmospheric protection'],
-      desc:'The innermost planet of the Solar System, a small dense rocky world baked by its proximity to Sol. Mercury was never settled permanently in the early expansion era — the extreme conditions made the investment hard to justify when better worlds were available. In the 56th century it hosts a small research outpost studying the planet\'s composition and the solar system\'s formation history. The surface is covered in craters that record billions of years of impact history, preserved by the absence of geological activity.'},
-     {id:'venus',name:'Venus',type:'Rocky World — Toxic Hell',status:'active',statusLabel:'Active — Research Only',
-      atmosphere:'Dense Carbon Dioxide',atm_note:'Crushing atmosphere of CO2 and sulphuric acid clouds — surface pressure 90× Earth\'s, surface temperature ~465°C. No breathable zone at any altitude without full environmental containment.',
+      faction:'Alliance Archaeological Preservation Authority',population:'Uninhabited — small rotating survey teams only',demographics:'Preservation Authority survey personnel',
+      government:'Alliance Archaeological Preservation Authority',tech_level:'Standard (Survey)',economy:'None — survey operations only',
+      access:'Restricted',access_note:'Alliance Preservation Authority permits required. Rotating survey teams conduct short operations. No permanent habitation.',
+      hazards:['Extreme thermal cycling — equipment must be rated for the full range','No atmosphere — full environmental suit required throughout','Solar radiation — proximity to Sol requires substantial shielding','Micrometeorite impacts — surface is actively cratered'],
+      desc:'Mercury was never permanently settled in humanity\'s expansion era — the conditions made the investment hard to justify when better worlds were available. It was a survey reference point and a mineral prospect. It is now the most unchanged body in the Solar System: still ancient, still blasted by Sol, its cratered surface recording billions of years of impact history that the absence of geological activity has perfectly preserved. Alliance survey teams study it in rotation. Nothing about it has changed since the system was abandoned. Nothing about it ever changed at all.'},
+     {id:'venus',name:'Venus',type:'Rocky World — Toxic',status:'abandoned',statusLabel:'Uninhabited — Inhospitable',
+      atmosphere:'Dense Carbon Dioxide',atm_note:'Crushing atmosphere of CO2 and sulphuric acid clouds — surface pressure 90× Earth\'s, surface temperature ~465°C. Never breathable at any altitude without full environmental containment.',
       climate:'Extreme — Runaway Greenhouse',gravity:'Standard',grav_note:'0.9g — nearly Earth-sized',
-      faction:'Alliance Historical Preservation Authority',population:'~500 — atmospheric research platform crew',demographics:'Scientists, engineers',
-      government:'Alliance Historical Preservation Authority',tech_level:'Advanced (Research and Atmospheric)',economy:'Atmospheric science research, climate modelling',
-      access:'Restricted',access_note:'No surface access possible with current technology at acceptable cost. Atmospheric research platforms operate at ~50km altitude where conditions are more moderate.',
-      hazards:['Surface is instantly lethal without specialised high-pressure, high-temperature suits','Atmospheric sulphuric acid — corrosive to most standard equipment','Crushing pressure at surface','The atmospheric research platforms are kept aloft at significant ongoing cost — a platform failure at altitude is not recoverable'],
-      desc:'Venus was humanity\'s first demonstration that a world similar in size to Earth could become something completely inhospitable through geological and atmospheric processes. The runaway greenhouse effect that cooked Venus is studied as a cautionary model in every climate science programme in the galaxy. An atmospheric research platform floats at altitude where conditions are merely difficult rather than immediately fatal. Early human civilisations gave Venus many names and associated it with beauty; the 56th century has a more precise description.'},
-     {id:'mars',name:'Mars',type:'Rocky World — Former Colonial Heartland',status:'active',statusLabel:'Active — Historical World',
-      atmosphere:'Thin Carbon Dioxide',atm_note:'Thin CO2 atmosphere — breathable only with respiratory assistance. Terraforming programmes begun in the 22nd century increased atmospheric density and produced isolated breathable zones, but full terraforming was never completed before the expansion era made it less critical.',
-      climate:'Cold, Arid — Partially Terraformed',gravity:'Low',grav_note:'0.38g — residents adapt over time; visitors may find movement unexpectedly easy',
-      faction:'Alliance Historical Preservation Authority',population:'~80 million — Mars has maintained a significant population for millennia',
-      demographics:'Predominantly human with long-standing Martian cultural identity distinct from Earth',
-      government:'Mars Planetary Council (Alliance-affiliated)',tech_level:'Advanced',economy:'Research, manufacturing, heritage tourism, agricultural development under dome and terraformed zones',
-      access:'Open',access_note:'Open under Alliance affiliation. Mars maintains its own cultural identity — referring to Martians as simply displaced Earth humans is considered offensive.',
-      hazards:['Low gravity — long-term residents have adapted but recent arrivals may need adjustment','Thin atmosphere — respiratory assistance required outside terraformed zones and habitat domes','Dust storms — can be planet-scale events lasting months','UV radiation without full atmospheric protection'],
+      faction:'Alliance Archaeological Preservation Authority',population:'Uninhabited — rotating survey teams occasionally operate atmospheric stations',demographics:'Survey personnel only',
+      government:'Alliance Archaeological Preservation Authority',tech_level:'Standard (Survey)',economy:'None — atmospheric study',
+      access:'Restricted',access_note:'No surface access at acceptable cost. Atmospheric platforms at altitude require extensive preparation. Preservation Authority permits required.',
+      hazards:['Surface is instantly lethal without specialised high-pressure, high-temperature rated suits','Atmospheric sulphuric acid — corrosive to most standard equipment','Crushing pressure at surface and lower altitudes','Maintaining platforms at altitude is expensive; the risks of failure are non-survivable'],
+      desc:'Venus was never colonised by humanity — the conditions were simply too extreme for any practical permanent settlement with the technology of the early expansion era. It was studied from orbit and from brief atmospheric missions. Old Earth cultural traditions associated it with beauty because of how it looked from Earth\'s surface; the people who went close enough to look properly had a different vocabulary. Alliance survey teams occasionally deploy atmospheric stations to study the ongoing geological and atmospheric dynamics. Venus is unchanged by everything that happened to the solar system. It will still be here long after everything else in the system has turned to dust.'},
+     {id:'mars',name:'Mars',type:'Rocky World — Failed Terraforming (Abandoned)',status:'abandoned',statusLabel:'Abandoned — Terraforming Failed',
+      atmosphere:'Thin Carbon Dioxide',atm_note:'Thin CO2 atmosphere — the terraforming programmes begun in the early expansion era increased atmospheric density and produced isolated breathable zones but never achieved a stable self-sustaining atmosphere. With the population gone and the atmospheric processors unmaintained for centuries, the partial terraforming has been slowly reversing.',
+      climate:'Cold, Arid — Reverting',gravity:'Low',grav_note:'0.38g — unchanged by centuries of abandonment',
+      faction:'Alliance Archaeological Preservation Authority',population:'Uninhabited — abandoned with the solar system in 2530 CE',
+      demographics:'None — rotating Preservation Authority survey teams only',
+      government:'Alliance Archaeological Preservation Authority',tech_level:'Standard (Survey)',economy:'None — archaeological preservation',
+      access:'Restricted',access_note:'Alliance Preservation Authority permits required. The habitat domes are structurally compromised after centuries without maintenance; surface access outside surveyed corridors is dangerous.',
+      hazards:['Thin atmosphere — full respiratory assistance required; the partial terraforming has been reversing for centuries and breathable zone pressure is declining','Habitat dome structural failure — centuries of unmaintained infrastructure makes many settlements dangerous to enter','Dust storms — planet-scale events still occur; the weather pattern continues without population','Abandoned atmospheric processors — some remain partially operational in unpredictable states'],
       notable_locations:[
-        {name:'Olympus Mons',desc:'The largest volcano in the Solar System — three times the height of Everest, its summit extends above most of the Martian atmosphere. A heritage site and one of the most dramatic landscapes in the known galaxy.'},
-        {name:'Valles Marineris',desc:'A canyon system that stretches across a quarter of Mars\'s circumference. Settled in its lower sections where atmospheric pressure is higher. One of the iconic landscapes of early human expansion.'},
-        {name:'The Old Colonies',desc:'The remains of the earliest human Mars settlements — maintained as heritage sites. The pioneers who came here with primitive equipment and made it work are held in a specific regard in human cultural memory.'}
+        {name:'Olympus Mons',desc:'The largest volcano in the Solar System — unchanged by everything that happened to humanity. Its summit extends above most of the Martian atmosphere. Survey teams find it one of the few places on Mars where the scale of the landscape makes the silence feel appropriate rather than wrong.'},
+        {name:'Valles Marineris',desc:'A canyon system stretching across a quarter of Mars\'s circumference. The lower sections, where atmospheric pressure was highest, were among the most densely settled areas. The settlements are intact — abandoned mid-occupation, preserved by the cold and the thin air. Everything the last Martians left behind is still there.'},
+        {name:'The Old Colony Domes (Abandoned)',desc:'The habitat domes that housed the Martian population — from the earliest primitive shelters to the final large-scale installations. Some are structurally intact; others have collapsed. Preservation Authority teams have catalogued them but most remain as found: abandoned mid-life, centuries ago, by people who did not expect to come back.'}
       ],
-      desc:'Mars was humanity\'s first step beyond Earth and the world that proved human beings could survive and thrive on another planet. It has been continuously inhabited for over three thousand years. The Martian identity — distinct from Earth, prouder of its independence, shaped by millennia of life in a challenging environment — is genuine and has survived the human expansion to the stars without dilution. Mars is not Earth and does not want to be.'},
-     {id:'asteroid_belt_sol',name:'Asteroid Belt',type:'Asteroid Belt — Mining Heritage',status:'active',statusLabel:'Active — Mixed Operations',
+      desc:'Mars was where humanity proved it could live somewhere else. The terraforming programmes that began in the early expansion era brought the planet closer to habitable — not close enough to sustain an atmosphere without active maintenance, and certainly not close enough to survive the departure of the population that maintained it. When the generation ship left the Saturn system in 2530 CE, Mars was already in its final decline. The Martian identity — proud, distinct, shaped by centuries of difficult living — ended with the planet\'s abandonment. What the Alliance survey teams found in 5287 CE was a world in the slow process of reverting: the atmospheric processors failing, the pressurised zones deflating, the cities intact and empty. The terraforming that took centuries to achieve is slowly undoing itself. In a geological timeframe, Mars will be as it was before humanity arrived.'},
+     {id:'asteroid_belt_sol',name:'Asteroid Belt',type:'Asteroid Belt — Abandoned Mining Sites',status:'abandoned',statusLabel:'Abandoned — Stations Silent',
       atmosphere:'None',atm_note:'Void',
       climate:'Void',gravity:'Microgravity',
-      faction:'Multiple (Alliance-affiliated)',population:'~5 million — mining communities, station populations',demographics:'Mixed — the belt has its own distinct community identity (Belters)',
-      government:'Belt Station Authority (loose confederation of independent station councils)',tech_level:'Standard',economy:'Mineral extraction, manufacturing, water ice mining, independent trade',
-      access:'Open',access_note:'No unified access control — each station has its own policy. The Belt community maintains informal norms about transit that are well-understood by regular operators.',
-      hazards:['Navigation hazard — despite the vast distances, traffic density in the Belt requires active monitoring','Belt community is self-reliant and does not welcome parties who treat Belt residents as second-class Alliance citizens','Resource claim disputes have historically been resolved with violence'],
-      desc:'The asteroid belt between Mars and Jupiter has been mined and inhabited since the early expansion era. The Belt community — sometimes called Belters — has developed a distinct culture shaped by life in microgravity, resource scarcity, and distance from planetary governance. The Belt is neither Earth nor Mars; its people are neither one nor the other. They are something that formed in the spaces between, and they have made that something real over three millennia.'},
-     {id:'jupiter',name:'Jupiter',type:'Gas Giant — Solar System Anchor',status:'active',statusLabel:'Active — Major Presence',
-      atmosphere:'Hydrogen/Helium',atm_note:'Massive hydrogen-helium atmosphere with visible cloud bands and the iconic Great Red Spot — a storm system larger than Earth that has persisted for centuries. Upper atmosphere accessible; interior crushes any conventional vessel.',
+      faction:'Alliance Archaeological Preservation Authority',population:'Uninhabited — stations abandoned 2530 CE',demographics:'None — survey teams operate in the Belt periodically',
+      government:'Alliance Archaeological Preservation Authority',tech_level:'N/A',economy:'None — abandoned infrastructure',
+      access:'Restricted (survey zones)',access_note:'No unified access restrictions but the Belt is designated an archaeological zone. Survey teams operate under Preservation Authority permits. The stations are structurally compromised and dangerous.',
+      hazards:['Navigation hazard — Belt debris is unchanged; the abandoned mining equipment adds additional obstacles','Station structural failure — centuries of unpressurised vacuum exposure have made most Belt stations structurally unreliable','Abandoned automated mining systems — some remain partially operational in unpredictable states'],
+      desc:'The Asteroid Belt between Mars and Jupiter was one of humanity\'s most productive and distinctive environments — the Belt community that developed there had its own culture, its own identity, and its own economy that was neither planetary nor dependent on planetary support. The Belt stations went dark with the rest of the solar system in 2530 CE. The mining equipment is still there, the stations are still there, the personal effects of the people who left are still there. The Belt is the largest archaeological field site in the Solar System. Alliance survey teams work it in rotation, cataloguing what was left behind by a culture that had no equivalent anywhere else humanity settled.'},
+     {id:'jupiter',name:'Jupiter',type:'Gas Giant — Solar System Anchor',status:'abandoned',statusLabel:'Abandoned — Moon Settlements Silent',
+      atmosphere:'Hydrogen/Helium',atm_note:'Massive hydrogen-helium atmosphere with visible cloud bands and the Great Red Spot — a storm system larger than Earth that has persisted for recorded history and continues undisturbed. Upper atmosphere accessible; interior crushes any conventional vessel.',
       climate:'Gas Giant — Extreme',gravity:'High',grav_note:'2.53g at the cloud tops — tidal forces on moons are significant',
-      faction:'Alliance (multiple jurisdictions)',population:'~500 million — primarily in the moon system (Europa, Ganymede, Callisto, Io), atmospheric platforms, and orbital stations',demographics:'Mixed — the Jovian system is the largest non-planetary population centre in the Solar System',
-      government:'Jovian Council (coordinates the moon-based communities)',tech_level:'Advanced',economy:'Fuel extraction (hydrogen), moon-based manufacturing and agriculture, scientific research, tourism',
-      access:'Open',access_note:'Open access — the atmospheric platforms require specific equipment. The moon communities are open to all Alliance visitors.',
-      hazards:['Atmospheric entry requires hardened vessels — the pressure gradient is extreme below the upper atmosphere','Radiation belts around Jupiter are intense — Io\'s orbit in particular is in a high-radiation zone','Tidal heating on Io produces continuous and unpredictable volcanic activity','Europa\'s subsurface ocean — significant scientific interest but access regulation protects the ecosystem'],
+      faction:'Alliance Archaeological Preservation Authority',population:'Uninhabited — Jovian moon settlements abandoned 2530 CE',demographics:'None — rotating survey teams only',
+      government:'Alliance Archaeological Preservation Authority',tech_level:'N/A',economy:'None — archaeological survey',
+      access:'Restricted',access_note:'Preservation Authority permits required. Moon settlements are archaeological sites — structurally compromised after centuries of abandonment. Europa subsurface access strictly controlled for ecosystem integrity.',
+      hazards:['Radiation belts — Jupiter\'s radiation environment is intense; extended operation requires hardened equipment','Abandoned moon infrastructure — Ganymede and Callisto settlements are structurally compromised after centuries without maintenance','Europa subsurface ecosystem — the life in Europa\'s ocean has been undisturbed for nearly a thousand years; Preservation Authority protocols restrict any access to prevent contamination'],
       notable_locations:[
-        {name:'Europa',desc:'The ice-covered moon with a subsurface ocean — one of humanity\'s most significant astrobiological sites. The subsurface ocean has been confirmed to host life. Access to the subsurface is strictly regulated to prevent contamination.'},
-        {name:'Ganymede',desc:'The largest moon in the Solar System — larger than Mercury. Home to the Jovian system\'s largest settlement. The magnetic field provides radiation protection that makes it the most hospitable of the major moons.'},
-        {name:'Io',desc:'The most volcanically active body in the Solar System — surface continuously reshaped by sulphuric eruptions. Research stations here study the volcanic processes. The stations are expensive to maintain and the turnover among researchers is high.'}
+        {name:'Ganymede Settlements (Abandoned)',desc:'The largest of the abandoned Jovian moon communities — Ganymede hosted the most significant off-Earth settlement in the outer Solar System. The settlements are intact, frozen in the moment of departure. Survey teams describe them as the most complete window into late pre-departure human settlement life: everything left as it was, including evidence that the departure was hurried.'},
+        {name:'Europa — Protected Biosphere',desc:'The ice-covered moon whose subsurface ocean hosts life — life that has now been completely undisturbed for nearly a thousand years. The Preservation Authority has classified Europa as a protected biosphere and restricts all subsurface access. The ocean continues in complete isolation, evolving without observation.'},
+        {name:'Io',desc:'The most volcanically active body in the Solar System — the sulphuric eruptions that made it expensive to operate here before abandonment continue unchanged. Whatever research infrastructure existed on Io has been comprehensively destroyed by the geological activity of the past nine centuries.'}
       ],
-      desc:'Jupiter is the giant of the Solar System and the anchor of its outer region. The Jovian moon system is one of humanity\'s oldest continuously inhabited off-Earth environments — people have lived on Ganymede for over two thousand years. The gas giant itself is not habitable but its resources and its moons have made the Jovian system a significant population and industrial centre. Visitors often describe seeing Jupiter in the Ganymede sky for the first time as an experience that recalibrates their sense of scale.'},
-     {id:'saturn',name:'Saturn',type:'Gas Giant — Ring System',status:'active',statusLabel:'Active — Research and Tourism',
-      atmosphere:'Hydrogen/Helium',atm_note:'Standard gas giant composition with slightly lower density than Jupiter',
-      climate:'Gas Giant',gravity:'High',grav_note:'~1.06g at cloud tops — slightly above standard',
-      faction:'Alliance (multiple jurisdictions)',population:'~150 million — primarily Titan and orbital stations',demographics:'Mixed — Titan community has a distinct identity',
-      government:'Saturnian Council (Titan-based primary governance)',tech_level:'Advanced',economy:'Titan hydrocarbon processing, ring system material extraction, tourism, research',
-      access:'Open',access_note:'Open access — the ring system requires navigation care.',
-      hazards:['Ring system navigation — the rings are composed of ice and rock particles that require careful transit planning','Titan\'s nitrogen-methane atmosphere — thick and cold (−179°C surface), breathable oxygen levels absent'],
+      desc:'Jupiter is unchanged. The Great Red Spot still turns. The radiation belts are as intense as they were when the last Jovian moon community went dark. The moons that were once home to the largest off-Earth population outside Mars now host only silence and the ruins of settlements that were abandoned with the rest of the system in 2530 CE. The Jovian communities were significant — Ganymede alone housed hundreds of thousands. Their departure was part of the same overall collapse and abandonment that ended the solar human presence. The Alliance survey teams who reached the Jovian system in the 5300s found the settlements structurally intact, the equipment still in place, and the records of a community that had been alive and functional days before the departure preserved in the cold and vacuum.'},
+     {id:'saturn',name:'Saturn',type:'Gas Giant — Last Human Stronghold (Abandoned)',status:'abandoned',statusLabel:'Abandoned — Departure Point of Humanity',
+      atmosphere:'Hydrogen/Helium',atm_note:'Standard gas giant composition. The rings continue their ancient rotation, unchanged.',
+      climate:'Gas Giant',gravity:'High',grav_note:'~1.06g at cloud tops',
+      faction:'Alliance Archaeological Preservation Authority',population:'Uninhabited — the Saturnian colony collapsed during the generation ship voyage, 2530–4452 CE',demographics:'None — rotating survey teams only',
+      government:'Alliance Archaeological Preservation Authority',tech_level:'N/A',economy:'None — archaeological preservation',
+      access:'Restricted',access_note:'Preservation Authority permits required. Titan surface is an active archaeological site. Ring navigation requires modern navigational equipment.',
+      hazards:['Ring system navigation — the rings require careful transit planning even with modern equipment','Titan surface structural collapse — the colony infrastructure has been deteriorating for nearly a thousand years; most pressurised structures are compromised','Titan atmosphere — thick nitrogen-methane, extremely cold, no breathable oxygen; full environmental suit required'],
       notable_locations:[
-        {name:'Titan',desc:'Saturn\'s largest moon — the only moon in the Solar System with a dense atmosphere. Surface lakes of liquid methane and ethane. Long-inhabited despite the extreme cold; the dense atmosphere actually makes pressure suits unnecessary even if thermal and breathing equipment is required. The Titan community is one of the oldest in the outer system.'},
-        {name:'The Ring System',desc:'Saturn\'s iconic rings — thousands of kilometres wide but only tens of metres thick in most sections. A navigational challenge and one of the most visually extraordinary sights in the Solar System. Tourism to the ring viewpoint orbit is a significant economic activity.'}
+        {name:'Titan — The Last Colony (Abandoned)',desc:'Saturn\'s largest moon was the main settlement of humanity in its final solar years — the largest community remaining in the Solar System when the generation ship Palentium launched from Titanian orbit in 2530 CE. The colony continued for some time after the ship\'s departure, then failed as its power systems degraded without the expertise and resources that had left with the ship. The timeline of the collapse is reconstructed from data logs — it took decades, not years. What remains on Titan\'s surface is the most complete record of humanity\'s final solar chapter.'},
+        {name:'The Departure Orbital (Ruins)',desc:'The orbital infrastructure from which the generation ship Palentium launched and from which the final shuttles returned those who chose to remain. The orbital station has been in free drift since 2530 CE. Portions remain intact; portions have been destroyed by minor impacts over nine centuries. The Preservation Authority has not moved it.'},
+        {name:'The Ring System',desc:'Saturn\'s iconic rings — thousands of kilometres wide, only metres thick, composed of ice and rock that has orbited unchanged through all of human history. They were the last thing the generation ship crew saw as they left the Solar System. They are the same rings. Nothing about them has changed.'}
       ],
-      desc:'Saturn is the most visually iconic body in the Solar System — the rings that orbit it are visible to human eyes from significant distances and have been depicted in human art for as long as telescopes existed. The reality of living in the Saturnian system is less aesthetic and more practical: Titan\'s hydrocarbon resources and the ring material have sustained communities for millennia. Visitors who come for the scenery and stay for the reality find both things are true.'},
-     {id:'uranus',name:'Uranus',type:'Ice Giant — Tilted World',status:'active',statusLabel:'Active — Research Outposts',
-      atmosphere:'Hydrogen/Helium/Methane',atm_note:'Methane in the upper atmosphere produces the characteristic blue-green colouration. Extremely cold (−224°C at cloud tops). Interior is a slushy mix of water, ammonia, and methane ices.',
+      desc:'Saturn is the last chapter of humanity\'s solar story. When Earth\'s biosphere collapsed and Mars\'s terraforming failed, the surviving human population concentrated in the Saturnian system — primarily on Titan, whose dense atmosphere and hydrocarbon resources made it the most sustainable option in the outer system. By 2530 CE, this was the core of humanity in the solar system. In that year, the generation ship Palentium launched from Titanian orbit carrying the population that chose to attempt the journey to a surveyed destination world. Those who remained behind — those who were too old, too sick, or simply chose not to go — continued in the Saturnian colony for some time after the ship\'s departure. The colony\'s power systems were designed for a larger and more capable population. Without the technical expertise that had departed, degradation was inevitable. The colony died over decades, its records preserved in data systems that ran on backup power long after the last human there was gone. The ship arrived at Palentium 1,922 years later. What was left of humanity was on it. The Saturnian system waited in silence for nearly 800 more years before the Alliance survey teams found it.'},
+     {id:'uranus',name:'Uranus',type:'Ice Giant — Outer System',status:'abandoned',statusLabel:'Abandoned — Outposts Gone Dark',
+      atmosphere:'Hydrogen/Helium/Methane',atm_note:'Methane produces the characteristic blue-green colouration. Extremely cold at cloud tops. The axial tilt that makes Uranus unique is unchanged.',
       climate:'Ice Giant — Extreme Cold',gravity:'Standard',grav_note:'0.89g — nearly standard despite the scale',
-      faction:'Alliance Historical Preservation Authority',population:'~10,000 — research outposts on moons',demographics:'Scientists and support staff',
-      government:'Alliance research mission governance',tech_level:'Advanced (Research)',economy:'Scientific research, resource survey',
-      access:'Open (research-focus)',access_note:'Open — the distance and conditions make casual transit rare.',
-      hazards:['Extreme cold — the coldest atmospheric temperature in the Solar System','Extreme distance from inner system support','Tilted rotation axis creates extreme seasonal variation — summer and winter each last decades'],
-      desc:'Uranus is the Solar System\'s oddity — an ice giant that orbits on its side, its rotation axis tilted nearly 98 degrees from its orbital plane. The origin of this tilt is believed to be a massive collision in the early solar system. The extreme axial tilt means Uranian seasons last decades: each pole experiences 42 years of continuous sunlight followed by 42 years of darkness. Research outposts study the unusual seasonal dynamics and the extensive moon system. It is a long way from anywhere comfortable.'},
-     {id:'neptune',name:'Neptune',type:'Ice Giant — Outer System',status:'active',statusLabel:'Active — Research Outposts',
-      atmosphere:'Hydrogen/Helium/Methane',atm_note:'Similar composition to Uranus but with more internal heat and more violent weather systems. Strongest winds in the Solar System — up to 2,100 km/h.',
+      faction:'Alliance Archaeological Preservation Authority',population:'Uninhabited — small research outposts abandoned with the solar system',demographics:'None',
+      government:'Alliance Archaeological Preservation Authority',tech_level:'N/A',economy:'None',
+      access:'Restricted',access_note:'Preservation Authority zone. The extreme distance and conditions make access rare even for survey teams. The moon outpost ruins are catalogued but not regularly visited.',
+      hazards:['Extreme cold throughout the system','Extreme distance — the Uranian system is at the outer edge of the solar system\'s inhabited range','The seasonal variation from the 98-degree axial tilt creates multi-decade periods of polar darkness — the abandoned outposts have spent decades in continuous darkness since the system went cold'],
+      desc:'Uranus was never a major settlement — the small research outposts on its moons were exactly that: small, remote, and oriented toward study of the gas giant\'s unusual seasonal dynamics rather than any practical exploitation. They went dark with the rest of the solar system. The ice giant itself is unchanged: still tilted at its improbable angle, still cycling through its decades-long seasons. The Alliance has catalogued the moon outposts from distance. Their priority for physical survey is low — the distance, the conditions, and the limited scientific yield compared to the inner system sites make them a long-term item on a long list.'},
+     {id:'neptune',name:'Neptune',type:'Ice Giant — Outer System',status:'abandoned',statusLabel:'Abandoned — Most Remote Outpost Gone Dark',
+      atmosphere:'Hydrogen/Helium/Methane',atm_note:'Similar composition to Uranus but with more internal heat and more violent weather. Wind speeds up to 2,100 km/h — the most extreme in the Solar System. Unchanged by everything that happened to humanity.',
       climate:'Ice Giant — Extreme Winds',gravity:'Standard',grav_note:'1.14g — slightly above standard',
-      faction:'Alliance Historical Preservation Authority',population:'~8,000 — research outposts on Triton',demographics:'Scientists and support staff',
-      government:'Alliance research mission governance',tech_level:'Advanced (Research)',economy:'Scientific research',
-      access:'Open (research-focus)',access_note:'The most distant major planet — transit from the inner system is measured in months even with modern drives.',
-      hazards:['Extreme winds — atmospheric entry is dangerous','Extreme distance — emergency response is not available on any practical timescale','Triton\'s retrograde orbit indicates it is a captured Kuiper Belt object — its eventual decay into Neptune is predicted on a geological timescale but the tidal stresses are currently significant'],
+      faction:'Alliance Archaeological Preservation Authority',population:'Uninhabited — the Triton outpost was the last Solar System settlement to go dark',demographics:'None',
+      government:'Alliance Archaeological Preservation Authority',tech_level:'N/A',economy:'None',
+      access:'Restricted',access_note:'The most distant surveyed body in the Solar System. Transit time significant even with modern drives. Preservation Authority permits required.',
+      hazards:['Extreme winds — atmospheric entry is dangerous','Extreme distance — the outermost major body of the Solar System; emergency response is not available on any practical timescale','Triton surface structural deterioration — the research installation has not been maintained for centuries'],
       notable_locations:[
-        {name:'Triton',desc:'Neptune\'s largest moon and almost certainly a captured Kuiper Belt object — it orbits Neptune backwards relative to the planet\'s rotation. Geologically active with nitrogen geysers. Inhabited by a small research community that maintains the most remote permanent human outpost in the Solar System proper.'}
+        {name:'Triton Research Installation (Abandoned)',desc:'Neptune\'s largest moon — a captured Kuiper Belt object orbiting backwards relative to Neptune\'s rotation, geologically active with nitrogen geysers. The research installation here was the most remote permanent human outpost in the Solar System. Alliance survey records indicate it went dark sometime after 2530 CE — likely among the last solar settlements to fail, given its relative self-sufficiency. The installation is physically intact. The data logs recovered from it contain the final recorded observations of humans in the Solar System proper.'}
       ],
-      desc:'Neptune marks the practical outer boundary of the Solar System\'s inhabited region. Beyond it lies the Kuiper Belt and the Oort Cloud — the diffuse outer boundary of Sol\'s gravitational influence. The ice giant itself is the most dynamic of the outer planets despite its distance from the Sun, driven by internal heat rather than solar energy. The research community on Triton describes their posting as the most isolated in the Solar System and, by consensus, worth it for the view.'}
+      desc:'Neptune is the last world of the Solar System — the outermost major planet, home to the most isolated and most remote research installation humanity ever maintained in its home system. The Triton outpost was the last of the solar settlements to fail; its logs, recovered by Alliance survey teams, contain the final recorded observations of any human presence in the Solar System proper. What those logs say about the final days of the Triton community, and what the researchers there knew about the state of the rest of the system as it went dark, is among the most studied documents in the Alliance Archaeological Authority\'s possession. Neptune itself is unchanged. It will still be here when its geological record has outlasted everything else in the system by billions of years.'}
     ]
   },
   // ─── MUBOTHEN EMPIRE ─────────────────────────────────────────────────
@@ -7518,12 +7524,43 @@ function render(){
       }
       return catSystems.filter(function(s){return sec.sysRegex.test(s.region||'')||sec.sysRegex.test(s.faction||'');});
     }
+    // Helper: get planet type icon
+    function gcPlanetIcon(p){
+      var t=(p.type||'').toLowerCase();
+      var a=(p.atmosphere||'').toLowerCase();
+      var s=(p.status||'');
+      if(s==='abandoned'&&(t.indexOf('kraven')!==-1||t.indexOf('consumed')!==-1))return'☠️';
+      if(t.indexOf('destroyed')!==-1||t.indexOf('debris field')!==-1||t.indexOf('ruins')!==-1)return'💀';
+      if(t.indexOf('asteroid belt')!==-1||t.indexOf('asteroid field')!==-1)return'☄️';
+      if(t.indexOf('incomplete')!==-1||t.indexOf('construction frame')!==-1)return'🔧';
+      if(t.indexOf('ice giant')!==-1||t.indexOf('ice world')!==-1||t.indexOf('ice planet')!==-1)return'🧊';
+      if(t.indexOf('gas giant')!==-1)return'🪐';
+      if(t.indexOf('station')!==-1||t.indexOf('orbital')!==-1||t.indexOf('spaceport')!==-1)return'🛸';
+      if(t.indexOf('artificial planet')!==-1||t.indexOf('artificial world')!==-1)return'🔵';
+      if(t.indexOf('ocean world')!==-1)return'🌊';
+      if(t.indexOf('floating')!==-1||t.indexOf('space ruins')!==-1)return'✨';
+      if(a.indexOf('breathable')!==-1)return'🌍';
+      if(t.indexOf('rocky')!==-1||t.indexOf('barren')!==-1)return'🌑';
+      return'🌑';
+    }
+    // Helper: is this a secondary (non-primary/non-habitable) body?
+    function gcIsSecondary(p){
+      var t=(p.type||'').toLowerCase();
+      var a=(p.atmosphere||'').toLowerCase();
+      // Primary: breathable + inhabited, or major station/artificial
+      if(a.indexOf('breathable')!==-1)return false;
+      if(t.indexOf('station')!==-1||t.indexOf('orbital network')!==-1||t.indexOf('spaceport')!==-1)return false;
+      if(t.indexOf('artificial planet')!==-1||t.indexOf('artificial world')!==-1)return false;
+      if(t.indexOf('floating')!==-1||t.indexOf('space ruins')!==-1)return false;
+      return true;
+    }
     // Helper: render a list of systems
     function gcRenderSystems(systems){
       var h='';
       systems.forEach(function(sys){
         var realIdx=catSystems.indexOf(sys);
         var isOpen=gcOpenSystems.has(sys.id);
+        var wldCnt=(sys.planets||[]).length;
         h+='<div class="gc-system-card'+(isOpen?' open':'')+'" id="gcs_'+esc(sys.id)+'">';
         h+='<div class="gc-system-header" onclick="gcToggleSystem(\''+esc(sys.id)+'\')">';
         h+='<div class="gc-system-info">';
@@ -7532,18 +7569,18 @@ function render(){
         h+='</div>';
         h+='<div class="gc-system-right">';
         h+='<span class="world-entry-status ws-'+esc(sys.status||'active')+'">'+esc((sys.status||'active')[0].toUpperCase()+(sys.status||'active').slice(1))+'</span>';
-        h+='<span class="gc-system-count">'+((sys.planets||[]).length)+' world'+((sys.planets||[]).length!==1?'s':'')+'</span>';
+        h+='<span class="gc-system-count">🌐 '+wldCnt+' world'+(wldCnt!==1?'s':'')+'</span>';
         h+='<button class="gc-edit-btn" onclick="event.stopPropagation();gcOpenEditSystem('+realIdx+')">✎</button>';
         h+='<span class="gc-arr">▼</span>';
         h+='</div></div>';
         if(sys.tags&&sys.tags.length)h+='<div class="gc-sys-tags">'+sys.tags.map(function(t){return '<span class="tag tgr">'+esc(t)+'</span>';}).join('')+'</div>';
         if(sys.desc){var exc=sys.desc.length>220?sys.desc.substring(0,220).replace(/\s+\S*$/,'')+'…':sys.desc;h+='<div class="gc-sys-excerpt">'+esc(exc)+'</div>';}
         var totalPop=(sys.planets||[]).map(function(p){return p.population||'';}).filter(Boolean);
-        if(totalPop.length||(sys.planets||[]).length){
+        if(totalPop.length||wldCnt){
           h+='<div class="gc-sys-quickbar">';
           (sys.planets||[]).forEach(function(p){
             if(!p.atmosphere&&!p.access&&!p.status)return;
-            h+='<span class="gc-sys-qworld"><span class="gc-sys-qname">'+esc(p.name)+'</span>';
+            h+='<span class="gc-sys-qworld"><span style="margin-right:3px;font-size:11px;">'+gcPlanetIcon(p)+'</span><span class="gc-sys-qname">'+esc(p.name)+'</span>';
             if(p.atmosphere)h+='<span class="gc-chip gc-chip-sm '+gcAtmClass(p.atmosphere)+'">'+esc(p.atmosphere)+'</span>';
             if(p.access)h+='<span class="gc-chip gc-chip-sm '+gcAccessClass(p.access)+'">'+esc(p.access)+'</span>';
             if(p.population)h+='<span class="gc-sys-qpop">'+esc(p.population)+'</span>';
@@ -7553,12 +7590,15 @@ function render(){
         }
         h+='<div class="gc-system-body">';
         if(sys.desc)h+='<div class="gc-system-desc">'+descHtml(sys.desc,sq)+'</div>';
-        if((sys.planets||[]).length){
+        if(wldCnt){
+          h+='<div class="gc-planets-hint">🖱 Click any world to open detailed profile in the side panel</div>';
           h+='<div class="gc-planets-head"><span>World</span><span>Type</span><span style="text-align:right;">Atmosphere</span><span style="text-align:right;">Access</span></div>';
           (sys.planets||[]).forEach(function(p,pi){
             var isSel=(gcPanelSys===realIdx&&gcPanelPlanet===pi);
-            h+='<div class="gc-planet-row'+(isSel?' sel':'')+'" id="gcp_'+esc(sys.id)+'_'+pi+'" onclick="gcOpenPlanet('+realIdx+','+pi+')">';
-            h+='<div class="gc-planet-name">'+hl(p.name,sq)+'</div>';
+            var isSec=gcIsSecondary(p);
+            var icon=gcPlanetIcon(p);
+            h+='<div class="gc-planet-row'+(isSel?' sel':'')+(isSec?' sec':'')+'" id="gcp_'+esc(sys.id)+'_'+pi+'" onclick="gcOpenPlanet('+realIdx+','+pi+')">';
+            h+='<div class="gc-planet-name"><span class="gc-planet-icon">'+icon+'</span>'+hl(p.name,sq)+'</div>';
             h+='<div class="gc-planet-type">'+esc(p.type||'—')+'</div>';
             h+='<div class="gc-planet-chips"><span class="gc-chip '+gcAtmClass(p.atmosphere)+'">'+esc(p.atmosphere||'—')+'</span></div>';
             h+='<div class="gc-planet-chips"><span class="gc-chip '+gcAccessClass(p.access)+'">'+esc(p.access||'—')+'</span></div>';
