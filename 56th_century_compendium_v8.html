@@ -6014,12 +6014,18 @@ function gcOpenPlanet(si,pi){
   }
   // Rumours & Observed Facts
   if(p.hooks&&p.hooks.length){
-    h+='<div class="gc-psec"><div class="gc-psec-title">Galactic Lore &amp; Rumours</div>';
-    h+='<div class="gc-hook-list">';
+    var pHkId='gc-acc-phooks-'+si+'-'+pi;
+    h+='<div class="gc-psec">';
+    h+='<div class="gc-region-acc" id="'+pHkId+'">';
+    h+='<div class="gc-region-acc-hd" onclick="gcToggleAcc(\''+pHkId+'\')">';
+    h+='<span class="gc-region-acc-title">Hooks &amp; Rumours <span style="color:var(--a);margin-left:6px;">'+p.hooks.length+'</span></span>';
+    h+='<span class="gc-region-acc-arr">▼</span></div>';
+    h+='<div class="gc-region-acc-body"><div class="gc-region-lore-list">';
     (p.hooks||[]).forEach(function(hk,i){
-      h+='<div class="gc-hook"><div class="gc-hook-num">RUMOUR '+(i+1)+'</div>'+esc(hk)+'</div>';
+      h+='<div class="gc-region-lore-item"><div class="gc-region-lore-num">RUMOUR '+(i+1)+'</div>'+esc(hk)+'</div>';
     });
-    h+='</div></div>';
+    h+='</div></div></div>';
+    h+='</div>';
   }
   h+='</div>';
   panel.innerHTML=h;
@@ -7596,8 +7602,13 @@ function render(){
         }
         var sysHooks=(sys.planets||[]).flatMap(function(p){return p.hooks||[];});
         if(sysHooks.length){
-          h+='<div style="margin:10px 0 6px;font-size:10px;color:#8e8e93;font-family:\'Share Tech Mono\',monospace;letter-spacing:.08em;">HOOKS &amp; INTEL</div>';
-          h+='<div class="gc-region-lore-list">'+sysHooks.map(function(n,i){return '<div class="gc-region-lore-item"><div class="gc-region-lore-num">NOTE '+(i+1)+'</div>'+esc(n)+'</div>';}).join('')+'</div>';
+          var hkAccId='gc-acc-hooks-'+esc(sys.id);
+          h+='<div class="gc-region-acc" id="'+hkAccId+'" style="margin-top:10px;">';
+          h+='<div class="gc-region-acc-hd" onclick="gcToggleAcc(\''+hkAccId+'\')">';
+          h+='<span class="gc-region-acc-title">Hooks &amp; Intel <span style="color:var(--a);margin-left:6px;">'+sysHooks.length+'</span></span>';
+          h+='<span class="gc-region-acc-arr">▼</span></div>';
+          h+='<div class="gc-region-acc-body"><div class="gc-region-lore-list">'+sysHooks.map(function(n,i){return '<div class="gc-region-lore-item"><div class="gc-region-lore-num">NOTE '+(i+1)+'</div>'+esc(n)+'</div>';}).join('')+'</div></div>';
+          h+='</div>';
         }
         if(wldCnt){
           h+='<div class="gc-planets-hint">🖱 Click any world to open detailed profile in the side panel</div>';
