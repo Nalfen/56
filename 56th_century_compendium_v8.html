@@ -727,7 +727,7 @@ function applyWpnMfr(item,mfrName){
 
 // Defense tiers: numeric mapping 0=None,3=Low,6=Medium,9=High,12=Extreme
 const DEF_TIER_MAP={0:'None',3:'Low',6:'Medium',9:'High',12:'Extreme'};
-const DEF_NAME_TO_NUM={None:0,Low:3,Medium:6,High:9,Extreme:12,EXTREME:12,NONE:0};
+const DEF_NAME_TO_NUM={None:0,Low:3,Medium:6,High:9,Extreme:12,EXTREME:12,NONE:0,LOW:3,MEDIUM:6,HIGH:9};
 function defShift(current, numericMod){
   // numericMod is a raw numeric value added to the 0/3/6/9/12 scale
   if(!numericMod) return current;
