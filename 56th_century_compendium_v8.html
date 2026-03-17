@@ -7525,9 +7525,10 @@ function render(){
     dcTypes.forEach(t=>{html+=fcBtn(t,t,af);});
     html+='</div>';
     html+='<div class="ssub">Quick Reference</div>';
-    html+='<table class="stab" style="margin-bottom:14px;"><thead><tr><th>Name</th><th>Type</th><th>CPU</th><th>MEM</th><th>NAN</th><th>Soak</th><th>Size</th><th>Legality</th><th>Cost</th></tr></thead><tbody>';
+    html+='<table class="stab" style="margin-bottom:14px;"><thead><tr><th>Name</th><th>Type</th><th>CPU</th><th>MEM</th><th>NAN</th><th>PHYS</th><th>ENRG</th><th>TECH</th><th>SPRT</th><th>Soak</th><th>Size</th><th>Legality</th><th>Cost</th></tr></thead><tbody>';
     F.forEach(dc=>{
-      html+='<tr><td>'+hl(dc.name,sq)+'</td><td class="avg">'+hl(dc.type||'—',sq)+'</td><td>'+hl(dc.cpu||'—',sq)+'</td><td>'+hl(dc.memory||'—',sq)+'</td><td>'+hl(dc.nanites!=null?String(dc.nanites):'—',sq)+'</td><td>'+hl(dc.soak||'—',sq)+'</td><td class="minmax">'+hl(dc.size||'—',sq)+'</td><td>'+hl(dc.legality||'—',sq)+'</td><td style="color:var(--gr);">'+fmt(dc.cost)+'</td></tr>';
+      const ddc=(v)=>{const c=defCls(v);return '<span class="'+c+'">'+esc(v||'—')+'</span>';};
+      html+='<tr><td>'+hl(dc.name,sq)+'</td><td class="avg">'+hl(dc.type||'—',sq)+'</td><td>'+hl(dc.cpu||'—',sq)+'</td><td>'+hl(dc.memory||'—',sq)+'</td><td>'+hl(dc.nanites!=null?String(dc.nanites):'—',sq)+'</td><td>'+ddc(dc.def_physical)+'</td><td>'+ddc(dc.def_energy)+'</td><td>'+ddc(dc.def_tech)+'</td><td>'+ddc(dc.def_spiritual)+'</td><td>'+hl(dc.soak||'—',sq)+'</td><td class="minmax">'+hl(dc.size||'—',sq)+'</td><td>'+hl(dc.legality||'—',sq)+'</td><td style="color:var(--gr);">'+fmt(dc.cost)+'</td></tr>';
     });
     html+='</tbody></table>';
     html+='<div class="grid">';
