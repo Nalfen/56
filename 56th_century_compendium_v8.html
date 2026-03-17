@@ -3623,6 +3623,161 @@ g.catalogue_systems=[
        hooks:['Nerulian records describe a specific alloy produced only on Ghash whose formula was not archived anywhere else. A researcher has proposed that samples might still exist in the physical remains of the processing complexes if shielded from atmospheric contact.','Kraven activity around the Ghash industrial ruins has increased. Whether the Kraven are simply moving through or doing something with the ruins is not clear from external observation.'],
        desc:'Ghash built what the Nerulian Empire needed to sustain its ambitions. When it fell, everything that depended on it fell with it. The industrial infrastructure — enormous, complex, deeply integrated into the empire\'s supply chain — is now buried under Kraven bio-layer and the atmospheric chemistry of both industrial contamination and biological transformation. It is, like all of Kraven Space, simultaneously a graveyard and a territory that functions for its current inhabitants in ways that the previous ones would find completely alien.'}
     ]
+  },
+  // ─── PROXIMA SECTOR ──────────────────────────────────────────────────
+  {
+    id:'heaven_system',name:'Heaven System',region:'Proxima Sector',classification:'Anomalous System — Magical Significance',
+    faction:'Bottenbak Cult',status:'active',
+    tags:['Proxima Sector','Magical','Ruins','Cult','Contested','Floating Ruins','Berilian Order'],
+    desc:'Heaven is a system unlike any other in the known galaxy — the primary body is not a planet but a vast field of floating ruins suspended in space, defying conventional physics in a way that has never been adequately explained by any scientific framework. The Bottenbak cult controls access, claims the ruins as sacred territory, and is in an ongoing conflict with the Berilian Order\'s Patriark Inquisition forces, who view the cult\'s theology as heresy requiring correction.',
+    planets:[
+      {id:'heaven_ruins',name:'Heaven Ruins',type:'Floating Space Ruins — Magically Sustained',status:'active',statusLabel:'Active — Cult Controlled',
+       atmosphere:'Breathable',atm_note:'Breathable throughout the ruins despite their spatial configuration — widely regarded as a direct consequence of the magical properties that keep the structure floating',
+       climate:'Variable (Spatial — No planetary surface)',gravity:'Variable',grav_note:'Artificial gravity zones throughout the ruins — localised and inconsistent. Moving between sections can involve significant gravitational shifts.',
+       faction:'Bottenbak Cult',population:'~30,000 — cult members, pilgrims under supervision, researchers who have received access',
+       demographics:'Mixed — the cult accepts members of all races; Patriark presence is adversarial rather than resident',
+       government:'Bottenbak Council of Ascendants (theocratic governance through magical authority)',tech_level:'Combination of advanced pre-existing systems and magical infrastructure',
+       economy:'Pilgrimage services, magical knowledge trade, artifact study, limited material extraction from ruin structures',
+       access:'Restricted',access_note:'Bottenbak Cult controls all access. Pilgrims are admitted under supervision. Researchers may petition for access. The Berilian Order is actively denied entry and responds with intermittent military pressure.',
+       hazards:['Gravitational anomalies — standard navigation instruments unreliable in proximity to the ruins','Bottenbak Cult security forces protect the ruins with methods that combine conventional weapons and magical capabilities','Berilian Order Inquisition forces operate in the system outer boundary — violent clashes with cult vessels are regular','The ruins themselves contain sections where the physics are locally altered — fire does not behave predictably, objects fall in unexpected directions, time is reported to move differently by multiple independent observers','Unknown origin and nature of the magical properties — the ruins may react to certain actions in ways that cannot be predicted'],
+       notable_locations:[
+         {name:'The Central Spire',desc:'The tallest surviving structure in the ruin field — the spiritual centre of Bottenbak theology and the location from which the Cult\'s Council of Ascendants governs. Non-members who have seen it describe it as architecturally unlike anything in the known galaxy, suggesting a civilisation of unknown origin built what Heaven once was.'},
+         {name:'The Archive of Ascent',desc:'The Cult\'s collection of knowledge about the ruins, their magic, and the theology built around them. Academics who have gained access consider it the most significant single body of magical scholarship available outside the Mubothen Empire.'},
+         {name:'The Perimeter Conflict Zone',desc:'The outer approach to the system where Bottenbak defence vessels and Berilian Order Inquisition ships regularly engage. The conflict is low-intensity by conventional military standards but ongoing. The dead from both sides are recovered and treated according to their respective traditions — even enemies here maintain certain protocols.'}
+       ],
+       hooks:['The Bottenbak Cult is looking for someone outside the conflict to carry a message to the Berilian Order. The cult won\'t explain what is in the message or why an outsider carrier is necessary.','A researcher who was granted access to the Archive of Ascent has not returned and has stopped communicating. The cult claims they left. The researcher\'s institution claims they have not arrived anywhere.','Something in the ruins has changed in the past six months — the Bottenbak Council is not discussing it publicly but the Inquisition forces in the system have increased their patrol intensity.'],
+       desc:'Heaven defies physics and defies easy categorisation. The ruins float in space, breathe, and seem to respond to the people inside them in ways that researchers cannot systematically quantify. The Bottenbak Cult has built a theology around what they found here and defends it with the conviction of people who have seen the evidence with their own eyes. The Berilian Order considers that theology dangerous and its practitioners heretics. The result is a system in a permanent low-level state of religious conflict around something that both sides agree is genuinely, undeniably strange.'}
+    ]
+  },
+  {
+    id:'zoana',name:'Zoana System',region:'Proxima Sector',classification:'Corporate Exploitation System',
+    faction:'Multiple Corporate Interests',status:'active',
+    tags:['Proxima Sector','Corporate','Exploitation','Resource Extraction','Labour Issues'],
+    desc:'Zoana exists because several corporations looked at its mineral content, its distance from meaningful regulation, and its existing population and made a calculation. The calculation produced the current arrangement: a corporate exploitation system where multiple corporate interests compete for extraction rights and the local population provides labour under terms that would not be legal in Alliance Space.',
+    planets:[
+      {id:'zoana_prime',name:'Zoana',type:'Terrestrial — Corporate Exploitation World',status:'active',statusLabel:'Active — Corporate Controlled',
+       atmosphere:'Breathable',atm_note:'Breathable but carrying industrial output from extraction operations — quality declining year over year',
+       climate:'Arid (Actively Degrading)',gravity:'Standard',
+       faction:'Multiple Corporations (contested)',population:'~4 million — workers and corporate personnel',
+       demographics:'Mixed — predominantly Non-Born and human labour force under corporate contract terms',
+       government:'Corporate Joint Administration Committee (no meaningful civilian governance)',tech_level:'Standard (Industrial)',
+       economy:'Mineral extraction, heavy industry, corporate logistics',
+       access:'Restricted (corporate affiliation required)',access_note:'Visitor access requires corporate contractor status or specific business purpose. Worker entry is on corporate-controlled terms.',
+       hazards:['Corporate security forces with no external oversight accountability','Labour conditions that would be illegal in regulated space — contract terms enforced through debt and isolation','Multiple corporate jurisdictions create legal grey zones where nothing clearly applies','Environmental degradation ongoing — long-term habitability of Zoana is being consumed by current operations'],
+       notable_locations:[
+         {name:'The Corporate Compounds',desc:'Each major corporation operating on Zoana maintains a separate walled compound — better-equipped, better-fed, and insulated from the worker communities surrounding them. Relations between compounds range from competitive to hostile.'},
+         {name:'Worker Settlements',desc:'The communities that have formed around the extraction sites — not planned, not supported by corporate infrastructure beyond minimum labour requirements. Self-organized, resilient, and accumulating grievances at a steady rate.'}
+       ],
+       hooks:['A labour organiser in one of the worker settlements has obtained documentation of contract terms that would constitute slavery under Alliance law. Getting the documentation out of Zoana and into hands that can act on it requires getting past corporate security first.','Corporate sabotage between competing factions has escalated to attacks on shared infrastructure. The joint administration committee is deadlocked. Someone needs to find a resolution before the extraction operations are interrupted, which the corporations will not allow but are currently causing.'],
+       desc:'Zoana is what happens at the intersection of valuable resources, minimal regulation, and corporate competition. The exploitation of what is here has been ongoing for two decades. The corporations involved have made the calculations about local population welfare and environmental impact and reached the same conclusion each time: the current arrangement is acceptable until it stops being profitable. Players on Zoana will find people who need help and corporations that do not want them to provide it.'}
+    ]
+  },
+  {
+    id:'asar',name:'Asar System',region:'Proxima Sector',classification:'Corporate Tourism System — Contested Control',
+    faction:'Mercenary Occupation (former Harsh Corp)',status:'active',
+    tags:['Proxima Sector','Former Corporate','Mercenary','Tourism','Harsh Corp','Torc Corp','Takeover'],
+    desc:'Asar was built as Harsh Corp\'s exclusive vacation destination — a system of genuine natural beauty developed with the kind of investment a major corporation makes when it wants to give its executive class something extraordinary. When Torc Corp\'s hostile takeover of Harsh sent the parent corporation into collapse, the mercenaries who had been providing Asar\'s security stopped receiving payment. They kept the system instead.',
+    planets:[
+      {id:'asar_prime',name:'Asar Prime',type:'Terrestrial — Former Resort World',status:'active',statusLabel:'Active — Mercenary Occupied',
+       atmosphere:'Breathable',atm_note:'Pristine — the exceptional natural environment was what Harsh Corp built around',
+       climate:'Tropical to Temperate — Exceptional',gravity:'Standard',
+       faction:'Asar Mercenary Council (former Harsh Corp security)',population:'~200,000 — former resort staff, mercenaries, and opportunistic new arrivals',
+       demographics:'Mixed — the former staff community has remained; the original luxury clientele has not returned',
+       government:'Mercenary Council (armed authority with no formal legitimacy)',tech_level:'Advanced (resort infrastructure intact)',
+       economy:'Fragmented — resort infrastructure exists but operates informally, some tourism from adventurous visitors, mercenary services, strategic goods trade',
+       access:'Cautiously open',access_note:'No official entry restrictions but Mercenary Council monitors all arrivals. Parties connected to Torc Corp or making claims related to the Harsh Corp takeover should expect a hostile reception.',
+       hazards:['Mercenary Council is well-armed and has the run of infrastructure originally designed for a much larger security operation','Post-corporate legal vacuum — no consistent rule of law, disputes resolved by whoever has more firepower','The exceptional natural environment has been maintained by people who liked it, but without corporate maintenance investment some facilities are deteriorating','Torc Corp has filed several legal claims to the system that have not been resolved'],
+       notable_locations:[
+         {name:'The Grand Resort Complex',desc:'The centrepiece of what Harsh Corp built — an extraordinary luxury facility that was once the most exclusive vacation destination within several sectors. Still physically intact. Currently occupied by mercenary command and various informal businesses that have moved in.'},
+         {name:'The Natural Preserves',desc:'The areas of Asar Prime that were kept as natural environment — the reason Harsh Corp chose this system. Genuinely remarkable. The mercenary council has maintained them, partly out of appreciation and partly because they understand that what makes Asar valuable is still here.'}
+       ],
+       hooks:['A former Harsh Corp executive has arrived on Asar claiming ownership of specific assets from the resort development. The mercenary council\'s response has been to hold them pending a decision. They need legal representation or an alternative resolution.','Torc Corp has quietly contracted with a party to secure legal title to Asar. The method is not specified. The deadline is soon.','Something in the natural preserve was discovered during the post-takeover period when the system was unsupervised. The person who found it is now one of the more influential members of the mercenary council. What they found, they haven\'t shared.'],
+       desc:'Asar is a beautiful system with a complicated ownership problem. The mercenaries who took it did so in the practical vacuum created by the Harsh Corp collapse, and have made something of it — they\'ve maintained what Harsh Corp built because the alternative was allowing it to deteriorate, and deterioration serves no one. Whether any legitimate authority will ever reassert control over Asar is uncertain. Whether that authority would be an improvement is a question the current residents are prepared to debate with weapons.'}
+    ]
+  },
+  {
+    id:'solar',name:'Solar System',region:'Proxima Sector',classification:'Historic System — Original Human Home',
+    faction:'Alliance (Special Historical Designation)',status:'active',
+    tags:['Proxima Sector','Human Origin','Historical','Earth','Alliance','Sacred Site'],
+    desc:'The Solar System is the system of origin of humanity — the same star and planets that produced the species that now spans the galaxy. Earth, the original human homeworld, orbits here in its ancestral position. The Alliance maintains the system under a special historical preservation designation. Most humans who visit experience something that does not map cleanly to any other kind of emotion.',
+    planets:[
+      {id:'earth',name:'Earth',type:'Terrestrial — Original Human Homeworld',status:'active',statusLabel:'Active — Historical Preservation',
+       atmosphere:'Breathable',atm_note:'Maintained through active intervention — the industrial history of old Earth required centuries of remediation before natural atmospheric function was restored',
+       climate:'Temperate (Restored)',gravity:'Standard',
+       faction:'Alliance Historical Preservation Authority',population:'~500 million — significantly reduced from historical peak',
+       demographics:'Predominantly human — the decision to maintain Earth as a historical world limits commercial development',
+       government:'Alliance Historical Preservation Authority (joint with Earth Planetary Council)',tech_level:'Standard to Advanced (controlled — industrial development prohibited in preservation zones)',
+       economy:'Heritage tourism, historical research, cultural preservation, limited sustainable agriculture',
+       access:'Open (regulated)',access_note:'Open access with Alliance ID. Industrial and commercial development permits are almost never granted. The political process for landing a manufacturing facility on Earth has defeated several corporations that tried.',
+       hazards:['Political sensitivity — Earth heritage politics are intense and have ended careers across Alliance Space','Religious and cultural significance for dozens of human-heritage traditions means that any incident here has amplified consequences','Preservation law enforcement is among the most thorough in Alliance Space'],
+       notable_locations:[
+         {name:'Old Cities (Multiple)',desc:'Earth\'s historical urban centres — some restored, some preserved as ruins, all designated as heritage sites. Walking through the streets of any of them produces the specific sensation of standing in the origin of something.'},
+         {name:'The First Launch Site',desc:'The location from which humanity first left its home system. Maintained as the single most significant heritage site on Earth. The original infrastructure is preserved under protective housing. People who come here from across the galaxy stand quietly and then leave without saying very much.'},
+         {name:'The Natural World Preserves',desc:'Large areas of Earth have been returned to pre-industrial ecological state. The variety of life on Earth\'s surface is itself a biological heritage site.'}
+       ],
+       hooks:['Earth Planetary Council politics have produced a dispute about a proposed development in a preservation zone. Both sides have hired outside parties to ensure the outcome. The consequences of being caught doing political work on Earth are significant.','A find in one of the old city archaeological zones has produced artefacts inconsistent with known Earth history. The Preservation Authority has quietly quarantined the site.','A historian is pursuing evidence that Alliance historical records about Earth\'s final centuries before the space age have been systematically altered. The original records, if they exist, would be on Earth.'],
+       desc:'Earth is simultaneously the most familiar and the most alien place a human can visit — the world that produced everything, maintained and preserved and visited by billions of descendants who have never lived anything like the life of anyone who originally walked its surface. Non-humans who visit Earth often describe a quiet they do not expect — the sense of standing at the origin of something that now fills the galaxy. The Alliance protects it carefully. The preservation is imperfect, the history is complicated, and the politics are continuous. It is still Earth.'}
+    ]
+  },
+  // ─── MUBOTHEN EMPIRE ─────────────────────────────────────────────────
+  {
+    id:'dicamia',name:'Dicamia System',region:'Mubothen Empire',classification:'Theocratic Core System',
+    faction:'Mubothen Empire',status:'isolated',
+    tags:['Mubothen Empire','Theocratic','Isolated','Magical','No Contact','Dynastic'],
+    desc:'Dicamia is one of the three known systems of the Mubothen Empire — a magical theocratic dynasty that has maintained total communications blackout for over fifty years. No external contact, no trade, no diplomatic exchange. The empire went silent and has stayed silent. What is known comes from records predating the blackout.',
+    planets:[
+      {id:'dicamia_prime',name:'Dicamia',type:'Terrestrial — Mubothen Core World',status:'isolated',statusLabel:'Isolated — No External Contact',
+       atmosphere:'Breathable',atm_note:'Believed standard — no current data',
+       climate:'Unknown — last data 50+ years old',gravity:'Standard',grav_note:'Believed standard',
+       faction:'Mubothen Empire',population:'Unknown — last census predates blackout',
+       demographics:'Unknown — pre-blackout records indicate mixed population under theocratic governance',
+       government:'Mubothen Dynastic Theocracy (High Council of the Divine Compact)',
+       tech_level:'Unknown — Mubothen technology and magical capability both were significant before blackout',
+       economy:'Unknown — self-sufficient theocratic economy implied by fifty years of isolation',
+       access:'Forbidden (unknown enforcement)',access_note:'All ships that have attempted entry into Mubothen space have either turned back or not returned. No official response to any communication in fifty years.',
+       hazards:['Complete intelligence blackout — no knowledge of current conditions','Ships that crossed the declared boundary have not returned — whatever enforcement exists is effective','Magical capability of Mubothen forces was significant before the blackout and may have developed further in isolation','Religious fundamentalism of an intensity that produced complete voluntary isolation'],
+       notable_locations:[{name:'The Grand Theocratic Complex (Pre-Blackout)',desc:'Records from before the blackout describe an extraordinary complex of temples, administrative structures, and magical research facilities. Whether this remains as described is entirely unknown.'}],
+       hooks:['Something has come out of Mubothen space — not a ship, not a communication, but something physical. It is now in the possession of a party who is trying to understand what it is and why it came out now.','A researcher has spent years building a profile of what the Mubothen Empire might have become in fifty years of isolation. Their conclusions are alarming. They are looking for someone to help them verify the theory.'],
+       desc:'The Mubothen Empire went silent fifty years ago. No explanation was ever given. Ships that approach the border either turn back of their own accord or do not return. No communication has been received from inside in any form. The Alliance has periodically attempted formal contact through multiple channels and received no response. What the Mubothen Empire is now — what it believes, what it has developed, what it wants — is genuinely unknown. Whether the silence will end, and on whose terms, is one of the galaxy\'s significant unanswered questions.'}
+    ]
+  },
+  {
+    id:'ethone',name:'Ethone System',region:'Mubothen Empire',classification:'Theocratic Outer System',
+    faction:'Mubothen Empire',status:'isolated',
+    tags:['Mubothen Empire','Theocratic','Isolated','Outer System','Magical Research'],
+    desc:'Ethone was the Mubothen Empire\'s designated research and magical development system before the blackout — records describe it as a place where the empire\'s most advanced magical investigation was conducted. Whether that research continued in isolation for fifty years, and what it might have produced, are questions that make several intelligence agencies deeply uncomfortable.',
+    planets:[
+      {id:'ethone_prime',name:'Ethone',type:'Terrestrial — Mubothen Research World',status:'isolated',statusLabel:'Isolated — Research Designation',
+       atmosphere:'Breathable',atm_note:'Believed standard — no current data',
+       climate:'Unknown',gravity:'Standard',grav_note:'Believed standard',
+       faction:'Mubothen Empire',population:'Unknown',demographics:'Unknown',
+       government:'Mubothen Dynastic Theocracy',
+       tech_level:'Unknown — but magical research conducted here before blackout was considered by Alliance intelligence to be the most advanced in any faction',
+       economy:'Unknown',
+       access:'Forbidden',access_note:'As Dicamia — no access, no return for those who try.',
+       hazards:['Fifty years of unobserved magical research — no characterisation of what may have been developed','Pre-blackout reports classified by Alliance intelligence — content unknown'],
+       notable_locations:[{name:'Research Spires (Pre-Blackout)',desc:'The research complex as described in pre-blackout records — multiple large installations for magical investigation and development. No current data exists on their state.'}],
+       hooks:['A piece of technology has appeared on the open market that does not match any known manufacturing source. Its properties suggest magical integration of a kind not seen from any current faction. One analyst believes it originates from Ethone.'],
+       desc:'Ethone is the part of the Mubothen blackout that intelligence agencies find most concerning. If the magical research programs operating here before the blackout continued in isolation for fifty years — without external observation, without the constraints of diplomatic visibility, without any need to limit development based on others\' reactions — the resulting capability is not something that can be estimated from outside. It is simply unknown.'}
+    ]
+  },
+  {
+    id:'astea',name:'Astea System',region:'Mubothen Empire',classification:'Theocratic Frontier System',
+    faction:'Mubothen Empire',status:'isolated',
+    tags:['Mubothen Empire','Theocratic','Isolated','Frontier','Border System'],
+    desc:'Astea was the outermost system of the Mubothen Empire before the blackout — the frontier of their territory and the system closest to broader galactic routes. It is the system that ships approaching Mubothen space encounter first and the one from which any future contact, if it comes, is most likely to emerge.',
+    planets:[
+      {id:'astea_prime',name:'Astea',type:'Terrestrial — Mubothen Frontier World',status:'isolated',statusLabel:'Isolated — Frontier System',
+       atmosphere:'Breathable',atm_note:'Believed standard — no current data',
+       climate:'Unknown',gravity:'Standard',
+       faction:'Mubothen Empire',population:'Unknown',demographics:'Unknown',
+       government:'Mubothen Dynastic Theocracy',tech_level:'Unknown',economy:'Unknown',
+       access:'Forbidden',access_note:'As other Mubothen systems. Astea\'s frontier position means it is also the most likely location of any enforcement capability directed at the boundary.',
+       hazards:['Closest Mubothen system to standard transit routes — whatever enforcement mechanism the empire uses to maintain its blackout is most active here','Any appearance of Mubothen ships or capability would first be observed from this system'],
+       notable_locations:[{name:'The Border',desc:'The outer edge of Mubothen-claimed space. Several navigational beacons placed before the blackout still broadcast on old frequencies, though they carry only positioning data and no content. Whether they are maintained or simply still running on autonomous power is not known.'}],
+       hooks:['The Astea border beacons have changed their broadcast pattern for the first time in fifty years. The change is minor — a shift in signal timing. Whether it is automated drift or a deliberate signal is being actively debated.','A ship that went missing near the Mubothen border three months ago has reappeared. The crew are present but will not discuss where they have been. Medical examination suggests they have been in normal space for exactly the time they have been missing. Their accounts have been classified by Alliance intelligence.'],
+       desc:'Astea marks the edge. Whatever the Mubothen Empire has become in fifty years of silence is behind that border. Astea is the closest point to finding out — and the most dangerous point to approach. The empire has maintained its blackout against every attempt at contact for half a century. Whether that changes, and what changes it, will begin here.'}
+    ]
   }
 
 // Load any saved catalogue edits from localStorage
