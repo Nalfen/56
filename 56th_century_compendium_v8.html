@@ -3778,6 +3778,268 @@ g.catalogue_systems=[
        hooks:['The Astea border beacons have changed their broadcast pattern for the first time in fifty years. The change is minor — a shift in signal timing. Whether it is automated drift or a deliberate signal is being actively debated.','A ship that went missing near the Mubothen border three months ago has reappeared. The crew are present but will not discuss where they have been. Medical examination suggests they have been in normal space for exactly the time they have been missing. Their accounts have been classified by Alliance intelligence.'],
        desc:'Astea marks the edge. Whatever the Mubothen Empire has become in fifty years of silence is behind that border. Astea is the closest point to finding out — and the most dangerous point to approach. The empire has maintained its blackout against every attempt at contact for half a century. Whether that changes, and what changes it, will begin here.'}
     ]
+  },
+  // ─── SOLAR EXPANSE ───────────────────────────────────────────────────
+  {
+    id:'yaevis',name:'Yaevis System',region:'Solar Expanse',classification:'Far Frontier — Established Outpost',
+    faction:'Independent (Alliance-affiliated)',status:'active',
+    tags:['Solar Expanse','Far Frontier','Established','Independent','Exploration Hub'],
+    desc:'Yaevis is the most developed system in the Solar Expanse — the first one the Alliance formally catalogued and the staging point for most organised exploration further into the region. It has the infrastructure that comes from being the gateway to a frontier: good fuel, decent repair facilities, and a community that has learned to deal with people who are either heading out or just came back.',
+    planets:[
+      {id:'yaevis_prime',name:'Yaevis',type:'Terrestrial — Frontier Gateway World',status:'active',statusLabel:'Active — Frontier Gateway',
+       atmosphere:'Breathable',atm_note:'Standard — clean',
+       climate:'Cool Temperate',gravity:'Standard',
+       faction:'Yaevis Pioneer Council (Alliance-affiliated)',population:'~600,000',
+       demographics:'Mixed — pioneer families, Alliance support staff, exploration contractors',
+       government:'Pioneer Council (locally elected, formally Alliance-affiliated)',tech_level:'Standard',
+       economy:'Frontier logistics, exploration support, fuel trade, basic manufacturing, agricultural development',
+       access:'Open',access_note:'Open under Alliance affiliation. Alliance law applies but enforcement is light — the Alliance prioritises the gateway function over regulatory detail.',
+       hazards:['Frontier conditions — resource limitations, distance from emergency response','Alliance affiliation is nominal — legal protections are theoretical in many practical situations','Information security low — everything discussed here flows back to parties tracking frontier exploration'],
+       notable_locations:[
+         {name:'The Pioneer Depot',desc:'The principal resupply facility for Solar Expanse exploration. Well-stocked by frontier standards, expensive by core world standards, and the only reliable source of certain supplies for significant distance.'},
+         {name:'The Survey Office',desc:'Alliance exploratory survey headquarters for the Solar Expanse. Maintains charts of all catalogued systems, current hazard assessments, and records of all registered exploration missions. Also where you file a claim if you find something worth claiming.'}
+       ],
+       hooks:['A survey team registered at the Survey Office has filed a discovery claim for something in the far Solar Expanse that the Alliance has classified within hours of filing. The original team is upset. The reason for classification has not been given.','The Pioneer Depot has received a resupply shipment from core space that includes items not on the original manifest. Nobody at Yaevis knows who added them or what they are for.'],
+       desc:'Yaevis works because frontiers need a door. Exploration of the Solar Expanse flows through this system — out through it and back through it — and the community that built up around that function has become self-sustaining. It is not glamorous. It is remarkably functional. For players heading deeper into the Solar Expanse, Yaevis is the last place where anything is reliably available and the last place where a clear head about what they are going into is possible.'}
+    ]
+  },
+  {
+    id:'nausica',name:'Nausica System',region:'Solar Expanse',classification:'Far Frontier — Exceptional Garden World',
+    faction:'Independent',status:'active',
+    tags:['Solar Expanse','Garden World','Exceptional','Frontier','Natural Wonder','Biodiversity'],
+    desc:'Nausica contains one of the most spectacular naturally occurring garden worlds in the known galaxy — a planet of extraordinary biodiversity, dramatic landscapes, and a biosphere so complex that Alliance scientists have been studying it for decades and have not finished cataloguing what lives there. The system has become a destination in itself despite its frontier location.',
+    planets:[
+      {id:'nausica_prime',name:'Nausica',type:'Terrestrial — Exceptional Garden World',status:'active',statusLabel:'Active — Protected Natural World',
+       atmosphere:'Breathable',atm_note:'Rich, warm, exceptionally high oxygen content — visitors often report feeling unusually energetic on first arrival',
+       climate:'Tropical to Temperate — Lush Throughout',gravity:'Low',grav_note:'Noticeably below standard — combined with the rich atmosphere makes movement feel different from any other world',
+       faction:'Nausica Preservation Council (joint Alliance and independent)',population:'~200,000 — researchers, support staff, small permanent settler community',
+       demographics:'Mixed — heavily weighted toward scientific and research personnel',
+       government:'Preservation Council (jointly constituted)',tech_level:'Standard',
+       economy:'Scientific research, nature tourism (carefully regulated), biological study, University contracts',
+       access:'Permit Required',access_note:'Access permit required to protect ecosystem integrity. Permits are difficult but not impossible to obtain. Unrestricted entry would destroy what makes the system worth visiting.',
+       hazards:['Megafauna — some species are genuinely dangerous to unprepared visitors','Plant toxins — beautiful environment does not mean benign; contact with certain species causes immediate medical emergencies','Easy disorientation — the biodiversity and low gravity can lead to navigation errors','Preservation enforcement — illegal collection of biological samples is treated severely'],
+       notable_locations:[
+         {name:'The Great Canopy',desc:'The continent-spanning rainforest that covers Nausica\'s equatorial zone — the most biodiverse square kilometre of surface in the known galaxy. Researchers describe the experience of entering it as humbling.'},
+         {name:'Research Station Alpha',desc:'The primary scientific facility, built carefully to minimise environmental impact. Home to the longest-running continuous biological study in the Solar Expanse.'},
+         {name:'The Crystal Flats',desc:'An expanse of mineral formations produced by Nausica\'s unusual geological history — simultaneously a stunning natural formation and a source of unique compounds being studied for applications in materials science.'}
+       ],
+       hooks:['Something has appeared on Nausica that should not exist — a species not catalogued in the study, with properties that do not fit the evolutionary framework of any known biosphere. The research team is keeping it quiet until they understand it better.','Illegal bio-harvesting has been detected — samples of protected species are appearing on certain markets. The operation is sophisticated enough to have bypassed the access controls. Someone inside the Preservation Council is involved.','A financial offer has been made for commercial development rights to a section of Nausica that the Preservation Council cannot easily refuse without political consequences. The offer comes through a structure designed to obscure its origin.'],
+       desc:'Nausica is the kind of world that makes the Solar Expanse\'s difficult distance seem worth it. The garden world\'s biodiversity defies easy summary — every survey reveals new species, new interactions, new complexity in a biosphere that appears to be functioning at a level of integration not seen elsewhere. Researchers who come here tend not to leave easily. The Preservation Council\'s strict access controls are the only reason it remains what it is — the pressure to exploit what is here commercially is constant and not diminishing.'}
+    ]
+  },
+  {
+    id:'rautis',name:'Rautis System',region:'Solar Expanse',classification:'Far Frontier — Mineral Rich',
+    faction:'Independent',status:'active',
+    tags:['Solar Expanse','Frontier','Mineral Rich','Mining','Independent'],
+    desc:'Rautis was identified by early Solar Expanse surveys as one of the most mineral-rich systems in the region and has attracted independent mining operations accordingly. The lack of corporate control means that conditions vary widely — some operations are well-run and profitable; others are chaotic. The system has developed a rough-and-ready culture shaped by extraction work done at distance from any oversight.',
+    planets:[
+      {id:'rautis_prime',name:'Rautis',type:'Rocky Terrestrial — Mining World',status:'active',statusLabel:'Active — Independent Mining',
+       atmosphere:'Thin',atm_note:'Thin but breathable at ground level — respirators recommended for extended outdoor activity',
+       climate:'Cold, Rocky, Mineral-Rich',gravity:'Standard',
+       faction:'Rautis Mining Collective (informal)',population:'~400,000',
+       demographics:'Mixed — predominantly Human and Hakari mining workers',
+       government:'Loose collective governance (disputes resolved by whoever controls the most viable operations)',tech_level:'Standard (Industrial)',
+       economy:'Mineral extraction, ore processing, equipment maintenance, frontier services',
+       access:'Open',access_note:'Open — the Collective has no formal entry controls. Bring your own equipment.',
+       hazards:['Mining environment — shaft collapses, gas pockets, heavy equipment accidents are routine','Collective disputes can become violent','No medical infrastructure beyond basic field medicine','Equipment failures at this distance from resupply can be immediately life-threatening'],
+       notable_locations:[
+         {name:'Main Shaft Settlement',desc:'The largest community in the system — a mining town that has grown organically around the most productive extraction site. Functional, dense, and offering every service that a mining workforce needs including several that are only available because oversight is far away.'}
+       ],
+       hooks:['A new ore deposit has been found that is richer than anything previously recorded in Rautis. Three separate mining operations have independently claimed it. The Collective lacks the authority to resolve the dispute and it is escalating.','A worker at one of the mining operations has found something in a shaft that is not mineral — manufactured, and clearly not from any recent human operation. They\'ve shown a few people. Word is spreading.'],
+       desc:'Rautis runs on ore and stubbornness. The independent mining culture here has produced a community with its own norms, its own dispute resolution methods (imperfect), and its own relationship to risk (accepting). It is not comfortable by core world standards and does not aspire to be. What it produces is real value at frontier cost, and the people who do that work have a practical competence that sophisticated core-world visitors tend to underestimate.'}
+    ]
+  },
+  {
+    id:'strides',name:'Strides System',region:'Solar Expanse',classification:'Far Frontier — Transit Point',
+    faction:'Independent',status:'active',
+    tags:['Solar Expanse','Transit','Frontier','Waypoint','Deep Expanse Gateway'],
+    desc:'Strides functions as the mid-point between the Solar Expanse gateway systems and the deeper far frontier. Its location makes it a natural transit stop and its community has built itself entirely around that function. Ships heading deeper into the expanse typically stop here. Ships coming back from the deep expanse definitely stop here.',
+    planets:[
+      {id:'strides_station',name:'Strides Station',type:'Space Station — Deep Expanse Waypoint',status:'active',statusLabel:'Active — Transit Waypoint',
+       atmosphere:'Breathable',atm_note:'Station-maintained throughout',
+       climate:'Controlled',gravity:'Standard',
+       faction:'Strides Station Authority',population:'~120,000',
+       demographics:'Heavily transient — permanent staff are a minority of any given population census',
+       government:'Station Authority (practical governance — keeps the life support running and the fuel available)',tech_level:'Standard',
+       economy:'Fuel, resupply, ship servicing, crew rest, information trade',
+       access:'Open',access_note:'Open to all — the station needs the trade.',
+       hazards:['Deep frontier conditions — rescue and emergency response capability is limited','Information flow in both directions — what you share on Strides Station reaches audiences in both directions','Cargo disputes from deep frontier operations concentrate here'],
+       notable_locations:[
+         {name:'The Forward Depot',desc:'The deepest-stocked resupply facility in the Solar Expanse outside Yaevis. Regularly restocked by trade runs and guarded carefully because it is the only one.'},
+         {name:'The Return Bar',desc:'Where crews coming back from the deep expanse stop first. The stories told here range from routine to extraordinary. The station staff have heard enough extraordinary ones to take them seriously.'}
+       ],
+       hooks:['A crew that came back from the deep expanse has not docked in three days despite being registered as arrived. Station Authority found the ship — empty, docked, life support running, no crew.','A supply shipment from Yaevis is overdue. Strides Station has enough reserves to be unconcerned for another two weeks. After that, the situation changes.'],
+       desc:'Strides is the middle distance — far enough in to be genuine frontier, close enough to the gateway to feel like a border. The community is defined by its transit function in the same way as Cetune, but with the specific character of deep frontier transit: the people here are either going very far or coming back from it. Both groups have things the other finds useful. The information flow between them is the most valuable product the station produces.'}
+    ]
+  },
+  {
+    id:'ongora',name:'Ongora System',region:'Solar Expanse',classification:'Far Frontier — Anomalous',
+    faction:'Independent (under observation)',status:'active',
+    tags:['Solar Expanse','Anomalous','Frontier','Research Subject','Unexplained'],
+    desc:'Ongora is a frontier system that has attracted disproportionate scientific attention because of a consistently anomalous set of readings that multiple independent surveys have confirmed and none have explained. The system functions normally in every measurable way except for a set of gravitational and electromagnetic patterns that do not correspond to any known natural phenomenon.',
+    planets:[
+      {id:'ongora_prime',name:'Ongora',type:'Terrestrial — Anomalous System',status:'active',statusLabel:'Active — Under Scientific Observation',
+       atmosphere:'Breathable',atm_note:'Standard breathable — anomalous readings do not affect atmospheric chemistry',
+       climate:'Temperate',gravity:'Standard',grav_note:'Standard at surface — anomalous readings are system-wide in certain electromagnetic bands, not local gravitational',
+       faction:'Independent with Alliance Science Authority presence',population:'~50,000 — small permanent settlement and rotating research teams',
+       demographics:'Mixed — research-heavy population',
+       government:'Settlement Council with Science Authority observer status',tech_level:'Standard',
+       economy:'Research support, small-scale agriculture, frontier services',
+       access:'Open',access_note:'Open entry — Science Authority research activity ongoing. Visitors are logged with unusual thoroughness.',
+       hazards:['Unknown nature of anomalous readings — their effects on biological systems or technology over extended exposure are undetermined','Science Authority presence has a surveillance component that extends to all system visitors','The unknown factor'],
+       notable_locations:[{name:'The Observation Array',desc:'Science Authority installation — a significant sensor and monitoring system deployed to study the anomalous readings. The data collected here has been flowing to Alliance research institutions for years. What conclusions have been reached have not been published.'}],
+       hooks:['The anomalous readings have shifted — not disappeared, but changed pattern in a way that the Science Authority has responded to by tripling the research team and classifying all new data.','A researcher who worked at the Observation Array has left the Science Authority and is attempting to publish an independent analysis of the data they worked with. Several parties are trying to prevent publication.'],
+       desc:'Ongora is the kind of system where the question matters more than the current answer. Something is producing readings that don\'t fit the models. The Science Authority has been studying it long enough that their continued silence on conclusions is itself informative. Whatever Ongora is, it is interesting enough to justify sustained scientific investment and sensitive enough to keep the conclusions classified.'}
+    ]
+  },
+  {
+    id:'thars',name:'Thars System',region:'Solar Expanse',classification:'Far Frontier — Industrial Development',
+    faction:'Independent (early-stage)',status:'active',
+    tags:['Solar Expanse','Industrial','Frontier','Development','Early Stage'],
+    desc:'Thars is in the early stages of industrial development — a frontier system that has attracted investment attention because of its resource profile and is in the process of being built up. The tension between those developing it and those who were already there is active and unresolved.',
+    planets:[
+      {id:'thars_prime',name:'Thars',type:'Terrestrial — Developing Industrial World',status:'active',statusLabel:'Active — Industrial Development',
+       atmosphere:'Breathable',atm_note:'Standard — not yet degraded by industrial output',
+       climate:'Temperate',gravity:'Standard',
+       faction:'Contested — Development Consortium vs established independent community',population:'~300,000',
+       demographics:'Mixed — original independent community and incoming development workforce',
+       government:'Contested — Development Consortium holds contracts, independent community holds cultural claim',tech_level:'Standard to basic Industrial',
+       economy:'Developing industrial extraction, agriculture, services for incoming development workforce',
+       access:'Open (contested)',access_note:'Open entry but Development Consortium and independent community each monitor arrivals for different reasons.',
+       hazards:['Active political tension between Consortium and community', 'Development operations creating environmental changes that the original community was not consulted about', 'Consortium security force operating outside any accountability framework'],
+       notable_locations:[{name:'Pioneer Town',desc:'The original independent settlement — the community that was here before the Consortium arrived. Well-established, self-sufficient, and increasingly concerned about what the development operations mean for the land they have worked for two generations.'}],
+       hooks:['The Consortium has moved extraction equipment onto land the original community uses as agricultural land. The legal basis for this is unclear. The Consortium\'s security force is there. The community is there. A confrontation is building.'],
+       desc:'Thars is a story playing out in slow motion that picks up pace when outside parties arrive. The development Consortium is backed by serious capital and has contracts. The people who built their lives here before the Consortium arrived have moral claim and the specific determination of people who came a long way to be left alone. Neither of those things is a legal argument in the current framework. How this resolves depends on what resources both sides can bring to bear.'}
+    ]
+  },
+  {
+    id:'pholla',name:'Pholla System',region:'Solar Expanse',classification:'Far Frontier — Deep Expanse Terminus',
+    faction:'Independent',status:'active',
+    tags:['Solar Expanse','Deep Frontier','Terminus','Isolated','Extreme Distance'],
+    desc:'Pholla is the most remote catalogued system in the Solar Expanse — the edge of what has been mapped and documented. Beyond Pholla, the deep expanse continues, but the systems out there have no names yet and the routes to them are not in standard navigation databases. Pholla is where the known ends.',
+    planets:[
+      {id:'pholla_prime',name:'Pholla',type:'Terrestrial — Deep Frontier Terminus',status:'active',statusLabel:'Active — Frontier Terminus',
+       atmosphere:'Breathable',atm_note:'Thin but breathable — high altitude environments require supplemental oxygen',
+       climate:'Cold, Mountainous',gravity:'Below Standard',
+       faction:'Pholla Outpost (independent)',population:'~20,000',
+       demographics:'A specific kind of person comes to Pholla and stays — frontier hardened, self-sufficient, deliberately far from others',
+       government:'Outpost Council (minimal structure)',tech_level:'Basic',
+       economy:'Frontier survival services, deep exploration support, what comes back from beyond',
+       access:'Open — no one comes here accidentally',access_note:'No controls — no one passes through Pholla unless they mean to.',
+       hazards:['Extreme distance from all support','Cold environment year-round','The deep expanse beyond — what is out there is not in the navigation charts'],
+       notable_locations:[{name:'The Last Station',desc:'Pholla\'s only significant structure — a community facility that functions as bar, resupply point, information exchange, and memorial wall for expeditions that went beyond and didn\'t come back. The memorial wall is substantial.'}],
+       hooks:['Something has come back from beyond Pholla — not a ship, not a crew, but an object. It is in the Last Station. Nobody knows where it came from. The person who found it is not explaining how they came to be where they found it.','An expedition is being organised to go beyond Pholla into uncatalogued space. They are looking for crew. The expedition leader has been this way before. They haven\'t explained where they went last time.'],
+       desc:'Pholla is the last full stop before the sentence ends. The community here is small, self-selected, and shaped by the knowledge that they are at the edge of what anyone knows. People come here for specific reasons — to launch deep expeditions, to be as far from the rest of the galaxy as possible while still having breathable air, or because they were heading deeper and ran out of capacity to go further. The deep expanse beyond is real, large, and almost entirely uncharted. What is out there is not known.'}
+    ]
+  },
+  // ─── GRAVEMIST NEBULA ───────────────────────────────────────────────
+  {
+    id:'basagoth',name:'Basagoth Station',region:'Gravemist Nebula',classification:'Pirate Station — Nebula Border',
+    faction:'Pirate Occupation',status:'active',
+    tags:['Gravemist Nebula','Pirate Station','Border Station','Dangerous','Gateway'],
+    desc:'Basagoth is not a system — it is a space station that has been in pirate hands for so long that its origins as something else have been completely buried. It sits at the border between Alliance Space and the Gravemist Nebula, a position that makes it the only practical staging point for anyone entering the nebula. The pirates who hold it have built an economy around being the last stop before the impossible navigation begins.',
+    planets:[
+      {id:'basagoth_station',name:'Basagoth Station',type:'Space Station — Pirate Held',status:'active',statusLabel:'Active — Pirate Controlled',
+       atmosphere:'Breathable',atm_note:'Maintained — life support is the one thing the pirates maintain meticulously because the alternative is dying',
+       climate:'Controlled (Station)',gravity:'Standard',grav_note:'Artificial gravity throughout — some sections have maintenance issues',
+       faction:'Basagoth Pirate Council',population:'~15,000 — pirates, support staff, temporary visitors, people waiting',
+       demographics:'Mixed — anyone who needs to go into or come out of the Gravemist passes through here',
+       government:'Pirate Council (rule by intimidation and mutual interest)',tech_level:'Mixed (whatever was on the station plus what has been brought in over the decades)',
+       economy:'Navigation information (expensive), fuel (more expensive), nebula guide services (extremely expensive), seized goods trade',
+       access:'Open (at price)',access_note:'Anyone can dock at Basagoth. Everything costs money. Violence is controlled because it is bad for business but the definition of "controlled" is loose.',
+       hazards:['Everything is for sale here including information about you','Pirate operations use Basagoth as a base — ships entering or leaving are assessed as potential targets','Navigation into the nebula from here requires guide services — without them, probability of return is low','The station\'s structural integrity in older sections is not certified by anyone'],
+       notable_locations:[
+         {name:'The Guide\'s Hall',desc:'Where Basagoth\'s navigation guides operate — the only people who can reliably plot courses through the Gravemist. The Guild (such as it is) controls access to this knowledge jealously. No guide speaks for another, and none of them explain how they know what they know.'},
+         {name:'The Waiting Room',desc:'The common area where everyone heading into or out of the nebula ends up waiting at some point. The information density in this room at any given time is extraordinary. So is the number of listening devices.'}
+       ],
+       hooks:['A guide has offered to take a party deep into the Gravemist. The price is unusual — not credits but a specific service. The service is something only the party can provide.','Someone has come out of the Gravemist alone in a ship that went in with five crew. They won\'t speak. Medical examination shows they are physically unharmed. The Basagoth Council is trying to decide what to do with them.'],
+       desc:'Basagoth is the door to the impossible. The Gravemist Nebula is nearly unnavigable — the few known paths are guarded knowledge belonging to the guides who work out of this station. Without them, entering the nebula is almost certainly fatal. The pirates who hold Basagoth understand their position perfectly and price their services accordingly. For players, Basagoth is a place where everything costs more than it should and the people you need to hire have their own agendas.'}
+    ]
+  },
+  {
+    id:'illora',name:'Illora System',region:'Gravemist Nebula',classification:'Nebula System — Known Path',
+    faction:'Independent (isolated)',status:'active',
+    tags:['Gravemist Nebula','Isolated','Known Path','Nebula Community','Mysterious'],
+    desc:'Illora is one of only two systems officially catalogued inside the Gravemist Nebula. Getting there requires a guide from Basagoth and a route that even most guides do not know. What is there is a community that came in through the nebula decades ago and never left — either by choice or because leaving became complicated.',
+    planets:[
+      {id:'illora_prime',name:'Illora',type:'Terrestrial — Isolated Nebula World',status:'active',statusLabel:'Active — Nebula Isolated',
+       atmosphere:'Breathable',atm_note:'Standard breathable — the nebula\'s interference with stellar radiation produces unusual lighting but no atmospheric effect',
+       climate:'Temperate (Nebula-lit — unusual visual spectrum)',gravity:'Standard',
+       faction:'Illoran Community (self-governing)',population:'~80,000',
+       demographics:'Mixed — the original community was diverse and has maintained that diversity in isolation',
+       government:'Community Council (long-established, well-functioning given the circumstances)',tech_level:'Standard (declining slowly — resupply is difficult)',
+       economy:'Agricultural (internal), limited technology maintenance, guide services for the outward path',
+       access:'By guide only',access_note:'No route to Illora that does not pass through Basagoth and require guide knowledge. The Illoran community maintains their own path knowledge and will not share it.',
+       hazards:['Nebula isolation — supply difficulty, technology degradation over time','Navigation back out requires either Basagoth guides or Illoran path knowledge','The nebula itself creates sensor and navigation anomalies throughout the system','The community has been isolated long enough to develop its own social dynamics that outsiders find difficult to read quickly'],
+       notable_locations:[
+         {name:'The Arrival Settlement',desc:'The original settlement point — named for the moment the community arrived. Still the administrative and cultural centre of Illoran society. The records of the original journey in are kept here.'},
+         {name:'The Signal Array',desc:'The communication system the Illorans use to maintain the path connection with Basagoth. Maintained carefully. The only reliable contact with the outside galaxy.'}
+       ],
+       hooks:['The Illoran community is requesting outside assistance — something specific that they need but cannot produce internally. Getting the request and the response through the nebula without Basagoth knowing is the complication.','Records in the Arrival Settlement describe the original journey into the Gravemist in terms that suggest the community did not arrive accidentally. They came here deliberately, to this specific place, for a reason the current residents either do not know or will not explain.'],
+       desc:'Illora exists in the nebula\'s quiet. The community here has been cut off from the main galaxy for longer than most of its current residents have been alive, and has made something functional from that separation. It is not paradise — resupply is difficult, technology degrades without replacement parts, and the social pressures of a closed community are real. It is, however, a community: people who have built their lives in an extraordinary context and are reasonably good at it by now.'}
+    ]
+  },
+  {
+    id:'bother',name:'Bother System',region:'Gravemist Nebula',classification:'Nebula System — Deep Catalogue',
+    faction:'Unknown',status:'unknown',
+    tags:['Gravemist Nebula','Unknown','Deep Nebula','Unverified','Mysterious'],
+    desc:'Bother is the second and deeper of the officially catalogued Gravemist Nebula systems — a designation based on two independent verified survey entries that reached it, made records, and returned. The most recent entry was forty years ago. Current conditions are entirely unknown. Whether the system is inhabited, what it contains, and whether it is navigable from Illora or only from the outer path, are all open questions.',
+    planets:[
+      {id:'bother_zone',name:'Bother (Unverified)',type:'Unknown — Deep Nebula System',status:'unknown',statusLabel:'Status Unknown',
+       atmosphere:'Unknown',atm_note:'Last survey 40 years ago — atmospheric data from that survey suggests breathable conditions but the data quality was rated as low-confidence',
+       climate:'Unknown',gravity:'Unknown',
+       faction:'Unknown',population:'Unknown — original surveys found no evidence of habitation; current status unknown',
+       demographics:'Unknown',government:'Unknown',tech_level:'Unknown',economy:'Unknown',
+       access:'Effectively inaccessible',access_note:'No known current navigable route. The guides at Basagoth who claim knowledge of the path to Bother are a minority and disagree about the route.',
+       hazards:['No current intelligence — unknown hazards','Navigation to Bother from any approach is not verified for safety','The nebula in the region of Bother is classified as "Dense Interference" — even with guide knowledge, instrument reliability is severely degraded','Forty years of whatever has been happening without observation'],
+       notable_locations:[{name:'Survey Point (Historical)',desc:'The location where both historical surveys established contact and made their records. Whether anything is there now is unknown. The forty-year-old coordinates are the only reference point.'}],
+       hooks:['One of the Basagoth guides has claimed they have been to Bother recently — the first claimed visit in decades. They won\'t say what they found but they are clearly unsettled by something.','The older of the two historical surveys made a reference in its records to "evidence of prior presence" on Bother that was not elaborated in the filed report. The full original survey data has never been released.'],
+       desc:'Bother is catalogued and effectively unknown. Two ships went there across forty years, both returned, neither stayed long enough to produce comprehensive data. What is in the system — whether natural, inhabited, or something else — has not been established. The name is apocryphal: supposedly from the first survey crew\'s logged reaction when they got back to Basagoth. The cataloguing is technically complete. The understanding of what was catalogued is not.'}
+    ]
+  },
+  // ─── ERBROTHER NEBULA ────────────────────────────────────────────────
+  {
+    id:'phoxitis',name:'Phoxitis System',region:'Erbrother Nebula',classification:'Nebula System — Scientific Interest',
+    faction:'Alliance Science Authority (survey mission)',status:'active',
+    tags:['Erbrother Nebula','Scientific','Nebula','Alliance Survey','Research'],
+    desc:'Phoxitis was identified by an Alliance survey mission as one of the more accessible systems inside the Erbrother Nebula — a smaller, more navigable nebula than the Gravemist but still challenging to transit without proper equipment. The system\'s unusual stellar characteristics have made it a subject of ongoing scientific interest.',
+    planets:[
+      {id:'phoxitis_prime',name:'Phoxitis',type:'Terrestrial — Erbrother Nebula',status:'active',statusLabel:'Active — Science Authority Survey',
+       atmosphere:'Breathable',atm_note:'Breathable but with elevated particulate content from nebula interaction — extended outdoor exposure requires filtration',
+       climate:'Cool, Nebula-lit (low stellar energy)',gravity:'Below Standard',
+       faction:'Alliance Science Authority (temporary survey installation)',population:'~2,000 — survey team and support staff',
+       demographics:'Almost entirely Science Authority personnel and contracted researchers',
+       government:'Survey Mission Command',tech_level:'Advanced (Survey)',
+       economy:'Scientific research — no commercial economy',
+       access:'Restricted',access_note:'Science Authority mission area. Academic credentials or Authority sponsorship required. Not commercially accessible.',
+       hazards:['Nebula navigation — access and egress require proper equipment and charted routes','Science Authority security enforces mission exclusivity','The nebula creates sensor interference affecting communication and navigation throughout','Unusual stellar radiation profile — some crew members on extended stays have reported health effects under investigation'],
+       notable_locations:[{name:'Survey Base Phoxitis',desc:'The Alliance Science Authority\'s installation — a well-equipped but temporary facility intended for extended research missions. The quality of the sensor equipment here is exceptionally high, directed at the nebula\'s properties and the system\'s stellar characteristics.'}],
+       hooks:['A Science Authority researcher has filed an internal dissent on the mission\'s published conclusions. The dissent has been suppressed and the researcher transferred. They want to talk to someone outside the Authority structure.','Long-range observation of Phoxitis from Peavis has detected an emission pattern from the survey base that is not consistent with known scientific equipment. Whether this is anomalous stellar activity or something the survey team is doing is not clear.'],
+       desc:'Phoxitis is a working science mission in an unusual location. The Erbrother Nebula is not the Gravemist — it is challenging to navigate but not effectively impossible — and the system\'s accessibility has made it a legitimate research destination. Whether the published research from this mission accurately represents what has been found is a question some people inside the Science Authority have started asking.'}
+    ]
+  },
+  {
+    id:'peavis',name:'Peavis System',region:'Erbrother Nebula',classification:'Nebula System — Free Access',
+    faction:'Independent',status:'active',
+    tags:['Erbrother Nebula','Independent','Nebula Community','Free Access','Frontier'],
+    desc:'Peavis is the second known system inside the Erbrother Nebula and the one that has developed without institutional presence. Where Phoxitis has the Science Authority, Peavis has whoever found it useful — independent operators who valued the nebula\'s natural navigation deterrent as a form of privacy protection. It has become a small but established independent community.',
+    planets:[
+      {id:'peavis_prime',name:'Peavis',type:'Terrestrial — Erbrother Independent Community',status:'active',statusLabel:'Active — Independent',
+       atmosphere:'Breathable',atm_note:'Standard breathable — the nebula filtering of stellar radiation produces a distinctive sky colouration but no atmospheric chemistry effect',
+       climate:'Temperate',gravity:'Standard',
+       faction:'Peavis Community Council',population:'~30,000',
+       demographics:'Mixed — people who came here for the privacy it offers',
+       government:'Community Council (minimal governance)',tech_level:'Standard',
+       economy:'Small-scale agriculture, technical services, privacy-valued activities, observation of Phoxitis mission',
+       access:'Open (with navigation)',access_note:'The nebula navigation is the access control — getting here without the right equipment and charts is difficult. Once here, the community is open.',
+       hazards:['Nebula navigation for entry and egress','Isolation — the community is self-sufficient but limits apply','The residents who chose Peavis for privacy reasons may react badly to parties perceived as representing institutional interests'],
+       notable_locations:[
+         {name:'The Settlement',desc:'The primary community on Peavis — built informally over time by people who came here in small groups and stayed. Functional, somewhat improvised in its infrastructure, and with the social texture of a community that has been through things together.'},
+         {name:'The Observation Point',desc:'The community maintains a passive observation array directed at the Phoxitis system — they watch the Science Authority mission with the interest of neighbours who have strong feelings about institutional proximity.'}
+       ],
+       hooks:['The Peavis Community Council has received information suggesting the Science Authority intends to expand its Erbrother presence into Peavis. They are looking for outside help in making their opposition to this effective.','Someone arrived on Peavis three months ago and has become part of the community. A party has arrived looking for them. The community\'s response to inquiries about their residents has been unwelcoming.'],
+       desc:'Peavis is a community of people who came to the Erbrother Nebula because they wanted the world to have some difficulty finding them. The nebula navigation is not completely deterrent but it is deterrent enough to make it selective. The Science Authority\'s presence in Phoxitis is a source of sustained unease — not because the Authority has done anything to Peavis, but because the residents understand that institutional presence tends to expand and that their privacy has a specific value they would prefer to maintain.'}
+    ]
   }
 
 // Load any saved catalogue edits from localStorage
