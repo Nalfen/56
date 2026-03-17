@@ -726,7 +726,7 @@ function applyWpnMfr(item,mfrName){
 }
 
 // Defense tiers: numeric mapping 0=None,3=Low,6=Medium,9=High,12=Extreme
-const DEF_TIER_MAP={0:'None',3:'Low',6:'Medium',9:'High',12:'Extreme'};
+const DEF_TIER_MAP={0:'NONE',3:'LOW',6:'MEDIUM',9:'HIGH',12:'EXTREME'};
 const DEF_NAME_TO_NUM={None:0,Low:3,Medium:6,High:9,Extreme:12,EXTREME:12,NONE:0,LOW:3,MEDIUM:6,HIGH:9};
 function defShift(current, numericMod){
   // numericMod is a raw numeric value added to the 0/3/6/9/12 scale
@@ -755,10 +755,10 @@ function applyArmorMfr(item, mfrName){
   // Defense tiers, numeric shift (3 = one tier up)
   const pmod=parseInt(m.pdef_mod||0), emod=parseInt(m.edef_mod||0);
   const tmod=parseInt(m.tdef_mod||0), smod=parseInt(m.sdef_mod||0);
-  if(pmod) w.def_physical  = defShift(w.def_physical  || 'None', pmod);
-  if(emod) w.def_energy    = defShift(w.def_energy    || 'None', emod);
-  if(tmod) w.def_tech      = defShift(w.def_tech      || 'None', tmod);
-  if(smod) w.def_spiritual = defShift(w.def_spiritual || 'None', smod);
+  if(pmod) w.def_physical  = defShift(w.def_physical  || 'NONE', pmod);
+  if(emod) w.def_energy    = defShift(w.def_energy    || 'NONE', emod);
+  if(tmod) w.def_tech      = defShift(w.def_tech      || 'NONE', tmod);
+  if(smod) w.def_spiritual = defShift(w.def_spiritual || 'NONE', smod);
   // Soak: same formula as weapon damage
   // new_soak = (soak_max + soak_max_mod - soak_min - soak_min_mod)D + (soak_min + soak_min_mod)
   const smaxMod = parseInt(m.soak_max_mod||0), sminMod = parseInt(m.soak_min_mod||0);
@@ -771,8 +771,8 @@ function applyArmorMfr(item, mfrName){
   if(m.armor_def_choice){
     const defFieldMap={physical:'def_physical',energy:'def_energy',tech:'def_tech',spiritual:'def_spiritual'};
     const defKey=defFieldMap[mfrState.kintechDef||'physical']||'def_physical';
-    let boosted=defShift(w[defKey]||'None',3);
-    if(boosted==='Extreme')boosted='High'; // cap at High
+    let boosted=defShift(w[defKey]||'NONE',3);
+    if(boosted==='EXTREME')boosted='HIGH'; // cap at High
     w[defKey]=boosted;
     const ex = w.special||'';
     const hasOPT = /\bOPT\b/.test(ex);
@@ -7501,7 +7501,7 @@ function render(){
       // System value (from int slot conversion)
       const sysM=parseInt(m.sys_mod||0);if(sysM&&w.system!=null){const sv=parseInt(w.system)||0;w.system=String(sv+sysM);}
       // Defense choice boost (from core slot conversion, player picks one defense, max High)
-      if(m.dc_def_choice){const defFieldMap={physical:'def_physical',energy:'def_energy',tech:'def_tech',spiritual:'def_spiritual'};const defKey=defFieldMap[mfrState.dcDef||'physical']||'def_physical';let boosted=defShift(w[defKey]||'None',3);if(boosted==='Extreme')boosted='High';w[defKey]=boosted;}
+      if(m.dc_def_choice){const defFieldMap={physical:'def_physical',energy:'def_energy',tech:'def_tech',spiritual:'def_spiritual'};const defKey=defFieldMap[mfrState.dcDef||'physical']||'def_physical';let boosted=defShift(w[defKey]||'NONE',3);if(boosted==='EXTREME')boosted='HIGH';w[defKey]=boosted;}
       // Expertise
       const expM=parseInt(m.expertise_mod||0);if(expM&&w.exp_num!==undefined)w.expertise=String(w.exp_num+expM);
       // Size: shift category
