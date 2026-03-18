@@ -8293,20 +8293,22 @@ function render(){
         h+='</div></div>';
         if(sys.tags&&sys.tags.length)h+='<div class="gc-sys-tags">'+sys.tags.map(function(t){return '<span class="tag tgr">'+esc(t)+'</span>';}).join('')+'</div>';
         if(sys.desc)h+='<div class="gc-sys-excerpt">'+descHtml(sys.desc,sq)+'</div>';
-        var totalPop=(sys.planets||[]).map(function(p){return p.population||'';}).filter(Boolean);
-        if(totalPop.length||wldCnt){
-          h+='<div class="gc-sys-quickbar">';
-          (sys.planets||[]).forEach(function(p){
-            if(!p.atmosphere&&!p.access&&!p.status)return;
-            h+='<span class="gc-sys-qworld"><span style="margin-right:3px;font-size:11px;">'+gcPlanetIcon(p)+'</span><span class="gc-sys-qname">'+esc(p.name)+'</span>';
-            if(p.atmosphere)h+='<span class="gc-chip gc-chip-sm '+gcAtmClass(p.atmosphere)+'">'+esc(p.atmosphere)+'</span>';
-            if(p.access)h+='<span class="gc-chip gc-chip-sm '+gcAccessClass(p.access)+'">'+esc(p.access)+'</span>';
-            if(p.population)h+='<span class="gc-sys-qpop">'+esc(p.population)+'</span>';
-            h+='</span>';
-          });
-          h+='</div>';
-        }
         h+='<div class="gc-system-body">';
+        if(wldCnt){
+          h+='<div class="gc-planets-hint">🖱 Click any world to open detailed profile in the side panel</div>';
+          h+='<div class="gc-planets-head"><span>World</span><span>Type</span><span style="text-align:right;">Atmosphere</span><span style="text-align:right;">Access</span></div>';
+          (sys.planets||[]).forEach(function(p,pi){
+            var isSel=(gcPanelSys===realIdx&&gcPanelPlanet===pi);
+            var isSec=gcIsSecondary(p);
+            var icon=gcPlanetIcon(p);
+            h+='<div class="gc-planet-row'+(isSel?' sel':'')+(isSec?' sec':'')+'" id="gcp_'+esc(sys.id)+'_'+pi+'" onclick="gcOpenPlanet('+realIdx+','+pi+')">';
+            h+='<div class="gc-planet-name"><span class="gc-planet-icon">'+icon+'</span>'+hl(p.name,sq)+'</div>';
+            h+='<div class="gc-planet-type">'+esc(p.type||'—')+'</div>';
+            h+='<div class="gc-planet-chips"><span class="gc-chip '+gcAtmClass(p.atmosphere)+'">'+esc(p.atmosphere||'—')+'</span></div>';
+            h+='<div class="gc-planet-chips"><span class="gc-chip '+gcAccessClass(p.access)+'">'+esc(p.access||'—')+'</span></div>';
+            h+='</div>';
+          });
+        }
         if(sys.population||sys.notable_for){
           h+='<div class="gc-faction-detail">';
           if(sys.notable_for)h+='<div class="gc-fd-row"><div class="gc-fd-lbl">Notable For</div><div class="gc-fd-val">'+esc(sys.notable_for)+'</div></div>';
@@ -8322,21 +8324,6 @@ function render(){
           h+='<span class="gc-region-acc-arr">▼</span></div>';
           h+='<div class="gc-region-acc-body"><div class="gc-region-lore-list">'+sysHooks.map(function(n,i){return '<div class="gc-region-lore-item"><div class="gc-region-lore-num">NOTE '+(i+1)+'</div>'+esc(n)+'</div>';}).join('')+'</div></div>';
           h+='</div>';
-        }
-        if(wldCnt){
-          h+='<div class="gc-planets-hint">🖱 Click any world to open detailed profile in the side panel</div>';
-          h+='<div class="gc-planets-head"><span>World</span><span>Type</span><span style="text-align:right;">Atmosphere</span><span style="text-align:right;">Access</span></div>';
-          (sys.planets||[]).forEach(function(p,pi){
-            var isSel=(gcPanelSys===realIdx&&gcPanelPlanet===pi);
-            var isSec=gcIsSecondary(p);
-            var icon=gcPlanetIcon(p);
-            h+='<div class="gc-planet-row'+(isSel?' sel':'')+(isSec?' sec':'')+'" id="gcp_'+esc(sys.id)+'_'+pi+'" onclick="gcOpenPlanet('+realIdx+','+pi+')">';
-            h+='<div class="gc-planet-name"><span class="gc-planet-icon">'+icon+'</span>'+hl(p.name,sq)+'</div>';
-            h+='<div class="gc-planet-type">'+esc(p.type||'—')+'</div>';
-            h+='<div class="gc-planet-chips"><span class="gc-chip '+gcAtmClass(p.atmosphere)+'">'+esc(p.atmosphere||'—')+'</span></div>';
-            h+='<div class="gc-planet-chips"><span class="gc-chip '+gcAccessClass(p.access)+'">'+esc(p.access||'—')+'</span></div>';
-            h+='</div>';
-          });
         }
         h+='<div class="gc-add-planet-row" onclick="gcOpenAddPlanet('+realIdx+')">＋ Add World</div>';
         h+='</div></div>';
