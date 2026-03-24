@@ -479,6 +479,7 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
   <button class="nb" data-s="weapon_options"><span class="ni">🔧</span>Weapon Options</button>
   <button class="nb" data-s="armor"><span class="ni">🛡</span>Armor</button>
   <button class="nb" data-s="armor_options"><span class="ni">⚙</span>Armor Options</button>
+  <button class="nb" data-s="ammo"><span class="ni">🔴</span>Ammunition</button>
   <div class="nl" style="margin-top:5px;">Magic</div>
   <button class="nb" data-s="spells"><span class="ni">✨</span>Spells</button>
   <div class="nl" style="margin-top:5px;">Tech</div>
@@ -532,6 +533,25 @@ document.addEventListener('click',e=>{
   if(card){const el=document.getElementById(card.dataset.tog);if(el)el.classList.toggle('x');return;}
   const rg=e.target.closest('[data-rgtog]');
   if(rg){const el=document.getElementById(rg.dataset.rgtog);if(el)el.classList.toggle('open');return;}
+  // ── Ammo Calculator interactions ───────────────────────────────────────────
+  const ammoEl=e.target.closest('[data-ammo]');
+  if(ammoEl){
+    const v=ammoEl.dataset.ammo;
+    if(v.startsWith('type:')){ammoCalc.type=v.slice(5);ammoCalc.opts=[];render();return;}
+    if(v.startsWith('opt:')){
+      const code=v.slice(4);
+      const idx=ammoCalc.opts.indexOf(code);
+      if(idx>=0){ammoCalc.opts.splice(idx,1);}
+      else{
+        // Check compatibility with already selected opts
+        const ok=ammoCalc.opts.every(o=>AMMO_COMPAT[o]&&AMMO_COMPAT[o][code]!==0);
+        if(ok) ammoCalc.opts.push(code);
+      }
+      render();return;
+    }
+    if(v==='reset'){ammoCalc={type:null,opts:[]};render();return;}
+    return;
+  }
   // ── Drone Builder interactions ─────────────────────────────────────────────
   const dbEl=e.target.closest('[data-db]');
   if(dbEl){
@@ -1541,6 +1561,14 @@ const DB_COMP={
 // Drone builder state, survives re-renders (module-level)
 let dbState={name:'Unnamed Drone',size:null,mob:null,pwr_type:null,atmo:false,core:[],internal:[],external:[],wpnPicker:null};
 let dbAdd={loc:null,type:null,tier:0,skills:[],wpnSearch:''};
+let ammoCalc={type:null,opts:[]};
+// Ammo option compatibility matrix: 1=compatible, 0=incompatible
+// Order: DP, S, HE, LB, AR, STN, FIRE, EMP, CRIT, SB
+const AMMO_OPT_CODES=['DP','S','HE','LB','AR','STN','FIRE','EMP','CRIT','SB'];
+const AMMO_COMPAT=(()=>{
+  const C={DP:{S:1,HE:0,LB:0,AR:1,STN:1,FIRE:1,EMP:1,CRIT:1,SB:1},S:{DP:1,HE:1,LB:1,AR:1,STN:1,FIRE:1,EMP:1,CRIT:1,SB:1},HE:{DP:0,S:1,LB:0,AR:0,STN:1,FIRE:0,EMP:0,CRIT:1,SB:0},LB:{DP:0,S:1,HE:0,AR:0,STN:1,FIRE:1,EMP:1,CRIT:1,SB:0},AR:{DP:1,S:1,HE:0,LB:0,STN:1,FIRE:1,EMP:0,CRIT:1,SB:1},STN:{DP:1,S:1,HE:1,LB:1,AR:1,FIRE:1,EMP:1,CRIT:1,SB:1},FIRE:{DP:1,S:1,HE:0,LB:1,AR:1,STN:1,EMP:1,CRIT:1,SB:1},EMP:{DP:1,S:1,HE:0,LB:1,AR:0,STN:1,FIRE:1,CRIT:1,SB:1},CRIT:{DP:1,S:1,HE:1,LB:1,AR:1,STN:1,FIRE:1,EMP:1,SB:1},SB:{DP:1,S:1,HE:0,LB:0,AR:1,STN:1,FIRE:1,EMP:1,CRIT:1}};
+  return C;
+})();
 
 function parseSk(s){if(!s||s==='0')return{d:0,f:0};const m=String(s).match(/^(\d*)D([+-]\d+)?$/i);if(m)return{d:parseInt(m[1]||1),f:parseInt(m[2]||0)};return{d:0,f:parseInt(s)||0};}
 function fmtSk(d,f){if(!d&&!f)return'0';if(!d)return String(f);if(!f)return d+'D';return d+'D'+(f>0?'+':'')+f;}
@@ -6192,6 +6220,32 @@ g.catalogue_systems=[
   }
 ];
 
+// ─── Ammunition Data ──────────────────────────────────────────────────────────
+g.ammo_types=[
+  {name:'Small Magazine',legality:'No Permit',typical:'Small weapons and needlers',options:'DP HP LB STN',cat:'S',qty:'3 (3)',size:'Small',cost:100},
+  {name:'Medium Magazine',legality:'No Permit',typical:'Average ammunition found in most rifles',options:'DP HP S AR LB STN FIRE',cat:'M',qty:'3 (3)',size:'Small',cost:500},
+  {name:'Large Magazine',legality:'Restricted',typical:'High power weapons',options:'All',cat:'L',qty:'3 (3)',size:'Small',cost:1000},
+  {name:'Small Heavy Magazine',legality:'Restricted',typical:'Small caliber machineguns and launchers',options:'All',cat:'HS',qty:'3 (3)',size:'Medium',cost:300},
+  {name:'Medium Heavy Magazine',legality:'Restricted',typical:'Heavy support weapons',options:'All',cat:'HM',qty:'3 (3)',size:'Medium',cost:1500},
+  {name:'Large Heavy Magazine',legality:'Restricted',typical:'Anti material weapons',options:'All',cat:'HL',qty:'3 (3)',size:'Medium',cost:3000},
+  {name:'Small ordnance',legality:'Illegal',typical:'Small vehicle weapons',options:'All',cat:'CS',qty:'3 (3)',size:'Oversize',cost:10000},
+  {name:'Medium ordnance',legality:'Illegal',typical:'Typical artillery and spaceships',options:'All',cat:'CM',qty:'1 (1)',size:'Oversize',cost:50000},
+  {name:'Large ordnance',legality:'Illegal',typical:'Siege artillery and large capital ships',options:'All',cat:'CL',qty:'1 (1)',size:'Oversize',cost:500000},
+  {name:'Arrows & Bolts',legality:'No Permit',typical:'Bows and Crossbows',options:'All',cat:'M',qty:'1 (12)',size:'Medium',cost:100}
+];
+g.ammo_opts=[
+  {code:'DP',name:'Defense Piercing',legality:'Restricted',effect:'Target is considered BREACHED but comes with a SMALL penalty to your damage.',avail:'UNCOMMON',cost_mult:2},
+  {code:'S',name:'Smart Ammo',legality:'Restricted',effect:'You gain a SMALL bonus to HIT. If you have LOCKON this bonus is LARGE instead.',avail:'COMMON',cost_mult:2},
+  {code:'HE',name:'High Explosive',legality:'Illegal',effect:'Reduce explosion radius by 50% but deals double the damage. (requires EX base mod)',avail:'RARE',cost_mult:5},
+  {code:'LB',name:'Lifebane',legality:'Illegal',effect:'Gain a LARGE damage bonus Vs LIVING targets. Critical ailment with LIFEBANE applies the SICK ailment; if already present, deal a TRAUMA instead.',avail:'LIMITED',cost_mult:5},
+  {code:'AR',name:'Armor Rending',legality:'Restricted',effect:'Gain a SMALL bonus to PHYSICAL DAMAGE when hitting MEDIUM PHYSICAL DEFENSE. Bonus increases to LARGE against HIGH or EXTREME DEFENSE or against structures and objects.',avail:'UNCOMMON',cost_mult:3},
+  {code:'STN',name:'Temporary Damage',legality:'No Permit',effect:'Temporary Damage (Recovery of STUN damage is per SCENE instead of per DAY)',avail:'COMMON',cost_mult:2},
+  {code:'FIRE',name:'Incendiary',legality:'Restricted',effect:'Successful hits have 60% chance (5+ on luck DICE) to ignite targets. Damage gains the ONG tag on successful ignite.',avail:'UNCOMMON',cost_mult:3},
+  {code:'EMP',name:'Electromagnetic Pulse',legality:'Restricted',effect:"Gain a LARGE damage bonus Vs ELECTRONICS. Applying a critical ailment with EMP effect stops an ELECTRONIC device from functioning or STUNs it if it's an android or robot. If the AILMENT is already present, deal a TRAUMA instead.",avail:'RARE',cost_mult:5},
+  {code:'CRIT',name:'High Critical',legality:'Restricted',effect:'Weapon will crit on an unmodified 9-10 instead of a natural 10 on your luck dice.',avail:'UNCOMMON',cost_mult:2},
+  {code:'SB',name:'Spiritbane',legality:'Illegal',effect:'Gain a LARGE damage bonus Vs MAGICAL targets. Applying a critical ailment with SPIRITBANE reduces its MANIFESTATION level: Manifested/Awakened > Passive, Passive > Suppressed. If already Suppressed, deal a TRAUMA instead.',avail:'LIMITED',cost_mult:5}
+];
+
 // Load any saved catalogue edits from localStorage
 (function(){try{var s=localStorage.getItem('gc_systems');if(s){var d=JSON.parse(s);if(Array.isArray(d))g.catalogue_systems=d;}}catch(e){}})();
 
@@ -7457,6 +7511,146 @@ function render(){
       html+='</tr>';
     });
     html+='</tbody></table>';
+  }
+
+  else if(cs==='ammo'){
+    // ── Ammunition section: ammo types table + options table + cost calculator ──
+    const AT=g.ammo_types||[];
+    const AO=g.ammo_opts||[];
+    // Search filter across both tables
+    const FT=AT.filter(a=>ms([a.name,a.legality,a.typical,a.cat,a.size]));
+    const FO=AO.filter(o=>ms([o.code,o.name,o.legality,o.effect,o.avail]));
+    cnt=FT.length+FO.length;
+    // Helper: ammo option tag with tooltip
+    function ammoOptTag(code){
+      const opt=AO.find(o=>o.code===code);
+      if(opt){const tipTxt='<b>'+esc(opt.name)+'</b><br>'+esc(opt.effect);return '<span class="spec-tag" data-tip="'+tipTxt+'">'+esc(code)+'</span>';}
+      const sp=g.specials&&g.specials[code];
+      if(sp){return '<span class="spec-tag" data-tip="<b>'+esc(sp.name)+'</b><br>'+esc(sp.desc)+'">'+esc(code)+'</span>';}
+      return '<span class="tag tgr" style="font-size:9px;">'+esc(code)+'</span>';
+    }
+    function ammoOptTagStr(optStr){
+      if(!optStr)return '';
+      if(optStr==='All')return '<span class="tag tg" style="font-size:9px;">ALL</span>';
+      return optStr.split(/\s+/).filter(Boolean).map(c=>ammoOptTag(c)).join(' ');
+    }
+    html='<div class="stitle">🔴 AMMUNITION <span class="badge">'+AT.length+'</span></div>';
+    // ── Ammo Types Table ──
+    html+='<div class="ssub" style="margin-bottom:8px;">Ammo Types</div>';
+    html+='<div style="overflow-x:auto;margin-bottom:20px;">';
+    html+='<table class="opt-table"><thead><tr><th style="min-width:160px;">Bullets</th><th>Legality</th><th>Typical Use</th><th>Options</th><th>Cat.</th><th>Qty.</th><th>Size</th><th>Cost</th></tr></thead><tbody>';
+    FT.forEach(a=>{
+      const lgCls=a.legality==='Illegal'?'tr':a.legality==='Restricted'?'ty':'tw';
+      html+='<tr>';
+      html+='<td style="font-weight:600;color:var(--tx);">'+hl(a.name,sq)+'</td>';
+      html+='<td><span class="tag '+lgCls+'" style="font-size:9px;">'+esc(a.legality)+'</span></td>';
+      html+='<td style="font-size:12px;color:var(--tx2);">'+hl(a.typical,sq)+'</td>';
+      html+='<td>'+ammoOptTagStr(a.options)+'</td>';
+      html+='<td style="font-family:\'IBM Plex Mono\',monospace;font-size:11px;color:var(--bl);text-align:center;">'+esc(a.cat)+'</td>';
+      html+='<td style="font-family:\'IBM Plex Mono\',monospace;font-size:11px;text-align:center;">'+esc(a.qty)+'</td>';
+      html+='<td style="font-size:11px;text-align:center;">'+esc(a.size)+'</td>';
+      html+='<td style="font-family:\'IBM Plex Mono\',monospace;font-size:11px;color:var(--gr);white-space:nowrap;">'+fmt(a.cost)+' Cr</td>';
+      html+='</tr>';
+    });
+    html+='</tbody></table></div>';
+    // ── Ammo Options Table ──
+    html+='<div class="ssub" style="margin-bottom:8px;">Ammunition Options</div>';
+    html+='<div style="overflow-x:auto;margin-bottom:20px;">';
+    html+='<table class="opt-table"><thead><tr><th style="min-width:160px;">Name</th><th>Type</th><th>Legality</th><th>Effect</th><th>Avail.</th><th>Cost ×</th></tr></thead><tbody>';
+    FO.forEach(o=>{
+      const lgCls=o.legality==='Illegal'?'tr':o.legality==='Restricted'?'ty':'tw';
+      const avCls=o.avail==='LIMITED'?'tp':o.avail==='RARE'?'tb':o.avail==='UNCOMMON'?'tg':'tw';
+      html+='<tr>';
+      html+='<td style="font-weight:600;color:var(--tx);">'+hl(o.name,sq)+'</td>';
+      html+='<td><span class="tag tw" style="font-size:9px;font-family:\'IBM Plex Mono\',monospace;">'+esc(o.code)+'</span></td>';
+      html+='<td><span class="tag '+lgCls+'" style="font-size:9px;">'+esc(o.legality)+'</span></td>';
+      html+='<td style="font-size:12px;">'+hl(o.effect,sq)+'</td>';
+      html+='<td><span class="tag '+avCls+'" style="font-size:9px;">'+esc(o.avail)+'</span></td>';
+      html+='<td style="font-family:\'IBM Plex Mono\',monospace;color:var(--ye);text-align:center;">×'+o.cost_mult+'</td>';
+      html+='</tr>';
+    });
+    html+='</tbody></table>';
+    html+='<p style="font-size:11px;color:var(--mu);margin-top:8px;">* Cost for multiple ammo options is cumulative. Availability increases by 1 per modifier based on the highest base availability.<br>EXAMPLE: Large Magazine (1000 Cr) + DP (×2) + S (×2) = 1000 × 2 × 2 = 4000 Cr</p>';
+    html+='</div>';
+    // ── Ammo Cost Calculator ──
+    html+='<div class="ssub" style="margin-bottom:10px;">Cost Calculator</div>';
+    html+='<div class="db-setup">';
+    // Step 1: select ammo type
+    html+='<div class="db-step"><span class="db-step-lbl">Ammo Type</span>';
+    AT.forEach(a=>{
+      const sel=ammoCalc.type===a.name?' sel':'';
+      html+='<button class="db-chip'+sel+'" data-ammo="type:'+esc(a.name)+'">'+esc(a.cat)+' – '+esc(a.name)+'</button>';
+    });
+    html+='</div>';
+    if(ammoCalc.type){
+      const baseAT=AT.find(a=>a.name===ammoCalc.type);
+      // Determine compatible codes for this ammo type
+      const compatCodes=baseAT.options==='All'?AMMO_OPT_CODES:baseAT.options.split(/\s+/).filter(c=>AMMO_OPT_CODES.includes(c));
+      // Step 2: select options
+      html+='<div class="db-step" style="align-items:flex-start;"><span class="db-step-lbl" style="padding-top:4px;">Options</span><div style="display:flex;flex-wrap:wrap;gap:4px;">';
+      AMMO_OPT_CODES.forEach(code=>{
+        const opt=AO.find(o=>o.code===code);if(!opt)return;
+        const isTypeCompat=compatCodes.includes(code);
+        const isSelected=ammoCalc.opts.includes(code);
+        // Check compatibility with selected options (excluding self)
+        const otherSel=ammoCalc.opts.filter(o=>o!==code);
+        const isOptCompat=otherSel.every(o=>AMMO_COMPAT[o]&&AMMO_COMPAT[o][code]!==0);
+        let cls='db-chip';
+        if(isSelected) cls+=' sel';
+        else if(!isTypeCompat||!isOptCompat) cls+=' sel-o';// disabled style
+        const disabled=(!isTypeCompat||(!isSelected&&!isOptCompat))?'style="opacity:.4;cursor:not-allowed;"':'';
+        const action=(isTypeCompat&&(isSelected||isOptCompat))?'data-ammo="opt:'+code+'"':'';
+        html+='<button class="'+cls+'" '+action+' '+disabled+' title="'+esc(opt.name)+' (×'+opt.cost_mult+')">'+esc(code)+'</button>';
+      });
+      html+='</div></div>';
+      // Step 3: cost breakdown
+      let totalCost=baseAT.cost;
+      let costBreakdown=fmt(baseAT.cost)+' Cr (base)';
+      let highestAvailIdx=0;
+      const AVAIL_ORD=['COMMON','UNCOMMON','RARE','LIMITED','CLASSIFIED'];
+      ammoCalc.opts.forEach(code=>{
+        const opt=AO.find(o=>o.code===code);if(!opt)return;
+        totalCost*=opt.cost_mult;
+        costBreakdown+=' × '+opt.cost_mult+' ('+code+')';
+        const ai=AVAIL_ORD.indexOf(opt.avail);
+        if(ai>highestAvailIdx)highestAvailIdx=ai;
+      });
+      const finalAvailIdx=Math.min(highestAvailIdx+(ammoCalc.opts.length>0?ammoCalc.opts.length-1:0),AVAIL_ORD.length-1);
+      html+='<div style="margin-top:10px;padding:10px 12px;background:rgba(255,255,255,.03);border:1px solid var(--border2);border-radius:6px;">';
+      html+='<div style="font-size:11px;color:var(--mu);font-family:\'IBM Plex Mono\',monospace;margin-bottom:4px;">'+costBreakdown+'</div>';
+      html+='<div style="font-size:18px;font-weight:700;color:var(--gr);font-family:\'IBM Plex Mono\',monospace;">'+fmt(Math.round(totalCost))+' Cr</div>';
+      if(ammoCalc.opts.length>0){
+        html+='<div style="margin-top:4px;font-size:11px;color:var(--mu);">Availability: <span class="tag '+(highestAvailIdx>=3?'tp':highestAvailIdx>=2?'tb':highestAvailIdx>=1?'tg':'tw')+'" style="font-size:9px;">'+AVAIL_ORD[finalAvailIdx]+'</span></div>';
+        html+='<div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:4px;">';
+        ammoCalc.opts.forEach(code=>{const opt=AO.find(o=>o.code===code);if(opt)html+='<span class="tag tb" style="font-size:9px;">'+esc(code)+': '+esc(opt.name)+'</span>';});
+        html+='</div>';
+      }
+      html+='</div>';
+    }
+    html+='<div style="margin-top:8px;"><button class="db-cancel" data-ammo="reset">Reset</button></div>';
+    html+='</div>';
+    // ── Compatibility Chart ──
+    html+='<div class="ssub" style="margin-bottom:8px;margin-top:16px;">Ammo Option Compatibility Chart</div>';
+    html+='<div style="overflow-x:auto;margin-bottom:16px;">';
+    html+='<table style="border-collapse:collapse;font-family:\'IBM Plex Mono\',monospace;font-size:11px;">';
+    html+='<thead><tr><th style="background:var(--bg2);border:1px solid var(--border2);padding:5px 8px;"></th>';
+    AMMO_OPT_CODES.forEach(c=>{html+='<th style="background:var(--bg2);border:1px solid var(--border2);padding:5px 8px;text-align:center;color:var(--mu);">'+esc(c)+'</th>';});
+    html+='</tr></thead><tbody>';
+    AMMO_OPT_CODES.forEach(row=>{
+      html+='<tr><th style="background:var(--bg2);border:1px solid var(--border2);padding:5px 8px;text-align:right;color:var(--mu);">'+esc(row)+'</th>';
+      AMMO_OPT_CODES.forEach(col=>{
+        if(row===col){
+          html+='<td style="background:#2c2c2e;border:1px solid var(--border2);width:36px;height:28px;"></td>';
+        } else {
+          const compat=AMMO_COMPAT[row]&&AMMO_COMPAT[row][col]!==undefined?AMMO_COMPAT[row][col]:1;
+          const bg=compat?'rgba(48,209,88,.18)':'rgba(255,69,58,.18)';
+          const dot=compat?'<span style="color:var(--gr);font-size:13px;">✓</span>':'<span style="color:var(--re);font-size:13px;">✗</span>';
+          html+='<td style="background:'+bg+';border:1px solid var(--border2);width:36px;height:28px;text-align:center;">'+dot+'</td>';
+        }
+      });
+      html+='</tr>';
+    });
+    html+='</tbody></table></div>';
   }
 
   else if(cs==='spells'){
