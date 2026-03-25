@@ -2741,6 +2741,7 @@ var smapGateFirst=null;
 var smapPlacing=null;   // name of pin being placed on next map click
 var smapPinPos=null;    // {name:{x,y,zoom}} — loaded lazily by smapPosLoad()
 var smapGatesData=null; // [[a,b],...] — loaded lazily by smapGatesLoad()
+var smapViewState=null; // {scale,ox,oy} — preserved across re-renders
 
 function smapPosLoad(){
   if(smapPinPos)return smapPinPos;
@@ -6948,7 +6949,7 @@ function initStarmap(){
   var pinDrag=null; // {el,name,moved,startCX,startCY,startPX,startPY}
 
   function setInnerSize(){var inner=document.getElementById('smap-inner');if(inner){inner.style.width=CW+'px';inner.style.height=CH+'px';}}
-  function applyT(){cv.style.transform='translate('+ox+'px,'+oy+'px) scale('+scale+')';if(pct)pct.textContent=Math.round(scale*100)+'%';}
+  function applyT(){cv.style.transform='translate('+ox+'px,'+oy+'px) scale('+scale+')';if(pct)pct.textContent=Math.round(scale*100)+'%';smapViewState={scale:scale,ox:ox,oy:oy};}
   function fit(){
     if(img&&img.naturalWidth){CW=img.naturalWidth;CH=img.naturalHeight;setInnerSize();}
     var vw=vp.clientWidth,vh=vp.clientHeight;
@@ -7139,7 +7140,12 @@ function initStarmap(){
   });
 
   setInnerSize();
-  if(img){img.addEventListener('load',fit);if(img.complete&&img.naturalWidth)fit();else fit();}else{fit();}
+  function restoreOrFit(){
+    if(img&&img.naturalWidth){CW=img.naturalWidth;CH=img.naturalHeight;setInnerSize();}
+    if(smapViewState){scale=smapViewState.scale;ox=smapViewState.ox;oy=smapViewState.oy;clamp();applyT();}
+    else{fit();}
+  }
+  if(img){img.addEventListener('load',restoreOrFit);if(img.complete&&img.naturalWidth)restoreOrFit();else restoreOrFit();}else{restoreOrFit();}
 }
 // ─── Galactic Catalogue State ─────────────────────────────────────────────────
 var gcOpenSystems=new Set();
