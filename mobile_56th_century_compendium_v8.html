@@ -406,27 +406,14 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 .gc-sec-div{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--mu3);text-transform:uppercase;letter-spacing:1.5px;margin:14px 0 10px;padding-bottom:5px;border-bottom:1px solid var(--border);}
 .gc-loc-edit{background:#1c1c1e;border:1px solid var(--border);border-radius:5px;padding:10px;margin-bottom:6px;}
 /* ── Star Map Hotspots ───────────────────────────────────────────────────────── */
-.smap-dot{position:absolute;cursor:pointer;transform:translate(-50%,-50%);z-index:5;display:flex;flex-direction:column;align-items:center;pointer-events:auto;padding:6px 3px 3px;}
-.smap-dot-inner{width:18px;height:18px;border-radius:50%;border:2px solid;transition:transform .15s,box-shadow .15s,filter .15s;flex-shrink:0;}
-.smap-dot.faction .smap-dot-inner{width:22px;height:22px;border-radius:3px;transform:rotate(45deg);}
-.smap-dot:hover .smap-dot-inner{transform:scale(1.5);filter:brightness(1.5);}
-.smap-dot.faction:hover .smap-dot-inner{transform:rotate(45deg) scale(1.4);filter:brightness(1.5);}
-.smap-dot-lbl{font-family:'Share Tech Mono',monospace;font-size:18px;white-space:nowrap;margin-top:6px;text-shadow:0 0 6px #000,0 0 14px #000,1px 1px 0 #000,-1px -1px 0 #000;opacity:.8;pointer-events:none;line-height:1;}
-.smap-dot.faction .smap-dot-lbl{font-size:22px;font-family:'Orbitron',sans-serif;letter-spacing:.5px;}
+.smap-dot{position:absolute;cursor:pointer;transform:translate(-50%,-50%);z-index:5;display:flex;flex-direction:column;align-items:center;pointer-events:auto;padding:4px 2px 2px;}
+.smap-dot-inner{width:8px;height:8px;border-radius:50%;border:1.5px solid;transition:transform .15s,box-shadow .15s,filter .15s;flex-shrink:0;}
+.smap-dot.faction .smap-dot-inner{width:14px;height:14px;border-radius:2px;transform:rotate(45deg);}
+.smap-dot:hover .smap-dot-inner{transform:scale(1.7);filter:brightness(1.6);}
+.smap-dot.faction:hover .smap-dot-inner{transform:rotate(45deg) scale(1.4);filter:brightness(1.6);}
+.smap-dot-lbl{font-family:'Share Tech Mono',monospace;font-size:8px;white-space:nowrap;margin-top:3px;text-shadow:0 0 4px #000,0 0 8px #000,1px 1px 0 #000,-1px -1px 0 #000;opacity:.7;pointer-events:none;line-height:1;}
+.smap-dot.faction .smap-dot-lbl{font-size:10px;font-family:'Orbitron',sans-serif;letter-spacing:.3px;opacity:.9;}
 .smap-dot:hover .smap-dot-lbl{opacity:1;}
-/* ── Star Map Popup ──────────────────────────────────────────────────────────── */
-.smap-popup{position:fixed;background:#161618;border:1px solid #3c3c3e;border-radius:8px;padding:14px 14px 12px;width:320px;z-index:1100;box-shadow:0 8px 40px rgba(0,0,0,.88);pointer-events:auto;}
-.smap-popup-name{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;padding-right:22px;margin-bottom:5px;letter-spacing:.4px;}
-.smap-popup-close{position:absolute;top:9px;right:9px;background:none;border:none;color:#636366;cursor:pointer;font-size:13px;line-height:1;padding:3px 6px;border-radius:4px;}
-.smap-popup-close:hover{color:#f2f2f7;background:rgba(255,255,255,.07);}
-.smap-popup-tags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:8px;}
-.smap-popup-field{display:grid;grid-template-columns:72px 1fr;gap:3px;margin-bottom:3px;font-size:10px;line-height:1.45;}
-.smap-popup-fl{color:#636366;font-family:'Share Tech Mono',monospace;}
-.smap-popup-fv{color:#d1d1d6;font-family:'Share Tech Mono',monospace;}
-.smap-popup-desc{font-size:11.5px;color:#aeaeb2;line-height:1.6;margin-top:9px;max-height:140px;overflow-y:auto;border-top:1px solid #2c2c2e;padding-top:9px;}
-.smap-popup-desc::-webkit-scrollbar{width:3px;}.smap-popup-desc::-webkit-scrollbar-thumb{background:#3a3a3c;border-radius:3px;}
-.smap-popup-worlds{display:block;width:100%;margin-top:10px;padding:8px 10px;background:rgba(0,200,255,.06);border:1px solid rgba(0,200,255,.22);border-radius:5px;color:#00c8ff;font-size:10px;font-family:'Orbitron',sans-serif;cursor:pointer;letter-spacing:.6px;text-align:center;}
-.smap-popup-worlds:hover{background:rgba(0,200,255,.14);border-color:rgba(0,200,255,.4);}
 /* ── Star Map Edit Mode ─────────────────────────────────────────────────────── */
 .smap-edit-bar{position:absolute;top:10px;left:10px;display:flex;align-items:center;gap:6px;background:#161618cc;border:1px solid #2c2c2e;border-radius:6px;padding:6px 10px;z-index:20;backdrop-filter:blur(8px);flex-wrap:wrap;max-width:calc(100% - 160px);}
 .smap-eb{background:none;border:1px solid #3c3c3e;color:#aeaeb2;font-size:9px;cursor:pointer;padding:4px 8px;border-radius:4px;font-family:'Orbitron',sans-serif;letter-spacing:.4px;transition:border-color .15s,color .15s,background .15s;}
@@ -455,6 +442,19 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 .smap-export-box .exp-btns{display:flex;gap:8px;justify-content:flex-end;}
 .smap-pin-sys .smap-dot-inner{width:14px;height:14px;}
 .smap-pin-sys .smap-dot-lbl{font-size:10px;}
+/* ── Star Map Popup ──────────────────────────────────────────────────────────── */
+.smap-popup{position:fixed;background:#161618;border:1px solid #3c3c3e;border-radius:8px;padding:14px 14px 12px;width:min(320px,calc(100vw - 24px));max-height:75vh;overflow-y:auto;z-index:1100;box-shadow:0 8px 40px rgba(0,0,0,.88);pointer-events:auto;}
+.smap-popup-name{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;padding-right:22px;margin-bottom:5px;letter-spacing:.4px;}
+.smap-popup-close{position:absolute;top:9px;right:9px;background:none;border:none;color:#636366;cursor:pointer;font-size:13px;line-height:1;padding:3px 6px;border-radius:4px;}
+.smap-popup-close:hover{color:#f2f2f7;background:rgba(255,255,255,.07);}
+.smap-popup-tags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:8px;}
+.smap-popup-field{display:grid;grid-template-columns:72px 1fr;gap:3px;margin-bottom:3px;font-size:10px;line-height:1.45;}
+.smap-popup-fl{color:#636366;font-family:'Share Tech Mono',monospace;}
+.smap-popup-fv{color:#d1d1d6;font-family:'Share Tech Mono',monospace;}
+.smap-popup-desc{font-size:11.5px;color:#aeaeb2;line-height:1.6;margin-top:9px;max-height:140px;overflow-y:auto;border-top:1px solid #2c2c2e;padding-top:9px;}
+.smap-popup-desc::-webkit-scrollbar{width:3px;}.smap-popup-desc::-webkit-scrollbar-thumb{background:#3a3a3c;border-radius:3px;}
+.smap-popup-worlds{display:block;width:100%;margin-top:10px;padding:8px 10px;background:rgba(0,200,255,.06);border:1px solid rgba(0,200,255,.22);border-radius:5px;color:#00c8ff;font-size:10px;font-family:'Orbitron',sans-serif;cursor:pointer;letter-spacing:.6px;text-align:center;}
+.smap-popup-worlds:hover{background:rgba(0,200,255,.14);border-color:rgba(0,200,255,.4);}
 /* ─── Region Faction Extras ──────────────────────────────────────────────────── */
 .gc-region-known-for{margin:0 0 14px;}
 .gc-region-kf-title{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--mu3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;}
@@ -2513,47 +2513,222 @@ g.galaxy=[
 // Percentages of image width/height (0–100). Replace coordinates to match your map.
 // Each label [POS-NN] marks a placeholder that needs to be positioned on the actual image.
 const GALAXY_MAP_POS={
-  // Factions / Regions, positions calibrated to Star-Map-v3_HIGH_QUALITY.png
-  'Alliance Space':    {x:45,y:51},
-  'Haven Space':       {x:33,y:12},
-  'Torc Federation':   {x:65,y:79},
-  'Mubothen Empire':   {x:68,y:8},
-  'Zegitor Trade Guild':{x:20,y:45},
-  'Freeland':          {x:28,y:42},
-  'The Dark Space':    {x:17,y:82},
-  'Nemani Rift':       {x:54,y:28},
-  'Kraven Space':      {x:79,y:52},
-  'The Endless Darkness':{x:93,y:50},
-  "Nuzonia's Dream":   {x:55,y:82},
-  // Notable Systems
-  'San Tien':          {x:69,y:66},
-  'New Earth':         {x:18,y:77},
-  'Titania':           {x:43,y:60},
-  'Sirius':            {x:39,y:50},
-  'Orion':             {x:47,y:46},
-  'Aderan':            {x:51,y:57},
-  'Mangara':           {x:32,y:71},
-  'Skalan Worlds':     {x:42,y:65},
-  'Berilia':           {x:53,y:39},
-  'Ishtar':            {x:49,y:54},
-  'Damph':             {x:57,y:44},
-  'Alsa':              {x:50,y:62},
-  'Ash':               {x:53,y:32},
-  'Palentium':         {x:44,y:43},
+  // ── Major Faction / Region labels (diamond markers) ──────────────────────
+  'Alliance Space':         {x:48, y:52},
+  'Haven Space':            {x:37, y:24},
+  'Mubothen Empire':        {x:71, y:20},
+  'The Dark Space':         {x:18, y:72},
+  'Nemani Rift':            {x:57, y:32},
+  'Kraven Space':           {x:84, y:48},
+  'The Endless Darkness':   {x:95, y:48},
+  "Nuzonia's Dream":        {x:46, y:83},
+  'Torc Federation':        {x:67, y:73},
+  'The Solar Expanse':      {x:34, y:5},
+  'Erbrother Nebula':       {x:73, y:66},
+  "Dragon Tail's Expanse":  {x:84, y:79},
+  'Realmsingers Empire':    {x:79, y:61},
+  'Tronik Network':         {x:20, y:37},
+  'Gravemist Nebula':       {x:62, y:61},
+  'Proxima Sector':         {x:13, y:74},
+  // ── Alliance Space Core Systems ──────────────────────────────────────────
+  'Orion':                  {x:47, y:47},   // GU capital, absolute center
+  'Orion System':           {x:47, y:47},
+  'Sirius':                 {x:40, y:51},   // major commercial hub, west of Orion
+  'Sirius System':          {x:40, y:51},
+  'Palentium':              {x:44, y:43},   // first human colony, north of Orion
+  'Palentium System':       {x:44, y:43},
+  'Berilia':                {x:53, y:40},   // Patriark homeworld, NE of Orion
+  'Berilia System':         {x:53, y:40},
+  'Ash':                    {x:55, y:33},   // Nemani Rift frontier gateway
+  'Ash System':             {x:55, y:33},
+  'Damph':                  {x:57, y:44},   // Coronthia monopoly, east
+  'Damph System':           {x:57, y:44},
+  'Ishtar':                 {x:50, y:54},   // industrial, south of center
+  'Ishtar System':          {x:50, y:54},
+  'Aderan':                 {x:53, y:57},   // corporate, SE
+  'Aderan System':          {x:53, y:57},
+  'Titania':                {x:44, y:60},   // contested, south
+  'Titania System':         {x:44, y:60},
+  'Alsa':                   {x:50, y:63},   // agricultural heartland, south
+  'Alsa System':            {x:50, y:63},
+  'Skalan Worlds':          {x:42, y:65},   // closed, south
+  'Mangara':                {x:34, y:69},   // embargoed, SW fringe
+  'Mangara System':         {x:34, y:69},
+  'Andromede':              {x:38, y:44},   // naval command, west of Orion
+  'Andromede System':       {x:38, y:44},
+  'System 5':               {x:41, y:55},   // Tronik War memorial
+  'B.I.G. (Beningen Ingratias Garlan)':{x:43,y:50},  // black hole, central
+  'Garson Black Hole':      {x:50, y:59},   // black hole, SE
+  // ── Haven Space Systems ──────────────────────────────────────────────────
+  // (Haven is noted as hostile; limited system detail in catalogue)
+  // ── Mubothen Empire Systems ──────────────────────────────────────────────
+  'Dicamia':                {x:65, y:17},
+  'Dicamia System':         {x:65, y:17},
+  'Ethone':                 {x:71, y:24},
+  'Ethone System':          {x:71, y:24},
+  'Astea':                  {x:68, y:12},
+  'Astea System':           {x:68, y:12},
+  // ── Torc Federation Systems ──────────────────────────────────────────────
+  'Vasophus':               {x:64, y:73},
+  'Vasophus System':        {x:64, y:73},
+  // ── Realmsinger Region Systems ───────────────────────────────────────────
+  'Nulneon':                {x:77, y:62},
+  'Nulneon System':         {x:77, y:62},
+  'Uether':                 {x:73, y:67},
+  'Uether System':          {x:73, y:67},
+  'Ithov':                  {x:70, y:71},   // disputed Torc/Realmsinger border
+  'Ithov System':           {x:70, y:71},
+  // ── Dragon Tail's Expanse Systems ────────────────────────────────────────
+  'Sunstrope':              {x:82, y:73},
+  'Sunstrope System':       {x:82, y:73},
+  'Carth':                  {x:86, y:78},
+  'Carth System':           {x:86, y:78},
+  'Briea':                  {x:79, y:79},
+  'Briea System':           {x:79, y:79},
+  'Soth L4':                {x:89, y:74},
+  'Soth L4 System':         {x:89, y:74},
+  // ── Freeland Systems ─────────────────────────────────────────────────────
+  'Gnoth Q714':             {x:31, y:38},
+  'Gnoth Q714 System':      {x:31, y:38},
+  'Lides H45':              {x:27, y:44},
+  'Lides H45 System':       {x:27, y:44},
+  'Mivenia':                {x:33, y:34},
+  'Mivenia System':         {x:33, y:34},
+  'Zunide':                 {x:24, y:40},
+  'Zunide System':          {x:24, y:40},
+  // ── Zegitor Trade Guild Systems ──────────────────────────────────────────
+  'Valtis':                 {x:18, y:50},
+  'Valtis System':          {x:18, y:50},
+  'Nopenop':                {x:23, y:55},
+  'Nopenop System':         {x:23, y:55},
+  // ── Kraven Space Systems (consumed) ──────────────────────────────────────
+  'Bah':                    {x:76, y:44},
+  'Bah System':             {x:76, y:44},
+  'Sicon':                  {x:80, y:38},
+  'Sicon System':           {x:80, y:38},
+  'Shev':                   {x:83, y:44},
+  'Shev System':            {x:83, y:44},
+  'Capio':                  {x:80, y:51},
+  'Capio System':           {x:80, y:51},
+  'Sarag':                  {x:85, y:49},
+  'Sarag System':           {x:85, y:49},
+  'Agua':                   {x:77, y:56},
+  'Agua System':            {x:77, y:56},
+  'Bet':                    {x:82, y:57},
+  'Bet System':             {x:82, y:57},
+  'Ghash':                  {x:86, y:53},
+  'Ghash System':           {x:86, y:53},
+  // ── Solar Expanse Systems (far north outer rim) ──────────────────────────
+  'Yaevis':                 {x:43, y:11},
+  'Yaevis System':          {x:43, y:11},
+  'Nausica':                {x:36, y:9},
+  'Nausica System':         {x:36, y:9},
+  'Rautis':                 {x:46, y:8},
+  'Rautis System':          {x:46, y:8},
+  'Strides':                {x:39, y:13},
+  'Strides System':         {x:39, y:13},
+  'Ongora':                 {x:32, y:11},
+  'Ongora System':          {x:32, y:11},
+  'Thars':                  {x:49, y:10},
+  'Thars System':           {x:49, y:10},
+  'Pholla':                 {x:30, y:7},
+  'Pholla System':          {x:30, y:7},
+  'Grulania':               {x:27, y:4},   // extreme north terminus
+  'Grulania System':        {x:27, y:4},
+  // ── Proxima Sector Systems (~3 months from Palentium at 44,43) ───────────
+  'Heaven System':          {x:11, y:71},  // magical anomaly; the Heaven gate target
+  'Solar System':           {x:9,  y:76},  // humanity origin, abandoned ghost world
+  'New Earth':              {x:17, y:78},  // isolationist human colony
+  'New Earth System':       {x:17, y:78},
+  'Zoana':                  {x:13, y:67},  // unrecorded corporate world
+  'Zoana System':           {x:13, y:67},
+  'Asar':                   {x:15, y:81},  // former resort, now mercenary
+  'Asar System':            {x:15, y:81},
+  // ── Dark Space Systems ───────────────────────────────────────────────────
+  'San Tien':               {x:68, y:66},  // last Nerulian world, Dark Space border
+  'San Tien System':        {x:68, y:66},
+  'Asteroid Eater':         {x:22, y:68},  // black hole, Dark Space
+  'New Oshana':             {x:28, y:74},
+  'New Oshana System':      {x:28, y:74},
+  'Manola':                 {x:62, y:71},  // Nerulian remnant
+  'Manola System':          {x:62, y:71},
+  'Cish':                   {x:26, y:62},
+  'Cish System':            {x:26, y:62},
+  'Haran':                  {x:17, y:58},
+  'Haran System':           {x:17, y:58},
+  'Cassidir':               {x:35, y:78},  // Black Angel proximity
+  'Cassidir System':        {x:35, y:78},
+  // ── Nuzonia's Dream Systems (south, between Torc and Zegitor) ────────────
+  'Puthea':                 {x:52, y:80},
+  'Puthea System':          {x:52, y:80},
+  'Betravir':               {x:56, y:85},
+  'Betravir System':        {x:56, y:85},
+  'Lumia':                  {x:47, y:85},
+  'Lumia System':           {x:47, y:85},
+  'Nypsos F47':             {x:43, y:78},  // Dark Space adjacent
+  'Nypsos F47 System':      {x:43, y:78},
+  'Zelmolla':               {x:58, y:79},  // Dark Space adjacent
+  'Zelmolla System':        {x:58, y:79},
+  // ── Gravemist Nebula Systems (classified, between Alliance and Kraven) ────
+  'Basagoth Station':       {x:61, y:60},
+  'Illora':                 {x:64, y:64},
+  'Illora System':          {x:64, y:64},
+  'Bother':                 {x:59, y:65},
+  'Bother System':          {x:59, y:65},
+  // ── Erbrother Nebula Systems ─────────────────────────────────────────────
+  'Phoxitis':               {x:72, y:68},
+  'Phoxitis System':        {x:72, y:68},
+  'Peavis':                 {x:75, y:72},
+  'Peavis System':          {x:75, y:72},
+  // ── Tronik Network Systems (west galaxy cluster) ──────────────────────────
+  'DR345-0':                {x:21, y:40},
+  'DR345-0 System':         {x:21, y:40},
+  'L.I.F.T.N':             {x:17, y:43},
+  'L.I.F.T.N System':      {x:17, y:43},
+  'Niezh':                  {x:23, y:36},
+  'Niezh System':           {x:23, y:36},
+  'Monda':                  {x:26, y:33},
+  'Monda System':           {x:26, y:33},
+  'Conso':                  {x:19, y:47},
+  'Conso System':           {x:19, y:47},
+  // ── Others (frontier/independent) ────────────────────────────────────────
+  'Yagmir':                 {x:61, y:35},  // Psylon homeworld, near Rift
+  'Yagmir System':          {x:61, y:35},
+  'Hanov':                  {x:27, y:59},
+  'Hanov System':           {x:27, y:59},
+  'Mulbaring':              {x:22, y:63},
+  'Mulbaring System':       {x:22, y:63},
+  'Cetune':                 {x:14, y:55},
+  'Cetune System':          {x:14, y:55},
 };
-// Apply positions to galaxy entries
-(g.galaxy||[]).forEach(function(e){if(GALAXY_MAP_POS[e.name])e.map_pos=GALAXY_MAP_POS[e.name];});
+
 
 // ─── Stargate Links ───────────────────────────────────────────────────────────
 // Pairs of system names connected by a star gate (tachyonic-speed travel superstructure).
 // Rendered as dotted lines on the star map overlay.
+// Reference: Palentium→Heaven gate = 3 months at jump speed without the gate, instant via gate.
 const STARGATE_LINKS=[
+  // Alliance Space core network
   ['Orion','Sirius'],
   ['Orion','Berilia'],
-  ['Sirius','Palentium'],
+  ['Orion','Palentium'],
+  ['Orion','Ishtar'],
+  ['Orion','Andromede'],
   ['Sirius','Aderan'],
+  ['Sirius','Titania'],
+  ['Palentium','Andromede'],
+  ['Berilia','Ash'],
   ['Berilia','Damph'],
-  ['Alsa','Ishtar'],
+  ['Ishtar','Alsa'],
+  ['Aderan','Alsa'],
+  ['Titania','Skalan Worlds'],
+  ['Titania','Mangara'],
+  ['Alsa','San Tien'],
+  // The Heaven Gate: connects Palentium to Heaven (makes the 3-month journey instant)
+  ['Palentium','Heaven System'],
+  // Torc Federation link to Alliance border
+  ['Vasophus','Aderan'],
+  ['Vasophus','Ithov'],
 ];
 
 // ─── Star Map Edit State ──────────────────────────────────────────────────────
@@ -6493,6 +6668,35 @@ function buildGalaxySVG(){
     +'</svg>';
 }
 
+var SMAP_REGION_COLORS={
+  'Alliance Space':'#00c8ff',
+  'Haven Space':'#ff453a',
+  'Torc Federation':'#30d158',
+  'Mubothen Empire':'#ff9f0a',
+  'Zegitor Trade Guild':'#64d2ff',
+  'Freeland':'#bf5af2',
+  'The Dark Space':'#8e8e93',
+  'Dark Space':'#8e8e93',
+  'Nemani Rift':'#ffd60a',
+  'Kraven Space':'#ff2d55',
+  'The Endless Darkness':'#6e40c9',
+  "Nuzonia's Dream":'#ffd60a',
+  'The Solar Expanse':'#ff9500',
+  'Solar Expanse':'#ff9500',
+  'Erbrother Nebula':'#5ac8fa',
+  "Dragon Tail's Expanse":'#ff6961',
+  'Realmsingers Empire':'#c084fc',
+  'Realmsinger Region':'#c084fc',
+  'Tronik Network':'#34c759',
+  'Gravemist Nebula':'#636366',
+  'Proxima Sector':'#ffe066',
+  'Others':'#636366',
+};
+function smapRegionColor(regionStr){
+  if(!regionStr)return '#aeaeb2';
+  for(var k in SMAP_REGION_COLORS){if(regionStr.toLowerCase().indexOf(k.toLowerCase())>=0)return SMAP_REGION_COLORS[k];}
+  return '#aeaeb2';
+}
 function smapEntryColor(e){
   // Faction/region colors
   switch(e.name){
@@ -6546,10 +6750,9 @@ function openSmapPopup(entry,clientX,clientY){
   }
   if(entry.desc)h+='<div class="smap-popup-desc">'+esc(entry.desc)+'</div>';
   if(entry.entry_type==='system'){
-    var planetCount=(entry.planets&&entry.planets.length)||0;
     var gcBtn='<button class="smap-popup-worlds" onclick="document.getElementById(\'smap-popup\').style.display=\'none\';cs=\'galaxy\';sq=\'\';render();">\u2b21 VIEW IN GALACTIC CATALOGUE</button>';
     if(entry.worlds_key){
-      h+='<button class="smap-popup-worlds" style="margin-bottom:5px;" onclick="document.getElementById(\'smap-popup\').style.display=\'none\';openWorldPanel(\''+esc(entry.worlds_key)+'\')">\u2b21 VIEW INDIVIDUAL WORLDS</button>';
+      h+='<button class="smap-popup-worlds" style="margin-bottom:5px;" onclick="document.getElementById(\'smap-popup\').style.display=\'none\';openWorldPanel(\''+esc(entry.worlds_key)+'\')">⬡ VIEW INDIVIDUAL WORLDS</button>';
     }
     h+=gcBtn;
   }
@@ -6565,7 +6768,6 @@ function openSmapPopup(entry,clientX,clientY){
   var pc=document.getElementById('smap-pc');
   if(pc)pc.onclick=function(ev){ev.stopPropagation();popup.style.display='none';};
 }
-
 function initStarmap(){
   var vp=document.getElementById('smap-viewport');
   var cv=document.getElementById('smap-canvas');
@@ -6760,7 +6962,7 @@ function initStarmap(){
       return;
     }
 
-    // Normal click on a pin → open system popup
+    // Normal click on a pin -> open system popup
     if(isMapPin&&!smapGateMode){
       var pinName=pin.dataset.pin;
       var entry=(g.catalogue_systems||[]).find(function(s){return s.name===pinName;});
@@ -6777,7 +6979,6 @@ function initStarmap(){
   setInnerSize();
   if(img){img.addEventListener('load',fit);if(img.complete&&img.naturalWidth)fit();else fit();}else{fit();}
 }
-
 // ─── Galactic Catalogue State ─────────────────────────────────────────────────
 var gcOpenSystems=new Set();
 var gcPanelSys=null,gcPanelPlanet=null;
@@ -8889,10 +9090,10 @@ function render(){
 
     // Top-left edit bar
     html+='<div class="smap-edit-bar">';
-    html+='<button class="smap-eb'+(smapEditMode?' on':'')+'" data-sm="edit-toggle">'+(smapEditMode?'✏️ Editing':'✏️ Edit Pins')+'</button>';
+    html+='<button class="smap-eb'+(smapEditMode?' on':'')+'" data-sm="edit-toggle">'+(smapEditMode?'\u270f\ufe0f Editing':'\u270f\ufe0f Edit Pins')+'</button>';
     if(smapEditMode){
-      html+='<button class="smap-eb'+(smapGateMode?' gate-on':'')+'" data-sm="gate-toggle">⛓ Gate Mode</button>';
-      html+='<button class="smap-eb" data-sm="export-open">📋 Export JSON</button>';
+      html+='<button class="smap-eb'+(smapGateMode?' gate-on':'')+'" data-sm="gate-toggle">\u26d3 Gate Mode</button>';
+      html+='<button class="smap-eb" data-sm="export-open">\ud83d\udccb Export JSON</button>';
     }
     html+='</div>';
 
@@ -8902,13 +9103,13 @@ function render(){
       html+='<div class="smap-unplaced'+(hasUnplaced?' open':' open')+'" id="smap-unplaced">';
       html+='<div class="smap-unp-hd">UNPLACED — '+unplacedPins.length+' remaining</div>';
       if(!hasUnplaced){
-        html+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:9px;color:#30d158;padding:4px 6px;">All pins placed ✓</div>';
+        html+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:9px;color:#30d158;padding:4px 6px;">All pins placed \u2713</div>';
       } else {
         unplacedPins.forEach(function(p){
           var isPlacing=smapPlacing===p.name;
           var cls='smap-unp-item '+(p.type==='sys'?'sys':'fac')+(isPlacing?' placing':'');
           html+='<div class="'+cls+'" data-sm="place-click" data-pin="'+esc(p.name)+'">';
-          html+=(p.type==='sys'?'⭐':'🔷')+' '+esc(p.name);
+          html+=(p.type==='sys'?'\u2b50':'\ud83d\udd37')+' '+esc(p.name);
           html+='</div>';
         });
       }
@@ -8917,8 +9118,8 @@ function render(){
         html+='<div class="smap-unp-hd" style="margin-top:10px;">PLACED — '+placedPins.length+'</div>';
         placedPins.forEach(function(p){
           html+='<div class="smap-unp-item '+(p.type==='sys'?'sys':'fac')+'" style="justify-content:space-between;">';
-          html+='<span>'+(p.type==='sys'?'⭐':'🔷')+' '+esc(p.name)+'</span>';
-          html+='<button class="smap-eb danger" style="padding:1px 4px;font-size:8px;" data-sm="pin-remove" data-pin="'+esc(p.name)+'">✕</button>';
+          html+='<span>'+(p.type==='sys'?'\u2b50':'\ud83d\udd37')+' '+esc(p.name)+'</span>';
+          html+='<button class="smap-eb danger" style="padding:1px 4px;font-size:8px;" data-sm="pin-remove" data-pin="'+esc(p.name)+'">\u2715</button>';
           html+='</div>';
         });
       }
@@ -8931,8 +9132,8 @@ function render(){
         gates.forEach(function(pair){
           var key=pair[0]+'|||'+pair[1];
           html+='<div style="display:flex;align-items:center;justify-content:space-between;padding:2px 4px;">';
-          html+='<span style="font-family:\'Share Tech Mono\',monospace;font-size:9px;color:#636366;">'+esc(pair[0])+' ↔ '+esc(pair[1])+'</span>';
-          html+='<button class="smap-eb danger" style="padding:1px 4px;font-size:8px;" data-sm="gate-del" data-gate="'+esc(key)+'">✕</button>';
+          html+='<span style="font-family:\'Share Tech Mono\',monospace;font-size:9px;color:#636366;">'+esc(pair[0])+' \u2194 '+esc(pair[1])+'</span>';
+          html+='<button class="smap-eb danger" style="padding:1px 4px;font-size:8px;" data-sm="gate-del" data-gate="'+esc(key)+'">\u2715</button>';
           html+='</div>';
         });
         html+='</div>';
@@ -8952,14 +9153,14 @@ function render(){
       var expJson=JSON.stringify(expData,null,2);
       html+='<div class="smap-export-overlay" data-sm="export-close">';
       html+='<div class="smap-export-box" onclick="event.stopPropagation()">';
-      html+='<h3>📋 EXPORT MAP DATA — copy to hardcode in GALAXY_MAP_POS / STARGATE_LINKS</h3>';
+      html+='<h3>\ud83d\udccb EXPORT MAP DATA — copy to hardcode in GALAXY_MAP_POS / STARGATE_LINKS</h3>';
       html+='<textarea id="smap-exp-ta" readonly>'+expJson.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</textarea>';
       html+='<div class="exp-btns"><button class="smap-eb on" data-sm="export-copy">Copy to Clipboard</button><button class="smap-eb danger" data-sm="export-close">Close</button></div>';
       html+='</div></div>';
     }
 
     // Bottom hint
-    html+='<div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);color:#8e8e93;font-size:10px;font-family:\'Share Tech Mono\',monospace;background:#161618cc;border:1px solid #2c2c2e;border-radius:4px;padding:4px 12px;pointer-events:none;z-index:20;white-space:nowrap;display:flex;align-items:center;gap:14px;">'+(smapEditMode?'✏️ Edit mode — drag pins to reposition':'Scroll to zoom · Drag to pan · Click to explore')+'<span style="display:flex;align-items:center;gap:5px;"><svg width="22" height="8" viewBox="0 0 22 8"><line x1="1" y1="4" x2="21" y2="4" stroke="#00c8ff" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/></svg><span style="color:#00c8ff;opacity:.8;">Star gate</span></span></div>';
+    html+='<div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);color:#8e8e93;font-size:10px;font-family:\'Share Tech Mono\',monospace;background:#161618cc;border:1px solid #2c2c2e;border-radius:4px;padding:4px 12px;pointer-events:none;z-index:20;white-space:nowrap;display:flex;align-items:center;gap:14px;">'+(smapEditMode?'\u270f\ufe0f Edit mode — drag pins to reposition':'Scroll to zoom \u00b7 Drag to pan \u00b7 Click to explore')+'<span style="display:flex;align-items:center;gap:5px;"><svg width="22" height="8" viewBox="0 0 22 8"><line x1="1" y1="4" x2="21" y2="4" stroke="#00c8ff" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/></svg><span style="color:#00c8ff;opacity:.8;">Star gate</span></span></div>';
     html+='</div>';
   }
 
