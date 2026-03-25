@@ -6828,7 +6828,7 @@ function openSmapPopup(entry,clientX,clientY){
     var pinData=smapPosLoad()[entry.name]||{};
     var curColor=pinData.color||'default';
     var curShape=pinData.shape||'default';
-    var safePN=JSON.stringify(entry.name);
+    var safePN=JSON.stringify(entry.name).replace(/"/g,'&quot;');
     var pinColors=[
       {val:'default',label:'Auto',style:'background:#2c2c2e;border:1px solid #636366;'},
       {val:'#00c8ff',style:'background:#00c8ff;'},
