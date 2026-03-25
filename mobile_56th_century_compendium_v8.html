@@ -427,6 +427,34 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 .smap-popup-desc::-webkit-scrollbar{width:3px;}.smap-popup-desc::-webkit-scrollbar-thumb{background:#3a3a3c;border-radius:3px;}
 .smap-popup-worlds{display:block;width:100%;margin-top:10px;padding:8px 10px;background:rgba(0,200,255,.06);border:1px solid rgba(0,200,255,.22);border-radius:5px;color:#00c8ff;font-size:10px;font-family:'Orbitron',sans-serif;cursor:pointer;letter-spacing:.6px;text-align:center;}
 .smap-popup-worlds:hover{background:rgba(0,200,255,.14);border-color:rgba(0,200,255,.4);}
+/* ── Star Map Edit Mode ─────────────────────────────────────────────────────── */
+.smap-edit-bar{position:absolute;top:10px;left:10px;display:flex;align-items:center;gap:6px;background:#161618cc;border:1px solid #2c2c2e;border-radius:6px;padding:6px 10px;z-index:20;backdrop-filter:blur(8px);flex-wrap:wrap;max-width:calc(100% - 160px);}
+.smap-eb{background:none;border:1px solid #3c3c3e;color:#aeaeb2;font-size:9px;cursor:pointer;padding:4px 8px;border-radius:4px;font-family:'Orbitron',sans-serif;letter-spacing:.4px;transition:border-color .15s,color .15s,background .15s;}
+.smap-eb:hover{border-color:#636366;color:#f2f2f7;}
+.smap-eb.on{border-color:#00c8ff;color:#00c8ff;background:rgba(0,200,255,.08);}
+.smap-eb.gate-on{border-color:#ff9f0a;color:#ff9f0a;background:rgba(255,159,10,.08);}
+.smap-eb.danger{border-color:#ff453a;color:#ff453a;background:rgba(255,69,58,.06);}
+.smap-eb.danger:hover{background:rgba(255,69,58,.14);}
+.smap-unplaced{position:absolute;top:52px;left:10px;width:190px;max-height:calc(100% - 80px);overflow-y:auto;background:#161618ee;border:1px solid #2c2c2e;border-radius:6px;z-index:20;padding:8px 6px;display:none;}
+.smap-unplaced.open{display:block;}
+.smap-unplaced::-webkit-scrollbar{width:3px;}.smap-unplaced::-webkit-scrollbar-thumb{background:#3a3a3c;border-radius:3px;}
+.smap-unp-hd{font-family:'Orbitron',sans-serif;font-size:9px;color:#636366;letter-spacing:.4px;margin-bottom:6px;padding:0 4px;}
+.smap-unp-item{font-family:'Share Tech Mono',monospace;font-size:10px;color:#aeaeb2;padding:4px 6px;border-radius:4px;cursor:pointer;display:flex;align-items:center;gap:5px;}
+.smap-unp-item:hover{background:rgba(255,255,255,.06);color:#f2f2f7;}
+.smap-unp-item.placing{background:rgba(0,200,255,.12);color:#00c8ff;}
+.smap-unp-item.sys{color:#a0c8e0;}
+.smap-unp-item.fac{color:#c0a0e0;}
+.smap-dot.edit-drag{cursor:move !important;}
+.smap-dot.gate-sel .smap-dot-inner{outline:3px solid #ff9f0a;outline-offset:3px;}
+.smap-gate-hint{position:absolute;bottom:38px;left:50%;transform:translateX(-50%);background:#161618ee;border:1px solid rgba(255,159,10,.4);border-radius:4px;padding:4px 16px;font-family:'Share Tech Mono',monospace;font-size:10px;color:#ff9f0a;z-index:20;pointer-events:none;white-space:nowrap;}
+.smap-place-hint{position:absolute;bottom:38px;left:50%;transform:translateX(-50%);background:#161618ee;border:1px solid rgba(0,200,255,.4);border-radius:4px;padding:4px 16px;font-family:'Share Tech Mono',monospace;font-size:10px;color:#00c8ff;z-index:20;pointer-events:none;white-space:nowrap;}
+.smap-export-overlay{position:absolute;inset:0;background:rgba(0,0,0,.65);z-index:30;display:flex;align-items:center;justify-content:center;}
+.smap-export-box{background:#161618;border:1px solid #3c3c3e;border-radius:8px;padding:16px;width:460px;max-width:92vw;display:flex;flex-direction:column;gap:8px;}
+.smap-export-box h3{font-family:'Orbitron',sans-serif;font-size:11px;color:#00c8ff;margin:0;letter-spacing:.5px;}
+.smap-export-box textarea{background:#0a0a12;border:1px solid #2c2c2e;border-radius:4px;color:#00c8ff;font-family:'Share Tech Mono',monospace;font-size:9px;padding:8px;resize:vertical;height:220px;outline:none;}
+.smap-export-box .exp-btns{display:flex;gap:8px;justify-content:flex-end;}
+.smap-pin-sys .smap-dot-inner{width:14px;height:14px;}
+.smap-pin-sys .smap-dot-lbl{font-size:10px;}
 /* ─── Region Faction Extras ──────────────────────────────────────────────────── */
 .gc-region-known-for{margin:0 0 14px;}
 .gc-region-kf-title{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--mu3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;}
@@ -2527,6 +2555,31 @@ const STARGATE_LINKS=[
   ['Berilia','Damph'],
   ['Alsa','Ishtar'],
 ];
+
+// ─── Star Map Edit State ──────────────────────────────────────────────────────
+var smapEditMode=false;
+var smapGateMode=false;
+var smapGateFirst=null;
+var smapPlacing=null;   // name of pin being placed on next map click
+var smapExportOpen=false;
+var smapPinPos=null;    // {name:{x,y,zoom}} — loaded lazily by smapPosLoad()
+var smapGatesData=null; // [[a,b],...] — loaded lazily by smapGatesLoad()
+
+function smapPosLoad(){
+  if(smapPinPos)return smapPinPos;
+  var def={};
+  Object.keys(GALAXY_MAP_POS).forEach(function(k){def[k]={x:GALAXY_MAP_POS[k].x,y:GALAXY_MAP_POS[k].y};});
+  try{var s=localStorage.getItem('smap_pin_pos');if(s){var p=JSON.parse(s);Object.keys(p).forEach(function(k){def[k]=p[k];});}}catch(e){}
+  smapPinPos=def;return def;
+}
+function smapPosSave(){try{localStorage.setItem('smap_pin_pos',JSON.stringify(smapPinPos));}catch(e){}}
+function smapGatesLoad(){
+  if(smapGatesData)return smapGatesData;
+  try{var s=localStorage.getItem('smap_gates');if(s){smapGatesData=JSON.parse(s);return smapGatesData;}}catch(e){}
+  smapGatesData=STARGATE_LINKS.map(function(l){return [l[0],l[1]];});
+  return smapGatesData;
+}
+function smapGatesSave(){try{localStorage.setItem('smap_gates',JSON.stringify(smapGatesData));}catch(e){}}
 
 // ─── Galaxy Sections ─────────────────────────────────────────────────────────
 // Ordered sections for the Galactic Catalogue main view.
@@ -6441,6 +6494,7 @@ function buildGalaxySVG(){
 }
 
 function smapEntryColor(e){
+  // Faction/region colors
   switch(e.name){
     case 'Alliance Space':return '#00c8ff';
     case 'Haven Space':return '#ff453a';
@@ -6453,8 +6507,23 @@ function smapEntryColor(e){
     case 'Kraven Space':return '#ff2d55';
     case 'The Endless Darkness':return '#6e40c9';
     case "Nuzonia's Dream":return '#ffd60a';
-    default:return e.worlds_key?'#00c8ff':'#aeaeb2';
   }
+  // System pins: color by region
+  if(e.entry_type==='system'){
+    var reg=(e.region||'').toLowerCase();
+    if(/alliance space/i.test(reg))return '#00c8ff';
+    if(/dark space/i.test(reg))return '#8e8e93';
+    if(/mubothen/i.test(reg))return '#ff9f0a';
+    if(/kraven/i.test(reg))return '#ff2d55';
+    if(/freeland/i.test(reg))return '#bf5af2';
+    if(/zegitor/i.test(reg))return '#64d2ff';
+    if(/torc/i.test(reg))return '#30d158';
+    if(/nuzonia/i.test(reg))return '#ffd60a';
+    if(/endless darkness/i.test(reg))return '#6e40c9';
+    if(/proxima/i.test(reg))return '#ff6961';
+    return '#a0c8e0';
+  }
+  return e.worlds_key?'#00c8ff':'#aeaeb2';
 }
 function openSmapPopup(entry,clientX,clientY){
   var popup=document.getElementById('smap-popup');
@@ -6476,7 +6545,14 @@ function openSmapPopup(entry,clientX,clientY){
     if(entry.notable_for)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Notable</span><span class="smap-popup-fv">'+esc(entry.notable_for)+'</span></div>';
   }
   if(entry.desc)h+='<div class="smap-popup-desc">'+esc(entry.desc)+'</div>';
-  if(entry.worlds_key)h+='<button class="smap-popup-worlds" onclick="document.getElementById(\'smap-popup\').style.display=\'none\';openWorldPanel(\''+esc(entry.worlds_key)+'\')">\u2b21 VIEW INDIVIDUAL WORLDS</button>';
+  if(entry.entry_type==='system'){
+    var planetCount=(entry.planets&&entry.planets.length)||0;
+    var gcBtn='<button class="smap-popup-worlds" onclick="document.getElementById(\'smap-popup\').style.display=\'none\';cs=\'galaxy\';sq=\'\';render();">\u2b21 VIEW IN GALACTIC CATALOGUE</button>';
+    if(entry.worlds_key){
+      h+='<button class="smap-popup-worlds" style="margin-bottom:5px;" onclick="document.getElementById(\'smap-popup\').style.display=\'none\';openWorldPanel(\''+esc(entry.worlds_key)+'\')">\u2b21 VIEW INDIVIDUAL WORLDS</button>';
+    }
+    h+=gcBtn;
+  }
   popup.innerHTML=h;
   popup.style.display='block';
   var pw=320,ph=popup.offsetHeight||320;
@@ -6495,32 +6571,23 @@ function initStarmap(){
   var cv=document.getElementById('smap-canvas');
   var img=document.getElementById('smap-img');
   if(!vp||!cv)return;
-  // Canvas logical size, read from the PNG's natural dimensions once loaded
-  var CW=1323,CH=886; // sensible defaults matching Star-Map-v3_HIGH_QUALITY.png
+  var CW=1323,CH=886;
   var scale=1,ox=0,oy=0,dragging=false,didDrag=false,startX=0,startY=0,sox=0,soy=0;
   var pinchDist=0;
   var pct=document.getElementById('smap-pct');
-  var entries=(g.galaxy||[]).filter(function(e){return e.map_pos;});
+  var pinDrag=null; // {el,name,moved,startCX,startCY,startPX,startPY}
 
-  function setInnerSize(){
-    var inner=document.getElementById('smap-inner');
-    if(inner){inner.style.width=CW+'px';inner.style.height=CH+'px';}
-  }
-  function applyT(){
-    cv.style.transform='translate('+ox+'px,'+oy+'px) scale('+scale+')';
-    if(pct)pct.textContent=Math.round(scale*100)+'%';
-  }
+  function setInnerSize(){var inner=document.getElementById('smap-inner');if(inner){inner.style.width=CW+'px';inner.style.height=CH+'px';}}
+  function applyT(){cv.style.transform='translate('+ox+'px,'+oy+'px) scale('+scale+')';if(pct)pct.textContent=Math.round(scale*100)+'%';}
   function fit(){
     if(img&&img.naturalWidth){CW=img.naturalWidth;CH=img.naturalHeight;setInnerSize();}
     var vw=vp.clientWidth,vh=vp.clientHeight;
-    // Leave a little breathing room so the galaxy doesn't fill edge-to-edge
     var s=Math.min(vw/CW,vh/CH)*0.92;
     scale=s;ox=(vw-CW*s)/2;oy=(vh-CH*s)/2;applyT();
   }
   function clamp(){
     var vw=vp.clientWidth,vh=vp.clientHeight;
     var iw=CW*scale,ih=CH*scale;
-    // Allow panning up to 20% outside the canvas edge for comfort
     var pad=Math.max(80,Math.min(vw,vh)*0.1);
     if(iw<=vw){ox=(vw-iw)/2;}else{ox=Math.min(pad,Math.max(ox,vw-iw-pad));}
     if(ih<=vh){oy=(vh-ih)/2;}else{oy=Math.min(pad,Math.max(oy,vh-ih-pad));}
@@ -6530,40 +6597,72 @@ function initStarmap(){
     var ns=Math.max(0.25,Math.min(scale*f,8));
     ox=cx-(cx-ox)*(ns/scale);oy=cy-(cy-oy)*(ns/scale);scale=ns;clamp();applyT();
   }
+  // Redraw gate SVG lines in-place after a pin drag (avoids full re-render)
+  function refreshGates(){
+    var svg=document.getElementById('smap-sg-svg');if(!svg)return;
+    var pos=smapPosLoad();var gates=smapGatesLoad();var newH='';
+    gates.forEach(function(pair){
+      var a=pos[pair[0]],b=pos[pair[1]];if(!a||!b)return;
+      newH+='<line x1="'+a.x+'" y1="'+a.y+'" x2="'+b.x+'" y2="'+b.y+'" stroke="#00c8ff" stroke-width="0.35" stroke-dasharray="1.4,1.1" opacity="0.55" stroke-linecap="round"/>';
+    });
+    svg.innerHTML=newH;
+  }
 
-  // ── Input events ──
-  vp.addEventListener('wheel',function(e){
-    e.preventDefault();
-    zoom(e.deltaY<0?1.12:1/1.12,e.offsetX,e.offsetY);
-  },{passive:false});
+  // ── Wheel zoom ──
+  vp.addEventListener('wheel',function(e){e.preventDefault();zoom(e.deltaY<0?1.12:1/1.12,e.offsetX,e.offsetY);},{passive:false});
 
+  // ── Mouse ──
   vp.addEventListener('mousedown',function(e){
     if(e.button!==0)return;
-    dragging=true;didDrag=false;
-    startX=e.clientX;startY=e.clientY;sox=ox;soy=oy;
-    vp.style.cursor='grabbing';
-    e.preventDefault();
+    // In edit mode try to start a pin drag
+    if(smapEditMode&&!smapGateMode&&!smapPlacing){
+      var pin=e.target.closest('[data-pin]');
+      var inner=document.getElementById('smap-inner');
+      if(pin&&inner&&inner.contains(pin)){
+        var pos=smapPosLoad();var pn=pin.dataset.pin;var cur=pos[pn]||{x:50,y:50};
+        pinDrag={el:pin,name:pn,moved:false,startCX:e.clientX,startCY:e.clientY,startPX:cur.x,startPY:cur.y};
+        e.preventDefault();return;
+      }
+    }
+    dragging=true;didDrag=false;startX=e.clientX;startY=e.clientY;sox=ox;soy=oy;
+    vp.style.cursor='grabbing';e.preventDefault();
   });
   document.addEventListener('mousemove',function(e){
+    if(pinDrag){
+      var dx=e.clientX-pinDrag.startCX,dy=e.clientY-pinDrag.startCY;
+      if(Math.sqrt(dx*dx+dy*dy)>3)pinDrag.moved=true;
+      if(pinDrag.moved){
+        var nx=Math.max(0,Math.min(100,pinDrag.startPX+dx/(CW*scale)*100));
+        var ny=Math.max(0,Math.min(100,pinDrag.startPY+dy/(CH*scale)*100));
+        pinDrag.el.style.left=nx+'%';pinDrag.el.style.top=ny+'%';
+      }
+      return;
+    }
     if(!dragging)return;
     var dx=e.clientX-startX,dy=e.clientY-startY;
     if(Math.sqrt(dx*dx+dy*dy)>4)didDrag=true;
     ox=sox+dx;oy=soy+dy;clamp();applyT();
   });
-  document.addEventListener('mouseup',function(){
+  document.addEventListener('mouseup',function(e){
+    if(pinDrag){
+      if(pinDrag.moved){
+        var dx=e.clientX-pinDrag.startCX,dy=e.clientY-pinDrag.startCY;
+        var pos=smapPosLoad();
+        var nx=parseFloat(Math.max(0,Math.min(100,pinDrag.startPX+dx/(CW*scale)*100)).toFixed(2));
+        var ny=parseFloat(Math.max(0,Math.min(100,pinDrag.startPY+dy/(CH*scale)*100)).toFixed(2));
+        pos[pinDrag.name]={x:nx,y:ny,zoom:parseFloat(scale.toFixed(2))};
+        smapPosSave();refreshGates();
+      }
+      pinDrag=null;return;
+    }
     if(!dragging)return;
     dragging=false;vp.style.cursor='grab';
   });
 
-  // Touch pan
+  // ── Touch ──
   vp.addEventListener('touchstart',function(e){
-    if(e.touches.length===1){
-      dragging=true;didDrag=false;
-      startX=e.touches[0].clientX;startY=e.touches[0].clientY;sox=ox;soy=oy;
-    } else if(e.touches.length===2){
-      dragging=false;
-      pinchDist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
-    }
+    if(e.touches.length===1){dragging=true;didDrag=false;startX=e.touches[0].clientX;startY=e.touches[0].clientY;sox=ox;soy=oy;}
+    else if(e.touches.length===2){dragging=false;pinchDist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);}
     e.preventDefault();
   },{passive:false});
   vp.addEventListener('touchmove',function(e){
@@ -6574,32 +6673,103 @@ function initStarmap(){
     } else if(e.touches.length===2){
       var d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
       var r=vp.getBoundingClientRect();
-      var cx=(e.touches[0].clientX+e.touches[1].clientX)/2-r.left;
-      var cy=(e.touches[0].clientY+e.touches[1].clientY)/2-r.top;
-      zoom(d/pinchDist,cx,cy);pinchDist=d;
+      zoom(d/pinchDist,(e.touches[0].clientX+e.touches[1].clientX)/2-r.left,(e.touches[0].clientY+e.touches[1].clientY)/2-r.top);
+      pinchDist=d;
     }
     e.preventDefault();
   },{passive:false});
   vp.addEventListener('touchend',function(){dragging=false;});
 
-  // Click delegation, buttons + dots
+  // ── Click delegation ──
   vp.addEventListener('click',function(e){
     if(didDrag){didDrag=false;return;}
+    if(pinDrag&&pinDrag.moved){pinDrag=null;return;}
+
+    // Toolbar buttons (data-sm)
     var sm=e.target.closest('[data-sm]');
     if(sm){
       var a=sm.dataset.sm;
-      if(a==='zin')zoom(1.3);
-      else if(a==='zout')zoom(1/1.3);
-      else if(a==='reset')fit();
+      if(a==='zin'){zoom(1.3);return;}
+      if(a==='zout'){zoom(1/1.3);return;}
+      if(a==='reset'){fit();return;}
+      if(a==='edit-toggle'){
+        smapEditMode=!smapEditMode;
+        if(!smapEditMode){smapGateMode=false;smapGateFirst=null;smapPlacing=null;smapExportOpen=false;}
+        render();return;
+      }
+      if(a==='gate-toggle'){smapGateMode=!smapGateMode;smapGateFirst=null;smapPlacing=null;render();return;}
+      if(a==='export-open'){smapExportOpen=true;render();return;}
+      if(a==='export-close'){smapExportOpen=false;render();return;}
+      if(a==='export-copy'){
+        var ta=document.getElementById('smap-exp-ta');
+        if(ta){ta.select();try{navigator.clipboard.writeText(ta.value).catch(function(){document.execCommand('copy');});}catch(ex){document.execCommand('copy');}}
+        return;
+      }
+      if(a==='place-click'){
+        var pn=sm.dataset.pin;
+        smapPlacing=(smapPlacing===pn)?null:pn;
+        smapGateMode=false;smapGateFirst=null;
+        render();return;
+      }
+      if(a==='pin-remove'){
+        var pn=sm.dataset.pin;
+        var pos=smapPosLoad();delete pos[pn];smapPosSave();
+        render();return;
+      }
+      if(a==='gate-del'){
+        var pairStr=sm.dataset.gate;
+        if(pairStr){
+          var pp=pairStr.split('|||');
+          smapGatesData=smapGatesLoad().filter(function(g){return !((g[0]===pp[0]&&g[1]===pp[1])||(g[0]===pp[1]&&g[1]===pp[0]));});
+          smapGatesSave();refreshGates();render();
+        }
+        return;
+      }
       return;
     }
-    var dot=e.target.closest('[data-smap-idx]');
-    if(dot){
-      var idx=parseInt(dot.dataset.smapIdx);
-      var entry=entries[idx];
+
+    var pin=e.target.closest('[data-pin]');
+    var inner=document.getElementById('smap-inner');
+    var isMapPin=pin&&inner&&inner.contains(pin);
+
+    // Gate mode: click two placed pins to create a gate
+    if(smapEditMode&&smapGateMode&&isMapPin){
+      var pinName=pin.dataset.pin;
+      if(!smapGateFirst){smapGateFirst=pinName;render();}
+      else if(smapGateFirst===pinName){smapGateFirst=null;render();}
+      else {
+        var gates=smapGatesLoad();
+        var exists=gates.some(function(g){return (g[0]===smapGateFirst&&g[1]===pinName)||(g[0]===pinName&&g[1]===smapGateFirst);});
+        if(!exists){gates.push([smapGateFirst,pinName]);smapGatesSave();}
+        smapGateFirst=null;render();
+      }
+      return;
+    }
+
+    // Place mode: click the map to drop a pin
+    if(smapEditMode&&smapPlacing&&!isMapPin){
+      var innerEl=document.getElementById('smap-inner');
+      if(innerEl){
+        var ir=innerEl.getBoundingClientRect();
+        var px=parseFloat(Math.max(0,Math.min(100,(e.clientX-ir.left)/ir.width*100)).toFixed(2));
+        var py=parseFloat(Math.max(0,Math.min(100,(e.clientY-ir.top)/ir.height*100)).toFixed(2));
+        var pos=smapPosLoad();
+        pos[smapPlacing]={x:px,y:py,zoom:parseFloat(scale.toFixed(2))};
+        smapPosSave();smapPlacing=null;render();
+      }
+      return;
+    }
+
+    // Normal click on a pin → open system popup
+    if(isMapPin&&!smapGateMode){
+      var pinName=pin.dataset.pin;
+      var entry=(g.catalogue_systems||[]).find(function(s){return s.name===pinName;});
+      if(!entry)entry=(g.galaxy||[]).find(function(s){return s.name===pinName;});
       if(entry)openSmapPopup(entry,e.clientX,e.clientY);
       return;
     }
+
+    // Close popup on background click
     var popup=document.getElementById('smap-popup');
     if(popup&&!e.target.closest('#smap-popup'))popup.style.display='none';
   });
@@ -8668,45 +8838,128 @@ function render(){
 
   else if(cs==='starmap'){
     cnt=1;
-    // Build inline hotspot dots, placed inside smap-canvas so they transform with the map
-    var smEntries=(g.galaxy||[]).filter(function(e){return e.map_pos;});
-    var dotsH='';
-    smEntries.forEach(function(e,i){
-      var col=smapEntryColor(e);
-      var isFaction=e.entry_type==='faction';
-      // Map percentage (0-100) → CSS % relative to canvas (which matches the PNG image dimensions)
-      dotsH+='<div class="smap-dot'+(isFaction?' faction':'')+'" data-smap-idx="'+i+'" style="left:'+e.map_pos.x+'%;top:'+e.map_pos.y+'%;">';
-      dotsH+='<div class="smap-dot-inner" style="background:'+col+';border-color:'+col+';box-shadow:0 0 10px '+col+',0 0 20px '+col+'44;"></div>';
-      dotsH+='<div class="smap-dot-lbl" style="color:'+col+';">'+esc(e.name)+'</div>';
-      dotsH+='</div>';
-    });
-    // Build stargate SVG overlay lines
+    var pinPos=smapPosLoad();
+    var gates=smapGatesLoad();
+
+    // Build full pin list: catalogue systems (⭐) + galaxy faction/region entries (🔷)
+    var allPins=[];
+    (g.catalogue_systems||[]).forEach(function(s){allPins.push({name:s.name,entry:s,type:'sys'});});
+    (g.galaxy||[]).filter(function(e){return e.entry_type==='faction';}).forEach(function(f){allPins.push({name:f.name,entry:f,type:'fac'});});
+
+    var placedPins=allPins.filter(function(p){return pinPos[p.name];});
+    var unplacedPins=allPins.filter(function(p){return !pinPos[p.name];});
+
+    // Build gate SVG
     var sgH='<svg id="smap-sg-svg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible;" viewBox="0 0 100 100" preserveAspectRatio="none">';
-    var posMap={};
-    smEntries.forEach(function(e){if(e.map_pos)posMap[e.name]=e.map_pos;});
-    STARGATE_LINKS.forEach(function(pair){
-      var a=posMap[pair[0]],b=posMap[pair[1]];
+    gates.forEach(function(pair){
+      var a=pinPos[pair[0]],b=pinPos[pair[1]];
       if(!a||!b)return;
       sgH+='<line x1="'+a.x+'" y1="'+a.y+'" x2="'+b.x+'" y2="'+b.y+'" stroke="#00c8ff" stroke-width="0.35" stroke-dasharray="1.4,1.1" opacity="0.55" stroke-linecap="round"/>';
     });
     sgH+='</svg>';
+
+    // Build pin dots
+    var dotsH='';
+    placedPins.forEach(function(p){
+      var pos=pinPos[p.name];
+      var col=smapEntryColor(p.entry);
+      var isFac=p.type==='fac';
+      var cls='smap-dot'+(isFac?' faction':' smap-pin-sys')+(smapEditMode?' edit-drag':'');
+      if(smapGateFirst===p.name)cls+=' gate-sel';
+      dotsH+='<div class="'+cls+'" data-pin="'+esc(p.name)+'" style="left:'+pos.x+'%;top:'+pos.y+'%;">';
+      dotsH+='<div class="smap-dot-inner" style="background:'+col+';border-color:'+col+';box-shadow:0 0 8px '+col+',0 0 16px '+col+'44;"></div>';
+      dotsH+='<div class="smap-dot-lbl" style="color:'+col+';">'+esc(p.name)+'</div>';
+      dotsH+='</div>';
+    });
+
     html='<div id="smap-viewport" style="position:relative;width:100%;height:calc(100vh - 120px);overflow:hidden;background:#06060d;border-radius:6px;border:1px solid #2c2c2e;user-select:none;cursor:grab;">';
-    // smap-canvas: one container that gets the CSS transform, PNG image + all dots live here
-    // The inner wrapper is position:relative so dot % coords are relative to the image dimensions
     html+='<div id="smap-canvas" style="position:absolute;top:0;left:0;transform-origin:0 0;">'
       +'<div id="smap-inner" style="position:relative;line-height:0;">'
       +'<img id="smap-img" src="Star-Map-v3_HIGH_QUALITY.png" alt="Star Map" style="display:block;pointer-events:none;max-width:none;" draggable="false">'
-      +sgH
-      +dotsH
+      +sgH+dotsH
       +'</div></div>';
-    // Controls overlay (outside canvas so they don't move/scale)
+
+    // Top-right zoom controls
     html+='<div style="position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:6px;background:#161618cc;border:1px solid #2c2c2e;border-radius:6px;padding:6px 10px;z-index:20;backdrop-filter:blur(8px);">';
     html+='<button data-sm="zin" style="background:none;border:none;color:#f2f2f7;font-size:16px;cursor:pointer;padding:2px 6px;border-radius:4px;" title="Zoom in">+</button>';
     html+='<button data-sm="zout" style="background:none;border:none;color:#f2f2f7;font-size:16px;cursor:pointer;padding:2px 6px;border-radius:4px;" title="Zoom out">\u2212</button>';
     html+='<button data-sm="reset" style="background:none;border:none;color:#8e8e93;font-size:11px;cursor:pointer;padding:2px 8px;border-radius:4px;font-family:\'Share Tech Mono\',monospace;" title="Reset view">Reset</button>';
     html+='<span id="smap-pct" style="color:#8e8e93;font-size:11px;font-family:\'Share Tech Mono\',monospace;min-width:42px;text-align:right;">–</span>';
     html+='</div>';
-    html+='<div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);color:#8e8e93;font-size:10px;font-family:\'Share Tech Mono\',monospace;background:#161618cc;border:1px solid #2c2c2e;border-radius:4px;padding:4px 12px;pointer-events:none;z-index:20;white-space:nowrap;display:flex;align-items:center;gap:14px;">Scroll to zoom \u00b7 Drag to pan \u00b7 Click to explore<span style="display:flex;align-items:center;gap:5px;"><svg width="22" height="8" viewBox="0 0 22 8"><line x1="1" y1="4" x2="21" y2="4" stroke="#00c8ff" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/></svg><span style="color:#00c8ff;opacity:.8;">Star gate link</span></span></div>';
+
+    // Top-left edit bar
+    html+='<div class="smap-edit-bar">';
+    html+='<button class="smap-eb'+(smapEditMode?' on':'')+'" data-sm="edit-toggle">'+(smapEditMode?'✏️ Editing':'✏️ Edit Pins')+'</button>';
+    if(smapEditMode){
+      html+='<button class="smap-eb'+(smapGateMode?' gate-on':'')+'" data-sm="gate-toggle">⛓ Gate Mode</button>';
+      html+='<button class="smap-eb" data-sm="export-open">📋 Export JSON</button>';
+    }
+    html+='</div>';
+
+    // Unplaced panel (edit mode)
+    if(smapEditMode){
+      var hasUnplaced=unplacedPins.length>0;
+      html+='<div class="smap-unplaced'+(hasUnplaced?' open':' open')+'" id="smap-unplaced">';
+      html+='<div class="smap-unp-hd">UNPLACED — '+unplacedPins.length+' remaining</div>';
+      if(!hasUnplaced){
+        html+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:9px;color:#30d158;padding:4px 6px;">All pins placed ✓</div>';
+      } else {
+        unplacedPins.forEach(function(p){
+          var isPlacing=smapPlacing===p.name;
+          var cls='smap-unp-item '+(p.type==='sys'?'sys':'fac')+(isPlacing?' placing':'');
+          html+='<div class="'+cls+'" data-sm="place-click" data-pin="'+esc(p.name)+'">';
+          html+=(p.type==='sys'?'⭐':'🔷')+' '+esc(p.name);
+          html+='</div>';
+        });
+      }
+      // Show placed list with remove option
+      if(placedPins.length>0){
+        html+='<div class="smap-unp-hd" style="margin-top:10px;">PLACED — '+placedPins.length+'</div>';
+        placedPins.forEach(function(p){
+          html+='<div class="smap-unp-item '+(p.type==='sys'?'sys':'fac')+'" style="justify-content:space-between;">';
+          html+='<span>'+(p.type==='sys'?'⭐':'🔷')+' '+esc(p.name)+'</span>';
+          html+='<button class="smap-eb danger" style="padding:1px 4px;font-size:8px;" data-sm="pin-remove" data-pin="'+esc(p.name)+'">✕</button>';
+          html+='</div>';
+        });
+      }
+      html+='</div>';
+
+      // Gate list (show existing gates with delete option)
+      if(gates.length>0){
+        html+='<div style="position:absolute;bottom:46px;left:10px;width:190px;background:#161618ee;border:1px solid #2c2c2e;border-radius:6px;z-index:20;padding:6px;max-height:120px;overflow-y:auto;">';
+        html+='<div class="smap-unp-hd">GATES — '+gates.length+'</div>';
+        gates.forEach(function(pair){
+          var key=pair[0]+'|||'+pair[1];
+          html+='<div style="display:flex;align-items:center;justify-content:space-between;padding:2px 4px;">';
+          html+='<span style="font-family:\'Share Tech Mono\',monospace;font-size:9px;color:#636366;">'+esc(pair[0])+' ↔ '+esc(pair[1])+'</span>';
+          html+='<button class="smap-eb danger" style="padding:1px 4px;font-size:8px;" data-sm="gate-del" data-gate="'+esc(key)+'">✕</button>';
+          html+='</div>';
+        });
+        html+='</div>';
+      }
+
+      // Hint banners
+      if(smapPlacing){
+        html+='<div class="smap-place-hint">Click map to place: <b>'+esc(smapPlacing)+'</b> (or click pin)</div>';
+      } else if(smapGateMode){
+        html+='<div class="smap-gate-hint">'+(smapGateFirst?'Selected: <b>'+esc(smapGateFirst)+'</b> — now click second pin':'Click first pin to start a gate')+'</div>';
+      }
+    }
+
+    // Export overlay
+    if(smapExportOpen){
+      var expData={positions:pinPos,gates:gates};
+      var expJson=JSON.stringify(expData,null,2);
+      html+='<div class="smap-export-overlay" data-sm="export-close">';
+      html+='<div class="smap-export-box" onclick="event.stopPropagation()">';
+      html+='<h3>📋 EXPORT MAP DATA — copy to hardcode in GALAXY_MAP_POS / STARGATE_LINKS</h3>';
+      html+='<textarea id="smap-exp-ta" readonly>'+expJson.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</textarea>';
+      html+='<div class="exp-btns"><button class="smap-eb on" data-sm="export-copy">Copy to Clipboard</button><button class="smap-eb danger" data-sm="export-close">Close</button></div>';
+      html+='</div></div>';
+    }
+
+    // Bottom hint
+    html+='<div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);color:#8e8e93;font-size:10px;font-family:\'Share Tech Mono\',monospace;background:#161618cc;border:1px solid #2c2c2e;border-radius:4px;padding:4px 12px;pointer-events:none;z-index:20;white-space:nowrap;display:flex;align-items:center;gap:14px;">'+(smapEditMode?'✏️ Edit mode — drag pins to reposition':'Scroll to zoom · Drag to pan · Click to explore')+'<span style="display:flex;align-items:center;gap:5px;"><svg width="22" height="8" viewBox="0 0 22 8"><line x1="1" y1="4" x2="21" y2="4" stroke="#00c8ff" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/></svg><span style="color:#00c8ff;opacity:.8;">Star gate</span></span></div>';
     html+='</div>';
   }
 
