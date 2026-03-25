@@ -414,6 +414,15 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 .smap-dot-lbl{font-family:'Share Tech Mono',monospace;font-size:8px;white-space:nowrap;margin-top:3px;text-shadow:0 0 4px #000,0 0 8px #000,1px 1px 0 #000,-1px -1px 0 #000;opacity:.7;pointer-events:none;line-height:1;}
 .smap-dot.faction .smap-dot-lbl{font-size:10px;font-family:'Orbitron',sans-serif;letter-spacing:.3px;opacity:.9;}
 .smap-dot:hover .smap-dot-lbl{opacity:1;}
+/* ── Custom Pin Shapes ──────────────────────────────────────────────────────── */
+.smap-dot[data-shape="circle"] .smap-dot-inner{border-radius:50% !important;transform:none !important;}
+.smap-dot[data-shape="circle"]:hover .smap-dot-inner{transform:scale(1.7) !important;filter:brightness(1.6);}
+.smap-dot[data-shape="square"] .smap-dot-inner{border-radius:2px !important;transform:none !important;}
+.smap-dot[data-shape="square"]:hover .smap-dot-inner{transform:scale(1.5) !important;filter:brightness(1.6);}
+.smap-dot[data-shape="diamond"] .smap-dot-inner{border-radius:2px !important;transform:rotate(45deg) !important;}
+.smap-dot[data-shape="diamond"]:hover .smap-dot-inner{transform:rotate(45deg) scale(1.4) !important;filter:brightness(1.6);}
+.smap-dot[data-shape="star"] .smap-dot-inner{clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%) !important;border-radius:0 !important;transform:none !important;box-shadow:none !important;}
+.smap-dot[data-shape="star"]:hover .smap-dot-inner{transform:scale(1.5) !important;filter:brightness(1.6);}
 /* ── Star Map Edit Mode ─────────────────────────────────────────────────────── */
 .smap-edit-bar{position:absolute;top:10px;left:10px;display:flex;align-items:center;gap:6px;background:#161618cc;border:1px solid #2c2c2e;border-radius:6px;padding:6px 10px;z-index:20;backdrop-filter:blur(8px);flex-wrap:wrap;max-width:calc(100% - 160px);}
 .smap-eb{background:none;border:1px solid #3c3c3e;color:#aeaeb2;font-size:9px;cursor:pointer;padding:4px 8px;border-radius:4px;font-family:'Orbitron',sans-serif;letter-spacing:.4px;transition:border-color .15s,color .15s,background .15s;}
@@ -2042,24 +2051,6 @@ g.galaxy=[
   },
   {
     entry_type:'faction',
-    name:'Haven Space',
-    tags:['Major Faction','Hostile','Core Space','Criminal Confederation'],
-    rarity:'rar-rare',
-    status:'Rival power, sovereign criminal confederation, hostile to Alliance',
-    territory:'North-central galaxy, bordering the Nemani Rift and Alliance core',
-    span:'~60 systems; several dozen additional systems under informal Haven influence or protection',
-    discovered:'Haven Space as a unified entity formalised approximately 4890 CE; the territory predates this as a collection of pirate havens and ungoverned worlds',
-    population_est:'~15 billion, across all systems, including transient criminal and trade populations',
-    government:'The Haven Council, a body of twelve crime lords, each controlling a bloc of systems, who vote on matters affecting all of Haven. Seats are hereditary within criminal dynasties or taken by force when a dynasty ends. There is no constitution, no legal code, and no rights. What there is: a profit-sharing agreement among the twelve that makes Haven more valuable intact than fractured, and a mutual understanding that war with the Alliance is less profitable than the permanent cold peace they have maintained since the Third Haven Conflict.',
-    alignment:'Hostile to Alliance; opportunistic to all others, will deal with anyone who pays',
-    desc:'Haven Space is where law goes to die. What appears on star charts as a sovereign territory is in reality a confederation of crime lords, slavers, smugglers and black market operators who have claimed enough territory to demand recognition.\n\nThe Alliance has fought three formal wars with Haven. Each time, a peace deal proved more profitable than victory, for both sides. Haven ports are open to anyone with credits and no questions. That openness is genuine and genuinely dangerous. Haven has no courts, no rights, and no mercy for those who cannot pay.',
-    history:'The region now called Haven Space was never formally settled, it accreted. Pirate strongholds, failed colonies, and ungoverned resource worlds in the north-central galaxy gradually fell under the influence of several large criminal organisations. The Haven Council emerged when those organisations, after a decade of mutual attrition, calculated that co-operation was more profitable than war.\n\nThe first Haven Conflict with the Alliance began when Haven formally claimed sovereignty over several systems the Alliance considered its own. The third conflict ended in the current arrangement: de facto recognition with no formal treaty, a buffer zone, and trade flows that both sides quietly depend on.',
-    known_for:['The galaxy\'s largest black market, operating openly across all Haven systems','No extradition, Haven does not recognise Alliance warrants and has never surrendered a fugitive','Slaving operations that the Alliance officially condemns and unofficially tolerates at the margins','A reputation for genuinely open ports, any ship, any cargo, any species, no questions, provided fees are paid','The most comprehensive network of unregistered medical facilities and identity services in known space'],
-    notable_systems:['The Port of Vell, largest open market in Haven Space; the standard reference point for black market pricing across the galaxy','Kharo Station, neutral meeting ground maintained by the Haven Council for negotiations with external parties','The Sands of Maugra, a desert world used for arbitration disputes; ancient tradition holds that contracts signed here are binding even in Haven'],
-    lore_notes:['The Haven Council has never lost a vote on whether to go to war with the Alliance. Observers have noted that this unanimity is mathematically improbable across decades of contentious politics, and some believe at least one Council seat is held by an Alliance intelligence asset.','It has long been rumoured that Haven Space contains a world, never charted, location circulated only in encrypted criminal networks, that operates as a retirement community for the galaxy\'s most successful thieves, assassins, and black market operators. Whether it exists as described, or at all, is unknown.','Several generations of navigators have passed down accounts of a Haven patrol fleet that has no home port, takes no contracts, and has been sighted in different sectors simultaneously. Some dismiss this as myth. Others note that Haven does not deny it.']
-  },
-  {
-    entry_type:'faction',
     name:'Torc Federation',
     tags:['Major Faction','Independent','South-East Galaxy','Manufacturing'],
     rarity:'rar-uncommon',
@@ -2430,15 +2421,27 @@ g.galaxy=[
   },
   {
     entry_type:'system',
-    name:'Skalan Worlds',
-    tags:['Notable System','Alliance Space','Skalan','Restricted'],
+    name:'Carach System',
+    tags:['Notable System','Alliance Space','Skalan','Restricted','Closed','Homeworld'],
     rarity:'',
     region:'Alliance Space, self-governed Skalan territory',
     faction:'Skalan',
-    population:'~450 million (Skalan only)',
-    notable_for:'Skalan homeworld Caragh; Seigh, most lethal natural environment in the galaxy',
-    worlds_key:'skalan_worlds',
-    desc:'The Skalan home system is closed to outsiders and enforces that closure without legislation, simply through the certainty that testing it is a bad idea. Caragh is the sacred homeworld of a species that survived an attempted extinction. Seigh is where they send their young to prove themselves against the most lethal natural environment in the galaxy. Neither world is welcoming to visitors.'
+    population:'~400 million (Skalan only)',
+    notable_for:'Skalan homeworld Caragh; sacred ground of a species that survived an attempted extinction',
+    worlds_key:'carach_system',
+    desc:'The Carach system is the heart of Skalan civilisation. Caragh, the homeworld, is closed to non-Skalans without exception or negotiation. The system is self-governed under a Warrior Council elected by combat reputation. Skalan patrol vessels enforce the system perimeter without legal frameworks or diplomatic language.'
+  },
+  {
+    entry_type:'system',
+    name:'Seigh System',
+    tags:['Notable System','Alliance Space','Skalan','Restricted','Extreme Danger','Training World'],
+    rarity:'',
+    region:'Alliance Space, self-governed Skalan territory',
+    faction:'Skalan',
+    population:'~50,000 (training rotations only)',
+    notable_for:'Most lethal natural environment in the known galaxy; Skalan rite of passage',
+    worlds_key:'seigh_system',
+    desc:'Seigh is a separate system from Carach, administered by the Skalan as a closed training world. Every survey that has assessed the planet reaches the same conclusion: it is the most lethal naturally occurring environment in the known galaxy. Non-Skalans are not welcome. The fauna does not check jurisdiction before acting.'
   },
   {
     entry_type:'system',
@@ -2515,7 +2518,6 @@ g.galaxy=[
 const GALAXY_MAP_POS={
   // ── Major Faction / Region labels (diamond markers) ──────────────────────
   'Alliance Space':         {x:48, y:52},
-  'Haven Space':            {x:37, y:24},
   'Mubothen Empire':        {x:71, y:20},
   'The Dark Space':         {x:18, y:72},
   'Nemani Rift':            {x:57, y:32},
@@ -2551,7 +2553,8 @@ const GALAXY_MAP_POS={
   'Titania System':         {x:44, y:60},
   'Alsa':                   {x:50, y:63},   // agricultural heartland, south
   'Alsa System':            {x:50, y:63},
-  'Skalan Worlds':          {x:42, y:65},   // closed, south
+  'Carach System':          {x:41, y:64},   // Skalan homeworld, closed
+  'Seigh System':           {x:43, y:67},   // Skalan training world, lethal
   'Mangara':                {x:34, y:69},   // embargoed, SW fringe
   'Mangara System':         {x:34, y:69},
   'Andromede':              {x:38, y:44},   // naval command, west of Orion
@@ -2721,7 +2724,7 @@ const STARGATE_LINKS=[
   ['Berilia','Damph'],
   ['Ishtar','Alsa'],
   ['Aderan','Alsa'],
-  ['Titania','Skalan Worlds'],
+  ['Titania','Carach System'],
   ['Titania','Mangara'],
   ['Alsa','San Tien'],
   // The Heaven Gate: connects Palentium to Heaven (makes the 3-month journey instant)
@@ -2742,7 +2745,7 @@ var smapGatesData=null; // [[a,b],...] — loaded lazily by smapGatesLoad()
 function smapPosLoad(){
   if(smapPinPos)return smapPinPos;
   var def={};
-  Object.keys(GALAXY_MAP_POS).forEach(function(k){def[k]={x:GALAXY_MAP_POS[k].x,y:GALAXY_MAP_POS[k].y};});
+  Object.keys(GALAXY_MAP_POS).forEach(function(k){var e=GALAXY_MAP_POS[k];def[k]={x:e.x,y:e.y};if(e.color)def[k].color=e.color;if(e.shape)def[k].shape=e.shape;});
   try{var s=localStorage.getItem('smap_pin_pos');if(s){var p=JSON.parse(s);Object.keys(p).forEach(function(k){def[k]=p[k];});}}catch(e){}
   smapPinPos=def;return def;
 }
@@ -2914,9 +2917,9 @@ const worldData={
       }
     ]
   },
-  skalan_worlds:{
-    name:'Skalan Worlds',
-    sub:'Skalan \u00b7 Alliance Member \u00b7 Self-Governed',
+  carach_system:{
+    name:'Carach System',
+    sub:'Skalan \u00b7 Alliance Member \u00b7 Self-Governed \u00b7 Homeworld System',
     worlds:[
       {
         name:'Caragh',
@@ -2929,6 +2932,32 @@ const worldData={
         desc:'Caragh is the Skalan homeworld and it is closed. Non-Skalans do not land here. This is not formally legislated \u2014 it is simply a boundary that the Skalans enforce and that everyone with any familiarity with Skalan culture understands not to test. The planet is covered in temples, training grounds, and shrines to warrior traditions that predate the Skalans\' existence as a distinct species. The Patriarks created the Skalans as a warrior caste and later attempted to eliminate them through genetic modification of their reproductive biology when they became inconvenient. The attempt failed. The Skalans remember. Caragh is the physical expression of a culture that survived an attempt at extinction by one of the most politically powerful species in the galaxy. It is sacred, guarded, and deeply private. Players who find themselves on Caragh without invitation are in extraordinary circumstances and should understand exactly how unwelcome they are.'
       },
       {
+        name:'Carach II',
+        type:'Rocky world \u2014 uninhabited',
+        status:'active',
+        statusLabel:'Uninhabited',
+        faction:'Skalan',
+        population:'Uninhabited',
+        notable:'Inner system rocky world; no cultural significance; Skalan patrol jurisdiction',
+        desc:'A dry, rocky world in the inner Carach system. Uninhabited and geologically unremarkable. The Skalans claim it as part of their system and enforce exclusion as a matter of principle rather than necessity.'
+      },
+      {
+        name:'Carach Outer Belt',
+        type:'Asteroid belt \u2014 patrol anchorage',
+        status:'active',
+        statusLabel:'Uninhabited',
+        faction:'Skalan',
+        population:'Uninhabited \u2014 patrol rotations only',
+        notable:'Skalan patrol anchorage; outer perimeter of homeworld system',
+        desc:'The outer belt of the Carach system. Skalan patrol vessels anchor among the larger bodies during long patrol rotations, using the belt as the de facto outer perimeter of the homeworld\'s territorial enforcement.'
+      }
+    ]
+  },
+  seigh_system:{
+    name:'Seigh System',
+    sub:'Skalan \u00b7 Alliance Member \u00b7 Self-Governed \u00b7 Training World System',
+    worlds:[
+      {
         name:'Seigh',
         type:'Skalan training world \u2014 lethal environment',
         status:'restricted',
@@ -2937,6 +2966,26 @@ const worldData={
         population:'~50,000 \u2014 training rotations only',
         notable:'Most lethal natural environment in the galaxy; Skalan rite of passage; deadly megafauna and toxic flora',
         desc:'Every credible environmental survey of Seigh has reached the same conclusion: it is the most lethal naturally occurring environment in the known galaxy. The jungle is dense, the flora is largely toxic on contact, the predators are large and have evolved over millions of years to kill anything that moves, and the terrain alternates between impenetrable canopy, acidic swampland, and sheer volcanic rock. The Skalans send their young here. Surviving Seigh for the required period is the rite of passage that marks the transition to adulthood in Skalan culture. There is no exemption, no alternative, and no rescue if you fail. Outsiders occasionally attempt to visit for sport, bounty hunting, or to capture megafauna specimens that command extraordinary prices on the collector market. The survival rate for uninvited visitors is low enough that most insurers classify Seigh as uninsurable. The Skalans do not advertise this. They do not need to.'
+      },
+      {
+        name:'Seigh II',
+        type:'Rocky world \u2014 frozen outer body',
+        status:'active',
+        statusLabel:'Uninhabited',
+        faction:'Skalan',
+        population:'Uninhabited',
+        notable:'Frozen outer world; no strategic significance; Skalan jurisdiction enforced',
+        desc:'A small, frozen rocky world at the outer edge of the Seigh system. The Skalans claim it as part of their territory and patrol it accordingly. It holds no strategic or cultural significance; they simply do not permit others to operate in their systems.'
+      },
+      {
+        name:'Seigh Outer Belt',
+        type:'Asteroid belt \u2014 patrol anchorage',
+        status:'active',
+        statusLabel:'Uninhabited',
+        faction:'Skalan',
+        population:'Uninhabited \u2014 patrol rotations only',
+        notable:'Outer perimeter of training world system; active Skalan patrol presence',
+        desc:'The outer belt of the Seigh system. Skalan patrol vessels maintain a presence here as part of the perimeter enforcement around the training world. Non-Skalan approach is treated as intrusion regardless of intent.'
       }
     ]
   },
@@ -3911,10 +3960,10 @@ g.catalogue_systems=[
     ]
   },
   {
-    id:'skalan_worlds',name:'Skalan Worlds',region:'Alliance Space',classification:'Self-Governed Territory, Closed System',
+    id:'carach_system',name:'Carach System',region:'Alliance Space',classification:'Self-Governed Territory, Skalan Homeworld System',
     faction:'Skalan',status:'restricted',
-    tags:['Alliance Space','Skalan','Restricted','Closed','Extreme Danger','Self-Governed'],
-    desc:'The Skalan home system is closed to outsiders and enforces that closure without legislation, simply through the certainty that testing it is a bad idea. Caragh is the sacred homeworld of a species that survived an attempted extinction. Seigh is where they send their young to prove themselves against the most lethal natural environment in the galaxy.',
+    tags:['Alliance Space','Skalan','Restricted','Closed','Homeworld','Sacred','Self-Governed'],
+    desc:'The Carach system is the seat of Skalan civilisation. Caragh, the homeworld, is closed. The system perimeter is enforced by Skalan patrol vessels without legal framework or diplomatic negotiation. Non-Skalans who approach uninvited are turned away or fired upon. The distinction between the two outcomes is not always communicated in advance.',
     planets:[
       {id:'caragh',name:'Caragh',type:'Terrestrial, Skalan Homeworld',status:'restricted',statusLabel:'Closed to Outsiders',
        atmosphere:'Breathable',atm_note:'Pristine, no industrial pollution, ecosystem maintained as sacred',
@@ -3933,9 +3982,30 @@ g.catalogue_systems=[
        ],
        hooks:['It is known among people who work with Skalan warriors that they occasionally seek outside contractors for tasks they cannot pursue through Skalan channels, not because the Skalans lack capability, but because involving their own institutions would make the matter a political issue within Skalan culture. This pattern of selective use of outsiders is established enough that certain contractors maintain ongoing relationships with Skalan clients specifically for this purpose.','The relationship between the Skalans and the Patriarks is one of the most closely watched bilateral dynamics in Alliance Space, a species that survived an attempted extinction by the Patriarks maintaining formal diplomatic relations with the perpetrators. Diplomatic exchanges between the two are never conducted publicly, and accounts of what happens in direct meetings between their representatives are not shared in any accessible record.','The City of Memory on Caragh is believed by historians and legal scholars to contain the most complete surviving documentation of the Patriarks\' genetic modification program against the Skalans, records that would be legally significant in Alliance jurisdictions if they could be accessed. They cannot be accessed without Skalan permission, which has never been granted to any outside party.'],
        desc:'Caragh is the Skalan homeworld and it is closed. Non-Skalans do not land here. This is not formally legislated, it is simply a boundary that the Skalans enforce and that everyone with any familiarity with Skalan culture understands not to test. The planet is covered in temples, training grounds, and shrines to warrior traditions that predate the Skalans\' existence as a distinct species. The Patriarks created the Skalans as a warrior caste and later attempted to eliminate them through genetic modification. The attempt failed. The Skalans remember.'},
+      {id:'carach_ii',name:'Carach II',type:'Rocky World, Uninhabited',status:'active',statusLabel:'Uninhabited',
+       atmosphere:'Trace',atm_note:'Thin, unbreathable atmosphere',
+       climate:'Arid, Rocky',gravity:'Standard',grav_note:'Standard gravity',
+       faction:'Skalan',population:'Uninhabited',demographics:'None',government:'Skalan (nominal)',tech_level:'N/A',economy:'None',
+       access:'Forbidden',access_note:'Within Skalan controlled space. Patrol vessels enforce exclusion throughout the system.',
+       hazards:['Skalan jurisdiction, approach without invitation treated as hostile','Unbreathable atmosphere','No infrastructure'],
+       desc:'A dry, rocky world in the inner Carach system. Uninhabited and geologically unremarkable, it holds no significance to Skalan culture. The Skalans claim it as part of their system and do not permit others to operate here on principle.'},
+      {id:'carach_belt',name:'Carach Outer Belt',type:'Asteroid Belt, Outer System',status:'active',statusLabel:'Uninhabited',
+       atmosphere:'None',climate:'Void',gravity:'None',
+       faction:'Skalan',population:'Uninhabited, occasional Skalan patrol anchorage',demographics:'None',government:'Skalan',tech_level:'N/A',economy:'None',
+       access:'Forbidden',access_note:'Skalan patrol vessels use the belt for positioning. Non-Skalan approach treated as intrusion.',
+       hazards:['Active Skalan patrol activity','Debris navigation hazards in denser belt sections'],
+       desc:'The outer belt of the Carach system. Skalan patrol vessels anchor among the larger bodies during long patrol rotations, using the belt as the de facto outer perimeter of territorial enforcement for the homeworld system.'}
+    ]
+  },
+  {
+    id:'seigh_system',name:'Seigh System',region:'Alliance Space',classification:'Self-Governed Territory, Skalan Training World System',
+    faction:'Skalan',status:'restricted',
+    tags:['Alliance Space','Skalan','Restricted','Closed','Extreme Danger','Training World'],
+    desc:'The Seigh system is administered by the Skalan as a separate closed territory from the Carach homeworld system. The primary body, Seigh, is the site of the Skalan rite of passage. Non-Skalans are not invited. The fauna does not check jurisdiction.',
+    planets:[
       {id:'seigh',name:'Seigh',type:'Terrestrial, Extreme Survival Environment',status:'restricted',statusLabel:'Extreme Danger',
        atmosphere:'Breathable',atm_note:'Breathable but carries spores, pollen, and biological agents causing cumulative harm without proper filtration',
-       climate:'Tropical Jungle, Extreme (Toxic Flora, Megafauna)',gravity:'High',grav_note:'Above standard, same as Caragh. Escape from predators is significantly harder than expected.',
+       climate:'Tropical Jungle, Extreme (Toxic Flora, Megafauna)',gravity:'High',grav_note:'Above standard. Escape from predators is significantly harder than expected.',
        faction:'Skalan',population:'~50,000, training rotations only',
        demographics:'Skalan young adults completing rite of passage',
        government:'None, survival conditions',
@@ -3950,18 +4020,18 @@ g.catalogue_systems=[
        ],
        hooks:['Among bounty hunters and fugitive recovery specialists, Seigh is treated as a terminal destination, the effective end of any trail. The combination of lethality and Skalan jurisdiction means that anyone who reaches Seigh is considered as inaccessible as if they had died. In practice, some do not survive it; but those who do are simply unreachable.','The exotic specimen trade has a standing, persistent market for live Seigh megafauna that has never been successfully supplied, the Skalans consider the planet\'s wildlife sacred and the environment ensures that any attempt at capture would likely kill the captor before the specimen. This has not reduced the offered prices, which continue to rise in proportion to the known impossibility of delivery.','Among Skalans living in Alliance Space, it is understood and never discussed that families who lose a child to Seigh\'s rite of passage cannot acknowledge the loss publicly. This creates a visible but unspoken grief that communities who know Skalans well learn to recognise and leave unaddressed, the correct response, in Skalan cultural terms, is silence.'],
        desc:'Every credible environmental survey of Seigh has reached the same conclusion: it is the most lethal naturally occurring environment in the known galaxy. The jungle is dense, the flora is largely toxic on contact, the predators are large and have evolved over millions of years to kill anything that moves, and the terrain alternates between impenetrable canopy, acidic swampland, and sheer volcanic rock. The Skalans send their young here. Surviving Seigh for the required period is the rite of passage that marks the transition to adulthood in Skalan culture. The survival rate for uninvited visitors is low enough that most insurers classify Seigh as uninsurable.'},
-      {id:'skalan_iii',name:'Skalan III',type:'Rocky World, Frozen',status:'active',statusLabel:'Uninhabited',
+      {id:'seigh_ii',name:'Seigh II',type:'Rocky World, Frozen',status:'active',statusLabel:'Uninhabited',
        atmosphere:'None',climate:'Frozen',gravity:'Low',
        faction:'Skalan',population:'Uninhabited',demographics:'None',government:'Skalan (nominal)',tech_level:'N/A',economy:'None',
        access:'Forbidden',access_note:'Skalan jurisdiction extends to all bodies in the system. Patrol vessels enforce exclusion.',
        hazards:['Skalan jurisdiction, approach without invitation treated as hostile','Extreme cold','No infrastructure'],
-       desc:'A small, frozen rocky world at the outer edge of the Skalan system. The Skalans claim it as part of their territory and patrol it accordingly. It holds no strategic or cultural significance, the Skalans simply do not permit others to operate in their system on principle.'},
-      {id:'skalan_belt',name:'Skalan Outer Belt',type:'Asteroid Belt, Outer System',status:'active',statusLabel:'Uninhabited',
+       desc:'A small, frozen rocky world at the outer edge of the Seigh system. The Skalans claim it as part of their territory. It holds no strategic or cultural significance; the Skalans simply do not permit others to operate in their systems on principle.'},
+      {id:'seigh_belt',name:'Seigh Outer Belt',type:'Asteroid Belt, Outer System',status:'active',statusLabel:'Uninhabited',
        atmosphere:'None',climate:'Void',gravity:'None',
        faction:'Skalan',population:'Uninhabited, occasional Skalan patrol anchorage',demographics:'None',government:'Skalan',tech_level:'N/A',economy:'None',
        access:'Forbidden',access_note:'Skalan patrol vessels use the belt for positioning. Non-Skalan approach treated as intrusion.',
        hazards:['Active Skalan patrol activity','Debris navigation hazards in denser belt sections'],
-       desc:'A sparse asteroid belt marking the outer boundary of the Skalan system. Skalan patrol vessels occasionally anchor among the larger bodies during long patrol rotations. The belt serves as the de facto outer perimeter of Skalan territorial enforcement.'}
+       desc:'The outer belt of the Seigh system. Skalan patrol vessels maintain a presence here as part of the broader perimeter enforcement around the training world.'}
     ]
   },
   {
@@ -6700,7 +6770,6 @@ function smapEntryColor(e){
   // Faction/region colors
   switch(e.name){
     case 'Alliance Space':return '#00c8ff';
-    case 'Haven Space':return '#ff453a';
     case 'Torc Federation':return '#30d158';
     case 'Mubothen Empire':return '#ff9f0a';
     case 'Zegitor Trade Guild':return '#64d2ff';
@@ -6755,6 +6824,47 @@ function openSmapPopup(entry,clientX,clientY){
     }
     h+=gcBtn;
   }
+  if(smapEditMode){
+    var pinData=smapPosLoad()[entry.name]||{};
+    var curColor=pinData.color||'default';
+    var curShape=pinData.shape||'default';
+    var safePN=JSON.stringify(entry.name);
+    var pinColors=[
+      {val:'default',label:'Auto',style:'background:#2c2c2e;border:1px solid #636366;'},
+      {val:'#00c8ff',style:'background:#00c8ff;'},
+      {val:'#ff6b35',style:'background:#ff6b35;'},
+      {val:'#a855f7',style:'background:#a855f7;'},
+      {val:'#30d158',style:'background:#30d158;'},
+      {val:'#ffd60a',style:'background:#ffd60a;'},
+      {val:'#ff453a',style:'background:#ff453a;'},
+      {val:'#ff9f0a',style:'background:#ff9f0a;'},
+      {val:'#f2f2f7',style:'background:#f2f2f7;'},
+      {val:'#64d2ff',style:'background:#64d2ff;'},
+    ];
+    var pinShapes=[
+      {val:'default',label:'●'},
+      {val:'diamond',label:'◆'},
+      {val:'square',label:'■'},
+      {val:'star',label:'★'},
+    ];
+    h+='<div style="border-top:1px solid #2c2c2e;margin-top:8px;padding-top:8px;">';
+    h+='<div style="font-size:9px;color:var(--a);font-family:\'Orbitron\',sans-serif;letter-spacing:.05em;margin-bottom:6px;">PIN APPEARANCE</div>';
+    h+='<div style="display:flex;align-items:center;gap:4px;margin-bottom:6px;">';
+    h+='<span style="font-size:9px;color:#636366;font-family:\'Share Tech Mono\',monospace;min-width:38px;">COLOR</span>';
+    pinColors.forEach(function(c){
+      var active=c.val===curColor?'outline:2px solid #fff;outline-offset:1px;':'';
+      h+='<div onclick="smapSetPinColor('+safePN+',\''+c.val+'\')" title="'+(c.label||c.val)+'" style="width:14px;height:14px;border-radius:50%;cursor:pointer;flex-shrink:0;'+c.style+active+'"></div>';
+    });
+    h+='</div>';
+    h+='<div style="display:flex;align-items:center;gap:4px;">';
+    h+='<span style="font-size:9px;color:#636366;font-family:\'Share Tech Mono\',monospace;min-width:38px;">SHAPE</span>';
+    pinShapes.forEach(function(s){
+      var active=s.val===curShape?'background:#3a3a3c;color:#f2f2f7;':'background:none;color:#636366;';
+      h+='<button onclick="smapSetPinShape('+safePN+',\''+s.val+'\')" style="border:1px solid #3c3c3e;'+active+'border-radius:3px;padding:2px 7px;font-size:13px;cursor:pointer;line-height:1;">'+s.label+'</button>';
+    });
+    h+='</div>';
+    h+='</div>';
+  }
   popup.innerHTML=h;
   popup.style.display='block';
   var pw=320,ph=popup.offsetHeight||320;
@@ -6767,6 +6877,26 @@ function openSmapPopup(entry,clientX,clientY){
   var pc=document.getElementById('smap-pc');
   if(pc)pc.onclick=function(ev){ev.stopPropagation();popup.style.display='none';};
 }
+function smapSetPinColor(name,color){
+  var pos=smapPosLoad();
+  if(!pos[name])return;
+  if(color==='default')delete pos[name].color;
+  else pos[name].color=color;
+  smapPosSave();
+  var popup=document.getElementById('smap-popup');
+  if(popup)popup.style.display='none';
+  render();
+}
+function smapSetPinShape(name,shape){
+  var pos=smapPosLoad();
+  if(!pos[name])return;
+  if(shape==='default')delete pos[name].shape;
+  else pos[name].shape=shape;
+  smapPosSave();
+  var popup=document.getElementById('smap-popup');
+  if(popup)popup.style.display='none';
+  render();
+}
 function smapCloseExport(){
   var bg=document.getElementById('smap-json-bg');
   if(bg){bg.style.display='none';}
@@ -6775,12 +6905,15 @@ function smapOpenExport(){
   var bg=document.getElementById('smap-json-bg');
   var ta=document.getElementById('smap-json-ta');
   if(!bg||!ta)return;
+  var pos=smapPosLoad();
   var lines=[];
-  (g.galaxy||[]).forEach(function(e){
-    if(e.map_pos){
-      var k=JSON.stringify(e.name);
-      lines.push('  '+k+':{x:'+e.map_pos.x+',y:'+e.map_pos.y+'}');
-    }
+  Object.keys(pos).sort().forEach(function(k){
+    var e=pos[k];
+    var entry='{x:'+e.x+',y:'+e.y;
+    if(e.color)entry+=',color:'+JSON.stringify(e.color);
+    if(e.shape)entry+=',shape:'+JSON.stringify(e.shape);
+    entry+='}';
+    lines.push('  '+JSON.stringify(k)+':'+entry);
   });
   ta.value='const GALAXY_MAP_POS={\n'+lines.join(',\n')+'\n};';
   bg.style.display='flex';
@@ -9092,13 +9225,16 @@ function render(){
     var dotsH='';
     placedPins.forEach(function(p){
       var pos=pinPos[p.name];
-      var col=smapEntryColor(p.entry);
+      var customColor=pos.color||null;
+      var col=customColor||smapEntryColor(p.entry);
+      var customShape=pos.shape||null;
       var isFac=p.type==='fac';
       var cls='smap-dot'+(isFac?' faction':' smap-pin-sys')+(smapEditMode?' edit-drag':'');
       if(smapGateFirst===p.name)cls+=' gate-sel';
-      dotsH+='<div class="'+cls+'" data-pin="'+esc(p.name)+'" style="left:'+pos.x+'%;top:'+pos.y+'%;">';
+      var shapeAttr=customShape?' data-shape="'+customShape+'"':'';
+      dotsH+='<div class="'+cls+'"'+shapeAttr+' data-pin="'+esc(p.name)+'" style="left:'+pos.x+'%;top:'+pos.y+'%;">';
       dotsH+='<div class="smap-dot-inner" style="background:'+col+';border-color:'+col+';box-shadow:0 0 8px '+col+',0 0 16px '+col+'44;"></div>';
-      dotsH+='<div class="smap-dot-lbl" style="color:'+col+';">'+esc(p.name)+'</div>';
+      if(smapEditMode)dotsH+='<div class="smap-dot-lbl" style="color:'+col+';">'+esc(p.name)+'</div>';
       dotsH+='</div>';
     });
 
