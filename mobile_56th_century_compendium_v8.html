@@ -2736,7 +2736,6 @@ var smapEditMode=false;
 var smapGateMode=false;
 var smapGateFirst=null;
 var smapPlacing=null;   // name of pin being placed on next map click
-var smapExportOpen=false;
 var smapPinPos=null;    // {name:{x,y,zoom}} — loaded lazily by smapPosLoad()
 var smapGatesData=null; // [[a,b],...] — loaded lazily by smapGatesLoad()
 
@@ -6768,6 +6767,42 @@ function openSmapPopup(entry,clientX,clientY){
   var pc=document.getElementById('smap-pc');
   if(pc)pc.onclick=function(ev){ev.stopPropagation();popup.style.display='none';};
 }
+function smapCloseExport(){
+  var bg=document.getElementById('smap-json-bg');
+  if(bg){bg.style.display='none';}
+}
+function smapOpenExport(){
+  var bg=document.getElementById('smap-json-bg');
+  var ta=document.getElementById('smap-json-ta');
+  if(!bg||!ta)return;
+  var lines=[];
+  (g.galaxy||[]).forEach(function(e){
+    if(e.map_pos){
+      var k=JSON.stringify(e.name);
+      lines.push('  '+k+':{x:'+e.map_pos.x+',y:'+e.map_pos.y+'}');
+    }
+  });
+  ta.value='const GALAXY_MAP_POS={\n'+lines.join(',\n')+'\n};';
+  bg.style.display='flex';
+  setTimeout(function(){ta.focus();ta.select();},50);
+}
+function smapCopyJson(){
+  var ta=document.getElementById('smap-json-ta');
+  var btn=document.getElementById('smap-json-copy');
+  if(!ta)return;
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(ta.value).then(function(){
+      if(btn){var orig=btn.textContent;btn.textContent='Copied!';btn.style.color='#30d158';setTimeout(function(){btn.textContent=orig;btn.style.color='';},1800);}
+    }).catch(function(){
+      ta.select();document.execCommand('copy');
+      if(btn){var orig=btn.textContent;btn.textContent='Copied!';btn.style.color='#30d158';setTimeout(function(){btn.textContent=orig;btn.style.color='';},1800);}
+    });
+  } else {
+    ta.select();document.execCommand('copy');
+    if(btn){var orig=btn.textContent;btn.textContent='Copied!';btn.style.color='#30d158';setTimeout(function(){btn.textContent=orig;btn.style.color='';},1800);}
+  }
+}
+
 function initStarmap(){
   var vp=document.getElementById('smap-viewport');
   var cv=document.getElementById('smap-canvas');
@@ -6896,17 +6931,11 @@ function initStarmap(){
       if(a==='reset'){fit();return;}
       if(a==='edit-toggle'){
         smapEditMode=!smapEditMode;
-        if(!smapEditMode){smapGateMode=false;smapGateFirst=null;smapPlacing=null;smapExportOpen=false;}
+        if(!smapEditMode){smapGateMode=false;smapGateFirst=null;smapPlacing=null;}
         render();return;
       }
       if(a==='gate-toggle'){smapGateMode=!smapGateMode;smapGateFirst=null;smapPlacing=null;render();return;}
-      if(a==='export-open'){smapExportOpen=true;render();return;}
-      if(a==='export-close'){smapExportOpen=false;render();return;}
-      if(a==='export-copy'){
-        var ta=document.getElementById('smap-exp-ta');
-        if(ta){ta.select();try{navigator.clipboard.writeText(ta.value).catch(function(){document.execCommand('copy');});}catch(ex){document.execCommand('copy');}}
-        return;
-      }
+      if(a==='pexp'){smapOpenExport();return;}
       if(a==='place-click'){
         var pn=sm.dataset.pin;
         smapPlacing=(smapPlacing===pn)?null:pn;
@@ -9093,7 +9122,7 @@ function render(){
     html+='<button class="smap-eb'+(smapEditMode?' on':'')+'" data-sm="edit-toggle">'+(smapEditMode?'\u270f\ufe0f Editing':'\u270f\ufe0f Edit Pins')+'</button>';
     if(smapEditMode){
       html+='<button class="smap-eb'+(smapGateMode?' gate-on':'')+'" data-sm="gate-toggle">\u26d3 Gate Mode</button>';
-      html+='<button class="smap-eb" data-sm="export-open">\ud83d\udccb Export JSON</button>';
+      html+='<button class="smap-eb" data-sm="pexp">\ud83d\udccb Export JSON</button>';
     }
     html+='</div>';
 
@@ -9147,18 +9176,6 @@ function render(){
       }
     }
 
-    // Export overlay
-    if(smapExportOpen){
-      var expData={positions:pinPos,gates:gates};
-      var expJson=JSON.stringify(expData,null,2);
-      html+='<div class="smap-export-overlay" data-sm="export-close">';
-      html+='<div class="smap-export-box" onclick="event.stopPropagation()">';
-      html+='<h3>\ud83d\udccb EXPORT MAP DATA — copy to hardcode in GALAXY_MAP_POS / STARGATE_LINKS</h3>';
-      html+='<textarea id="smap-exp-ta" readonly>'+expJson.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</textarea>';
-      html+='<div class="exp-btns"><button class="smap-eb on" data-sm="export-copy">Copy to Clipboard</button><button class="smap-eb danger" data-sm="export-close">Close</button></div>';
-      html+='</div></div>';
-    }
-
     // Bottom hint
     html+='<div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);color:#8e8e93;font-size:10px;font-family:\'Share Tech Mono\',monospace;background:#161618cc;border:1px solid #2c2c2e;border-radius:4px;padding:4px 12px;pointer-events:none;z-index:20;white-space:nowrap;display:flex;align-items:center;gap:14px;">'+(smapEditMode?'\u270f\ufe0f Edit mode — drag pins to reposition':'Scroll to zoom \u00b7 Drag to pan \u00b7 Click to explore')+'<span style="display:flex;align-items:center;gap:5px;"><svg width="22" height="8" viewBox="0 0 22 8"><line x1="1" y1="4" x2="21" y2="4" stroke="#00c8ff" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/></svg><span style="color:#00c8ff;opacity:.8;">Star gate</span></span></div>';
     html+='</div>';
@@ -9182,6 +9199,23 @@ render();
   <div class="world-panel-body" id="world-panel-body"></div>
 </div>
 <div id="world-panel-overlay" class="world-panel-overlay" onclick="closeWorldPanel()"></div>
+<!-- Star Map JSON Export Panel -->
+<div id="smap-json-bg" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:3000;align-items:center;justify-content:center;backdrop-filter:blur(4px);" onclick="if(event.target===this)smapCloseExport()">
+  <div style="background:#1c1c1e;border:1px solid #3a3a3c;border-radius:10px;width:560px;max-width:calc(100vw - 24px);max-height:calc(100vh - 48px);display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.9);">
+    <div style="padding:14px 18px 11px;border-bottom:1px solid #2c2c2e;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
+      <span style="font-family:'Share Tech Mono',monospace;font-size:13px;color:#f2f2f7;letter-spacing:.05em;">GALAXY_MAP_POS — Export</span>
+      <button id="smap-json-close" style="background:none;border:none;color:#636366;font-size:16px;cursor:pointer;padding:3px 7px;border-radius:4px;line-height:1;" title="Close" onclick="smapCloseExport()">✕</button>
+    </div>
+    <div style="padding:14px 18px;flex:1;overflow:hidden;display:flex;flex-direction:column;gap:10px;">
+      <div style="font-size:11px;color:#636366;font-family:'Share Tech Mono',monospace;">Copy this block and replace the <code style="color:#00c8ff;">GALAXY_MAP_POS</code> constant in the HTML file.</div>
+      <textarea id="smap-json-ta" readonly style="flex:1;min-height:280px;background:#111;border:1px solid #2c2c2e;border-radius:6px;color:#00c8ff;font-family:'Share Tech Mono',monospace;font-size:11px;padding:10px 12px;resize:none;outline:none;line-height:1.6;user-select:text;-webkit-user-select:text;cursor:text;"></textarea>
+    </div>
+    <div style="padding:10px 18px 14px;border-top:1px solid #2c2c2e;display:flex;justify-content:flex-end;gap:8px;flex-shrink:0;">
+      <button onclick="smapCloseExport()" style="background:none;border:1px solid #3a3a3c;color:#8e8e93;font-size:11px;cursor:pointer;padding:5px 14px;border-radius:5px;font-family:'Share Tech Mono',monospace;">Close</button>
+      <button id="smap-json-copy" onclick="smapCopyJson()" style="background:rgba(0,200,255,.1);border:1px solid rgba(0,200,255,.3);color:#00c8ff;font-size:11px;cursor:pointer;padding:5px 14px;border-radius:5px;font-family:'Share Tech Mono',monospace;">Copy to Clipboard</button>
+    </div>
+  </div>
+</div>
 <div id="smap-popup" class="smap-popup" style="display:none;"></div>
 <!-- Galactic Catalogue Planet Panel -->
 <div id="gc-panel" class="gc-panel"></div>
