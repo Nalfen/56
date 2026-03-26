@@ -12,16 +12,18 @@ The project is released under **CC0 1.0 Universal** (public domain).
 
 ```
 /
-├── 56th_century_compendium_v3.html   # Version 3 (431 lines, archived)
-├── 56th_century_compendium_v5.html   # Version 5 (838 lines, archived)
-├── 56th_century_compendium_v8.html   # Version 8 (current/latest)
+├── 56th_century_compendium_v8.html   # CANONICAL — single file, mobile + desktop compatible
 ├── ship_components.csv               # Exported flat ship component catalog (generated)
 ├── inject_engines.py                 # Dev helper: injects ENGINE codes into ship data
 ├── drone_redesign.py                 # Dev helper: generates/exports drone component data
-└── LICENSE                           # CC0 1.0 Universal
+├── LICENSE                           # CC0 1.0 Universal
+└── archive/                          # Retired versions — do not edit
+    ├── 56th_century_compendium_v3.html
+    ├── 56th_century_compendium_v5.html
+    └── 56th_century_compendium_v8.html   # Old desktop-only build (superseded)
 ```
 
-**v8 is the canonical/latest version.** Work on v8 unless explicitly told otherwise. v3 and v5 are kept for reference.
+**`56th_century_compendium_v8.html` is the one and only active file.** All development goes here. It is designed to work on both mobile and desktop. The `archive/` folder is read-only history — never edit files there.
 
 ---
 
