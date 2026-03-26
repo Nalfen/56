@@ -409,14 +409,34 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 .gc-sec-div{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--mu3);text-transform:uppercase;letter-spacing:1.5px;margin:14px 0 10px;padding-bottom:5px;border-bottom:1px solid var(--border);}
 .gc-loc-edit{background:#1c1c1e;border:1px solid var(--border);border-radius:5px;padding:10px;margin-bottom:6px;}
 /* ── Star Map Hotspots ───────────────────────────────────────────────────────── */
-.smap-dot{position:absolute;cursor:pointer;transform:translate(-50%,-50%);z-index:5;display:flex;flex-direction:column;align-items:center;pointer-events:auto;padding:6px 3px 3px;}
-.smap-dot-inner{width:18px;height:18px;border-radius:50%;border:2px solid;transition:transform .15s,box-shadow .15s,filter .15s;flex-shrink:0;}
-.smap-dot.faction .smap-dot-inner{width:22px;height:22px;border-radius:3px;transform:rotate(45deg);}
-.smap-dot:hover .smap-dot-inner{transform:scale(1.5);filter:brightness(1.5);}
-.smap-dot.faction:hover .smap-dot-inner{transform:rotate(45deg) scale(1.4);filter:brightness(1.5);}
-.smap-dot-lbl{font-family:'Share Tech Mono',monospace;font-size:18px;white-space:nowrap;margin-top:6px;text-shadow:0 0 6px #000,0 0 14px #000,1px 1px 0 #000,-1px -1px 0 #000;opacity:.8;pointer-events:none;line-height:1;}
-.smap-dot.faction .smap-dot-lbl{font-size:22px;font-family:'Orbitron',sans-serif;letter-spacing:.5px;}
+/* Anchor is zero-size; circle/image positioned absolutely so hiding label never shifts pin */
+.smap-dot{position:absolute;width:0;height:0;z-index:5;pointer-events:none;}
+.smap-dot-inner{position:absolute;width:18px;height:18px;border-radius:50%;border:2px solid;transition:transform .15s,box-shadow .15s,filter .15s;transform:translate(-50%,-50%);pointer-events:auto;cursor:pointer;}
+.smap-dot.faction .smap-dot-inner{width:22px;height:22px;border-radius:3px;transform:translate(-50%,-50%) rotate(45deg);}
+.smap-dot:hover .smap-dot-inner{transform:translate(-50%,-50%) scale(1.5);filter:brightness(1.5);}
+.smap-dot.faction:hover .smap-dot-inner{transform:translate(-50%,-50%) rotate(45deg) scale(1.4);filter:brightness(1.5);}
+.smap-dot-planet{position:absolute;transform:translate(-50%,-50%);border-radius:50%;pointer-events:auto;cursor:pointer;transition:transform .15s,filter .15s;}
+.smap-dot:hover .smap-dot-planet{transform:translate(-50%,-50%) scale(1.12);filter:brightness(1.25);}
+.smap-dot-lbl{position:absolute;left:0;top:var(--lbl-top,14px);transform:translateX(-50%);font-family:'Share Tech Mono',monospace;font-size:9px;white-space:nowrap;text-shadow:0 0 6px #000,0 0 14px #000,1px 1px 0 #000,-1px -1px 0 #000;opacity:.8;pointer-events:none;line-height:1;}
+.smap-dot.faction .smap-dot-lbl{font-size:11px;font-family:'Orbitron',sans-serif;letter-spacing:.5px;}
 .smap-dot:hover .smap-dot-lbl{opacity:1;}
+.smap-dot.hlbl .smap-dot-lbl{display:none;}
+.smap-dot.smap-edit .smap-dot-inner{cursor:grab;outline:1px dashed rgba(255,180,60,.6);outline-offset:4px;}
+.smap-dot.smap-edit .smap-dot-planet{cursor:grab;outline:1px dashed rgba(255,180,60,.6);outline-offset:3px;border-radius:50%;}
+/* edit pin panel */
+.smap-epin{position:fixed;z-index:1200;background:#1c1c1e;border:1px solid #3a3a3c;border-radius:9px;padding:14px;width:260px;box-shadow:0 8px 40px rgba(0,0,0,.9);}
+.smap-epin-name{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;color:#f2f2f7;margin-bottom:10px;padding-right:20px;letter-spacing:.3px;}
+.smap-epin-close{position:absolute;top:9px;right:9px;background:none;border:none;color:#636366;cursor:pointer;font-size:13px;line-height:1;padding:3px 6px;border-radius:4px;}
+.smap-epin-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.smap-epin-lbl{font-family:'Share Tech Mono',monospace;font-size:10px;color:#8e8e93;min-width:52px;}
+.smap-epin-planet-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:8px;}
+.smap-epin-planet-btn{padding:0;background:#2c2c2e;border:1px solid #3a3a3c;border-radius:4px;cursor:pointer;aspect-ratio:1;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:border-color .12s;}
+.smap-epin-planet-btn:hover{border-color:#00c8ff;}
+.smap-epin-planet-btn.active{border-color:#00c8ff;box-shadow:0 0 6px rgba(0,200,255,.5);}
+.smap-epin-planet-btn img{width:100%;height:100%;object-fit:cover;border-radius:3px;}
+.smap-epin-planet-none{font-family:'Share Tech Mono',monospace;font-size:8px;color:#636366;}
+.smap-epin-range{width:100%;accent-color:#00c8ff;}
+.smap-edit-bar{position:absolute;top:10px;left:10px;display:flex;align-items:center;gap:6px;background:#161618cc;border:1px solid #2c2c2e;border-radius:6px;padding:6px 10px;z-index:20;backdrop-filter:blur(8px);pointer-events:auto;}
 /* ── Star Map Popup ──────────────────────────────────────────────────────────── */
 .smap-popup{position:fixed;background:#161618;border:1px solid #3c3c3e;border-radius:8px;padding:14px 14px 12px;width:320px;z-index:1100;box-shadow:0 8px 40px rgba(0,0,0,.88);pointer-events:auto;}
 .smap-popup-name{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;padding-right:22px;margin-bottom:5px;letter-spacing:.4px;}
@@ -2418,36 +2438,180 @@ g.galaxy=[
 // Percentages of image width/height (0–100). Replace coordinates to match your map.
 // Each label [POS-NN] marks a placeholder that needs to be positioned on the actual image.
 const GALAXY_MAP_POS={
-  // Factions / Regions, positions calibrated to Star-Map-v3_HIGH_QUALITY.png
-  'Alliance Space':    {x:45,y:51},
-  'Haven Space':       {x:33,y:12},
-  'Torc Federation':   {x:65,y:79},
-  'Mubothen Empire':   {x:68,y:8},
-  'Zegitor Trade Guild':{x:20,y:45},
-  'Freeland':          {x:28,y:42},
-  'The Dark Space':    {x:17,y:82},
-  'Nemani Rift':       {x:54,y:28},
-  'Kraven Space':      {x:79,y:52},
-  'The Endless Darkness':{x:93,y:50},
-  "Nuzonia's Dream":   {x:55,y:82},
-  // Notable Systems
-  'San Tien':          {x:69,y:66},
-  'New Earth':         {x:18,y:77},
-  'Titania':           {x:43,y:60},
-  'Sirius':            {x:39,y:50},
-  'Orion':             {x:47,y:46},
-  'Aderan':            {x:51,y:57},
-  'Mangara':           {x:32,y:71},
-  'Skalan Worlds':     {x:42,y:65},
-  'Berilia':           {x:53,y:39},
-  'Ishtar':            {x:49,y:54},
-  'Damph':             {x:57,y:44},
-  'Alsa':              {x:50,y:62},
-  'Ash':               {x:53,y:32},
-  'Palentium':         {x:44,y:43},
+  "Aderan":{x:53,y:57},
+  "Aderan System":{x:57.96,y:49.88,color:"#00c8ff"},
+  "Agua":{x:77,y:56},
+  "Agua System":{x:31.78,y:38.06,color:"#ff453a"},
+  "Alliance Space":{x:55.62,y:55.84},
+  "Alsa":{x:50,y:63},
+  "Alsa System":{x:39.76,y:50.41,color:"#00c8ff"},
+  "Andromede":{x:38,y:44},
+  "Andromede System":{x:55.61,y:51.27,color:"#00c8ff"},
+  "Asar":{x:15,y:81},
+  "Asar System":{x:54.32,y:39.78,color:"#ff6b35"},
+  "Ash":{x:55,y:33},
+  "Ash System":{x:44.27,y:42.52,color:"#00c8ff"},
+  "Astea":{x:68,y:12},
+  "Astea System":{x:70.33,y:28.43,color:"#a855f7"},
+  "Asteroid Eater":{x:49.04,y:64.47},
+  "B.I.G. (Beningen Ingratias Garlan)":{x:47.99,y:52.3,color:"#00c8ff",shape:"star"},
+  "Bah":{x:76,y:44},
+  "Bah System":{x:40.65,y:29.8,color:"#ff453a"},
+  "Basagoth Station":{x:66.82,y:51.3,color:"#ffd60a"},
+  "Berilia":{x:53,y:40},
+  "Berilia System":{x:60.41,y:54.46,color:"#00c8ff"},
+  "Bet":{x:82,y:57},
+  "Bet System":{x:35.63,y:37.83,color:"#ff453a"},
+  "Betravir":{x:56,y:85},
+  "Betravir System":{x:66.24,y:87.76,color:"#ff9f0a"},
+  "Bother":{x:59,y:65},
+  "Bother System":{x:90.26,y:43.19,color:"#ffd60a"},
+  "Briea":{x:79,y:79},
+  "Briea System":{x:17.27,y:70.5,color:"#30d158"},
+  "Capio":{x:80,y:51},
+  "Capio System":{x:37.32,y:34.57,color:"#ff453a"},
+  "Carach System":{x:60.91,y:56.32,color:"#00c8ff"},
+  "Carth":{x:86,y:78},
+  "Carth System":{x:21.12,y:67.18,color:"#30d158"},
+  "Cassidir":{x:35,y:78},
+  "Cassidir System":{x:66.71,y:66.71,color:"#ff453a"},
+  "Cetune":{x:14,y:55},
+  "Cetune System":{x:13.1,y:38.93},
+  "Cish":{x:26,y:62},
+  "Cish System":{x:63.48,y:65.79,color:"#ff453a"},
+  "Conso":{x:19,y:47},
+  "Conso System":{x:36.49,y:58.11,color:"#f2f2f7"},
+  "DR345-0":{x:21,y:40},
+  "DR345-0 System":{x:34.03,y:53.2,color:"#f2f2f7"},
+  "Damph":{x:57,y:44},
+  "Damph System":{x:42.74,y:47.22,color:"#00c8ff"},
+  "Dicamia":{x:65,y:17},
+  "Dicamia System":{x:65.61,y:26.83,color:"#a855f7"},
+  "Dragon Tail's Expanse":{x:9.78,y:71.07,color:"#30d158",shape:"star"},
+  "Erbrother Nebula":{x:82.38,y:29.82,color:"#f2f2f7",shape:"star"},
+  "Ethone":{x:71,y:24},
+  "Ethone System":{x:62.32,y:30.55,color:"#a855f7"},
+  "Freeland":{x:12.1,y:56.15,color:"#ffd60a",shape:"star"},
+  "Garson Black Hole":{x:52.46,y:50.02,color:"#00c8ff",shape:"star"},
+  "Ghash":{x:86,y:53},
+  "Ghash System":{x:39.67,y:37.39,color:"#ff453a"},
+  "Gnoth Q714":{x:31,y:38},
+  "Gnoth Q714 System":{x:6.26,y:51.03,color:"#ffd60a"},
+  "Gravemist Nebula":{x:74,y:46.69,color:"#ffd60a",shape:"star"},
+  "Grulania":{x:27,y:4},
+  "Grulania System":{x:42.48,y:7.94,color:"#ffd60a"},
+  "Hanov":{x:27,y:59},
+  "Hanov System":{x:22.13,y:48.97},
+  "Haran":{x:17,y:58},
+  "Haran System":{x:62.39,y:67.52,color:"#ff453a"},
+  "Heaven System":{x:56.51,y:41.9,color:"#ff6b35"},
+  "Illora":{x:64,y:64},
+  "Illora System":{x:81.12,y:52.02,color:"#ffd60a"},
+  "Ishtar":{x:50,y:54},
+  "Ishtar System":{x:47.79,y:45.63,color:"#00c8ff"},
+  "Ithov":{x:70,y:71},
+  "Ithov System":{x:85.98,y:64.27,color:"#30d158"},
+  "Kraven Space":{x:35.54,y:30.34},
+  "L.I.F.T.N":{x:17,y:43},
+  "L.I.F.T.N System":{x:33.71,y:56.84,color:"#f2f2f7"},
+  "Lides H45":{x:27,y:44},
+  "Lides H45 System":{x:13.36,y:53.65,color:"#ffd60a"},
+  "Lumia":{x:47,y:85},
+  "Lumia System":{x:87.72,y:71.39,color:"#ff9f0a"},
+  "Mangara":{x:34,y:69},
+  "Mangara System":{x:45.67,y:57.43,color:"#00c8ff"},
+  "Manola":{x:62,y:71},
+  "Manola System":{x:58.15,y:62.89,color:"#ff453a"},
+  "Mivenia":{x:33,y:34},
+  "Mivenia System":{x:13.26,y:50.1,color:"#ffd60a"},
+  "Monda":{x:26,y:33},
+  "Monda System":{x:34.07,y:60.28,color:"#f2f2f7"},
+  "Mubothen Empire":{x:69.93,y:31.08,color:"#a855f7",shape:"star"},
+  "Mulbaring":{x:22,y:63},
+  "Mulbaring System":{x:22.41,y:43.63},
+  "Nausica":{x:36,y:9},
+  "Nausica System":{x:78.19,y:23.05,color:"#ffd60a"},
+  "Nemani Rift":{x:35.91,y:41.62},
+  "New Earth":{x:17,y:78},
+  "New Earth System":{x:61.65,y:38.93,color:"#ff6b35"},
+  "New Oshana":{x:28,y:74},
+  "New Oshana System":{x:52.82,y:68.96,color:"#ff453a"},
+  "Niezh":{x:23,y:36},
+  "Niezh System":{x:31.07,y:56.99,color:"#f2f2f7"},
+  "Nopenop":{x:23,y:55},
+  "Nopenop System":{x:14.72,y:33.15,color:"#64d2ff"},
+  "Nulneon":{x:77,y:62},
+  "Nulneon System":{x:95.15,y:64.87,color:"#ff9f0a"},
+  "Nuzonia's Dream":{x:41.9,y:90.86,color:"#ff9f0a",shape:"star"},
+  "Nypsos F47":{x:43,y:78},
+  "Nypsos F47 System":{x:50.41,y:73.85,color:"#ff9f0a"},
+  "Ongora":{x:32,y:11},
+  "Ongora System":{x:48.88,y:22.16,color:"#ffd60a"},
+  "Orion":{x:47,y:47},
+  "Orion System":{x:44.13,y:49.64,color:"#00c8ff"},
+  "Palentium":{x:44,y:43},
+  "Palentium System":{x:55.67,y:47.09,color:"#00c8ff"},
+  "Peavis":{x:75,y:72},
+  "Peavis System":{x:77.58,y:37.53,color:"#f2f2f7"},
+  "Pholla":{x:30,y:7},
+  "Pholla System":{x:90.09,y:20.66,color:"#ffd60a"},
+  "Phoxitis":{x:72,y:68},
+  "Phoxitis System":{x:81.26,y:33.29,color:"#f2f2f7"},
+  "Proxima Sector":{x:62.69,y:43.34},
+  "Puthea":{x:52,y:80},
+  "Puthea System":{x:24.84,y:88.57,color:"#ff9f0a"},
+  "Rautis":{x:46,y:8},
+  "Rautis System":{x:29.66,y:17.49,color:"#ffd60a"},
+  "Realmsingers Empire":{x:93.46,y:61.3,color:"#ff9f0a"},
+  "San Tien":{x:68,y:66},
+  "San Tien System":{x:44.94,y:67.25,color:"#ff453a"},
+  "Sarag":{x:85,y:49},
+  "Sarag System":{x:41.58,y:34.9,color:"#ff453a"},
+  "Seigh System":{x:64.14,y:58.12,color:"#00c8ff"},
+  "Shev":{x:83,y:44},
+  "Shev System":{x:33.68,y:34.45,color:"#ff453a"},
+  "Sicon":{x:80,y:38},
+  "Sicon System":{x:42.23,y:30.32,color:"#ff453a"},
+  "Sirius":{x:40,y:51},
+  "Sirius System":{x:51.71,y:59.73,color:"#00c8ff"},
+  "Solar System":{x:68.02,y:42.5,color:"#ff6b35"},
+  "Soth L4":{x:89,y:74},
+  "Soth L4 System":{x:10.76,y:74.49,color:"#30d158"},
+  "Strides":{x:39,y:13},
+  "Strides System":{x:25.52,y:21.88,color:"#ffd60a"},
+  "Sunstrope":{x:82,y:73},
+  "Sunstrope System":{x:14.37,y:66.89,color:"#30d158"},
+  "System 5":{x:41.49,y:56.31,color:"#00c8ff"},
+  "Thars":{x:49,y:10},
+  "Thars System":{x:61.62,y:20.47,color:"#ffd60a"},
+  "The Dark Space":{x:55.73,y:66.42,color:"#ff453a"},
+  "The Endless Darkness":{x:86.85,y:48.05},
+  "The Solar Expanse":{x:20.28,y:13.19,color:"#ffd60a",shape:"star"},
+  "Titania":{x:44,y:60},
+  "Titania System":{x:49.98,y:53.91,color:"#00c8ff"},
+  "Torc Federation":{x:80.89,y:70.01,shape:"star"},
+  "Tronik Network":{x:26.31,y:53.48,color:"#f2f2f7",shape:"star"},
+  "Uether":{x:73,y:67},
+  "Uether System":{x:84.72,y:61.6,color:"#ff9f0a"},
+  "Valtis":{x:18,y:50},
+  "Valtis System":{x:10.78,y:31.42,color:"#64d2ff"},
+  "Vasophus":{x:64,y:73},
+  "Vasophus System":{x:81.94,y:65.68,color:"#30d158"},
+  "Yaevis":{x:43,y:11},
+  "Yaevis System":{x:18.92,y:19.22,color:"#ffd60a"},
+  "Yagmir":{x:61,y:35},
+  "Yagmir System":{x:31.84,y:73.71},
+  "Zegitor Trade Guild":{x:21.73,y:35.27,shape:"star"},
+  "Zelmolla":{x:58,y:79},
+  "Zelmolla System":{x:53.41,y:76.72,color:"#ff9f0a"},
+  "Zoana":{x:13,y:67},
+  "Zoana System":{x:58.14,y:39.88,color:"#ff6b35"},
+  "Zunide":{x:24,y:40},
+  "Zunide System":{x:8.31,y:48.24,color:"#ffd60a"}
 };
-// Apply positions to galaxy entries
+// Apply positions to galaxy entries and catalogue systems
 (g.galaxy||[]).forEach(function(e){if(GALAXY_MAP_POS[e.name])e.map_pos=GALAXY_MAP_POS[e.name];});
+(g.catalogue_systems||[]).forEach(function(e){if(GALAXY_MAP_POS[e.name])e.map_pos=GALAXY_MAP_POS[e.name];});
 
 // ─── Stargate Links ───────────────────────────────────────────────────────────
 // Pairs of system names connected by a star gate (tachyonic-speed travel superstructure).
@@ -6373,7 +6537,10 @@ function buildGalaxySVG(){
     +'</svg>';
 }
 
+// Global viewport state so export can read it
+var smapViewport={scale:1,ox:0,oy:0,CW:1323,CH:886};
 function smapEntryColor(e){
+  if(e.map_pos&&e.map_pos.color)return e.map_pos.color;
   switch(e.name){
     case 'Alliance Space':return '#00c8ff';
     case 'Haven Space':return '#ff453a';
@@ -6386,7 +6553,7 @@ function smapEntryColor(e){
     case 'Kraven Space':return '#ff2d55';
     case 'The Endless Darkness':return '#6e40c9';
     case "Nuzonia's Dream":return '#ffd60a';
-    default:return e.worlds_key?'#00c8ff':'#aeaeb2';
+    default:return e.worlds_key?'#00c8ff':(e.planets?'#aeaeb2':'#aeaeb2');
   }
 }
 function openSmapPopup(entry,clientX,clientY){
@@ -6394,6 +6561,7 @@ function openSmapPopup(entry,clientX,clientY){
   if(!popup)return;
   var col=smapEntryColor(entry);
   var isFaction=entry.entry_type==='faction';
+  var isSys=!!entry.planets; // catalogue_systems entry
   var h='<div class="smap-popup-name" style="color:'+col+'">'+esc(entry.name)+'</div>';
   h+='<button class="smap-popup-close" id="smap-pc">\u2715</button>';
   if(entry.tags&&entry.tags.length)h+='<div class="smap-popup-tags">'+entry.tags.map(function(t){return '<span class="tag tgr">'+esc(t)+'</span>';}).join('')+'</div>';
@@ -6402,13 +6570,19 @@ function openSmapPopup(entry,clientX,clientY){
     if(entry.territory)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Territory</span><span class="smap-popup-fv">'+esc(entry.territory)+'</span></div>';
     if(entry.government)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Gov\'t</span><span class="smap-popup-fv">'+esc(entry.government.length>90?entry.government.substring(0,90)+'\u2026':entry.government)+'</span></div>';
     if(entry.alignment)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Alignment</span><span class="smap-popup-fv">'+esc(entry.alignment)+'</span></div>';
+  } else if(isSys){
+    if(entry.region)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Region</span><span class="smap-popup-fv">'+esc(entry.region)+'</span></div>';
+    if(entry.faction)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Faction</span><span class="smap-popup-fv">'+esc(entry.faction)+'</span></div>';
+    if(entry.classification)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Class</span><span class="smap-popup-fv">'+esc(entry.classification)+'</span></div>';
+    if(entry.status)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Status</span><span class="smap-popup-fv">'+esc(entry.status)+'</span></div>';
+    if(entry.planets&&entry.planets.length)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Worlds</span><span class="smap-popup-fv">'+entry.planets.length+'</span></div>';
   } else {
     if(entry.region)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Region</span><span class="smap-popup-fv">'+esc(entry.region)+'</span></div>';
     if(entry.faction)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Faction</span><span class="smap-popup-fv">'+esc(entry.faction)+'</span></div>';
     if(entry.population)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Population</span><span class="smap-popup-fv">'+esc(entry.population)+'</span></div>';
     if(entry.notable_for)h+='<div class="smap-popup-field"><span class="smap-popup-fl">Notable</span><span class="smap-popup-fv">'+esc(entry.notable_for)+'</span></div>';
   }
-  if(entry.desc)h+='<div class="smap-popup-desc">'+esc(entry.desc)+'</div>';
+  if(entry.desc){var descTxt=entry.desc.length>200?entry.desc.substring(0,200)+'\u2026':entry.desc;h+='<div class="smap-popup-desc">'+esc(descTxt)+'</div>';}
   if(entry.worlds_key)h+='<button class="smap-popup-worlds" onclick="document.getElementById(\'smap-popup\').style.display=\'none\';openWorldPanel(\''+esc(entry.worlds_key)+'\')">\u2b21 VIEW INDIVIDUAL WORLDS</button>';
   popup.innerHTML=h;
   popup.style.display='block';
@@ -6431,14 +6605,27 @@ function smapOpenExport(){
   var bg=document.getElementById('smap-json-bg');
   var ta=document.getElementById('smap-json-ta');
   if(!bg||!ta)return;
-  // Build the current positions from g.galaxy entries that have map_pos
   var lines=[];
-  (g.galaxy||[]).forEach(function(e){
-    if(e.map_pos){
-      var k=JSON.stringify(e.name);
-      lines.push('  '+k+':{x:'+e.map_pos.x+',y:'+e.map_pos.y+'}');
-    }
-  });
+  // Viewport state (stored as fractions of canvas for portability)
+  var sv=smapViewport;
+  var ox_f=sv.CW>0?parseFloat((sv.ox/sv.CW).toFixed(4)):0;
+  var oy_f=sv.CH>0?parseFloat((sv.oy/sv.CH).toFixed(4)):0;
+  lines.push('  "_viewport":{scale:'+parseFloat(sv.scale.toFixed(3))+',ox_f:'+ox_f+',oy_f:'+oy_f+'}');
+  function serPos(e){
+    if(!e.map_pos)return;
+    var k=JSON.stringify(e.name);
+    var p=e.map_pos;
+    var obj='{x:'+p.x+',y:'+p.y;
+    if(p.color)obj+=',color:'+JSON.stringify(p.color);
+    if(p.shape)obj+=',shape:'+JSON.stringify(p.shape);
+    if(p.planet_img)obj+=',planet_img:'+p.planet_img;
+    if(p.planet_scale&&p.planet_scale!==1)obj+=',planet_scale:'+parseFloat(p.planet_scale.toFixed(2));
+    if(p.label_hidden)obj+=',label_hidden:true';
+    obj+='}';
+    lines.push('  '+k+':'+obj);
+  }
+  (g.galaxy||[]).forEach(serPos);
+  (g.catalogue_systems||[]).forEach(serPos);
   ta.value='const GALAXY_MAP_POS={\n'+lines.join(',\n')+'\n};';
   bg.style.display='flex';
   setTimeout(function(){ta.focus();ta.select();},50);
@@ -6465,12 +6652,21 @@ function initStarmap(){
   var cv=document.getElementById('smap-canvas');
   var img=document.getElementById('smap-img');
   if(!vp||!cv)return;
-  // Canvas logical size, read from the PNG's natural dimensions once loaded
-  var CW=1323,CH=886; // sensible defaults matching Star-Map-v3_HIGH_QUALITY.png
+  var CW=1323,CH=886;
   var scale=1,ox=0,oy=0,dragging=false,didDrag=false,startX=0,startY=0,sox=0,soy=0;
   var pinchDist=0;
   var pct=document.getElementById('smap-pct');
-  var entries=(g.galaxy||[]).filter(function(e){return e.map_pos;});
+  // Combined entries: galaxy + catalogue_systems
+  var entries=[];
+  (g.galaxy||[]).forEach(function(e){if(e.map_pos)entries.push(e);});
+  (g.catalogue_systems||[]).forEach(function(e){if(e.map_pos)entries.push(e);});
+
+  // Edit mode state
+  var editMode=false;
+  var dotDragging=false,dotDidDrag=false,dotEl=null,dotEntry=null;
+  var dotStartX=0,dotStartY=0,dotOrigX=0,dotOrigY=0;
+  // Global label visibility toggle
+  var labelsHidden=false;
 
   function setInnerSize(){
     var inner=document.getElementById('smap-inner');
@@ -6479,18 +6675,25 @@ function initStarmap(){
   function applyT(){
     cv.style.transform='translate('+ox+'px,'+oy+'px) scale('+scale+')';
     if(pct)pct.textContent=Math.round(scale*100)+'%';
+    smapViewport.scale=scale;smapViewport.ox=ox;smapViewport.oy=oy;smapViewport.CW=CW;smapViewport.CH=CH;
   }
   function fit(){
     if(img&&img.naturalWidth){CW=img.naturalWidth;CH=img.naturalHeight;setInnerSize();}
     var vw=vp.clientWidth,vh=vp.clientHeight;
-    // Leave a little breathing room so the galaxy doesn't fill edge-to-edge
+    // Check for saved viewport
+    if(GALAXY_MAP_POS._viewport){
+      var sv=GALAXY_MAP_POS._viewport;
+      scale=sv.scale||1;
+      ox=(sv.ox_f||0)*CW;
+      oy=(sv.oy_f||0)*CH;
+      applyT();return;
+    }
     var s=Math.min(vw/CW,vh/CH)*0.92;
     scale=s;ox=(vw-CW*s)/2;oy=(vh-CH*s)/2;applyT();
   }
   function clamp(){
     var vw=vp.clientWidth,vh=vp.clientHeight;
     var iw=CW*scale,ih=CH*scale;
-    // Allow panning up to 20% outside the canvas edge for comfort
     var pad=Math.max(80,Math.min(vw,vh)*0.1);
     if(iw<=vw){ox=(vw-iw)/2;}else{ox=Math.min(pad,Math.max(ox,vw-iw-pad));}
     if(ih<=vh){oy=(vh-ih)/2;}else{oy=Math.min(pad,Math.max(oy,vh-ih-pad));}
@@ -6501,6 +6704,146 @@ function initStarmap(){
     ox=cx-(cx-ox)*(ns/scale);oy=cy-(cy-oy)*(ns/scale);scale=ns;clamp();applyT();
   }
 
+  // ── Edit mode helpers ──
+  function setEditMode(on){
+    editMode=on;
+    var btn=document.getElementById('smap-edit-btn');
+    if(btn){btn.textContent=on?'✓ Edit':'Edit';btn.style.color=on?'#ffd60a':'#8e8e93';btn.style.borderColor=on?'rgba(255,214,10,.4)':'#3a3a3c';}
+    var bar=document.getElementById('smap-edit-bar');
+    if(bar)bar.style.display=on?'flex':'none';
+    // Toggle edit handles on all dots
+    document.querySelectorAll('[data-smap-idx]').forEach(function(d){
+      if(on)d.classList.add('smap-edit');else d.classList.remove('smap-edit');
+    });
+    vp.style.cursor=on?'default':'grab';
+    closeEditPanel();
+  }
+  function toggleGlobalLabels(){
+    labelsHidden=!labelsHidden;
+    var btn=document.getElementById('smap-lbl-btn');
+    document.querySelectorAll('[data-smap-idx]').forEach(function(d){
+      var idx=parseInt(d.dataset.smapIdx);
+      var entry=entries[idx];
+      // In global toggle: ignore per-pin label_hidden and just show/hide all
+      if(labelsHidden){d.classList.add('hlbl');}
+      else{
+        // restore per-pin setting
+        if(entry&&entry.map_pos&&entry.map_pos.label_hidden)d.classList.add('hlbl');
+        else d.classList.remove('hlbl');
+      }
+    });
+    if(btn){btn.textContent=labelsHidden?'Show Labels':'Hide Labels';}
+  }
+  function closeEditPanel(){
+    var p=document.getElementById('smap-epin-panel');
+    if(p)p.remove();
+  }
+  function openEditPanel(entry,dotElem,clientX,clientY){
+    closeEditPanel();
+    var p=document.createElement('div');
+    p.id='smap-epin-panel';
+    p.className='smap-epin';
+    var col=smapEntryColor(entry);
+    var pos=entry.map_pos;
+    var curPlanet=pos.planet_img||0;
+    var curScale=pos.planet_scale||1;
+    var curHidden=!!pos.label_hidden;
+    var h='<div class="smap-epin-name" style="color:'+col+'">'+esc(entry.name)+'</div>';
+    h+='<button class="smap-epin-close" id="smap-epin-close">\u2715</button>';
+    // Label toggle
+    h+='<div class="smap-epin-row"><span class="smap-epin-lbl">Label</span>';
+    h+='<button id="smap-epin-lbl-btn" style="background:'+(curHidden?'rgba(255,99,60,.15)':'rgba(48,209,88,.15)')+';border:1px solid '+(curHidden?'rgba(255,99,60,.4)':'rgba(48,209,88,.4)')+';color:'+(curHidden?'#ff453a':'#30d158')+';font-size:10px;cursor:pointer;padding:3px 10px;border-radius:4px;font-family:\'Share Tech Mono\',monospace;">'+(curHidden?'Hidden':'Visible')+'</button></div>';
+    // Planet picker
+    h+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#8e8e93;margin-bottom:6px;">Planet Image</div>';
+    h+='<div class="smap-epin-planet-grid">';
+    h+='<button class="smap-epin-planet-btn'+(curPlanet===0?' active':'')+'" data-epin-planet="0"><span class="smap-epin-planet-none">NONE</span></button>';
+    for(var i=1;i<=20;i++){
+      h+='<button class="smap-epin-planet-btn'+(curPlanet===i?' active':'')+'" data-epin-planet="'+i+'"><img src="planets'+i+'.png" alt="'+i+'" onerror="this.parentElement.querySelector(\'span\')||this.insertAdjacentHTML(\'afterend\',\'<span style=\\\'font-size:9px;color:#636366;\\\'>'+i+'</span>\');this.style.display=\'none\'">'+'</button>';
+    }
+    h+='</div>';
+    // Scale slider (only shown if planet is set)
+    h+='<div class="smap-epin-row" id="smap-epin-scale-row" style="display:'+(curPlanet?'flex':'none')+'">';
+    h+='<span class="smap-epin-lbl">Scale</span>';
+    h+='<input id="smap-epin-scale" class="smap-epin-range" type="range" min="0.5" max="4" step="0.1" value="'+curScale+'">';
+    h+='<span id="smap-epin-scale-val" style="font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#aeaeb2;min-width:28px;">'+curScale.toFixed(1)+'×</span>';
+    h+='</div>';
+    p.innerHTML=h;
+    document.body.appendChild(p);
+    // Position panel
+    var pw=260,ph=p.offsetHeight||300;
+    var vw=window.innerWidth,vh=window.innerHeight;
+    var px=clientX+14,py=clientY-100;
+    if(px+pw>vw-10)px=clientX-pw-14;
+    if(py+ph>vh-10)py=vh-ph-10;
+    if(py<10)py=10;if(px<10)px=10;
+    p.style.left=px+'px';p.style.top=py+'px';
+    // Events
+    document.getElementById('smap-epin-close').onclick=closeEditPanel;
+    document.getElementById('smap-epin-lbl-btn').onclick=function(){
+      curHidden=!curHidden;
+      pos.label_hidden=curHidden||undefined;
+      if(!curHidden)delete pos.label_hidden;
+      this.textContent=curHidden?'Hidden':'Visible';
+      this.style.background=curHidden?'rgba(255,99,60,.15)':'rgba(48,209,88,.15)';
+      this.style.borderColor=curHidden?'rgba(255,99,60,.4)':'rgba(48,209,88,.4)';
+      this.style.color=curHidden?'#ff453a':'#30d158';
+      if(curHidden)dotElem.classList.add('hlbl');else dotElem.classList.remove('hlbl');
+    };
+    p.querySelectorAll('[data-epin-planet]').forEach(function(btn){
+      btn.onclick=function(){
+        curPlanet=parseInt(this.dataset.epinPlanet);
+        pos.planet_img=curPlanet||undefined;
+        if(!curPlanet)delete pos.planet_img;
+        p.querySelectorAll('[data-epin-planet]').forEach(function(b){b.classList.remove('active');});
+        this.classList.add('active');
+        // Update scale row visibility
+        var sr=document.getElementById('smap-epin-scale-row');
+        if(sr)sr.style.display=curPlanet?'flex':'none';
+        // Update dot rendering
+        refreshDotEl(dotElem,entry);
+      };
+    });
+    var scInput=document.getElementById('smap-epin-scale');
+    var scVal=document.getElementById('smap-epin-scale-val');
+    if(scInput){
+      scInput.oninput=function(){
+        curScale=parseFloat(this.value);
+        pos.planet_scale=curScale;
+        if(scVal)scVal.textContent=curScale.toFixed(1)+'×';
+        refreshDotEl(dotElem,entry);
+      };
+    }
+  }
+  // Re-render a single dot element in place (after edit)
+  function refreshDotEl(dotElem,entry){
+    var pos=entry.map_pos;
+    var col=smapEntryColor(entry);
+    var isFaction=entry.entry_type==='faction'||(pos.shape==='star');
+    var planet=pos.planet_img||0;
+    var ps=(pos.planet_scale||1)*32;
+    var lblTop=planet?(ps/2+5):14;
+    dotElem.style.setProperty('--lbl-top',lblTop+'px');
+    // Replace inner content
+    var inner=dotElem.querySelector('.smap-dot-inner');
+    var pimg=dotElem.querySelector('.smap-dot-planet');
+    var lbl=dotElem.querySelector('.smap-dot-lbl');
+    if(planet){
+      if(inner){inner.style.display='none';}
+      if(pimg){pimg.src='planets'+planet+'.png';pimg.style.width=ps+'px';pimg.style.height=ps+'px';pimg.style.display='';}
+      else{
+        var ni=document.createElement('img');
+        ni.className='smap-dot-planet';ni.src='planets'+planet+'.png';
+        ni.style.width=ps+'px';ni.style.height=ps+'px';
+        if(inner)dotElem.insertBefore(ni,inner);else dotElem.appendChild(ni);
+      }
+    } else {
+      if(pimg)pimg.style.display='none';
+      if(inner)inner.style.display='';
+    }
+    if(lbl){lbl.style.top=lblTop+'px';}
+    if(pos.label_hidden)dotElem.classList.add('hlbl');else dotElem.classList.remove('hlbl');
+  }
+
   // ── Input events ──
   vp.addEventListener('wheel',function(e){
     e.preventDefault();
@@ -6509,20 +6852,49 @@ function initStarmap(){
 
   vp.addEventListener('mousedown',function(e){
     if(e.button!==0)return;
+    if(editMode){
+      var dot=e.target.closest('[data-smap-idx]');
+      if(dot){
+        var idx=parseInt(dot.dataset.smapIdx);
+        var ent=entries[idx];
+        if(ent&&ent.map_pos){
+          dotDragging=true;dotDidDrag=false;dotEl=dot;dotEntry=ent;
+          dotStartX=e.clientX;dotStartY=e.clientY;
+          dotOrigX=ent.map_pos.x;dotOrigY=ent.map_pos.y;
+          vp.style.cursor='grabbing';
+          e.preventDefault();e.stopPropagation();return;
+        }
+      }
+    }
     dragging=true;didDrag=false;
     startX=e.clientX;startY=e.clientY;sox=ox;soy=oy;
     vp.style.cursor='grabbing';
     e.preventDefault();
   });
   document.addEventListener('mousemove',function(e){
+    if(dotDragging&&dotEntry&&dotEntry.map_pos){
+      var dx=e.clientX-dotStartX,dy=e.clientY-dotStartY;
+      if(Math.abs(dx)>3||Math.abs(dy)>3)dotDidDrag=true;
+      var newX=dotOrigX+(dx/(CW*scale))*100;
+      var newY=dotOrigY+(dy/(CH*scale))*100;
+      newX=Math.max(0,Math.min(100,parseFloat(newX.toFixed(2))));
+      newY=Math.max(0,Math.min(100,parseFloat(newY.toFixed(2))));
+      dotEntry.map_pos.x=newX;dotEntry.map_pos.y=newY;
+      if(dotEl){dotEl.style.left=newX+'%';dotEl.style.top=newY+'%';}
+      return;
+    }
     if(!dragging)return;
     var dx=e.clientX-startX,dy=e.clientY-startY;
     if(Math.sqrt(dx*dx+dy*dy)>4)didDrag=true;
     ox=sox+dx;oy=soy+dy;clamp();applyT();
   });
   document.addEventListener('mouseup',function(){
+    if(dotDragging){
+      dotDragging=false;vp.style.cursor=editMode?'default':'grab';
+      dotEl=null;dotEntry=null;return;
+    }
     if(!dragging)return;
-    dragging=false;vp.style.cursor='grab';
+    dragging=false;vp.style.cursor=editMode?'default':'grab';
   });
 
   // Touch pan
@@ -6550,11 +6922,12 @@ function initStarmap(){
     }
     e.preventDefault();
   },{passive:false});
-  vp.addEventListener('touchend',function(){dragging=false;});
+  vp.addEventListener('touchend',function(){dragging=false;dotDragging=false;});
 
-  // Click delegation, buttons + dots
+  // Click delegation
   vp.addEventListener('click',function(e){
     if(didDrag){didDrag=false;return;}
+    if(dotDidDrag){dotDidDrag=false;return;}
     var sm=e.target.closest('[data-sm]');
     if(sm){
       var a=sm.dataset.sm;
@@ -6562,12 +6935,20 @@ function initStarmap(){
       else if(a==='zout')zoom(1/1.3);
       else if(a==='reset')fit();
       else if(a==='pexp'){smapOpenExport();return;}
+      else if(a==='edit'){setEditMode(!editMode);return;}
+      else if(a==='lbl'){toggleGlobalLabels();return;}
       return;
     }
+    // Close edit panel if clicking outside
+    if(document.getElementById('smap-epin-panel')&&!e.target.closest('#smap-epin-panel')){closeEditPanel();}
     var dot=e.target.closest('[data-smap-idx]');
     if(dot){
       var idx=parseInt(dot.dataset.smapIdx);
       var entry=entries[idx];
+      if(editMode){
+        if(entry)openEditPanel(entry,dot,e.clientX,e.clientY);
+        return;
+      }
       if(entry)openSmapPopup(entry,e.clientX,e.clientY);
       return;
     }
@@ -8659,47 +9040,62 @@ function render(){
 
   else if(cs==='starmap'){
     cnt=1;
-    // Build inline hotspot dots, placed inside smap-canvas so they transform with the map
-    var smEntries=(g.galaxy||[]).filter(function(e){return e.map_pos;});
+    // Combined entries: galaxy + catalogue_systems
+    var smEntries=[];
+    (g.galaxy||[]).forEach(function(e){if(e.map_pos)smEntries.push(e);});
+    (g.catalogue_systems||[]).forEach(function(e){if(e.map_pos)smEntries.push(e);});
     var dotsH='';
     smEntries.forEach(function(e,i){
       var col=smapEntryColor(e);
-      var isFaction=e.entry_type==='faction';
-      // Map percentage (0-100) → CSS % relative to canvas (which matches the PNG image dimensions)
-      dotsH+='<div class="smap-dot'+(isFaction?' faction':'')+'" data-smap-idx="'+i+'" style="left:'+e.map_pos.x+'%;top:'+e.map_pos.y+'%;">';
-      dotsH+='<div class="smap-dot-inner" style="background:'+col+';border-color:'+col+';box-shadow:0 0 10px '+col+',0 0 20px '+col+'44;"></div>';
+      var pos=e.map_pos;
+      var isFaction=e.entry_type==='faction'||(pos.shape==='star');
+      var planet=pos.planet_img||0;
+      var ps=(pos.planet_scale||1)*32;
+      var lblTop=planet?(ps/2+5):14;
+      var cls='smap-dot'+(isFaction&&!planet?' faction':'')+(pos.label_hidden?' hlbl':'');
+      dotsH+='<div class="'+cls+'" data-smap-idx="'+i+'" style="left:'+pos.x+'%;top:'+pos.y+'%;--lbl-top:'+lblTop+'px;">';
+      if(planet){
+        dotsH+='<img class="smap-dot-planet" src="planets'+planet+'.png" style="width:'+ps+'px;height:'+ps+'px;" alt="'+planet+'" draggable="false">';
+      } else {
+        dotsH+='<div class="smap-dot-inner" style="background:'+col+';border-color:'+col+';box-shadow:0 0 8px '+col+',0 0 18px '+col+'44;"></div>';
+      }
       dotsH+='<div class="smap-dot-lbl" style="color:'+col+';">'+esc(e.name)+'</div>';
       dotsH+='</div>';
     });
-    // Build stargate SVG overlay lines
+    // Stargate SVG lines — white, tight dash
     var sgH='<svg id="smap-sg-svg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible;" viewBox="0 0 100 100" preserveAspectRatio="none">';
     var posMap={};
     smEntries.forEach(function(e){if(e.map_pos)posMap[e.name]=e.map_pos;});
     STARGATE_LINKS.forEach(function(pair){
       var a=posMap[pair[0]],b=posMap[pair[1]];
       if(!a||!b)return;
-      sgH+='<line x1="'+a.x+'" y1="'+a.y+'" x2="'+b.x+'" y2="'+b.y+'" stroke="#00c8ff" stroke-width="0.35" stroke-dasharray="1.4,1.1" opacity="0.55" stroke-linecap="round"/>';
+      sgH+='<line x1="'+a.x+'" y1="'+a.y+'" x2="'+b.x+'" y2="'+b.y+'" stroke="#ffffff" stroke-width="0.25" stroke-dasharray="0.4,0.4" opacity="0.6" stroke-linecap="butt"/>';
     });
     sgH+='</svg>';
     html='<div id="smap-viewport" style="position:relative;width:100%;height:calc(100vh - 120px);overflow:hidden;background:#06060d;border-radius:6px;border:1px solid #2c2c2e;user-select:none;cursor:grab;">';
-    // smap-canvas: one container that gets the CSS transform, PNG image + all dots live here
-    // The inner wrapper is position:relative so dot % coords are relative to the image dimensions
     html+='<div id="smap-canvas" style="position:absolute;top:0;left:0;transform-origin:0 0;">'
       +'<div id="smap-inner" style="position:relative;line-height:0;">'
       +'<img id="smap-img" src="Star-Map-v3_HIGH_QUALITY.png" alt="Star Map" style="display:block;pointer-events:none;max-width:none;" draggable="false">'
-      +sgH
-      +dotsH
-      +'</div></div>';
-    // Controls overlay (outside canvas so they don't move/scale)
+      +sgH+dotsH+'</div></div>';
+    // Main controls (top right)
     html+='<div style="position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:6px;background:#161618cc;border:1px solid #2c2c2e;border-radius:6px;padding:6px 10px;z-index:20;backdrop-filter:blur(8px);">';
     html+='<button data-sm="zin" style="background:none;border:none;color:#f2f2f7;font-size:16px;cursor:pointer;padding:2px 6px;border-radius:4px;" title="Zoom in">+</button>';
     html+='<button data-sm="zout" style="background:none;border:none;color:#f2f2f7;font-size:16px;cursor:pointer;padding:2px 6px;border-radius:4px;" title="Zoom out">\u2212</button>';
     html+='<button data-sm="reset" style="background:none;border:none;color:#8e8e93;font-size:11px;cursor:pointer;padding:2px 8px;border-radius:4px;font-family:\'Share Tech Mono\',monospace;" title="Reset view">Reset</button>';
     html+='<span id="smap-pct" style="color:#8e8e93;font-size:11px;font-family:\'Share Tech Mono\',monospace;min-width:42px;text-align:right;">–</span>';
     html+='<span style="width:1px;height:16px;background:#3a3a3c;display:inline-block;margin:0 2px;"></span>';
+    html+='<button id="smap-lbl-btn" data-sm="lbl" style="background:none;border:1px solid #3a3a3c;color:#8e8e93;font-size:10px;cursor:pointer;padding:2px 8px;border-radius:4px;font-family:\'Share Tech Mono\',monospace;letter-spacing:.04em;">Hide Labels</button>';
+    html+='<span style="width:1px;height:16px;background:#3a3a3c;display:inline-block;margin:0 2px;"></span>';
+    html+='<button id="smap-edit-btn" data-sm="edit" style="background:none;border:1px solid #3a3a3c;color:#8e8e93;font-size:10px;cursor:pointer;padding:2px 8px;border-radius:4px;font-family:\'Share Tech Mono\',monospace;letter-spacing:.04em;" title="Toggle edit mode">Edit</button>';
+    html+='<span style="width:1px;height:16px;background:#3a3a3c;display:inline-block;margin:0 2px;"></span>';
     html+='<button data-sm="pexp" style="background:none;border:1px solid #3a3a3c;color:#8e8e93;font-size:10px;cursor:pointer;padding:2px 8px;border-radius:4px;font-family:\'Share Tech Mono\',monospace;letter-spacing:.04em;" title="Export map positions as JSON">Export JSON</button>';
     html+='</div>';
-    html+='<div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);color:#8e8e93;font-size:10px;font-family:\'Share Tech Mono\',monospace;background:#161618cc;border:1px solid #2c2c2e;border-radius:4px;padding:4px 12px;pointer-events:none;z-index:20;white-space:nowrap;display:flex;align-items:center;gap:14px;">Scroll to zoom \u00b7 Drag to pan \u00b7 Click to explore<span style="display:flex;align-items:center;gap:5px;"><svg width="22" height="8" viewBox="0 0 22 8"><line x1="1" y1="4" x2="21" y2="4" stroke="#00c8ff" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/></svg><span style="color:#00c8ff;opacity:.8;">Star gate link</span></span></div>';
+    // Edit mode bar (top left, hidden by default)
+    html+='<div id="smap-edit-bar" class="smap-edit-bar" style="display:none;">';
+    html+='<span style="font-family:\'Orbitron\',sans-serif;font-size:9px;color:#ffd60a;letter-spacing:.8px;text-transform:uppercase;">Edit Mode</span>';
+    html+='<span style="color:#636366;font-family:\'Share Tech Mono\',monospace;font-size:10px;">· Drag pins · Click to edit label/planet</span>';
+    html+='</div>';
+    html+='<div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);color:#8e8e93;font-size:10px;font-family:\'Share Tech Mono\',monospace;background:#161618cc;border:1px solid #2c2c2e;border-radius:4px;padding:4px 12px;pointer-events:none;z-index:20;white-space:nowrap;display:flex;align-items:center;gap:14px;">Scroll to zoom \u00b7 Drag to pan \u00b7 Click to explore<span style="display:flex;align-items:center;gap:5px;"><svg width="22" height="8" viewBox="0 0 22 8"><line x1="1" y1="4" x2="21" y2="4" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="2,2" opacity="0.7"/></svg><span style="color:#f2f2f7;opacity:.7;">Star gate link</span></span></div>';
     html+='</div>';
   }
 
