@@ -9171,17 +9171,43 @@ function render(){
       var t=(p.type||'').toLowerCase();
       var a=(p.atmosphere||'').toLowerCase();
       var s=(p.status||'');
-      if(s==='abandoned'&&(t.indexOf('kraven')!==-1||t.indexOf('consumed')!==-1))return'☠️';
+      // name-based hash for color variation (deterministic per planet)
+      var nh=function(n,m){return n.split('').reduce(function(a,c){return(a+c.charCodeAt(0))&255;},0)%m;};
+      var nm=p.name||'';
+      if(s==='abandoned'&&(t.indexOf('kraven')!==-1||t.indexOf('consumed')!==-1)){
+        // Infected/consumed planet — 3 color variations
+        var ih=nh(nm,3);
+        var ic=[['#0c1c0a','#ff7a00','#50ff20','#1a5010'],['#1a0a1c','#e040ff','#c0ff40','#3a1050'],['#0a1820','#20e0ff','#ffee00','#0a3048']][ih];
+        return'<svg width="15" height="15" viewBox="0 0 14 14" style="display:inline-block;vertical-align:-3px;"><circle cx="7" cy="7" r="5.5" fill="'+ic[0]+'"/><path d="M7,1.5 L7,4.5 M7,4.5 L4,7 M7,4.5 L10,7 M4,7 L3.5,10 M4,7 L5.5,9.5 M10,7 L10.5,10 M10,7 L8.5,9.5 M7,4.5 L7,3 L9.5,2" fill="none" stroke="'+ic[1]+'" stroke-width="0.7" stroke-linecap="round"/><circle cx="5" cy="8.5" r="1.3" fill="'+ic[3]+'" stroke="'+ic[2]+'" stroke-width="0.5"/><circle cx="7" cy="7" r="5.5" fill="none" stroke="'+ic[1]+'" stroke-width="0.5" opacity="0.5"/></svg>';
+      }
       if(t.indexOf('destroyed')!==-1||t.indexOf('debris field')!==-1||t.indexOf('ruins')!==-1)return'💀';
       if(t.indexOf('asteroid belt')!==-1||t.indexOf('asteroid field')!==-1)return'☄️';
       if(t.indexOf('incomplete')!==-1||t.indexOf('construction frame')!==-1)return'🔧';
-      if(t.indexOf('black hole')!==-1)return'<svg width="15" height="15" viewBox="0 0 14 14" style="display:inline-block;vertical-align:-3px;"><path d="M 0.5,7 A 6.5,2.3 0,0,1 13.5,7" fill="none" stroke="rgba(255,120,0,0.45)" stroke-width="2.2"/><circle cx="7" cy="7" r="3.5" fill="#040608"/><circle cx="7" cy="7" r="3.5" fill="none" stroke="rgba(255,150,30,0.6)" stroke-width="1.2"/><path d="M 0.5,7 A 6.5,2.3 0,0,0 13.5,7" fill="none" stroke="rgba(255,175,55,0.92)" stroke-width="2.2"/></svg>';
-      if(t.indexOf('dyson')!==-1)return'<svg width="15" height="15" viewBox="0 0 14 14" style="display:inline-block;vertical-align:-3px;"><circle cx="7" cy="7" r="6" fill="#1a1205" stroke="#c8860a" stroke-width="1.2"/><circle cx="7" cy="7" r="2.8" fill="#3a2808" stroke="rgba(255,180,40,0.5)" stroke-width="0.6"/><ellipse cx="7" cy="7" rx="6" ry="2.5" fill="none" stroke="#c8860a" stroke-width="0.65"/><ellipse cx="7" cy="7" rx="6" ry="4.6" fill="none" stroke="#c8860a" stroke-width="0.45"/><line x1="7" y1="1" x2="7" y2="13" stroke="#c8860a" stroke-width="0.65"/></svg>';
+      if(t.indexOf('black hole')!==-1){
+        // Black hole — dark event horizon + glowing accretion disc
+        return'<svg width="15" height="15" viewBox="0 0 14 14" style="display:inline-block;vertical-align:-3px;"><ellipse cx="7" cy="7" rx="6" ry="2.4" fill="none" stroke="rgba(255,90,0,0.22)" stroke-width="3.5"/><circle cx="7" cy="7" r="3" fill="#020408"/><circle cx="7" cy="7" r="3.3" fill="none" stroke="rgba(255,130,0,0.35)" stroke-width="1"/><path d="M 1,7 A 6,2.4 0,0,0 13,7" fill="none" stroke="rgba(255,145,20,0.95)" stroke-width="2.5"/><path d="M 3.5,6.8 A 3.5,1.4 0,0,0 10.5,7.2" fill="none" stroke="rgba(255,225,160,0.65)" stroke-width="0.8"/></svg>';
+      }
+      if(t.indexOf('dyson')!==-1||t.indexOf('artificial planet')!==-1||t.indexOf('artificial world')!==-1){
+        // Artificial/tech planet — metallic sphere with panel grid and cyan lights
+        return'<svg width="15" height="15" viewBox="0 0 14 14" style="display:inline-block;vertical-align:-3px;"><circle cx="7" cy="7" r="5.5" fill="#0c0e12"/><ellipse cx="7" cy="7" rx="5.5" ry="2" fill="none" stroke="#1c2e3a" stroke-width="0.7"/><ellipse cx="7" cy="7" rx="5.5" ry="4" fill="none" stroke="#1c2e3a" stroke-width="0.5"/><ellipse cx="7" cy="7" rx="2.2" ry="5.5" fill="none" stroke="#1c2e3a" stroke-width="0.7"/><ellipse cx="7" cy="7" rx="4.4" ry="5.5" fill="none" stroke="#1c2e3a" stroke-width="0.5"/><circle cx="7" cy="1.6" r="0.55" fill="#00d0ff"/><circle cx="10.9" cy="3.8" r="0.45" fill="#0096c0"/><circle cx="11.5" cy="7" r="0.45" fill="#0096c0"/><circle cx="3.4" cy="10.5" r="0.45" fill="#0096c0"/><circle cx="7" cy="12.4" r="0.45" fill="#0096c0"/><circle cx="7" cy="7" r="5.5" fill="none" stroke="#203848" stroke-width="0.8"/></svg>';
+      }
       if(t.indexOf('ice giant')!==-1||t.indexOf('ice world')!==-1||t.indexOf('ice planet')!==-1)return'🧊';
-      if(t.indexOf('ringed')!==-1)return'<svg width="15" height="15" viewBox="0 0 14 14" style="display:inline-block;vertical-align:-3px;"><path d="M 0.5,7 A 6.5,2.2 0,0,1 13.5,7" fill="none" stroke="rgba(160,120,70,0.48)" stroke-width="2"/><circle cx="7" cy="7" r="3.8" fill="#c87c45"/><path d="M 3.7,5.6 Q 7,5.1 10.3,5.6" fill="none" stroke="rgba(255,205,145,0.38)" stroke-width="0.9"/><path d="M 3.4,8.2 Q 7,7.7 10.6,8.2" fill="none" stroke="rgba(150,90,35,0.35)" stroke-width="0.8"/><path d="M 0.5,7 A 6.5,2.2 0,0,0 13.5,7" fill="none" stroke="rgba(215,168,90,0.9)" stroke-width="2"/></svg>';
+      if(t.indexOf('ringed')!==-1){
+        // Ringed planet — 4 color variations: cyan/purple, amber/gold, jade/green, rose/magenta
+        var rh=nh(nm,4);
+        var rp=[
+          ['#0b3a55','rgba(130,60,255,0.42)','rgba(150,80,255,0.95)','rgba(0,180,255,0.28)'],
+          ['#4a1e04','rgba(200,100,20,0.42)','rgba(255,175,40,0.95)','rgba(255,140,40,0.28)'],
+          ['#0a2818','rgba(20,150,80,0.42)','rgba(40,210,130,0.95)','rgba(60,200,120,0.28)'],
+          ['#2a0a18','rgba(220,40,100,0.42)','rgba(255,60,150,0.95)','rgba(200,60,120,0.28)']
+        ][rh];
+        return'<svg width="15" height="15" viewBox="0 0 14 14" style="display:inline-block;vertical-align:-3px;"><path d="M 0.5,7 A 6.5,2.2 0,0,1 13.5,7" fill="none" stroke="'+rp[1]+'" stroke-width="2.2"/><path d="M 1.5,6.5 A 5.5,1.8 0,0,1 12.5,6.5" fill="none" stroke="'+rp[1]+'" stroke-width="1.1"/><circle cx="7" cy="7" r="3.8" fill="'+rp[0]+'"/><circle cx="8.2" cy="5.8" r="1.9" fill="'+rp[3]+'"/><path d="M 0.5,7 A 6.5,2.2 0,0,0 13.5,7" fill="none" stroke="'+rp[2]+'" stroke-width="2.2"/><path d="M 1.5,7.5 A 5.5,1.8 0,0,0 12.5,7.5" fill="none" stroke="'+rp[2]+'" stroke-width="1.1"/></svg>';
+      }
       if(t.indexOf('gas giant')!==-1)return'🪐';
-      if(t.indexOf('station')!==-1||t.indexOf('orbital')!==-1||t.indexOf('spaceport')!==-1)return'🛸';
-      if(t.indexOf('artificial planet')!==-1||t.indexOf('artificial world')!==-1)return'🔵';
+      if(t.indexOf('station')!==-1||t.indexOf('orbital')!==-1||t.indexOf('spaceport')!==-1){
+        // Space station — torus ring with concentric orbital rings and spokes
+        return'<svg width="15" height="15" viewBox="0 0 14 14" style="display:inline-block;vertical-align:-3px;"><ellipse cx="7" cy="7" rx="6.5" ry="2.8" fill="none" stroke="rgba(140,165,185,0.28)" stroke-width="0.5"/><ellipse cx="7" cy="7" rx="5.5" ry="2.2" fill="none" stroke="rgba(140,165,185,0.38)" stroke-width="0.4"/><ellipse cx="7" cy="7" rx="4.2" ry="1.6" fill="none" stroke="#b2cad8" stroke-width="2.2"/><ellipse cx="7" cy="7" rx="4.2" ry="1.6" fill="none" stroke="#cc2010" stroke-width="0.55" stroke-dasharray="0.8 1.5"/><circle cx="7" cy="7" r="0.9" fill="#a0b8c8"/><line x1="7" y1="5.4" x2="7" y2="7" stroke="#607888" stroke-width="0.4"/><line x1="7" y1="7" x2="7" y2="8.6" stroke="#607888" stroke-width="0.4"/><line x1="4.8" y1="7.5" x2="7" y2="7" stroke="#607888" stroke-width="0.4"/><line x1="9.2" y1="6.5" x2="7" y2="7" stroke="#607888" stroke-width="0.4"/></svg>';
+      }
       if(t.indexOf('ocean world')!==-1)return'🌊';
       if(t.indexOf('floating')!==-1||t.indexOf('space ruins')!==-1)return'✨';
       if(a.indexOf('breathable')!==-1)return'🌍';
