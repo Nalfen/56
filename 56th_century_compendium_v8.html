@@ -2112,6 +2112,15 @@ var PLANET_IMGS=(function(){
     ctx.fillStyle=rim;ctx.fillRect(0,0,64,64);
     imgs.push(cv.toDataURL());
   });
+  // Special type 21: Ringed planet
+  var rsvg='<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><path d="M 4,32 A 28,9.5 0,0,1 60,32" fill="none" stroke="rgba(160,120,70,0.48)" stroke-width="8"/><circle cx="32" cy="32" r="16" fill="#c87c45"/><path d="M 18,26 Q 32,23 46,26" fill="none" stroke="rgba(255,205,145,0.35)" stroke-width="3.5"/><path d="M 16,36 Q 32,33 48,36" fill="none" stroke="rgba(150,90,35,0.3)" stroke-width="3"/><path d="M 36,17 A 16,16 0,1,1 36,47" fill="rgba(0,0,0,0.35)"/><circle cx="26" cy="26" r="6" fill="rgba(255,255,255,0.12)"/><path d="M 4,32 A 28,9.5 0,0,0 60,32" fill="none" stroke="rgba(215,168,90,0.85)" stroke-width="8"/></svg>';
+  imgs.push('data:image/svg+xml,'+encodeURIComponent(rsvg));
+  // Special type 22: Black hole
+  var bhsvg='<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="31" fill="rgba(20,8,0,0.8)"/><path d="M 2,32 A 30,10 0,0,1 62,32" fill="none" stroke="rgba(255,120,0,0.45)" stroke-width="9"/><circle cx="32" cy="32" r="15" fill="#040608"/><circle cx="32" cy="32" r="15" fill="none" stroke="rgba(255,150,30,0.6)" stroke-width="5"/><path d="M 2,32 A 30,10 0,0,0 62,32" fill="none" stroke="rgba(255,175,55,0.92)" stroke-width="9"/><circle cx="32" cy="32" r="19" fill="none" stroke="rgba(255,200,100,0.25)" stroke-width="2"/></svg>';
+  imgs.push('data:image/svg+xml,'+encodeURIComponent(bhsvg));
+  // Special type 23: Dyson sphere
+  var dssvg='<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" fill="#1a1205" stroke="#c8860a" stroke-width="3.5"/><circle cx="32" cy="32" r="12" fill="#3a2808" stroke="rgba(255,180,40,0.5)" stroke-width="2"/><ellipse cx="32" cy="32" rx="28" ry="10" fill="none" stroke="#c8860a" stroke-width="2.5"/><ellipse cx="32" cy="32" rx="28" ry="19" fill="none" stroke="#c8860a" stroke-width="1.5"/><line x1="32" y1="4" x2="32" y2="60" stroke="#c8860a" stroke-width="2.5"/></svg>';
+  imgs.push('data:image/svg+xml,'+encodeURIComponent(dssvg));
   return imgs;
 })();
 
@@ -2812,6 +2821,7 @@ var smapPinPos=null;    // {name:{x,y,zoom}} — loaded lazily by smapPosLoad()
 var smapGatesData=null; // [[a,b],...] — loaded lazily by smapGatesLoad()
 var smapViewState=null; // {scale,ox,oy} — preserved across re-renders
 var smapLabelsHidden=false;
+var smapActivePopupEntry=null; // entry currently shown in smap-popup
 
 function smapPosLoad(){
   if(smapPinPos)return smapPinPos;
@@ -6890,9 +6900,10 @@ function smapEntryColor(e){
   }
   return e.worlds_key?'#00c8ff':'#aeaeb2';
 }
-function openSmapPopup(entry,clientX,clientY){
+function openSmapPopup(entry,clientX,clientY,preservePos){
   var popup=document.getElementById('smap-popup');
   if(!popup)return;
+  smapActivePopupEntry=entry;
   var col=smapEntryColor(entry);
   var isFaction=entry.entry_type==='faction';
   var h='<div class="smap-popup-name" style="color:'+col+'">'+esc(entry.name)+'</div>';
@@ -6949,13 +6960,19 @@ function openSmapPopup(entry,clientX,clientY){
       h+='<div onclick="smapSetPinColor('+safePN+',\''+c.val+'\')" title="'+(c.label||c.val)+'" style="width:14px;height:14px;border-radius:50%;cursor:pointer;flex-shrink:0;'+c.style+active+'"></div>';
     });
     h+='</div>';
-    h+='<div style="display:flex;align-items:center;gap:4px;margin-bottom:6px;">';
-    h+='<span style="font-size:9px;color:#636366;font-family:\'Share Tech Mono\',monospace;min-width:38px;">SHAPE</span>';
-    pinShapes.forEach(function(s){
-      var active=s.val===curShape?'background:#3a3a3c;color:#f2f2f7;':'background:none;color:#636366;';
-      h+='<button onclick="smapSetPinShape('+safePN+',\''+s.val+'\')" style="border:1px solid #3c3c3e;'+active+'border-radius:3px;padding:2px 7px;font-size:13px;cursor:pointer;line-height:1;">'+s.label+'</button>';
-    });
-    h+='</div>';
+    // Planet image picker (read curPlanet before shape so we can conditionally show shape)
+    var curPlanet=pinData.planet_img||0;
+    var curScale=pinData.planet_scale||1;
+    // Shape selector — only meaningful when no planet image is set
+    if(!curPlanet){
+      h+='<div style="display:flex;align-items:center;gap:4px;margin-bottom:6px;">';
+      h+='<span style="font-size:9px;color:#636366;font-family:\'Share Tech Mono\',monospace;min-width:38px;">SHAPE</span>';
+      pinShapes.forEach(function(s){
+        var active=s.val===curShape?'background:#3a3a3c;color:#f2f2f7;':'background:none;color:#636366;';
+        h+='<button onclick="smapSetPinShape('+safePN+',\''+s.val+'\')" style="border:1px solid #3c3c3e;'+active+'border-radius:3px;padding:2px 7px;font-size:13px;cursor:pointer;line-height:1;">'+s.label+'</button>';
+      });
+      h+='</div>';
+    }
     // Label toggle
     var lblHidden=!!(pinData.label_hidden);
     h+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">';
@@ -6963,35 +6980,53 @@ function openSmapPopup(entry,clientX,clientY){
     h+='<button onclick="smapSetPinLabel('+safePN+','+(lblHidden?'false':'true')+')" style="border:1px solid #3c3c3e;'+(lblHidden?'background:#3a3a3c;color:#ff453a;':'background:none;color:#30d158;')+'border-radius:3px;padding:2px 10px;font-size:9px;cursor:pointer;font-family:\'Share Tech Mono\',monospace;">'+(lblHidden?'Hidden':'Visible')+'</button>';
     h+='</div>';
     // Planet image picker
-    var curPlanet=pinData.planet_img||0;
-    var curScale=pinData.planet_scale||1;
     h+='<div style="margin-bottom:4px;"><span style="font-size:9px;color:#636366;font-family:\'Share Tech Mono\',monospace;">PLANET IMAGE</span></div>';
-    h+='<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px;">';
+    h+='<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:4px;">';
     h+='<div onclick="smapSetPinPlanet('+safePN+',0)" style="width:22px;height:22px;border-radius:3px;border:2px solid '+(curPlanet===0?'#fff':'#3c3c3e')+';background:#2c2c2e;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:9px;color:#636366;">✕</div>';
     for(var pi=1;pi<=20;pi++){
       h+='<img src="'+PLANET_IMGS[pi]+'" onclick="smapSetPinPlanet('+safePN+','+pi+')" style="width:22px;height:22px;border-radius:50%;border:2px solid '+(curPlanet===pi?'#fff':'#3c3c3e')+';cursor:pointer;object-fit:cover;" draggable="false">';
     }
     h+='</div>';
+    h+='<div style="display:flex;align-items:center;gap:4px;margin-bottom:6px;">';
+    h+='<span style="font-size:9px;color:#636366;font-family:\'Share Tech Mono\',monospace;min-width:38px;flex-shrink:0;">SPECIAL</span>';
+    [{idx:21,label:'Ringed'},{idx:22,label:'Black Hole'},{idx:23,label:'Dyson'}].forEach(function(sp){
+      h+='<div onclick="smapSetPinPlanet('+safePN+','+sp.idx+')" style="display:flex;flex-direction:column;align-items:center;gap:1px;cursor:pointer;">';
+      h+='<img src="'+PLANET_IMGS[sp.idx]+'" style="width:26px;height:26px;border-radius:3px;border:2px solid '+(curPlanet===sp.idx?'#fff':'#3c3c3e')+';object-fit:contain;background:#0a0a12;" draggable="false">';
+      h+='<span style="font-size:7px;color:#636366;font-family:\'Share Tech Mono\',monospace;white-space:nowrap;">'+sp.label+'</span>';
+      h+='</div>';
+    });
+    h+='</div>';
     if(curPlanet){
-      h+='<div style="display:flex;align-items:center;gap:6px;">';
+      h+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">';
       h+='<span style="font-size:9px;color:#636366;font-family:\'Share Tech Mono\',monospace;min-width:38px;">SCALE</span>';
       h+='<input type="range" min="0.5" max="4" step="0.25" value="'+curScale+'" oninput="smapSetPinScale('+safePN+',this.value)" style="flex:1;accent-color:var(--a);">';
-      h+='<span style="font-size:9px;color:#8e8e93;font-family:\'Share Tech Mono\',monospace;min-width:24px;text-align:right;">'+curScale+'×</span>';
+      h+='<span id="smap-scale-val" style="font-size:9px;color:#8e8e93;font-family:\'Share Tech Mono\',monospace;min-width:24px;text-align:right;">'+curScale+'×</span>';
       h+='</div>';
     }
     h+='</div>';
   }
+  var savedLeft=popup.style.left,savedTop=popup.style.top;
   popup.innerHTML=h;
   popup.style.display='block';
-  var pw=320,ph=popup.offsetHeight||320;
-  var vw=window.innerWidth,vh=window.innerHeight;
-  var px=clientX+18,py=clientY-80;
-  if(px+pw>vw-12)px=clientX-pw-18;
-  if(py+ph>vh-12)py=vh-ph-12;
-  if(py<10)py=10;if(px<10)px=10;
-  popup.style.left=px+'px';popup.style.top=py+'px';
+  if(preservePos){
+    popup.style.left=savedLeft;popup.style.top=savedTop;
+  } else {
+    var pw=320,ph=popup.offsetHeight||320;
+    var vw=window.innerWidth,vh=window.innerHeight;
+    var px=clientX+18,py=clientY-80;
+    if(px+pw>vw-12)px=clientX-pw-18;
+    if(py+ph>vh-12)py=vh-ph-12;
+    if(py<10)py=10;if(px<10)px=10;
+    popup.style.left=px+'px';popup.style.top=py+'px';
+  }
   var pc=document.getElementById('smap-pc');
-  if(pc)pc.onclick=function(ev){ev.stopPropagation();popup.style.display='none';};
+  if(pc)pc.onclick=function(ev){ev.stopPropagation();popup.style.display='none';smapActivePopupEntry=null;};
+}
+function smapRefreshPopup(){
+  if(!smapActivePopupEntry)return;
+  var popup=document.getElementById('smap-popup');
+  if(!popup||popup.style.display==='none')return;
+  openSmapPopup(smapActivePopupEntry,0,0,true);
 }
 function smapSetPinColor(name,color){
   var pos=smapPosLoad();
@@ -7028,6 +7063,7 @@ function smapSetPinLabel(name,hidden){
   smapPosSave();
   var d=document.querySelector('[data-pin="'+name+'"]');
   if(d){if(hidden)d.classList.add('hlbl');else d.classList.remove('hlbl');}
+  smapRefreshPopup();
 }
 function smapSetPinPlanet(name,planet_img){
   var pos=smapPosLoad();
@@ -7036,13 +7072,25 @@ function smapSetPinPlanet(name,planet_img){
   else pos[name].planet_img=planet_img;
   smapPosSave();
   render();
+  smapRefreshPopup();
 }
 function smapSetPinScale(name,scale){
   var pos=smapPosLoad();
   if(!pos[name])return;
-  pos[name].planet_scale=parseFloat(scale)||1;
+  var s=parseFloat(scale)||1;
+  pos[name].planet_scale=s;
   smapPosSave();
-  render();
+  // Update the planet image size on the map in-place (avoids full re-render during drag)
+  var ps=s*32;
+  var dot=document.querySelector('[data-pin="'+name+'"]');
+  if(dot){
+    var pimg=dot.querySelector('.smap-dot-planet');
+    if(pimg){pimg.style.width=ps+'px';pimg.style.height=ps+'px';}
+    dot.style.setProperty('--lbl-top',(ps/2+5)+'px');
+  }
+  // Update scale display in popup without rebuilding it
+  var disp=document.getElementById('smap-scale-val');
+  if(disp)disp.textContent=s+'×';
 }
 function smapCloseExport(){
   var bg=document.getElementById('smap-json-bg');
@@ -9400,7 +9448,7 @@ function render(){
       var shapeAttr=customShape?' data-shape="'+customShape+'"':'';
       dotsH+='<div class="'+cls+'"'+shapeAttr+' data-pin="'+esc(p.name)+'" style="left:'+pos.x+'%;top:'+pos.y+'%;--lbl-top:'+lblTop+'px;">';
       if(planet){
-        dotsH+='<img class="smap-dot-planet" src="'+PLANET_IMGS[planet]+'" style="width:'+ps+'px;height:'+ps+'px;" alt="'+planet+'" draggable="false">';
+        dotsH+='<img class="smap-dot-planet" src="'+PLANET_IMGS[planet]+'" style="width:'+ps+'px;height:'+ps+'px;filter:drop-shadow(0 0 '+Math.round(ps*0.15)+'px '+col+') drop-shadow(0 0 '+Math.round(ps*0.28)+'px '+col+'66);" alt="'+planet+'" draggable="false">';
       } else {
         dotsH+='<div class="smap-dot-inner" style="background:'+col+';border-color:'+col+';box-shadow:0 0 8px '+col+',0 0 16px '+col+'44;"></div>';
       }
