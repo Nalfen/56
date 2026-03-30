@@ -7304,6 +7304,87 @@ function computePinLblStyle(pinData,ps,isSys){
     default:        return fsStr+'top:'+(halfH+gap)+'px;bottom:auto;left:0;right:auto;transform:translateX(-50%);text-align:center;';
   }
 }
+// ── Star Map Overlap Resolver ─────────────────────────────────────────────────
+// After render, nudge pin+label bounding boxes apart by the minimum distance so
+// nothing overlaps. Does NOT modify stored positions — purely visual CSS offsets.
+function smapResolveOverlaps(){
+  if(smapEditMode)return; // don't fight manual dragging
+  var inner=document.getElementById('smap-inner');
+  if(!inner)return;
+  var baseRect=inner.getBoundingClientRect();
+  if(!baseRect.width||!baseRect.height)return;
+  var sc=(smapViewState&&smapViewState.scale)||1;
+  var imgEl=document.getElementById('smap-img');
+  var CW_=imgEl&&imgEl.naturalWidth?imgEl.naturalWidth:1323;
+  var CH_=imgEl&&imgEl.naturalHeight?imgEl.naturalHeight:886;
+
+  var dots=Array.from(inner.querySelectorAll('.smap-dot[data-pin]'));
+  if(dots.length<2)return;
+
+  // Build bounding box (screen px, relative to inner) + anchor centre for each pin
+  var items=[];
+  dots.forEach(function(dot){
+    var els=[dot.querySelector('.smap-dot-inner'),dot.querySelector('.smap-dot-planet')].filter(Boolean);
+    var lbl=dot.querySelector('.smap-dot-lbl');
+    if(lbl&&!dot.classList.contains('hlbl')){
+      var cs=window.getComputedStyle(lbl);
+      if(cs.display!=='none'&&cs.visibility!=='hidden')els.push(lbl);
+    }
+    if(!els.length)return;
+    var l=Infinity,t=Infinity,r=-Infinity,b=-Infinity;
+    els.forEach(function(el){
+      var rx=el.getBoundingClientRect();
+      l=Math.min(l,rx.left-baseRect.left);t=Math.min(t,rx.top-baseRect.top);
+      r=Math.max(r,rx.right-baseRect.left);b=Math.max(b,rx.bottom-baseRect.top);
+    });
+    if(l>=r||t>=b)return;
+    var dotEl=dot.querySelector('.smap-dot-inner')||dot.querySelector('.smap-dot-planet');
+    var ax=0,ay=0;
+    if(dotEl){var dr=dotEl.getBoundingClientRect();ax=(dr.left+dr.right)/2-baseRect.left;ay=(dr.top+dr.bottom)/2-baseRect.top;}
+    items.push({dot:dot,l:l,t:t,r:r,b:b,ax:ax,ay:ay,ox:0,oy:0});
+  });
+  if(items.length<2)return;
+
+  var GAP=3; // minimum pixel gap between bounding boxes
+  var ITERS=120;
+  for(var iter=0;iter<ITERS;iter++){
+    var any=false;
+    for(var i=0;i<items.length;i++){
+      for(var j=i+1;j<items.length;j++){
+        var a=items[i],bItem=items[j];
+        var al=a.l+a.ox,ar=a.r+a.ox,at=a.t+a.oy,ab=a.b+a.oy;
+        var bl=bItem.l+bItem.ox,br=bItem.r+bItem.ox,bt=bItem.t+bItem.oy,bb2=bItem.b+bItem.oy;
+        var overX=Math.min(ar,br)-Math.max(al,bl)+GAP;
+        var overY=Math.min(ab,bb2)-Math.max(at,bt)+GAP;
+        if(overX>0&&overY>0){
+          // Resolve along the axis requiring the least total movement
+          if(overX<=overY){
+            var halfX=overX/2;
+            var sxSign=(a.ax+a.ox)<=(bItem.ax+bItem.ox)?-1:1;
+            a.ox+=sxSign*halfX;bItem.ox-=sxSign*halfX;
+          } else {
+            var halfY=overY/2;
+            var sySign=(a.ay+a.oy)<=(bItem.ay+bItem.oy)?-1:1;
+            a.oy+=sySign*halfY;bItem.oy-=sySign*halfY;
+          }
+          any=true;
+        }
+      }
+    }
+    if(!any)break;
+  }
+
+  // Convert screen-pixel offsets back to image-% and apply to each dot element
+  items.forEach(function(item){
+    if(Math.abs(item.ox)<0.5&&Math.abs(item.oy)<0.5)return;
+    var pctX=item.ox/sc/CW_*100;
+    var pctY=item.oy/sc/CH_*100;
+    var curL=parseFloat(item.dot.style.left)||0;
+    var curT=parseFloat(item.dot.style.top)||0;
+    item.dot.style.left=(curL+pctX).toFixed(3)+'%';
+    item.dot.style.top=(curT+pctY).toFixed(3)+'%';
+  });
+}
 function smapCloseExport(){
   var bg=document.getElementById('smap-json-bg');
   if(bg){bg.style.display='none';}
@@ -7557,6 +7638,8 @@ function initStarmap(){
     if(img&&img.naturalWidth){CW=img.naturalWidth;CH=img.naturalHeight;setInnerSize();}
     if(smapViewState){scale=smapViewState.scale;ox=smapViewState.ox;oy=smapViewState.oy;clamp();applyT();}
     else{fit();}
+    // Defer overlap resolution until browser has completed layout
+    requestAnimationFrame(function(){requestAnimationFrame(smapResolveOverlaps);});
   }
   if(img){img.addEventListener('load',restoreOrFit);if(img.complete&&img.naturalWidth)restoreOrFit();else restoreOrFit();}else{restoreOrFit();}
 }
