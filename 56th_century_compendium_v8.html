@@ -2892,27 +2892,22 @@ const GALAXY_MAP_POS={
 // Rendered as dotted lines on the star map overlay.
 // Reference: Palentium→Heaven gate = 3 months at jump speed without the gate, instant via gate.
 const STARGATE_LINKS=[
-  // Alliance Space core network
-  ['Orion System','Sirius System'],
-  ['Orion System','Berilia System'],
-  ['Orion System','Palentium System'],
-  ['Orion System','Ishtar System'],
-  ['Orion System','Andromede System'],
-  ['Sirius System','Aderan System'],
-  ['Sirius System','Titania System'],
-  ['Palentium System','Andromede System'],
-  ['Berilia System','Ash System'],
-  ['Berilia System','Damph System'],
-  ['Ishtar System','Alsa System'],
-  ['Aderan System','Alsa System'],
-  ['Titania System','Carach System'],
-  ['Titania System','Mangara System'],
-  ['Alsa System','San Tien System'],
-  // The Heaven Gate: connects Palentium to Heaven (makes the 3-month journey instant)
-  ['Palentium System','Heaven System'],
-  // Torc Federation link to Alliance border
-  ['Vasophus System','Aderan System'],
-  ['Vasophus System','Ithov System'],
+  ['Yagmir','System 5'],
+  ['System 5','Mangara'],
+  ['System 5','Alsa'],
+  ['Alsa','Orion'],
+  ['Orion','Palentium'],
+  ['Palentium','Ishtar'],
+  ['Palentium','Aderan'],
+  ['Palentium','Andromede'],
+  ['Ishtar','Ash'],
+  ['Ishtar','Damph'],
+  ['Andromede','Titania'],
+  ['Titania','Sirius'],
+  ['Titania','Berilia'],
+  ['Berilia','Basagoth Station'],
+  ['Berilia','Carach System'],
+  ['Carach System','Seigh System'],
 ];
 
 // ─── Star Map Edit State ──────────────────────────────────────────────────────
@@ -9779,7 +9774,7 @@ function render(){
 }
 render();
 // ─── Star Map Popup Drag ──────────────────────────────────────────────────────
-// Uses DOMContentLoaded so smap-popup (defined after </script>) exists in DOM.
+// Uses DOMContentLoaded so smap-popup (defined after the closing script tag) exists in DOM.
 document.addEventListener('DOMContentLoaded',function(){
   var popup=document.getElementById('smap-popup');
   if(!popup)return;
