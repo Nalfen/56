@@ -459,7 +459,7 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 .smap-pin-sys .smap-dot-lbl{font-size:var(--lbl-fs,10px);top:var(--lbl-top,11px);}
 /* ── Star Map Popup ──────────────────────────────────────────────────────────── */
 .smap-popup{position:fixed;background:#161618;border:1px solid #3c3c3e;border-radius:8px;padding:14px 14px 12px;width:min(320px,calc(100vw - 24px));max-height:75vh;overflow-y:auto;z-index:1100;box-shadow:0 8px 40px rgba(0,0,0,.88);pointer-events:auto;}
-.smap-popup-name{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;padding-right:22px;margin-bottom:5px;letter-spacing:.4px;}
+.smap-popup-name{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;padding-right:22px;margin-bottom:5px;letter-spacing:.4px;cursor:move;user-select:none;}
 .smap-popup-close{position:absolute;top:9px;right:9px;background:none;border:none;color:#636366;cursor:pointer;font-size:13px;line-height:1;padding:3px 6px;border-radius:4px;}
 .smap-popup-close:hover{color:#f2f2f7;background:rgba(255,255,255,.07);}
 .smap-popup-tags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:8px;}
@@ -2715,175 +2715,175 @@ g.galaxy=[
 // Each label [POS-NN] marks a placeholder that needs to be positioned on the actual image.
 const GALAXY_MAP_POS={
   "Aderan":{x:53,y:57},
-  "Aderan System":{x:57.96,y:49.88,color:"#00c8ff"},
+  "Aderan System":{x:59.15,y:49.24,color:"#00c8ff",planet_img:24,label_size:"s",label_pos:"above-right"},
   "Agua":{x:77,y:56},
-  "Agua System":{x:31.78,y:38.06,color:"#ff453a"},
-  "Alliance Space":{x:55.62,y:55.84},
+  "Agua System":{x:31.88,y:37.77,color:"#ff453a",planet_img:25},
+  "Alliance Space":{x:55.62,y:55.94,shape:"star",label_size:"m"},
   "Alsa":{x:50,y:63},
-  "Alsa System":{x:39.76,y:50.41,color:"#00c8ff"},
+  "Alsa System":{x:39.88,y:50.1,color:"#00c8ff",planet_img:11,label_pos:"above-left"},
   "Andromede":{x:38,y:44},
-  "Andromede System":{x:55.61,y:51.27,color:"#00c8ff"},
+  "Andromede System":{x:55.73,y:50.96,color:"#00c8ff",planet_img:28,planet_scale:1.25,label_size:"s"},
   "Asar":{x:15,y:81},
-  "Asar System":{x:54.32,y:39.78,color:"#ff6b35"},
+  "Asar System":{x:54.29,y:39.44,color:"#14b8a6",planet_img:13,planet_scale:0.75},
   "Ash":{x:55,y:33},
-  "Ash System":{x:44.27,y:42.52,color:"#00c8ff"},
+  "Ash System":{x:44.27,y:42.24,color:"#00c8ff",planet_img:25,label_size:"s",label_pos:"above-right"},
   "Astea":{x:68,y:12},
-  "Astea System":{x:70.33,y:28.43,color:"#a855f7"},
-  "Asteroid Eater":{x:49.04,y:64.47},
-  "B.I.G. (Beningen Ingratias Garlan)":{x:47.99,y:52.3,color:"#00c8ff",shape:"star"},
+  "Astea System":{x:70.33,y:28.25,color:"#a855f7",planet_img:6},
+  "Asteroid Eater":{x:49.11,y:64.17,color:"#f2f2f7",planet_img:27,planet_scale:0.75},
+  "B.I.G. (Beningen Ingratias Garlan)":{x:47.89,y:52.1,color:"#f2f2f7",shape:"star",planet_img:27,planet_scale:0.75,label_hidden:true,label_pos:"above"},
   "Bah":{x:76,y:44},
-  "Bah System":{x:40.65,y:29.8,color:"#ff453a"},
-  "Basagoth Station":{x:66.82,y:51.3,color:"#ffd60a"},
+  "Bah System":{x:40.65,y:29.64,color:"#ff453a",planet_img:29,planet_scale:0.75,label_pos:"above"},
+  "Basagoth Station":{x:66.69,y:50.99,color:"#ff9f0a",planet_img:28,planet_scale:1.25},
   "Berilia":{x:53,y:40},
-  "Berilia System":{x:60.41,y:54.46,color:"#00c8ff"},
+  "Berilia System":{x:60,y:53.57,color:"#00c8ff",planet_img:1},
   "Bet":{x:82,y:57},
-  "Bet System":{x:35.63,y:37.83,color:"#ff453a"},
+  "Bet System":{x:35.68,y:37.57,color:"#ff453a",planet_img:18},
   "Betravir":{x:56,y:85},
-  "Betravir System":{x:66.24,y:87.76,color:"#ff9f0a"},
+  "Betravir System":{x:66.34,y:87.33,color:"#64d2ff",planet_img:20,planet_scale:1.5},
   "Bother":{x:59,y:65},
-  "Bother System":{x:90.26,y:43.19,color:"#ffd60a"},
+  "Bother System":{x:90.33,y:42.97,color:"#ff9f0a",planet_img:16,planet_scale:0.75},
   "Briea":{x:79,y:79},
-  "Briea System":{x:17.27,y:70.5,color:"#30d158"},
+  "Briea System":{x:17.24,y:70.26,color:"#6366f1",planet_img:2},
   "Capio":{x:80,y:51},
-  "Capio System":{x:37.32,y:34.57,color:"#ff453a"},
-  "Carach System":{x:60.91,y:56.32,color:"#00c8ff"},
+  "Capio System":{x:37.38,y:34.31,color:"#ff453a",planet_img:29,label_pos:"above"},
+  "Carach System":{x:61.12,y:56.77,color:"#00c8ff",planet_img:13},
   "Carth":{x:86,y:78},
-  "Carth System":{x:21.12,y:67.18,color:"#30d158"},
+  "Carth System":{x:21.05,y:66.98,color:"#6366f1",planet_img:25,planet_scale:0.5},
   "Cassidir":{x:35,y:78},
-  "Cassidir System":{x:66.71,y:66.71,color:"#ff453a"},
+  "Cassidir System":{x:66.76,y:66.58,color:"#a855f7",planet_img:10},
   "Cetune":{x:14,y:55},
-  "Cetune System":{x:13.1,y:38.93},
+  "Cetune System":{x:13.1,y:38.75,color:"#f2f2f7",planet_img:11},
   "Cish":{x:26,y:62},
-  "Cish System":{x:63.48,y:65.79,color:"#ff453a"},
+  "Cish System":{x:63.63,y:65.53,color:"#a855f7",planet_img:14,label_pos:"above"},
   "Conso":{x:19,y:47},
-  "Conso System":{x:36.49,y:58.11,color:"#f2f2f7"},
+  "Conso System":{x:36.52,y:57.8,color:"#f2f2f7",planet_img:30,planet_scale:0.75},
   "DR345-0":{x:21,y:40},
-  "DR345-0 System":{x:34.03,y:53.2,color:"#f2f2f7"},
+  "DR345-0 System":{x:33.93,y:52.93,color:"#f2f2f7",planet_img:30,label_pos:"above"},
   "Damph":{x:57,y:44},
-  "Damph System":{x:42.74,y:47.22,color:"#00c8ff"},
+  "Damph System":{x:42.86,y:46.99,color:"#00c8ff",planet_img:14,planet_scale:1.25,label_pos:"above-left"},
   "Dicamia":{x:65,y:17},
-  "Dicamia System":{x:65.61,y:26.83,color:"#a855f7"},
-  "Dragon Tail's Expanse":{x:9.78,y:71.07,color:"#30d158",shape:"star"},
-  "Erbrother Nebula":{x:82.38,y:29.82,color:"#f2f2f7",shape:"star"},
+  "Dicamia System":{x:65.58,y:26.56,color:"#a855f7",planet_img:4},
+  "Dragon Tail's Expanse":{x:19.75,y:73.12,color:"#6366f1",shape:"diamond",label_size:"m"},
+  "Erbrother Nebula":{x:86.75,y:29.69,color:"#f2f2f7",shape:"diamond",label_size:"m"},
   "Ethone":{x:71,y:24},
-  "Ethone System":{x:62.32,y:30.55,color:"#a855f7"},
-  "Freeland":{x:12.1,y:56.15,color:"#ffd60a",shape:"star"},
-  "Garson Black Hole":{x:52.46,y:50.02,color:"#00c8ff",shape:"star"},
+  "Ethone System":{x:62.32,y:30.19,color:"#a855f7",planet_img:5},
+  "Freeland":{x:6.45,y:53.9,color:"#ffd60a",shape:"diamond",label_size:"m"},
+  "Garson Black Hole":{x:52.46,y:50.02,color:"#f2f2f7",shape:"star",planet_img:27,planet_scale:0.75,label_hidden:true,label_pos:"above"},
   "Ghash":{x:86,y:53},
-  "Ghash System":{x:39.67,y:37.39,color:"#ff453a"},
+  "Ghash System":{x:39.77,y:37.17,color:"#ff453a",planet_img:21},
   "Gnoth Q714":{x:31,y:38},
-  "Gnoth Q714 System":{x:6.26,y:51.03,color:"#ffd60a"},
-  "Gravemist Nebula":{x:74,y:46.69,color:"#ffd60a",shape:"star"},
+  "Gnoth Q714 System":{x:6.26,y:50.88,color:"#ffd60a",planet_img:21},
+  "Gravemist Nebula":{x:74,y:46.69,color:"#ff9f0a",shape:"diamond"},
   "Grulania":{x:27,y:4},
-  "Grulania System":{x:42.48,y:7.94,color:"#ffd60a"},
+  "Grulania System":{x:42.48,y:7.7,color:"#ffd60a",planet_img:11},
   "Hanov":{x:27,y:59},
-  "Hanov System":{x:22.13,y:48.97},
+  "Hanov System":{x:22.16,y:48.84,color:"#f2f2f7",planet_img:24},
   "Haran":{x:17,y:58},
-  "Haran System":{x:62.39,y:67.52,color:"#ff453a"},
-  "Heaven System":{x:56.51,y:41.9,color:"#ff6b35"},
+  "Haran System":{x:62.44,y:67.36,color:"#a855f7",planet_img:24},
+  "Heaven System":{x:56.54,y:41.56,color:"#14b8a6",planet_img:1,planet_scale:0.75},
   "Illora":{x:64,y:64},
-  "Illora System":{x:81.12,y:52.02,color:"#ffd60a"},
+  "Illora System":{x:81.25,y:51.9,color:"#ff9f0a",planet_img:10},
   "Ishtar":{x:50,y:54},
-  "Ishtar System":{x:47.79,y:45.63,color:"#00c8ff"},
+  "Ishtar System":{x:47.87,y:45.35,color:"#00c8ff",planet_img:24,label_size:"s",label_pos:"above-right"},
   "Ithov":{x:70,y:71},
-  "Ithov System":{x:85.98,y:64.27,color:"#30d158"},
-  "Kraven Space":{x:35.54,y:30.34},
+  "Ithov System":{x:86.14,y:64.07,color:"#ff2d9f",planet_img:2,planet_scale:0.75},
+  "Kraven Space":{x:35.33,y:30.37,color:"#ff453a",shape:"diamond",label_size:"m"},
   "L.I.F.T.N":{x:17,y:43},
-  "L.I.F.T.N System":{x:33.71,y:56.84,color:"#f2f2f7"},
+  "L.I.F.T.N System":{x:33.71,y:56.64,color:"#f2f2f7",planet_img:30,label_pos:"above"},
   "Lides H45":{x:27,y:44},
-  "Lides H45 System":{x:13.36,y:53.65,color:"#ffd60a"},
+  "Lides H45 System":{x:13.42,y:53.38,color:"#ffd60a",planet_img:20,planet_scale:0.75},
   "Lumia":{x:47,y:85},
-  "Lumia System":{x:87.72,y:71.39,color:"#ff9f0a"},
+  "Lumia System":{x:87.85,y:71.29,color:"#64d2ff",planet_img:1,planet_scale:1.25},
   "Mangara":{x:34,y:69},
-  "Mangara System":{x:45.67,y:57.43,color:"#00c8ff"},
+  "Mangara System":{x:45.6,y:57.27,color:"#00c8ff",planet_img:26,planet_scale:1.25},
   "Manola":{x:62,y:71},
-  "Manola System":{x:58.15,y:62.89,color:"#ff453a"},
+  "Manola System":{x:58.25,y:62.73,color:"#a855f7",planet_img:1},
   "Mivenia":{x:33,y:34},
-  "Mivenia System":{x:13.26,y:50.1,color:"#ffd60a"},
+  "Mivenia System":{x:13.2,y:49.92,color:"#ffd60a",planet_img:10},
   "Monda":{x:26,y:33},
-  "Monda System":{x:34.07,y:60.28,color:"#f2f2f7"},
-  "Mubothen Empire":{x:69.93,y:31.08,color:"#a855f7",shape:"star"},
+  "Monda System":{x:34.1,y:60.09,color:"#f2f2f7",planet_img:10,planet_scale:0.75},
+  "Mubothen Empire":{x:67.62,y:32.01,color:"#a855f7",shape:"diamond",label_size:"m"},
   "Mulbaring":{x:22,y:63},
-  "Mulbaring System":{x:22.41,y:43.63},
+  "Mulbaring System":{x:22.45,y:43.4,color:"#f2f2f7",planet_img:26,label_size:"s"},
   "Nausica":{x:36,y:9},
-  "Nausica System":{x:78.19,y:23.05,color:"#ffd60a"},
-  "Nemani Rift":{x:35.91,y:41.62},
+  "Nausica System":{x:78.19,y:22.98,color:"#ffd60a",planet_img:3,planet_scale:1.25},
+  "Nemani Rift":{x:38.48,y:40.87,color:"#f2f2f7",shape:"diamond",label_size:"m"},
   "New Earth":{x:17,y:78},
-  "New Earth System":{x:61.65,y:38.93,color:"#ff6b35"},
+  "New Earth System":{x:61.71,y:38.8,color:"#14b8a6",planet_img:11,label_pos:"above-left"},
   "New Oshana":{x:28,y:74},
-  "New Oshana System":{x:52.82,y:68.96,color:"#ff453a"},
+  "New Oshana System":{x:52.87,y:68.77,color:"#a855f7",planet_img:19},
   "Niezh":{x:23,y:36},
-  "Niezh System":{x:31.07,y:56.99,color:"#f2f2f7"},
+  "Niezh System":{x:31.1,y:56.72,color:"#f2f2f7",planet_img:30,planet_scale:0.75},
   "Nopenop":{x:23,y:55},
-  "Nopenop System":{x:14.72,y:33.15,color:"#64d2ff"},
+  "Nopenop System":{x:14.54,y:32.9,color:"#64d2ff",planet_img:23,label_size:"s"},
   "Nulneon":{x:77,y:62},
-  "Nulneon System":{x:95.15,y:64.87,color:"#ff9f0a"},
-  "Nuzonia's Dream":{x:41.9,y:90.86,color:"#ff9f0a",shape:"star"},
+  "Nulneon System":{x:95.12,y:64.6,color:"#4ade80",planet_img:7},
+  "Nuzonia's Dream":{x:39.22,y:87.86,color:"#64d2ff",shape:"diamond",label_size:"m"},
   "Nypsos F47":{x:43,y:78},
-  "Nypsos F47 System":{x:50.41,y:73.85,color:"#ff9f0a"},
+  "Nypsos F47 System":{x:50.64,y:73.61,color:"#64d2ff",planet_img:2,planet_scale:0.75},
   "Ongora":{x:32,y:11},
-  "Ongora System":{x:48.88,y:22.16,color:"#ffd60a"},
+  "Ongora System":{x:48.82,y:21.86,color:"#ffd60a",planet_img:15},
   "Orion":{x:47,y:47},
-  "Orion System":{x:44.13,y:49.64,color:"#00c8ff"},
+  "Orion System":{x:44.05,y:49.41,color:"#00c8ff",planet_img:30,planet_scale:1.25,label_size:"s"},
   "Palentium":{x:44,y:43},
-  "Palentium System":{x:55.67,y:47.09,color:"#00c8ff"},
+  "Palentium System":{x:55.75,y:46.73,color:"#00c8ff",planet_img:1,label_size:"s",label_pos:"above-right"},
   "Peavis":{x:75,y:72},
-  "Peavis System":{x:77.58,y:37.53,color:"#f2f2f7"},
+  "Peavis System":{x:77.58,y:37.33,color:"#f2f2f7",planet_img:20,planet_scale:0.75},
   "Pholla":{x:30,y:7},
-  "Pholla System":{x:90.09,y:20.66,color:"#ffd60a"},
+  "Pholla System":{x:89.97,y:20.31,color:"#ffd60a",planet_img:26},
   "Phoxitis":{x:72,y:68},
-  "Phoxitis System":{x:81.26,y:33.29,color:"#f2f2f7"},
-  "Proxima Sector":{x:62.69,y:43.34},
+  "Phoxitis System":{x:81.35,y:33.07,color:"#f2f2f7",planet_img:2},
+  "Proxima Sector":{x:62.53,y:42.88,color:"#14b8a6",shape:"diamond",label_size:"m"},
   "Puthea":{x:52,y:80},
-  "Puthea System":{x:24.84,y:88.57,color:"#ff9f0a"},
+  "Puthea System":{x:24.89,y:88.31,color:"#64d2ff",planet_img:17,planet_scale:1.25},
   "Rautis":{x:46,y:8},
-  "Rautis System":{x:29.66,y:17.49,color:"#ffd60a"},
-  "Realmsingers Empire":{x:93.46,y:61.3,color:"#ff9f0a"},
+  "Rautis System":{x:29.6,y:17.25,color:"#ffd60a",planet_img:10},
+  "Realmsingers Empire":{x:93.43,y:61.79,color:"#4ade80",shape:"diamond",label_size:"m",label_pos:"above"},
   "San Tien":{x:68,y:66},
-  "San Tien System":{x:44.94,y:67.25,color:"#ff453a"},
+  "San Tien System":{x:45.09,y:67.06,color:"#a855f7",planet_img:26},
   "Sarag":{x:85,y:49},
-  "Sarag System":{x:41.58,y:34.9,color:"#ff453a"},
-  "Seigh System":{x:64.14,y:58.12,color:"#00c8ff"},
+  "Sarag System":{x:41.53,y:34.61,color:"#ff453a",planet_img:2},
+  "Seigh System":{x:65.92,y:57.79,color:"#00c8ff",planet_img:21},
   "Shev":{x:83,y:44},
-  "Shev System":{x:33.68,y:34.45,color:"#ff453a"},
+  "Shev System":{x:33.68,y:34.45,color:"#ff453a",planet_img:29},
   "Sicon":{x:80,y:38},
-  "Sicon System":{x:42.23,y:30.32,color:"#ff453a"},
+  "Sicon System":{x:42.38,y:30.13,color:"#ff453a",planet_img:29,planet_scale:0.75},
   "Sirius":{x:40,y:51},
-  "Sirius System":{x:51.71,y:59.73,color:"#00c8ff"},
-  "Solar System":{x:68.02,y:42.5,color:"#ff6b35"},
+  "Sirius System":{x:52.65,y:59.19,color:"#00c8ff",planet_img:6},
+  "Solar System":{x:67.92,y:42.15,color:"#14b8a6",planet_img:19,planet_scale:0.75},
   "Soth L4":{x:89,y:74},
-  "Soth L4 System":{x:10.76,y:74.49,color:"#30d158"},
+  "Soth L4 System":{x:10.73,y:74.37,color:"#6366f1",planet_img:18,planet_scale:1.25},
   "Strides":{x:39,y:13},
-  "Strides System":{x:25.52,y:21.88,color:"#ffd60a"},
+  "Strides System":{x:25.44,y:21.65,color:"#ffd60a",planet_img:25,label_size:"s"},
   "Sunstrope":{x:82,y:73},
-  "Sunstrope System":{x:14.37,y:66.89,color:"#30d158"},
-  "System 5":{x:41.49,y:56.31,color:"#00c8ff"},
+  "Sunstrope System":{x:14.47,y:66.77,color:"#6366f1",planet_img:24},
+  "System 5":{x:41.56,y:56.11,color:"#00c8ff",planet_img:28,planet_scale:1.25,label_size:"s"},
   "Thars":{x:49,y:10},
-  "Thars System":{x:61.62,y:20.47,color:"#ffd60a"},
-  "The Dark Space":{x:55.73,y:66.42,color:"#ff453a"},
-  "The Endless Darkness":{x:86.85,y:48.05},
-  "The Solar Expanse":{x:20.28,y:13.19,color:"#ffd60a",shape:"star"},
+  "Thars System":{x:61.62,y:20.32,color:"#ffd60a",planet_img:2},
+  "The Dark Space":{x:54.81,y:65.72,color:"#a855f7",shape:"diamond",label_size:"m"},
+  "The Endless Darkness":{x:86.85,y:48.05,color:"#f2f2f7",shape:"diamond",label_size:"m"},
+  "The Solar Expanse":{x:37.03,y:12.65,color:"#ffd60a",shape:"diamond",label_size:"m"},
   "Titania":{x:44,y:60},
-  "Titania System":{x:49.98,y:53.91,color:"#00c8ff"},
-  "Torc Federation":{x:80.89,y:70.01,shape:"star"},
-  "Tronik Network":{x:26.31,y:53.48,color:"#f2f2f7",shape:"star"},
+  "Titania System":{x:49.67,y:54.26,color:"#00c8ff",planet_img:10},
+  "Torc Federation":{x:77.89,y:67.98,color:"#ff2d9f",shape:"diamond",label_size:"m"},
+  "Tronik Network":{x:26.31,y:53.48,color:"#f2f2f7",shape:"star",label_size:"m"},
   "Uether":{x:73,y:67},
-  "Uether System":{x:84.72,y:61.6,color:"#ff9f0a"},
+  "Uether System":{x:84.75,y:61.36,color:"#4ade80",planet_img:23},
   "Valtis":{x:18,y:50},
-  "Valtis System":{x:10.78,y:31.42,color:"#64d2ff"},
+  "Valtis System":{x:10.89,y:31.14,color:"#00c8ff",planet_img:26,label_size:"s",label_pos:"above"},
   "Vasophus":{x:64,y:73},
-  "Vasophus System":{x:81.94,y:65.68,color:"#30d158"},
+  "Vasophus System":{x:81.97,y:65.48,color:"#ff2d9f",planet_img:16,planet_scale:1.25},
   "Yaevis":{x:43,y:11},
-  "Yaevis System":{x:18.92,y:19.22,color:"#ffd60a"},
+  "Yaevis System":{x:18.98,y:19.06,color:"#ffd60a",planet_img:14},
   "Yagmir":{x:61,y:35},
-  "Yagmir System":{x:31.84,y:73.71},
-  "Zegitor Trade Guild":{x:21.73,y:35.27,shape:"star"},
+  "Yagmir System":{x:31.87,y:73.51,color:"#00c8ff",planet_img:9},
+  "Zegitor Trade Guild":{x:16.42,y:29.8,shape:"diamond",label_size:"l",label_pos:"above"},
   "Zelmolla":{x:58,y:79},
-  "Zelmolla System":{x:53.41,y:76.72,color:"#ff9f0a"},
+  "Zelmolla System":{x:53.41,y:76.6,color:"#64d2ff",planet_img:25,planet_scale:1.25},
   "Zoana":{x:13,y:67},
-  "Zoana System":{x:58.14,y:39.88,color:"#ff6b35"},
+  "Zoana System":{x:58.02,y:39.51,color:"#14b8a6",planet_img:8,planet_scale:0.75,label_pos:"below-right"},
   "Zunide":{x:24,y:40},
-  "Zunide System":{x:8.31,y:48.24,color:"#ffd60a"}
+  "Zunide System":{x:8.28,y:48.02,color:"#ffd60a",planet_img:1}
 };
 
 
@@ -7005,13 +7005,17 @@ function smapEntryColor(e){
   }
   return e.worlds_key?'#00c8ff':'#aeaeb2';
 }
+function smapLabel(name){
+  if(name==='B.I.G. (Beningen Ingratias Garlan)')return 'B.I.G.';
+  return name.replace(/ System$/i,'');
+}
 function openSmapPopup(entry,clientX,clientY,preservePos){
   var popup=document.getElementById('smap-popup');
   if(!popup)return;
   smapActivePopupEntry=entry;
   var col=smapEntryColor(entry);
   var isFaction=entry.entry_type==='faction';
-  var h='<div class="smap-popup-name" style="color:'+col+'">'+esc(entry.name)+'</div>';
+  var h='<div class="smap-popup-name" style="color:'+col+'">'+esc(smapLabel(entry.name))+'</div>';
   h+='<button class="smap-popup-close" id="smap-pc">\u2715</button>';
   if(entry.tags&&entry.tags.length)h+='<div class="smap-popup-tags">'+entry.tags.map(function(t){return '<span class="tag tgr">'+esc(t)+'</span>';}).join('')+'</div>';
   if(isFaction){
@@ -9669,7 +9673,7 @@ function render(){
       var isSys=p.type==='sys';
       var planet=pos.planet_img||0;
       var ps=(pos.planet_scale||1)*32;
-      var hlbl=(pos.label_hidden||smapLabelsHidden)&&!smapEditMode?' hlbl':'';
+      var hlbl=(pos.label_hidden&&p.name!=='B.I.G. (Beningen Ingratias Garlan)'||smapLabelsHidden)&&!smapEditMode?' hlbl':'';
       var cls='smap-dot'+(isFac&&!planet?' faction':(!planet?' smap-pin-sys':''))+(smapEditMode?' edit-drag':'')+hlbl;
       if(smapGateFirst===p.name)cls+=' gate-sel';
       var shapeAttr=customShape?' data-shape="'+customShape+'"':'';
@@ -9682,7 +9686,7 @@ function render(){
         dotsH+='<div class="smap-dot-inner" style="background:'+col+';border-color:'+col+';box-shadow:0 0 8px '+col+',0 0 16px '+col+'44;"></div>';
       }
       var lblStyle=computePinLblStyle(pos,planet?ps:0,isSys);
-      dotsH+='<div class="smap-dot-lbl" style="color:'+col+';'+lblStyle+'">'+esc(p.name)+'</div>';
+      dotsH+='<div class="smap-dot-lbl" style="color:'+col+';'+lblStyle+'">'+esc(smapLabel(p.name))+'</div>';
       dotsH+='</div>';
     });
 
@@ -9774,6 +9778,32 @@ function render(){
   if(cs==='starmap')initStarmap();
 }
 render();
+// ─── Star Map Popup Drag ──────────────────────────────────────────────────────
+(function(){
+  var popup=document.getElementById('smap-popup');
+  if(!popup)return;
+  var pdrag=false,pdx=0,pdy=0,ppl=0,ppt=0;
+  popup.addEventListener('mousedown',function(e){
+    if(!e.target.closest('.smap-popup-name'))return;
+    if(e.button!==0)return;
+    pdrag=true;
+    pdx=e.clientX;pdy=e.clientY;
+    ppl=parseInt(popup.style.left)||0;
+    ppt=parseInt(popup.style.top)||0;
+    popup.style.userSelect='none';
+    e.preventDefault();e.stopPropagation();
+  });
+  document.addEventListener('mousemove',function(e){
+    if(!pdrag)return;
+    var vw=window.innerWidth,vh=window.innerHeight;
+    var nl=ppl+e.clientX-pdx,nt=ppt+e.clientY-pdy;
+    popup.style.left=Math.max(0,Math.min(nl,vw-popup.offsetWidth))+'px';
+    popup.style.top=Math.max(0,Math.min(nt,vh-popup.offsetHeight))+'px';
+  });
+  document.addEventListener('mouseup',function(){
+    if(pdrag){pdrag=false;popup.style.userSelect='';}
+  });
+})();
 </script>
 <div id="world-panel" class="world-panel">
   <div class="world-panel-header">
