@@ -2893,26 +2893,26 @@ const GALAXY_MAP_POS={
 // Reference: Palentium→Heaven gate = 3 months at jump speed without the gate, instant via gate.
 const STARGATE_LINKS=[
   // Alliance Space core network
-  ['Orion','Sirius'],
-  ['Orion','Berilia'],
-  ['Orion','Palentium'],
-  ['Orion','Ishtar'],
-  ['Orion','Andromede'],
-  ['Sirius','Aderan'],
-  ['Sirius','Titania'],
-  ['Palentium','Andromede'],
-  ['Berilia','Ash'],
-  ['Berilia','Damph'],
-  ['Ishtar','Alsa'],
-  ['Aderan','Alsa'],
-  ['Titania','Carach System'],
-  ['Titania','Mangara'],
-  ['Alsa','San Tien'],
+  ['Orion System','Sirius System'],
+  ['Orion System','Berilia System'],
+  ['Orion System','Palentium System'],
+  ['Orion System','Ishtar System'],
+  ['Orion System','Andromede System'],
+  ['Sirius System','Aderan System'],
+  ['Sirius System','Titania System'],
+  ['Palentium System','Andromede System'],
+  ['Berilia System','Ash System'],
+  ['Berilia System','Damph System'],
+  ['Ishtar System','Alsa System'],
+  ['Aderan System','Alsa System'],
+  ['Titania System','Carach System'],
+  ['Titania System','Mangara System'],
+  ['Alsa System','San Tien System'],
   // The Heaven Gate: connects Palentium to Heaven (makes the 3-month journey instant)
-  ['Palentium','Heaven System'],
+  ['Palentium System','Heaven System'],
   // Torc Federation link to Alliance border
-  ['Vasophus','Aderan'],
-  ['Vasophus','Ithov'],
+  ['Vasophus System','Aderan System'],
+  ['Vasophus System','Ithov System'],
 ];
 
 // ─── Star Map Edit State ──────────────────────────────────────────────────────
@@ -2947,11 +2947,11 @@ function smapPosLoad(){
 function smapPosSave(){try{localStorage.setItem('smap_pin_pos',JSON.stringify(smapPinPos));}catch(e){}}
 function smapGatesLoad(){
   if(smapGatesData)return smapGatesData;
-  try{var s=localStorage.getItem('smap_gates');if(s){smapGatesData=JSON.parse(s);return smapGatesData;}}catch(e){}
+  try{var s=localStorage.getItem('smap_gates_v2');if(s){smapGatesData=JSON.parse(s);return smapGatesData;}}catch(e){}
   smapGatesData=STARGATE_LINKS.map(function(l){return [l[0],l[1]];});
   return smapGatesData;
 }
-function smapGatesSave(){try{localStorage.setItem('smap_gates',JSON.stringify(smapGatesData));}catch(e){}}
+function smapGatesSave(){try{localStorage.setItem('smap_gates_v2',JSON.stringify(smapGatesData));}catch(e){}}
 
 // ─── Galaxy Sections ─────────────────────────────────────────────────────────
 // Ordered sections for the Galactic Catalogue main view.
@@ -9779,7 +9779,8 @@ function render(){
 }
 render();
 // ─── Star Map Popup Drag ──────────────────────────────────────────────────────
-(function(){
+// Uses DOMContentLoaded so smap-popup (defined after </script>) exists in DOM.
+document.addEventListener('DOMContentLoaded',function(){
   var popup=document.getElementById('smap-popup');
   if(!popup)return;
   var pdrag=false,pdx=0,pdy=0,ppl=0,ppt=0;
@@ -9803,7 +9804,7 @@ render();
   document.addEventListener('mouseup',function(){
     if(pdrag){pdrag=false;popup.style.userSelect='';}
   });
-})();
+});
 </script>
 <div id="world-panel" class="world-panel">
   <div class="world-panel-header">
