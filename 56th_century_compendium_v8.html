@@ -2942,11 +2942,11 @@ function smapPosLoad(){
 function smapPosSave(){try{localStorage.setItem('smap_pin_pos',JSON.stringify(smapPinPos));}catch(e){}}
 function smapGatesLoad(){
   if(smapGatesData)return smapGatesData;
-  try{var s=localStorage.getItem('smap_gates_v2');if(s){smapGatesData=JSON.parse(s);return smapGatesData;}}catch(e){}
+  try{var s=localStorage.getItem('smap_gates_v3');if(s){smapGatesData=JSON.parse(s);return smapGatesData;}}catch(e){}
   smapGatesData=STARGATE_LINKS.map(function(l){return [l[0],l[1]];});
   return smapGatesData;
 }
-function smapGatesSave(){try{localStorage.setItem('smap_gates_v2',JSON.stringify(smapGatesData));}catch(e){}}
+function smapGatesSave(){try{localStorage.setItem('smap_gates_v3',JSON.stringify(smapGatesData));}catch(e){}}
 
 // ─── Galaxy Sections ─────────────────────────────────────────────────────────
 // Ordered sections for the Galactic Catalogue main view.
