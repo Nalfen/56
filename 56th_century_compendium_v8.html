@@ -8914,7 +8914,8 @@ function render(){
         html+='<div><div class="fl" style="color:var(--a2);margin-bottom:3px;">WITH CONTROL</div><div class="desc">'+hl(x.active,sq)+'</div></div>';
       }
       if(!x.passive&&!x.active&&(x.desc||x.effect)){
-        html+='<div class="desc">'+hl(x.desc||x.effect||'',sq)+'</div>';
+        html+='<div class="desc">'+hl(x.effect||x.desc||'',sq)+'</div>';
+        if(x.effect&&x.desc)html+='<div class="desc" style="margin-top:6px;color:var(--mu);font-style:italic;">'+hl(x.desc,sq)+'</div>';
       }
       if(x.desc&&(x.passive||x.active)){
         html+='<div class="desc" style="margin-top:6px;color:var(--mu);font-style:italic;">'+hl(x.desc,sq)+'</div>';
