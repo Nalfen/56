@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "nidhinjs-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "nidhinjs/prompt-mini"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "prompt-mini@nidhinjs-marketplace": true
+  }
+}
