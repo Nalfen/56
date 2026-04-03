@@ -8491,31 +8491,40 @@ function egAutoTalentsEvos(){
   const talentCat=catMap[dominantCat]||'PHYSICAL';
   // Fallback to archetype-preferred cats if dominant has no talents
   const archCats=(EG_ARCH_TALENT_CATS[archKey]||['PHYSICAL']);
-  // ── Budget from dominant category skills ──────────────────────────────────
-  const catSkills=EG_SKILLS_ALL.filter(s=>s.cat===dominantCat);
-  const budget=Math.max(5,Math.floor(catSkills.reduce((sum,s)=>sum+(egState.skills[s.key]||0),0)/5)*5);
-  // ── Greedy fill: pick highest-cost talent that fits, up to 4 talents ──────
+  // ── Per-category skill totals used as talent point limits ─────────────────
+  const catLimits={};
+  cats.forEach(cat=>{
+    const total=EG_SKILLS_ALL.filter(s=>s.cat===cat).reduce((sum,s)=>sum+(egState.skills[s.key]||0),0);
+    catLimits[catMap[cat]||cat.toUpperCase()]=total;
+  });
+  // ── Greedy fill: pick highest-cost talent that fits per category, up to 4 ──
   egState.talents=[];
-  let remaining=budget;
+  const catSpent={};
   const usedIds=new Set();
   const allTalents=(g.talents||[]).filter(t=>{
     const cat=t.category;
     return cat===talentCat||archCats.includes(cat);
   });
-  for(let pass=0;pass<4&&remaining>=5;pass++){
-    // Find highest cost tier <= remaining from unused talents
-    const eligible=allTalents.filter(t=>!usedIds.has(t.name)&&parseInt(t.cost)>0&&parseInt(t.cost)<=remaining);
+  for(let pass=0;pass<4;pass++){
+    // Only pick a talent if its category's skill total has room for the cost
+    const eligible=allTalents.filter(t=>{
+      if(usedIds.has(t.name))return false;
+      const cost=parseInt(t.cost);if(!cost||cost<5)return false;
+      const limit=catLimits[t.category]||0;
+      const spent=catSpent[t.category]||0;
+      return spent+cost<=limit;
+    });
     if(!eligible.length) break;
     const maxCost=Math.max(...eligible.map(t=>parseInt(t.cost)));
     const topTier=eligible.filter(t=>parseInt(t.cost)===maxCost);
     const picked=topTier[Math.floor(Math.random()*topTier.length)];
     egState.talents.push(picked);
     usedIds.add(picked.name);
-    remaining-=parseInt(picked.cost);
+    catSpent[picked.category]=(catSpent[picked.category]||0)+parseInt(picked.cost);
   }
   if(!egState.talents.length){
-    // Fallback: one 5-pt talent from archetype cats
-    const fb=(g.talents||[]).filter(t=>archCats.includes(t.category)&&parseInt(t.cost)===5);
+    // Fallback: one 5-pt talent from archetype cats (respect per-category limit)
+    const fb=(g.talents||[]).filter(t=>archCats.includes(t.category)&&parseInt(t.cost)===5&&(catLimits[t.category]||0)>=5);
     if(fb.length) egState.talents=[fb[Math.floor(Math.random()*fb.length)]];
   }
   // ── Evolution ───────────────────────────────────────────────────────────────
@@ -9460,6 +9469,42 @@ function render(){
       html+='</div></div>';
     });
     html+='</div>';
+    // ── Programs & Gadgets reference ──────────────────────────────────────────
+    {
+      const sw=g.software||{};
+      const allSw=[...(sw.programs||[]).map(x=>({...x,cat:'PROGRAMS'})),...(sw.gadgets||[]).map(x=>({...x,cat:'GADGETS'}))];
+      const swF=allSw.filter(x=>ms([x.name,x.type,x.action,x.skill,x.passive,x.active,x.desc,x.effect]));
+      if(swF.length){
+        html+='<div class="ssub" style="margin-top:18px;">Programs &amp; Gadgets</div>';
+        html+='<table class="stab" style="margin-bottom:14px;"><thead><tr><th>Name</th><th>Category</th><th>Type / Action</th><th>CPU / Nanite</th><th>MEM</th><th>Cost</th><th>Avail</th><th>Legality</th></tr></thead><tbody>';
+        swF.forEach(x=>{
+          const cpuOrNan=x.nanite?'◆'+x.nanite:(x.cpu||'—');
+          html+='<tr><td>'+hl(x.name,sq)+'</td><td class="avg">'+hl(x.cat,sq)+'</td><td class="minmax">'+hl(x.type||x.action||'—',sq)+'</td><td>'+hl(cpuOrNan,sq)+'</td><td>'+hl(x.memory||'—',sq)+'</td><td style="color:var(--gr);">'+(x.cost&&x.cost!='0'?fmt(x.cost):'—')+'</td><td>'+hl(x.availability||'—',sq)+'</td><td>'+hl(x.legality||'—',sq)+'</td></tr>';
+        });
+        html+='</tbody></table>';
+        html+='<div class="grid">';
+        swF.forEach((x,i)=>{
+          const id='dcsw'+i;
+          html+='<div class="card" id="'+id+'" data-tog="'+id+'"><div class="ch"><div><div class="cn">'+hl(x.name,sq)+'</div><div class="cs">'+hl(x.type||x.action||'',sq)+'</div></div>';
+          html+='<div style="display:flex;align-items:center;gap:4px;"><span class="tag '+(x.cat==='GADGETS'?'tp':'tb')+'">'+esc(x.cat)+'</span><span class="xi">▼</span></div></div>';
+          html+='<div class="tags">'+(x.memory?'<span class="tag tgr">MEM: '+hl(x.memory,sq)+'</span>':'')+(x.nanite?'<span class="tag tp">◆ NANITE: '+hl(x.nanite,sq)+'</span>':'')+(x.cpu?'<span class="tag to">CPU: '+hl(x.cpu,sq)+'</span>':'')+(x.cost&&x.cost!='0'?'<span class="tag tg">⊕ '+hl(x.cost,sq)+'</span>':'')+(x.availability?'<span class="tag '+tc(x.availability)+'">'+hl(x.availability,sq)+'</span>':'')+(x.legality?'<span class="tag '+tc(x.legality)+'">'+hl(x.legality,sq)+'</span>':'')+'</div>';
+          if(x.power||x.damage){
+            html+='<div class="cr2">';
+            if(x.damage)      html+='<span class="wpn-pill wpill-dmg">⚔ '+hl(x.damage,sq)+'</span>';
+            if(x.power)       html+='<span class="wpn-pill wpill-pwr">⚡ '+hl(x.power,sq)+'</span>';
+            if(x.damage_type) html+='<span class="wpn-pill" style="opacity:.7;">'+hl(x.damage_type,sq)+'</span>';
+            html+='</div>';
+          }
+          html+='<div class="cb">';
+          if(x.passive) html+='<div style="margin-bottom:6px;"><div class="fl" style="color:var(--gr);margin-bottom:3px;">WITHOUT CONTROL</div><div class="desc">'+hl(x.passive,sq)+'</div></div>';
+          if(x.active)  html+='<div><div class="fl" style="color:var(--a2);margin-bottom:3px;">WITH CONTROL</div><div class="desc">'+hl(x.active,sq)+'</div></div>';
+          if(!x.passive&&!x.active&&(x.desc||x.effect)) html+='<div class="desc">'+hl(x.effect||x.desc||'',sq)+'</div>';
+          if(x.desc&&(x.passive||x.active)) html+='<div class="desc" style="margin-top:6px;color:var(--mu);font-style:italic;">'+hl(x.desc,sq)+'</div>';
+          html+='</div></div>';
+        });
+        html+='</div>';
+      }
+    }
   }
 
   else if(cs==='hacking'){
