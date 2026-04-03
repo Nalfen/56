@@ -10645,32 +10645,58 @@ function render(){
     } else {
       // Talents (multiple)
       const talArr=egState.talents||[];
-      if(talArr.length){
-        html+='<div style="font-family:\'Orbitron\',monospace;font-size:8px;letter-spacing:1px;color:#8e8e93;margin-bottom:6px;text-transform:uppercase;">Talents ('+talArr.length+')</div>';
-        talArr.forEach(t=>{
-          html+='<div class="eg-talent-box" style="margin-bottom:6px;">';
-          html+='<div class="eg-tb-name">'+esc(t.name)+'</div>';
-          html+='<div class="eg-tb-meta"><span class="eg-gear-pill tech">'+esc(t.category)+'</span><span class="eg-gear-pill">SKILL: '+esc(t.skill||'General')+'</span><span class="eg-gear-pill" style="color:var(--ye);border-color:var(--ye);">'+esc(t.cost)+' pts</span></div>';
-          html+='<div class="eg-tb-effect">'+esc(t.effect)+'</div>';
-          html+='</div>';
-        });
-      } else {
-        html+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#3a3a3c;margin-bottom:8px;">No talent found for this archetype/budget.</div>';
-      }
+      html+='<div style="font-family:\'Orbitron\',monospace;font-size:8px;letter-spacing:1px;color:#8e8e93;margin-bottom:6px;text-transform:uppercase;">Talents ('+talArr.length+')</div>';
+      talArr.forEach((t,ti)=>{
+        html+='<div class="eg-gear-item" style="flex-direction:column;align-items:stretch;padding:8px 10px;margin-bottom:6px;">';
+        html+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">';
+        html+='<button class="eg-gear-remove" onclick="egState.talents.splice('+ti+',1);render();">✕</button>';
+        html+='<select class="eg-select" style="flex:1;" onchange="const _t=JSON.parse(this.value);egState.talents['+ti+']=_t;render();">';
+        (g.talents||[]).forEach(gt=>{const sel=gt.name===t.name?'selected':'';html+='<option value="'+esc(JSON.stringify({name:gt.name,skill:gt.skill||'',category:gt.category||'',effect:gt.effect||'',cost:gt.cost||'0'}))+'" '+sel+'>'+esc(gt.name)+' ['+esc(gt.category||'')+'] ('+esc(String(gt.cost||0))+'pts)</option>';});
+        html+='</select>';
+        html+='</div>';
+        html+='<div class="eg-tb-meta"><span class="eg-gear-pill tech">'+esc(t.category)+'</span><span class="eg-gear-pill">SKILL: '+esc(t.skill||'General')+'</span><span class="eg-gear-pill" style="color:var(--ye);border-color:var(--ye);">'+esc(t.cost)+' pts</span></div>';
+        html+='<div class="eg-tb-effect" style="margin-top:4px;">'+esc(t.effect)+'</div>';
+        html+='</div>';
+      });
+      if(!talArr.length){html+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#3a3a3c;margin-bottom:8px;">No talents — use the button below to add one.</div>';}
+      // Add talent picker
+      html+='<div style="display:flex;gap:6px;align-items:center;margin-top:4px;">';
+      html+='<select class="eg-select" id="eg-talent-add-sel" style="flex:1;"><option value="">— Select Talent to Add —</option>';
+      (g.talents||[]).forEach(gt=>{html+='<option value="'+esc(JSON.stringify({name:gt.name,skill:gt.skill||'',category:gt.category||'',effect:gt.effect||'',cost:gt.cost||'0'}))+'">'+esc(gt.name)+' ['+esc(gt.category||'')+'] ('+esc(String(gt.cost||0))+'pts)</option>';});
+      html+='</select>';
+      html+='<button class="eg-add-btn" onclick="const _sel=document.getElementById(\'eg-talent-add-sel\');if(_sel&&_sel.value){const _t=JSON.parse(_sel.value);if(!egState.talents.find(x=>x.name===_t.name)){egState.talents.push(_t);render();}}">+ Add Talent</button>';
+      html+='</div>';
       // Evolution
+      html+='<div style="font-family:\'Orbitron\',monospace;font-size:8px;letter-spacing:1px;color:#8e8e93;margin:14px 0 6px;text-transform:uppercase;">Evolution</div>';
       if(egState.evolution){
         const ev=egState.evolution;
         const t1=ev.tiers&&ev.tiers['TIER I'],t2=ev.tiers&&ev.tiers['TIER II'],t3=ev.tiers&&ev.tiers['TIER III'];
         const showT2=egState.tier==='elite'||egState.tier==='boss';
         const showT3=egState.tier==='boss';
-        html+='<div style="font-family:\'Orbitron\',monospace;font-size:8px;letter-spacing:1px;color:#8e8e93;margin:10px 0 6px;text-transform:uppercase;">Evolution — '+esc(ev.name)+'<span style="margin-left:8px;color:#3a3a3c;font-size:8px;">'+esc(ev.evo_type)+'</span></div>';
+        html+='<div style="display:flex;gap:6px;align-items:center;margin-bottom:6px;">';
+        html+='<button class="eg-gear-remove" onclick="egState.evolution=null;render();">✕</button>';
+        // Evolution selector dropdown
+        html+='<select class="eg-select" style="flex:1;" onchange="egState.evolution=JSON.parse(this.value);render();">';
+        const allGrouped=(g.evolutions&&g.evolutions.grouped)||[];
+        allGrouped.forEach(evOpt=>{const sel=evOpt.name===ev.name?'selected':'';html+='<option value="'+esc(JSON.stringify({name:evOpt.name,evo_type:evOpt.evo_type,tiers:evOpt.tiers||{}}))+'" '+sel+'>'+esc(evOpt.name)+' ['+esc(evOpt.evo_type)+']</option>';});
+        html+='</select>';
+        html+='</div>';
+        html+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:11px;color:#8e8e93;margin-bottom:4px;">'+esc(ev.name)+'<span style="margin-left:8px;color:#3a3a3c;font-size:10px;">'+esc(ev.evo_type)+'</span></div>';
         html+='<div class="eg-evo-box">';
         if(t1){html+='<div class="eg-evo-tier t1"><div class="eg-evo-tlbl">TIER I</div><div class="eg-evo-eff">'+esc(t1.effect)+'</div><div class="eg-evo-cost">'+esc(t1.availability||'')+'</div></div>';}
         if(showT2&&t2){html+='<div class="eg-evo-tier t2"><div class="eg-evo-tlbl">TIER II</div><div class="eg-evo-eff">'+esc(t2.effect)+'</div><div class="eg-evo-cost">'+esc(t2.availability||'')+'</div></div>';}
         if(showT3&&t3){html+='<div class="eg-evo-tier t3"><div class="eg-evo-tlbl">TIER III</div><div class="eg-evo-eff">'+esc(t3.effect)+'</div><div class="eg-evo-cost">'+esc(t3.availability||'')+'</div></div>';}
         html+='</div>';
       } else {
-        html+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#3a3a3c;">No evolution found for this archetype.</div>';
+        html+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#3a3a3c;margin-bottom:8px;">No evolution — use the picker below to add one.</div>';
+        // Add evolution picker
+        html+='<div style="display:flex;gap:6px;align-items:center;">';
+        html+='<select class="eg-select" id="eg-evo-add-sel" style="flex:1;"><option value="">— Select Evolution to Add —</option>';
+        const allGrouped2=(g.evolutions&&g.evolutions.grouped)||[];
+        allGrouped2.forEach(evOpt=>{html+='<option value="'+esc(JSON.stringify({name:evOpt.name,evo_type:evOpt.evo_type,tiers:evOpt.tiers||{}}))+'">'+esc(evOpt.name)+' ['+esc(evOpt.evo_type)+']</option>';});
+        html+='</select>';
+        html+='<button class="eg-add-btn" onclick="const _esel=document.getElementById(\'eg-evo-add-sel\');if(_esel&&_esel.value){egState.evolution=JSON.parse(_esel.value);render();}">+ Set Evolution</button>';
+        html+='</div>';
       }
     }
     html+='</div>';
@@ -10678,39 +10704,75 @@ function render(){
     {
       const dcArch=EG_ARCHETYPES[egState.archetype]||EG_ARCHETYPES.soldier;
       const hackSkill=egState.skills['Hacking']||0;
+      const egDcAvails=EG_AVAIL_BY_TIER[egState.tier];
+      const egDcLegals=EG_LEGAL_BY_TIER[egState.tier];
+      const allDcPool=(g.datacoms||[]).filter(d=>(d.type==='Basic Datacom'||d.type==='Full Datacom'));
+      const sw=g.software||{};
       html+='<div class="eg-section">';
       html+='<div class="eg-section-title" style="display:flex;align-items:center;gap:6px;">Datacom &amp; Software<button class="eg-lock-btn'+(egState.locks.datacom?' locked':'')+'" title="Lock datacom" onclick="egState.locks.datacom=!egState.locks.datacom;render();">'+(egState.locks.datacom?'🔒':'🔓')+'</button></div>';
       if(egState.datacom){
         const dc=egState.datacom;
-        html+='<div class="eg-talent-box" style="margin-bottom:8px;">';
-        html+='<div class="eg-tb-name">'+esc(dc.name)+'</div>';
+        const memCap=parseInt(dc.memory)||1;
+        const naniteCap=parseInt(dc.nanites)||0;
+        // Datacom selector row
+        html+='<div class="eg-gear-item" style="flex-direction:column;align-items:stretch;padding:8px 10px;margin-bottom:8px;">';
+        html+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">';
+        html+='<button class="eg-gear-remove" onclick="egState.datacom=null;egState.programs=[];egState.gadgets=[];render();">✕</button>';
+        html+='<select class="eg-select" style="flex:1;" onchange="const _dc=JSON.parse(this.value);egState.datacom=_dc;egState.programs=[];egState.gadgets=[];render();">';
+        allDcPool.forEach(d=>{const sel=d.name===dc.name?'selected':'';html+='<option value="'+esc(JSON.stringify({name:d.name,type:d.type,memory:d.memory,cpu:d.cpu,nanites:d.nanites||'0',availability:d.availability,legality:d.legality}))+'" '+sel+'>'+esc(d.name)+' ['+esc(d.type)+'] MEM:'+esc(d.memory)+' — '+esc(d.availability)+'</option>';});
+        html+='</select>';
+        html+='</div>';
         html+='<div class="eg-tb-meta"><span class="eg-gear-pill tech">'+esc(dc.type)+'</span><span class="eg-gear-pill">MEM: '+esc(dc.memory)+'</span><span class="eg-gear-pill">CPU: '+esc(dc.cpu)+'</span>'+(parseInt(dc.nanites)>0?'<span class="eg-gear-pill">NANITES: '+esc(dc.nanites)+'</span>':'')+'<span class="eg-gear-pill" style="color:var(--gr);">'+esc(dc.availability)+'</span></div>';
         html+='</div>';
-        if((egState.programs||[]).length){
-          html+='<div style="font-family:\'Orbitron\',monospace;font-size:8px;letter-spacing:1px;color:#8e8e93;margin:6px 0 4px;text-transform:uppercase;">Programs</div>';
-          egState.programs.forEach(p=>{
-            html+='<div style="display:flex;gap:6px;align-items:center;padding:3px 0;border-bottom:1px solid #2c2c2e;">';
-            html+='<span style="font-family:\'Share Tech Mono\',monospace;font-size:11px;color:#f2f2f7;flex:1;">'+esc(p.name)+'</span>';
-            html+='<span class="eg-gear-pill">MEM:'+esc(p.memory)+'</span><span class="eg-gear-pill" style="color:var(--gr);">'+esc(p.availability)+'</span>';
-            html+='</div>';
-          });
+        // Calculate used memory
+        const usedMem=(egState.programs||[]).reduce((s,p)=>s+(parseInt(p.memory)||1),0)+(egState.gadgets||[]).reduce((s,g2)=>s+(parseInt(g2.memory)||1),0);
+        html+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#8e8e93;margin-bottom:6px;">Memory used: '+usedMem+' / '+memCap+(naniteCap>0?' · Nanite slots: '+naniteCap:'')+'</div>';
+        // Programs list
+        html+='<div style="font-family:\'Orbitron\',monospace;font-size:8px;letter-spacing:1px;color:#8e8e93;margin:6px 0 4px;text-transform:uppercase;">Programs</div>';
+        (egState.programs||[]).forEach((p,pi)=>{
+          html+='<div style="display:flex;gap:6px;align-items:center;padding:3px 0;border-bottom:1px solid #2c2c2e;">';
+          html+='<button class="eg-gear-remove" style="flex-shrink:0;" onclick="egState.programs.splice('+pi+',1);render();">✕</button>';
+          html+='<span style="font-family:\'Share Tech Mono\',monospace;font-size:11px;color:#f2f2f7;flex:1;">'+esc(p.name)+'</span>';
+          html+='<span class="eg-gear-pill">MEM:'+esc(p.memory)+'</span><span class="eg-gear-pill" style="color:var(--gr);">'+esc(p.availability)+'</span>';
+          html+='</div>';
+        });
+        if(usedMem<memCap){
+          html+='<div style="display:flex;gap:6px;align-items:center;margin-top:4px;">';
+          html+='<select class="eg-select" id="eg-prog-add-sel" style="flex:1;"><option value="">— Add Program —</option>';
+          (sw.programs||[]).filter(p=>!egState.programs.find(x=>x.name===p.name)&&(parseInt(p.memory)||1)<=(memCap-usedMem)).forEach(p=>{html+='<option value="'+esc(JSON.stringify({name:p.name,memory:p.memory||'1',availability:p.availability||'',legality:p.legality||''}))+'">'+esc(p.name)+' (MEM:'+esc(p.memory||'1')+') — '+esc(p.availability)+'</option>';});
+          html+='</select>';
+          html+='<button class="eg-add-btn" onclick="const _ps=document.getElementById(\'eg-prog-add-sel\');if(_ps&&_ps.value){egState.programs.push(JSON.parse(_ps.value));render();}">+ Add</button>';
+          html+='</div>';
         }
-        if((egState.gadgets||[]).length){
-          html+='<div style="font-family:\'Orbitron\',monospace;font-size:8px;letter-spacing:1px;color:#8e8e93;margin:8px 0 4px;text-transform:uppercase;">Gadgets</div>';
-          egState.gadgets.forEach(gd=>{
+        // Gadgets list (only if datacom has nanite slots)
+        if(naniteCap>0){
+          html+='<div style="font-family:\'Orbitron\',monospace;font-size:8px;letter-spacing:1px;color:#8e8e93;margin:10px 0 4px;text-transform:uppercase;">Gadgets</div>';
+          (egState.gadgets||[]).forEach((gd,gi)=>{
             html+='<div style="display:flex;gap:6px;align-items:center;padding:3px 0;border-bottom:1px solid #2c2c2e;">';
+            html+='<button class="eg-gear-remove" style="flex-shrink:0;" onclick="egState.gadgets.splice('+gi+',1);render();">✕</button>';
             html+='<span style="font-family:\'Share Tech Mono\',monospace;font-size:11px;color:#f2f2f7;flex:1;">'+esc(gd.name)+'</span>';
             html+='<span class="eg-gear-pill">MEM:'+esc(gd.memory)+'</span><span class="eg-gear-pill" style="color:var(--pu);">'+esc(gd.availability)+'</span>';
             html+='</div>';
           });
+          if(usedMem<memCap){
+            html+='<div style="display:flex;gap:6px;align-items:center;margin-top:4px;">';
+            html+='<select class="eg-select" id="eg-gad-add-sel" style="flex:1;"><option value="">— Add Gadget —</option>';
+            (sw.gadgets||[]).filter(gd=>!egState.gadgets.find(x=>x.name===gd.name)&&(parseInt(gd.memory)||1)<=(memCap-usedMem)).forEach(gd=>{html+='<option value="'+esc(JSON.stringify({name:gd.name,memory:gd.memory||'1',availability:gd.availability||'',legality:gd.legality||''}))+'">'+esc(gd.name)+' (MEM:'+esc(gd.memory||'1')+') — '+esc(gd.availability)+'</option>';});
+            html+='</select>';
+            html+='<button class="eg-add-btn" onclick="const _gs=document.getElementById(\'eg-gad-add-sel\');if(_gs&&_gs.value){egState.gadgets.push(JSON.parse(_gs.value));render();}">+ Add</button>';
+            html+='</div>';
+          }
         }
-        html+='<button class="eg-add-btn" style="margin-top:8px;" onclick="egAutoDatacom();render();">🎲 Re-roll Datacom</button>';
-        html+='<button class="eg-add-btn" style="margin-top:8px;margin-left:6px;color:var(--re);border-color:var(--re);" onclick="egState.datacom=null;egState.programs=[];egState.gadgets=[];render();">✕ Remove</button>';
-      } else if(dcArch.isHacker||hackSkill>=2){
-        html+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#3a3a3c;margin-bottom:8px;">No datacom generated — click to add.</div>';
-        html+='<button class="eg-add-btn" onclick="egAutoDatacom();render();">+ Add Datacom</button>';
       } else {
-        html+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#3a3a3c;">No datacom for this archetype (requires Hacking skill ≥ 2).</div>';
+        // No datacom — show picker to add one
+        html+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#3a3a3c;margin-bottom:8px;">No datacom — select one below to add.</div>';
+        html+='<div style="display:flex;gap:6px;align-items:center;">';
+        html+='<select class="eg-select" id="eg-dc-add-sel" style="flex:1;"><option value="">— Select Datacom —</option>';
+        allDcPool.forEach(d=>{html+='<option value="'+esc(JSON.stringify({name:d.name,type:d.type,memory:d.memory,cpu:d.cpu,nanites:d.nanites||'0',availability:d.availability,legality:d.legality}))+'">'+esc(d.name)+' ['+esc(d.type)+'] MEM:'+esc(d.memory)+' — '+esc(d.availability)+'</option>';});
+        html+='</select>';
+        html+='<button class="eg-add-btn" onclick="const _ds=document.getElementById(\'eg-dc-add-sel\');if(_ds&&_ds.value){egState.datacom=JSON.parse(_ds.value);egState.programs=[];egState.gadgets=[];render();}">+ Add</button>';
+        html+='<button class="eg-add-btn" style="margin-left:2px;" onclick="egAutoDatacom();render();">🎲 Random</button>';
+        html+='</div>';
       }
       // Spirit/Spells placeholder for mage
       if(dcArch.isMage){
