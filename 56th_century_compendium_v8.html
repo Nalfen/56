@@ -120,7 +120,7 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 .db-reset-btn:hover{color:var(--re);border-color:#4a1c1c;}
 .db-empty{text-align:center;padding:40px 20px;color:var(--mu);font-family:'IBM Plex Sans',sans-serif;font-size:13px;}
 .db-empty-icon{font-size:36px;margin-bottom:8px;}.db-empty-msg{font-size:13px;font-family:'IBM Plex Sans',sans-serif;color:var(--mu);}.db-zone-mod{font-size:9px;font-family:'IBM Plex Mono',monospace;color:var(--mu);}.db-wpn-picker{margin:4px 0 4px 0;padding:8px;background:rgba(255,255,255,.03);border:1px solid rgba(255,159,10,.2);border-radius:4px;}.db-wpn-list{display:flex;flex-wrap:wrap;gap:3px;max-height:110px;overflow-y:auto;margin-bottom:4px;}.db-wpn-search{font-size:11px;font-family:'IBM Plex Mono',monospace;background:rgba(255,255,255,.05);border:1px solid var(--border2);border-radius:4px;color:var(--tx);padding:3px 8px;}
-.desc{font-size:14px;line-height:1.8;color:var(--tx2);font-family:'IBM Plex Sans',sans-serif;}
+.desc{font-size:13px;line-height:1.8;color:var(--tx2);font-family:'IBM Plex Sans',sans-serif;}
 .desc b,.desc strong{font-weight:600;color:var(--tx);}
 .desc p,.gc-desc-block p,.gd p{margin:0 0 10px 0;}
 .desc p:last-child,.gc-desc-block p:last-child,.gd p:last-child{margin-bottom:0;}
@@ -543,7 +543,7 @@ aside.open{transform:translateX(0);}
 .opt-table th,.opt-table td{padding:6px 6px;}
 .nb{padding:9px 16px;font-size:14px;}
 .cn{font-size:15px;}
-.desc,.re,.rv,.gd{font-size:14px;line-height:1.75;}
+.re,.rv,.gd{font-size:14px;line-height:1.75;}
 .card{padding:14px 0 14px 12px;}
 .gc-panel-pname{font-size:16px;}
 .world-panel-title{font-size:16px;}
@@ -10660,9 +10660,19 @@ function render(){
       });
       if(!talArr.length){html+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#3a3a3c;margin-bottom:8px;">No talents — use the button below to add one.</div>';}
       // Add talent picker
+      const _talCatMap={Physical:'PHYSICAL',Mental:'MENTAL',Social:'SOCIAL',Acuity:'ACUITY'};
+      const _talLimits={};
+      ['Physical','Mental','Social','Acuity'].forEach(cat=>{_talLimits[_talCatMap[cat]]=EG_SKILLS_ALL.filter(s=>s.cat===cat).reduce((sum,s)=>sum+(egState.skills[s.key]||0),0);});
+      const _talSpent={};
+      (egState.talents||[]).forEach(t=>{_talSpent[t.category]=(_talSpent[t.category]||0)+(parseInt(t.cost)||0);});
+      const _talAddable=(g.talents||[]).filter(gt=>{
+        if((egState.talents||[]).find(x=>x.name===gt.name))return false;
+        const cost=parseInt(gt.cost)||0;
+        return (_talSpent[gt.category]||0)+cost<=(_talLimits[gt.category]||0);
+      });
       html+='<div style="display:flex;gap:6px;align-items:center;margin-top:4px;">';
       html+='<select class="eg-select" id="eg-talent-add-sel" style="flex:1;"><option value="">— Select Talent to Add —</option>';
-      (g.talents||[]).forEach(gt=>{html+='<option value="'+esc(JSON.stringify({name:gt.name,skill:gt.skill||'',category:gt.category||'',effect:gt.effect||'',cost:gt.cost||'0'}))+'">'+esc(gt.name)+' ['+esc(gt.category||'')+'] ('+esc(String(gt.cost||0))+'pts)</option>';});
+      _talAddable.forEach(gt=>{html+='<option value="'+esc(JSON.stringify({name:gt.name,skill:gt.skill||'',category:gt.category||'',effect:gt.effect||'',cost:gt.cost||'0'}))+'">'+esc(gt.name)+' ['+esc(gt.category||'')+'] ('+esc(String(gt.cost||0))+'pts)</option>';});
       html+='</select>';
       html+='<button class="eg-add-btn" onclick="const _sel=document.getElementById(\'eg-talent-add-sel\');if(_sel&&_sel.value){const _t=JSON.parse(_sel.value);if(!egState.talents.find(x=>x.name===_t.name)){egState.talents.push(_t);render();}}">+ Add Talent</button>';
       html+='</div>';
