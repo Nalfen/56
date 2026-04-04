@@ -8623,7 +8623,8 @@ function egAutoTalentsEvos(){
   const usedIds=new Set();
   const allTalents=(g.talents||[]).filter(t=>{
     const cat=t.category;
-    return cat===talentCat||archCats.includes(cat);
+    if(!(cat===talentCat||archCats.includes(cat)))return false;
+    return egTalentMatchesRace(t,egState.race);
   });
   for(let pass=0;pass<maxPasses;pass++){
     // Only pick a talent if its category's skill total has room for the cost
@@ -8635,16 +8636,16 @@ function egAutoTalentsEvos(){
       return spent+cost<=limit;
     });
     if(!eligible.length) break;
-    const maxCost=Math.max(...eligible.map(t=>parseInt(t.cost)));
-    const topTier=eligible.filter(t=>parseInt(t.cost)===maxCost);
-    const picked=topTier[Math.floor(Math.random()*topTier.length)];
+    const _costWeights={5:40,10:30,15:20,20:8,25:4};
+    const _pool=[];eligible.forEach(t=>{const w=_costWeights[parseInt(t.cost)]||1;for(let _wi=0;_wi<w;_wi++)_pool.push(t);});
+    const picked=_pool[Math.floor(Math.random()*_pool.length)];
     egState.talents.push(picked);
     usedIds.add(picked.name);
     catSpent[picked.category]=(catSpent[picked.category]||0)+parseInt(picked.cost);
   }
   if(!egState.talents.length){
     // Fallback: one 5-pt talent from archetype cats (respect per-category limit)
-    const fb=(g.talents||[]).filter(t=>archCats.includes(t.category)&&parseInt(t.cost)===5&&(catLimits[t.category]||0)>=5);
+    const fb=(g.talents||[]).filter(t=>archCats.includes(t.category)&&parseInt(t.cost)===5&&(catLimits[t.category]||0)>=5&&egTalentMatchesRace(t,egState.race));
     if(fb.length) egState.talents=[fb[Math.floor(Math.random()*fb.length)]];
   }
   // ── Evolution ───────────────────────────────────────────────────────────────
@@ -8700,6 +8701,35 @@ function egAutoConsumables(){
   egState.consumables=picked;
 }
 
+function egSpecialDesc(specialStr){
+  if(!specialStr||!g.specials)return specialStr||'';
+  return specialStr.split(/[,\/]/).map(s=>{
+    const trimmed=s.trim();
+    const key=trimmed.replace(/[()]/g,'').split(' ')[0];
+    const sp=g.specials[key]||g.specials[key.toUpperCase()]||g.specials[key.toLowerCase()];
+    if(sp&&sp.desc)return trimmed+': '+sp.desc;
+    return trimmed;
+  }).join(' | ');
+}
+
+function egTalentMatchesRace(t,raceName){
+  const req=(t.req||'0').trim();
+  if(req==='0'||!req)return true;
+  const raceNames=new Set((g.races||[]).map(r=>r.name.toUpperCase()));
+  const parts=req.toUpperCase().split(/\s+OR\s+/);
+  const isRaceReq=parts.some(p=>raceNames.has(p.trim()));
+  if(!isRaceReq)return true;
+  const raceUp=(raceName||'').toUpperCase();
+  return parts.some(p=>p.trim()===raceUp);
+}
+
+function egUpdateDiffLabel(){
+  const el=document.getElementById('eg-diff-label');
+  if(!el)return;
+  const v=egState.difficulty||5;
+  el.innerHTML=v<=3?'<span style="color:var(--gr);font-weight:600;">EASY ('+v+')</span>':v<=6?'<span style="color:var(--a2);font-weight:600;">STANDARD ('+v+')</span>':'<span style="color:var(--re);font-weight:600;">HARDENED ('+v+')</span>';
+}
+
 function egExportVTTES(){
   const attribs=[];
   function att(name,current,max){
@@ -8729,7 +8759,7 @@ function egExportVTTES(){
     const n=i+1;
     att('weapon'+n+'_name',w.name,'');att('weapon'+n+'_type',w.type,'');att('weapon'+n+'_dmgtype',w.dmgtype,'');
     att('weapon'+n+'_power',w.power,'');att('weapon'+n+'_dmg',w.dmg,'');att('weapon'+n+'_expertise',w.expertise,'');
-    att('weapon'+n+'_special',w.special,'');att('weapon'+n+'_close_range',w.close_range,'');
+    att('weapon'+n+'_special',egSpecialDesc(w.special),'');att('weapon'+n+'_close_range',w.close_range,'');
     att('weapon'+n+'_medium_range',w.medium_range,'');att('weapon'+n+'_long_range',w.long_range,'');
     att('weapon'+n+'_rof',w.rof,'');att('weapon'+n+'_currentammo',w.ammo,'');att('weapon'+n+'_ammo',w.ammo,'');
     att('weapon'+n+'_reload',w.reload,'');att('weapon'+n+'_skill',w.skill,'');att('weapon'+n+'_dmgtarget',w.dmgtarget,'');
@@ -8740,7 +8770,7 @@ function egExportVTTES(){
     att('armor'+n+'_name',ar.name,'');att('armor'+n+'_type',ar.type,'');
     att('armor'+n+'_def_phys',ar.def_phys,'');att('armor'+n+'_def_energy',ar.def_energy,'');
     att('armor'+n+'_def_tech',ar.def_tech,'');att('armor'+n+'_def_spirit',ar.def_spirit,'');
-    att('armor'+n+'_special',ar.special,'');att('armor'+n+'_soak_expr',ar.soak,'');
+    att('armor'+n+'_special',egSpecialDesc(ar.special),'');att('armor'+n+'_soak_expr',ar.soak,'');
   });
   // Misc
   att('notes','','');att('total_xp',0,'');att('credited_xp',0,'');att('attribute_xp',0,'');
@@ -8776,6 +8806,7 @@ function egExportVTTES(){
     const dc=egState.datacom;
     gmHtml+='<h2><strong>DATACOM: '+_gmE(dc.name)+'</strong></h2>\n';
     gmHtml+='<p><strong>'+_gmE(dc.type)+'</strong><br>\n<strong>MEM: '+_gmE(dc.memory)+' | CPU: '+_gmE(dc.cpu)+(parseInt(dc.nanites)>0?' | NANITE POOL: '+_gmE(dc.nanites):'')+' </strong></p>\n';
+    if(dc.special){gmHtml+='<p><em>Special: '+_gmE(egSpecialDesc(dc.special))+'</em></p>\n';}
     gmHtml+='<hr>\n';
     if((egState.programs||[]).length){
       gmHtml+='<h1><strong>PROGRAMS</strong></h1>\n<hr>\n';
@@ -10734,8 +10765,8 @@ function render(){
       html+='<div class="eg-row" style="margin-top:10px;align-items:center;gap:10px;">';
       html+='<button class="eg-lock-btn'+(egState.locks.difficulty?' locked':'')+'" title="Lock difficulty" onclick="egState.locks.difficulty=!egState.locks.difficulty;render();">'+(egState.locks.difficulty?'🔒':'🔓')+'</button>';
       html+='<span class="eg-label">DIFFICULTY</span>';
-      html+='<input type="range" min="1" max="10" value="'+dv+'" style="width:160px;accent-color:var(--a);" oninput="egState.difficulty=parseInt(this.value);egCalcResources();render();" />';
-      html+=dLabel;
+      html+='<input type="range" min="1" max="10" value="'+dv+'" style="width:160px;accent-color:var(--a);" onclick="event.stopPropagation();" oninput="event.stopPropagation();egState.difficulty=parseInt(this.value);egCalcResources();egUpdateDiffLabel();" onchange="render();" />';
+      html+='<span id="eg-diff-label">'+dLabel+'</span>';
       html+='<span style="font-family:\'Share Tech Mono\',monospace;font-size:9px;color:var(--mu);margin-left:4px;">1=weakest · 10=strongest</span>';
       html+='</div>';
     }
@@ -10803,7 +10834,7 @@ function render(){
       html+='<div class="eg-weapon-select-wrap" style="display:flex;gap:4px;align-items:center;">';
       html+='<select class="eg-select" style="max-width:220px;" onchange="const pw=JSON.parse(this.value);const _ws=egWpnToState(pw);_ws.mfr=egState.weapons['+i+'].mfr||\'Generic\';egState.weapons['+i+']=_ws;render();">';
       const filteredWpns=(g.weapons||[]).filter(fw=>avails.includes(fw.availability)&&legals.includes(fw.legality));
-      filteredWpns.forEach(fw=>{const sel=fw.name===w.name?'selected':'';html+='<option value="'+esc(JSON.stringify({name:fw.name,category:fw.category,dmg_type:fw.dmg_type||fw.type,type:fw.type,power:fw.power,damage:fw.damage,special:fw.special,range_short:fw.range_short,range_med:fw.range_med,range_long:fw.range_long,rof:fw.rof,ammo:fw.ammo,reload:fw.reload,expertise:fw.expertise}))+'" '+sel+'>'+esc(fw.name)+'</option>';});
+      filteredWpns.forEach(fw=>{const sel=fw.name===(w._src?w._src.name:w.name)?'selected':'';html+='<option value="'+esc(JSON.stringify({name:fw.name,category:fw.category,dmg_type:fw.dmg_type||fw.type,type:fw.type,power:fw.power,damage:fw.damage,special:fw.special,range_short:fw.range_short,range_med:fw.range_med,range_long:fw.range_long,rof:fw.rof,ammo:fw.ammo,reload:fw.reload,expertise:fw.expertise}))+'" '+sel+'>'+esc(fw.name)+'</option>';});
       html+='</select>';
       // manufacturer selector
       {
@@ -10843,7 +10874,7 @@ function render(){
       html+='<div class="eg-weapon-select-wrap" style="display:flex;gap:4px;align-items:center;">';
       html+='<select class="eg-select" style="max-width:220px;" onchange="const pa=JSON.parse(this.value);const _as=egArmorToState(pa);_as.mfr=egState.armors['+i+'].mfr||\'Generic\';egState.armors['+i+']=_as;egCalcResources();render();">';
       const filteredAr=(g.armor||[]).filter(fa=>availsAr.includes(fa.availability));
-      filteredAr.forEach(fa=>{const sel=fa.name===ar.name?'selected':'';html+='<option value="'+esc(JSON.stringify({name:fa.name,type:fa.type,def_physical:fa.def_physical,def_energy:fa.def_energy,def_tech:fa.def_tech,def_spiritual:fa.def_spiritual,special:fa.special,soak:fa.soak,soak_max:fa.soak_max,soak_min:fa.soak_min}))+'" '+sel+'>'+esc(fa.name)+'</option>';});
+      filteredAr.forEach(fa=>{const sel=fa.name===(ar._src?ar._src.name:ar.name)?'selected':'';html+='<option value="'+esc(JSON.stringify({name:fa.name,type:fa.type,def_physical:fa.def_physical,def_energy:fa.def_energy,def_tech:fa.def_tech,def_spiritual:fa.def_spiritual,special:fa.special,soak:fa.soak,soak_max:fa.soak_max,soak_min:fa.soak_min}))+'" '+sel+'>'+esc(fa.name)+'</option>';});
       html+='</select>';
       html+='<select class="eg-select" style="max-width:130px;" title="Manufacturer" onchange="const _srcA=egState.armors['+i+']._src;if(_srcA){const _nm=this.value;const _mod=_nm===\'Generic\'?{..._srcA}:applyArmorMfr(_srcA,_nm);if(_mod){const _nas=egArmorToState(_mod);_nas.mfr=_nm;_nas._src=_srcA;egState.armors['+i+']=_nas;egCalcResources();render();}}">';
       ARMOR_MFRS.forEach(m=>{const sel=(ar.mfr||'Generic')===m?'selected':'';html+='<option value="'+esc(m)+'" '+sel+'>'+esc(m)+'</option>';});
@@ -10883,7 +10914,7 @@ function render(){
           if(c.availability)html+='<span class="eg-gear-pill" style="font-size:9px;color:var(--mu);">'+esc(c.availability)+'</span>';
           html+='</div>';
           if(c.application)html+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:9px;color:var(--a2);margin-top:2px;padding-left:20px;">Apply: '+esc(c.application)+'</div>';
-          if(c.effect||c.desc){const eff=c.effect||c.desc||'';html+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#8e8e93;margin-top:3px;padding-left:20px;">'+esc(eff.length>90?eff.slice(0,88)+'…':eff)+'</div>';}
+          if(c.effect||c.desc){const eff=c.effect||c.desc||'';html+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#8e8e93;margin-top:3px;padding-left:20px;">'+esc(eff)+'</div>';}
           html+='</div>';
         });
       }
@@ -10914,7 +10945,7 @@ function render(){
         html+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">';
         html+='<button class="eg-gear-remove" onclick="egState.talents.splice('+ti+',1);render();">✕</button>';
         html+='<select class="eg-select" style="flex:1;" onchange="const _t=JSON.parse(this.value);egState.talents['+ti+']=_t;render();">';
-        (g.talents||[]).forEach(gt=>{const sel=gt.name===t.name?'selected':'';html+='<option value="'+esc(JSON.stringify({name:gt.name,skill:gt.skill||'',category:gt.category||'',effect:gt.effect||'',cost:gt.cost||'0'}))+'" '+sel+'>'+esc(gt.name)+' ['+esc(gt.category||'')+'] ('+esc(String(gt.cost||0))+'pts)</option>';});
+        (g.talents||[]).filter(gt=>egTalentMatchesRace(gt,egState.race)).forEach(gt=>{const sel=gt.name===t.name?'selected':'';html+='<option value="'+esc(JSON.stringify({name:gt.name,skill:gt.skill||'',category:gt.category||'',effect:gt.effect||'',cost:gt.cost||'0'}))+'" '+sel+'>'+esc(gt.name)+' ['+esc(gt.category||'')+'] ('+esc(String(gt.cost||0))+'pts)</option>';});
         html+='</select>';
         html+='</div>';
         html+='<div class="eg-tb-meta"><span class="eg-gear-pill tech">'+esc(t.category)+'</span><span class="eg-gear-pill">SKILL: '+esc(t.skill||'General')+'</span><span class="eg-gear-pill" style="color:var(--ye);border-color:var(--ye);">'+esc(t.cost)+' pts</span></div>';
@@ -10929,6 +10960,7 @@ function render(){
       const _talSpent={};
       (egState.talents||[]).forEach(t=>{_talSpent[t.category]=(_talSpent[t.category]||0)+(parseInt(t.cost)||0);});
       const _talAddable=(g.talents||[]).filter(gt=>{
+        if(!egTalentMatchesRace(gt,egState.race))return false;
         if((egState.talents||[]).find(x=>x.name===gt.name))return false;
         const cost=parseInt(gt.cost)||0;
         return (_talSpent[gt.category]||0)+cost<=(_talLimits[gt.category]||0);
