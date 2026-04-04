@@ -8613,13 +8613,13 @@ function egExportVTTES(){
   if(egState.datacom){
     const dc=egState.datacom;
     gmHtml+='<h2><strong>DATACOM: '+_gmE(dc.name)+'</strong></h2>\n';
-    gmHtml+='<p><strong>'+_gmE(dc.type)+'</strong><br>\n<strong>MEM: '+_gmE(dc.memory)+' | CPU: '+_gmE(dc.cpu)+(parseInt(dc.nanites)>0?' | NANITES: '+_gmE(dc.nanites):'')+' </strong></p>\n';
+    gmHtml+='<p><strong>'+_gmE(dc.type)+'</strong><br>\n<strong>MEM: '+_gmE(dc.memory)+' | CPU: '+_gmE(dc.cpu)+(parseInt(dc.nanites)>0?' | NANITE POOL: '+_gmE(dc.nanites):'')+' </strong></p>\n';
     gmHtml+='<hr>\n';
     if((egState.programs||[]).length){
       gmHtml+='<h1><strong>PROGRAMS</strong></h1>\n<hr>\n';
       egState.programs.forEach(p=>{
         gmHtml+='<h2><strong>'+_gmE(p.name)+'</strong></h2>\n';
-        gmHtml+='<p><strong>(MEM:'+_gmE(p.memory)+' | '+_gmE(p.availability)+' / '+_gmE(p.legality)+')</strong></p>\n';
+        gmHtml+='<p><strong>(MEM:'+_gmE(p.memory)+(p.cpu?' | CPU:'+_gmE(p.cpu):'')+' | '+_gmE(p.availability)+' / '+_gmE(p.legality)+')</strong></p>\n';
         if(p.passive||p.active){
           if(p.passive){gmHtml+='<h3><strong>[Without Control]</strong></h3>\n<p>'+_gmE(p.passive)+'</p>\n';}
           if(p.active){gmHtml+='<h3><strong>[With Control]</strong></h3>\n<p>'+_gmE(p.active)+'</p>\n';}
@@ -8633,7 +8633,7 @@ function egExportVTTES(){
       gmHtml+='<h1><strong>GADGETS</strong></h1>\n<hr>\n';
       egState.gadgets.forEach(gd=>{
         gmHtml+='<h2><strong>'+_gmE(gd.name)+'</strong></h2>\n';
-        gmHtml+='<p><strong>(MEM:'+_gmE(gd.memory)+' | '+_gmE(gd.availability)+' / '+_gmE(gd.legality)+')</strong></p>\n';
+        gmHtml+='<p><strong>(MEM:'+_gmE(gd.memory)+(gd.nanite?' | NANITE:'+_gmE(gd.nanite):'')+' | '+_gmE(gd.availability)+' / '+_gmE(gd.legality)+')</strong></p>\n';
         if(gd.effect||gd.desc){gmHtml+='<blockquote><p>'+_gmE(gd.effect||gd.desc)+'</p></blockquote>\n';}
         gmHtml+='<hr>\n';
       });
@@ -10760,7 +10760,7 @@ function render(){
         html+='</div>';
         // Calculate used memory
         const usedMem=(egState.programs||[]).reduce((s,p)=>s+(parseInt(p.memory)||1),0)+(egState.gadgets||[]).reduce((s,g2)=>s+(parseInt(g2.memory)||1),0);
-        html+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#8e8e93;margin-bottom:6px;">Memory used: '+usedMem+' / '+memCap+(naniteCap>0?' · Nanite slots: '+naniteCap:'')+'</div>';
+        html+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#8e8e93;margin-bottom:6px;">Memory used: '+usedMem+' / '+memCap+(naniteCap>0?' · Nanite pool: '+naniteCap:'')+'</div>';
         // Programs list
         html+='<div style="font-family:\'Orbitron\',monospace;font-size:8px;letter-spacing:1px;color:#8e8e93;margin:6px 0 4px;text-transform:uppercase;">Programs</div>';
         (egState.programs||[]).forEach((p,pi)=>{
@@ -10768,7 +10768,7 @@ function render(){
           html+='<div style="display:flex;gap:6px;align-items:center;">';
           html+='<button class="eg-gear-remove" style="flex-shrink:0;" onclick="egState.programs.splice('+pi+',1);render();">✕</button>';
           html+='<span style="font-family:\'Share Tech Mono\',monospace;font-size:11px;color:#f2f2f7;flex:1;">'+esc(p.name)+'</span>';
-          html+='<span class="eg-gear-pill">MEM:'+esc(p.memory)+'</span><span class="eg-gear-pill" style="color:var(--gr);">'+esc(p.availability)+'</span>';
+          html+='<span class="eg-gear-pill">MEM:'+esc(p.memory)+'</span>'+(p.cpu?'<span class="eg-gear-pill" style="color:var(--a2);">CPU:'+esc(p.cpu)+'</span>':'')+'<span class="eg-gear-pill" style="color:var(--gr);">'+esc(p.availability)+'</span>';
           html+='</div>';
           if(p.passive||p.active||p.effect||p.desc){
             if(p.passive) html+='<div style="margin-top:3px;padding-left:20px;font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#8e8e93;"><span style="color:var(--gr);font-size:9px;text-transform:uppercase;letter-spacing:1px;">Without Control</span> '+esc(p.passive)+'</div>';
@@ -10780,12 +10780,12 @@ function render(){
         if(usedMem<memCap){
           html+='<div style="display:flex;gap:6px;align-items:center;margin-top:4px;">';
           html+='<select class="eg-select" id="eg-prog-add-sel" style="flex:1;"><option value="">— Add Program —</option>';
-          (sw.programs||[]).filter(p=>!egState.programs.find(x=>x.name===p.name)&&(parseInt(p.memory)||1)<=(memCap-usedMem)).forEach(p=>{html+='<option value="'+esc(JSON.stringify({name:p.name,memory:p.memory||'1',availability:p.availability||'',legality:p.legality||'',passive:p.passive||'',active:p.active||'',effect:p.effect||'',desc:p.desc||''}))+'">'+esc(p.name)+' (MEM:'+esc(p.memory||'1')+') — '+esc(p.availability)+'</option>';});
+          (sw.programs||[]).filter(p=>!egState.programs.find(x=>x.name===p.name)&&(parseInt(p.memory)||1)<=(memCap-usedMem)).forEach(p=>{html+='<option value="'+esc(JSON.stringify({name:p.name,memory:p.memory||'1',cpu:p.cpu||'',availability:p.availability||'',legality:p.legality||'',passive:p.passive||'',active:p.active||'',effect:p.effect||'',desc:p.desc||''}))+'">'+esc(p.name)+' (MEM:'+esc(p.memory||'1')+' CPU:'+esc(p.cpu||'?')+') — '+esc(p.availability)+'</option>';});
           html+='</select>';
           html+='<button class="eg-add-btn" onclick="const _ps=document.getElementById(\'eg-prog-add-sel\');if(_ps&&_ps.value){egState.programs.push(JSON.parse(_ps.value));render();}">+ Add</button>';
           html+='</div>';
         }
-        // Gadgets list (only if datacom has nanite slots)
+        // Gadgets list (only if datacom has a nanite pool)
         if(naniteCap>0){
           html+='<div style="font-family:\'Orbitron\',monospace;font-size:8px;letter-spacing:1px;color:#8e8e93;margin:10px 0 4px;text-transform:uppercase;">Gadgets</div>';
           (egState.gadgets||[]).forEach((gd,gi)=>{
@@ -10793,7 +10793,7 @@ function render(){
             html+='<div style="display:flex;gap:6px;align-items:center;">';
             html+='<button class="eg-gear-remove" style="flex-shrink:0;" onclick="egState.gadgets.splice('+gi+',1);render();">✕</button>';
             html+='<span style="font-family:\'Share Tech Mono\',monospace;font-size:11px;color:#f2f2f7;flex:1;">'+esc(gd.name)+'</span>';
-            html+='<span class="eg-gear-pill">MEM:'+esc(gd.memory)+'</span><span class="eg-gear-pill" style="color:var(--pu);">'+esc(gd.availability)+'</span>';
+            html+='<span class="eg-gear-pill">MEM:'+esc(gd.memory)+'</span>'+(gd.nanite?'<span class="eg-gear-pill" style="color:var(--a3);">NAN:'+esc(gd.nanite)+'</span>':'')+'<span class="eg-gear-pill" style="color:var(--pu);">'+esc(gd.availability)+'</span>';
             html+='</div>';
             if(gd.effect||gd.desc) html+='<div style="margin-top:3px;padding-left:20px;font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#8e8e93;">'+esc(gd.effect||gd.desc)+'</div>';
             html+='</div>';
@@ -10801,7 +10801,7 @@ function render(){
           if(usedMem<memCap){
             html+='<div style="display:flex;gap:6px;align-items:center;margin-top:4px;">';
             html+='<select class="eg-select" id="eg-gad-add-sel" style="flex:1;"><option value="">— Add Gadget —</option>';
-            (sw.gadgets||[]).filter(gd=>!egState.gadgets.find(x=>x.name===gd.name)&&(parseInt(gd.memory)||1)<=(memCap-usedMem)).forEach(gd=>{html+='<option value="'+esc(JSON.stringify({name:gd.name,memory:gd.memory||'1',availability:gd.availability||'',legality:gd.legality||'',effect:gd.effect||'',desc:gd.desc||''}))+'">'+esc(gd.name)+' (MEM:'+esc(gd.memory||'1')+') — '+esc(gd.availability)+'</option>';});
+            (sw.gadgets||[]).filter(gd=>!egState.gadgets.find(x=>x.name===gd.name)&&(parseInt(gd.memory)||1)<=(memCap-usedMem)).forEach(gd=>{html+='<option value="'+esc(JSON.stringify({name:gd.name,memory:gd.memory||'1',nanite:gd.nanite||'',availability:gd.availability||'',legality:gd.legality||'',effect:gd.effect||'',desc:gd.desc||''}))+'">'+esc(gd.name)+' (MEM:'+esc(gd.memory||'1')+' NAN:'+esc(gd.nanite||'?')+') — '+esc(gd.availability)+'</option>';});
             html+='</select>';
             html+='<button class="eg-add-btn" onclick="const _gs=document.getElementById(\'eg-gad-add-sel\');if(_gs&&_gs.value){egState.gadgets.push(JSON.parse(_gs.value));render();}">+ Add</button>';
             html+='</div>';
