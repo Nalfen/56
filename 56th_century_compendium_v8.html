@@ -8361,6 +8361,7 @@ function egAutoGearWeapons(){
   const{item:mfrItem,mfr}=egTryApplyWpnMfr(primaryItem,isMelee);
   const wpnState=egWpnToState(mfrItem);
   wpnState.mfr=mfr;
+  wpnState._src=primaryItem;
   egState.weapons=[wpnState];
   // ── Secondary weapon ──────────────────────────────────────────────────────
   const diff=egState.difficulty||5;
@@ -8387,6 +8388,7 @@ function egAutoGearWeapons(){
       const{item:secMfrItem,mfr:secMfr}=egTryApplyWpnMfr(secItem,secIsMelee);
       const secState=egWpnToState(secMfrItem);
       secState.mfr=secMfr;
+      secState._src=secItem;
       egState.weapons.push(secState);
     }
   }
@@ -8419,6 +8421,7 @@ function egAutoGearArmors(){
   const{item:mfrItem,mfr}=egTryApplyArmorMfr(baseArmor);
   const arState=egArmorToState(mfrItem);
   arState.mfr=mfr;
+  arState._src=baseArmor;
   egState.armors=[arState];
 }
 
