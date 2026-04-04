@@ -8608,11 +8608,19 @@ function egExportVTTES(){
     gmnotesLines.push('DATACOM: '+dc.name+' ['+dc.type+'] MEM:'+dc.memory+' CPU:'+dc.cpu+(parseInt(dc.nanites)>0?' NANITES:'+dc.nanites:''));
     if((egState.programs||[]).length){
       gmnotesLines.push('  PROGRAMS:');
-      egState.programs.forEach(p=>{gmnotesLines.push('    - '+p.name+' (MEM:'+p.memory+' | '+p.availability+' / '+p.legality+')');});
+      egState.programs.forEach(p=>{
+        gmnotesLines.push('    - '+p.name+' (MEM:'+p.memory+' | '+p.availability+' / '+p.legality+')');
+        if(p.passive) gmnotesLines.push('        [Without Control] '+p.passive);
+        if(p.active)  gmnotesLines.push('        [With Control] '+p.active);
+        if(!p.passive&&!p.active&&(p.effect||p.desc)) gmnotesLines.push('        '+( p.effect||p.desc));
+      });
     }
     if((egState.gadgets||[]).length){
       gmnotesLines.push('  GADGETS:');
-      egState.gadgets.forEach(gd=>{gmnotesLines.push('    - '+gd.name+' (MEM:'+gd.memory+' | '+gd.availability+' / '+gd.legality+')');});
+      egState.gadgets.forEach(gd=>{
+        gmnotesLines.push('    - '+gd.name+' (MEM:'+gd.memory+' | '+gd.availability+' / '+gd.legality+')');
+        if(gd.effect||gd.desc) gmnotesLines.push('        '+(gd.effect||gd.desc));
+      });
     }
   }
   // Spirit / Spells placeholder for mage archetype
@@ -10740,16 +10748,23 @@ function render(){
         // Programs list
         html+='<div style="font-family:\'Orbitron\',monospace;font-size:8px;letter-spacing:1px;color:#8e8e93;margin:6px 0 4px;text-transform:uppercase;">Programs</div>';
         (egState.programs||[]).forEach((p,pi)=>{
-          html+='<div style="display:flex;gap:6px;align-items:center;padding:3px 0;border-bottom:1px solid #2c2c2e;">';
+          html+='<div style="padding:4px 0 6px;border-bottom:1px solid #2c2c2e;">';
+          html+='<div style="display:flex;gap:6px;align-items:center;">';
           html+='<button class="eg-gear-remove" style="flex-shrink:0;" onclick="egState.programs.splice('+pi+',1);render();">✕</button>';
           html+='<span style="font-family:\'Share Tech Mono\',monospace;font-size:11px;color:#f2f2f7;flex:1;">'+esc(p.name)+'</span>';
           html+='<span class="eg-gear-pill">MEM:'+esc(p.memory)+'</span><span class="eg-gear-pill" style="color:var(--gr);">'+esc(p.availability)+'</span>';
+          html+='</div>';
+          if(p.passive||p.active||p.effect||p.desc){
+            if(p.passive) html+='<div style="margin-top:3px;padding-left:20px;font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#8e8e93;"><span style="color:var(--gr);font-size:9px;text-transform:uppercase;letter-spacing:1px;">Without Control</span> '+esc(p.passive)+'</div>';
+            if(p.active)  html+='<div style="margin-top:2px;padding-left:20px;font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#8e8e93;"><span style="color:var(--a2);font-size:9px;text-transform:uppercase;letter-spacing:1px;">With Control</span> '+esc(p.active)+'</div>';
+            if(!p.passive&&!p.active&&(p.effect||p.desc)) html+='<div style="margin-top:3px;padding-left:20px;font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#8e8e93;">'+esc(p.effect||p.desc)+'</div>';
+          }
           html+='</div>';
         });
         if(usedMem<memCap){
           html+='<div style="display:flex;gap:6px;align-items:center;margin-top:4px;">';
           html+='<select class="eg-select" id="eg-prog-add-sel" style="flex:1;"><option value="">— Add Program —</option>';
-          (sw.programs||[]).filter(p=>!egState.programs.find(x=>x.name===p.name)&&(parseInt(p.memory)||1)<=(memCap-usedMem)).forEach(p=>{html+='<option value="'+esc(JSON.stringify({name:p.name,memory:p.memory||'1',availability:p.availability||'',legality:p.legality||''}))+'">'+esc(p.name)+' (MEM:'+esc(p.memory||'1')+') — '+esc(p.availability)+'</option>';});
+          (sw.programs||[]).filter(p=>!egState.programs.find(x=>x.name===p.name)&&(parseInt(p.memory)||1)<=(memCap-usedMem)).forEach(p=>{html+='<option value="'+esc(JSON.stringify({name:p.name,memory:p.memory||'1',availability:p.availability||'',legality:p.legality||'',passive:p.passive||'',active:p.active||'',effect:p.effect||'',desc:p.desc||''}))+'">'+esc(p.name)+' (MEM:'+esc(p.memory||'1')+') — '+esc(p.availability)+'</option>';});
           html+='</select>';
           html+='<button class="eg-add-btn" onclick="const _ps=document.getElementById(\'eg-prog-add-sel\');if(_ps&&_ps.value){egState.programs.push(JSON.parse(_ps.value));render();}">+ Add</button>';
           html+='</div>';
@@ -10758,16 +10773,19 @@ function render(){
         if(naniteCap>0){
           html+='<div style="font-family:\'Orbitron\',monospace;font-size:8px;letter-spacing:1px;color:#8e8e93;margin:10px 0 4px;text-transform:uppercase;">Gadgets</div>';
           (egState.gadgets||[]).forEach((gd,gi)=>{
-            html+='<div style="display:flex;gap:6px;align-items:center;padding:3px 0;border-bottom:1px solid #2c2c2e;">';
+            html+='<div style="padding:4px 0 6px;border-bottom:1px solid #2c2c2e;">';
+            html+='<div style="display:flex;gap:6px;align-items:center;">';
             html+='<button class="eg-gear-remove" style="flex-shrink:0;" onclick="egState.gadgets.splice('+gi+',1);render();">✕</button>';
             html+='<span style="font-family:\'Share Tech Mono\',monospace;font-size:11px;color:#f2f2f7;flex:1;">'+esc(gd.name)+'</span>';
             html+='<span class="eg-gear-pill">MEM:'+esc(gd.memory)+'</span><span class="eg-gear-pill" style="color:var(--pu);">'+esc(gd.availability)+'</span>';
+            html+='</div>';
+            if(gd.effect||gd.desc) html+='<div style="margin-top:3px;padding-left:20px;font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#8e8e93;">'+esc(gd.effect||gd.desc)+'</div>';
             html+='</div>';
           });
           if(usedMem<memCap){
             html+='<div style="display:flex;gap:6px;align-items:center;margin-top:4px;">';
             html+='<select class="eg-select" id="eg-gad-add-sel" style="flex:1;"><option value="">— Add Gadget —</option>';
-            (sw.gadgets||[]).filter(gd=>!egState.gadgets.find(x=>x.name===gd.name)&&(parseInt(gd.memory)||1)<=(memCap-usedMem)).forEach(gd=>{html+='<option value="'+esc(JSON.stringify({name:gd.name,memory:gd.memory||'1',availability:gd.availability||'',legality:gd.legality||''}))+'">'+esc(gd.name)+' (MEM:'+esc(gd.memory||'1')+') — '+esc(gd.availability)+'</option>';});
+            (sw.gadgets||[]).filter(gd=>!egState.gadgets.find(x=>x.name===gd.name)&&(parseInt(gd.memory)||1)<=(memCap-usedMem)).forEach(gd=>{html+='<option value="'+esc(JSON.stringify({name:gd.name,memory:gd.memory||'1',availability:gd.availability||'',legality:gd.legality||'',effect:gd.effect||'',desc:gd.desc||''}))+'">'+esc(gd.name)+' (MEM:'+esc(gd.memory||'1')+') — '+esc(gd.availability)+'</option>';});
             html+='</select>';
             html+='<button class="eg-add-btn" onclick="const _gs=document.getElementById(\'eg-gad-add-sel\');if(_gs&&_gs.value){egState.gadgets.push(JSON.parse(_gs.value));render();}">+ Add</button>';
             html+='</div>';
