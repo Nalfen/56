@@ -8583,54 +8583,70 @@ function egExportVTTES(){
   // Misc
   att('notes','','');att('total_xp',0,'');att('credited_xp',0,'');att('attribute_xp',0,'');
   att('init_move',a.speed,'');att('init_standard',2,'');att('init_quick',2,'');att('init_complex',0,'');
-  // Build gmnotes from talents, evolutions, datacoms, and spirit placeholder
-  let gmnotesLines=[];
+  // Build gmnotes as HTML markup for maximum readability in Roll20
+  const _gmE=s=>String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  let gmHtml='';
   // Talents
-  (egState.talents||[]).forEach((t,i)=>{
-    if(i>0) gmnotesLines.push('');
-    gmnotesLines.push('TALENT: '+t.name+' ['+t.category+' / '+(t.skill||'General')+'] ('+t.cost+' pts)');
-    gmnotesLines.push(t.effect);
-  });
+  const _gmTalents=egState.talents||[];
+  if(_gmTalents.length){
+    gmHtml+='<h2>🎴 <strong>TALENTS</strong></h2>\n';
+    _gmTalents.forEach((t,i)=>{
+      if(i>0) gmHtml+='<hr>\n';
+      gmHtml+='<h3><strong>'+_gmE(t.name)+'</strong></h3>\n';
+      gmHtml+='<p><strong>['+_gmE(t.category)+' / '+_gmE(t.skill||'General')+'] — ('+_gmE(t.cost)+' pts)</strong></p>\n';
+      gmHtml+='<blockquote><p>'+_gmE(t.effect)+'</p></blockquote>\n';
+    });
+    gmHtml+='<hr>\n';
+  }
   // Evolution
   if(egState.evolution&&egState.tier!=='henchmen'){
     const ev=egState.evolution;
     const t1=ev.tiers&&ev.tiers['TIER I'],t2=ev.tiers&&ev.tiers['TIER II'],t3=ev.tiers&&ev.tiers['TIER III'];
-    gmnotesLines.push('');
-    gmnotesLines.push('EVOLUTION: '+ev.name+' ['+ev.evo_type+']');
-    if(t1) gmnotesLines.push('  Tier I: '+t1.effect);
-    if((egState.tier==='elite'||egState.tier==='boss')&&t2) gmnotesLines.push('  Tier II: '+t2.effect);
-    if(egState.tier==='boss'&&t3) gmnotesLines.push('  Tier III: '+t3.effect);
+    gmHtml+='<h2>🧬 <strong>EVOLUTION: '+_gmE(ev.name)+'</strong></h2>\n';
+    gmHtml+='<p><strong>['+_gmE(ev.evo_type)+']</strong></p>\n';
+    if(t1){gmHtml+='<h3><strong>Tier I</strong></h3>\n<p>'+_gmE(t1.effect)+'</p>\n';}
+    if((egState.tier==='elite'||egState.tier==='boss')&&t2){gmHtml+='<h3><strong>Tier II</strong></h3>\n<p>'+_gmE(t2.effect)+'</p>\n';}
+    if(egState.tier==='boss'&&t3){gmHtml+='<h3><strong>Tier III</strong></h3>\n<p>'+_gmE(t3.effect)+'</p>\n';}
+    gmHtml+='<hr>\n';
   }
   // Datacom & Programs/Gadgets
   if(egState.datacom){
     const dc=egState.datacom;
-    gmnotesLines.push('');
-    gmnotesLines.push('DATACOM: '+dc.name+' ['+dc.type+'] MEM:'+dc.memory+' CPU:'+dc.cpu+(parseInt(dc.nanites)>0?' NANITES:'+dc.nanites:''));
+    gmHtml+='<h2>🕸️ <strong>DATACOM: '+_gmE(dc.name)+'</strong></h2>\n';
+    gmHtml+='<p><strong>'+_gmE(dc.type)+'</strong><br>\n<strong>MEM: '+_gmE(dc.memory)+' — CPU: '+_gmE(dc.cpu)+(parseInt(dc.nanites)>0?' — NANITES: '+_gmE(dc.nanites):'')+' </strong></p>\n';
+    gmHtml+='<hr>\n';
     if((egState.programs||[]).length){
-      gmnotesLines.push('  PROGRAMS:');
+      gmHtml+='<h1>📡 <strong>PROGRAMS</strong></h1>\n<hr>\n';
       egState.programs.forEach(p=>{
-        gmnotesLines.push('    - '+p.name+' (MEM:'+p.memory+' | '+p.availability+' / '+p.legality+')');
-        if(p.passive) gmnotesLines.push('        [Without Control] '+p.passive);
-        if(p.active)  gmnotesLines.push('        [With Control] '+p.active);
-        if(!p.passive&&!p.active&&(p.effect||p.desc)) gmnotesLines.push('        '+( p.effect||p.desc));
+        gmHtml+='<h2><strong>'+_gmE(p.name)+'</strong></h2>\n';
+        gmHtml+='<p><strong>(MEM:'+_gmE(p.memory)+' | '+_gmE(p.availability)+' / '+_gmE(p.legality)+')</strong></p>\n';
+        if(p.passive||p.active){
+          if(p.passive){gmHtml+='<h3><strong>[Without Control]</strong></h3>\n<p>'+_gmE(p.passive)+'</p>\n';}
+          if(p.active){gmHtml+='<h3><strong>[With Control]</strong></h3>\n<p>'+_gmE(p.active)+'</p>\n';}
+        } else if(p.effect||p.desc){
+          gmHtml+='<blockquote><p>'+_gmE(p.effect||p.desc)+'</p></blockquote>\n';
+        }
+        gmHtml+='<hr>\n';
       });
     }
     if((egState.gadgets||[]).length){
-      gmnotesLines.push('  GADGETS:');
+      gmHtml+='<h1>🛠️ <strong>GADGETS</strong></h1>\n<hr>\n';
       egState.gadgets.forEach(gd=>{
-        gmnotesLines.push('    - '+gd.name+' (MEM:'+gd.memory+' | '+gd.availability+' / '+gd.legality+')');
-        if(gd.effect||gd.desc) gmnotesLines.push('        '+(gd.effect||gd.desc));
+        gmHtml+='<h2><strong>'+_gmE(gd.name)+'</strong></h2>\n';
+        gmHtml+='<p><strong>(MEM:'+_gmE(gd.memory)+' | '+_gmE(gd.availability)+' / '+_gmE(gd.legality)+')</strong></p>\n';
+        if(gd.effect||gd.desc){gmHtml+='<blockquote><p>'+_gmE(gd.effect||gd.desc)+'</p></blockquote>\n';}
+        gmHtml+='<hr>\n';
       });
     }
   }
   // Spirit / Spells placeholder for mage archetype
   const _archForExp=EG_ARCHETYPES[egState.archetype]||EG_ARCHETYPES.soldier;
   if(_archForExp.isMage){
-    gmnotesLines.push('');
-    gmnotesLines.push('SPIRIT / SPELLS: [Placeholder — spirit and spell selection will be implemented when the compendium spirit/spell data is finalised]');
+    gmHtml+='<h2>✨ <strong>SPIRIT / SPELLS</strong></h2>\n';
+    gmHtml+='<p>[Placeholder — spirit and spell selection will be implemented when the compendium spirit/spell data is finalised]</p>\n';
   }
   const charId=egGenId();
-  const out={schema_version:3,type:'character',character:{oldId:charId,name:egState.name,avatar:'',bio:'',gmnotes:gmnotesLines.join('\n'),defaulttoken:'',tags:'[]',controlledby:'',inplayerjournals:'',attribs,abilities:[]}};
+  const out={schema_version:3,type:'character',character:{oldId:charId,name:egState.name,avatar:'',bio:'',gmnotes:encodeURIComponent(gmHtml),defaulttoken:'',tags:'[]',controlledby:'',inplayerjournals:'',attribs,abilities:[]}};
   const blob=new Blob([JSON.stringify(out,null,4)],{type:'application/json'});
   const url=URL.createObjectURL(blob);
   const a2=document.createElement('a');
