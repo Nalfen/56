@@ -14,13 +14,20 @@ The project is released under **CC0 1.0 Universal** (public domain).
 /
 ├── 56th_century_compendium_v8.html   # CANONICAL — single file, mobile + desktop compatible
 ├── ship_components.csv               # Exported flat ship component catalog (generated)
+├── drone_components.csv              # Exported flat drone component catalog (generated)
 ├── inject_engines.py                 # Dev helper: injects ENGINE codes into ship data
 ├── drone_redesign.py                 # Dev helper: generates/exports drone component data
+├── export_drone_comps.py             # Dev helper: exports drone components to CSV
+├── gen_db_comp.py                    # Dev helper: generates DB_COMP constant data
+├── db_comp_new.js                    # Dev helper: JS snippet for drone component data
 ├── LICENSE                           # CC0 1.0 Universal
 └── archive/                          # Retired versions — do not edit
     ├── 56th_century_compendium_v3.html
     ├── 56th_century_compendium_v5.html
-    └── 56th_century_compendium_v8.html   # Old desktop-only build (superseded)
+    ├── 56th_century_compendium_v8.html         # Old desktop-only build (superseded)
+    ├── 56th_century_compendium_v8.backup.html  # Backup snapshots
+    ├── 56th_century_compendium_v8.backup2.html
+    └── 56th_century_compendium_v8.backup4.html
 ```
 
 **`56th_century_compendium_v8.html` is the one and only active file.** All development goes here. It is designed to work on both mobile and desktop. The `archive/` folder is read-only history — never edit files there.
@@ -98,10 +105,17 @@ All game data lives in the `const g = {...}` constant. Top-level keys:
 | `g.weapons` | Weapons `{name, category, type, damage, range, legality, special, notes, desc, variants:{}}` |
 | `g.armor` | Armor items with defense values and manufacturer variants |
 | `g.options` | Weapon/armor options `{name, desc, wpn_ranged, wpn_melee, availability, legality}` |
+| `g.ammo_types` | Ammunition type definitions `{name, category, desc, …}` — displayed in the `ammo` section |
+| `g.ammo_opts` | Ammunition option modifiers — compatibility matrix data for ammo options |
 | `g.spells` | Spells with school, range, duration, effect |
 | `g.datacoms` | Datacom devices with manufacturer variants |
+| `g.software` | Hacking software `{actions:[], programs:[], gadgets:[]}` — used by the `hacking` section |
+| `g.equipment` | General equipment items `{name, category, size, effect, cost, availability, legality}` |
 | `g.medical` | Medical items with manufacturer variants |
-| `g.catalog` | Vehicle/drone/ship catalog (new in v8) — see below |
+| `g.toxic_shock` | Toxic shock rules and reference table `{rules:'…', table:[{result, name, duration, effect}]}` — displayed in the `medical` section |
+| `g.manufacturers` | Dict of manufacturer stat modifier entries for weapons, armor, and datacoms — separate from `g.factions` lore entries |
+| `g.medical_manufacturers` | Dict of manufacturer stat modifier entries for medical items |
+| `g.catalog` | Vehicle/drone/ship catalog — see below |
 | `g.catalog.vehicles` | Vehicles `{name, manufacturer, size, availability, durability, structure, deflect, soak, wall, integrity, special}` |
 | `g.catalog.drones` | Drones `{name, manufacturer, size, availability, durability, structure, deflect, soak, wall, integrity, special}` |
 | `g.catalog.chassis` | Drone chassis sizes `{size, core, internal, external, durability, structure, base_price}` |
@@ -117,38 +131,42 @@ All game data lives in the `const g = {...}` constant. Top-level keys:
 
 ## Navigation Sections (v8)
 
-| Section ID | Label | Icon |
-|---|---|---|
-| `glossary` | Rules & Glossary | 📖 |
-| `glossary_only` | Glossary | 📚 |
-| `specials` | Special Properties | 🔖 |
-| `galaxy` | Galactic Catalogue | 🌌 |
-| `starmap` | Star Map | 🗺 |
-| `races` | Races | 👁 |
-| `backgrounds` | Backgrounds | 📜 |
-| `occupations` | Occupations | 💼 |
-| `skills` | Skills | 🎯 |
-| `talents` | Talents | ⚡ |
-| `evolutions` | Evolutions | 🧬 |
-| `weapons` | Weapons | 🔫 |
-| `weapon_options` | Weapon Options | 🔧 |
-| `armor` | Armor | 🛡 |
-| `armor_options` | Armor Options | ⚙ |
-| `spells` | Spells | ✨ |
-| `datacoms` | Datacoms | 📡 |
-| `hacking` | Hacking Software | 💻 |
-| `vehicles` | Vehicles | 🚗 |
-| `cat_drones` | Drones | 🤖 |
-| `modules` | Modules | 🔧 |
-| `ships` | Spaceships | 🚀 |
-| `ship_components` | Ship Components | ⚙ |
-| `equipment` | Equipment | 🎒 |
-| `medical` | Medical | 💉 |
-| `drone_parts` | Drone Parts | 🔩 |
-| `drone_builder` | Drone Builder | 🤖 |
-| `factions` | Factions | 🏴 |
+Sections are grouped in the sidebar (in display order):
 
-**New in v8:** `glossary_only` (flat glossary view from `g.glossary_clean`), `vehicles`, `cat_drones`, `modules`, `ships`, and `ship_components` (all sourced from `g.catalog`), plus the interactive `drone_parts` catalog and `drone_builder` tool.
+| Section ID | Label | Icon | Nav Group |
+|---|---|---|---|
+| `glossary` | Rules & Glossary | 📖 | Reference |
+| `glossary_only` | Glossary | 📚 | Reference |
+| `specials` | Special Properties | 🔖 | Reference |
+| `galaxy` | Galactic Catalogue | 🌌 | Galaxy |
+| `starmap` | Star Map | 🗺 | Galaxy |
+| `factions` | Factions | 🏴 | Galaxy |
+| `gm_tools` | Enemy Generator | ⚔️ | GM Tools |
+| `races` | Races | 👁 | Characters |
+| `backgrounds` | Backgrounds | 📜 | Characters |
+| `occupations` | Occupations | 💼 | Characters |
+| `skills` | Skills | 🎯 | Characters |
+| `talents` | Talents | ⚡ | Characters |
+| `evolutions` | Evolutions | 🧬 | Characters |
+| `weapons` | Weapons | 🔫 | Combat |
+| `weapon_options` | Weapon Options | 🔧 | Combat |
+| `armor` | Armor | 🛡 | Combat |
+| `armor_options` | Armor Options | ⚙ | Combat |
+| `ammo` | Ammunition | 🔴 | Combat |
+| `spells` | Spells | ✨ | Magic |
+| `datacoms` | Datacoms | 📡 | Tech |
+| `hacking` | Hacking Software | 💻 | Tech |
+| `vehicles` | Vehicles | 🚗 | Catalog |
+| `cat_drones` | Drones | 🤖 | Catalog |
+| `modules` | Modules | 🔧 | Catalog |
+| `ships` | Spaceships | 🚀 | Catalog |
+| `ship_components` | Ship Components | ⚙ | Catalog |
+| `drone_builder` | Drone Builder | 🤖 | Builder |
+| `drone_parts` | Drone Parts | 🔩 | Builder |
+| `equipment` | Equipment | 🎒 | Gear |
+| `medical` | Medical | 💉 | Gear |
+
+**New in v8:** `glossary_only` (flat glossary view from `g.glossary_clean`), `vehicles`, `cat_drones`, `modules`, `ships`, and `ship_components` (all sourced from `g.catalog`), plus the interactive `drone_parts` catalog and `drone_builder` tool, the `ammo` section with compatibility matrix, and the `gm_tools` Enemy Generator.
 
 ### Rule Groups (in `rules_grouped`)
 
@@ -362,7 +380,7 @@ const STARGATE_LINKS = [
 ];
 ```
 
-The map image itself is `Star-Map-v3_HIGH_QUALITY.png` (external asset, same directory). Dot coordinates are percentages relative to the image dimensions. Clicking a dot opens a detail panel. `initStarmap()` is called after render to attach pan/zoom event listeners.
+The map image itself is `Star-Map-v3_HIGH_QUALITY.png` (external asset, same directory). Dot coordinates are percentages relative to the image dimensions. Clicking a dot opens a detail panel. `initStarmap()` is called after render to attach pan/zoom event listeners. Pin positions and stargate connections are user-editable and persisted to localStorage (see "Galactic Catalogue & Star Map — Additional Notes" below).
 
 > **Note:** `g.galaxy` and `g.factions` are separate arrays. `g.galaxy` holds region-scale overviews (Alliance Space, Kraven Space, etc.) with map positions. `g.factions` holds corporation/organisation lore entries (Malivaux, Arms Corp, etc.). They serve different UI sections and should be edited independently.
 
@@ -372,19 +390,115 @@ The map image itself is `Star-Map-v3_HIGH_QUALITY.png` (external asset, same dir
 
 Weapons, armor, datacoms, and medical items support manufacturer variants that modify stats:
 
-**Weapon manufacturers (v8):**
+Manufacturer lists are defined as top-level constants (not inside `g`):
+
+**Weapon manufacturers (`WPN_MFRS`):**
 `Generic`, `Malivaux`, `Kintech`, `Nakamura`, `Arms Corp`, `Zang'Hai`, `TORC`, `Voran`, `Dilithium`, `Monomolecular`
 
 - `Dilithium` and `Monomolecular` are melee-only manufacturers (`WPN_MFRS_MELEE_ONLY` set)
 - Melee categories tracked in `MELEE_CATS` set
 
-**Armor manufacturers (v8):**
-`Generic`, `Harsh`, `Santech`, `BMS`, `Acer`
+**Armor manufacturers (`ARMOR_MFRS`):**
+`Generic`, `Kintech`, `Harsh`, `Santech`, `BMS`, `Acer`
 
-**Datacom manufacturers (v8):**
-`Generic`, `Securicorp`, `Orionworks`, `Biocom`, `Carnifex`, `Saiko`, `Yotoma`
+**Datacom manufacturers (`DATACOM_MFRS`):**
+`Generic`, `Securicorp`, `Orionworks`, `Biocom`, `Carnifex`, `Saiko`, `Yotoma`, `Zang'Hai`
 
-The `mfrState` object tracks the selected manufacturer per section. The `applyWpnMfr` / `applyArmorMfr` / `applyMedMfr` functions return a modified copy of an item with adjusted stats.
+**Medical manufacturers (`MEDICAL_MFRS`):**
+`Generic`, `Altair Biomed`, `RX Generic`, `Goodman Holistic`, `Diva Solutions`, `Mono-Med Customs`
+
+The `mfrState` object tracks the selected manufacturer per section. The `applyWpnMfr` / `applyArmorMfr` / `applyMedMfr` functions return a modified copy of an item with adjusted stats. Stat modifier data lives in `g.manufacturers` (weapons/armor/datacoms) and `g.medical_manufacturers` (medical items).
+
+---
+
+## Ammunition System (`ammo` section)
+
+The `ammo` section renders a two-part view:
+
+1. **Ammunition types** — from `g.ammo_types`, each with name, category, stats, and description
+2. **Ammo options compatibility matrix** — from `g.ammo_opts`, rendered as a table showing which options (`DP`, `S`, `HE`, `LB`, `AR`, `STN`, `FIRE`, `EMP`, `CRIT`, `SB`) are compatible with each ammo type
+
+Key constants:
+
+| Constant | Purpose |
+|---|---|
+| `AMMO_OPT_CODES` | Ordered array of ammo option code strings |
+| `AMMO_COMPAT` | IIFE that builds the compatibility lookup — maps ammo type name → set of compatible option codes |
+
+---
+
+## Hacking Software (`hacking` section)
+
+Data lives in `g.software` (not `g.hacking`). Structure:
+
+```js
+g.software = {
+  actions:  [ /* basic hacking actions */ ],
+  programs: [ /* installable hacking programs */ ],
+  gadgets:  [ /* physical hacking gadgets */ ],
+}
+```
+
+Each item has fields including: `name`, `type`/`action`, `description`/`effect`, `passive`, `active`, `cpu` or `nanite`, `memory`, `cost`, `availability`, `legality`. The section renders three tabs/groups: BASIC ACTIONS, PROGRAMS, GADGETS.
+
+---
+
+## Equipment (`equipment` section)
+
+Data lives in `g.equipment` — a flat array of general gear items:
+
+```js
+{ name, category, size, effect, cost, availability, legality }
+```
+
+Rendered as a filterable grouped list, organised by `category`. Search matches against `name`, `effect`, `category`, `legality`, `availability`, and `size`.
+
+---
+
+## Enemy Generator (`gm_tools` section)
+
+A full interactive NPC/enemy creation tool. Not a static data view — all state is local to the render/event cycle.
+
+### Key constants
+
+| Constant | Purpose |
+|---|---|
+| `EG_ARCHETYPES` | Archetype definitions (soldier, sniper, brawler, assassin, mage, hacker, commander, heavy, plus military/police/gang/corp variants) — each has preferred skills, weapon categories, armor types |
+| `EG_TIER_ORDER` | Difficulty tiers: `['henchmen', 'regular', 'elite', 'boss']` |
+| `EG_TIER_BASE` | Base HP per tier |
+| `EG_AVAIL_BY_TIER` | Allowed equipment availability per tier |
+| `EG_LEGAL_BY_TIER` | Allowed equipment legality per tier |
+| `EG_NAMES_FIRST` / `EG_NAMES_LAST` | Random name pools |
+| `EG_ARCH_TALENT_CATS` | Talent categories preferred per archetype |
+| `EG_ARCH_EVO_TYPES` | Evolution types preferred per archetype |
+| `EG_SKILL_WPN_CATS` | Maps weapon categories to skill names |
+
+### Key functions
+
+| Function | Purpose |
+|---|---|
+| `egCalcResources()` | Calculate HP, resource pools for current build |
+| `egAutoSkills()` | Auto-assign skills based on selected archetype |
+| `egAutoGear()` | Auto-assign weapons/armor based on archetype and tier |
+| `egAutoConsumables()` | Auto-assign medical/equipment consumables |
+| `egAutoTalentsEvos()` | Auto-assign talents and evolutions |
+| `egAutoDatacom()` | Auto-assign datacoms |
+| `egRandName()` | Generate a random enemy name |
+| `egExportVTT()` | Export the enemy to VTT-ES JSON format |
+
+---
+
+## Galactic Catalogue & Star Map — Additional Notes
+
+Both the Galactic Catalogue and Star Map support **user editing** with localStorage persistence:
+
+| localStorage key | Purpose |
+|---|---|
+| `gc_systems` | User-edited catalogue system data (overrides `g.catalogue_systems`) |
+| `smap_pin_pos` | Custom pin positions on the star map |
+| `smap_gates_v3` | User-defined stargate connection pairs |
+
+The `worldData` constant (separate from `g.catalogue_systems`) holds additional static world detail panels for specific named systems, used when a user clicks into a system from the star map.
 
 ---
 
