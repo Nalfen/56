@@ -8190,15 +8190,50 @@ const EG_SKILL_WPN_CATS={};
 (function(){Object.entries(EG_WPN_SKILL_MAP).forEach(([cat,sk])=>{if(!EG_SKILL_WPN_CATS[sk])EG_SKILL_WPN_CATS[sk]=[];EG_SKILL_WPN_CATS[sk].push(cat);});})();
 const EG_ARCH_TALENT_CATS={soldier:['PHYSICAL','ACUITY'],sniper:['ACUITY','PHYSICAL'],brawler:['PHYSICAL'],assassin:['ACUITY','SOCIAL'],mage:['SOCIAL','MENTAL','ACUITY'],hacker:['MENTAL','ACUITY'],commander:['SOCIAL','ACUITY'],heavy:['PHYSICAL'],mil_infantry:['PHYSICAL','ACUITY'],mil_sniper:['ACUITY','PHYSICAL'],mil_heavy:['PHYSICAL'],mil_medic:['MENTAL','PHYSICAL'],mil_engineer:['MENTAL'],mil_pilot:['PHYSICAL','ACUITY'],mil_officer:['SOCIAL','ACUITY'],mil_spec_ops:['ACUITY','PHYSICAL'],pol_officer:['PHYSICAL','ACUITY'],pol_investigator:['ACUITY','MENTAL'],pol_captain:['SOCIAL','ACUITY'],pol_detective:['MENTAL','ACUITY'],gang_enforcer:['PHYSICAL','SOCIAL'],gang_smuggler:['SOCIAL','ACUITY'],gang_hitman:['ACUITY','PHYSICAL'],corp_guard:['ACUITY','PHYSICAL'],corp_agent:['SOCIAL','ACUITY'],corp_executive:['SOCIAL','MENTAL']};
 const EG_ARCH_EVO_TYPES={soldier:['CYBERNETICS','GENETICS'],sniper:['CYBERNETICS','GENETICS'],brawler:['GENETICS','CYBERNETICS'],assassin:['CYBERNETICS','GENETICS'],mage:['MAGIC','GENETICS'],hacker:['CYBERNETICS'],commander:['GENETICS','CYBERNETICS'],heavy:['CYBERNETICS','GENETICS'],mil_infantry:['CYBERNETICS','GENETICS'],mil_sniper:['CYBERNETICS','GENETICS'],mil_heavy:['CYBERNETICS','GENETICS'],mil_medic:['GENETICS','CYBERNETICS'],mil_engineer:['CYBERNETICS'],mil_pilot:['CYBERNETICS'],mil_officer:['GENETICS','CYBERNETICS'],mil_spec_ops:['CYBERNETICS','GENETICS'],pol_officer:['CYBERNETICS','GENETICS'],pol_investigator:['CYBERNETICS'],pol_captain:['GENETICS','CYBERNETICS'],pol_detective:['CYBERNETICS','GENETICS'],gang_enforcer:['GENETICS','CYBERNETICS'],gang_smuggler:['CYBERNETICS'],gang_hitman:['CYBERNETICS','GENETICS'],corp_guard:['CYBERNETICS','GENETICS'],corp_agent:['CYBERNETICS'],corp_executive:['GENETICS']};
+const EG_CONSUMABLE_LEGAL={
+  pol_officer:{prefer:['No Permit'],allow:['Restricted'],illegalChance:0.05},
+  pol_investigator:{prefer:['No Permit'],allow:['Restricted'],illegalChance:0.05},
+  pol_captain:{prefer:['No Permit','Restricted'],allow:['Illegal'],illegalChance:0.08},
+  pol_detective:{prefer:['No Permit'],allow:['Restricted'],illegalChance:0.05},
+  mil_infantry:{prefer:['No Permit','Restricted'],allow:['Illegal'],illegalChance:0.15},
+  mil_medic:{prefer:['No Permit','Restricted','Illegal'],allow:['Classified'],illegalChance:0.25},
+  mil_heavy:{prefer:['No Permit','Restricted'],allow:['Illegal'],illegalChance:0.2},
+  mil_spec_ops:{prefer:['No Permit','Restricted','Illegal'],allow:['Classified'],illegalChance:0.3},
+  mil_officer:{prefer:['No Permit','Restricted'],allow:['Illegal'],illegalChance:0.1},
+  mil_engineer:{prefer:['No Permit','Restricted'],allow:['Illegal'],illegalChance:0.1},
+  mil_pilot:{prefer:['No Permit','Restricted'],allow:['Illegal'],illegalChance:0.1},
+  mil_sniper:{prefer:['No Permit','Restricted'],allow:['Illegal'],illegalChance:0.2},
+  gang_enforcer:{prefer:['No Permit','Restricted','Illegal'],allow:['Classified'],illegalChance:0.6},
+  gang_smuggler:{prefer:['No Permit','Restricted','Illegal'],allow:['Classified'],illegalChance:0.5},
+  gang_hitman:{prefer:['No Permit','Restricted','Illegal'],allow:['Classified'],illegalChance:0.7},
+  corp_guard:{prefer:['No Permit','Restricted'],allow:['Illegal'],illegalChance:0.1},
+  corp_agent:{prefer:['No Permit','Restricted'],allow:['Illegal'],illegalChance:0.2},
+  corp_executive:{prefer:['No Permit'],allow:['Restricted'],illegalChance:0.05},
+  soldier:{prefer:['No Permit','Restricted'],allow:['Illegal'],illegalChance:0.2},
+  sniper:{prefer:['No Permit','Restricted'],allow:['Illegal'],illegalChance:0.15},
+  brawler:{prefer:['No Permit','Restricted','Illegal'],allow:['Classified'],illegalChance:0.4},
+  assassin:{prefer:['No Permit','Restricted','Illegal'],allow:['Classified'],illegalChance:0.5},
+  mage:{prefer:['No Permit','Restricted'],allow:['Illegal'],illegalChance:0.15},
+  hacker:{prefer:['No Permit','Restricted'],allow:['Illegal'],illegalChance:0.2},
+  commander:{prefer:['No Permit','Restricted'],allow:['Illegal'],illegalChance:0.1},
+  heavy:{prefer:['No Permit','Restricted','Illegal'],allow:['Classified'],illegalChance:0.3}
+};
+const EG_SECONDARY_RULES={
+  dual_wield:['assassin','gang_hitman','mil_spec_ops','brawler'],
+  backup_sidearm:['soldier','sniper','mil_infantry','mil_sniper','mil_heavy','mil_medic','mil_engineer','mil_pilot','mil_officer','corp_guard','corp_agent','pol_officer','pol_captain','gang_enforcer','gang_smuggler','heavy','commander'],
+  melee_backup:['assassin','brawler','gang_enforcer','gang_hitman','mil_spec_ops']
+};
 
 let egState={
   name:'Enemy Name',tier:'regular',race:'Human',archetype:'soldier',outputFmt:'vttes',
+  difficulty:5,
   attrs:{physical:0,acuity:0,mental:0,social:0,endurance:3,speed:3,wits:3,willpower:3},
   health:13,morale:13,chi:0,
   skills:{},weapons:[],armors:[],
+  consumables:[],
   talents:[],evolution:null,
   datacom:null,programs:[],gadgets:[],
-  locks:{name:false,tier:false,archetype:false,race:false,attrs:{physical:false,acuity:false,mental:false,social:false,endurance:false,speed:false,wits:false,willpower:false},skills:false,weapons:false,armors:false,talentsevos:false,datacom:false}
+  locks:{name:false,tier:false,archetype:false,race:false,difficulty:false,attrs:{physical:false,acuity:false,mental:false,social:false,endurance:false,speed:false,wits:false,willpower:false},skills:false,weapons:false,armors:false,consumables:false,talentsevos:false,datacom:false}
 };
 
 function egGenId(){
@@ -8235,12 +8270,24 @@ function egCalcResources(){
   egState.chi=Math.min(10,Math.max(0,egState.chi));
 }
 
+function difficultyAvails(tier,difficulty){
+  const base=EG_AVAIL_BY_TIER[tier]||['COMMON'];
+  if(difficulty<=3) return base.filter(a=>['COMMON','UNCOMMON'].includes(a)).length?base.filter(a=>['COMMON','UNCOMMON'].includes(a)):['COMMON'];
+  if(difficulty<=6) return base.filter(a=>['COMMON','UNCOMMON','RARE'].includes(a)).length?base.filter(a=>['COMMON','UNCOMMON','RARE'].includes(a)):['COMMON'];
+  return base;
+}
+
 function egSkillValueForTier(tier,priority){
   // priority: 1=primary, 0=secondary
   const ranges={henchmen:{p:[2,3],s:[1,2]},regular:{p:[4,5],s:[2,3]},elite:{p:[6,7],s:[4,5]},boss:{p:[8,9],s:[5,7]}};
   const r=ranges[tier]||ranges.regular;
   const [lo,hi]=priority?r.p:r.s;
-  return lo+Math.floor(Math.random()*(hi-lo+1));
+  const diff=egState.difficulty||5;
+  // At diff 1: 60% of values; at diff 10: 100%
+  const scale=0.6+0.4*(diff-1)/9;
+  const scaledLo=Math.max(1,Math.round(lo*scale));
+  const scaledHi=Math.max(scaledLo,Math.round(hi*scale));
+  return scaledLo+Math.floor(Math.random()*(scaledHi-scaledLo+1));
 }
 
 function egSkillMinForTier(tier){
@@ -8261,8 +8308,8 @@ function egAutoSkills(){
   egState.skills=skills;
 }
 
-function egFilterWeapons(cats){
-  const avails=EG_AVAIL_BY_TIER[egState.tier];
+function egFilterWeapons(cats,overrideAvails){
+  const avails=overrideAvails||difficultyAvails(egState.tier,egState.difficulty||5);
   const legals=EG_LEGAL_BY_TIER[egState.tier];
   return (g.weapons||[]).filter(w=>
     cats.includes(w.category)&&
@@ -8271,15 +8318,27 @@ function egFilterWeapons(cats){
   );
 }
 
-function egFilterArmor(armorType){
-  const avails=EG_AVAIL_BY_TIER[egState.tier];
-  const legals=EG_LEGAL_BY_TIER[egState.tier];
+function egFilterArmor(armorType,overrideAvails){
+  const avails=overrideAvails||difficultyAvails(egState.tier,egState.difficulty||5);
   const typeMap={light:'Light Armor',medium:'Medium Armor',heavy:'Heavy Armor'};
   const t=typeMap[armorType]||'Light Armor';
   return (g.armor||[]).filter(a=>
     a.type===t&&
     avails.includes(a.availability)
   );
+}
+
+function egTryApplyWpnMfr(item,isMelee){
+  const avails=difficultyAvails(egState.tier,egState.difficulty||5);
+  const validMfrs=WPN_MFRS.filter(m=>m!=='Generic'&&(!WPN_MFRS_MELEE_ONLY.has(m)||isMelee));
+  const shuffled=validMfrs.slice().sort(()=>Math.random()-0.5);
+  for(const mfr of shuffled){
+    const modified=applyWpnMfr(item,mfr);
+    if(!modified)continue;
+    const modAv=(modified.availability||'COMMON').toUpperCase();
+    if(avails.includes(modAv))return{item:modified,mfr};
+  }
+  return{item,mfr:'Generic'};
 }
 
 function egAutoGearWeapons(){
@@ -8289,25 +8348,78 @@ function egAutoGearWeapons(){
   wpnSkills.forEach(sk=>{const v=egState.skills[sk]||0;if(v>bestVal){bestVal=v;bestSkill=sk;}});
   let cats=arch.weaponCats;
   if(bestSkill&&bestVal>=3&&EG_SKILL_WPN_CATS[bestSkill]) cats=EG_SKILL_WPN_CATS[bestSkill];
+  const meleeCats=['Melee Weapons (Martial Arts)','Powered Melee Weapons (Martial Arts)'];
+  const isMelee=cats.some(c=>meleeCats.includes(c));
   let pool=egFilterWeapons(cats);
-  if(pool.length>0){egState.weapons=[egWpnToState(egPickTiered(pool,egState.tier))];}
+  let primaryItem=null;
+  if(pool.length>0){primaryItem=egPickTiered(pool,egState.tier);}
   else{
     const fb=(g.weapons||[]).filter(w=>arch.weaponCats.includes(w.category));
-    if(fb.length){egState.weapons=[egWpnToState(egPickTiered(fb,egState.tier))];}
-    else{egState.weapons=[];}
+    if(fb.length){primaryItem=egPickTiered(fb,egState.tier);}
   }
+  if(!primaryItem){egState.weapons=[];return;}
+  const{item:mfrItem,mfr}=egTryApplyWpnMfr(primaryItem,isMelee);
+  const wpnState=egWpnToState(mfrItem);
+  wpnState.mfr=mfr;
+  egState.weapons=[wpnState];
+  // ── Secondary weapon ──────────────────────────────────────────────────────
+  const diff=egState.difficulty||5;
+  if(diff<=2)return;
+  const sk=egState.skills||{};
+  const archKey=egState.archetype;
+  const primary=egState.weapons[0];
+  const pistolCats=['Pistols and Handguns (Gunslinger)','Auto pistols and S.M.G (Gunslinger)'];
+  const primaryCat=primaryItem.category||'';
+  const isPistolPrimary=pistolCats.includes(primaryCat);
+  const isRangedPrimary=!meleeCats.includes(primaryCat);
+  let secPool=null;
+  if(EG_SECONDARY_RULES.dual_wield.includes(archKey)&&((sk.Gunslinger||0)>=4||(sk.Martial_Arts||0)>=4)&&diff>=4){
+    secPool=egFilterWeapons(cats).filter(w=>w.name!==primaryItem.name);
+  } else if(EG_SECONDARY_RULES.backup_sidearm.includes(archKey)&&(sk.Gunslinger||0)>=3&&!isPistolPrimary){
+    secPool=egFilterWeapons(pistolCats);
+  } else if(EG_SECONDARY_RULES.melee_backup.includes(archKey)&&isRangedPrimary&&(sk.Martial_Arts||0)>=3){
+    secPool=egFilterWeapons(meleeCats);
+  }
+  if(secPool&&secPool.length){
+    const secItem=egPickTiered(secPool,egState.tier);
+    if(secItem){
+      const secIsMelee=meleeCats.includes(secItem.category||'');
+      const{item:secMfrItem,mfr:secMfr}=egTryApplyWpnMfr(secItem,secIsMelee);
+      const secState=egWpnToState(secMfrItem);
+      secState.mfr=secMfr;
+      egState.weapons.push(secState);
+    }
+  }
+}
+
+function egTryApplyArmorMfr(item){
+  const avails=difficultyAvails(egState.tier,egState.difficulty||5);
+  const validMfrs=ARMOR_MFRS.filter(m=>m!=='Generic');
+  const shuffled=validMfrs.slice().sort(()=>Math.random()-0.5);
+  for(const mfr of shuffled){
+    const modified=applyArmorMfr(item,mfr);
+    if(!modified)continue;
+    const modAv=(modified.availability||'COMMON').toUpperCase();
+    if(avails.includes(modAv))return{item:modified,mfr};
+  }
+  return{item,mfr:'Generic'};
 }
 
 function egAutoGearArmors(){
   const arch=EG_ARCHETYPES[egState.archetype]||EG_ARCHETYPES.soldier;
   const apool=egFilterArmor(arch.armorType);
-  if(apool.length>0){egState.armors=[egArmorToState(egPickTiered(apool,egState.tier))];}
+  let baseArmor=null;
+  if(apool.length>0){baseArmor=egPickTiered(apool,egState.tier);}
   else{
     const t={light:'Light Armor',medium:'Medium Armor',heavy:'Heavy Armor'}[arch.armorType];
     const af2=(g.armor||[]).filter(a=>a.type===t);
-    if(af2.length){egState.armors=[egArmorToState(egPickTiered(af2,egState.tier))];}
-    else{egState.armors=[];}
+    if(af2.length){baseArmor=egPickTiered(af2,egState.tier);}
   }
+  if(!baseArmor){egState.armors=[];return;}
+  const{item:mfrItem,mfr}=egTryApplyArmorMfr(baseArmor);
+  const arState=egArmorToState(mfrItem);
+  arState.mfr=mfr;
+  egState.armors=[arState];
 }
 
 function egAutoGear(){
@@ -8458,18 +8570,24 @@ function egRandomize(){
   const raceObj=(g.races||[]).find(r=>r.name===egState.race)||{stats:{}};
   const rs=raceObj.stats||{};
   const tier=egState.tier;
+  const diff=egState.difficulty||5;
   ['physical','acuity','mental','social','endurance','speed','wits','willpower'].forEach(k=>{
     if(egState.locks.attrs[k]) return;
     const s=rs[k]||{};
     const mn=parseInt(s.min)||0,av=parseInt(s.avg)||0,mx=parseInt(s.max)||0;
     if(tier==='henchmen'){egState.attrs[k]=mn+Math.floor(Math.random()*(Math.max(av,mn)-mn+1));}
-    else if(tier==='regular'){const r1=mn+Math.floor(Math.random()*(mx-mn+1)),r2=mn+Math.floor(Math.random()*(mx-mn+1)),r3=mn+Math.floor(Math.random()*(mx-mn+1));egState.attrs[k]=Math.min(mx,Math.max(mn,Math.round((r1+r2+r3)/3)));}
-    else if(tier==='elite'){egState.attrs[k]=av+Math.floor(Math.random()*(mx-av+1));}
-    else{const lo=Math.floor((av+mx)/2);egState.attrs[k]=lo+Math.floor(Math.random()*(mx-lo+1));}
+    else{
+      const range=mx-mn;
+      const t=(diff-1)/9;
+      const lo=mn+Math.floor(0.5*t*range);
+      const hi=Math.min(mx,mn+Math.floor((0.2+0.8*t)*range));
+      egState.attrs[k]=lo+Math.floor(Math.random()*(Math.max(hi,lo)-lo+1));
+    }
   });
   if(!egState.locks.skills) egAutoSkills();
   if(!egState.locks.weapons) egAutoGearWeapons();
   if(!egState.locks.armors) egAutoGearArmors();
+  if(!egState.locks.consumables) egAutoConsumables();
   if(!egState.locks.talentsevos) egAutoTalentsEvos();
   if(!egState.locks.datacom) egAutoDatacom();
   egCalcResources();
@@ -8497,7 +8615,9 @@ function egAutoTalentsEvos(){
     const total=EG_SKILLS_ALL.filter(s=>s.cat===cat).reduce((sum,s)=>sum+(egState.skills[s.key]||0),0);
     catLimits[catMap[cat]||cat.toUpperCase()]=total;
   });
-  // ── Greedy fill: pick highest-cost talent that fits per category, up to 4 ──
+  // ── Greedy fill: pick highest-cost talent that fits per category ─────────
+  const diff=egState.difficulty||5;
+  const maxPasses=Math.max(1,Math.round(diff/3));
   egState.talents=[];
   const catSpent={};
   const usedIds=new Set();
@@ -8505,7 +8625,7 @@ function egAutoTalentsEvos(){
     const cat=t.category;
     return cat===talentCat||archCats.includes(cat);
   });
-  for(let pass=0;pass<4;pass++){
+  for(let pass=0;pass<maxPasses;pass++){
     // Only pick a talent if its category's skill total has room for the cost
     const eligible=allTalents.filter(t=>{
       if(usedIds.has(t.name))return false;
@@ -8530,12 +8650,54 @@ function egAutoTalentsEvos(){
   // ── Evolution ───────────────────────────────────────────────────────────────
   const evoTypes=EG_ARCH_EVO_TYPES[archKey]||['GENETICS'];
   const allGrouped=(g.evolutions&&g.evolutions.grouped)||[];
-  const eligibleEvos=allGrouped.filter(grp=>evoTypes.includes(grp.evo_type)&&grp.tiers&&grp.tiers['TIER I']);
+  const eligibleEvos=allGrouped.filter(grp=>{
+    if(!evoTypes.includes(grp.evo_type)||!grp.tiers||!grp.tiers['TIER I'])return false;
+    const t1=grp.tiers['TIER I'];
+    const av=(t1.availability||'COMMON').toUpperCase();
+    if(diff<=3){return ['COMMON','UNCOMMON'].includes(av);}
+    if(diff<=6){return !['UNIQUE','CLASSIFIED'].includes(av);}
+    return true;
+  });
   if(eligibleEvos.length>0){
     egState.evolution=eligibleEvos[Math.floor(Math.random()*eligibleEvos.length)];
   } else {
     egState.evolution=null;
   }
+}
+
+function egAutoConsumables(){
+  const tier=egState.tier;
+  const diff=egState.difficulty||5;
+  const avails=difficultyAvails(tier,diff);
+  const archKey=egState.archetype;
+  const legalProfile=EG_CONSUMABLE_LEGAL[archKey]||{prefer:['No Permit'],allow:['Restricted'],illegalChance:0.1};
+  const medItems=(g.medical||[]).filter(m=>{
+    const av=(m.availability||'COMMON').toUpperCase();
+    return avails.includes(av);
+  });
+  const preferPool=medItems.filter(m=>legalProfile.prefer.includes(m.legality));
+  const allowPool=medItems.filter(m=>legalProfile.allow.includes(m.legality)&&!legalProfile.prefer.includes(m.legality));
+  if(!preferPool.length&&!allowPool.length){egState.consumables=[];return;}
+  let maxCount;
+  if(tier==='henchmen')maxCount=Math.floor(Math.random()*2);
+  else if(tier==='regular')maxCount=1+Math.floor(Math.random()*2);
+  else maxCount=1+Math.floor(Math.random()*3);
+  const picked=[];
+  const usedNames=new Set();
+  for(let i=0;i<maxCount;i++){
+    const useIllegal=allowPool.length>0&&Math.random()<legalProfile.illegalChance;
+    const pool=(useIllegal?allowPool:preferPool).filter(m=>!usedNames.has(m.name));
+    if(!pool.length){
+      const fallback=(useIllegal?preferPool:allowPool).filter(m=>!usedNames.has(m.name));
+      if(!fallback.length)continue;
+      const item=egPickTiered(fallback,tier);
+      if(item){picked.push(item);usedNames.add(item.name);}
+      continue;
+    }
+    const item=egPickTiered(pool,tier);
+    if(item){picked.push(item);usedNames.add(item.name);}
+  }
+  egState.consumables=picked;
 }
 
 function egExportVTTES(){
@@ -8639,6 +8801,22 @@ function egExportVTTES(){
       });
     }
   }
+  // Consumables
+  if((egState.consumables||[]).length){
+    gmHtml+='<h2><strong>CONSUMABLES</strong></h2>\n';
+    egState.consumables.forEach((c,i)=>{
+      if(i>0)gmHtml+='<hr>\n';
+      gmHtml+='<h3><strong>'+_gmE(c.name)+'</strong></h3>\n';
+      const tags=[];
+      if(c.legality)tags.push(_gmE(c.legality));
+      if(c.availability)tags.push(_gmE(c.availability));
+      if(c.application)tags.push('Apply: '+_gmE(c.application));
+      if(tags.length)gmHtml+='<p><strong>['+tags.join(' / ')+']</strong></p>\n';
+      if(c.effect||c.desc)gmHtml+='<blockquote><p>'+_gmE(c.effect||c.desc)+'</p></blockquote>\n';
+      if(c.toxicity&&parseInt(c.toxicity))gmHtml+='<p><em>Toxicity: '+_gmE(c.toxicity)+'</em></p>\n';
+    });
+    gmHtml+='<hr>\n';
+  }
   // Spirit / Spells placeholder for mage archetype
   const _archForExp=EG_ARCHETYPES[egState.archetype]||EG_ARCHETYPES.soldier;
   if(_archForExp.isMage){
@@ -8659,6 +8837,7 @@ function egInit(){
   egSetRaceAttrs();
   egAutoSkills();
   egAutoGear();
+  egAutoConsumables();
   egAutoTalentsEvos();
   egAutoDatacom();
   egCalcResources();
@@ -10548,6 +10727,18 @@ function render(){
     (g.races||[]).forEach(r=>{html+='<option value="'+esc(r.name)+'"'+(egState.race===r.name?' selected':'')+'>'+esc(r.name)+'</option>';});
     html+='</select>';
     html+='</div>';
+    // Difficulty slider row
+    {
+      const dv=egState.difficulty||5;
+      const dLabel=dv<=3?'<span style="color:var(--gr);font-weight:600;">EASY ('+dv+')</span>':dv<=6?'<span style="color:var(--a2);font-weight:600;">STANDARD ('+dv+')</span>':'<span style="color:var(--re);font-weight:600;">HARDENED ('+dv+')</span>';
+      html+='<div class="eg-row" style="margin-top:10px;align-items:center;gap:10px;">';
+      html+='<button class="eg-lock-btn'+(egState.locks.difficulty?' locked':'')+'" title="Lock difficulty" onclick="egState.locks.difficulty=!egState.locks.difficulty;render();">'+(egState.locks.difficulty?'🔒':'🔓')+'</button>';
+      html+='<span class="eg-label">DIFFICULTY</span>';
+      html+='<input type="range" min="1" max="10" value="'+dv+'" style="width:160px;accent-color:var(--a);" oninput="egState.difficulty=parseInt(this.value);egCalcResources();render();" />';
+      html+=dLabel;
+      html+='<span style="font-family:\'Share Tech Mono\',monospace;font-size:9px;color:var(--mu);margin-left:4px;">1=weakest · 10=strongest</span>';
+      html+='</div>';
+    }
     html+='</div>';
     // ── Attributes ────────────────────────────────────────────────────────────
     html+='<div class="eg-section">';
@@ -10609,17 +10800,27 @@ function render(){
       html+='<div class="eg-gear-item">';
       html+='<button class="eg-gear-remove" onclick="egState.weapons.splice('+i+',1);render();">✕</button>';
       // weapon name selector
-      html+='<div class="eg-weapon-select-wrap">';
-      html+='<select class="eg-select" style="max-width:320px;" onchange="const pw=JSON.parse(this.value);egState.weapons['+i+']=egWpnToState(pw);render();">';
+      html+='<div class="eg-weapon-select-wrap" style="display:flex;gap:4px;align-items:center;">';
+      html+='<select class="eg-select" style="max-width:220px;" onchange="const pw=JSON.parse(this.value);const _ws=egWpnToState(pw);_ws.mfr=egState.weapons['+i+'].mfr||\'Generic\';egState.weapons['+i+']=_ws;render();">';
       const filteredWpns=(g.weapons||[]).filter(fw=>avails.includes(fw.availability)&&legals.includes(fw.legality));
       filteredWpns.forEach(fw=>{const sel=fw.name===w.name?'selected':'';html+='<option value="'+esc(JSON.stringify({name:fw.name,category:fw.category,dmg_type:fw.dmg_type||fw.type,type:fw.type,power:fw.power,damage:fw.damage,special:fw.special,range_short:fw.range_short,range_med:fw.range_med,range_long:fw.range_long,rof:fw.rof,ammo:fw.ammo,reload:fw.reload,expertise:fw.expertise}))+'" '+sel+'>'+esc(fw.name)+'</option>';});
       html+='</select>';
+      // manufacturer selector
+      {
+        const _wCat=w._src?w._src.category||'':'';
+        const _isMeleeWpn=['Melee Weapons (Martial Arts)','Powered Melee Weapons (Martial Arts)'].includes(_wCat);
+        const _validWMfrs=WPN_MFRS.filter(m=>!WPN_MFRS_MELEE_ONLY.has(m)||_isMeleeWpn);
+        html+='<select class="eg-select" style="max-width:130px;" title="Manufacturer" onchange="const _srcW=egState.weapons['+i+']._src;if(_srcW){const _nm=this.value;const _mod=_nm===\'Generic\'?{..._srcW}:applyWpnMfr(_srcW,_nm);if(_mod){const _ns=egWpnToState(_mod);_ns.mfr=_nm;_ns._src=_srcW;egState.weapons['+i+']=_ns;render();}}">';
+        _validWMfrs.forEach(m=>{const sel=(w.mfr||'Generic')===m?'selected':'';html+='<option value="'+esc(m)+'" '+sel+'>'+esc(m)+'</option>';});
+        html+='</select>';
+      }
       html+='</div>';
       html+='<div class="eg-gear-name">'+esc(w.name)+'</div>';
       html+='<div class="eg-gear-pills">';
       html+='<span class="eg-gear-pill phys">'+esc(w.dmgtype)+'</span>';
       html+='<span class="eg-gear-pill">DMG: '+esc(w.dmg)+'</span>';
       html+='<span class="eg-gear-pill">PWR: '+esc(w.power)+'</span>';
+      if(w.mfr&&w.mfr!=='Generic')html+='<span class="eg-gear-pill" style="color:var(--a3);border-color:var(--a3);">'+esc(w.mfr)+'</span>';
       if(w.special)html+='<span class="eg-gear-pill tech">'+esc(w.special)+'</span>';
       html+='<span class="eg-gear-pill">CLOSE '+esc(w.close_range)+'m · MED '+esc(w.medium_range)+'m · LONG '+esc(w.long_range)+'m</span>';
       html+='<span class="eg-gear-pill">ROF: '+esc(w.rof||'—')+'</span>';
@@ -10632,17 +10833,20 @@ function render(){
       html+='<button class="eg-add-btn" onclick="const _wpnSks=[\'Marksman\',\'Gunslinger\',\'Heavy_Weapons\',\'Martial_Arts\',\'Dexterity\'];let _bsk=null,_bv=-1;_wpnSks.forEach(sk=>{const v=egState.skills[sk]||0;if(v>_bv){_bv=v;_bsk=sk;}});let _cats=EG_ARCHETYPES[egState.archetype]?EG_ARCHETYPES[egState.archetype].weaponCats:[];if(_bsk&&_bv>=3&&EG_SKILL_WPN_CATS[_bsk])_cats=EG_SKILL_WPN_CATS[_bsk];const _av=EG_AVAIL_BY_TIER[egState.tier],_lg=EG_LEGAL_BY_TIER[egState.tier];let _pool=(g.weapons||[]).filter(fw=>_cats.includes(fw.category)&&_av.includes(fw.availability)&&_lg.includes(fw.legality));if(!_pool.length)_pool=(g.weapons||[]).filter(fw=>_av.includes(fw.availability)&&_lg.includes(fw.legality));if(_pool.length){egState.weapons.push(egWpnToState(egPickTiered(_pool,egState.tier)));render();}">+ Add Weapon</button>';
     }
     html+='</div>';
-    // ── Armor ─────────────────────────────────────────────────────────────────
+    // ── Defenses ──────────────────────────────────────────────────────────────
     html+='<div class="eg-section">';
-    html+='<div class="eg-section-title" style="display:flex;align-items:center;gap:6px;">Armor<button class="eg-lock-btn'+(egState.locks.armors?' locked':'')+'" title="Lock armor" onclick="egState.locks.armors=!egState.locks.armors;render();">'+(egState.locks.armors?'🔒':'🔓')+'</button></div>';
+    html+='<div class="eg-section-title" style="display:flex;align-items:center;gap:6px;">Defenses<button class="eg-lock-btn'+(egState.locks.armors?' locked':'')+'" title="Lock defenses" onclick="egState.locks.armors=!egState.locks.armors;render();">'+(egState.locks.armors?'🔒':'🔓')+'</button></div>';
     const availsAr=EG_AVAIL_BY_TIER[egState.tier];
     egState.armors.forEach((ar,i)=>{
       html+='<div class="eg-gear-item">';
       html+='<button class="eg-gear-remove" onclick="egState.armors.splice('+i+',1);render();">✕</button>';
-      html+='<div class="eg-weapon-select-wrap">';
-      html+='<select class="eg-select" style="max-width:320px;" onchange="const pa=JSON.parse(this.value);egState.armors['+i+']=egArmorToState(pa);egCalcResources();render();">';
+      html+='<div class="eg-weapon-select-wrap" style="display:flex;gap:4px;align-items:center;">';
+      html+='<select class="eg-select" style="max-width:220px;" onchange="const pa=JSON.parse(this.value);const _as=egArmorToState(pa);_as.mfr=egState.armors['+i+'].mfr||\'Generic\';egState.armors['+i+']=_as;egCalcResources();render();">';
       const filteredAr=(g.armor||[]).filter(fa=>availsAr.includes(fa.availability));
-      filteredAr.forEach(fa=>{const sel=fa.name===ar.name?'selected':'';html+='<option value="'+esc(JSON.stringify({name:fa.name,type:fa.type,def_physical:fa.def_physical,def_energy:fa.def_energy,def_tech:fa.def_tech,def_spiritual:fa.def_spiritual,special:fa.special,soak:fa.soak}))+'" '+sel+'>'+esc(fa.name)+'</option>';});
+      filteredAr.forEach(fa=>{const sel=fa.name===ar.name?'selected':'';html+='<option value="'+esc(JSON.stringify({name:fa.name,type:fa.type,def_physical:fa.def_physical,def_energy:fa.def_energy,def_tech:fa.def_tech,def_spiritual:fa.def_spiritual,special:fa.special,soak:fa.soak,soak_max:fa.soak_max,soak_min:fa.soak_min}))+'" '+sel+'>'+esc(fa.name)+'</option>';});
+      html+='</select>';
+      html+='<select class="eg-select" style="max-width:130px;" title="Manufacturer" onchange="const _srcA=egState.armors['+i+']._src;if(_srcA){const _nm=this.value;const _mod=_nm===\'Generic\'?{..._srcA}:applyArmorMfr(_srcA,_nm);if(_mod){const _nas=egArmorToState(_mod);_nas.mfr=_nm;_nas._src=_srcA;egState.armors['+i+']=_nas;egCalcResources();render();}}">';
+      ARMOR_MFRS.forEach(m=>{const sel=(ar.mfr||'Generic')===m?'selected':'';html+='<option value="'+esc(m)+'" '+sel+'>'+esc(m)+'</option>';});
       html+='</select>';
       html+='</div>';
       html+='<div class="eg-gear-name">'+esc(ar.name)+'</div>';
@@ -10653,6 +10857,7 @@ function render(){
       html+='<span class="eg-gear-pill energy">ENERGY: '+esc(ar.def_energy)+'</span>';
       html+='<span class="eg-gear-pill tech">TECH: '+esc(ar.def_tech)+'</span>';
       html+='<span class="eg-gear-pill spirit">SPIRIT: '+esc(ar.def_spirit)+'</span>';
+      if(ar.mfr&&ar.mfr!=='Generic')html+='<span class="eg-gear-pill" style="color:var(--a3);border-color:var(--a3);">'+esc(ar.mfr)+'</span>';
       if(ar.special)html+='<span class="eg-gear-pill">'+esc(ar.special)+'</span>';
       html+='</div>';
       html+='</div>';
@@ -10661,6 +10866,40 @@ function render(){
       html+='<button class="eg-add-btn" onclick="const _av2=EG_AVAIL_BY_TIER[egState.tier],ap=(g.armor||[]).filter(fa=>_av2.includes(fa.availability));if(ap.length){egState.armors.push(egArmorToState(egPickTiered(ap,egState.tier)));egCalcResources();render();}">+ Add Armor</button>';
     }
     html+='</div>';
+    // ── Consumables ───────────────────────────────────────────────────────────
+    {
+      html+='<div class="eg-section">';
+      html+='<div class="eg-section-title" style="display:flex;align-items:center;gap:6px;">Consumables<button class="eg-lock-btn'+(egState.locks.consumables?' locked':'')+'" title="Lock consumables" onclick="egState.locks.consumables=!egState.locks.consumables;render();">'+(egState.locks.consumables?'🔒':'🔓')+'</button><button class="eg-add-btn" style="margin-left:auto;" onclick="egAutoConsumables();render();">🎲 Re-roll</button></div>';
+      const cItems=egState.consumables||[];
+      if(!cItems.length){
+        html+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#3a3a3c;margin-bottom:8px;">No consumables generated — use the button below to add one.</div>';
+      } else {
+        cItems.forEach((c,ci)=>{
+          html+='<div class="eg-gear-item" style="flex-direction:column;align-items:stretch;padding:6px 10px;margin-bottom:6px;">';
+          html+='<div style="display:flex;align-items:center;gap:6px;">';
+          html+='<button class="eg-gear-remove" onclick="egState.consumables.splice('+ci+',1);render();">✕</button>';
+          html+='<span style="font-family:\'Share Tech Mono\',monospace;font-size:12px;color:#f2f2f7;flex:1;">'+esc(c.name)+'</span>';
+          if(c.legality){const lcls=c.legality==='Illegal'||c.legality==='Classified'?'tr':c.legality==='Restricted'?'ty':'tg';html+='<span class="tag '+lcls+'" style="font-size:9px;">'+esc(c.legality)+'</span>';}
+          if(c.availability)html+='<span class="eg-gear-pill" style="font-size:9px;color:var(--mu);">'+esc(c.availability)+'</span>';
+          html+='</div>';
+          if(c.application)html+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:9px;color:var(--a2);margin-top:2px;padding-left:20px;">Apply: '+esc(c.application)+'</div>';
+          if(c.effect||c.desc){const eff=c.effect||c.desc||'';html+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#8e8e93;margin-top:3px;padding-left:20px;">'+esc(eff.length>90?eff.slice(0,88)+'…':eff)+'</div>';}
+          html+='</div>';
+        });
+      }
+      // Add consumable picker
+      const _cAvails=difficultyAvails(egState.tier,egState.difficulty||5);
+      const _cAddPool=(g.medical||[]).filter(m=>_cAvails.includes((m.availability||'COMMON').toUpperCase()));
+      if(_cAddPool.length){
+        html+='<div style="display:flex;gap:6px;align-items:center;margin-top:6px;">';
+        html+='<select class="eg-select" id="eg-consumable-add-sel" style="flex:1;"><option value="">— Add Consumable —</option>';
+        _cAddPool.forEach(m=>{html+='<option value="'+esc(JSON.stringify({name:m.name,legality:m.legality||'',availability:(m.availability||'').toUpperCase(),application:m.application||'',effect:m.effect||m.desc||'',toxicity:m.toxicity||''}))+'">'+esc(m.name)+' — '+esc(m.legality||'')+'</option>';});
+        html+='</select>';
+        html+='<button class="eg-add-btn" onclick="const _cs=document.getElementById(\'eg-consumable-add-sel\');if(_cs&&_cs.value){const _cm=JSON.parse(_cs.value);if(!egState.consumables.find(x=>x.name===_cm.name)){egState.consumables.push(_cm);render();}}">+ Add</button>';
+        html+='</div>';
+      }
+      html+='</div>';
+    }
     // ── Talents & Evolutions ─────────────────────────────────────────────────
     html+='<div class="eg-section">';
     html+='<div class="eg-section-title" style="display:flex;align-items:center;gap:6px;">Talents &amp; Evolutions<button class="eg-lock-btn'+(egState.locks.talentsevos?' locked':'')+'" title="Lock talents &amp; evolutions" onclick="egState.locks.talentsevos=!egState.locks.talentsevos;render();">'+(egState.locks.talentsevos?'🔒':'🔓')+'</button></div>';
