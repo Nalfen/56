@@ -8589,11 +8589,11 @@ function egExportVTTES(){
   // Talents
   const _gmTalents=egState.talents||[];
   if(_gmTalents.length){
-    gmHtml+='<h2>🎴 <strong>TALENTS</strong></h2>\n';
+    gmHtml+='<h2><strong>TALENTS</strong></h2>\n';
     _gmTalents.forEach((t,i)=>{
       if(i>0) gmHtml+='<hr>\n';
       gmHtml+='<h3><strong>'+_gmE(t.name)+'</strong></h3>\n';
-      gmHtml+='<p><strong>['+_gmE(t.category)+' / '+_gmE(t.skill||'General')+'] — ('+_gmE(t.cost)+' pts)</strong></p>\n';
+      gmHtml+='<p><strong>['+_gmE(t.category)+' / '+_gmE(t.skill||'General')+'] - ('+_gmE(t.cost)+' pts)</strong></p>\n';
       gmHtml+='<blockquote><p>'+_gmE(t.effect)+'</p></blockquote>\n';
     });
     gmHtml+='<hr>\n';
@@ -8602,7 +8602,7 @@ function egExportVTTES(){
   if(egState.evolution&&egState.tier!=='henchmen'){
     const ev=egState.evolution;
     const t1=ev.tiers&&ev.tiers['TIER I'],t2=ev.tiers&&ev.tiers['TIER II'],t3=ev.tiers&&ev.tiers['TIER III'];
-    gmHtml+='<h2>🧬 <strong>EVOLUTION: '+_gmE(ev.name)+'</strong></h2>\n';
+    gmHtml+='<h2><strong>EVOLUTION: '+_gmE(ev.name)+'</strong></h2>\n';
     gmHtml+='<p><strong>['+_gmE(ev.evo_type)+']</strong></p>\n';
     if(t1){gmHtml+='<h3><strong>Tier I</strong></h3>\n<p>'+_gmE(t1.effect)+'</p>\n';}
     if((egState.tier==='elite'||egState.tier==='boss')&&t2){gmHtml+='<h3><strong>Tier II</strong></h3>\n<p>'+_gmE(t2.effect)+'</p>\n';}
@@ -8612,11 +8612,11 @@ function egExportVTTES(){
   // Datacom & Programs/Gadgets
   if(egState.datacom){
     const dc=egState.datacom;
-    gmHtml+='<h2>🕸️ <strong>DATACOM: '+_gmE(dc.name)+'</strong></h2>\n';
-    gmHtml+='<p><strong>'+_gmE(dc.type)+'</strong><br>\n<strong>MEM: '+_gmE(dc.memory)+' — CPU: '+_gmE(dc.cpu)+(parseInt(dc.nanites)>0?' — NANITES: '+_gmE(dc.nanites):'')+' </strong></p>\n';
+    gmHtml+='<h2><strong>DATACOM: '+_gmE(dc.name)+'</strong></h2>\n';
+    gmHtml+='<p><strong>'+_gmE(dc.type)+'</strong><br>\n<strong>MEM: '+_gmE(dc.memory)+' | CPU: '+_gmE(dc.cpu)+(parseInt(dc.nanites)>0?' | NANITES: '+_gmE(dc.nanites):'')+' </strong></p>\n';
     gmHtml+='<hr>\n';
     if((egState.programs||[]).length){
-      gmHtml+='<h1>📡 <strong>PROGRAMS</strong></h1>\n<hr>\n';
+      gmHtml+='<h1><strong>PROGRAMS</strong></h1>\n<hr>\n';
       egState.programs.forEach(p=>{
         gmHtml+='<h2><strong>'+_gmE(p.name)+'</strong></h2>\n';
         gmHtml+='<p><strong>(MEM:'+_gmE(p.memory)+' | '+_gmE(p.availability)+' / '+_gmE(p.legality)+')</strong></p>\n';
@@ -8630,7 +8630,7 @@ function egExportVTTES(){
       });
     }
     if((egState.gadgets||[]).length){
-      gmHtml+='<h1>🛠️ <strong>GADGETS</strong></h1>\n<hr>\n';
+      gmHtml+='<h1><strong>GADGETS</strong></h1>\n<hr>\n';
       egState.gadgets.forEach(gd=>{
         gmHtml+='<h2><strong>'+_gmE(gd.name)+'</strong></h2>\n';
         gmHtml+='<p><strong>(MEM:'+_gmE(gd.memory)+' | '+_gmE(gd.availability)+' / '+_gmE(gd.legality)+')</strong></p>\n';
@@ -8642,7 +8642,7 @@ function egExportVTTES(){
   // Spirit / Spells placeholder for mage archetype
   const _archForExp=EG_ARCHETYPES[egState.archetype]||EG_ARCHETYPES.soldier;
   if(_archForExp.isMage){
-    gmHtml+='<h2>✨ <strong>SPIRIT / SPELLS</strong></h2>\n';
+    gmHtml+='<h2><strong>SPIRIT / SPELLS</strong></h2>\n';
     gmHtml+='<p>[Placeholder — spirit and spell selection will be implemented when the compendium spirit/spell data is finalised]</p>\n';
   }
   const charId=egGenId();
