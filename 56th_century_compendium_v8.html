@@ -639,6 +639,31 @@ aside.open{transform:translateX(0);}
 .eg-evo-tier .eg-evo-eff{font-family:'Share Tech Mono',monospace;font-size:13px;color:#f2f2f7;line-height:1.5;}
 .eg-evo-tier .eg-evo-cost{font-family:'Share Tech Mono',monospace;font-size:9px;color:#3a3a3c;margin-top:3px;}
 .eg-weapon-select-wrap{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px;}
+/* Mode toggle */
+.eg-mode-bar{display:flex;gap:6px;margin-bottom:14px;}
+.eg-mode-btn{flex:1;padding:8px 12px;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:transparent;border:1px solid var(--border2);color:var(--mu);border-radius:6px;cursor:pointer;transition:all .14s;}
+.eg-mode-btn.active{background:rgba(10,132,255,.1);border-color:var(--bl);color:var(--bl);font-weight:600;}
+/* Group template grid */
+.eg-tmpl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px;margin-bottom:12px;}
+.eg-tmpl-card{padding:10px 12px;border:1px solid var(--border2);border-radius:6px;cursor:pointer;background:transparent;transition:all .14s;text-align:left;}
+.eg-tmpl-card:hover{border-color:var(--mu);background:rgba(255,255,255,.03);}
+.eg-tmpl-card.active{border-color:var(--bl);background:rgba(10,132,255,.07);}
+.eg-tmpl-emoji{font-size:20px;margin-bottom:4px;}
+.eg-tmpl-label{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--tx);font-weight:600;margin-bottom:3px;}
+.eg-tmpl-desc{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--mu);line-height:1.4;}
+/* Group enemy card */
+.eg-group-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:8px;margin-top:12px;}
+.eg-group-card{background:rgba(255,255,255,.025);border:1px solid var(--border2);border-radius:8px;padding:12px 14px;}
+.eg-group-card-role{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--a2);margin-bottom:4px;}
+.eg-group-card-name{font-family:'Share Tech Mono',monospace;font-size:14px;font-weight:600;color:var(--tx);margin-bottom:6px;}
+.eg-group-card-stats{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px;}
+.eg-group-export{width:100%;margin-top:8px;padding:5px 10px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;background:rgba(10,132,255,.08);border:1px solid rgba(10,132,255,.3);color:var(--bl);border-radius:5px;cursor:pointer;}
+.eg-group-export:hover{background:rgba(10,132,255,.15);}
+/* Loot section */
+.eg-loot-credits{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);margin-bottom:8px;}
+.eg-loot-amount{font-family:'Share Tech Mono',monospace;font-size:16px;font-weight:600;color:var(--gr);}
+.tag-blanks{background:rgba(48,209,88,.08);color:var(--gr);border:1px solid rgba(48,209,88,.3);}
+.tag-credstick{background:rgba(255,159,10,.08);color:var(--or);border:1px solid rgba(255,159,10,.3);}
 
 </style>
 </head>
@@ -8223,6 +8248,27 @@ const EG_SECONDARY_RULES={
   backup_sidearm:['soldier','sniper','mil_infantry','mil_sniper','mil_heavy','mil_medic','mil_engineer','mil_pilot','mil_officer','corp_guard','corp_agent','pol_officer','pol_captain','gang_enforcer','gang_smuggler','heavy','commander'],
   melee_backup:['assassin','brawler','gang_enforcer','gang_hitman','mil_spec_ops']
 };
+const EQUIPMENT_LOOT_CATEGORIES=['Communication','Electronics','Surveillance','Tools','Explosives','Security','Survival','Medical Supplies','Cybernetics Accessories','Clothing & Disguise','Drugs & Substances'];
+const LOOT_CARRY_SIZES=new Set(['Tiny','Small','Medium','','undefined','null']);
+const LOOT_MEMENTOS=[
+  'Battered holophotograph (worn, personal)',
+  'Crumpled transit voucher (expired, 3 systems ago)',
+  'Cheap synth-leather wallet (empty except for a name-chip)',
+  'Small religious medallion (unidentified faction symbol)',
+  'Folded handwritten note (language unidentified)',
+  'Broken credstick (zero balance, scratched serial)'
+];
+const EG_GROUP_TEMPLATES={
+  crime_boss:{label:'Crime Boss & Crew',description:'A crime boss flanked by a lieutenant and enforcers.',emoji:'👑',slots:[{role:'Boss',tier:'boss',archetypes:['gang_enforcer','commander','corp_executive'],count:1,locked:true},{role:'Lieutenant',tier:'elite',archetypes:['gang_enforcer','gang_hitman','assassin'],count:1,locked:true},{role:'Enforcer',tier:'regular',archetypes:['gang_enforcer','brawler','soldier'],count:-1}]},
+  military_squad:{label:'Military Squad',description:'A disciplined squad with officer, specialists, and infantry.',emoji:'🪖',slots:[{role:'Officer',tier:'elite',archetypes:['mil_officer','commander'],count:1,locked:true},{role:'Specialist',tier:'regular',archetypes:['mil_medic','mil_engineer','mil_sniper'],count:1,locked:true},{role:'Infantry',tier:'regular',archetypes:['mil_infantry','soldier'],count:-1}]},
+  corporate_security:{label:'Corporate Security Detail',description:'Executive protection team with a handler and guards.',emoji:'🏢',slots:[{role:'Handler',tier:'elite',archetypes:['corp_agent','pol_captain'],count:1,locked:true},{role:'Guard',tier:'regular',archetypes:['corp_guard','soldier'],count:-1}]},
+  police_response:{label:'Police Response Team',description:'Law enforcement squad with a captain and officers.',emoji:'🚔',slots:[{role:'Captain',tier:'elite',archetypes:['pol_captain','pol_detective'],count:1,locked:true},{role:'Investigator',tier:'regular',archetypes:['pol_investigator','pol_detective'],count:1,locked:false},{role:'Officer',tier:'regular',archetypes:['pol_officer'],count:-1}]},
+  hired_guns:{label:'Hired Guns (Mercenary)',description:'A mixed mercenary team without strict hierarchy.',emoji:'🔫',slots:[{role:'Merc Leader',tier:'elite',archetypes:['soldier','commander','heavy','sniper'],count:1,locked:true},{role:'Specialist',tier:'regular',archetypes:['sniper','hacker','assassin','mage'],count:1,locked:false},{role:'Grunt',tier:'regular',archetypes:['soldier','brawler','heavy'],count:-1}]},
+  henchmen_mob:{label:'Henchmen Mob',description:'A loose mob of low-tier enemies with a single tough leader.',emoji:'💀',slots:[{role:'Ringleader',tier:'regular',archetypes:['gang_enforcer','brawler','soldier'],count:1,locked:true},{role:'Henchman',tier:'henchmen',archetypes:['soldier','gang_enforcer','brawler'],count:-1}]}
+};
+
+let egMode='single';
+let egGroupState={template:'crime_boss',enemyCount:4,difficulty:5,enemies:[]};
 
 let egState={
   name:'Enemy Name',tier:'regular',race:'Human',archetype:'soldier',outputFmt:'vttes',
@@ -8233,7 +8279,8 @@ let egState={
   consumables:[],
   talents:[],evolution:null,
   datacom:null,programs:[],gadgets:[],
-  locks:{name:false,tier:false,archetype:false,race:false,difficulty:false,attrs:{physical:false,acuity:false,mental:false,social:false,endurance:false,speed:false,wits:false,willpower:false},skills:false,weapons:false,armors:false,consumables:false,talentsevos:false,datacom:false}
+  loot:{credits:{amount:0,type:'blanks'},items:[]},
+  locks:{name:false,tier:false,archetype:false,race:false,difficulty:false,attrs:{physical:false,acuity:false,mental:false,social:false,endurance:false,speed:false,wits:false,willpower:false},skills:false,weapons:false,armors:false,consumables:false,talentsevos:false,datacom:false,loot:false}
 };
 
 function egGenId(){
@@ -8250,24 +8297,24 @@ function egSkillLevel(v){
   return 'gmaster';
 }
 
-function egCalcResources(){
-  const tier=egState.tier;
+function egCalcResources(state=egState){
+  const tier=state.tier;
   const base=EG_TIER_BASE[tier];
-  const endur=parseInt(egState.attrs.endurance)||0;
-  const will=parseInt(egState.attrs.willpower)||0;
-  egState.health=base.fixed?base.hp:base.hp+endur;
-  egState.morale=base.fixed?base.hp:base.hp+will;
+  const endur=parseInt(state.attrs.endurance)||0;
+  const will=parseInt(state.attrs.willpower)||0;
+  state.health=base.fixed?base.hp:base.hp+endur;
+  state.morale=base.fixed?base.hp:base.hp+will;
   // chi: 0 unless mage
-  const arch=EG_ARCHETYPES[egState.archetype];
-  if(!arch||!arch.chi){egState.chi=0;return;}
+  const arch=EG_ARCHETYPES[state.archetype];
+  if(!arch||!arch.chi){state.chi=0;return;}
   // mage chi based on armor lightness
-  const ar=egState.armors[0];
+  const ar=state.armors[0];
   let arType=ar?ar.type:'';
-  if(!arType||arType===''){egState.chi=Math.min(10,5+Math.floor(Math.random()*6));}
-  else if(arType.toLowerCase().includes('light')){egState.chi=3+Math.floor(Math.random()*6);}
-  else if(arType.toLowerCase().includes('medium')){egState.chi=1+Math.floor(Math.random()*5);}
-  else{egState.chi=Math.floor(Math.random()*3);}
-  egState.chi=Math.min(10,Math.max(0,egState.chi));
+  if(!arType||arType===''){state.chi=Math.min(10,5+Math.floor(Math.random()*6));}
+  else if(arType.toLowerCase().includes('light')){state.chi=3+Math.floor(Math.random()*6);}
+  else if(arType.toLowerCase().includes('medium')){state.chi=1+Math.floor(Math.random()*5);}
+  else{state.chi=Math.floor(Math.random()*3);}
+  state.chi=Math.min(10,Math.max(0,state.chi));
 }
 
 function difficultyAvails(tier,difficulty){
@@ -8277,12 +8324,12 @@ function difficultyAvails(tier,difficulty){
   return base;
 }
 
-function egSkillValueForTier(tier,priority){
+function egSkillValueForTier(tier,priority,difficulty){
   // priority: 1=primary, 0=secondary
   const ranges={henchmen:{p:[2,3],s:[1,2]},regular:{p:[4,5],s:[2,3]},elite:{p:[6,7],s:[4,5]},boss:{p:[8,9],s:[5,7]}};
   const r=ranges[tier]||ranges.regular;
   const [lo,hi]=priority?r.p:r.s;
-  const diff=egState.difficulty||5;
+  const diff=difficulty||egState.difficulty||5;
   // At diff 1: 60% of values; at diff 10: 100%
   const scale=0.6+0.4*(diff-1)/9;
   const scaledLo=Math.max(1,Math.round(lo*scale));
@@ -8297,20 +8344,20 @@ function egSkillMinForTier(tier){
   return 2+Math.floor(Math.random()*3);
 }
 
-function egAutoSkills(){
-  const arch=EG_ARCHETYPES[egState.archetype]||EG_ARCHETYPES.soldier;
-  const tier=egState.tier;
+function egAutoSkills(state=egState){
+  const arch=EG_ARCHETYPES[state.archetype]||EG_ARCHETYPES.soldier;
+  const tier=state.tier;
   const skills={};
   EG_SKILLS_ALL.forEach(s=>{ skills[s.key]=egSkillMinForTier(tier); });
   Object.entries(arch.skills).forEach(([k,priority])=>{
-    skills[k]=egSkillValueForTier(tier,priority);
+    skills[k]=egSkillValueForTier(tier,priority,state.difficulty||5);
   });
-  egState.skills=skills;
+  state.skills=skills;
 }
 
-function egFilterWeapons(cats,overrideAvails){
-  const avails=overrideAvails||difficultyAvails(egState.tier,egState.difficulty||5);
-  const legals=EG_LEGAL_BY_TIER[egState.tier];
+function egFilterWeapons(cats,overrideAvails,state=egState){
+  const avails=overrideAvails||difficultyAvails(state.tier,state.difficulty||5);
+  const legals=EG_LEGAL_BY_TIER[state.tier];
   return (g.weapons||[]).filter(w=>
     cats.includes(w.category)&&
     avails.includes(w.availability)&&
@@ -8318,8 +8365,8 @@ function egFilterWeapons(cats,overrideAvails){
   );
 }
 
-function egFilterArmor(armorType,overrideAvails){
-  const avails=overrideAvails||difficultyAvails(egState.tier,egState.difficulty||5);
+function egFilterArmor(armorType,overrideAvails,state=egState){
+  const avails=overrideAvails||difficultyAvails(state.tier,state.difficulty||5);
   const typeMap={light:'Light Armor',medium:'Medium Armor',heavy:'Heavy Armor'};
   const t=typeMap[armorType]||'Light Armor';
   return (g.armor||[]).filter(a=>
@@ -8328,8 +8375,8 @@ function egFilterArmor(armorType,overrideAvails){
   );
 }
 
-function egTryApplyWpnMfr(item,isMelee){
-  const avails=difficultyAvails(egState.tier,egState.difficulty||5);
+function egTryApplyWpnMfr(item,isMelee,state=egState){
+  const avails=difficultyAvails(state.tier,state.difficulty||5);
   const validMfrs=WPN_MFRS.filter(m=>m!=='Generic'&&(!WPN_MFRS_MELEE_ONLY.has(m)||isMelee));
   const shuffled=validMfrs.slice().sort(()=>Math.random()-0.5);
   for(const mfr of shuffled){
@@ -8341,61 +8388,60 @@ function egTryApplyWpnMfr(item,isMelee){
   return{item,mfr:'Generic'};
 }
 
-function egAutoGearWeapons(){
-  const arch=EG_ARCHETYPES[egState.archetype]||EG_ARCHETYPES.soldier;
+function egAutoGearWeapons(state=egState){
+  const arch=EG_ARCHETYPES[state.archetype]||EG_ARCHETYPES.soldier;
   const wpnSkills=['Marksman','Gunslinger','Heavy_Weapons','Martial_Arts','Dexterity'];
   let bestSkill=null,bestVal=-1;
-  wpnSkills.forEach(sk=>{const v=egState.skills[sk]||0;if(v>bestVal){bestVal=v;bestSkill=sk;}});
+  wpnSkills.forEach(sk=>{const v=state.skills[sk]||0;if(v>bestVal){bestVal=v;bestSkill=sk;}});
   let cats=arch.weaponCats;
   if(bestSkill&&bestVal>=3&&EG_SKILL_WPN_CATS[bestSkill]) cats=EG_SKILL_WPN_CATS[bestSkill];
   const meleeCats=['Melee Weapons (Martial Arts)','Powered Melee Weapons (Martial Arts)'];
   const isMelee=cats.some(c=>meleeCats.includes(c));
-  let pool=egFilterWeapons(cats);
+  let pool=egFilterWeapons(cats,null,state);
   let primaryItem=null;
-  if(pool.length>0){primaryItem=egPickTiered(pool,egState.tier);}
+  if(pool.length>0){primaryItem=egPickTiered(pool,state.tier);}
   else{
     const fb=(g.weapons||[]).filter(w=>arch.weaponCats.includes(w.category));
-    if(fb.length){primaryItem=egPickTiered(fb,egState.tier);}
+    if(fb.length){primaryItem=egPickTiered(fb,state.tier);}
   }
-  if(!primaryItem){egState.weapons=[];return;}
-  const{item:mfrItem,mfr}=egTryApplyWpnMfr(primaryItem,isMelee);
+  if(!primaryItem){state.weapons=[];return;}
+  const{item:mfrItem,mfr}=egTryApplyWpnMfr(primaryItem,isMelee,state);
   const wpnState=egWpnToState(mfrItem);
   wpnState.mfr=mfr;
   wpnState._src=primaryItem;
-  egState.weapons=[wpnState];
+  state.weapons=[wpnState];
   // ── Secondary weapon ──────────────────────────────────────────────────────
-  const diff=egState.difficulty||5;
+  const diff=state.difficulty||5;
   if(diff<=2)return;
-  const sk=egState.skills||{};
-  const archKey=egState.archetype;
-  const primary=egState.weapons[0];
+  const sk=state.skills||{};
+  const archKey=state.archetype;
   const pistolCats=['Pistols and Handguns (Gunslinger)','Auto pistols and S.M.G (Gunslinger)'];
   const primaryCat=primaryItem.category||'';
   const isPistolPrimary=pistolCats.includes(primaryCat);
   const isRangedPrimary=!meleeCats.includes(primaryCat);
   let secPool=null;
   if(EG_SECONDARY_RULES.dual_wield.includes(archKey)&&((sk.Gunslinger||0)>=4||(sk.Martial_Arts||0)>=4)&&diff>=4){
-    secPool=egFilterWeapons(cats).filter(w=>w.name!==primaryItem.name);
+    secPool=egFilterWeapons(cats,null,state).filter(w=>w.name!==primaryItem.name);
   } else if(EG_SECONDARY_RULES.backup_sidearm.includes(archKey)&&(sk.Gunslinger||0)>=3&&!isPistolPrimary){
-    secPool=egFilterWeapons(pistolCats);
+    secPool=egFilterWeapons(pistolCats,null,state);
   } else if(EG_SECONDARY_RULES.melee_backup.includes(archKey)&&isRangedPrimary&&(sk.Martial_Arts||0)>=3){
-    secPool=egFilterWeapons(meleeCats);
+    secPool=egFilterWeapons(meleeCats,null,state);
   }
   if(secPool&&secPool.length){
-    const secItem=egPickTiered(secPool,egState.tier);
+    const secItem=egPickTiered(secPool,state.tier);
     if(secItem){
       const secIsMelee=meleeCats.includes(secItem.category||'');
-      const{item:secMfrItem,mfr:secMfr}=egTryApplyWpnMfr(secItem,secIsMelee);
+      const{item:secMfrItem,mfr:secMfr}=egTryApplyWpnMfr(secItem,secIsMelee,state);
       const secState=egWpnToState(secMfrItem);
       secState.mfr=secMfr;
       secState._src=secItem;
-      egState.weapons.push(secState);
+      state.weapons.push(secState);
     }
   }
 }
 
-function egTryApplyArmorMfr(item){
-  const avails=difficultyAvails(egState.tier,egState.difficulty||5);
+function egTryApplyArmorMfr(item,state=egState){
+  const avails=difficultyAvails(state.tier,state.difficulty||5);
   const validMfrs=ARMOR_MFRS.filter(m=>m!=='Generic');
   const shuffled=validMfrs.slice().sort(()=>Math.random()-0.5);
   for(const mfr of shuffled){
@@ -8407,27 +8453,27 @@ function egTryApplyArmorMfr(item){
   return{item,mfr:'Generic'};
 }
 
-function egAutoGearArmors(){
-  const arch=EG_ARCHETYPES[egState.archetype]||EG_ARCHETYPES.soldier;
-  const apool=egFilterArmor(arch.armorType);
+function egAutoGearArmors(state=egState){
+  const arch=EG_ARCHETYPES[state.archetype]||EG_ARCHETYPES.soldier;
+  const apool=egFilterArmor(arch.armorType,null,state);
   let baseArmor=null;
-  if(apool.length>0){baseArmor=egPickTiered(apool,egState.tier);}
+  if(apool.length>0){baseArmor=egPickTiered(apool,state.tier);}
   else{
     const t={light:'Light Armor',medium:'Medium Armor',heavy:'Heavy Armor'}[arch.armorType];
     const af2=(g.armor||[]).filter(a=>a.type===t);
-    if(af2.length){baseArmor=egPickTiered(af2,egState.tier);}
+    if(af2.length){baseArmor=egPickTiered(af2,state.tier);}
   }
-  if(!baseArmor){egState.armors=[];return;}
-  const{item:mfrItem,mfr}=egTryApplyArmorMfr(baseArmor);
+  if(!baseArmor){state.armors=[];return;}
+  const{item:mfrItem,mfr}=egTryApplyArmorMfr(baseArmor,state);
   const arState=egArmorToState(mfrItem);
   arState.mfr=mfr;
   arState._src=baseArmor;
-  egState.armors=[arState];
+  state.armors=[arState];
 }
 
-function egAutoGear(){
-  egAutoGearWeapons();
-  egAutoGearArmors();
+function egAutoGear(state=egState){
+  egAutoGearWeapons(state);
+  egAutoGearArmors(state);
 }
 
 function egWpnToState(w){
@@ -8508,22 +8554,22 @@ function egPickTiered(pool,tier){
   return pool[pool.length-1];
 }
 
-function egAutoDatacom(){
+function egAutoDatacom(state=egState){
   // Decide if this enemy should have a datacom
-  const arch=EG_ARCHETYPES[egState.archetype]||EG_ARCHETYPES.soldier;
-  const hackingSkill=egState.skills['Hacking']||0;
-  if(!arch.isHacker&&hackingSkill<2){egState.datacom=null;egState.programs=[];egState.gadgets=[];return;}
-  const avails=EG_AVAIL_BY_TIER[egState.tier];
-  const legals=EG_LEGAL_BY_TIER[egState.tier];
+  const arch=EG_ARCHETYPES[state.archetype]||EG_ARCHETYPES.soldier;
+  const hackingSkill=state.skills['Hacking']||0;
+  if(!arch.isHacker&&hackingSkill<2){state.datacom=null;state.programs=[];state.gadgets=[];return;}
+  const avails=EG_AVAIL_BY_TIER[state.tier];
+  const legals=EG_LEGAL_BY_TIER[state.tier];
   // Filter: only Basic/Full Datacoms (not Networks)
   const dcPool=(g.datacoms||[]).filter(d=>
     (d.type==='Basic Datacom'||d.type==='Full Datacom')&&
     avails.includes(d.availability)&&
     legals.includes(d.legality)
   );
-  if(!dcPool.length){egState.datacom=null;egState.programs=[];egState.gadgets=[];return;}
-  const dc=egPickTiered(dcPool,egState.tier);
-  egState.datacom=dc;
+  if(!dcPool.length){state.datacom=null;state.programs=[];state.gadgets=[];return;}
+  const dc=egPickTiered(dcPool,state.tier);
+  state.datacom=dc;
   const memCap=parseInt(dc.memory)||1;
   const naniteCap=parseInt(dc.nanites)||0;
   // Build programs pool (not basic actions - those come from software.actions)
@@ -8545,9 +8591,9 @@ function egAutoDatacom(){
     const mem=parseInt(p.memory)||1;
     if(usedMem+mem<=memCap){usedMem+=mem;picked.push(p);}
   }
-  egState.programs=picked;
+  state.programs=picked;
   // Fill gadgets if nanite cap > 0 and memory allows
-  egState.gadgets=[];
+  state.gadgets=[];
   if(naniteCap>0){
     const sortedGads=gadPool.slice().sort((a,b)=>{
       const wa=EG_AVAIL_WEIGHT[(a.availability||'COMMON').toUpperCase()]||1;
@@ -8556,55 +8602,57 @@ function egAutoDatacom(){
     });
     const maxGads=1+Math.floor(Math.random()*3); // 1-3 gadgets
     for(const gad of sortedGads){
-      if(egState.gadgets.length>=maxGads) break;
+      if(state.gadgets.length>=maxGads) break;
       const mem=parseInt(gad.memory)||1;
-      if(usedMem+mem<=memCap){usedMem+=mem;egState.gadgets.push(gad);}
+      if(usedMem+mem<=memCap){usedMem+=mem;state.gadgets.push(gad);}
     }
   }
 }
 
-function egRandomize(){
-  if(!egState.locks.tier) egState.tier=EG_TIER_ORDER[Math.floor(Math.random()*EG_TIER_ORDER.length)];
-  if(!egState.locks.race) egState.race=egPickRace();
-  if(!egState.locks.archetype){const archKeys=Object.keys(EG_ARCHETYPES);egState.archetype=archKeys[Math.floor(Math.random()*archKeys.length)];}
-  const _arch=EG_ARCHETYPES[egState.archetype]||EG_ARCHETYPES.soldier;
-  if(!egState.locks.name) egState.name=egTierName(egState.tier,egState.race,_arch.label);
+function egRandomizeState(state=egState){
+  if(!state.locks.tier) state.tier=EG_TIER_ORDER[Math.floor(Math.random()*EG_TIER_ORDER.length)];
+  if(!state.locks.race) state.race=egPickRace();
+  if(!state.locks.archetype){const archKeys=Object.keys(EG_ARCHETYPES);state.archetype=archKeys[Math.floor(Math.random()*archKeys.length)];}
+  const _arch=EG_ARCHETYPES[state.archetype]||EG_ARCHETYPES.soldier;
+  if(!state.locks.name) state.name=egTierName(state.tier,state.race,_arch.label);
   // Randomize attrs within racial range, skewed by tier
-  const raceObj=(g.races||[]).find(r=>r.name===egState.race)||{stats:{}};
+  const raceObj=(g.races||[]).find(r=>r.name===state.race)||{stats:{}};
   const rs=raceObj.stats||{};
-  const tier=egState.tier;
-  const diff=egState.difficulty||5;
+  const tier=state.tier;
+  const diff=state.difficulty||5;
   ['physical','acuity','mental','social','endurance','speed','wits','willpower'].forEach(k=>{
-    if(egState.locks.attrs[k]) return;
+    if(state.locks.attrs[k]) return;
     const s=rs[k]||{};
     const mn=parseInt(s.min)||0,av=parseInt(s.avg)||0,mx=parseInt(s.max)||0;
-    if(tier==='henchmen'){egState.attrs[k]=mn+Math.floor(Math.random()*(Math.max(av,mn)-mn+1));}
+    if(tier==='henchmen'){state.attrs[k]=mn+Math.floor(Math.random()*(Math.max(av,mn)-mn+1));}
     else{
       const range=mx-mn;
       const t=(diff-1)/9;
       const lo=mn+Math.floor(0.5*t*range);
       const hi=Math.min(mx,mn+Math.floor((0.2+0.8*t)*range));
-      egState.attrs[k]=lo+Math.floor(Math.random()*(Math.max(hi,lo)-lo+1));
+      state.attrs[k]=lo+Math.floor(Math.random()*(Math.max(hi,lo)-lo+1));
     }
   });
-  if(!egState.locks.skills) egAutoSkills();
-  if(!egState.locks.weapons) egAutoGearWeapons();
-  if(!egState.locks.armors) egAutoGearArmors();
-  if(!egState.locks.consumables) egAutoConsumables();
-  if(!egState.locks.talentsevos) egAutoTalentsEvos();
-  if(!egState.locks.datacom) egAutoDatacom();
-  egCalcResources();
+  if(!state.locks.skills) egAutoSkills(state);
+  if(!state.locks.weapons) egAutoGearWeapons(state);
+  if(!state.locks.armors) egAutoGearArmors(state);
+  if(!state.locks.consumables) egAutoConsumables(state);
+  if(!state.locks.talentsevos) egAutoTalentsEvos(state);
+  if(!state.locks.datacom) egAutoDatacom(state);
+  if(!state.locks.loot) egAutoLoot(state);
+  egCalcResources(state);
 }
+function egRandomize(){ egRandomizeState(egState); }
 
-function egAutoTalentsEvos(){
-  const tier=egState.tier;
-  const archKey=egState.archetype;
-  if(tier==='henchmen'){egState.talents=[];egState.evolution=null;return;}
+function egAutoTalentsEvos(state=egState){
+  const tier=state.tier;
+  const archKey=state.archetype;
+  if(tier==='henchmen'){state.talents=[];state.evolution=null;return;}
   // ── Find dominant skill category ──────────────────────────────────────────
   const cats=['Physical','Mental','Social','Acuity'];
   let dominantCat='Physical',dominantTotal=0;
   cats.forEach(cat=>{
-    const total=EG_SKILLS_ALL.filter(s=>s.cat===cat).reduce((sum,s)=>sum+(egState.skills[s.key]||0),0);
+    const total=EG_SKILLS_ALL.filter(s=>s.cat===cat).reduce((sum,s)=>sum+(state.skills[s.key]||0),0);
     if(total>dominantTotal){dominantTotal=total;dominantCat=cat;}
   });
   // Map category name to talent category key (capitalised differently)
@@ -8615,19 +8663,19 @@ function egAutoTalentsEvos(){
   // ── Per-category skill totals used as talent point limits ─────────────────
   const catLimits={};
   cats.forEach(cat=>{
-    const total=EG_SKILLS_ALL.filter(s=>s.cat===cat).reduce((sum,s)=>sum+(egState.skills[s.key]||0),0);
+    const total=EG_SKILLS_ALL.filter(s=>s.cat===cat).reduce((sum,s)=>sum+(state.skills[s.key]||0),0);
     catLimits[catMap[cat]||cat.toUpperCase()]=total;
   });
   // ── Greedy fill: pick highest-cost talent that fits per category ─────────
-  const diff=egState.difficulty||5;
+  const diff=state.difficulty||5;
   const maxPasses=Math.max(1,Math.round(diff/3));
-  egState.talents=[];
+  state.talents=[];
   const catSpent={};
   const usedIds=new Set();
   const allTalents=(g.talents||[]).filter(t=>{
     const cat=t.category;
     if(!(cat===talentCat||archCats.includes(cat)))return false;
-    return egTalentMatchesRace(t,egState.race);
+    return egTalentMatchesRace(t,state.race);
   });
   for(let pass=0;pass<maxPasses;pass++){
     // Only pick a talent if its category's skill total has room for the cost
@@ -8642,14 +8690,14 @@ function egAutoTalentsEvos(){
     const _costWeights={5:40,10:30,15:20,20:8,25:4};
     const _pool=[];eligible.forEach(t=>{const w=_costWeights[parseInt(t.cost)]||1;for(let _wi=0;_wi<w;_wi++)_pool.push(t);});
     const picked=_pool[Math.floor(Math.random()*_pool.length)];
-    egState.talents.push(picked);
+    state.talents.push(picked);
     usedIds.add(picked.name);
     catSpent[picked.category]=(catSpent[picked.category]||0)+parseInt(picked.cost);
   }
-  if(!egState.talents.length){
+  if(!state.talents.length){
     // Fallback: one 5-pt talent from archetype cats (respect per-category limit)
-    const fb=(g.talents||[]).filter(t=>archCats.includes(t.category)&&parseInt(t.cost)===5&&(catLimits[t.category]||0)>=5&&egTalentMatchesRace(t,egState.race));
-    if(fb.length) egState.talents=[fb[Math.floor(Math.random()*fb.length)]];
+    const fb=(g.talents||[]).filter(t=>archCats.includes(t.category)&&parseInt(t.cost)===5&&(catLimits[t.category]||0)>=5&&egTalentMatchesRace(t,state.race));
+    if(fb.length) state.talents=[fb[Math.floor(Math.random()*fb.length)]];
   }
   // ── Evolution ───────────────────────────────────────────────────────────────
   const evoTypes=EG_ARCH_EVO_TYPES[archKey]||['GENETICS'];
@@ -8663,17 +8711,17 @@ function egAutoTalentsEvos(){
     return true;
   });
   if(eligibleEvos.length>0){
-    egState.evolution=eligibleEvos[Math.floor(Math.random()*eligibleEvos.length)];
+    state.evolution=eligibleEvos[Math.floor(Math.random()*eligibleEvos.length)];
   } else {
-    egState.evolution=null;
+    state.evolution=null;
   }
 }
 
-function egAutoConsumables(){
-  const tier=egState.tier;
-  const diff=egState.difficulty||5;
+function egAutoConsumables(state=egState){
+  const tier=state.tier;
+  const diff=state.difficulty||5;
   const avails=difficultyAvails(tier,diff);
-  const archKey=egState.archetype;
+  const archKey=state.archetype;
   const legalProfile=EG_CONSUMABLE_LEGAL[archKey]||{prefer:['No Permit'],allow:['Restricted'],illegalChance:0.1};
   const medItems=(g.medical||[]).filter(m=>{
     const av=(m.availability||'COMMON').toUpperCase();
@@ -8681,7 +8729,7 @@ function egAutoConsumables(){
   });
   const preferPool=medItems.filter(m=>legalProfile.prefer.includes(m.legality));
   const allowPool=medItems.filter(m=>legalProfile.allow.includes(m.legality)&&!legalProfile.prefer.includes(m.legality));
-  if(!preferPool.length&&!allowPool.length){egState.consumables=[];return;}
+  if(!preferPool.length&&!allowPool.length){state.consumables=[];return;}
   let maxCount;
   if(tier==='henchmen')maxCount=Math.floor(Math.random()*2);
   else if(tier==='regular')maxCount=1+Math.floor(Math.random()*2);
@@ -8701,7 +8749,7 @@ function egAutoConsumables(){
     const item=egPickTiered(pool,tier);
     if(item){picked.push(item);usedNames.add(item.name);}
   }
-  egState.consumables=picked;
+  state.consumables=picked;
 }
 
 function egSpecialDesc(specialStr){
@@ -8733,14 +8781,157 @@ function egUpdateDiffLabel(){
   el.innerHTML=v<=3?'<span style="color:var(--gr);font-weight:600;">EASY ('+v+')</span>':v<=6?'<span style="color:var(--a2);font-weight:600;">STANDARD ('+v+')</span>':'<span style="color:var(--re);font-weight:600;">HARDENED ('+v+')</span>';
 }
 
-function egExportVTTES(){
+function egExportVTTES(){ egExportStateVTTES(egState); }
+
+function egInit(){
+  egSetRaceAttrs();
+  egAutoSkills();
+  egAutoGear();
+  egAutoConsumables();
+  egAutoTalentsEvos();
+  egAutoDatacom();
+  egAutoLoot();
+  egCalcResources();
+}
+
+function egAutoLoot(state=egState){
+  const tier=state.tier;
+  const diff=state.difficulty||5;
+  const archKey=state.archetype;
+  // ── Credits ───────────────────────────────────────────────────────────────
+  const creditRanges={henchmen:[100,500,50],regular:[500,2000,100],elite:[1500,6000,500],boss:[5000,30000,1000]};
+  const cr=creditRanges[tier]||creditRanges.regular;
+  const rawAmt=cr[0]+Math.floor(Math.random()*(cr[1]-cr[0]+1));
+  const mult=Math.min(1.30,0.7+0.06*diff);
+  const denom=cr[2];
+  const finalAmt=Math.round(rawAmt*mult/denom)*denom;
+  const gangTypes=['gang_enforcer','gang_smuggler','gang_hitman','assassin','brawler'];
+  const blankChance=gangTypes.includes(archKey)?0.70:0.30;
+  const credType=Math.random()<blankChance?'blanks':'credstick';
+  // ── Items ─────────────────────────────────────────────────────────────────
+  const avails=difficultyAvails(tier,diff);
+  const legals=EG_LEGAL_BY_TIER[tier];
+  const carryableSizes=['Tiny','Small','Medium','',null,undefined];
+  const pool=(g.equipment||[]).filter(item=>{
+    if(!EQUIPMENT_LOOT_CATEGORIES.includes(item.category))return false;
+    if(!carryableSizes.includes(item.size))return false;
+    const av=(item.availability||'COMMON').toUpperCase();
+    if(!avails.includes(av))return false;
+    if(item.legality&&!legals.includes(item.legality))return false;
+    return true;
+  });
+  // Archetype category weights
+  const catWeights={};
+  const combatArchs=['soldier','heavy','mil_infantry','mil_heavy','mil_spec_ops','mil_engineer'];
+  if(combatArchs.includes(archKey)){catWeights['Explosives']=2;catWeights['Tools']=2;}
+  else if(archKey==='hacker'){catWeights['Electronics']=2;catWeights['Communication']=2;}
+  else if(archKey==='mage'){catWeights['Drugs & Substances']=2;catWeights['Cybernetics Accessories']=2;}
+  else if(['gang_enforcer','gang_smuggler','gang_hitman'].includes(archKey)){catWeights['Drugs & Substances']=2;catWeights['Security']=2;}
+  else if(['corp_guard','corp_agent','corp_executive'].includes(archKey)){catWeights['Communication']=2;catWeights['Surveillance']=2;}
+  // Weighted sample without replacement
+  const countRanges={henchmen:[0,1],regular:[1,2],elite:[2,3],boss:[2,4]};
+  const cr2=countRanges[tier]||[1,2];
+  const count=cr2[0]+Math.floor(Math.random()*(cr2[1]-cr2[0]+1));
+  const items=[];
+  const usedNames=new Set();
+  // Build weighted pool
+  const weightedPool=[];
+  pool.forEach(item=>{
+    const w=catWeights[item.category]||1;
+    for(let i=0;i<w;i++) weightedPool.push(item);
+  });
+  for(let i=0;i<count&&weightedPool.length>0;i++){
+    // Remove already used
+    const filtered=weightedPool.filter(it=>!usedNames.has(it.name));
+    if(!filtered.length)break;
+    const picked=filtered[Math.floor(Math.random()*filtered.length)];
+    items.push({name:picked.name,category:picked.category,effect:picked.effect||'',legality:picked.legality||'No Permit',cost:picked.cost||0});
+    usedNames.add(picked.name);
+  }
+  // 15% chance of a flavour memento
+  if(Math.random()<0.15){
+    const m=LOOT_MEMENTOS[Math.floor(Math.random()*LOOT_MEMENTOS.length)];
+    items.push({name:m,category:'Memento',effect:'',legality:'No Permit',cost:0});
+  }
+  state.loot={credits:{amount:finalAmt,type:credType},items};
+}
+
+function egFreshState(){
+  return{
+    name:'Enemy',tier:'regular',race:'Human',archetype:'soldier',outputFmt:'vttes',
+    difficulty:5,
+    attrs:{physical:0,acuity:0,mental:0,social:0,endurance:3,speed:3,wits:3,willpower:3},
+    health:13,morale:13,chi:0,
+    skills:{},weapons:[],armors:[],
+    consumables:[],
+    talents:[],evolution:null,
+    datacom:null,programs:[],gadgets:[],
+    loot:{credits:{amount:0,type:'blanks'},items:[]},
+    locks:{name:false,tier:false,archetype:false,race:false,difficulty:false,attrs:{physical:false,acuity:false,mental:false,social:false,endurance:false,speed:false,wits:false,willpower:false},skills:false,weapons:false,armors:false,consumables:false,talentsevos:false,datacom:false,loot:false}
+  };
+}
+
+function egGenerateGroup(){
+  const tmpl=EG_GROUP_TEMPLATES[egGroupState.template];
+  if(!tmpl)return;
+  const totalCount=Math.max(2,Math.min(8,egGroupState.enemyCount||4));
+  const difficulty=egGroupState.difficulty||5;
+  const enemies=[];
+  // Resolve slot counts
+  let fixed=0;
+  const resolvedSlots=tmpl.slots.map(slot=>{
+    if(slot.count!==-1){fixed+=slot.count;return{...slot,resolvedCount:slot.count};}
+    return{...slot,resolvedCount:0};
+  });
+  const remaining=Math.max(1,totalCount-fixed);
+  resolvedSlots.forEach(slot=>{if(slot.count===-1)slot.resolvedCount=remaining;});
+  resolvedSlots.forEach(slot=>{
+    for(let i=0;i<slot.resolvedCount;i++){
+      const st=egFreshState();
+      st.difficulty=difficulty;
+      st.tier=slot.tier;
+      st.archetype=slot.archetypes[Math.floor(Math.random()*slot.archetypes.length)];
+      // Set race
+      st.race=egPickRace();
+      // Set name
+      const _arch=EG_ARCHETYPES[st.archetype]||EG_ARCHETYPES.soldier;
+      st.name=egTierName(st.tier,st.race,_arch.label);
+      // Set attrs from race
+      const raceObj=(g.races||[]).find(r=>r.name===st.race)||{stats:{}};
+      const rs=raceObj.stats||{};
+      const diff=(st.difficulty-1)/9;
+      ['physical','acuity','mental','social','endurance','speed','wits','willpower'].forEach(k=>{
+        const s=rs[k]||{};
+        const mn=parseInt(s.min)||0,mx=parseInt(s.max)||0;
+        const range=mx-mn;
+        const lo=mn+Math.floor(0.5*diff*range);
+        const hi=Math.min(mx,mn+Math.floor((0.2+0.8*diff)*range));
+        if(st.tier==='henchmen'){const av=parseInt(s.avg)||0;st.attrs[k]=mn+Math.floor(Math.random()*(Math.max(av,mn)-mn+1));}
+        else{st.attrs[k]=lo+Math.floor(Math.random()*(Math.max(hi,lo)-lo+1));}
+      });
+      egAutoSkills(st);
+      egAutoGearWeapons(st);
+      egAutoGearArmors(st);
+      egAutoConsumables(st);
+      egAutoTalentsEvos(st);
+      egAutoDatacom(st);
+      egAutoLoot(st);
+      egCalcResources(st);
+      st._role=slot.role;
+      enemies.push(st);
+    }
+  });
+  egGroupState.enemies=enemies;
+}
+
+function egExportStateVTTES(state){
   const attribs=[];
   function att(name,current,max){
     attribs.push({name,current:String(current),max:String(max||''),id:egGenId()});
   }
-  const a=egState.attrs;
-  att('name',egState.name,'');
-  att('race',egState.race,'');
+  const a=state.attrs;
+  att('name',state.name,'');
+  att('race',state.race,'');
   att('occupation','','');att('background','','');att('sex','','');att('age','','');att('appararent_age','','');
   att('PHYSICAL',a.physical,'');att('ACUITY',a.acuity,'');att('MENTAL',a.mental,'');att('SOCIAL',a.social,'');
   att('ENDURANCE',a.endurance,'');att('SPEED',a.speed,'');att('WITS',a.wits,'');att('WILLPOWER',a.willpower,'');
@@ -8748,17 +8939,14 @@ function egExportVTTES(){
   att('ENDURANCE_base',a.endurance,'');att('SPEED_base',a.speed,'');att('MENTAL_base',a.mental,'');att('WITS_base',a.wits,'');att('WILLPOWER_base',a.willpower,'');
   att('PHYSICAL_perm',a.physical,'');att('ACUITY_perm',a.acuity,'');att('MENTAL_perm',a.mental,'');att('SOCIAL_perm',a.social,'');
   att('ENDURANCE_perm',a.endurance,'');att('SPEED_perm',a.speed,'');att('WITS_perm',a.wits,'');att('WILLPOWER_perm',a.willpower,'');
-  attribs.push({name:'HEALTH',current:String(egState.health),max:String(egState.health),id:egGenId()});
-  attribs.push({name:'MORALE',current:String(egState.morale),max:String(egState.morale),id:egGenId()});
-  attribs.push({name:'CHI',current:String(egState.chi),max:String(egState.chi),id:egGenId()});
-  // Armor soak
-  const firstArmor=egState.armors[0];
+  attribs.push({name:'HEALTH',current:String(state.health),max:String(state.health),id:egGenId()});
+  attribs.push({name:'MORALE',current:String(state.morale),max:String(state.morale),id:egGenId()});
+  attribs.push({name:'CHI',current:String(state.chi),max:String(state.chi),id:egGenId()});
+  const firstArmor=state.armors[0];
   att('armorsoak',firstArmor?firstArmor.soak:'0D+0','');
   att('armorsoak_bonus','','');
-  // Skills
-  EG_SKILLS_ALL.forEach(s=>{att(s.key,egState.skills[s.key]||0,'');});
-  // Weapons
-  egState.weapons.forEach((w,i)=>{
+  EG_SKILLS_ALL.forEach(s=>{att(s.key,state.skills[s.key]||0,'');});
+  state.weapons.forEach((w,i)=>{
     const n=i+1;
     att('weapon'+n+'_name',w.name,'');att('weapon'+n+'_type',w.type,'');att('weapon'+n+'_dmgtype',w.dmgtype,'');
     att('weapon'+n+'_power',w.power,'');att('weapon'+n+'_dmg',w.dmg,'');att('weapon'+n+'_expertise',w.expertise,'');
@@ -8767,22 +8955,19 @@ function egExportVTTES(){
     att('weapon'+n+'_rof',w.rof,'');att('weapon'+n+'_currentammo',w.ammo,'');att('weapon'+n+'_ammo',w.ammo,'');
     att('weapon'+n+'_reload',w.reload,'');att('weapon'+n+'_skill',w.skill,'');att('weapon'+n+'_dmgtarget',w.dmgtarget,'');
   });
-  // Armors
-  egState.armors.forEach((ar,i)=>{
+  state.armors.forEach((ar,i)=>{
     const n=i+1;
     att('armor'+n+'_name',ar.name,'');att('armor'+n+'_type',ar.type,'');
     att('armor'+n+'_def_phys',ar.def_phys,'');att('armor'+n+'_def_energy',ar.def_energy,'');
     att('armor'+n+'_def_tech',ar.def_tech,'');att('armor'+n+'_def_spirit',ar.def_spirit,'');
     att('armor'+n+'_special',egSpecialDesc(ar.special),'');att('armor'+n+'_soak_expr',ar.soak,'');
   });
-  // Misc
   att('notes','','');att('total_xp',0,'');att('credited_xp',0,'');att('attribute_xp',0,'');
   att('init_move',a.speed,'');att('init_standard',2,'');att('init_quick',2,'');att('init_complex',0,'');
-  // Build gmnotes as HTML markup for maximum readability in Roll20
+  // Build gmnotes
   const _gmE=s=>String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   let gmHtml='';
-  // Talents
-  const _gmTalents=egState.talents||[];
+  const _gmTalents=state.talents||[];
   if(_gmTalents.length){
     gmHtml+='<h2><strong>TALENTS</strong></h2>\n';
     _gmTalents.forEach((t,i)=>{
@@ -8793,27 +8978,25 @@ function egExportVTTES(){
     });
     gmHtml+='<hr>\n';
   }
-  // Evolution
-  if(egState.evolution&&egState.tier!=='henchmen'){
-    const ev=egState.evolution;
+  if(state.evolution&&state.tier!=='henchmen'){
+    const ev=state.evolution;
     const t1=ev.tiers&&ev.tiers['TIER I'],t2=ev.tiers&&ev.tiers['TIER II'],t3=ev.tiers&&ev.tiers['TIER III'];
     gmHtml+='<h2><strong>EVOLUTION: '+_gmE(ev.name)+'</strong></h2>\n';
     gmHtml+='<p><strong>['+_gmE(ev.evo_type)+']</strong></p>\n';
     if(t1){gmHtml+='<h3><strong>Tier I</strong></h3>\n<p>'+_gmE(t1.effect)+'</p>\n';}
-    if((egState.tier==='elite'||egState.tier==='boss')&&t2){gmHtml+='<h3><strong>Tier II</strong></h3>\n<p>'+_gmE(t2.effect)+'</p>\n';}
-    if(egState.tier==='boss'&&t3){gmHtml+='<h3><strong>Tier III</strong></h3>\n<p>'+_gmE(t3.effect)+'</p>\n';}
+    if((state.tier==='elite'||state.tier==='boss')&&t2){gmHtml+='<h3><strong>Tier II</strong></h3>\n<p>'+_gmE(t2.effect)+'</p>\n';}
+    if(state.tier==='boss'&&t3){gmHtml+='<h3><strong>Tier III</strong></h3>\n<p>'+_gmE(t3.effect)+'</p>\n';}
     gmHtml+='<hr>\n';
   }
-  // Datacom & Programs/Gadgets
-  if(egState.datacom){
-    const dc=egState.datacom;
+  if(state.datacom){
+    const dc=state.datacom;
     gmHtml+='<h2><strong>DATACOM: '+_gmE(dc.name)+'</strong></h2>\n';
     gmHtml+='<p><strong>'+_gmE(dc.type)+'</strong><br>\n<strong>MEM: '+_gmE(dc.memory)+' | CPU: '+_gmE(dc.cpu)+(parseInt(dc.nanites)>0?' | NANITE POOL: '+_gmE(dc.nanites):'')+' </strong></p>\n';
     if(dc.special){gmHtml+='<p><em>Special: '+_gmE(egSpecialDesc(dc.special))+'</em></p>\n';}
     gmHtml+='<hr>\n';
-    if((egState.programs||[]).length){
+    if((state.programs||[]).length){
       gmHtml+='<h1><strong>PROGRAMS</strong></h1>\n<hr>\n';
-      egState.programs.forEach(p=>{
+      state.programs.forEach(p=>{
         gmHtml+='<h2><strong>'+_gmE(p.name)+'</strong></h2>\n';
         gmHtml+='<p><strong>(MEM:'+_gmE(p.memory)+(p.cpu?' | CPU:'+_gmE(p.cpu):'')+' | '+_gmE(p.availability)+' / '+_gmE(p.legality)+')</strong></p>\n';
         if(p.passive||p.active){
@@ -8825,9 +9008,9 @@ function egExportVTTES(){
         gmHtml+='<hr>\n';
       });
     }
-    if((egState.gadgets||[]).length){
+    if((state.gadgets||[]).length){
       gmHtml+='<h1><strong>GADGETS</strong></h1>\n<hr>\n';
-      egState.gadgets.forEach(gd=>{
+      state.gadgets.forEach(gd=>{
         gmHtml+='<h2><strong>'+_gmE(gd.name)+'</strong></h2>\n';
         gmHtml+='<p><strong>(MEM:'+_gmE(gd.memory)+(gd.nanite?' | NANITE:'+_gmE(gd.nanite):'')+' | '+_gmE(gd.availability)+' / '+_gmE(gd.legality)+')</strong></p>\n';
         if(gd.effect||gd.desc){gmHtml+='<blockquote><p>'+_gmE(gd.effect||gd.desc)+'</p></blockquote>\n';}
@@ -8835,10 +9018,9 @@ function egExportVTTES(){
       });
     }
   }
-  // Consumables
-  if((egState.consumables||[]).length){
+  if((state.consumables||[]).length){
     gmHtml+='<h2><strong>CONSUMABLES</strong></h2>\n';
-    egState.consumables.forEach((c,i)=>{
+    state.consumables.forEach((c,i)=>{
       if(i>0)gmHtml+='<hr>\n';
       gmHtml+='<h3><strong>'+_gmE(c.name)+'</strong></h3>\n';
       const tags=[];
@@ -8851,30 +9033,39 @@ function egExportVTTES(){
     });
     gmHtml+='<hr>\n';
   }
-  // Spirit / Spells placeholder for mage archetype
-  const _archForExp=EG_ARCHETYPES[egState.archetype]||EG_ARCHETYPES.soldier;
+  // Loot block
+  if(state.loot){
+    const loot=state.loot;
+    gmHtml+='<h2><strong>LOOT</strong></h2>\n';
+    gmHtml+='<p><strong>Credits: '+fmt(loot.credits.amount)+' Cr ['+_gmE(loot.credits.type==='blanks'?'BLANKS — untraceable cash':'CREDSTICK — requires hacking to access')+']</strong></p>\n';
+    if((loot.items||[]).length){
+      gmHtml+='<ul>\n';
+      loot.items.forEach(it=>{
+        gmHtml+='<li>'+_gmE(it.name)+(it.category&&it.category!=='Memento'?' ('+_gmE(it.category)+') — '+_gmE(it.legality):'')+(it.category==='Memento'?' <em>(Memento)</em>':'')+'</li>\n';
+      });
+      gmHtml+='</ul>\n';
+    }
+    gmHtml+='<hr>\n';
+  }
+  const _archForExp=EG_ARCHETYPES[state.archetype]||EG_ARCHETYPES.soldier;
   if(_archForExp.isMage){
     gmHtml+='<h2><strong>SPIRIT / SPELLS</strong></h2>\n';
     gmHtml+='<p>[Placeholder — spirit and spell selection will be implemented when the compendium spirit/spell data is finalised]</p>\n';
   }
   const charId=egGenId();
-  const out={schema_version:3,type:'character',character:{oldId:charId,name:egState.name,avatar:'',bio:'',gmnotes:encodeURIComponent(gmHtml),defaulttoken:'',tags:'[]',controlledby:'',inplayerjournals:'',attribs,abilities:[]}};
+  const out={schema_version:3,type:'character',character:{oldId:charId,name:state.name,avatar:'',bio:'',gmnotes:encodeURIComponent(gmHtml),defaulttoken:'',tags:'[]',controlledby:'',inplayerjournals:'',attribs,abilities:[]}};
   const blob=new Blob([JSON.stringify(out,null,4)],{type:'application/json'});
   const url=URL.createObjectURL(blob);
   const a2=document.createElement('a');
-  a2.href=url;a2.download=(egState.name||'enemy').replace(/\s+/g,'_')+'.json';
+  a2.href=url;a2.download=(state.name||'enemy').replace(/\s+/g,'_')+'.json';
   document.body.appendChild(a2);a2.click();
   setTimeout(()=>{document.body.removeChild(a2);URL.revokeObjectURL(url);},500);
 }
 
-function egInit(){
-  egSetRaceAttrs();
-  egAutoSkills();
-  egAutoGear();
-  egAutoConsumables();
-  egAutoTalentsEvos();
-  egAutoDatacom();
-  egCalcResources();
+function egExportGroup(){
+  egGroupState.enemies.forEach((st,i)=>{
+    setTimeout(()=>egExportStateVTTES(st),i*300);
+  });
 }
 
 function render(){
@@ -10730,6 +10921,70 @@ function render(){
     const arch=EG_ARCHETYPES[egState.archetype]||EG_ARCHETYPES.soldier;
     html='<div class="eg-wrap">';
     html+='<div class="eg-title">⚔️ ENEMY GENERATOR</div>';
+    // ── Mode toggle ───────────────────────────────────────────────────────────
+    html+='<div class="eg-mode-bar">';
+    html+='<button class="eg-mode-btn'+(egMode==='single'?' active':'')+'" onclick="egMode=\'single\';render();">Single Enemy</button>';
+    html+='<button class="eg-mode-btn'+(egMode==='group'?' active':'')+'" onclick="egMode=\'group\';render();">Encounter Group</button>';
+    html+='</div>';
+    if(egMode==='group'){
+      // ── GROUP MODE ─────────────────────────────────────────────────────────
+      html+='<div class="eg-section">';
+      html+='<div class="eg-section-title">Encounter Template</div>';
+      html+='<div class="eg-tmpl-grid">';
+      Object.entries(EG_GROUP_TEMPLATES).forEach(([k,t])=>{
+        html+='<button class="eg-tmpl-card'+(egGroupState.template===k?' active':'')+'" onclick="egGroupState.template=\''+k+'\';render();">';
+        html+='<div class="eg-tmpl-emoji">'+t.emoji+'</div>';
+        html+='<div class="eg-tmpl-label">'+esc(t.label)+'</div>';
+        html+='<div class="eg-tmpl-desc">'+esc(t.description)+'</div>';
+        html+='</button>';
+      });
+      html+='</div>';
+      html+='<div class="eg-row">';
+      html+='<span class="eg-label">TOTAL ENEMIES</span>';
+      html+='<input type="number" class="eg-input eg-input-sm" min="2" max="8" value="'+egGroupState.enemyCount+'" onchange="egGroupState.enemyCount=Math.max(2,Math.min(8,parseInt(this.value)||4));" style="width:60px;" />';
+      html+='<span class="eg-label" style="margin-left:16px;">DIFFICULTY</span>';
+      {
+        const dv=egGroupState.difficulty||5;
+        const dLabel=dv<=3?'<span style="color:var(--gr);">EASY ('+dv+')</span>':dv<=6?'<span style="color:var(--a2);">STANDARD ('+dv+')</span>':'<span style="color:var(--re);">HARDENED ('+dv+')</span>';
+        html+='<input type="range" min="1" max="10" value="'+dv+'" style="width:140px;accent-color:var(--a);" onchange="egGroupState.difficulty=parseInt(this.value);render();" />';
+        html+=dLabel;
+      }
+      html+='</div>';
+      html+='<button class="eg-rand-btn" style="width:100%;margin-top:8px;" onclick="egGenerateGroup();render();">🎲 GENERATE GROUP</button>';
+      html+='</div>';
+      // Group preview
+      if(egGroupState.enemies.length>0){
+        html+='<div class="eg-section">';
+        html+='<div class="eg-section-title">Group Preview ('+egGroupState.enemies.length+' enemies)</div>';
+        html+='<div class="eg-group-grid">';
+        egGroupState.enemies.forEach((st,gi)=>{
+          const tierCols={henchmen:'#8e8e93',regular:'#30d158',elite:'#0a84ff',boss:'var(--re)'};
+          const tc2=tierCols[st.tier]||'#8e8e93';
+          const lootAmt=st.loot?st.loot.credits.amount:0;
+          const lootType=st.loot?st.loot.credits.type:'blanks';
+          const primaryWpn=st.weapons&&st.weapons[0]?st.weapons[0].name:'—';
+          html+='<div class="eg-group-card">';
+          html+='<div class="eg-group-card-role">'+esc(st._role||'')+'</div>';
+          html+='<div class="eg-group-card-name">'+esc(st.name)+'</div>';
+          html+='<div class="eg-group-card-stats">';
+          html+='<span class="eg-gear-pill" style="border-color:'+tc2+';color:'+tc2+';">'+st.tier.toUpperCase()+'</span>';
+          html+='<span class="eg-gear-pill">'+esc(EG_ARCHETYPES[st.archetype]?EG_ARCHETYPES[st.archetype].label:st.archetype)+'</span>';
+          html+='<span class="eg-gear-pill" style="color:var(--re);">HP: '+st.health+'</span>';
+          html+='<span class="eg-gear-pill" style="color:var(--a);">MORA: '+st.morale+'</span>';
+          html+='<span class="eg-gear-pill">'+esc(primaryWpn)+'</span>';
+          html+='<span class="eg-gear-pill" style="color:var(--gr);">'+fmt(lootAmt)+' Cr</span>';
+          html+='<span class="tag '+(lootType==='blanks'?'tag-blanks':'tag-credstick')+'" style="font-size:8px;padding:1px 5px;">'+esc(lootType.toUpperCase())+'</span>';
+          html+='</div>';
+          html+='<button class="eg-group-export" onclick="egExportStateVTTES(egGroupState.enemies['+gi+']);">⬇ Export JSON</button>';
+          html+='</div>';
+        });
+        html+='</div>';
+        html+='<button class="eg-export-btn" style="width:100%;margin-top:12px;" onclick="egExportGroup();">⬇ EXPORT ALL ('+egGroupState.enemies.length+') AS JSON FILES</button>';
+        html+='</div>';
+      }
+      html+='</div>';
+    } else {
+    // ── SINGLE MODE ───────────────────────────────────────────────────────────
     // ── Identity ──────────────────────────────────────────────────────────────
     html+='<div class="eg-section">';
     html+='<div class="eg-section-title">Identity</div>';
@@ -10934,6 +11189,56 @@ function render(){
       }
       html+='</div>';
     }
+    // ── Loot ──────────────────────────────────────────────────────────────────
+    {
+      const loot=egState.loot||{credits:{amount:0,type:'blanks'},items:[]};
+      html+='<div class="eg-section">';
+      html+='<div class="eg-section-title" style="display:flex;align-items:center;gap:6px;">Loot<button class="eg-lock-btn'+(egState.locks.loot?' locked':'')+'" title="Lock loot" onclick="egState.locks.loot=!egState.locks.loot;render();">'+(egState.locks.loot?'🔒':'🔓')+'</button><button class="eg-add-btn" style="margin-left:auto;width:auto;padding:4px 10px;" onclick="egAutoLoot();render();">🎲 Re-roll</button></div>';
+      // Credits row
+      html+='<div class="eg-loot-credits">';
+      html+='<span class="eg-loot-amount">'+fmt(loot.credits.amount)+' Cr</span>';
+      html+='<span class="tag '+(loot.credits.type==='blanks'?'tag-blanks':'tag-credstick')+'">'+(loot.credits.type==='blanks'?'BLANKS':'CREDSTICK')+'</span>';
+      if(loot.credits.type==='credstick') html+='<span style="font-family:\'Share Tech Mono\',monospace;font-size:9px;color:var(--mu);">requires hacking</span>';
+      html+='<div style="margin-left:auto;display:flex;gap:6px;align-items:center;">';
+      html+='<input type="number" class="eg-input" style="width:100px;" value="'+loot.credits.amount+'" onchange="egState.loot.credits.amount=parseInt(this.value)||0;render();" />';
+      html+='<select class="eg-select" style="width:110px;" onchange="egState.loot.credits.type=this.value;render();">';
+      html+='<option value="blanks"'+(loot.credits.type==='blanks'?' selected':'')+'>BLANKS</option>';
+      html+='<option value="credstick"'+(loot.credits.type==='credstick'?' selected':'')+'>CREDSTICK</option>';
+      html+='</select>';
+      html+='</div>';
+      html+='</div>';
+      // Items list
+      const lootItems=loot.items||[];
+      if(!lootItems.length){
+        html+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#3a3a3c;margin-bottom:8px;">No items — use re-roll to add some.</div>';
+      } else {
+        lootItems.forEach((it,li)=>{
+          html+='<div class="eg-gear-item" style="flex-direction:column;align-items:stretch;padding:6px 10px;margin-bottom:6px;">';
+          html+='<div style="display:flex;align-items:center;gap:6px;">';
+          html+='<button class="eg-gear-remove" onclick="egState.loot.items.splice('+li+',1);render();">✕</button>';
+          html+='<span style="font-family:\'Share Tech Mono\',monospace;font-size:12px;color:#f2f2f7;flex:1;">'+esc(it.name)+'</span>';
+          if(it.category)html+='<span class="tag tb" style="font-size:9px;">'+esc(it.category)+'</span>';
+          if(it.legality){const lcls=it.legality==='Illegal'||it.legality==='Classified'?'tr':it.legality==='Restricted'?'ty':'tg';html+='<span class="tag '+lcls+'" style="font-size:9px;">'+esc(it.legality)+'</span>';}
+          if(it.cost>0)html+='<span class="eg-gear-pill" style="color:var(--gr);">'+fmt(it.cost)+' Cr</span>';
+          html+='</div>';
+          if(it.effect)html+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#8e8e93;margin-top:2px;padding-left:20px;">'+esc(it.effect)+'</div>';
+          html+='</div>';
+        });
+      }
+      // Add item picker
+      const _lootAvails=difficultyAvails(egState.tier,egState.difficulty||5);
+      const _lootLegals=EG_LEGAL_BY_TIER[egState.tier];
+      const _lootPool=(g.equipment||[]).filter(it=>EQUIPMENT_LOOT_CATEGORIES.includes(it.category)&&[null,undefined,'Tiny','Small','Medium',''].includes(it.size)&&_lootAvails.includes((it.availability||'COMMON').toUpperCase()));
+      if(_lootPool.length){
+        html+='<div style="display:flex;gap:6px;align-items:center;margin-top:6px;">';
+        html+='<select class="eg-select" id="eg-loot-add-sel" style="flex:1;"><option value="">— Add Item —</option>';
+        _lootPool.forEach(it=>{html+='<option value="'+esc(JSON.stringify({name:it.name,category:it.category||'',effect:it.effect||'',legality:it.legality||'No Permit',cost:it.cost||0}))+'">'+esc(it.name)+' ('+esc(it.category||'')+')</option>';});
+        html+='</select>';
+        html+='<button class="eg-add-btn" style="width:auto;padding:8px 14px;" onclick="const _ls=document.getElementById(\'eg-loot-add-sel\');if(_ls&&_ls.value){const _li=JSON.parse(_ls.value);if(!egState.loot.items.find(x=>x.name===_li.name)){egState.loot.items.push(_li);render();}}">+ Add</button>';
+        html+='</div>';
+      }
+      html+='</div>';
+    }
     // ── Talents & Evolutions ─────────────────────────────────────────────────
     html+='<div class="eg-section">';
     html+='<div class="eg-section-title" style="display:flex;align-items:center;gap:6px;">Talents &amp; Evolutions<button class="eg-lock-btn'+(egState.locks.talentsevos?' locked':'')+'" title="Lock talents &amp; evolutions" onclick="egState.locks.talentsevos=!egState.locks.talentsevos;render();">'+(egState.locks.talentsevos?'🔒':'🔓')+'</button></div>';
@@ -11108,6 +11413,7 @@ function render(){
     html+='</div>';
     html+='</div>';
     html+='</div>';
+    } // end single mode
   }
 
   if(!cnt&&sq){html+='<div class="empty"><div style="font-size:32px;margin-bottom:8px;">🔍</div><div style="font-family:\'Share Tech Mono\',monospace;font-size:11px;">No results for &quot;'+esc(sq)+'&quot;</div></div>';}
