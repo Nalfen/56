@@ -8269,6 +8269,7 @@ const EG_GROUP_TEMPLATES={
 
 let egMode='single';
 let egGroupState={template:'crime_boss',enemyCount:4,difficulty:5,enemies:[]};
+let egGroupEditIdx=null; // index of group enemy being edited, or null
 
 let egState={
   name:'Enemy Name',tier:'regular',race:'Human',archetype:'soldier',outputFmt:'vttes',
@@ -10927,10 +10928,10 @@ function render(){
     html+='<div class="eg-title">⚔️ ENEMY GENERATOR</div>';
     // ── Mode toggle ───────────────────────────────────────────────────────────
     html+='<div class="eg-mode-bar">';
-    html+='<button class="eg-mode-btn'+(egMode==='single'?' active':'')+'" onclick="egMode=\'single\';render();">Single Enemy</button>';
-    html+='<button class="eg-mode-btn'+(egMode==='group'?' active':'')+'" onclick="egMode=\'group\';render();">Encounter Group</button>';
+    html+='<button class="eg-mode-btn'+(egMode==='single'&&egGroupEditIdx===null?' active':'')+'" onclick="egGroupEditIdx=null;egMode=\'single\';render();">Single Enemy</button>';
+    html+='<button class="eg-mode-btn'+(egMode==='group'?' active':'')+'" onclick="if(egGroupEditIdx!==null){egGroupState.enemies[egGroupEditIdx]=JSON.parse(JSON.stringify(egState));egGroupEditIdx=null;}egMode=\'group\';render();">Encounter Group</button>';
     html+='</div>';
-    if(egMode==='group'){
+    if(egMode==='group'&&egGroupEditIdx===null){
       // ── GROUP MODE ─────────────────────────────────────────────────────────
       html+='<div class="eg-section">';
       html+='<div class="eg-section-title">Encounter Template</div>';
@@ -10979,7 +10980,10 @@ function render(){
           html+='<span class="eg-gear-pill" style="color:var(--gr);">'+fmt(lootAmt)+' Cr</span>';
           html+='<span class="tag '+(lootType==='blanks'?'tag-blanks':'tag-credstick')+'" style="font-size:8px;padding:1px 5px;">'+esc(lootType.toUpperCase())+'</span>';
           html+='</div>';
-          html+='<button class="eg-group-export" onclick="egExportStateVTTES(egGroupState.enemies['+gi+']);">⬇ Export JSON</button>';
+          html+='<div style="display:flex;gap:6px;margin-top:8px;">';
+          html+='<button class="eg-group-export" style="flex:1;background:rgba(48,209,88,.07);border-color:rgba(48,209,88,.3);color:var(--gr);" onclick="egGroupEditIdx='+gi+';egState=JSON.parse(JSON.stringify(egGroupState.enemies['+gi+']));render();">✏ Edit</button>';
+          html+='<button class="eg-group-export" style="flex:1;" onclick="egExportStateVTTES(egGroupState.enemies['+gi+']);">⬇ Export</button>';
+          html+='</div>';
           html+='</div>';
         });
         html+='</div>';
@@ -10987,8 +10991,38 @@ function render(){
         html+='</div>';
       }
       html+='</div>';
-    } else {
-    // ── SINGLE MODE ───────────────────────────────────────────────────────────
+    }
+    if(egMode==='single'||(egMode==='group'&&egGroupEditIdx!==null)){
+    // ── SINGLE / GROUP-EDIT MODE ──────────────────────────────────────────────
+    // Auto-sync egState back into the group array on every render while editing
+    if(egGroupEditIdx!==null&&egGroupState.enemies[egGroupEditIdx]){
+      egGroupState.enemies[egGroupEditIdx]=JSON.parse(JSON.stringify(egState));
+    }
+    // ── Group-edit context header ─────────────────────────────────────────────
+    if(egGroupEditIdx!==null){
+      const _grole=egGroupState.enemies[egGroupEditIdx]?._role||'Enemy';
+      const _gtier=egState.tier;
+      const _tierCG={henchmen:'#8e8e93',regular:'#30d158',elite:'#0a84ff',boss:'var(--re)'};
+      const _gtc=_tierCG[_gtier]||'#8e8e93';
+      const _gTotal=egGroupState.enemies.length;
+      html+='<div style="background:rgba(10,132,255,.06);border:1px solid rgba(10,132,255,.25);border-radius:8px;padding:10px 14px;margin-bottom:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">';
+      html+='<span style="font-family:\'Share Tech Mono\',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--a);">Group Member</span>';
+      html+='<span style="font-family:\'Share Tech Mono\',monospace;font-size:11px;font-weight:600;color:var(--a2);">'+esc(_grole)+'</span>';
+      html+='<span class="eg-gear-pill" style="border-color:'+_gtc+';color:'+_gtc+';font-size:9px;">'+_gtier.toUpperCase()+'</span>';
+      html+='<span style="font-family:\'Share Tech Mono\',monospace;font-size:10px;color:var(--mu);">'+(egGroupEditIdx+1)+' / '+_gTotal+'</span>';
+      html+='<div style="margin-left:auto;display:flex;gap:5px;">';
+      if(egGroupEditIdx>0){
+        const _pi=egGroupEditIdx-1;
+        html+='<button class="eg-btn" style="font-size:10px;padding:4px 8px;" onclick="egGroupState.enemies[egGroupEditIdx]=JSON.parse(JSON.stringify(egState));egGroupEditIdx='+_pi+';egState=JSON.parse(JSON.stringify(egGroupState.enemies['+_pi+']));render();">◀ Prev</button>';
+      }
+      if(egGroupEditIdx<egGroupState.enemies.length-1){
+        const _ni=egGroupEditIdx+1;
+        html+='<button class="eg-btn" style="font-size:10px;padding:4px 8px;" onclick="egGroupState.enemies[egGroupEditIdx]=JSON.parse(JSON.stringify(egState));egGroupEditIdx='+_ni+';egState=JSON.parse(JSON.stringify(egGroupState.enemies['+_ni+']));render();">Next ▶</button>';
+      }
+      html+='<button class="eg-btn eg-btn-cyan" style="font-size:10px;padding:4px 10px;" onclick="egGroupState.enemies[egGroupEditIdx]=JSON.parse(JSON.stringify(egState));egGroupEditIdx=null;render();">← Back to Group</button>';
+      html+='</div>';
+      html+='</div>';
+    }
     // ── Identity ──────────────────────────────────────────────────────────────
     html+='<div class="eg-section">';
     html+='<div class="eg-section-title">Identity</div>';
@@ -11413,11 +11447,12 @@ function render(){
     html+='<div class="eg-export-bar">';
     html+='<button class="eg-rand-btn" onclick="egRandomize();render();">🎲 RANDOMIZE ALL</button>';
     html+='<button class="eg-export-btn" onclick="egExportVTTES();">⬇ EXPORT JSON</button>';
+    if(egGroupEditIdx!==null){html+='<button class="eg-btn eg-btn-cyan" style="padding:7px 14px;" onclick="egGroupState.enemies[egGroupEditIdx]=JSON.parse(JSON.stringify(egState));egGroupEditIdx=null;render();">← Back to Group</button>';}
     html+='<span style="font-family:\'Share Tech Mono\',monospace;font-size:10px;color:#8e8e93;">Format: JSON for VTT-ES (Roll20)</span>';
     html+='</div>';
     html+='</div>';
     html+='</div>';
-    } // end single mode
+    } // end single/group-edit mode
   }
 
   if(!cnt&&sq){html+='<div class="empty"><div style="font-size:32px;margin-bottom:8px;">🔍</div><div style="font-family:\'Share Tech Mono\',monospace;font-size:11px;">No results for &quot;'+esc(sq)+'&quot;</div></div>';}
