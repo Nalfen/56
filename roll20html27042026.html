@@ -1,0 +1,3368 @@
+<div class="charsheet">
+<link href="56-sheet.css" rel="stylesheet" type="text/css">
+<div class="sheet-main">
+    <div>
+        <h1 style="text-align: center;"><span>56ième Siècle</span></h1>
+            <div class="sheet-2colrow">
+            <div class="sheet-col">
+            <!-- Ability Scores... -->
+<h3 style="text-align: center; color: #359fcf; background-color: #000;">
+    <span>Ability Scores</span>
+</h3>
+
+<table id="table_ability" style="width: 100%;">
+
+    <tr>
+        <th style="font-size: 12px; text-align: center;">Ability</th>
+        <th style="font-size: 12px; text-align: center;">Base</th>
+        <th style="font-size: 12px; text-align: center;">Permanent</th>
+        <th style="font-size: 12px; text-align: center;">Current</th>
+        <th style="font-size: 12px; text-align: center;">Bonus</th>
+    </tr>
+
+    <!-- ========================= -->
+    <!--        CORE STATS         -->
+    <!-- ========================= -->
+
+    <!-- PHYSICAL -->
+    <tr>
+        <td align="center">
+            <button type="action" class="ability-button ability-core"
+                title="Your general fitness level and body's ability to perform physical tasks. Influences PHYSICAL SKILLS.">
+                PHYSICAL
+            </button>
+        </td>
+
+        <td align="center" class="gm-only">
+            <input type="number" name="attr_PHYSICAL_base" style="width: 60px;">
+        </td>
+
+        <td align="center">
+            <input type="number" name="attr_PHYSICAL_perm" style="width: 60px;">
+        </td>
+
+        <td align="center">
+            <input type="number" name="attr_PHYSICAL" style="width: 60px;">
+        </td>
+
+        <td>
+            <select name="attr_PHYSICAL_bonus" style="width: 100px;">
+                <option value="0" selected>None</option>
+                <option value="1">Small</option>
+                <option value="3">Large</option>
+                <option value="-1">Small -</option>
+                <option value="-3">Large -</option>
+            </select>
+        </td>
+    </tr>
+
+    <!-- MENTAL -->
+    <tr>
+        <td align="center">
+            <button type="action" class="ability-button ability-core"
+                title="Your capacity at thinking, general intelligence, logic and performing mental related tasks. Influences MENTAL SKILLS.">
+                MENTAL
+            </button>
+        </td>
+
+        <td align="center" class="gm-only">
+            <input type="number" name="attr_MENTAL_base" style="width: 60px;">
+        </td>
+
+        <td align="center">
+            <input type="number" name="attr_MENTAL_perm" style="width: 60px;">
+        </td>
+
+        <td align="center">
+            <input type="number" name="attr_MENTAL" style="width: 60px;">
+        </td>
+
+        <td>
+            <select name="attr_MENTAL_bonus" style="width: 100px;">
+                <option value="0" selected>None</option>
+                <option value="1">Small</option>
+                <option value="3">Large</option>
+                <option value="-1">Small -</option>
+                <option value="-3">Large -</option>
+            </select>
+        </td>
+    </tr>
+
+    <!-- SOCIAL -->
+    <tr>
+        <td align="center">
+            <button type="action" class="ability-button ability-core"
+                title="Your general charisma, capacity to interact with others as well as any other social context challenges. Influences SOCIAL SKILLS.">
+                SOCIAL
+            </button>
+        </td>
+
+        <td align="center" class="gm-only">
+            <input type="number" name="attr_SOCIAL_base" style="width: 60px;">
+        </td>
+
+        <td align="center">
+            <input type="number" name="attr_SOCIAL_perm" style="width: 60px;">
+        </td>
+
+        <td align="center">
+            <input type="number" name="attr_SOCIAL" style="width: 60px;">
+        </td>
+
+        <td>
+            <select name="attr_SOCIAL_bonus" style="width: 100px;">
+                <option value="0" selected>None</option>
+                <option value="1">Small</option>
+                <option value="3">Large</option>
+                <option value="-1">Small -</option>
+                <option value="-3">Large -</option>
+            </select>
+        </td>
+    </tr>
+
+    <!-- ACUITY -->
+    <tr>
+        <td align="center">
+            <button type="action" class="ability-button ability-core"
+                title="Your ability to sense things and react accordingly, your general meticulousness and coordination. Influences ACUITY SKILLS.">
+                ACUITY
+            </button>
+        </td>
+
+        <td align="center" class="gm-only">
+            <input type="number" name="attr_ACUITY_base" style="width: 60px;">
+        </td>
+
+        <td align="center">
+            <input type="number" name="attr_ACUITY_perm" style="width: 60px;">
+        </td>
+
+        <td align="center">
+            <input type="number" name="attr_ACUITY" style="width: 60px;">
+        </td>
+
+        <td>
+            <select name="attr_ACUITY_bonus" style="width: 100px;">
+                <option value="0" selected>None</option>
+                <option value="1">Small</option>
+                <option value="3">Large</option>
+                <option value="-1">Small -</option>
+                <option value="-3">Large -</option>
+            </select>
+        </td>
+    </tr>
+
+    <!-- ========================= -->
+    <!--         DEFENSES          -->
+    <!-- ========================= -->
+
+    <!-- ENDURANCE -->
+    <tr>
+        <td align="center">
+            <button type="roll" class="ability-button ability-roll"
+                name="roll_ENDURANCE"
+                value="!roll ENDURANCE none"
+                title="Starting HEALTH, health damage threshold, HEALTH SOAK and daily health recovery.">
+                ENDURANCE
+            </button>
+        </td>
+
+        <td align="center" class="gm-only">
+            <input type="number" name="attr_ENDURANCE_base" style="width: 60px;">
+        </td>
+
+        <td align="center">
+            <input type="number" name="attr_ENDURANCE_perm" style="width: 60px;">
+        </td>
+
+        <td align="center">
+            <input type="number" name="attr_ENDURANCE" style="width: 60px;">
+        </td>
+
+        <td>
+            <select name="attr_ENDURANCE_bonus" style="width: 100px;">
+                <option value="0" selected>None</option>
+                <option value="1">Small</option>
+                <option value="3">Large</option>
+                <option value="-1">Small -</option>
+                <option value="-3">Large -</option>
+            </select>
+        </td>
+    </tr>
+
+    <!-- SPEED -->
+    <tr>
+        <td align="center">
+            <button type="roll" class="ability-button ability-roll"
+                name="roll_SPEED"
+                value="!roll SPEED none"
+                title="Avoidance of most attacks that would target your HEALTH.">
+                SPEED
+            </button>
+        </td>
+
+        <td align="center" class="gm-only">
+            <input type="number" name="attr_SPEED_base" style="width: 60px;">
+        </td>
+
+        <td align="center">
+            <input type="number" name="attr_SPEED_perm" style="width: 60px;">
+        </td>
+
+        <td align="center">
+            <input type="number" name="attr_SPEED" style="width: 60px;">
+        </td>
+
+        <td>
+            <select name="attr_SPEED_bonus" style="width: 100px;">
+                <option value="0" selected>None</option>
+                <option value="1">Small</option>
+                <option value="3">Large</option>
+                <option value="-1">Small -</option>
+                <option value="-3">Large -</option>
+            </select>
+        </td>
+    </tr>
+
+    <!-- WITS -->
+    <tr>
+        <td align="center">
+            <button type="roll" class="ability-button ability-roll"
+                name="roll_WITS"
+                value="!roll WITS none"
+                title="Avoidance of most attacks that target MORALE, plus PASSIVE AWARENESS and INITIATIVE.">
+                WITS
+            </button>
+        </td>
+
+        <td align="center" class="gm-only">
+            <input type="number" name="attr_WITS_base" style="width: 60px;">
+        </td>
+
+        <td align="center">
+            <input type="number" name="attr_WITS_perm" style="width: 60px;">
+        </td>
+
+        <td align="center">
+            <input type="number" name="attr_WITS" style="width: 60px;">
+        </td>
+
+        <td>
+            <select name="attr_WITS_bonus" style="width: 100px;">
+                <option value="0" selected>None</option>
+                <option value="1">Small</option>
+                <option value="3">Large</option>
+                <option value="-1">Small -</option>
+                <option value="-3">Large -</option>
+            </select>
+        </td>
+    </tr>
+
+    <!-- WILLPOWER -->
+    <tr>
+        <td align="center">
+            <button type="roll" class="ability-button ability-roll"
+                name="roll_WILLPOWER"
+                value="!roll WILLPOWER none"
+                title="Starting MORALE, morale damage threshold, morale SOAK and daily morale recovery.">
+                WILLPOWER
+            </button>
+        </td>
+
+        <td align="center" class="gm-only">
+            <input type="number" name="attr_WILLPOWER_base" style="width: 60px;">
+        </td>
+
+        <td align="center">
+            <input type="number" name="attr_WILLPOWER_perm" style="width: 60px;">
+        </td>
+
+        <td align="center">
+            <input type="number" name="attr_WILLPOWER" style="width: 60px;">
+        </td>
+
+        <td>
+            <select name="attr_WILLPOWER_bonus" style="width: 100px;">
+                <option value="0" selected>None</option>
+                <option value="1">Small</option>
+                <option value="3">Large</option>
+                <option value="-1">Small -</option>
+                <option value="-3">Large -</option>
+            </select>
+        </td>
+    </tr>
+
+</table>
+            </div>
+            <div class="sheet-col">
+              <h3 style="text-align: center; color: #359fcf; background-color: #000;"><span>Character information</span></h3>
+                <table style="width: 100%;">
+                    <tr>
+                        <td width="47%"><span >Character Name</span></td>
+                        <td width="32%">
+                            <input type="text" name="attr_name" /> </td>
+                        <td width="21%" rowspan="7"><img name="attr_character_avatar" style=" align-content: center"></td>
+                    </tr>
+                    <tr>
+                        <td><span >Race</span></td>
+                        <td>
+                            <input type="text" name="attr_race" />
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td><span >Occupation</span></td>
+                        <td>
+                            <input type="text" name="attr_occupation" /> </td>
+                        
+                    </tr>
+                    <tr>
+                        <td><span >Background</span></td>
+                        <td>
+                            <input type="text" name="attr_background" />
+                        </td>
+                       
+                    </tr>
+                    <tr>
+                        <td><span >Sexe</span></td>
+                        <td>
+                            <input type="text" name="attr_sex" />
+                        </td>
+                        
+			      </tr>
+                   <tr>    
+						<td><span >Real Age</span></td>
+                        <td>
+                            <input type="number" name="attr_age" style="width: 50px;" />
+                        </td>
+                        
+                  </tr>
+                    <tr>
+                        <td><span >Apparent Age</span></td>
+                        <td>
+                            <input type="number" name="attr_appararent_age" style="width: 50px;" />
+                        </td>
+                        
+                    </tr>
+                   
+                </table>
+
+          <h3 style="text-align: center; color: #359fcf; background-color: #000;">
+    <span>Health & Morale</span>
+</h3>
+
+<table style="width: 100%;">
+    <tr>
+        <td><span>CURRENT MORALE</span></td>
+        <td>
+            <input type="number" name="attr_MORALE" style="width: 50px;" />
+            <span>MAX MORALE</span>
+            <input type="number" name="attr_MORALE_max" style="width: 50px;" />
+        </td>
+    </tr>
+
+    <tr>
+        <td><span>CURRENT HEALTH</span></td>
+        <td>
+            <input type="number" name="attr_HEALTH" style="width: 50px;" />
+            <span>MAX HEALTH</span>
+            <input type="number" name="attr_HEALTH_max" style="width: 50px;" />
+        </td>
+    </tr>
+
+    <tr>
+        <td><span>CURRENT CHI</span></td>
+        <td>
+            <input type="number" name="attr_CHI" style="width: 50px;" />
+            <span>MAX CHI</span>
+            <input type="number" name="attr_CHI_max" style="width: 50px;" />
+        </td>
+    </tr>
+
+</table>  
+<!-- ========================= -->
+<!--      XP Section           -->
+<!-- ========================= -->
+
+<h3 style="text-align: center; color: #359fcf; background-color: #000;">
+    <span>XP Calculator</span>
+</h3>
+<!-- XP SECTION -->
+<input type="number" name="attr_attribute_xp" value="0" style="display:none;">
+
+<div class="xp-block">
+
+    <div class="xp-row" style="align-items: flex-end;">
+
+        <!-- Total XP -->
+        <div class="xp-cell" style="max-width: 120px;">
+            <label>Total XP</label>
+            <input type="number" name="attr_total_xp" style="width: 70px;" min="0" max="9999">
+        </div>
+
+        <!-- Credited XP -->
+        <div class="xp-cell gm-only" style="max-width: 120px;">
+            <label>Credited XP</label>
+            <input type="number" name="attr_credited_xp" style="width: 70px;" min="0" max="9999">
+        </div>
+
+        <!-- Spacer -->
+        <div style="width: 30px;"></div>
+
+        <!-- Spent XP -->
+        <div class="xp-cell" style="max-width: 140px;">
+            <label>Spent XP</label>
+            <input type="number" name="attr_spent_xp" disabled style="width: 80px;"
+            value="(
+(@{Academics}*(@{Academics}+1))/2 +
+(@{Acting}*(@{Acting}+1))/2 +
+(@{Athletics}*(@{Athletics}+1))/2 +
+(@{Awareness}*(@{Awareness}+1))/2 +
+(@{Binding}*(@{Binding}+1))/2 +
+(@{Charm}*(@{Charm}+1))/2 +
+(@{Concealment}*(@{Concealment}+1))/2 +
+(@{Craft}*(@{Craft}+1))/2 +
+(@{Cyberintel}*(@{Cyberintel}+1))/2 +
+(@{Dexterity}*(@{Dexterity}+1))/2 +
+(@{Engineering}*(@{Engineering}+1))/2 +
+(@{Etiquette}*(@{Etiquette}+1))/2 +
+(@{Flair}*(@{Flair}+1))/2 +
+(@{Galactic_Knowledge}*(@{Galactic_Knowledge}+1))/2 +
+(@{Gunslinger}*(@{Gunslinger}+1))/2 +
+(@{Hacking}*(@{Hacking}+1))/2 +
+(@{Heavy_Weapons}*(@{Heavy_Weapons}+1))/2 +
+(@{Intimidation}*(@{Intimidation}+1))/2 +
+(@{Intuition}*(@{Intuition}+1))/2 +
+(@{Leadership}*(@{Leadership}+1))/2 +
+(@{Marksman}*(@{Marksman}+1))/2 +
+(@{Martial_Arts}*(@{Martial_Arts}+1))/2 +
+(@{Medicine}*(@{Medicine}+1))/2 +
+(@{Might}*(@{Might}+1))/2 +
+(@{Navigation}*(@{Navigation}+1))/2 +
+(@{Negotiation}*(@{Negotiation}+1))/2 +
+(@{Operator}*(@{Operator}+1))/2 +
+(@{Parascience}*(@{Parascience}+1))/2 +
+(@{Piloting}*(@{Piloting}+1))/2 +
+(@{Repair}*(@{Repair}+1))/2 +
+(@{Resilience}*(@{Resilience}+1))/2 +
+(@{Scavenging}*(@{Scavenging}+1))/2 +
+(@{Science}*(@{Science}+1))/2 +
+(@{Search}*(@{Search}+1))/2 +
+(@{Spiritual}*(@{Spiritual}+1))/2 +
+(@{Streetwise}*(@{Streetwise}+1))/2 +
+(@{Subterfuge}*(@{Subterfuge}+1))/2 +
+(@{Survival}*(@{Survival}+1))/2 +
+(@{Tactics}*(@{Tactics}+1))/2 +
+(@{Technology}*(@{Technology}+1))/2
++
+@{attribute_xp}
+)">
+        </div>
+
+        <!-- Available XP -->
+        <div class="xp-cell" style="max-width: 140px;">
+            <label>Available XP</label>
+            <input type="number" name="attr_available_xp" style="width: 70px;" disabled
+            value="(@{total_xp} - @{spent_xp} + @{credited_xp})">
+        </div>
+
+    </div>
+</div>
+</div>
+</div>   <!-- CLOSE sheet-col (right column) -->
+</div>   <!-- CLOSE sheet-2colrow -->
+<h3 style="text-align: center; color: #359fcf; background-color: #000;">
+    <span>SKILLS</span>
+</h3>
+
+<div class="sheet-4colrow">
+<table id="skillstable" name="skillstable" style="width: 100%;">
+
+<tr>
+    <th colspan="2" style="font-size: 24px; text-align: center;">Physical</th>
+    <th colspan="2" style="font-size: 24px; text-align: center;">Mental</th>
+    <th colspan="2" style="font-size: 24px; text-align: center;">Social</th>
+    <th colspan="2" style="font-size: 24px; text-align: center;">Acuity</th>
+</tr>
+
+<!-- ROW 1 -->
+<tr>
+
+    <!-- Physical: Athletics -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Athletics"
+            value="!roll Athletics PHYSICAL"
+            title="Physical aptitude to climb, swim, run etc. Ability to do flips, walk tight ledges, break falls etc.">
+            Athletics
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Athletics" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Athletics_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Mental: Academics -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Academics"
+            value="!roll Academics MENTAL"
+            title="Ability to understand, research or advance the various societies of the galaxy.">
+            Academics
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Academics" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Academics_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Social: Acting -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Acting"
+            value="!roll Acting SOCIAL"
+            title="Ability to impersonate, play roles and be someone else.">
+            Acting
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Acting" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Acting_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Acuity: Awareness -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Awareness"
+            value="!roll Awareness ACUITY"
+            title="General awareness of surroundings; helps prevent ambush and notice small differences.">
+            Awareness
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Awareness" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Awareness_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+</tr>
+
+<!-- ROW 2 -->
+<tr>
+
+    <!-- Physical: Craft -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Craft"
+            value="!roll Craft PHYSICAL"
+            title="Making items or modifying existing items.">
+            Craft
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Craft" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Craft_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Mental: Cyberintel -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Cyberintel"
+            value="!roll Cyberintel MENTAL"
+            title="Investigate virtual environments; can replace non-mental skills in virtual settings.">
+            Cyberintel
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Cyberintel" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Cyberintel_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Social: Charm -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Charm"
+            value="!roll Charm SOCIAL"
+            title="Make friends, influence allies, get people to like you.">
+            Charm
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Charm" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Charm_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Acuity: Binding -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Binding"
+            value="!roll Binding ACUITY"
+            title="Cast Arcane spells. Capture spirits and bind them to objects or realities.">
+            Binding
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Binding" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Binding_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+</tr>
+
+<!-- ROW 3 -->
+<tr>
+
+    <!-- Physical: Heavy Weapons -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Heavy_Weapons"
+            value="!roll Heavy_Weapons PHYSICAL"
+            title="Operation of heavy weapons: machine guns, rocket launchers, artillery, turrets.">
+            Heavy Weapons
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Heavy_Weapons" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Heavy_Weapons_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Mental: Engineering -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Engineering"
+            value="!roll Engineering MENTAL"
+            title="Designing, planning, understanding how things are made. Also explosives.">
+            Engineering
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Engineering" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Engineering_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Social: Etiquette -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Etiquette"
+            value="!roll Etiquette SOCIAL"
+            title="Understanding expectations in various social settings.">
+            Etiquette
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Etiquette" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Etiquette_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Acuity: Concealment -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Concealment"
+            value="!roll Concealment ACUITY"
+            title="Camouflage, disguise, silent movement, electronic cloaking.">
+            Concealment
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Concealment" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Concealment_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+</tr>
+
+<!-- ROW 4 -->
+<tr>
+
+    <!-- Physical: Martial Arts -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Martial_Arts"
+            value="!roll Martial_Arts PHYSICAL"
+            title="Close quarters combat, armed or unarmed.">
+            Martial Arts
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Martial_Arts" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Martial_Arts_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Mental: Galactic Knowledge -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Galactic_Knowledge"
+            value="!roll Galactic_Knowledge MENTAL"
+            title="History of cultures, corporations, entities, and places in the galaxy.">
+            Galactic Knowledge
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Galactic_Knowledge" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Galactic_Knowledge_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Social: Flair -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Flair"
+            value="!roll Flair SOCIAL"
+            title="Stand out through style or artistic ability (dance, music, performance).">
+            Flair
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Flair" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Flair_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Acuity: Dexterity -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Dexterity"
+            value="!roll Dexterity ACUITY"
+            title="Throwing, picking locks, pickpocketing, fine motor skills.">
+            Dexterity
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Dexterity" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Dexterity_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+</tr>
+
+<!-- ROW 5 -->
+<tr>
+
+    <!-- Physical: Might -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Might"
+            value="!roll Might PHYSICAL"
+            title="Opening things, lifting, pulling, holding someone down.">
+            Might
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Might" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Might_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Mental: Hacking -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Hacking"
+            value="!roll Hacking MENTAL"
+            title="Break encryptions, codes, hack protected systems.">
+            Hacking
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Hacking" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Hacking_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Social: Intimidation -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Intimidation"
+            value="!roll Intimidation SOCIAL"
+            title="Coerce others through fear.">
+            Intimidation
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Intimidation" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Intimidation_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Acuity: Gunslinger -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Gunslinger"
+            value="!roll Gunslinger ACUITY"
+            title="Operation of pistols, SMGs, shotguns.">
+            Gunslinger
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Gunslinger" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Gunslinger_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+</tr>
+<!-- ROW 6 -->
+<tr>
+
+    <!-- Physical: Piloting -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Piloting"
+            value="!roll Piloting PHYSICAL"
+            title="Piloting and handling of most vehicles or beasts.">
+            Piloting
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Piloting" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Piloting_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Mental: Medicine -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Medicine"
+            value="!roll Medicine MENTAL"
+            title="First aid, medical treatment, surgery, drug use.">
+            Medicine
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Medicine" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Medicine_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Social: Leadership -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Leadership"
+            value="!roll Leadership SOCIAL"
+            title="Lead, command, influence morale.">
+            Leadership
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Leadership" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Leadership_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Acuity: Intuition -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Intuition"
+            value="!roll Intuition ACUITY"
+            title="Read a scene, emotions, predict outcomes.">
+            Intuition
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Intuition" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Intuition_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+</tr>
+<!-- ROW 7 -->
+<tr>
+
+    <!-- Physical: Repair -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Repair"
+            value="!roll Repair PHYSICAL"
+            title="Fixing items and devices.">
+            Repair
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Repair" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Repair_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Mental: Navigation -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Navigation"
+            value="!roll Navigation MENTAL"
+            title="Calculate trajectories, understand where you are, navigate safely.">
+            Navigation
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Navigation" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Navigation_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Social: Negotiation -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Negotiation"
+            value="!roll Negotiation SOCIAL"
+            title="Finance, deals, contracts, acquiring or disposing of goods.">
+            Negotiation
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Negotiation" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Negotiation_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Acuity: Marksman -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Marksman"
+            value="!roll Marksman ACUITY"
+            title="Operation of rifles and sniper rifles.">
+            Marksman
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Marksman" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Marksman_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+</tr>
+<!-- ROW 8 -->
+<tr>
+
+    <!-- Physical: Resilience -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Resilience"
+            value="!roll Resilience PHYSICAL"
+            title="Push yourself harder, survive toxins, ignore wounds, endure hunger/thirst.">
+            Resilience
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Resilience" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Resilience_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Mental: Parascience -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Parascience"
+            value="!roll Parascience MENTAL"
+            title="Scientific knowledge of the paranormal.">
+            Parascience
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Parascience" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Parascience_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Social: Spiritual -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Spiritual"
+            value="!roll Spiritual SOCIAL"
+            title="Casting spells using CHI.">
+            Spiritual
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Spiritual" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Spiritual_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Acuity: Operator -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Operator"
+            value="!roll Operator ACUITY"
+            title="Use of high-tech nanotech and remote control of technological devices.">
+            Operator
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Operator" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Operator_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+</tr>
+<!-- ROW 9 -->
+<tr>
+
+    <!-- Physical: Scavenging -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Scavenging"
+            value="!roll Scavenging PHYSICAL"
+            title="Gather raw resources or salvage equipment, including from fallen foes.">
+            Scavenging
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Scavenging" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Scavenging_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Mental: Science -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Science"
+            value="!roll Science MENTAL"
+            title="Biology, chemistry, botany, ecology, genetics, zoology, natural sciences.">
+            Science
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Science" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Science_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Social: Streetwise -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Streetwise"
+            value="!roll Streetwise SOCIAL"
+            title="Navigate urban environments, gather intel, avoid threats.">
+            Streetwise
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Streetwise" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Streetwise_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Acuity: Search -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Search"
+            value="!roll Search ACUITY"
+            title="Find hidden or not immediately visible things.">
+            Search
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Search" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Search_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+</tr>
+<!-- ROW 10 -->
+<tr>
+
+    <!-- Physical: Survival -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Survival"
+            value="!roll Survival PHYSICAL"
+            title="Identify safe food, water, shelter; track targets; predict dangerous weather.">
+            Survival
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Survival" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Survival_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Mental: Technology -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Technology"
+            value="!roll Technology MENTAL"
+            title="Creation, understanding, installation and modification of electronic components or programs; many security systems.">
+            Technology
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Technology" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Technology_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Social: Subterfuge -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Subterfuge"
+            value="!roll Subterfuge SOCIAL"
+            title="Deceive people, lie convincingly, or see through others' lies.">
+            Subterfuge
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Subterfuge" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Subterfuge_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+    <!-- Acuity: Tactics -->
+    <td>
+        <button type="roll" class="skill-button" name="roll_Tactics"
+            value="!roll Tactics ACUITY"
+            title="Understand your enemy, best approaches, and identify weaknesses.">
+            Tactics
+        </button>
+    </td>
+    <td>
+        <input type="number" name="attr_Tactics" style="width: 60px" />
+        <span>BONUS</span>
+        <select name="attr_Tactics_bonus" style="width: 80px">
+            <option value="0" selected>None</option>
+            <option value="1">Small</option>
+            <option value="3">Large</option>
+            <option value="-1">Small -</option>
+            <option value="-3">Large -</option>
+        </select>
+    </td>
+
+</tr>
+</table>
+</div>
+
+</div>
+    
+    
+<h3 style="text-align:center; color:#359fcf; background-color:#000; margin-top:20px;">
+    <span>Defenses</span>
+</h3>
+
+<table id="armor" style="width:100%; border-collapse:collapse;">
+
+    <!-- HEADER -->
+    <tr>
+        <th style="width:30px;">#</th>
+        <th style="width:180px;">Name</th>
+        <th style="width:60px;">Roll</th>
+        <th style="width:100px;">Type</th>
+
+        <th colspan="4" style="text-align:center;">Defense</th>
+
+        <th colspan="2" style="text-align:center;">Soak</th>
+
+        <th style="width:90px;">Charges</th>
+        <th style="width:70px;">Regen</th>
+        <th style="width:200px;">Special</th>
+    </tr>
+
+    <!-- DEFENSE SUBHEADERS -->
+    <tr>
+        <th></th><th></th><th></th><th></th>
+
+        <th style="width:80px;">Physical</th>
+        <th style="width:80px;">Energy</th>
+        <th style="width:80px;">Tech</th>
+        <th style="width:80px;">Spiritual</th>
+
+        <th style="width:100px;">Expression</th>
+        <th style="width:70px;">Attr</th>
+
+        <th></th><th></th><th></th>
+    </tr>
+
+    <!-- ========================= -->
+    <!-- ARMOR ROW 1 -->
+    <!-- ========================= -->
+    <tr>
+        <td>1</td>
+
+        <!-- Name -->
+        <td>
+            <input type="text" name="attr_armor1_name" style="width:100%;">
+        </td>
+
+        <!-- Roll Button -->
+        <td>
+            <button type="roll" class="weapon-fire-button"
+                name="roll_armor1"
+                value="!armor-roll 1">
+                Roll
+            </button>
+        </td>
+
+        <!-- Type -->
+        <td>
+            <input type="text" name="attr_armor1_type" style="width:100%;">
+        </td>
+
+        <!-- Defense dropdowns -->
+        <td>
+            <select name="attr_armor1_def_phys" style="width:100%;">
+                <option value="None">None</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+                <option value="Extreme">Extreme</option>
+            </select>
+        </td>
+
+        <td>
+            <select name="attr_armor1_def_energy" style="width:100%;">
+                <option value="None">None</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+                <option value="Extreme">Extreme</option>
+            </select>
+        </td>
+
+        <td>
+            <select name="attr_armor1_def_tech" style="width:100%;">
+                <option value="None">None</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+                <option value="Extreme">Extreme</option>
+            </select>
+        </td>
+
+        <td>
+            <select name="attr_armor1_def_spirit" style="width:100%;">
+                <option value="None">None</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+                <option value="Extreme">Extreme</option>
+            </select>
+        </td>
+
+        <!-- Soak Expression -->
+        <td>
+            <input type="text" name="attr_armor1_soak_expr" placeholder="3D+2" style="width:100%;">
+        </td>
+
+        <!-- Attribute -->
+        <td>
+            <select name="attr_armor1_soak_attr" style="width:100%;">
+                <option value="ENDURANCE">END</option>
+                <option value="WILLPOWER">WILL</option>
+            </select>
+        </td>
+
+        <!-- Charges -->
+        <td>
+            <input type="text" name="attr_armor1_charges" placeholder="0/0" style="width:100%;">
+        </td>
+
+        <!-- Regen -->
+        <td>
+            <input type="text" name="attr_armor1_regen" style="width:100%;">
+        </td>
+
+        <!-- Special -->
+        <td>
+            <input type="text" name="attr_armor1_special" style="width:100%;">
+        </td>
+    </tr>
+
+    <!-- ========================= -->
+    <!-- ARMOR ROW 2 -->
+    <!-- ========================= -->
+    <tr>
+        <td>2</td>
+        <td><input type="text" name="attr_armor2_name" style="width:100%;"></td>
+        <td><button type="roll" class="weapon-fire-button" name="roll_armor2" value="!armor-roll 2">Roll</button></td>
+        <td><input type="text" name="attr_armor2_type" style="width:100%;"></td>
+
+        <td><select name="attr_armor2_def_phys" style="width:100%;"><option>None</option><option>Low</option><option>Medium</option><option>High</option><option>Extreme</option></select></td>
+        <td><select name="attr_armor2_def_energy" style="width:100%;"><option>None</option><option>Low</option><option>Medium</option><option>High</option><option>Extreme</option></select></td>
+        <td><select name="attr_armor2_def_tech" style="width:100%;"><option>None</option><option>Low</option><option>Medium</option><option>High</option><option>Extreme</option></select></td>
+        <td><select name="attr_armor2_def_spirit" style="width:100%;"><option>None</option><option>Low</option><option>Medium</option><option>High</option><option>Extreme</option></select></td>
+
+        <td><input type="text" name="attr_armor2_soak_expr" style="width:100%;"></td>
+        <td><select name="attr_armor2_soak_attr" style="width:100%;"><option value="ENDURANCE">END</option><option value="WILLPOWER">WILL</option></select></td>
+
+        <td><input type="text" name="attr_armor2_charges" style="width:100%;"></td>
+        <td><input type="text" name="attr_armor2_regen" style="width:100%;"></td>
+        <td><input type="text" name="attr_armor2_special" style="width:100%;"></td>
+    </tr>
+
+    <!-- ========================= -->
+    <!-- ARMOR ROW 3 -->
+    <!-- ========================= -->
+    <tr>
+        <td>3</td>
+        <td><input type="text" name="attr_armor3_name" style="width:100%;"></td>
+        <td><button type="roll" class="weapon-fire-button" name="roll_armor3" value="!armor-roll 3">Roll</button></td>
+        <td><input type="text" name="attr_armor3_type" style="width:100%;"></td>
+
+        <td><select name="attr_armor3_def_phys" style="width:100%;"><option>None</option><option>Low</option><option>Medium</option><option>High</option><option>Extreme</option></select></td>
+        <td><select name="attr_armor3_def_energy" style="width:100%;"><option>None</option><option>Low</option><option>Medium</option><option>High</option><option>Extreme</option></select></td>
+        <td><select name="attr_armor3_def_tech" style="width:100%;"><option>None</option><option>Low</option><option>Medium</option><option>High</option><option>Extreme</option></select></td>
+        <td><select name="attr_armor3_def_spirit" style="width:100%;"><option>None</option><option>Low</option><option>Medium</option><option>High</option><option>Extreme</option></select></td>
+
+        <td><input type="text" name="attr_armor3_soak_expr" style="width:100%;"></td>
+        <td><select name="attr_armor3_soak_attr" style="width:100%;"><option value="ENDURANCE">END</option><option value="WILLPOWER">WILL</option></select></td>
+
+        <td><input type="text" name="attr_armor3_charges" style="width:100%;"></td>
+        <td><input type="text" name="attr_armor3_regen" style="width:100%;"></td>
+        <td><input type="text" name="attr_armor3_special" style="width:100%;"></td>
+    </tr>
+
+</table>
+    <div>
+        <h3 style="text-align: center; color: #359fcf; background-color: #000;"><span>Weapons</span></h3>
+       
+      <table align="center" id="weapons">
+  <thead>
+    <tr>
+      <th style="font-size: 12px; text-align: center;">#</th>
+      <th style="font-size: 12px; text-align: center;">Name</th>
+      <th style="font-size: 12px; text-align: center;">ROLL</th>
+      <th style="font-size: 12px; text-align: center;width: 120px;">Skill</th>
+      <th style="font-size: 12px; text-align: center;width: 120px;">DMG Type</th>
+      <th style="font-size: 12px; text-align: center; width: 120px;">Power</th>
+      <th style="font-size: 12px; text-align: center;">DMG</th>
+      <th style="font-size: 12px; text-align: center;">Max Expertise</th>
+      <th style="font-size: 12px; text-align: center;">Special</th>
+      <th style="font-size: 12px; text-align: center;">Close</th>
+      <th style="font-size: 12px; text-align: center;">Medium</th>
+      <th style="font-size: 12px; text-align: center;">Long</th>
+      <th style="font-size: 12px; text-align: center; width: 120px;">R.O.F</th>
+      <th style="font-size: 12px; text-align: center; width: 120px;">AMMO</th>
+      <th style="font-size: 12px; text-align: center; width: 120px;">RELOAD/COOLDOWN</th>
+      <th style="font-size: 12px; text-align: center; width: 120px;">Damage Target</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+  <!-- # -->
+  <td align="center"><span>1</span></td>
+
+  <!-- NAME -->
+  <td align="center">
+    <input type="text" name="attr_weapon1_name" style="width: 200px;">
+  </td>
+
+  <!-- ROLL COLUMN (Single / Burst / Auto) -->
+  <td align="center" style="padding:0; width:90px;">
+    <div class="weapon-roll-column">
+
+      <button type="roll"
+        class="weapon-fire-button"
+        value='!attack @{weapon1_name} @{weapon1_skill} @{weapon1_dmg} @{weapon1_power} @{weapon1_expertise} @{weapon1_dmgtarget} ?{Target roll DC|2} single'>
+        Single
+      </button>
+
+      <button type="roll"
+        class="weapon-fire-button"
+        value='!attack @{weapon1_name} @{weapon1_skill} @{weapon1_dmg} @{weapon1_power} @{weapon1_expertise} @{weapon1_dmgtarget} ?{Target roll DC|2} burst'>
+        Burst
+      </button>
+
+      <button type="roll"
+        class="weapon-fire-button"
+        value='!attack @{weapon1_name} @{weapon1_skill} @{weapon1_dmg} @{weapon1_power} @{weapon1_expertise} @{weapon1_dmgtarget} ?{Target roll DC|2} auto'>
+        Auto
+      </button>
+
+    </div>
+  </td>
+
+  <!-- SKILL -->
+  <td align="center">
+    <select name="attr_weapon1_skill" style="width: 120px;">
+      <option value=""></option>
+      <option value="Academics">Academics</option>
+      <option value="Acting">Acting</option>
+      <option value="Awareness">Awareness</option>
+      <option value="Binding">Binding</option>
+      <option value="Charm">Charm</option>
+      <option value="Concealment">Concealment</option>
+      <option value="Craft">Craft</option>
+      <option value="Cyberintel">Cyberintel</option>
+      <option value="Dexterity">Dexterity</option>
+      <option value="Engineering">Engineering</option>
+      <option value="Etiquette">Etiquette</option>
+      <option value="Flair">Flair</option>
+      <option value="Galactic_Knowledge">Galactic Knowledge</option>
+      <option value="Gunslinger">Gunslinger</option>
+      <option value="Hacking">Hacking</option>
+      <option value="Heavy_Weapons">Heavy Weapons</option>
+      <option value="Intimidation">Intimidation</option>
+      <option value="Intuition">Intuition</option>
+      <option value="Leadership">Leadership</option>
+      <option value="Marksman">Marksman</option>
+      <option value="Martial_Arts">Martial Arts</option>
+      <option value="Medicine">Medicine</option>
+      <option value="Might">Might</option>
+      <option value="Navigation">Navigation</option>
+      <option value="Negotiation">Negotiation</option>
+      <option value="Operator">Operator</option>
+      <option value="Parascience">Parascience</option>
+      <option value="Piloting">Piloting</option>
+      <option value="Repair">Repair</option>
+      <option value="Resilience">Resilience</option>
+      <option value="Science">Science</option>
+      <option value="Scavenging">Scavenging</option>
+      <option value="Search">Search</option>
+      <option value="Social">Social</option>
+      <option value="Speed">Speed</option>
+      <option value="Spiritual">Spiritual</option>
+      <option value="Streetwise">Streetwise</option>
+      <option value="Subterfuge">Subterfuge</option>
+      <option value="Survival">Survival</option>
+      <option value="Tactics">Tactics</option>
+      <option value="Technology">Technology</option>
+      <option value="Wits">Wits</option>
+      <option value="Willpower">Willpower</option>
+    </select>
+  </td>
+
+  <!-- DMG TYPE -->
+  <td align="center">
+    <input type="text" name="attr_weapon1_dmgtype" style="width: 100px;">
+  </td>
+
+  <!-- POWER -->
+  <td align="center">
+    <select name="attr_weapon1_power" style="width: 100px;">
+      <option value="None" selected>None</option>
+      <option value="Low">Low</option>
+      <option value="Medium">Medium</option>
+      <option value="High">High</option>
+      <option value="Extreme">Extreme</option>
+    </select>
+  </td>
+
+  <!-- DMG -->
+  <td align="center">
+    <input type="text" name="attr_weapon1_dmg" style="width: 80px;">
+  </td>
+
+  <!-- MAX EXPERTISE -->
+  <td align="center">
+    <input type="number" name="attr_weapon1_expertise" style="width: 60px;">
+  </td>
+
+  <!-- SPECIAL -->
+  <td align="center">
+    <input type="text" name="attr_weapon1_special" style="width: 110px;">
+  </td>
+
+  <!-- CLOSE -->
+  <td align="center">
+    <input type="number" name="attr_weapon1_close_range" style="width: 60px;">
+  </td>
+
+  <!-- MEDIUM -->
+  <td align="center">
+    <input type="number" name="attr_weapon1_medium_range" style="width: 60px;">
+  </td>
+
+  <!-- LONG -->
+  <td align="center">
+    <input type="number" name="attr_weapon1_long_range" style="width: 60px;">
+  </td>
+
+  <!-- R.O.F -->
+  <td align="center">
+    <select name="attr_weapon1_rof" style="width: 70px;">
+      <option value="single">-/-</option>
+      <option value="burst">B/-</option>
+      <option value="auto">-/F</option>
+      <option value="all">B/F</option>
+    </select>
+  </td>
+
+  <!-- AMMO -->
+  <td align="center">
+    <input type="text" name="attr_weapon1_currentammo" style="width:40px;">
+    <b>/</b>
+    <input type="text" name="attr_weapon1_ammo" style="width:40px;">
+  </td>
+
+  <!-- RELOAD -->
+  <td align="center">
+    <input type="text" name="attr_weapon1_reload" style="width: 80px;">
+    <button type="roll" value="!reload 1">R</button>
+  </td>
+
+  <!-- DAMAGE TARGET -->
+  <td align="center">
+    <select name="attr_weapon1_dmgtarget" style="width: 100px;">
+      <option value="HEALTH" selected>HEALTH</option>
+      <option value="MORALE">MORALE</option>
+    </select>
+  </td>
+</tr>
+<tr>
+  <!-- # -->
+  <td align="center"><span>2</span></td>
+
+  <!-- NAME -->
+  <td align="center">
+    <input type="text" name="attr_weapon2_name" style="width: 200px;">
+  </td>
+
+  <!-- ROLL COLUMN (Single / Burst / Auto) -->
+  <td align="center" style="padding:0; width:90px;">
+    <div class="weapon-roll-column">
+
+      <button type="roll"
+        class="weapon-fire-button"
+        value='!attack @{weapon2_name} @{weapon2_skill} @{weapon2_dmg} @{weapon2_power} @{weapon2_expertise} @{weapon2_dmgtarget} ?{Target roll DC|2} single'>
+        Single
+      </button>
+
+      <button type="roll"
+        class="weapon-fire-button"
+        value='!attack @{weapon2_name} @{weapon2_skill} @{weapon2_dmg} @{weapon2_power} @{weapon2_expertise} @{weapon2_dmgtarget} ?{Target roll DC|2} burst'>
+        Burst
+      </button>
+
+      <button type="roll"
+        class="weapon-fire-button"
+        value='!attack @{weapon2_name} @{weapon2_skill} @{weapon2_dmg} @{weapon2_power} @{weapon2_expertise} @{weapon2_dmgtarget} ?{Target roll DC|2} auto'>
+        Auto
+      </button>
+
+    </div>
+  </td>
+
+  <!-- SKILL -->
+  <td align="center">
+    <select name="attr_weapon2_skill" style="width: 120px;">
+      <option value=""></option>
+      <option value="Academics">Academics</option>
+      <option value="Acting">Acting</option>
+      <option value="Awareness">Awareness</option>
+      <option value="Binding">Binding</option>
+      <option value="Charm">Charm</option>
+      <option value="Concealment">Concealment</option>
+      <option value="Craft">Craft</option>
+      <option value="Cyberintel">Cyberintel</option>
+      <option value="Dexterity">Dexterity</option>
+      <option value="Engineering">Engineering</option>
+      <option value="Etiquette">Etiquette</option>
+      <option value="Flair">Flair</option>
+      <option value="Galactic_Knowledge">Galactic Knowledge</option>
+      <option value="Gunslinger">Gunslinger</option>
+      <option value="Hacking">Hacking</option>
+      <option value="Heavy_Weapons">Heavy Weapons</option>
+      <option value="Intimidation">Intimidation</option>
+      <option value="Intuition">Intuition</option>
+      <option value="Leadership">Leadership</option>
+      <option value="Marksman">Marksman</option>
+      <option value="Martial_Arts">Martial Arts</option>
+      <option value="Medicine">Medicine</option>
+      <option value="Might">Might</option>
+      <option value="Navigation">Navigation</option>
+      <option value="Negotiation">Negotiation</option>
+      <option value="Operator">Operator</option>
+      <option value="Parascience">Parascience</option>
+      <option value="Piloting">Piloting</option>
+      <option value="Repair">Repair</option>
+      <option value="Resilience">Resilience</option>
+      <option value="Science">Science</option>
+      <option value="Scavenging">Scavenging</option>
+      <option value="Search">Search</option>
+      <option value="Social">Social</option>
+      <option value="Speed">Speed</option>
+      <option value="Spiritual">Spiritual</option>
+      <option value="Streetwise">Streetwise</option>
+      <option value="Subterfuge">Subterfuge</option>
+      <option value="Survival">Survival</option>
+      <option value="Tactics">Tactics</option>
+      <option value="Technology">Technology</option>
+      <option value="Wits">Wits</option>
+      <option value="Willpower">Willpower</option>
+    </select>
+  </td>
+
+  <!-- DMG TYPE -->
+  <td align="center">
+    <input type="text" name="attr_weapon2_dmgtype" style="width: 100px;">
+  </td>
+
+  <!-- POWER -->
+  <td align="center">
+    <select name="attr_weapon2_power" style="width: 100px;">
+      <option value="None" selected>None</option>
+      <option value="Low">Low</option>
+      <option value="Medium">Medium</option>
+      <option value="High">High</option>
+      <option value="Extreme">Extreme</option>
+    </select>
+  </td>
+
+  <!-- DMG -->
+  <td align="center">
+    <input type="text" name="attr_weapon2_dmg" style="width: 80px;">
+  </td>
+
+  <!-- MAX EXPERTISE -->
+  <td align="center">
+    <input type="number" name="attr_weapon2_expertise" style="width: 60px;">
+  </td>
+
+  <!-- SPECIAL -->
+  <td align="center">
+    <input type="text" name="attr_weapon2_special" style="width: 110px;">
+  </td>
+
+  <!-- CLOSE -->
+  <td align="center">
+    <input type="number" name="attr_weapon2_close_range" style="width: 60px;">
+  </td>
+
+  <!-- MEDIUM -->
+  <td align="center">
+    <input type="number" name="attr_weapon2_medium_range" style="width: 60px;">
+  </td>
+
+  <!-- LONG -->
+  <td align="center">
+    <input type="number" name="attr_weapon2_long_range" style="width: 60px;">
+  </td>
+
+  <!-- R.O.F -->
+  <td align="center">
+    <select name="attr_weapon2_rof" style="width: 70px;">
+      <option value="single">-/-</option>
+      <option value="burst">B/-</option>
+      <option value="auto">-/F</option>
+      <option value="all">B/F</option>
+    </select>
+  </td>
+
+  <!-- AMMO -->
+  <td align="center">
+    <input type="text" name="attr_weapon2_currentammo" style="width:40px;">
+    <b>/</b>
+    <input type="text" name="attr_weapon2_ammo" style="width:40px;">
+  </td>
+
+  <!-- RELOAD -->
+  <td align="center">
+    <input type="text" name="attr_weapon2_reload" style="width: 80px;">
+    <button type="roll" value="!reload 2">R</button>
+  </td>
+
+  <!-- DAMAGE TARGET -->
+  <td align="center">
+    <select name="attr_weapon2_dmgtarget" style="width: 100px;">
+      <option value="HEALTH" selected>HEALTH</option>
+      <option value="MORALE">MORALE</option>
+    </select>
+  </td>
+</tr>
+<tr>
+  <!-- # -->
+  <td align="center"><span>3</span></td>
+
+  <!-- NAME -->
+  <td align="center">
+    <input type="text" name="attr_weapon3_name" style="width: 200px;">
+  </td>
+
+  <!-- ROLL COLUMN (Single / Burst / Auto) -->
+  <td align="center" style="padding:0; width:90px;">
+    <div class="weapon-roll-column">
+
+      <button type="roll"
+        class="weapon-fire-button"
+        value='!attack @{weapon3_name} @{weapon3_skill} @{weapon3_dmg} @{weapon3_power} @{weapon3_expertise} @{weapon3_dmgtarget} ?{Target roll DC|2} single'>
+        Single
+      </button>
+
+      <button type="roll"
+        class="weapon-fire-button"
+        value='!attack @{weapon3_name} @{weapon3_skill} @{weapon3_dmg} @{weapon3_power} @{weapon3_expertise} @{weapon3_dmgtarget} ?{Target roll DC|2} burst'>
+        Burst
+      </button>
+
+      <button type="roll"
+        class="weapon-fire-button"
+        value='!attack @{weapon3_name} @{weapon3_skill} @{weapon3_dmg} @{weapon3_power} @{weapon3_expertise} @{weapon3_dmgtarget} ?{Target roll DC|2} auto'>
+        Auto
+      </button>
+
+    </div>
+  </td>
+
+  <!-- SKILL -->
+  <td align="center">
+    <select name="attr_weapon3_skill" style="width: 120px;">
+      <option value=""></option>
+      <option value="Academics">Academics</option>
+      <option value="Acting">Acting</option>
+      <option value="Awareness">Awareness</option>
+      <option value="Binding">Binding</option>
+      <option value="Charm">Charm</option>
+      <option value="Concealment">Concealment</option>
+      <option value="Craft">Craft</option>
+      <option value="Cyberintel">Cyberintel</option>
+      <option value="Dexterity">Dexterity</option>
+      <option value="Engineering">Engineering</option>
+      <option value="Etiquette">Etiquette</option>
+      <option value="Flair">Flair</option>
+      <option value="Galactic_Knowledge">Galactic Knowledge</option>
+      <option value="Gunslinger">Gunslinger</option>
+      <option value="Hacking">Hacking</option>
+      <option value="Heavy_Weapons">Heavy Weapons</option>
+      <option value="Intimidation">Intimidation</option>
+      <option value="Intuition">Intuition</option>
+      <option value="Leadership">Leadership</option>
+      <option value="Marksman">Marksman</option>
+      <option value="Martial_Arts">Martial Arts</option>
+      <option value="Medicine">Medicine</option>
+      <option value="Might">Might</option>
+      <option value="Navigation">Navigation</option>
+      <option value="Negotiation">Negotiation</option>
+      <option value="Operator">Operator</option>
+      <option value="Parascience">Parascience</option>
+      <option value="Piloting">Piloting</option>
+      <option value="Repair">Repair</option>
+      <option value="Resilience">Resilience</option>
+      <option value="Science">Science</option>
+      <option value="Scavenging">Scavenging</option>
+      <option value="Search">Search</option>
+      <option value="Social">Social</option>
+      <option value="Speed">Speed</option>
+      <option value="Spiritual">Spiritual</option>
+      <option value="Streetwise">Streetwise</option>
+      <option value="Subterfuge">Subterfuge</option>
+      <option value="Survival">Survival</option>
+      <option value="Tactics">Tactics</option>
+      <option value="Technology">Technology</option>
+      <option value="Wits">Wits</option>
+      <option value="Willpower">Willpower</option>
+    </select>
+  </td>
+
+  <!-- DMG TYPE -->
+  <td align="center">
+    <input type="text" name="attr_weapon3_dmgtype" style="width: 100px;">
+  </td>
+
+  <!-- POWER -->
+  <td align="center">
+    <select name="attr_weapon3_power" style="width: 100px;">
+      <option value="None" selected>None</option>
+      <option value="Low">Low</option>
+      <option value="Medium">Medium</option>
+      <option value="High">High</option>
+      <option value="Extreme">Extreme</option>
+    </select>
+  </td>
+
+  <!-- DMG -->
+  <td align="center">
+    <input type="text" name="attr_weapon3_dmg" style="width: 80px;">
+  </td>
+
+  <!-- MAX EXPERTISE -->
+  <td align="center">
+    <input type="number" name="attr_weapon3_expertise" style="width: 60px;">
+  </td>
+
+  <!-- SPECIAL -->
+  <td align="center">
+    <input type="text" name="attr_weapon3_special" style="width: 110px;">
+  </td>
+
+  <!-- CLOSE -->
+  <td align="center">
+    <input type="number" name="attr_weapon3_close_range" style="width: 60px;">
+  </td>
+
+  <!-- MEDIUM -->
+  <td align="center">
+    <input type="number" name="attr_weapon3_medium_range" style="width: 60px;">
+  </td>
+
+  <!-- LONG -->
+  <td align="center">
+    <input type="number" name="attr_weapon3_long_range" style="width: 60px;">
+  </td>
+
+  <!-- R.O.F -->
+  <td align="center">
+    <select name="attr_weapon3_rof" style="width: 70px;">
+      <option value="single">-/-</option>
+      <option value="burst">B/-</option>
+      <option value="auto">-/F</option>
+      <option value="all">B/F</option>
+    </select>
+  </td>
+
+  <!-- AMMO -->
+  <td align="center">
+    <input type="text" name="attr_weapon3_currentammo" style="width:40px;">
+    <b>/</b>
+    <input type="text" name="attr_weapon3_ammo" style="width:40px;">
+  </td>
+
+  <!-- RELOAD -->
+  <td align="center">
+    <input type="text" name="attr_weapon3_reload" style="width: 80px;">
+    <button type="roll" value="!reload 3">R</button>
+  </td>
+
+  <!-- DAMAGE TARGET -->
+  <td align="center">
+    <select name="attr_weapon3_dmgtarget" style="width: 100px;">
+      <option value="HEALTH" selected>HEALTH</option>
+      <option value="MORALE">MORALE</option>
+    </select>
+  </td>
+</tr>
+<tr>
+  <!-- # -->
+  <td align="center"><span>4</span></td>
+
+  <!-- NAME -->
+  <td align="center">
+    <input type="text" name="attr_weapon4_name" style="width: 200px;">
+  </td>
+
+  <!-- ROLL COLUMN (Single / Burst / Auto) -->
+  <td align="center" style="padding:0; width:90px;">
+    <div class="weapon-roll-column">
+
+      <button type="roll"
+        class="weapon-fire-button"
+        value='!attack @{weapon4_name} @{weapon4_skill} @{weapon4_dmg} @{weapon4_power} @{weapon4_expertise} @{weapon4_dmgtarget} ?{Target roll DC|2} single'>
+        Single
+      </button>
+
+      <button type="roll"
+        class="weapon-fire-button"
+        value='!attack @{weapon4_name} @{weapon4_skill} @{weapon4_dmg} @{weapon4_power} @{weapon4_expertise} @{weapon4_dmgtarget} ?{Target roll DC|2} burst'>
+        Burst
+      </button>
+
+      <button type="roll"
+        class="weapon-fire-button"
+        value='!attack @{weapon4_name} @{weapon4_skill} @{weapon4_dmg} @{weapon4_power} @{weapon4_expertise} @{weapon4_dmgtarget} ?{Target roll DC|2} auto'>
+        Auto
+      </button>
+
+    </div>
+  </td>
+
+  <!-- SKILL -->
+  <td align="center">
+    <select name="attr_weapon4_skill" style="width: 120px;">
+      <option value=""></option>
+      <option value="Academics">Academics</option>
+      <option value="Acting">Acting</option>
+      <option value="Awareness">Awareness</option>
+      <option value="Binding">Binding</option>
+      <option value="Charm">Charm</option>
+      <option value="Concealment">Concealment</option>
+      <option value="Craft">Craft</option>
+      <option value="Cyberintel">Cyberintel</option>
+      <option value="Dexterity">Dexterity</option>
+      <option value="Engineering">Engineering</option>
+      <option value="Etiquette">Etiquette</option>
+      <option value="Flair">Flair</option>
+      <option value="Galactic_Knowledge">Galactic Knowledge</option>
+      <option value="Gunslinger">Gunslinger</option>
+      <option value="Hacking">Hacking</option>
+      <option value="Heavy_Weapons">Heavy Weapons</option>
+      <option value="Intimidation">Intimidation</option>
+      <option value="Intuition">Intuition</option>
+      <option value="Leadership">Leadership</option>
+      <option value="Marksman">Marksman</option>
+      <option value="Martial_Arts">Martial Arts</option>
+      <option value="Medicine">Medicine</option>
+      <option value="Might">Might</option>
+      <option value="Navigation">Navigation</option>
+      <option value="Negotiation">Negotiation</option>
+      <option value="Operator">Operator</option>
+      <option value="Parascience">Parascience</option>
+      <option value="Piloting">Piloting</option>
+      <option value="Repair">Repair</option>
+      <option value="Resilience">Resilience</option>
+      <option value="Science">Science</option>
+      <option value="Scavenging">Scavenging</option>
+      <option value="Search">Search</option>
+      <option value="Social">Social</option>
+      <option value="Speed">Speed</option>
+      <option value="Spiritual">Spiritual</option>
+      <option value="Streetwise">Streetwise</option>
+      <option value="Subterfuge">Subterfuge</option>
+      <option value="Survival">Survival</option>
+      <option value="Tactics">Tactics</option>
+      <option value="Technology">Technology</option>
+      <option value="Wits">Wits</option>
+      <option value="Willpower">Willpower</option>
+    </select>
+  </td>
+
+  <!-- DMG TYPE -->
+  <td align="center">
+    <input type="text" name="attr_weapon4_dmgtype" style="width: 100px;">
+  </td>
+
+  <!-- POWER -->
+  <td align="center">
+    <select name="attr_weapon4_power" style="width: 100px;">
+      <option value="None" selected>None</option>
+      <option value="Low">Low</option>
+      <option value="Medium">Medium</option>
+      <option value="High">High</option>
+      <option value="Extreme">Extreme</option>
+    </select>
+  </td>
+
+  <!-- DMG -->
+  <td align="center">
+    <input type="text" name="attr_weapon4_dmg" style="width: 80px;">
+  </td>
+
+  <!-- MAX EXPERTISE -->
+  <td align="center">
+    <input type="number" name="attr_weapon4_expertise" style="width: 60px;">
+  </td>
+
+  <!-- SPECIAL -->
+  <td align="center">
+    <input type="text" name="attr_weapon4_special" style="width: 110px;">
+  </td>
+
+  <!-- CLOSE -->
+  <td align="center">
+    <input type="number" name="attr_weapon4_close_range" style="width: 60px;">
+  </td>
+
+  <!-- MEDIUM -->
+  <td align="center">
+    <input type="number" name="attr_weapon4_medium_range" style="width: 60px;">
+  </td>
+
+  <!-- LONG -->
+  <td align="center">
+    <input type="number" name="attr_weapon4_long_range" style="width: 60px;">
+  </td>
+
+  <!-- R.O.F -->
+  <td align="center">
+    <select name="attr_weapon4_rof" style="width: 70px;">
+      <option value="single">-/-</option>
+      <option value="burst">B/-</option>
+      <option value="auto">-/F</option>
+      <option value="all">B/F</option>
+    </select>
+  </td>
+
+  <!-- AMMO -->
+  <td align="center">
+    <input type="text" name="attr_weapon4_currentammo" style="width:40px;">
+    <b>/</b>
+    <input type="text" name="attr_weapon4_ammo" style="width:40px;">
+  </td>
+
+  <!-- RELOAD -->
+  <td align="center">
+    <input type="text" name="attr_weapon4_reload" style="width: 80px;">
+    <button type="roll" value="!reload 4">R</button>
+  </td>
+
+  <!-- DAMAGE TARGET -->
+  <td align="center">
+    <select name="attr_weapon4_dmgtarget" style="width: 100px;">
+      <option value="HEALTH" selected>HEALTH</option>
+      <option value="MORALE">MORALE</option>
+    </select>
+  </td>
+</tr>
+<tr>
+  <!-- # -->
+  <td align="center"><span>5</span></td>
+
+  <!-- NAME -->
+  <td align="center">
+    <input type="text" name="attr_weapon5_name" style="width: 200px;">
+  </td>
+
+  <!-- ROLL COLUMN (Single / Burst / Auto) -->
+  <td align="center" style="padding:0; width:90px;">
+    <div class="weapon-roll-column">
+
+      <button type="roll"
+        class="weapon-fire-button"
+        value='!attack @{weapon5_name} @{weapon5_skill} @{weapon5_dmg} @{weapon5_power} @{weapon5_expertise} @{weapon5_dmgtarget} ?{Target roll DC|2} single'>
+        Single
+      </button>
+
+      <button type="roll"
+        class="weapon-fire-button"
+        value='!attack @{weapon5_name} @{weapon5_skill} @{weapon5_dmg} @{weapon5_power} @{weapon5_expertise} @{weapon5_dmgtarget} ?{Target roll DC|2} burst'>
+        Burst
+      </button>
+
+      <button type="roll"
+        class="weapon-fire-button"
+        value='!attack @{weapon5_name} @{weapon5_skill} @{weapon5_dmg} @{weapon5_power} @{weapon5_expertise} @{weapon5_dmgtarget} ?{Target roll DC|2} auto'>
+        Auto
+      </button>
+
+    </div>
+  </td>
+
+  <!-- SKILL -->
+  <td align="center">
+    <select name="attr_weapon5_skill" style="width: 120px;">
+      <option value=""></option>
+      <option value="Academics">Academics</option>
+      <option value="Acting">Acting</option>
+      <option value="Awareness">Awareness</option>
+      <option value="Binding">Binding</option>
+      <option value="Charm">Charm</option>
+      <option value="Concealment">Concealment</option>
+      <option value="Craft">Craft</option>
+      <option value="Cyberintel">Cyberintel</option>
+      <option value="Dexterity">Dexterity</option>
+      <option value="Engineering">Engineering</option>
+      <option value="Etiquette">Etiquette</option>
+      <option value="Flair">Flair</option>
+      <option value="Galactic_Knowledge">Galactic Knowledge</option>
+      <option value="Gunslinger">Gunslinger</option>
+      <option value="Hacking">Hacking</option>
+      <option value="Heavy_Weapons">Heavy Weapons</option>
+      <option value="Intimidation">Intimidation</option>
+      <option value="Intuition">Intuition</option>
+      <option value="Leadership">Leadership</option>
+      <option value="Marksman">Marksman</option>
+      <option value="Martial_Arts">Martial Arts</option>
+      <option value="Medicine">Medicine</option>
+      <option value="Might">Might</option>
+      <option value="Navigation">Navigation</option>
+      <option value="Negotiation">Negotiation</option>
+      <option value="Operator">Operator</option>
+      <option value="Parascience">Parascience</option>
+      <option value="Piloting">Piloting</option>
+      <option value="Repair">Repair</option>
+      <option value="Resilience">Resilience</option>
+      <option value="Science">Science</option>
+      <option value="Scavenging">Scavenging</option>
+      <option value="Search">Search</option>
+      <option value="Social">Social</option>
+      <option value="Speed">Speed</option>
+      <option value="Spiritual">Spiritual</option>
+      <option value="Streetwise">Streetwise</option>
+      <option value="Subterfuge">Subterfuge</option>
+      <option value="Survival">Survival</option>
+      <option value="Tactics">Tactics</option>
+      <option value="Technology">Technology</option>
+      <option value="Wits">Wits</option>
+      <option value="Willpower">Willpower</option>
+    </select>
+  </td>
+
+  <!-- DMG TYPE -->
+  <td align="center">
+    <input type="text" name="attr_weapon5_dmgtype" style="width: 100px;">
+  </td>
+
+  <!-- POWER -->
+  <td align="center">
+    <select name="attr_weapon5_power" style="width: 100px;">
+      <option value="None" selected>None</option>
+      <option value="Low">Low</option>
+      <option value="Medium">Medium</option>
+      <option value="High">High</option>
+      <option value="Extreme">Extreme</option>
+    </select>
+  </td>
+
+  <!-- DMG -->
+  <td align="center">
+    <input type="text" name="attr_weapon5_dmg" style="width: 80px;">
+  </td>
+
+  <!-- MAX EXPERTISE -->
+  <td align="center">
+    <input type="number" name="attr_weapon5_expertise" style="width: 60px;">
+  </td>
+
+  <!-- SPECIAL -->
+  <td align="center">
+    <input type="text" name="attr_weapon5_special" style="width: 110px;">
+  </td>
+
+  <!-- CLOSE -->
+  <td align="center">
+    <input type="number" name="attr_weapon5_close_range" style="width: 60px;">
+  </td>
+
+  <!-- MEDIUM -->
+  <td align="center">
+    <input type="number" name="attr_weapon5_medium_range" style="width: 60px;">
+  </td>
+
+  <!-- LONG -->
+  <td align="center">
+    <input type="number" name="attr_weapon5_long_range" style="width: 60px;">
+  </td>
+
+  <!-- R.O.F -->
+  <td align="center">
+    <select name="attr_weapon5_rof" style="width: 70px;">
+      <option value="single">-/-</option>
+      <option value="burst">B/-</option>
+      <option value="auto">-/F</option>
+      <option value="all">B/F</option>
+    </select>
+  </td>
+
+  <!-- AMMO -->
+  <td align="center">
+    <input type="text" name="attr_weapon5_currentammo" style="width:40px;">
+    <b>/</b>
+    <input type="text" name="attr_weapon5_ammo" style="width:40px;">
+  </td>
+
+  <!-- RELOAD -->
+  <td align="center">
+    <input type="text" name="attr_weapon5_reload" style="width: 80px;">
+    <button type="roll" value="!reload 5">R</button>
+  </td>
+
+  <!-- DAMAGE TARGET -->
+  <td align="center">
+    <select name="attr_weapon5_dmgtarget" style="width: 100px;">
+      <option value="HEALTH" selected>HEALTH</option>
+      <option value="MORALE">MORALE</option>
+    </select>
+  </td>
+</tr>
+<tr>
+  <!-- # -->
+  <td align="center"><span>6</span></td>
+
+  <!-- NAME -->
+  <td align="center">
+    <input type="text" name="attr_weapon6_name" style="width: 200px;">
+  </td>
+
+  <!-- ROLL COLUMN (Single / Burst / Auto) -->
+  <td align="center" style="padding:0; width:90px;">
+    <div class="weapon-roll-column">
+
+      <button type="roll"
+        class="weapon-fire-button"
+        value='!attack @{weapon6_name} @{weapon6_skill} @{weapon6_dmg} @{weapon6_power} @{weapon6_expertise} @{weapon6_dmgtarget} ?{Target roll DC|2} single'>
+        Single
+      </button>
+
+      <button type="roll"
+        class="weapon-fire-button"
+        value='!attack @{weapon6_name} @{weapon6_skill} @{weapon6_dmg} @{weapon6_power} @{weapon6_expertise} @{weapon6_dmgtarget} ?{Target roll DC|2} burst'>
+        Burst
+      </button>
+
+      <button type="roll"
+        class="weapon-fire-button"
+        value='!attack @{weapon6_name} @{weapon6_skill} @{weapon6_dmg} @{weapon6_power} @{weapon6_expertise} @{weapon6_dmgtarget} ?{Target roll DC|2} auto'>
+        Auto
+      </button>
+
+    </div>
+  </td>
+
+  <!-- SKILL -->
+  <td align="center">
+    <select name="attr_weapon6_skill" style="width: 120px;">
+      <option value=""></option>
+      <option value="Academics">Academics</option>
+      <option value="Acting">Acting</option>
+      <option value="Awareness">Awareness</option>
+      <option value="Binding">Binding</option>
+      <option value="Charm">Charm</option>
+      <option value="Concealment">Concealment</option>
+      <option value="Craft">Craft</option>
+      <option value="Cyberintel">Cyberintel</option>
+      <option value="Dexterity">Dexterity</option>
+      <option value="Engineering">Engineering</option>
+      <option value="Etiquette">Etiquette</option>
+      <option value="Flair">Flair</option>
+      <option value="Galactic_Knowledge">Galactic Knowledge</option>
+      <option value="Gunslinger">Gunslinger</option>
+      <option value="Hacking">Hacking</option>
+      <option value="Heavy_Weapons">Heavy Weapons</option>
+      <option value="Intimidation">Intimidation</option>
+      <option value="Intuition">Intuition</option>
+      <option value="Leadership">Leadership</option>
+      <option value="Marksman">Marksman</option>
+      <option value="Martial_Arts">Martial Arts</option>
+      <option value="Medicine">Medicine</option>
+      <option value="Might">Might</option>
+      <option value="Navigation">Navigation</option>
+      <option value="Negotiation">Negotiation</option>
+      <option value="Operator">Operator</option>
+      <option value="Parascience">Parascience</option>
+      <option value="Piloting">Piloting</option>
+      <option value="Repair">Repair</option>
+      <option value="Resilience">Resilience</option>
+      <option value="Science">Science</option>
+      <option value="Scavenging">Scavenging</option>
+      <option value="Search">Search</option>
+      <option value="Social">Social</option>
+      <option value="Speed">Speed</option>
+      <option value="Spiritual">Spiritual</option>
+      <option value="Streetwise">Streetwise</option>
+      <option value="Subterfuge">Subterfuge</option>
+      <option value="Survival">Survival</option>
+      <option value="Tactics">Tactics</option>
+      <option value="Technology">Technology</option>
+      <option value="Wits">Wits</option>
+      <option value="Willpower">Willpower</option>
+    </select>
+  </td>
+
+  <!-- DMG TYPE -->
+  <td align="center">
+    <input type="text" name="attr_weapon6_dmgtype" style="width: 100px;">
+  </td>
+
+  <!-- POWER -->
+  <td align="center">
+    <select name="attr_weapon6_power" style="width: 100px;">
+      <option value="None" selected>None</option>
+      <option value="Low">Low</option>
+      <option value="Medium">Medium</option>
+      <option value="High">High</option>
+      <option value="Extreme">Extreme</option>
+    </select>
+  </td>
+
+  <!-- DMG -->
+  <td align="center">
+    <input type="text" name="attr_weapon6_dmg" style="width: 80px;">
+  </td>
+
+  <!-- MAX EXPERTISE -->
+  <td align="center">
+    <input type="number" name="attr_weapon6_expertise" style="width: 60px;">
+  </td>
+
+  <!-- SPECIAL -->
+  <td align="center">
+    <input type="text" name="attr_weapon6_special" style="width: 110px;">
+  </td>
+
+  <!-- CLOSE -->
+  <td align="center">
+    <input type="number" name="attr_weapon6_close_range" style="width: 60px;">
+  </td>
+
+  <!-- MEDIUM -->
+  <td align="center">
+    <input type="number" name="attr_weapon6_medium_range" style="width: 60px;">
+  </td>
+
+  <!-- LONG -->
+  <td align="center">
+    <input type="number" name="attr_weapon6_long_range" style="width: 60px;">
+  </td>
+
+  <!-- R.O.F -->
+  <td align="center">
+    <select name="attr_weapon6_rof" style="width: 70px;">
+      <option value="single">-/-</option>
+      <option value="burst">B/-</option>
+      <option value="auto">-/F</option>
+      <option value="all">B/F</option>
+    </select>
+  </td>
+
+  <!-- AMMO -->
+  <td align="center">
+    <input type="text" name="attr_weapon6_currentammo" style="width:40px;">
+    <b>/</b>
+    <input type="text" name="attr_weapon6_ammo" style="width:40px;">
+  </td>
+
+  <!-- RELOAD -->
+  <td align="center">
+    <input type="text" name="attr_weapon6_reload" style="width: 80px;">
+    <button type="roll" value="!reload 6">R</button>
+  </td>
+
+  <!-- DAMAGE TARGET -->
+  <td align="center">
+    <select name="attr_weapon6_dmgtarget" style="width: 100px;">
+      <option value="HEALTH" selected>HEALTH</option>
+      <option value="MORALE">MORALE</option>
+    </select>
+  </td>
+</tr>
+  </tbody>
+</table>
+  
+
+     
+    </div>
+<div>
+
+
+   
+  <h3 align="center" style="text-align: center; color: #359fcf; background-color: #000;">SPELLS</h3>
+		
+		<table align="center" width="1393">
+			<thead>
+    <tr>
+      <th width="188" style="font-size: 12px; text-align: center;">Spell Name</th>
+      <th width="188" style="font-size: 12px; text-align: center;">Domain</th>
+      <th width="100" style="font-size: 12px; text-align: center;">Minor</th>
+	  <th width="100" style="font-size: 12px; text-align: center;">Intermediate</th>
+		<th width="100" style="font-size: 12px; text-align: center;">Major</th>
+		<th width="100" bgcolor="#000000" style="font-size: 12px; text-align: center;">&nbsp;</th>
+		<th width="100" bgcolor="#000000" style="font-size: 12px; text-align: center;">&nbsp;</th>
+		<th width="100" bgcolor="#000000" style="font-size: 12px; text-align: center;">&nbsp;</th>
+		<th width="100" bgcolor="#000000" style="font-size: 12px; text-align: center;">&nbsp;</th>
+		<th width="100" bgcolor="#000000" style="font-size: 12px; text-align: center;">&nbsp;</th>
+		     <th width="188" style="font-size: 12px; text-align: center;">Spell Name</th>
+      <th width="186" style="font-size: 12px; text-align: center;">Domain</th>
+      <th width="100" style="font-size: 12px; text-align: center;">Minor</th>
+	  <th width="100" style="font-size: 12px; text-align: center;">Intermediate</th>
+		<th width="99" style="font-size: 12px; text-align: center;">Major</th>
+		
+				</tr>
+			</thead>
+		<tr>
+			<td align="center"><input name="attr_spell1_name" type="text" placeholder="Spirit Power" style="width: auto" align="middle">
+		    </td>
+			<td align="center"><input align="middle" type="text" name="attr_spell1_domain" style="width: auto"></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell1_name} 1 ?{Expertise|0}" ></button></td>
+			<td align="center" bgcolor="#BBBBBB"></td>
+			<td align="center" bgcolor="#BBBBBB"></td>
+		  <td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center"><input align="middle" type="text" placeholder="Spell 2" name="attr_spell2_name" style="width: auto"></td>
+			<td align="center"><input align="middle" type="text" name="attr_spell2_domain" style="width: auto"></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell2_name} 1 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell2_name} 2 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell2_name} 3 ?{Expertise|0}" ></button></td>
+		</tr>	
+			<tr>
+			<td align="center"><input align="middle" type="text" name="attr_spell3_name" placeholder="Spell 3" style="width: auto"></td>
+			<td align="center"><input align="middle" type="text" name="attr_spell3_domain" style="width: auto"></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell3_name} 1 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell3_name} 2 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell3_name} 3 ?{Expertise|0}" ></button></td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+		
+			<td align="center"><input align="middle" type="text" name="attr_spell4_name" placeholder="Spell 4" style="width: auto"></td>
+			<td align="center"><input align="middle" type="text" name="attr_spell4_domain" style="width: auto"></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell4_name} 1 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell4_name} 2 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell4_name} 3 ?{Expertise|0}" ></button></td>
+		</tr>
+			
+			<tr>
+			<td align="center"><input align="middle" type="text" name="attr_spell5_name" placeholder="Spell 5" style="width: auto"></td>
+			<td align="center"><input align="middle" type="text" name="attr_spell5_domain" style="width: auto"></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell5_name} 1 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell5_name} 2 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell5_name} 3 ?{Expertise|0}" ></button></td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+		
+			<td align="center"><input align="middle" type="text" name="attr_spell6_name" placeholder="Spell 6" style="width: auto"></td>
+			<td align="center"><input align="middle" type="text" name="attr_spell6_domain" style="width: auto"></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell6_name} 1 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell6_name} 2 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell6_name} 3 ?{Expertise|0}" ></button></td>
+		</tr>	
+			
+			<tr>
+			<td align="center"><input align="middle" type="text" name="attr_spell7_name"  placeholder="Spell 7" style="width: auto"></td>
+			<td align="center"><input align="middle" type="text" name="attr_spell7_domain" style="width: auto"></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell7_name} 1 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell7_name} 2 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell7_name} 3 ?{Expertise|0}" ></button></td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+		
+			<td align="center"><input align="middle" type="text" name="attr_spell8_name" placeholder="Spell 8" style="width: auto"></td>
+			<td align="center"><input align="middle" type="text" name="attr_spell8_domain" style="width: auto"></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell8_name} 1 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell8_name} 2 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell8_name} 3 ?{Expertise|0}" ></button></td>
+		</tr>	
+			<tr>
+			<td align="center"><input align="middle" type="text" name="attr_spell9_name"  placeholder="Spell 9" style="width: auto"></td>
+			<td align="center"><input align="middle" type="text" name="attr_spell9_domain" style="width: auto"></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell9_name} 1 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell9_name} 2 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell9_name} 3 ?{Expertise|0}" ></button></td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+		
+			<td align="center"><input align="middle" type="text" name="attr_spell10_name" placeholder="Spell 10" style="width: auto"></td>
+			<td align="center"><input align="middle" type="text" name="attr_spell10_domain" style="width: auto"></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell10_name} 1 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell10_name} 2 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell10_name} 3 ?{Expertise|0}" ></button></td>
+		</tr>	
+			<tr>
+			<td align="center"><input align="middle" type="text" name="attr_spell11_name" placeholder="Spell 11" style="width: auto"></td>
+			<td align="center"><input align="middle" type="text" name="attr_spell11_domain" style="width: auto"></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell11_name} 1 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell11_name} 2 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell11_name} 3 ?{Expertise|0}" ></button></td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+		
+			<td align="center"><input align="middle" type="text" name="attr_spell12_name" placeholder="Spell 12" style="width: auto"></td>
+			<td align="center"><input align="middle" type="text" name="attr_spell12_domain" style="width: auto"></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell12_name} 1 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell12_name} 2 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell12_name} 3 ?{Expertise|0}" ></button></td>
+		</tr>	
+				<tr>
+			<td align="center"><input align="middle" type="text" name="attr_spell13_name" placeholder="Spell 13" style="width: auto"></td>
+			<td align="center"><input align="middle" type="text" name="attr_spell13_domain" style="width: auto"></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell13_name} 1 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell13_name} 2 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell13_name} 3 ?{Expertise|0}" ></button></td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+		
+			<td align="center"><input align="middle" type="text" name="attr_spell14_name" placeholder="Spell 14" style="width: auto"></td>
+			<td align="center"><input align="middle" type="text" name="attr_spell14_domain" style="width: auto"></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell14_name} 1 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell14_name} 2 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell14_name} 3 ?{Expertise|0}" ></button></td>
+		</tr>
+				<tr>
+			<td align="center"><input align="middle" type="text" name="attr_spell15_name" placeholder="Spell 15" style="width: auto"></td>
+			<td align="center"><input align="middle" type="text" name="attr_spell15_domain" style="width: auto"></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell15_name} 1 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell15_name} 2 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell15_name} 3 ?{Expertise|0}" ></button></td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+			<td align="center" bgcolor="#000000">&nbsp;</td>
+	
+		    <td align="center"><input align="middle" type="text" name="attr_spell16_name" placeholder="Spell 16" style="width: auto"></td>
+		    <td align="center"><input align="middle" type="text" name="attr_spell16_domain" style="width: auto"></td>
+		    <td align="center"><button type="roll" value="!spell @{selected|spell16_name} 1 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell16_name} 2 ?{Expertise|0}" ></button></td>
+			<td align="center"><button type="roll" value="!spell @{selected|spell16_name} 3 ?{Expertise|0}" ></button></td>
+	      </tr>
+  </table>
+</div>
+   
+		
+	
+<div>
+        <h3 style="text-align: center; color: #359fcf; background-color: #000;">LOADOUT</h3>
+        <div class="sheet-2colrow" align="center">
+            <div class="sheet-col">
+                <table style="width: 100%;">
+                    <tr>
+                        <td valign="middle" style="font-weight: bold; font-size: 24px; text-align: center;" >ON YOU </td>
+						<td align="center"><span style="font-weight: bold; font-size: 16px">CURRENT: </span>
+					  <input type="number" name="attr_charloadcurrent" readonly="true" id="charloadcurrent" style="width: 40px; text-align: center; font-size: 16px;" /><span style="text-align: center; font-size: 16px;"><b> / MAX:</b></span><input type="text" name="attr_charloadmax" style="width: 40px; text-align: center; font-size: 16px;" /><button type="roll" value="!backpack 1" >UPDATE</button></td>
+						
+                    </tr>
+					<th width="805" valign="middle" style="font-size: 12px; text-align: center;">Items</th>
+					<th width="822" align="center" style="font-size: 12px; text-align: center;">Size</th>
+					<th width="536" align="center" style="font-size: 12px; text-align: center;">Qty</th>
+                    
+                    <tr>
+                        <td valign="middle">
+                            <input type="text" name="attr_item1_name" style="width: 200px; " />
+						</td>                
+                            <td align="center" style="padding-top: 8px"><select name="attr_item1_size" style="width: 100px">
+    						<option value="0" selected="selected">None</option>
+							<option value="0.25">Tiny</option>
+							<option value="1">Small</option>
+							<option value="2">Medium</option>
+							<option value="3">Large</option>
+							<option value="0">In Hands</option>
+							</select>
+						</td>
+                        <td align="center">
+                            <input type="text" name="attr_item1_qty" style="width: 100px" />
+                        </td>
+                      </tr>
+					 <tr>
+                        <td valign="middle">
+                            <input type="text" name="attr_item2_name" style="width: 200px" />
+						</td>                
+                            <td align="center" style="padding-top: 8px"><select name="attr_item2_size" style="width: 100px;">
+    						<option value="0" selected="selected">None</option>
+							<option value="0.25">Tiny</option>
+							<option value="1">Small</option>
+							<option value="2">Medium</option>
+							<option value="3">Large</option>
+							<option value="0">In Hands</option>
+							</select>
+						</td>
+                        <td align="center">
+                            <input type="text" name="attr_item2_qty" style="width: 100px" />
+                        </td>
+                      </tr>
+					 <tr>
+                        <td valign="middle">
+                            <input type="text" name="attr_item3_name" style="width: 200px" />
+						</td>                
+                            <td align="center" style="padding-top: 8px"><select name="attr_item3_size" style="width: 100px;">
+    						<option value="0" selected="selected">None</option>
+							<option value="0.25">Tiny</option>
+							<option value="1">Small</option>
+							<option value="2">Medium</option>
+							<option value="3">Large</option>
+							<option value="0">In Hands</option>
+							</select>
+						</td>
+                        <td align="center">
+                            <input type="text" name="attr_item3_qty" style="width: 100px" />
+                        </td>
+                      </tr>
+						 <tr>
+                        <td valign="middle">
+                            <input type="text" name="attr_item4_name" style="width: 200px" />
+							
+						</td>                
+                            <td align="center" style="padding-top: 8px"><select name="attr_item4_size" style="width: 100px;">
+    						<option value="0" selected="selected">None</option>
+							<option value="0.25">Tiny</option>
+							<option value="1">Small</option>
+							<option value="2">Medium</option>
+							<option value="3">Large</option>
+							<option value="0">In Hands</option>
+							</select>
+						</td>
+                        <td align="center">
+                            <input type="text" name="attr_item4_qty" style="width: 100px" />
+                        </td>
+                      </tr>
+						 <tr>
+                        <td valign="middle">
+                            <input type="text" name="attr_item5_name" style="width: 200px" />
+							<input type="hidden" name="attr_item5_size" style="width: 140px" value="0" />
+						</td>                
+                            <td align="center" style="padding-top: 8px"><select name="attr_item5_size" style="width: 100px;">
+    						<option value="0" selected="selected">None</option>
+							<option value="0.25">Tiny</option>
+							<option value="1">Small</option>
+							<option value="2">Medium</option>
+							<option value="3">Large</option>
+							<option value="0">In Hands</option>
+							</select>
+						</td>
+                        <td align="center">
+                            <input type="text" name="attr_item5_qty" style="width: 100px" />
+                        </td>
+                      </tr>
+						 <tr>
+                        <td valign="middle">
+                            <input type="text" name="attr_item6_name" style="width: 200px" />
+							
+						</td>                
+                            <td align="center" style="padding-top: 8px"><select name="attr_item6_size" style="width: 100px;">
+    						<option value="0" selected="selected">None</option>
+							<option value="0.25">Tiny</option>
+							<option value="1">Small</option>
+							<option value="2">Medium</option>
+							<option value="3">Large</option>
+							<option value="0">In Hands</option>
+							</select>
+						</td>
+                        <td align="center">
+                            <input type="text" name="attr_item6_qty" style="width: 100px" />
+                        </td>
+                      </tr>
+						 <tr>
+                        <td valign="middle">
+                            <input type="text" name="attr_item7_name" style="width: 200px" />
+							
+						</td>                
+                            <td align="center" style="padding-top: 8px"><select name="attr_item7_size" style="width: 100px;">
+    						<option value="0" selected="selected">None</option>
+							<option value="0.25">Tiny</option>
+							<option value="1">Small</option>
+							<option value="2">Medium</option>
+							<option value="3">Large</option>
+							<option value="0">In Hands</option>
+							</select>
+						</td>
+                        <td align="center">
+                            <input type="text" name="attr_item7_qty" style="width: 100px" />
+							
+                        </td>
+                      </tr>
+						 <tr>
+                        <td valign="middle">
+                            <input type="text" name="attr_item8_name" style="width: 200px" />
+							<input type="hidden" name="attr_item8_size" style="width: 140px" value="0" />
+						</td>                
+                            <td align="center" style="padding-top: 8px"><select name="attr_item8_size" style="width: 100px;">
+    						<option value="0" selected="selected">None</option>
+							<option value="0.25">Tiny</option>
+							<option value="1">Small</option>
+							<option value="2">Medium</option>
+							<option value="3">Large</option>
+							<option value="0">In Hands</option>
+							</select>
+						</td>
+                        <td align="center">
+                            <input type="text" name="attr_item8_qty" style="width: 100px" />
+                        </td>
+                      </tr>
+						 <tr>
+                        <td valign="middle">
+                            <input type="text" name="attr_item9_name" style="width: 200px" />
+						</td>                
+                            <td align="center" style="padding-top: 8px"><select name="attr_item9_size" style="width: 100px;">
+    						<option value="0" selected="selected">None</option>
+							<option value="0.25">Tiny</option>
+							<option value="1">Small</option>
+							<option value="2">Medium</option>
+							<option value="3">Large</option>
+							<option value="0">In Hands</option>
+							</select>
+						</td>
+                        <td align="center">
+                            <input type="text" name="attr_item9_qty" style="width: 100px" />
+                        </td>
+                      </tr>
+						 <tr>
+                        <td valign="middle">
+                            <input type="text" name="attr_item10_name" style="width: 200px" />
+						</td>                
+                            <td align="center" style="padding-top: 8px"><select name="attr_item10_size" style="width: 100px;">
+    						<option value="0" selected="selected">None</option>
+							<option value="0.25">Tiny</option>
+							<option value="1">Small</option>
+							<option value="2">Medium</option>
+							<option value="3">Large</option>
+							<option value="0">In Hands</option>
+							</select>
+						</td>
+                        <td align="center">
+                            <input type="text" name="attr_item10_qty" style="width: 100px" />
+                        </td>
+                      </tr>
+                </table>
+                        </div>
+					
+          <div class="sheet-col">
+                 
+                <table style="width: 100%;">
+                    <tr>
+                        <td align="center" style="font-weight: bold; font-size: 24px; text-align: center;" ><input name="attr_secondloadout" type="text" placeholder="ELSEWHERE" style="font-weight: bold; font-size: 24px" /></td>
+						<td align="center"><span style="font-weight: bold; font-size: 16px"> CURRENT: </span>
+					  <input type="number" name="attr_charloadcurrent2" readonly="true" id="charloadcurrent2" style="width: 40px; text-align: center; font-size: 16px;" /><span style="text-align: center; font-size: 16px;"><b> / MAX:</b></span><input type="text" name="attr_charloadmax2" style="width: 40px; text-align: center; font-size: 16px;" /><button type="roll" value="!backpack 2" >UPDATE</button></td>
+						
+                    </tr>
+					<th width="805" align="center" style="font-size: 12px; text-align: center;">Items</th>
+					<th width="823" align="center" style="font-size: 12px; text-align: center;">Size</th>
+					<th width="535" align="center" style="font-size: 12px; text-align: center;">Qty</th>
+                    
+                    <tr>
+                        <td align="center">
+                            <input type="text" name="attr_item11_name" style="width: 200px" />
+						</td>                
+                            <td align="center" style="padding-top: 8px"><select name="attr_item11_size" style="width: 100px">
+    						<option value="0" selected="selected">None</option>
+							<option value="0.25">Tiny</option>
+							<option value="1">Small</option>
+							<option value="2">Medium</option>
+							<option value="3">Large</option>
+							<option value="0">In Hands</option>
+							</select>
+						</td>
+                        <td align="center">
+                            <input type="text" name="attr_item11_qty" style="width: 100px" />
+                        </td>
+                      </tr>
+					 <tr>
+                        <td align="center">
+                            <input type="text" name="attr_item12_name" style="width: 200px" />
+						</td>                
+                            <td align="center" style="padding-top: 8px"><select name="attr_item12_size" style="width: 100px;">
+    						<option value="0" selected="selected">None</option>
+							<option value="0.25">Tiny</option>
+							<option value="1">Small</option>
+							<option value="2">Medium</option>
+							<option value="3">Large</option>
+							<option value="0">In Hands</option>
+							</select>
+						</td>
+                        <td align="center">
+                            <input type="text" name="attr_item12_qty" style="width: 100px" />
+                        </td>
+                      </tr>
+					 <tr>
+                        <td align="center">
+                            <input type="text" name="attr_item13_name" style="width: 200px" />
+						</td>                
+                            <td align="center" style="padding-top: 8px"><select name="attr_item13_size" style="width: 100px;">
+    						<option value="0" selected="selected">None</option>
+							<option value="0.25">Tiny</option>
+							<option value="1">Small</option>
+							<option value="2">Medium</option>
+							<option value="3">Large</option>
+							<option value="0">In Hands</option>
+							</select>
+						</td>
+                        <td align="center">
+                            <input type="text" name="attr_item13_qty" style="width: 100px" />
+                        </td>
+                      </tr>
+						 <tr>
+                        <td align="center">
+                            <input type="text" name="attr_item14_name" style="width: 200px" />
+							
+						</td>                
+                            <td align="center" style="padding-top: 8px"><select name="attr_item14_size" style="width: 100px;">
+    						<option value="0" selected="selected">None</option>
+							<option value="0.25">Tiny</option>
+							<option value="1">Small</option>
+							<option value="2">Medium</option>
+							<option value="3">Large</option>
+							<option value="0">In Hands</option>
+							</select>
+						</td>
+                        <td align="center">
+                            <input type="text" name="attr_item14_qty" style="width: 100px" />
+                        </td>
+                      </tr>
+						 <tr>
+                        <td align="center">
+                            <input type="text" name="attr_item15_name" style="width: 200px" />
+							<input type="hidden" name="attr_item5_size" style="width: 140px" value="0" />
+						</td>                
+                            <td align="center" style="padding-top: 8px"><select name="attr_item15_size" style="width: 100px;">
+    						<option value="0" selected="selected">None</option>
+							<option value="0.25">Tiny</option>
+							<option value="1">Small</option>
+							<option value="2">Medium</option>
+							<option value="3">Large</option>
+							<option value="0">In Hands</option>
+							</select>
+						</td>
+                        <td align="center">
+                            <input type="text" name="attr_item15_qty" style="width: 100px" />
+                        </td>
+                      </tr>
+						 <tr>
+                        <td align="center">
+                            <input type="text" name="attr_item16_name" style="width: 200px" />
+							
+						</td>                
+                            <td align="center" style="padding-top: 8px"><select name="attr_item16_size" style="width: 100px;">
+    						<option value="0" selected="selected">None</option>
+							<option value="0.25">Tiny</option>
+							<option value="1">Small</option>
+							<option value="2">Medium</option>
+							<option value="3">Large</option>
+							<option value="0">In Hands</option>
+							</select>
+						</td>
+                        <td align="center">
+                            <input type="text" name="attr_item16_qty" style="width: 100px" />
+                        </td>
+                      </tr>
+						 <tr>
+                        <td align="center">
+                            <input type="text" name="attr_item17_name" style="width: 200px" />
+							
+						</td>                
+                            <td align="center" style="padding-top: 8px"><select name="attr_item17_size" style="width: 100px;">
+    						<option value="0" selected="selected">None</option>
+							<option value="0.25">Tiny</option>
+							<option value="1">Small</option>
+							<option value="2">Medium</option>
+							<option value="3">Large</option>
+							<option value="0">In Hands</option>
+							</select>
+						</td>
+                        <td align="center">
+                            <input type="text" name="attr_item17_qty" style="width: 100px" />
+							
+                        </td>
+                      </tr>
+						 <tr>
+                        <td align="center">
+                            <input type="text" name="attr_item18_name" style="width: 200px" />
+							<input type="hidden" name="attr_item18_size" style="width: 140px" value="0" />
+						</td>                
+                            <td align="center" style="padding-top: 8px"><select name="attr_item18_size" style="width: 100px;">
+    						<option value="0" selected="selected">None</option>
+							<option value="0.25">Tiny</option>
+							<option value="1">Small</option>
+							<option value="2">Medium</option>
+							<option value="3">Large</option>
+							<option value="0">In Hands</option>
+							</select>
+						</td>
+                        <td align="center">
+                            <input type="text" name="attr_item18_qty" style="width: 100px" />
+                        </td>
+                      </tr>
+						 <tr>
+                        <td align="center">
+                            <input type="text" name="attr_item19_name" style="width: 200px" />
+						</td>                
+                            <td align="center" style="padding-top: 8px"><select name="attr_item19_size" style="width: 100px;">
+    						<option value="0" selected="selected">None</option>
+							<option value="0.25">Tiny</option>
+							<option value="1">Small</option>
+							<option value="2">Medium</option>
+							<option value="3">Large</option>
+							<option value="0">In Hands</option>
+							</select>
+						</td>
+                        <td align="center">
+                            <input type="text" name="attr_item19_qty" style="width: 100px" />
+                        </td>
+                      </tr>
+						 <tr>
+                        <td align="center">
+                            <input type="text" name="attr_item20_name" style="width: 200px" />
+						</td>                
+                            <td align="center" style="padding-top: 8px"><select name="attr_item20_size" style="width: 100px;">
+    						<option value="0" selected="selected">None</option>
+							<option value="0.25">Tiny</option>
+							<option value="1">Small</option>
+							<option value="2">Medium</option>
+							<option value="3">Large</option>
+							<option value="0">In Hands</option>
+							</select>
+						</td>
+                        <td align="center">
+                            <input type="text" name="attr_item20_qty" style="width: 100px" />
+                        </td>
+                      </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div>
+        <h3 style="text-align: center; color: #FFF; background-color: #000;"><span data-i18n="contacts">Contacts</span></h3>
+        <div class="sheet-col">
+            <table style="width: 100%;">
+                <tr>
+                    <td><span data-i18n="contact">Contact</span></td>
+                    <td><span data-i18n="attitude">Attitude</span></td>
+                    <td><span data-i18n="circumstances">Circonstances</span></td>
+                    <td><span data-i18n="scenario">Scénario</span></td>
+                </tr>
+                <tr>
+                        <td>
+                            <input type="text" name="attr_contact-name" /> </td>
+                        <td>
+                            <input type="text" name="attr_attitude" /> </td>
+                        <td>
+                            <input type="text" name="attr_circumstances" /> </td>
+                        <td>
+                            <input type="text" name="attr_scenario" /> </td>
+                </tr>
+            </table>
+            <fieldset class="repeating_contacts">
+                <table style="width: 100%;">
+                    <tr>
+                        <td>
+                            <input type="text" name="attr_contact-name" /> </td>
+                        <td>
+                            <input type="text" name="attr_attitude" /> </td>
+                        <td>
+                            <input type="text" name="attr_circumstances" /> </td>
+                        <td>
+                            <input type="text" name="attr_scenario" /> </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </div>
+    </div>
+    <hr/>
+    <div>
+        <h3 style="text-align: center; color: #FFF; background-color: #000;"><span data-i18n="known-investigators">Investigateurs connus</span></h3>
+        <div class="sheet-col">
+            <table style="width: 100%;">
+                <tr>
+                    <td><span data-i18n="name">Nom</span></td>
+                    <td><span data-i18n="scenario">Scénario</span></td>
+                    <td><span data-i18n="notes">Notes</span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" name="attr_investigator-name" />
+                    </td>
+                    <td>
+                        <input type="text" name="attr_investigator-scenario" />
+                    </td>
+                    <td>
+                        <input type="text" name="attr_investigator-notes" /> </td>
+                </tr>
+            </table>
+            <fieldset class="repeating_investigators">
+                <table style="width: 100%;">
+                    <tr>
+                        <td>
+                            <input type="text" name="attr_investigator-name" />
+                        </td>
+                        <td>
+                            <input type="text" name="attr_investigator-scenario" />
+                        </td>
+                        <td>
+                            <input type="text" name="attr_investigator-notes" /> </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </div>
+    </div>
+    <hr/>
+    <div>
+        <h3 style="text-align: center; color: #FFF; background-color: #000;"><span data-i18n="personal-story">Histoire personnelle</span></h3>
+        <b><span data-i18n="motivation">Motivation</span></b>
+        <input type="text" name="attr_motivation" style="width: 600px" />
+        <hr/>
+        <span data-i18n="personal-story-details">Détails de l'histoire personnelle</span>
+        <textarea name="attr_personal-story-details"></textarea>
+    </div>
+    <hr/>
+    <div>
+        <h3 style="text-align: center; color: #FFF; background-color: #000;"><span data-i18n="unholy-knowledge">Savoirs impies</span></h3> 
+        <span data-i18n="known-creatures">Créatures connues</span>
+        <textarea name="attr_creatures"></textarea>
+        <span data-i18n="consulted-books">Ouvrages consultés</span>
+        <textarea name="attr_books"></textarea>
+    </div>
+    <hr/>
+    <div>
+        <h3 style="text-align: center; color: #FFF; background-color: #000;"><span data-i18n="notes">Notes</span></h3>
+        <textarea name="attr_notes"></textarea>
+    </div>
+
+    <div>
+        <h3 style="text-align: center; color: #FFF; background-color: #000;"><span data-i18n="configuration">Configuration</span></h3>
+        <span data-i18n="rolls-results">Résultat des jets</span> :
+        <select name="attr_PC-whisper">
+            <option value="&nbsp;" data-i18n="public" selected>Public</option>
+            <option value="/w gm" data-i18n="whisper-to-guardian">Pour le Gardien</option>
+        </select>   
+    </div>
+<rolltemplate class="sheet-rolltemplate-skillroll">
+    <div class="sheet-template-container">
+
+        <h3 class="sheet-title">{{name}}</h3>
+
+        <div><strong>Skill:</strong> {{skill}} (Lv {{skill_level}})</div>
+        <div><strong>Attribute:</strong> {{attribute}}</div>
+
+        <hr>
+
+        <div><strong>Initial Dice:</strong> {{initial_dice}}</div>
+        <div><strong>Rerolls:</strong> {{rerolls}}</div>
+        <div><strong>Final Dice:</strong> {{finaldice}}</div>
+
+        <div><strong>Final Successes:</strong> {{final_successes}}</div>
+        <div><strong>Bonus Successes:</strong> {{bonus_successes}}</div>
+
+        <hr>
+
+        <div class="sheet-total">
+            <strong>Total Successes:</strong> {{total_successes}}
+        </div>
+
+    </div>
+</rolltemplate>
+<rolltemplate class="sheet-rolltemplate-armor">
+    <div class="sheet-rt-container">
+
+        <div class="sheet-rt-title">
+            {{type}} — {{name}}
+        </div>
+
+        <div class="sheet-rt-subtitle">
+            Defender: {{defender}}
+        </div>
+
+        <div class="sheet-rt-section">
+            <b>Attribute:</b> {{attribute}}
+        </div>
+
+        <table class="sheet-rt-def-table">
+            <tr><td>Physical:</td><td>{{phys}}</td></tr>
+            <tr><td>Energy:</td><td>{{energy}}</td></tr>
+            <tr><td>Tech:</td><td>{{tech}}</td></tr>
+            <tr><td>Spiritual:</td><td>{{spirit}}</td></tr>
+        </table>
+
+        {{#special}}
+        <div class="sheet-rt-special">
+            Special: {{special}}
+        </div>
+        {{/special}}
+
+        <div class="sheet-rt-details">
+            <span title="{{details}}">
+                Hover for breakdown
+            </span>
+        </div>
+
+        <div class="sheet-rt-soak">
+            {{icon}} {{soak}}
+        </div>
+
+    </div>
+</rolltemplate>
+<script type="text/worker">
+
+const ATTRS = [
+    "PHYSICAL",
+    "ACUITY",
+    "MENTAL",
+    "SOCIAL",
+    "ENDURANCE",
+    "SPEED",
+    "WITS",
+    "WILLPOWER"
+];
+
+on("change:PHYSICAL change:PHYSICAL_base \
+change:ACUITY change:ACUITY_base \
+change:MENTAL change:MENTAL_base \
+change:SOCIAL change:SOCIAL_base \
+change:ENDURANCE change:ENDURANCE_base \
+change:SPEED change:SPEED_base \
+change:WITS change:WITS_base \
+change:WILLPOWER change:WILLPOWER_base", function() {
+
+    getAttrs([
+        "PHYSICAL","PHYSICAL_base",
+        "ACUITY","ACUITY_base",
+        "MENTAL","MENTAL_base",
+        "SOCIAL","SOCIAL_base",
+        "ENDURANCE","ENDURANCE_base",
+        "SPEED","SPEED_base",
+        "WITS","WITS_base",
+        "WILLPOWER","WILLPOWER_base"
+    ], function(values) {
+
+        let totalXP = 0;
+
+        ATTRS.forEach(attr => {
+            let cur = parseInt(values[attr]) || 0;
+            let base = parseInt(values[attr + "_base"]) || 0;
+
+            // No refunds
+            if (cur <= base) return;
+
+            let xp = 0;
+
+            // CASE 1: Entirely negative range
+            if (base < 0 && cur <= 0) {
+                xp = (cur - base) * 5;
+            }
+
+            // CASE 2: Cross from negative to positive
+            else if (base < 0 && cur > 0) {
+                let negSteps = (0 - base);      // linear
+                let posSteps = cur;             // triangular
+                xp = (negSteps * 5) + (5 * (posSteps * (posSteps + 1)) / 2);
+            }
+
+            // CASE 3: Entirely positive range
+            else if (base >= 0) {
+                let xpBase = 5 * (base * (base + 1)) / 2;
+                let xpCur  = 5 * (cur  * (cur  + 1)) / 2;
+                xp = xpCur - xpBase;
+            }
+            totalXP += xp;
+        });
+
+        setAttrs({
+            attribute_xp: totalXP
+        });
+    });
+});
+
+</script>
+
+<script type="text/worker">
+on("sheet:opened", function() {
+    // Initialize HEALTH
+    getAttrs(["HEALTH"], function(values) {
+        if(values.HEALTH === undefined || values.HEALTH === "") {
+            setAttrs({ HEALTH: 0 });
+        }
+    });
+
+    // Initialize HEALTH_max
+    getAttrs(["HEALTH_max"], function(values) {
+        if(values.HEALTH_max === undefined || values.HEALTH_max === "") {
+            setAttrs({ HEALTH_max: 0 });
+        }
+    });
+
+    // Initialize MORALE
+    getAttrs(["MORALE"], function(values) {
+        if(values.MORALE === undefined || values.MORALE === "") {
+            setAttrs({ MORALE: 0 });
+        }
+    });
+
+    // Initialize MORALE_max
+    getAttrs(["MORALE_max"], function(values) {
+        if(values.MORALE_max === undefined || values.MORALE_max === "") {
+            setAttrs({ MORALE_max: 0 });
+        }
+    });
+
+    // Initialize CHI
+    getAttrs(["CHI"], function(values) {
+        if(values.CHI === undefined || values.CHI === "") {
+            setAttrs({ CHI: 0 });
+        }
+    });
+
+    // Initialize CHI_max
+    getAttrs(["CHI_max"], function(values) {
+        if(values.CHI_max === undefined || values.CHI_max === "") {
+            setAttrs({ CHI_max: 0 });
+        }
+    });
+});
+</script>
+</div> <!-- close sheet-main -->
+</div> <!-- close charsheet -->
+

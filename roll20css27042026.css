@@ -1,0 +1,386 @@
+.sheet-main{
+    font-size: 11px;
+    font-family: verdana;
+}
+
+input[type="text"], input[type="number"] {
+    font-size: 11px;
+    font-family: verdana;
+}
+
+#skillstable {
+  border-collapse: collapse;
+}
+
+#skillstable th, #skillstable td {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+#skillstable th {
+  background-color: #ddd;
+}
+
+#weapons {
+  border-collapse: collapse;
+}
+/* Make the entire sheet use the full available width */
+.sheet-container,
+.charsheet {
+    width: 100% !important;
+    min-width: 1080px;   /* adjust if you want more or less */
+}
+
+
+/* Header cells: keep borders */
+#weapons th {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+/* Body cells: no borders, just padding + vertical centering */
+#weapons td {
+    border: 0;
+    padding: 5px;
+    vertical-align: middle;
+}
+/* Visually align all selects with inputs in the weapons table */
+#weapons select {
+    position: relative;
+    top: 4px;   /* if still a hair high, try 2px */
+}
+
+#weapons th {
+  background-color: #ddd;
+}
+
+#table_ability {
+  border-collapse: collapse;
+}
+
+#table_ability th, #table_ability td {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+#table_ability th {
+  background-color: #ddd;
+}
+
+code.vertical-line { 
+   width: 5px; 
+   background-color: black; 
+}
+
+/* ========================= */
+/* XP GRID LAYOUT (NEW)      */
+/* ========================= */
+
+.xp-block {
+    margin-top: 10px;
+}
+
+.xp-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.xp-cell {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.xp-cell label {
+    font-size: 10px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+}
+
+.xp-cell input {
+    width: 100%;
+    box-sizing: border-box;
+}
+/* Dice Container */
+.sheet-rolltemplate-skillroll .sheet-template-container {
+    background: #222;
+    border: 1px solid #359fcf;
+    padding: 10px;
+    color: #f0f0f0;
+    font-family: sans-serif;
+}
+
+.sheet-rolltemplate-skillroll .sheet-title {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.sheet-rolltemplate-skillroll .sheet-total {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.sheet-rolltemplate-skillroll .sheet-die-success {
+    color: #00ff00;
+    font-weight: bold;
+}
+
+.sheet-rolltemplate-skillroll .sheet-die-fail {
+    color: #ff4444;
+    font-weight: bold;
+}
+
+.sheet-rolltemplate-skillroll .sheet-die-luck {
+    border: 1px solid #ffd700;
+    padding: 1px 4px;
+    margin-right: 3px;
+    border-radius: 3px;
+    font-weight: bold;
+    color: #ffd700;
+}
+.skill-button {
+    background: #1565c0; /* darker blue for contrast */
+    color: white;
+    border: 1px solid #0d47a1;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.4);
+    text-align: center;
+
+    /* crisp text */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+}
+
+.skill-button:hover {
+    background: #1e88e5;
+}
+
+.skill-button:active {
+    box-shadow: inset 0 2px 3px rgba(0,0,0,0.6);
+    transform: translateY(1px);
+}
+/* Base style shared by all ability buttons */
+.ability-button {
+    color: white;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.4);
+    text-align: center;
+
+    /* crisp text */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+}
+
+/* Non‑rollable abilities */
+.ability-core {
+    background: #455a64;
+    border: 1px solid #263238;
+}
+
+.ability-core:hover {
+    background: #546e7a;
+}
+
+/* Roll‑enabled abilities */
+.ability-roll {
+    background: #1565c0;
+    border: 1px solid #0d47a1;
+}
+
+.ability-roll:hover {
+    background: #1e88e5;
+}
+
+.ability-button:active {
+    box-shadow: inset 0 2px 3px rgba(0,0,0,0.6);
+    transform: translateY(1px);
+}
+/* Compact version of skill-button for weapon fire modes */
+.weapon-fire-button {
+    background: #1565c0;          /* same blue as skill buttons */
+    color: white;
+    border: 1px solid #0d47a1;
+    border-radius: 6px;
+
+    /* ↓↓↓ THIS is what makes them shorter ↓↓↓ */
+    padding: 1px 4px;             /* was 2px 6px */
+    font-size: 11px;              /* was 12px */
+    line-height: 12px;            /* forces a tighter vertical box */
+
+    width: 80px;                  /* fixed width so all 3 match */
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+
+    box-shadow: 0 2px 3px rgba(0,0,0,0.4);
+
+    /* crisp text */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+}
+
+.weapon-fire-button:hover {
+    background: #1e88e5;
+}
+
+.weapon-fire-button:active {
+    box-shadow: inset 0 2px 3px rgba(0,0,0,0.6);
+    transform: translateY(1px);
+}
+
+.weapon-fire-button:hover {
+    background: #1e88e5;          /* same hover color as skill-button */
+}
+
+.weapon-fire-button:active {
+    box-shadow: inset 0 2px 3px rgba(0,0,0,0.6);
+    transform: translateY(1px);
+}
+
+/* Column layout */
+.weapon-roll-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+/* ========================= */
+/* ARMOR TABLE STYLING       */
+/* ========================= */
+
+#armor {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#armor th {
+    background-color: #ddd;
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}
+
+#armor td {
+    border: 0;
+    padding: 5px;
+    vertical-align: middle;
+}
+
+#armor input,
+#armor select {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Armor table: remove styling from the second header row */
+#armor tr:nth-child(2) th {
+    background: none !important;
+    border: none !important;
+    padding: 0 4px;
+    vertical-align: bottom;
+    font-weight: normal;
+    color: inherit; /* keeps your normal text color */
+}
+
+/* Visually align all selects with inputs in the armor table */
+#armor select {
+    position: relative;
+    top: 4px; 
+}
+
+/* Roll button for armor (same style as weapon-fire-button) */
+.armor-roll-button {
+    background: #1565c0;
+    color: white;
+    border: 1px solid #0d47a1;
+    border-radius: 6px;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.4);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+}
+
+.armor-roll-button:hover {
+    background: #1e88e5;
+}
+
+.armor-roll-button:active {
+    box-shadow: inset 0 2px 3px rgba(0,0,0,0.6);
+    transform: translateY(1px);
+}
+.sheet-rolltemplate-armor .sheet-rt-container {
+    background: #111;
+    border: 1px solid #359fcf;
+    padding: 10px;
+    color: #eee;
+    font-size: 12px;
+}
+
+.sheet-rolltemplate-armor .sheet-rt-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #4fc3f7;
+    margin-bottom: 4px;
+}
+
+.sheet-rolltemplate-armor .sheet-rt-subtitle {
+    margin-bottom: 6px;
+}
+
+.sheet-rolltemplate-armor .sheet-rt-section {
+    margin-bottom: 8px;
+}
+
+.sheet-rolltemplate-armor .sheet-rt-def-table {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.sheet-rolltemplate-armor .sheet-rt-def-table td:first-child {
+    color: #bbb;
+    width: 90px;
+}
+
+.sheet-rolltemplate-armor .sheet-rt-special {
+    margin-top: 6px;
+    margin-bottom: 10px;
+    color: #ccc;
+    font-size: 11px;
+}
+
+.sheet-rolltemplate-armor .sheet-rt-details {
+    font-size: 11px;
+    margin-bottom: 10px;
+    color: #888;
+}
+
+.sheet-rolltemplate-armor .sheet-rt-soak {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ce93d8;
+    text-align: center;
+    margin-top: 10px;
+}
