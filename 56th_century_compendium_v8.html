@@ -717,6 +717,8 @@ aside.open{transform:translateX(0);}
   <div class="nl" style="margin-top:5px;">Gear</div>
   <button class="nb" data-s="equipment"><span class="ni">🎒</span>Equipment</button>
   <button class="nb" data-s="medical"><span class="ni">💉</span>Medical</button>
+  <div class="nl" style="margin-top:5px;">Creator</div>
+  <button class="nb" data-s="char_creator"><span class="ni">👤</span>Character Creator</button>
 </aside>
 <main id="main"></main>
 </div>
@@ -8267,6 +8269,473 @@ const EG_GROUP_TEMPLATES={
   henchmen_mob:{label:'Henchmen Mob',description:'A loose mob of low-tier enemies with a single tough leader.',emoji:'💀',slots:[{role:'Ringleader',tier:'regular',archetypes:['gang_enforcer','brawler','soldier'],count:1,locked:true},{role:'Henchman',tier:'henchmen',archetypes:['soldier','gang_enforcer','brawler'],count:-1}]}
 };
 
+// ─── Character Creator ────────────────────────────────────────────────────────
+const CC_SKILLS_PHYS=['Athletics','Craft','Heavy_Weapons','Martial_Arts','Might','Piloting','Repair','Resilience','Scavenging','Survival'];
+const CC_SKILLS_MENT=['Academics','Cyberintel','Engineering','Galactic_Knowledge','Hacking','Medicine','Navigation','Parascience','Science','Technology'];
+const CC_SKILLS_SOCI=['Acting','Charm','Etiquette','Flair','Intimidation','Leadership','Negotiation','Spiritual','Streetwise','Subterfuge'];
+const CC_SKILLS_ACUI=['Awareness','Binding','Concealment','Dexterity','Gunslinger','Intuition','Marksman','Operator','Search','Tactics'];
+const CC_ALL_SKILLS=[...CC_SKILLS_PHYS,...CC_SKILLS_MENT,...CC_SKILLS_SOCI,...CC_SKILLS_ACUI];
+const CC_NAMES_FIRST=['Aria','Brek','Cal','Dara','Evan','Fenn','Gaia','Hale','Ixa','Jin','Kael','Lyra','Mira','Nex','Ora','Pax','Quinn','Rael','Saya','Tova','Ursa','Vela','Wrex','Xan','Yara','Zeph','Asha','Brix','Crix','Dax','Ember','Fyra','Hex','Iris'];
+const CC_NAMES_LAST=['Voss','Dhar','Kline','Sato','Cruz','Thane','Bale','Quin','Nara','Cole','Frost','Mars','Chen','Wolf','Dale','Park','Han','Sky','Russ','Faye','Drake','Holt','Ives','Jax','Kade','Lorne'];
+const CC_RACE_ATTR_MAP={PHYSICAL:'physical',MENTAL:'mental',SOCIAL:'social',ACUITY:'acuity',ENDURANCE:'endurance',SPEED:'speed',WITS:'wits',WILLPOWER:'willpower'};
+
+function ccMakeFreshState(){
+  const sk={};CC_ALL_SKILLS.forEach(s=>{sk[s]=0;});
+  return {
+    tab:'identity',
+    name:'',race:'',occupation:'',background:'',sex:'',age:'',apparent_age:'',
+    background_desc:'',occupation_desc:'',
+    PHYSICAL:1,PHYSICAL_base:1,PHYSICAL_perm:1,PHYSICAL_bonus:0,
+    MENTAL:1,MENTAL_base:1,MENTAL_perm:1,MENTAL_bonus:0,
+    SOCIAL:1,SOCIAL_base:1,SOCIAL_perm:1,SOCIAL_bonus:0,
+    ACUITY:1,ACUITY_base:1,ACUITY_perm:1,ACUITY_bonus:0,
+    ENDURANCE:3,ENDURANCE_base:3,ENDURANCE_perm:3,ENDURANCE_bonus:0,
+    SPEED:3,SPEED_base:3,SPEED_perm:3,SPEED_bonus:0,
+    WITS:3,WITS_base:3,WITS_perm:3,WITS_bonus:0,
+    WILLPOWER:3,WILLPOWER_base:3,WILLPOWER_perm:3,WILLPOWER_bonus:0,
+    HEALTH:10,HEALTH_max:10,MORALE:10,MORALE_max:10,CHI:5,CHI_max:5,
+    total_xp:0,credited_xp:0,attribute_xp:0,
+    init_move:'',init_standard:'',init_quick:'',init_complex:'',
+    armorsoak:'',armorsoak_bonus:0,
+    ...sk,
+    talents:Array(10).fill(0).map(()=>({name:'',skill:'',category:'',xp_cost:0,effect:''})),
+    evolutions:Array(5).fill(0).map(()=>({name:'',type:'',tier:'',effect:''})),
+    weapons:Array(6).fill(0).map(()=>({name:'',skill:'',dmg:'',dmgtype:'',power:0,expertise:0,special:'',close_range:'',medium_range:'',long_range:'',rof:'',ammo:0,currentammo:0,reload:'',dmgtarget:''})),
+    armor:Array(2).fill(0).map(()=>({name:'',type:'',def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',special:'',soak_expr:'',charges:0,regen:''})),
+    datacoms:Array(3).fill(0).map(()=>({name:'',cpu:0,mem:0,nanite:0,def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',def_dmg:'',int_ext:0,int_int:0,int_main:0,expertise:0,special:''})),
+    programs:Array(10).fill(0).map(()=>({name:'',type:'',cpu:0,mem:0,passive:'',active:''})),
+    gadgets:Array(5).fill(0).map(()=>({name:'',nanite:0,effect:''})),
+    spells:Array(16).fill(0).map(()=>({name:'',domain:''})),
+    items:Array(20).fill(0).map(()=>({name:'',size:'0',qty:1})),
+    items2:Array(20).fill(0).map(()=>({name:'',size:'0',qty:1})),
+    charloadmax:'',notes:'',
+    picker:null,pickerSearch:''
+  };
+}
+let ccState=ccMakeFreshState();
+let ccPickerCache=[];
+
+function ccCalcSpentXP(){
+  let s=+(ccState.attribute_xp)||0;
+  CC_ALL_SKILLS.forEach(sk=>{const v=ccState[sk]||0;s+=v*(v+1)/2;});
+  return s;
+}
+function ccRandName(){ccState.name=CC_NAMES_FIRST[Math.floor(Math.random()*CC_NAMES_FIRST.length)]+' '+CC_NAMES_LAST[Math.floor(Math.random()*CC_NAMES_LAST.length)];render();}
+function ccPickFromCache(pidx){
+  const item=ccPickerCache[pidx];if(!item||!ccState.picker)return;
+  const {type,slot}=ccState.picker;
+  if(type==='talent'){const t=item;ccState.talents[slot]={name:t.name||'',skill:t.skill||'',category:t.category||'',xp_cost:t.cost||0,effect:t.effect||''};}
+  else if(type==='evolution'){const e=item;ccState.evolutions[slot]={name:e.name||'',type:e.evo_type||'',tier:e.tier||'',effect:e.effect||''};}
+  else if(type==='weapon'){const w=item;const wp=ccState.weapons[slot];wp.name=w.name||'';wp.dmg=w.damage||'';wp.dmgtype=w.type||'';wp.special=(Array.isArray(w.special)?w.special.join(' '):w.special)||'';}
+  else if(type==='armor'){const a=item;const ar=ccState.armor[slot];ar.name=a.name||'';ar.type=a.category||'';}
+  else if(type==='datacom'){const d=item;const dc=ccState.datacoms[slot];dc.name=d.name||'';dc.cpu=d.cpu||0;dc.mem=d.memory||0;dc.nanite=d.nanite||0;dc.expertise=d.expertise_bonus||0;['phys','energy','tech','spirit'].forEach(k=>{dc['def_'+k]=d['def_'+k]||'None';});dc.special=(Array.isArray(d.special)?d.special.join(' '):d.special)||'';}
+  else if(type==='program'){const p=item;const pr=ccState.programs[slot];pr.name=p.name||'';pr.type=p.type||'';pr.cpu=p.cpu||0;pr.mem=p.memory||0;pr.passive=p.passive||'';pr.active=p.active||'';}
+  ccState.picker=null;ccState.pickerSearch='';render();
+}
+function ccExportRoll20(){
+  const st=ccState;
+  const spent=ccCalcSpentXP();
+  const available=(+(st.total_xp)||0)-spent+(+(st.credited_xp)||0);
+  const attribs=[];
+  const a=(n,c,m)=>{const o={name:n,current:c,id:'cc_'+n.replace(/[^a-zA-Z0-9_]/g,'_')};if(m!==undefined)o.max=m;attribs.push(o);};
+  a('name',st.name||'');a('race',st.race||'');a('occupation',st.occupation||'');
+  a('background',st.background||'');a('sex',st.sex||'');a('age',st.age||0);a('appararent_age',st.apparent_age||0);
+  a('background_desc',st.background_desc||'');a('occupation_desc',st.occupation_desc||'');
+  ['PHYSICAL','MENTAL','SOCIAL','ACUITY','ENDURANCE','SPEED','WITS','WILLPOWER'].forEach(ab=>{
+    a(ab,st[ab]||0);a(ab+'_base',st[ab+'_base']||0);a(ab+'_perm',st[ab+'_perm']||0);a(ab+'_bonus',st[ab+'_bonus']||0);
+  });
+  a('HEALTH',st.HEALTH||0,st.HEALTH_max||0);a('MORALE',st.MORALE||0,st.MORALE_max||0);a('CHI',st.CHI||0,st.CHI_max||0);
+  a('total_xp',st.total_xp||0);a('credited_xp',st.credited_xp||0);a('attribute_xp',st.attribute_xp||0);
+  a('spent_xp',spent);a('available_xp',available);
+  a('init_move',st.init_move||'');a('init_standard',st.init_standard||'');a('init_quick',st.init_quick||'');a('init_complex',st.init_complex||'');
+  a('armorsoak',st.armorsoak||'');a('armorsoak_bonus',st.armorsoak_bonus||0);
+  CC_ALL_SKILLS.forEach(s=>{a(s,st[s]||0);a(s+'_bonus',0);});
+  for(let i=1;i<=10;i++){const t=st.talents[i-1]||{};a('talent'+i+'_name',t.name||'');a('talent'+i+'_skill',t.skill||'');a('talent'+i+'_category',t.category||'');a('talent'+i+'_xp_cost',t.xp_cost||0);a('talent'+i+'_effect',t.effect||'');}
+  for(let i=1;i<=5;i++){const e=st.evolutions[i-1]||{};a('evo'+i+'_name',e.name||'');a('evo'+i+'_type',e.type||'');a('evo'+i+'_tier',e.tier||'');a('evo'+i+'_effect',e.effect||'');}
+  for(let i=1;i<=6;i++){const w=st.weapons[i-1]||{};a('weapon'+i+'_name',w.name||'');a('weapon'+i+'_skill',w.skill||'');a('weapon'+i+'_dmg',w.dmg||'');a('weapon'+i+'_dmgtype',w.dmgtype||'');a('weapon'+i+'_power',w.power||0);a('weapon'+i+'_expertise',w.expertise||0);a('weapon'+i+'_special',w.special||'');a('weapon'+i+'_close_range',w.close_range||'');a('weapon'+i+'_medium_range',w.medium_range||'');a('weapon'+i+'_long_range',w.long_range||'');a('weapon'+i+'_rof',w.rof||'');a('weapon'+i+'_ammo',w.ammo||0);a('weapon'+i+'_currentammo',w.currentammo||0);a('weapon'+i+'_reload',w.reload||'');a('weapon'+i+'_dmgtarget',w.dmgtarget||'');}
+  for(let i=1;i<=2;i++){const ar=st.armor[i-1]||{};a('armor'+i+'_name',ar.name||'');a('armor'+i+'_type',ar.type||'');a('armor'+i+'_def_phys',ar.def_phys||'None');a('armor'+i+'_def_energy',ar.def_energy||'None');a('armor'+i+'_def_tech',ar.def_tech||'None');a('armor'+i+'_def_spirit',ar.def_spirit||'None');a('armor'+i+'_special',ar.special||'');a('armor'+i+'_soak_expr',ar.soak_expr||'');a('armor'+i+'_charges',ar.charges||0);a('armor'+i+'_regen',ar.regen||'');}
+  for(let i=1;i<=3;i++){const d=st.datacoms[i-1]||{};a('datacom'+i+'_name',d.name||'');a('datacom'+i+'_cpu',d.cpu||0);a('datacom'+i+'_mem',d.mem||0);a('datacom'+i+'_nanite',d.nanite||0);a('datacom'+i+'_def_phys',d.def_phys||'None');a('datacom'+i+'_def_energy',d.def_energy||'None');a('datacom'+i+'_def_tech',d.def_tech||'None');a('datacom'+i+'_def_spirit',d.def_spirit||'None');a('datacom'+i+'_def_dmg',d.def_dmg||'');a('datacom'+i+'_int_ext',d.int_ext||0);a('datacom'+i+'_int_int',d.int_int||0);a('datacom'+i+'_int_main',d.int_main||0);a('datacom'+i+'_expertise',d.expertise||0);a('datacom'+i+'_special',d.special||'');}
+  for(let i=1;i<=10;i++){const p=st.programs[i-1]||{};a('program'+i+'_name',p.name||'');a('program'+i+'_type',p.type||'');a('program'+i+'_cpu',p.cpu||0);a('program'+i+'_mem',p.mem||0);a('program'+i+'_passive',p.passive||'');a('program'+i+'_active',p.active||'');}
+  for(let i=1;i<=5;i++){const gd=st.gadgets[i-1]||{};a('gadget'+i+'_name',gd.name||'');a('gadget'+i+'_nanite',gd.nanite||0);a('gadget'+i+'_effect',gd.effect||'');}
+  for(let i=1;i<=16;i++){const sp=st.spells[i-1]||{};a('spell'+i+'_name',sp.name||'');a('spell'+i+'_domain',sp.domain||'');}
+  for(let i=1;i<=20;i++){const it=st.items[i-1]||{};a('item'+i+'_name',it.name||'');a('item'+i+'_size',it.size||'0');a('item'+i+'_qty',it.qty||1);}
+  for(let i=1;i<=20;i++){const it=st.items2[i-1]||{};a('item'+(i+20)+'_name',it.name||'');a('item'+(i+20)+'_size',it.size||'0');a('item'+(i+20)+'_qty',it.qty||1);}
+  a('charloadmax',st.charloadmax||'');a('notes',st.notes||'');
+  const json=JSON.stringify({schema_version:3,type:'character',character:{name:st.name||'Character',attribs,abilities:[]}},null,2);
+  const blob=new Blob([json],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const lnk=document.createElement('a');
+  lnk.href=url;lnk.download=(st.name||'character').replace(/[^a-zA-Z0-9 _-]/g,'_')+'.json';
+  document.body.appendChild(lnk);lnk.click();document.body.removeChild(lnk);
+  URL.revokeObjectURL(url);
+}
+
+// ── Character Creator render helpers ─────────────────────────────────────────
+const CC_INP='background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.25);color:var(--tx);padding:3px 6px;font-size:12px;box-sizing:border-box;width:100%;';
+const CC_INP_SM='background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.2);color:var(--tx);padding:2px 4px;font-size:11px;box-sizing:border-box;width:100%;';
+const CC_SEL='background:#111;border:1px solid rgba(0,200,255,.2);color:var(--tx);padding:2px 4px;font-size:11px;width:100%;';
+const CC_DEF_OPTS=['None','Low','Medium','High','Extreme'];
+
+function ccSecHead(t,c){return '<div style="font-family:\'Orbitron\',sans-serif;font-size:12px;color:'+(c||'var(--a)')+';margin-bottom:10px;border-bottom:1px solid '+(c||'var(--a)')+'55;padding-bottom:4px;">'+t+'</div>';}
+function ccLbl(label,inp){return '<div style="margin-bottom:8px;"><div style="font-size:10px;color:#888;margin-bottom:2px;">'+label+'</div>'+inp+'</div>';}
+
+function ccRenderPicker(){
+  const st=ccState;if(!st.picker)return '';
+  const {type,slot}=st.picker;
+  const pq=(st.pickerSearch||'').toLowerCase();
+  let items=[],title='',bdr='var(--a)';
+  if(type==='talent'){items=g.talents||[];title='Talent for slot '+(slot+1);}
+  else if(type==='evolution'){items=(g.evolutions&&g.evolutions.entries)||[];title='Evolution for slot '+(slot+1);bdr='var(--a3)';}
+  else if(type==='weapon'){items=g.weapons||[];title='Weapon for slot '+(slot+1);bdr='var(--a2)';}
+  else if(type==='armor'){items=g.armor||[];title='Armor for slot '+(slot+1);bdr='var(--gr)';}
+  else if(type==='datacom'){items=g.datacoms||[];title='Datacom for slot '+(slot+1);}
+  else if(type==='program'){items=(g.software&&g.software.programs)||[];title='Program for slot '+(slot+1);bdr='var(--a3)';}
+  const matches=items.filter(x=>{
+    if(!pq)return true;
+    const n=(x.name||'').toLowerCase();
+    return n.includes(pq)||(x.skill||x.category||x.evo_type||x.type||'').toLowerCase().includes(pq);
+  });
+  ccPickerCache=matches.slice(0,40);
+  let h='<div style="background:rgba(0,0,0,.7);border:1px solid '+bdr+';border-radius:6px;padding:12px;margin-bottom:14px;">';
+  h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">';
+  h+='<div style="font-family:\'Orbitron\',sans-serif;font-size:12px;color:'+bdr+';">Pick '+esc(title)+'</div>';
+  h+='<button onclick="ccState.picker=null;ccState.pickerSearch=\'\';render();" style="background:none;border:1px solid #555;color:#888;padding:2px 8px;border-radius:3px;cursor:pointer;font-size:11px;">✕ Close</button>';
+  h+='</div>';
+  h+='<input type="text" placeholder="Search..." value="'+esc(st.pickerSearch||'')+'" style="'+CC_INP+'margin-bottom:8px;" oninput="ccState.pickerSearch=this.value;render();">';
+  h+='<div style="max-height:260px;overflow-y:auto;">';
+  ccPickerCache.forEach((x,pi)=>{
+    let sub='';
+    if(type==='talent')sub=esc(x.skill||'')+(x.category?' · '+esc(x.category):'')+'  —  '+(x.cost||0)+' XP';
+    else if(type==='evolution')sub=esc(x.evo_type||'')+' · Tier '+esc(x.tier||'?');
+    else if(type==='weapon')sub=esc(x.category||'')+(x.damage?' | '+esc(x.damage):'')+(x.type?' | '+esc(x.type):'');
+    else if(type==='armor')sub=esc(x.category||'');
+    else if(type==='datacom')sub='CPU '+(x.cpu||'?')+' | Mem '+(x.memory||'?')+' | Nanite '+(x.nanite||'?');
+    else if(type==='program')sub=esc(x.type||'')+(x.cpu?' | CPU '+x.cpu:'')+(x.memory?' | Mem '+x.memory:'');
+    h+='<div style="padding:5px 8px;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer;" onclick="ccPickFromCache('+pi+');">';
+    h+='<div style="font-size:12px;color:var(--tx);">'+esc(x.name||'')+'</div>';
+    if(sub)h+='<div style="font-size:10px;color:#777;">'+sub+'</div>';
+    h+='</div>';
+  });
+  if(matches.length>40)h+='<div style="text-align:center;font-size:10px;color:#555;padding:5px;">'+matches.length+' total — refine search</div>';
+  h+='</div></div>';
+  return h;
+}
+
+function ccRenderIdentity(){
+  const st=ccState;
+  const spent=ccCalcSpentXP();
+  const avail=(+(st.total_xp)||0)-spent+(+(st.credited_xp)||0);
+  const raceObj=st.race?g.races.find(r=>r.name===st.race):null;
+  let h='<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">';
+  // Left col
+  h+='<div>'+ccSecHead('IDENTITY');
+  h+=ccLbl('Character Name','<div style="display:flex;gap:6px;"><input type="text" value="'+esc(st.name||'')+'" style="'+CC_INP+'" oninput="ccState.name=this.value;"><button onclick="ccRandName();" style="background:rgba(0,200,255,.15);border:1px solid var(--a);color:var(--a);padding:3px 8px;border-radius:4px;cursor:pointer;font-size:11px;white-space:nowrap;">🎲 Random</button></div>');
+  // Race dropdown
+  h+='<div style="margin-bottom:8px;"><div style="font-size:10px;color:#888;margin-bottom:2px;">Race</div><select style="'+CC_SEL.replace('font-size:11px','font-size:12px')+'padding:4px;" onchange="ccState.race=this.value;render();">';
+  h+='<option value="">— Select race —</option>';
+  g.races.forEach(r=>{h+='<option value="'+esc(r.name)+'"'+(st.race===r.name?' selected':'')+'>'+esc(r.name)+'</option>';});
+  h+='</select></div>';
+  h+=ccLbl('Occupation','<input type="text" value="'+esc(st.occupation||'')+'" style="'+CC_INP+'" oninput="ccState.occupation=this.value;">');
+  h+=ccLbl('Background','<input type="text" value="'+esc(st.background||'')+'" style="'+CC_INP+'" oninput="ccState.background=this.value;">');
+  h+=ccLbl('Sex','<input type="text" value="'+esc(st.sex||'')+'" style="'+CC_INP+'" oninput="ccState.sex=this.value;">');
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">';
+  h+=ccLbl('Real Age','<input type="number" value="'+(st.age||'')+'" style="'+CC_INP+'" oninput="ccState.age=this.value;">');
+  h+=ccLbl('Apparent Age','<input type="number" value="'+(st.apparent_age||'')+'" style="'+CC_INP+'" oninput="ccState.apparent_age=this.value;">');
+  h+='</div></div>';
+  // Right col
+  h+='<div>'+ccSecHead('DETAILS & EXPERIENCE');
+  h+=ccLbl('Background Details','<textarea style="'+CC_INP+'height:70px;resize:vertical;" oninput="ccState.background_desc=this.value;">'+esc(st.background_desc||'')+'</textarea>');
+  h+=ccLbl('Occupation Details','<textarea style="'+CC_INP+'height:70px;resize:vertical;" oninput="ccState.occupation_desc=this.value;">'+esc(st.occupation_desc||'')+'</textarea>');
+  h+='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;">';
+  [['total_xp','Total XP'],['credited_xp','Credited XP'],['attribute_xp','Attr XP']].forEach(([k,lbl])=>{
+    h+='<div><div style="font-size:10px;color:#888;margin-bottom:2px;">'+lbl+'</div><input type="number" value="'+(+(st[k])||0)+'" style="'+CC_INP+'" onchange="ccState.'+k+'=+this.value||0;render();"></div>';
+  });
+  h+='</div>';
+  h+='<div style="display:flex;gap:16px;font-family:\'Share Tech Mono\',monospace;font-size:13px;">';
+  h+='<span>Spent: <span style="color:var(--a2);">'+spent+' XP</span></span>';
+  h+='<span>Available: <span style="color:'+(avail>=0?'var(--gr)':'var(--re)')+';">'+avail+' XP</span></span>';
+  h+='</div></div></div>';
+  // Racial hint
+  if(raceObj){
+    h+='<div style="margin-top:14px;background:rgba(0,200,255,.05);border:1px solid rgba(0,200,255,.2);border-radius:5px;padding:10px;">';
+    h+='<div style="font-family:\'Orbitron\',sans-serif;font-size:11px;color:var(--a);margin-bottom:8px;">'+esc(raceObj.name)+' — RACIAL STAT RANGES (min / avg / max)</div>';
+    h+='<div style="display:grid;grid-template-columns:repeat(8,1fr);gap:6px;font-family:\'Share Tech Mono\',monospace;font-size:10px;">';
+    ['physical','mental','social','acuity','endurance','speed','wits','willpower'].forEach(rk=>{
+      const rs=raceObj.stats[rk]||{};
+      h+='<div><div style="color:#666;margin-bottom:2px;">'+rk.slice(0,4).toUpperCase()+'</div>';
+      h+='<div>'+esc(rs.min||'?')+' / <b style="color:var(--a);">'+esc(rs.avg||'?')+'</b> / '+esc(rs.max||'?')+'</div></div>';
+    });
+    h+='</div>';
+    if(raceObj.racial)h+='<div style="margin-top:6px;font-size:11px;color:#aaa;"><b style="color:var(--a);">Racial:</b> '+esc(raceObj.racial)+'</div>';
+    h+='</div>';
+  }
+  return h;
+}
+
+function ccRenderAttributes(){
+  const st=ccState;
+  const raceObj=st.race?g.races.find(r=>r.name===st.race):null;
+  const ABS=['PHYSICAL','MENTAL','SOCIAL','ACUITY','ENDURANCE','SPEED','WITS','WILLPOWER'];
+  const RK={PHYSICAL:'physical',MENTAL:'mental',SOCIAL:'social',ACUITY:'acuity',ENDURANCE:'endurance',SPEED:'speed',WITS:'wits',WILLPOWER:'willpower'};
+  let h=ccSecHead('CORE ATTRIBUTES'+(st.race?' — '+esc(st.race):''));
+  h+='<table style="width:100%;border-collapse:collapse;">';
+  h+='<tr style="font-size:10px;color:#888;"><th style="text-align:left;padding:4px 8px;">Attribute</th><th style="width:80px;padding:4px;">Base</th><th style="width:80px;padding:4px;">Perm</th><th style="width:80px;padding:4px;">Current</th><th style="width:80px;padding:4px;">Bonus</th>';
+  if(raceObj)h+='<th style="padding:4px;color:var(--a3);width:140px;">Racial Range</th>';
+  h+='</tr>';
+  ABS.forEach(ab=>{
+    const rs=raceObj&&raceObj.stats[RK[ab]]?raceObj.stats[RK[ab]]:null;
+    h+='<tr style="border-top:1px solid rgba(255,255,255,.06);">';
+    h+='<td style="padding:5px 8px;font-family:\'Orbitron\',sans-serif;font-size:11px;color:var(--a);">'+ab+'</td>';
+    [ab+'_base',ab+'_perm',ab,ab+'_bonus'].forEach(k=>{
+      h+='<td style="padding:3px 4px;text-align:center;"><input type="number" value="'+(+(st[k])||0)+'" style="width:68px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.22);color:var(--tx);padding:3px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:13px;" oninput="ccState[\''+k+'\']=+this.value||0;"></td>';
+    });
+    if(raceObj){
+      h+='<td style="padding:3px 8px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:11px;">';
+      h+=rs?esc(rs.min)+' / <b style="color:var(--a);">'+esc(rs.avg)+'</b> / '+esc(rs.max):'<span style="color:#444;">—</span>';
+      h+='</td>';
+    }
+    h+='</tr>';
+  });
+  h+='</table>';
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:18px;">';
+  h+='<div>'+ccSecHead('HEALTH & MORALE');
+  h+='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">';
+  [['HEALTH','HP Curr'],['HEALTH_max','HP Max'],['MORALE','Morale'],['MORALE_max','Morale Max'],['CHI','CHI'],['CHI_max','CHI Max']].forEach(([k,lbl])=>{
+    h+='<div><div style="font-size:10px;color:#888;margin-bottom:2px;">'+lbl+'</div><input type="number" value="'+(+(st[k])||0)+'" style="width:100%;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.22);color:var(--tx);padding:4px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:13px;box-sizing:border-box;" oninput="ccState[\''+k+'\']=+this.value||0;"></div>';
+  });
+  h+='</div></div>';
+  h+='<div>'+ccSecHead('INITIATIVE');
+  h+='<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;">';
+  [['init_move','Move'],['init_standard','Standard'],['init_quick','Quick'],['init_complex','Complex']].forEach(([k,lbl])=>{
+    h+='<div><div style="font-size:10px;color:#888;margin-bottom:2px;">'+lbl+'</div><input type="text" value="'+esc(st[k]||'')+'" placeholder="e.g. 4" style="'+CC_INP+'" oninput="ccState[\''+k+'\']=this.value;"></div>';
+  });
+  h+='</div></div></div>';
+  return h;
+}
+
+function ccRenderSkills(){
+  const st=ccState;
+  const spent=ccCalcSpentXP();
+  const avail=(+(st.total_xp)||0)-spent+(+(st.credited_xp)||0);
+  let h='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">';
+  h+='<div style="font-family:\'Orbitron\',sans-serif;font-size:12px;color:var(--a);">SKILLS</div>';
+  h+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:12px;">Spent: <span style="color:var(--a2);">'+spent+'</span> | Available: <span style="color:'+(avail>=0?'var(--gr)':'var(--re)')+';">'+avail+'</span> | <span style="font-size:10px;color:#666;">Cost = N×(N+1)÷2</span></div>';
+  h+='</div>';
+  h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">';
+  [['Physical',CC_SKILLS_PHYS,'PHYSICAL'],['Mental',CC_SKILLS_MENT,'MENTAL'],['Social',CC_SKILLS_SOCI,'SOCIAL'],['Acuity',CC_SKILLS_ACUI,'ACUITY']].forEach(([grp,skills,ab])=>{
+    h+='<div>';
+    h+='<div style="font-family:\'Orbitron\',sans-serif;font-size:11px;color:var(--a);margin-bottom:8px;text-align:center;background:rgba(0,200,255,.08);padding:4px 2px;border-radius:3px;">'+grp+'<span style="font-size:9px;color:#666;display:block;">'+ab+'</span></div>';
+    skills.forEach(sk=>{
+      const v=+(st[sk])||0;const cost=v*(v+1)/2;
+      h+='<div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">';
+      h+='<input type="number" min="0" max="10" value="'+v+'" style="width:44px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.22);color:var(--tx);padding:2px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:13px;" onchange="ccState[\''+sk+'\']=Math.max(0,Math.min(10,+this.value||0));render();">';
+      h+='<div style="flex:1;"><div style="font-size:11px;">'+sk.replace(/_/g,' ')+'</div><div style="font-size:9px;color:#555;">'+cost+' xp'+(v<10?' | +'+( v+1)+' next':'')+'</div></div>';
+      h+='</div>';
+    });
+    h+='</div>';
+  });
+  h+='</div>';
+  return h;
+}
+
+function ccRenderTalents(){
+  const st=ccState;
+  let h=ccRenderPicker();
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">';
+  // Talents
+  h+='<div>'+ccSecHead('TALENTS — 10 slots');
+  st.talents.forEach((t,i)=>{
+    h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.07);border-radius:4px;padding:7px;margin-bottom:6px;">';
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;"><span style="font-size:10px;color:#666;">Slot '+(i+1)+'</span>';
+    h+='<button onclick="ccState.picker={type:\'talent\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:rgba(0,200,255,.1);border:1px solid var(--a);color:var(--a);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">Browse</button></div>';
+    h+='<input type="text" placeholder="Talent name" value="'+esc(t.name||'')+'" style="'+CC_INP+'margin-bottom:3px;" oninput="ccState.talents['+i+'].name=this.value;">';
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr auto;gap:3px;margin-bottom:3px;">';
+    h+='<input type="text" placeholder="Skill" value="'+esc(t.skill||'')+'" style="'+CC_INP_SM+'" oninput="ccState.talents['+i+'].skill=this.value;">';
+    h+='<input type="text" placeholder="Category" value="'+esc(t.category||'')+'" style="'+CC_INP_SM+'" oninput="ccState.talents['+i+'].category=this.value;">';
+    h+='<input type="number" placeholder="XP" value="'+(+(t.xp_cost)||0)+'" style="width:48px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.15);color:var(--a2);padding:2px 3px;font-size:11px;" oninput="ccState.talents['+i+'].xp_cost=+this.value||0;">';
+    h+='</div>';
+    h+='<input type="text" placeholder="Effect..." value="'+esc(t.effect||'')+'" style="'+CC_INP_SM+'" oninput="ccState.talents['+i+'].effect=this.value;">';
+    h+='</div>';
+  });
+  h+='</div>';
+  // Evolutions
+  h+='<div>'+ccSecHead('EVOLUTIONS — 5 slots','var(--a3)');
+  st.evolutions.forEach((e,i)=>{
+    h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(163,85,247,.15);border-radius:4px;padding:7px;margin-bottom:6px;">';
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;"><span style="font-size:10px;color:#666;">Slot '+(i+1)+'</span>';
+    h+='<button onclick="ccState.picker={type:\'evolution\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:rgba(163,85,247,.1);border:1px solid var(--a3);color:var(--a3);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">Browse</button></div>';
+    h+='<input type="text" placeholder="Evolution name" value="'+esc(e.name||'')+'" style="'+CC_INP.replace('rgba(0,200,255,.25)','rgba(163,85,247,.3)')+'margin-bottom:3px;" oninput="ccState.evolutions['+i+'].name=this.value;">';
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;">';
+    h+='<input type="text" placeholder="Type" value="'+esc(e.type||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.2)')+'margin-bottom:0;" oninput="ccState.evolutions['+i+'].type=this.value;">';
+    h+='<input type="text" placeholder="Tier" value="'+esc(e.tier||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.2)')+'margin-bottom:0;" oninput="ccState.evolutions['+i+'].tier=this.value;">';
+    h+='</div>';
+    h+='<input type="text" placeholder="Effect..." value="'+esc(e.effect||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.2)')+'margin-top:3px;" oninput="ccState.evolutions['+i+'].effect=this.value;">';
+    h+='</div>';
+  });
+  h+='</div></div>';
+  return h;
+}
+
+function ccRenderCombat(){
+  const st=ccState;
+  const DEF=['None','Low','Medium','High','Extreme'];
+  let h=ccRenderPicker();
+  // Weapons
+  h+=ccSecHead('WEAPONS — 6 slots','var(--a2)');
+  st.weapons.forEach((w,i)=>{
+    h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.07);border-radius:4px;padding:7px;margin-bottom:7px;">';
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;"><span style="font-size:10px;color:#666;">Weapon '+(i+1)+'</span>';
+    h+='<button onclick="ccState.picker={type:\'weapon\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:rgba(255,107,53,.1);border:1px solid var(--a2);color:var(--a2);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">Browse</button></div>';
+    h+='<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:5px;margin-bottom:4px;">';
+    h+='<input type="text" placeholder="Name" value="'+esc(w.name||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].name=this.value;">';
+    h+='<input type="text" placeholder="Skill" value="'+esc(w.skill||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].skill=this.value;">';
+    h+='<input type="text" placeholder="DMG" value="'+esc(w.dmg||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].dmg=this.value;">';
+    h+='<input type="text" placeholder="Type" value="'+esc(w.dmgtype||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].dmgtype=this.value;">';
+    h+='</div>';
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr 55px 50px;gap:3px;margin-bottom:4px;">';
+    [['close_range','Close'],['medium_range','Med'],['long_range','Long'],['rof','RoF'],['special','Special']].forEach(([k,pl])=>{
+      h+='<input type="text" placeholder="'+pl+'" value="'+esc(w[k]||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].'+k+'=this.value;">';
+    });
+    h+='<input type="number" placeholder="Ammo" value="'+(+(w.ammo)||0)+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].ammo=+this.value||0;">';
+    h+='<input type="number" placeholder="Exp" value="'+(+(w.expertise)||0)+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].expertise=+this.value||0;">';
+    h+='</div>';
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;">';
+    h+='<input type="number" placeholder="Power" value="'+(+(w.power)||0)+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].power=+this.value||0;">';
+    h+='<input type="text" placeholder="Reload" value="'+esc(w.reload||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].reload=this.value;">';
+    h+='<input type="text" placeholder="DMG Target" value="'+esc(w.dmgtarget||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].dmgtarget=this.value;">';
+    h+='</div></div>';
+  });
+  // Armor
+  h+=ccSecHead('ARMOR — 2 slots','var(--gr)');
+  st.armor.forEach((ar,i)=>{
+    h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.07);border-radius:4px;padding:7px;margin-bottom:7px;">';
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;"><span style="font-size:10px;color:#666;">Armor '+(i+1)+'</span>';
+    h+='<button onclick="ccState.picker={type:\'armor\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:rgba(0,200,100,.1);border:1px solid var(--gr);color:var(--gr);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">Browse</button></div>';
+    h+='<div style="display:grid;grid-template-columns:2fr 1fr;gap:5px;margin-bottom:5px;">';
+    h+='<input type="text" placeholder="Armor name" value="'+esc(ar.name||'')+'" style="'+CC_INP_SM+'" oninput="ccState.armor['+i+'].name=this.value;">';
+    h+='<input type="text" placeholder="Type" value="'+esc(ar.type||'')+'" style="'+CC_INP_SM+'" oninput="ccState.armor['+i+'].type=this.value;">';
+    h+='</div>';
+    h+='<div style="display:grid;grid-template-columns:repeat(4,1fr) 1fr 1fr 1fr;gap:3px;">';
+    ['phys','energy','tech','spirit'].forEach(dk=>{
+      h+='<div><div style="font-size:9px;color:#666;">'+dk.charAt(0).toUpperCase()+dk.slice(1)+'</div>';
+      h+='<select style="'+CC_SEL+'" onchange="ccState.armor['+i+'].def_'+dk+'=this.value;">';
+      DEF.forEach(o=>{h+='<option value="'+o+'"'+(ar['def_'+dk]===o?' selected':'')+'>'+o+'</option>';});
+      h+='</select></div>';
+    });
+    h+='<div><div style="font-size:9px;color:#666;">Soak Expr</div><input type="text" placeholder="3D" value="'+esc(ar.soak_expr||'')+'" style="'+CC_INP_SM+'" oninput="ccState.armor['+i+'].soak_expr=this.value;"></div>';
+    h+='<div><div style="font-size:9px;color:#666;">Charges</div><input type="number" value="'+(+(ar.charges)||0)+'" style="'+CC_INP_SM+'" oninput="ccState.armor['+i+'].charges=+this.value||0;"></div>';
+    h+='<div><div style="font-size:9px;color:#666;">Special</div><input type="text" value="'+esc(ar.special||'')+'" style="'+CC_INP_SM+'" oninput="ccState.armor['+i+'].special=this.value;"></div>';
+    h+='</div></div>';
+  });
+  h+='<div style="display:flex;gap:10px;align-items:center;margin-top:8px;"><span style="font-size:11px;color:#888;">Armor Soak:</span>';
+  h+='<input type="text" placeholder="expr e.g. 3D" value="'+esc(st.armorsoak||'')+'" style="width:90px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.2);color:var(--tx);padding:3px 5px;font-size:11px;" oninput="ccState.armorsoak=this.value;">';
+  h+='<input type="number" placeholder="+bonus" value="'+(+(st.armorsoak_bonus)||0)+'" style="width:60px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.2);color:var(--tx);padding:3px 5px;font-size:11px;" oninput="ccState.armorsoak_bonus=+this.value||0;"></div>';
+  return h;
+}
+
+function ccRenderTech(){
+  const st=ccState;
+  const DEF=['None','Low','Medium','High','Extreme'];
+  let h=ccRenderPicker();
+  // Datacoms
+  h+=ccSecHead('DATACOMS — 3 slots');
+  st.datacoms.forEach((d,i)=>{
+    h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(0,200,255,.1);border-radius:4px;padding:7px;margin-bottom:7px;">';
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;"><span style="font-size:10px;color:#666;">Datacom '+(i+1)+'</span>';
+    h+='<button onclick="ccState.picker={type:\'datacom\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:rgba(0,200,255,.1);border:1px solid var(--a);color:var(--a);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">Browse</button></div>';
+    h+='<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4px;margin-bottom:4px;">';
+    h+='<input type="text" placeholder="Datacom name" value="'+esc(d.name||'')+'" style="'+CC_INP_SM+'" oninput="ccState.datacoms['+i+'].name=this.value;">';
+    ['cpu','mem','nanite'].forEach(k=>{
+      h+='<div><div style="font-size:9px;color:#666;">'+k.toUpperCase()+'</div><input type="number" value="'+(+(d[k])||0)+'" style="'+CC_INP_SM+'" oninput="ccState.datacoms['+i+'].'+k+'=+this.value||0;"></div>';
+    });
+    h+='</div>';
+    h+='<div style="display:grid;grid-template-columns:repeat(4,1fr) 1fr repeat(3,1fr) 1fr;gap:3px;">';
+    ['phys','energy','tech','spirit'].forEach(dk=>{
+      h+='<div><div style="font-size:9px;color:#666;">'+dk.charAt(0).toUpperCase()+dk.slice(1)+'</div>';
+      h+='<select style="'+CC_SEL+'" onchange="ccState.datacoms['+i+'].def_'+dk+'=this.value;">';
+      DEF.forEach(o=>{h+='<option value="'+o+'"'+(d['def_'+dk]===o?' selected':'')+'>'+o+'</option>';});
+      h+='</select></div>';
+    });
+    h+='<div><div style="font-size:9px;color:#666;">Def Dmg</div><input type="text" placeholder="1D" value="'+esc(d.def_dmg||'')+'" style="'+CC_INP_SM+'" oninput="ccState.datacoms['+i+'].def_dmg=this.value;"></div>';
+    ['int_ext','int_int','int_main'].forEach(k=>{
+      h+='<div><div style="font-size:9px;color:#666;">'+(k==='int_ext'?'Ext':k==='int_int'?'Int':'Main')+'</div><input type="number" value="'+(+(d[k])||0)+'" style="'+CC_INP_SM+'" oninput="ccState.datacoms['+i+'].'+k+'=+this.value||0;"></div>';
+    });
+    h+='<div><div style="font-size:9px;color:#666;">Expertise</div><input type="number" value="'+(+(d.expertise)||0)+'" style="'+CC_INP_SM+'" oninput="ccState.datacoms['+i+'].expertise=+this.value||0;"></div>';
+    h+='</div>';
+    h+='<input type="text" placeholder="Special..." value="'+esc(d.special||'')+'" style="'+CC_INP_SM+'margin-top:3px;" oninput="ccState.datacoms['+i+'].special=this.value;">';
+    h+='</div>';
+  });
+  // Programs
+  h+=ccSecHead('SOFTWARE PROGRAMS — 10 slots','var(--a3)');
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">';
+  st.programs.forEach((p,i)=>{
+    h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(163,85,247,.1);border-radius:4px;padding:6px;">';
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><span style="font-size:10px;color:#555;">Prog '+(i+1)+'</span>';
+    h+='<button onclick="ccState.picker={type:\'program\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:rgba(163,85,247,.08);border:1px solid var(--a3);color:var(--a3);padding:1px 6px;border-radius:3px;cursor:pointer;font-size:9px;">Browse</button></div>';
+    h+='<input type="text" placeholder="Program name" value="'+esc(p.name||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.2)')+'margin-bottom:3px;" oninput="ccState.programs['+i+'].name=this.value;">';
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-bottom:3px;">';
+    h+='<input type="text" placeholder="Type" value="'+esc(p.type||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.15)')+'margin-bottom:0;" oninput="ccState.programs['+i+'].type=this.value;">';
+    h+='<input type="number" placeholder="CPU" value="'+(+(p.cpu)||0)+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.15)')+'margin-bottom:0;" oninput="ccState.programs['+i+'].cpu=+this.value||0;">';
+    h+='<input type="number" placeholder="Mem" value="'+(+(p.mem)||0)+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.15)')+'margin-bottom:0;" oninput="ccState.programs['+i+'].mem=+this.value||0;">';
+    h+='</div>';
+    h+='<input type="text" placeholder="Passive..." value="'+esc(p.passive||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.1)')+'margin-bottom:2px;" oninput="ccState.programs['+i+'].passive=this.value;">';
+    h+='<input type="text" placeholder="Active..." value="'+esc(p.active||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.1)')+'" oninput="ccState.programs['+i+'].active=this.value;">';
+    h+='</div>';
+  });
+  h+='</div>';
+  // Gadgets
+  h+=ccSecHead('GADGETS — 5 slots','var(--a2)');
+  h+='<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;">';
+  st.gadgets.forEach((gad,i)=>{
+    h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,107,53,.1);border-radius:4px;padding:6px;">';
+    h+='<div style="font-size:10px;color:#555;margin-bottom:4px;">Gadget '+(i+1)+'</div>';
+    h+='<input type="text" placeholder="Name" value="'+esc(gad.name||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(255,107,53,.2)')+'margin-bottom:3px;" oninput="ccState.gadgets['+i+'].name=this.value;">';
+    h+='<input type="number" placeholder="Nanite" value="'+(+(gad.nanite)||0)+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(255,107,53,.15)')+'margin-bottom:3px;" oninput="ccState.gadgets['+i+'].nanite=+this.value||0;">';
+    h+='<input type="text" placeholder="Effect..." value="'+esc(gad.effect||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(255,107,53,.1)')+'" oninput="ccState.gadgets['+i+'].effect=this.value;">';
+    h+='</div>';
+  });
+  h+='</div>';
+  return h;
+}
+
+function ccRenderMagicGear(){
+  const st=ccState;
+  const sizeOpts=[['0','None'],['0.25','Tiny'],['1','Small'],['2','Medium'],['3','Large'],['0','In Hands']];
+  let h=ccSecHead('SPELLS — 16 slots','var(--a3)');
+  h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:18px;">';
+  st.spells.forEach((sp,i)=>{
+    h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(163,85,247,.12);border-radius:4px;padding:6px;">';
+    h+='<div style="font-size:9px;color:#555;margin-bottom:3px;">Spell '+(i+1)+'</div>';
+    h+='<input type="text" placeholder="Spell name" value="'+esc(sp.name||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.2)')+'margin-bottom:2px;" oninput="ccState.spells['+i+'].name=this.value;">';
+    h+='<input type="text" placeholder="Domain" value="'+esc(sp.domain||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.12)')+'" oninput="ccState.spells['+i+'].domain=this.value;">';
+    h+='</div>';
+  });
+  h+='</div>';
+  h+=ccSecHead('GEAR & LOADOUT');
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:16px;">';
+  ['items','items2'].forEach((key,li)=>{
+    h+='<div><div style="font-size:11px;color:var(--a);margin-bottom:6px;font-family:\'Orbitron\',sans-serif;">'+(li===0?'LOADOUT 1 (On You)':'LOADOUT 2 (Storage)')+'</div>';
+    h+='<div style="display:grid;grid-template-columns:3fr 1fr 50px;gap:3px;font-size:9px;color:#555;margin-bottom:3px;"><span>Item</span><span>Size</span><span>Qty</span></div>';
+    for(let idx=0;idx<20;idx++){
+      const it=st[key][idx];
+      h+='<div style="display:grid;grid-template-columns:3fr 1fr 50px;gap:2px;margin-bottom:2px;">';
+      h+='<input type="text" placeholder="Item '+(idx+1)+'" value="'+esc(it.name||'')+'" style="'+CC_INP_SM+'margin-bottom:0;" oninput="ccState.'+key+'['+idx+'].name=this.value;">';
+      h+='<select style="'+CC_SEL+'margin-bottom:0;" onchange="ccState.'+key+'['+idx+'].size=this.value;">';
+      sizeOpts.forEach(([v,l])=>{h+='<option value="'+v+'"'+(it.size===v?' selected':'')+'>'+l+'</option>';});
+      h+='</select>';
+      h+='<input type="number" min="1" value="'+(+(it.qty)||1)+'" style="'+CC_INP_SM+'margin-bottom:0;" oninput="ccState.'+key+'['+idx+'].qty=+this.value||1;">';
+      h+='</div>';
+    }
+    h+='</div>';
+  });
+  h+='</div>';
+  h+='<div style="display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;">';
+  h+='<div>'+ccSecHead('MAX LOAD')+'<input type="text" placeholder="e.g. 12" value="'+esc(st.charloadmax||'')+'" style="width:120px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.25);color:var(--tx);padding:4px 6px;font-size:12px;" oninput="ccState.charloadmax=this.value;"></div>';
+  h+='<div>'+ccSecHead('NOTES')+'<textarea style="'+CC_INP+'height:100px;resize:vertical;" oninput="ccState.notes=this.value;">'+esc(st.notes||'')+'</textarea></div>';
+  h+='</div>';
+  return h;
+}
+
 let egMode='single';
 let egGroupState={template:'crime_boss',enemyCount:4,difficulty:5,enemies:[]};
 let egGroupEditIdx=null; // index of group enemy being edited, or null
@@ -11453,6 +11922,33 @@ function render(){
     html+='</div>';
     html+='</div>';
     } // end single/group-edit mode
+  }
+
+  else if(cs==='char_creator'){
+    cnt=1;
+    const st=ccState;
+    const TABS=[['identity','Identity'],['attributes','Attributes'],['skills','Skills'],['talents','Talents & Evos'],['combat','Combat'],['tech','Tech'],['magic','Magic'],['gear','Gear']];
+    html+='<div style="padding:12px;">';
+    html+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">';
+    html+='<div style="font-family:\'Orbitron\',sans-serif;font-size:18px;color:var(--a);">👤 CHARACTER CREATOR</div>';
+    html+='<div style="display:flex;gap:8px;">';
+    html+='<button onclick="ccExportRoll20();" style="background:var(--gr);color:#000;border:none;border-radius:5px;padding:6px 16px;cursor:pointer;font-weight:bold;font-size:12px;font-family:\'Orbitron\',sans-serif;">⬇ EXPORT JSON</button>';
+    html+='<button onclick="if(confirm(\'Reset all character data?\')){{ccState=ccMakeFreshState();render();}}" style="background:rgba(255,68,68,.12);color:var(--re);border:1px solid var(--re);border-radius:5px;padding:6px 12px;cursor:pointer;font-size:11px;">↺ Reset</button>';
+    html+='</div></div>';
+    html+='<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px;border-bottom:1px solid rgba(0,200,255,.2);padding-bottom:10px;">';
+    TABS.forEach(([tid,tlabel])=>{
+      const act=st.tab===tid;
+      html+='<button onclick="ccState.tab=\''+tid+'\';ccState.picker=null;render();" style="background:'+(act?'var(--a)':'rgba(0,200,255,.1)')+';color:'+(act?'#000':'var(--a)')+';border:1px solid var(--a);border-radius:5px;padding:5px 12px;cursor:pointer;font-size:12px;font-weight:bold;">'+tlabel+'</button>';
+    });
+    html+='</div>';
+    if(st.tab==='identity')html+=ccRenderIdentity();
+    else if(st.tab==='attributes')html+=ccRenderAttributes();
+    else if(st.tab==='skills')html+=ccRenderSkills();
+    else if(st.tab==='talents')html+=ccRenderTalents();
+    else if(st.tab==='combat')html+=ccRenderCombat();
+    else if(st.tab==='tech')html+=ccRenderTech();
+    else if(st.tab==='magic'||st.tab==='gear')html+=ccRenderMagicGear();
+    html+='</div>';
   }
 
   if(!cnt&&sq){html+='<div class="empty"><div style="font-size:32px;margin-bottom:8px;">🔍</div><div style="font-family:\'Share Tech Mono\',monospace;font-size:11px;">No results for &quot;'+esc(sq)+'&quot;</div></div>';}

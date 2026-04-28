@@ -384,3 +384,94 @@ code.vertical-line {
     text-align: center;
     margin-top: 10px;
 }
+
+/* ========================= */
+/* TALENTS TABLE              */
+/* ========================= */
+
+#talents {
+    border-collapse: collapse;
+}
+
+#talents th, #talents td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+#talents th {
+    background-color: #ddd;
+}
+
+/* ========================= */
+/* EVOLUTIONS TABLE           */
+/* ========================= */
+
+#evolutions {
+    border-collapse: collapse;
+}
+
+#evolutions th, #evolutions td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+#evolutions th {
+    background-color: #ddd;
+}
+
+/* ========================= */
+/* DATACOMS TABLE             */
+/* ========================= */
+
+#datacoms {
+    border-collapse: collapse;
+}
+
+#datacoms th, #datacoms td {
+    border: 1px solid black;
+    padding: 5px;
+    vertical-align: middle;
+}
+
+#datacoms th {
+    background-color: #ddd;
+}
+
+#datacoms select {
+    position: relative;
+    top: 4px;
+}
+
+/* ========================= */
+/* SOFTWARE PROGRAMS TABLE    */
+/* ========================= */
+
+#programs {
+    border-collapse: collapse;
+}
+
+#programs th, #programs td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+#programs th {
+    background-color: #ddd;
+}
+
+/* ========================= */
+/* GADGETS TABLE              */
+/* ========================= */
+
+#gadgets {
+    border-collapse: collapse;
+}
+
+#gadgets th, #gadgets td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+#gadgets th {
+    background-color: #ddd;
+}
