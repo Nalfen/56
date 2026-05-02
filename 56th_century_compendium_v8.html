@@ -8759,7 +8759,7 @@ function ccRenderTalents(){
   const evoUsed=ccEvoUsed();
   const evoCap=ccEvoSoftCap();
   const evoOver=evoUsed>evoCap;
-  const evoCapStr=evoCap>0?evoCap+'(END '++(st.ENDURANCE||0)+' + WILL '+(+(st.WILLPOWER)||0)+')':'—';
+  const evoCapStr=evoCap>0?evoCap+' (END '+(+(st.ENDURANCE||0))+' + WILL '+(+(st.WILLPOWER||0))+')':'—';
 
   h+='<div>';
   h+=ccSecHead('EVOLUTIONS <span style="font-size:10px;color:#666;font-family:sans-serif;">'+st.evolutions.length+' slots</span>','var(--a3)');
