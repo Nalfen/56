@@ -8284,7 +8284,7 @@ function ccMakeFreshState(){
     tab:'identity',
     name:'',race:'',occupation:'',background:'',sex:'',age:'',apparent_age:'',
     background_desc:'',occupation_desc:'',
-    clone:null,attr_variance:{},
+    clone:null,attr_variance:{},nb_rolled:false,
     PHYSICAL:0,PHYSICAL_base:0,PHYSICAL_perm:0,PHYSICAL_bonus:0,
     MENTAL:0,MENTAL_base:0,MENTAL_perm:0,MENTAL_bonus:0,
     SOCIAL:0,SOCIAL_base:0,SOCIAL_perm:0,SOCIAL_bonus:0,
@@ -8363,6 +8363,7 @@ function ccRollNaturalBirth(){
     v[ab]={minVar:rollDie()+rollDie()+rollDie(),maxVar:rollDie()+rollDie()+rollDie()};
   });
   ccState.attr_variance=v;
+  ccState.nb_rolled=true;
   ccApplyRaceDefaults(ro);
   render();
 }
@@ -8518,6 +8519,51 @@ function ccRenderIdentity(){
   const st=ccState;
   const raceObj=ccGetRaceObj();
   let h=ccRenderPicker();
+  // ── STEP 1: Clone / Natural Birth ─────────────────────────────────────────
+  const cloneChosen=st.clone!==null;
+  h+='<div style="border:2px solid '+(cloneChosen?'rgba(0,200,255,.3)':'var(--a)')+';border-radius:8px;padding:14px;margin-bottom:16px;background:rgba(0,200,255,.03);">';
+  h+='<div style="font-family:\'Orbitron\',sans-serif;font-size:11px;color:var(--a);margin-bottom:10px;letter-spacing:1px;">STEP 1 — ORIGIN: Clone or Natural Birth?</div>';
+  if(!cloneChosen){
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">';
+    h+='<div style="background:rgba(0,200,255,.06);border:1px solid rgba(0,200,255,.2);border-radius:6px;padding:10px;">';
+    h+='<div style="font-weight:bold;color:var(--a);margin-bottom:5px;">Option A — Clone Vat</div>';
+    h+='<div style="font-size:11px;color:#aaa;margin-bottom:8px;">You start as an average clone with your race\'s average attributes. Clones have a lifespan of ~10 years before needing a new body. (Cost: 2 500 000 cr — Clone, Average)</div>';
+    h+='<button onclick="ccState.clone=true;ccApplyRaceDefaults(ccGetRaceObj());render();" style="background:rgba(0,200,255,.2);border:1px solid var(--a);color:var(--a);padding:5px 12px;border-radius:4px;cursor:pointer;font-size:11px;font-weight:bold;">Choose Clone</button>';
+    h+='</div>';
+    h+='<div style="background:rgba(163,85,247,.06);border:1px solid rgba(163,85,247,.2);border-radius:6px;padding:10px;">';
+    h+='<div style="font-weight:bold;color:var(--a3);margin-bottom:5px;">Option B — Natural Birth</div>';
+    h+='<div style="font-size:11px;color:#aaa;margin-bottom:8px;">Your body lasts your full racial lifespan but genetic potential is random. Roll 3D10 per PRIMARY attribute — each die: 1–3 lowers min/max by 1, 4–7 no change, 8–10 raises by 1. Select a race first, then roll.</div>';
+    h+='<button onclick="ccState.clone=false;ccState.nb_rolled=false;render();" style="background:rgba(163,85,247,.2);border:1px solid var(--a3);color:var(--a3);padding:5px 12px;border-radius:4px;cursor:pointer;font-size:11px;font-weight:bold;">Choose Natural Birth</button>';
+    h+='</div></div>';
+  } else {
+    const label=st.clone?'Clone Vat':'Natural Birth';
+    const col=st.clone?'var(--a)':'var(--a3)';
+    h+='<div style="display:flex;align-items:center;gap:12px;">';
+    h+='<span style="color:'+col+';font-weight:bold;font-size:13px;">'+(st.clone?'🧬':'🌱')+' '+label+'</span>';
+    if(!st.clone){
+      // Natural birth — show dice rolls or roll button
+      if(!st.nb_rolled||!st.race){
+        h+='<button onclick="ccRollNaturalBirth();" style="background:rgba(163,85,247,.2);border:1px solid var(--a3);color:var(--a3);padding:4px 10px;border-radius:4px;cursor:pointer;font-size:11px;">';
+        h+=(st.race?'🎲 Roll Attributes':'Select a race first then roll')+'</button>';
+      } else {
+        // Show results
+        h+='<div style="display:flex;gap:10px;flex-wrap:wrap;">';
+        ['PHYSICAL','MENTAL','SOCIAL','ACUITY'].forEach(ab=>{
+          const v=st.attr_variance[ab]||{};
+          const ro=ccGetRaceObj();const rs=ro&&ro.stats[CC_ATTR_RK[ab]];
+          const rMin=rs?+(rs.min)||0:0;const rMax=rs?+(rs.max)||0:0;
+          const pMin=rMin+(v.minVar||0);const pMax=rMax+(v.maxVar||0);
+          h+='<span style="font-size:11px;font-family:\'Share Tech Mono\',monospace;color:#aaa;">'+ab.slice(0,4)+': <b style="color:var(--tx);">'+pMin+'/'+pMax+'</b></span>';
+        });
+        h+='</div>';
+        h+='<button onclick="ccRollNaturalBirth();" style="background:rgba(163,85,247,.1);border:1px solid rgba(163,85,247,.3);color:var(--a3);padding:2px 8px;border-radius:4px;cursor:pointer;font-size:10px;">Re-roll</button>';
+      }
+    }
+    h+='<button onclick="ccState.clone=null;ccState.attr_variance={};ccState.nb_rolled=false;render();" style="margin-left:auto;background:none;border:1px solid #444;color:#666;padding:2px 8px;border-radius:3px;cursor:pointer;font-size:10px;">Change</button>';
+    h+='</div>';
+  }
+  h+='</div>';
+  // ──────────────────────────────────────────────────────────────────────────
   h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">';
   // Left col — identity fields
   h+='<div>'+ccSecHead('IDENTITY');
