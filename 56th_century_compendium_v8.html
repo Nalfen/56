@@ -8596,26 +8596,27 @@ function ccRenderPicker(){
   h+='<button onclick="ccState.picker=null;ccState.pickerSearch=\'\';render();" style="background:none;border:1px solid #555;color:#888;padding:2px 8px;border-radius:3px;cursor:pointer;font-size:11px;">✕ Close</button>';
   h+='</div>';
   h+='<input type="text" placeholder="Search..." value="'+esc(st.pickerSearch||'')+'" style="'+CC_INP+'margin-bottom:8px;" oninput="ccState.pickerSearch=this.value;render();">';
-  h+='<div style="max-height:260px;overflow-y:auto;">';
+  h+='<div style="max-height:420px;overflow-y:auto;">';
   ccPickerCache.forEach((x,pi)=>{
-    let sub='';
-    if(type==='talent')sub=esc(x.skill||'')+(x.category?' · '+esc(x.category):'')+'  —  '+(x.cost||0)+' XP';
-    else if(type==='evolution')sub=esc(x.evo_type||'')+' · Tier '+esc(x.tier||'?');
-    else if(type==='weapon')sub=esc(x.category||'')+(x.damage?' | '+esc(x.damage):'')+(x.type?' | '+esc(x.type):'');
-    else if(type==='armor')sub=esc(x.category||'');
-    else if(type==='datacom')sub='CPU '+(x.cpu||'?')+' | Mem '+(x.memory||'?')+' | Nanite '+(x.nanite||'?');
-    else if(type==='program')sub=esc(x.type||'')+(x.cpu?' | CPU '+x.cpu:'')+(x.memory?' | Mem '+x.memory:'');
+    h+='<div style="padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07);cursor:pointer;transition:background .1s;" onmouseenter="this.style.background=\'rgba(255,255,255,.04)\'" onmouseleave="this.style.background=\'\'" onclick="ccPickFromCache('+pi+');">';
+    h+='<div style="font-size:12px;font-weight:bold;color:var(--tx);margin-bottom:3px;">';
+    if(type==='background'&&x.race&&x.race!=='ANY')h+='<span style="color:var(--ye);font-size:10px;margin-right:5px;">['+esc(x.race)+']</span>';
+    h+=esc(x.name||'')+'</div>';
+    if(type==='talent')h+='<div style="font-size:10px;color:#888;">'+esc(x.skill||'')+(x.category?' · '+esc(x.category):'')+'  —  '+(x.cost||0)+' XP</div>';
+    else if(type==='evolution')h+='<div style="font-size:10px;color:#888;">'+esc(x.evo_type||'')+' · Tier '+esc(x.tier||'?')+'</div>';
+    else if(type==='weapon')h+='<div style="font-size:10px;color:#888;">'+esc(x.category||'')+(x.damage?' | '+esc(x.damage):'')+(x.type?' | '+esc(x.type):'')+'</div>';
+    else if(type==='armor')h+='<div style="font-size:10px;color:#888;">'+esc(x.category||'')+'</div>';
+    else if(type==='datacom')h+='<div style="font-size:10px;color:#888;">CPU '+(x.cpu||'?')+' | Mem '+(x.memory||'?')+' | Nanite '+(x.nanite||'?')+'</div>';
+    else if(type==='program')h+='<div style="font-size:10px;color:#888;">'+esc(x.type||'')+(x.cpu?' | CPU '+x.cpu:'')+(x.memory?' | Mem '+x.memory:'')+'</div>';
     else if(type==='background'){
-      const raceTag=x.race&&x.race!=='ANY'?'<span style="color:var(--ye);font-weight:bold;">'+esc(x.race)+'</span> · ':'';
-      const b0=x.traits&&x.traits[0]?x.traits[0].slice(0,60)+(x.traits[0].length>60?'…':''):'';
-      const b2=x.traits&&x.traits[2]?x.traits[2].slice(0,50)+(x.traits[2].length>50?'…':''):'';
-      sub=raceTag+(b0?'<span style="color:var(--gr);">✓ '+esc(b0)+'</span>':'')+
-          (b2?'<br><span style="color:var(--re);">✗ '+esc(b2)+'</span>':'');
+      if(x.traits&&x.traits[0])h+='<div style="font-size:10px;color:var(--gr);line-height:1.4;margin-bottom:2px;">✓ '+esc(x.traits[0])+'</div>';
+      if(x.traits&&x.traits[1])h+='<div style="font-size:10px;color:var(--gr);line-height:1.4;margin-bottom:2px;">✓ '+esc(x.traits[1])+'</div>';
+      if(x.traits&&x.traits[2])h+='<div style="font-size:10px;color:var(--re);line-height:1.4;">✗ '+esc(x.traits[2])+'</div>';
     }
-    else if(type==='occupation')sub=(x.desc||'').slice(0,80)+((x.desc||'').length>80?'…':'');
-    h+='<div style="padding:5px 8px;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer;" onclick="ccPickFromCache('+pi+');">';
-    h+='<div style="font-size:12px;color:var(--tx);">'+esc(x.name||'')+'</div>';
-    if(sub)h+='<div style="font-size:10px;color:#777;">'+sub+'</div>';
+    else if(type==='occupation'){
+      if(x.desc)h+='<div style="font-size:10px;color:#aaa;line-height:1.4;margin-bottom:2px;">'+esc(x.desc)+'</div>';
+      if(x.details&&x.details.length)x.details.forEach(d=>{h+='<div style="font-size:10px;color:#777;line-height:1.4;">• '+esc(d)+'</div>';});
+    }
     h+='</div>';
   });
   if(matches.length>40)h+='<div style="text-align:center;font-size:10px;color:#555;padding:5px;">'+matches.length+' total — refine search</div>';
