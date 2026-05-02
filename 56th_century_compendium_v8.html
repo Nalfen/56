@@ -8695,20 +8695,57 @@ function ccRenderIdentity(){
   h+=ccLbl('Occupation Details','<textarea style="'+CC_INP+'height:100px;resize:vertical;" oninput="ccState.occupation_desc=this.value;">'+esc(st.occupation_desc||'')+'</textarea>');
   h+='<div style="margin-top:4px;"><label style="font-size:10px;color:#888;">Notes</label><textarea style="'+CC_INP+'height:60px;resize:vertical;" oninput="ccState.notes=this.value;">'+esc(st.notes||'')+'</textarea></div>';
   h+='</div></div>';
-  // Racial hint panel
+  // ── Info cards at bottom ─────────────────────────────────────────────────────
   if(raceObj){
-    h+='<div style="margin-top:14px;background:rgba(0,200,255,.05);border:1px solid rgba(0,200,255,.2);border-radius:5px;padding:10px;">';
-    h+='<div style="font-family:\'Orbitron\',sans-serif;font-size:11px;color:var(--a);margin-bottom:8px;">'+esc(raceObj.name)+' — RACIAL STAT RANGES (min / avg / max)</div>';
+    const isNB=st.clone===false&&st.nb_rolled;
+    h+='<div style="margin-top:14px;background:rgba(0,200,255,.05);border:1px solid rgba(0,200,255,.2);border-radius:5px;padding:12px;">';
+    h+='<div style="font-family:\'Orbitron\',sans-serif;font-size:11px;color:var(--a);margin-bottom:8px;">'+esc(raceObj.name)+(isNB?' — NATURAL BIRTH RANGES (rolled)':' — RACIAL STAT RANGES')+'  <span style="font-size:9px;color:#555;">min / avg / max</span></div>';
     h+='<div style="display:grid;grid-template-columns:repeat(8,1fr);gap:6px;font-family:\'Share Tech Mono\',monospace;font-size:10px;">';
+    const PRIMARY_ATTRS=['physical','mental','social','acuity'];
     ['physical','mental','social','acuity','endurance','speed','wits','willpower'].forEach(rk=>{
       const rs=raceObj.stats[rk]||{};
+      let minV=esc(rs.min||'?'),maxV=esc(rs.max||'?');
+      const abKey=rk.toUpperCase();
+      if(isNB&&PRIMARY_ATTRS.includes(rk)&&st.attr_variance[abKey]){
+        const v=st.attr_variance[abKey];
+        minV='<span style="color:var(--a3);">'+(+(rs.min||0)+(v.minVar||0))+'</span>';
+        maxV='<span style="color:var(--a3);">'+(+(rs.max||0)+(v.maxVar||0))+'</span>';
+      }
       h+='<div><div style="color:#666;margin-bottom:2px;">'+rk.slice(0,4).toUpperCase()+'</div>';
-      h+='<div>'+esc(rs.min||'?')+' / <b style="color:var(--a);">'+esc(rs.avg||'?')+'</b> / '+esc(rs.max||'?')+'</div></div>';
+      h+='<div>'+minV+' / <b style="color:var(--a);">'+esc(rs.avg||'?')+'</b> / '+maxV+'</div></div>';
     });
     h+='</div>';
-    if(raceObj.racial)h+='<div style="margin-top:6px;font-size:11px;color:#aaa;"><b style="color:var(--a);">Racial:</b> '+esc(raceObj.racial)+'</div>';
+    if(raceObj.racial)h+='<div style="margin-top:8px;font-size:11px;color:#aaa;border-top:1px solid rgba(255,255,255,.06);padding-top:6px;"><b style="color:var(--a);">Racial:</b> '+esc(raceObj.racial)+'</div>';
     if(raceObj.evolution)h+='<div style="margin-top:4px;font-size:11px;color:#aaa;"><b style="color:var(--a3);">Evolution:</b> '+esc(raceObj.evolution)+'</div>';
     h+='</div>';
+  }
+  // Background info card
+  if(st.background){
+    const bgObj=(g.backgrounds||[]).find(b=>b.name===st.background);
+    if(bgObj){
+      h+='<div style="margin-top:10px;background:rgba(255,200,0,.04);border:1px solid rgba(255,200,0,.25);border-radius:5px;padding:12px;">';
+      h+='<div style="font-family:\'Orbitron\',sans-serif;font-size:11px;color:var(--ye);margin-bottom:6px;">BACKGROUND — '+esc(bgObj.name)+(bgObj.race&&bgObj.race!=='ANY'?' <span style="color:#888;font-size:10px;">('+esc(bgObj.race)+')</span>':'')+'</div>';
+      if(bgObj.desc)h+='<div style="font-size:11px;color:#aaa;margin-bottom:8px;">'+esc(bgObj.desc)+'</div>';
+      if(bgObj.traits&&bgObj.traits[0])h+='<div style="margin-bottom:6px;"><div style="font-size:10px;color:var(--gr);font-weight:bold;margin-bottom:2px;">✓ BENEFIT 1</div><div style="font-size:11px;color:#ccc;line-height:1.5;">'+esc(bgObj.traits[0])+'</div></div>';
+      if(bgObj.traits&&bgObj.traits[1])h+='<div style="margin-bottom:6px;"><div style="font-size:10px;color:var(--gr);font-weight:bold;margin-bottom:2px;">✓ BENEFIT 2</div><div style="font-size:11px;color:#ccc;line-height:1.5;">'+esc(bgObj.traits[1])+'</div></div>';
+      if(bgObj.traits&&bgObj.traits[2])h+='<div><div style="font-size:10px;color:var(--re);font-weight:bold;margin-bottom:2px;">✗ DRAWBACK</div><div style="font-size:11px;color:#ccc;line-height:1.5;">'+esc(bgObj.traits[2])+'</div></div>';
+      h+='</div>';
+    }
+  }
+  // Occupation info card
+  if(st.occupation){
+    const occObj=(g.occupations||[]).find(o=>o.name===st.occupation);
+    if(occObj){
+      h+='<div style="margin-top:10px;background:rgba(255,107,53,.04);border:1px solid rgba(255,107,53,.25);border-radius:5px;padding:12px;">';
+      h+='<div style="font-family:\'Orbitron\',sans-serif;font-size:11px;color:var(--a2);margin-bottom:6px;">OCCUPATION — '+esc(occObj.name)+'</div>';
+      if(occObj.desc)h+='<div style="font-size:11px;color:#aaa;margin-bottom:8px;line-height:1.5;">'+esc(occObj.desc)+'</div>';
+      if(occObj.details&&occObj.details.length){
+        h+='<div style="border-top:1px solid rgba(255,107,53,.15);padding-top:6px;">';
+        occObj.details.forEach(d=>{h+='<div style="font-size:11px;color:#ccc;margin-bottom:4px;line-height:1.5;">• '+esc(d)+'</div>';});
+        h+='</div>';
+      }
+      h+='</div>';
+    }
   }
   return h;
 }
