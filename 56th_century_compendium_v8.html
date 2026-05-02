@@ -8278,8 +8278,34 @@ const CC_NAMES_FIRST=['Aria','Brek','Cal','Dara','Evan','Fenn','Gaia','Hale','Ix
 const CC_NAMES_LAST=['Voss','Dhar','Kline','Sato','Cruz','Thane','Bale','Quin','Nara','Cole','Frost','Mars','Chen','Wolf','Dale','Park','Han','Sky','Russ','Faye','Drake','Holt','Ives','Jax','Kade','Lorne'];
 const CC_RACE_ATTR_MAP={PHYSICAL:'physical',MENTAL:'mental',SOCIAL:'social',ACUITY:'acuity',ENDURANCE:'endurance',SPEED:'speed',WITS:'wits',WILLPOWER:'willpower'};
 
+const BG_GRANTS={
+  'Scholar':{skills:{Academics:5,Etiquette:5},choice_skills:[{count:1,from:'MENTAL',rank:5,label:'Choose 1 Mental skill at rank 5'}],attrs:{MENTAL:1}},
+  'Artist':{skills:{Acting:5,Flair:5}},
+  'Crime syndicate':{skills:{Intimidation:5,Streetwise:5}},
+  'Ridge Racer':{skills:{Piloting:6},attrs:{WITS:1}},
+  'Genome Soldier':{choice_skills:[{count:2,options:['Heavy_Weapons','Martial_Arts','Piloting','Tactics'],rank:5,label:'Choose 2 combat skills at rank 5'}],attrs:{PHYSICAL:1,ACUITY:1,ENDURANCE:1,WILLPOWER:1}},
+  'Drifter':{all_skills:2},
+  'Deep space explorer':{attrs:{WILLPOWER:1}},
+  'Darkspacer':{attrs:{ENDURANCE:1}},
+  'Family of thieves':{attrs:{ACUITY:1}},
+  'Sorcerous background':{attrs:{WITS:1},chi:2},
+  'Imaginary friend':{attrs:{ACUITY:1}},
+  'Warrior of Titan':{attrs:{ENDURANCE:1}},
+  'Bonded laborer':{attrs:{ENDURANCE:1,PHYSICAL:1,WILLPOWER:1}},
+  'Pit Slave':{health:2,morale:2},
+  'Mangaran Brave':{health:5,attrs:{WITS:1}},
+  'Skalan Samurai':{attrs:{ENDURANCE:1}},
+  'Chain breaker':{attrs:{SOCIAL:1}},
+  'Matricide':{attrs:{ACUITY:1}},
+  'Politician':{attrs:{SOCIAL:1}},
+  'Data Jockey':{attrs:{MENTAL:1}},
+  'Salvaged Droid':{attrs:{ACUITY:1,MENTAL:1},health:3,morale:3},
+  'Guinnea Pig':{attrs:{ENDURANCE:1}},
+};
+
 function ccMakeFreshState(){
-  const sk={};CC_ALL_SKILLS.forEach(s=>{sk[s]=0;});
+  const sk={};
+  CC_ALL_SKILLS.forEach(s=>{sk[s]=0;sk[s+'_crit']='10';sk[s+'_bonus']=0;});
   return {
     tab:'identity',
     name:'',race:'',occupation:'',background:'',sex:'',age:'',apparent_age:'',
@@ -8294,7 +8320,8 @@ function ccMakeFreshState(){
     WITS:3,WITS_base:3,WITS_perm:3,WITS_bonus:0,
     WILLPOWER:3,WILLPOWER_base:3,WILLPOWER_perm:3,WILLPOWER_bonus:0,
     HEALTH:10,HEALTH_max:10,MORALE:10,MORALE_max:10,CHI:5,CHI_max:5,
-    total_xp:50,credited_xp:0,
+    total_xp:50,credited_xp:0,bg_granted_xp:0,
+    bg_choices:[],bg_choice_done:{},sk_expanded:{},
     init_move:'',init_standard:'',init_quick:'',init_complex:'',
     armorsoak:'',armorsoak_bonus:0,
     ...sk,
@@ -8320,9 +8347,67 @@ const CC_ATTR_RK={PHYSICAL:'physical',MENTAL:'mental',SOCIAL:'social',ACUITY:'ac
 
 function ccGetRaceObj(){return ccState.race?g.races.find(r=>r.name===ccState.race):null;}
 
+function ccGetAttrBase(ab){
+  const ro=ccGetRaceObj();
+  const rs=ro&&ro.stats[CC_ATTR_RK[ab]];
+  const racial=rs?+(rs.avg)||0:0;
+  const bg=BG_GRANTS[ccState.background]||{};
+  return racial+((bg.attrs&&bg.attrs[ab])||0);
+}
+
+function ccRecalcHealthMorale(){
+  const st=ccState;const bg=BG_GRANTS[st.background]||{};
+  st.HEALTH_max=10+(+(st.ENDURANCE_perm)||0)+(+(st.ENDURANCE_bonus)||0)+(bg.health||0);
+  st.MORALE_max=10+(+(st.WILLPOWER_perm)||0)+(+(st.WILLPOWER_bonus)||0)+(bg.morale||0);
+  st.CHI_max=5+(bg.chi||0);
+}
+
+function ccSetAttrPerm(ab,val){
+  const base=ccGetAttrBase(ab);
+  ccState[ab+'_perm']=Math.max(base,+val||0);
+  ccState[ab]=(ccState[ab+'_perm'])+(ccState[ab+'_bonus']||0);
+  ccRecalcHealthMorale();render();
+}
+function ccSetAttrBonus(ab,val){
+  ccState[ab+'_bonus']=+val||0;
+  ccState[ab]=(ccState[ab+'_perm']||0)+(+val||0);
+  ccRecalcHealthMorale();render();
+}
+
+function ccUpdateBgGrantedXP(){
+  const st=ccState;const bg=BG_GRANTS[st.background]||{};
+  let xp=0;
+  if(bg.skills)Object.values(bg.skills).forEach(r=>{xp+=r*(r+1)/2;});
+  if(bg.all_skills){const r=bg.all_skills;xp+=CC_ALL_SKILLS.length*r*(r+1)/2;}
+  if(bg.choice_skills&&st.bg_choice_done){
+    bg.choice_skills.forEach((c,idx)=>{
+      const done=st.bg_choice_done[idx]||[];
+      done.forEach(()=>{xp+=c.rank*(c.rank+1)/2;});
+    });
+  }
+  st.bg_granted_xp=xp;
+}
+
+function ccBgChoicePick(choiceIdx,sk){
+  const st=ccState;const bg=BG_GRANTS[st.background]||{};
+  const choice=bg.choice_skills&&bg.choice_skills[choiceIdx];if(!choice)return;
+  if(!st.bg_choice_done)st.bg_choice_done={};
+  const done=[...(st.bg_choice_done[choiceIdx]||[])];
+  if(done.includes(sk)){
+    st.bg_choice_done[choiceIdx]=done.filter(s=>s!==sk);
+  } else if(done.length<choice.count){
+    done.push(sk);st.bg_choice_done[choiceIdx]=done;
+    st[sk]=Math.max(st[sk]||0,choice.rank);
+  }
+  ccUpdateBgGrantedXP();render();
+}
+
+function ccToggleSkillExpand(sk){
+  if(!ccState.sk_expanded)ccState.sk_expanded={};
+  ccState.sk_expanded[sk]=!ccState.sk_expanded[sk];render();
+}
+
 function ccAttrXPCost(base,cur){
-  // base = racial average (free starting point); cur = current value
-  // negative range: linear 5xp/step; positive range: triangular 5*(n*(n+1)/2)
   if(base===cur)return 0;
   let xp=0;
   if(base<0&&cur<=0){xp=(cur-base)*5;}
@@ -8332,11 +8417,8 @@ function ccAttrXPCost(base,cur){
 }
 
 function ccCalcAttrXP(){
-  const st=ccState;const ro=ccGetRaceObj();
   return CC_ATTR_KEYS.reduce((s,ab)=>{
-    const rs=ro&&ro.stats[CC_ATTR_RK[ab]];
-    const base=rs?+(rs.avg)||0:+(st[ab+'_base'])||0;
-    return s+ccAttrXPCost(base,+(st[ab])||0);
+    return s+ccAttrXPCost(ccGetAttrBase(ab),+(ccState[ab+'_perm'])||0);
   },0);
 }
 
@@ -8350,8 +8432,15 @@ function ccApplyRaceDefaults(raceObj){
   if(!raceObj)return;
   CC_ATTR_KEYS.forEach(ab=>{
     const rs=raceObj.stats[CC_ATTR_RK[ab]];
-    if(rs){const avg=+(rs.avg)||0;ccState[ab]=avg;ccState[ab+'_base']=avg;ccState[ab+'_perm']=avg;}
+    if(rs){const avg=+(rs.avg)||0;ccState[ab+'_base']=avg;ccState[ab+'_perm']=avg;}
   });
+  // Re-apply bg attr bonuses so perm >= base
+  CC_ATTR_KEYS.forEach(ab=>{
+    const base=ccGetAttrBase(ab);
+    if((ccState[ab+'_perm']||0)<base)ccState[ab+'_perm']=base;
+    ccState[ab]=(ccState[ab+'_perm']||0)+(ccState[ab+'_bonus']||0);
+  });
+  ccRecalcHealthMorale();
 }
 
 function ccRollNaturalBirth(){
@@ -8373,12 +8462,14 @@ function ccXPBar(){
   const attrXP=ccCalcAttrXP();
   const skillXP=(()=>{let s=0;CC_ALL_SKILLS.forEach(sk=>{const v=st[sk]||0;s+=v*(v+1)/2;});return s;})();
   const spent=attrXP+skillXP;
-  const avail=(+(st.total_xp)||0)+(+(st.credited_xp)||0)-spent;
+  const bgXP=+(st.bg_granted_xp)||0;
+  const avail=(+(st.total_xp)||0)+(+(st.credited_xp)||0)+bgXP-spent;
   const over=avail<0;
   let h='<div style="background:rgba(0,0,0,.5);border:1px solid rgba(0,200,255,.25);border-radius:5px;padding:8px 14px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;">';
   h+='<span style="font-family:\'Orbitron\',sans-serif;font-size:10px;color:var(--a);letter-spacing:1px;">XP</span>';
   h+='<span style="font-size:12px;color:#aaa;">Pool: <b style="color:var(--tx);">'+(+(st.total_xp)||0)+'</b></span>';
   h+='<span style="font-size:12px;color:#aaa;">Credited: <b style="color:var(--gr);">'+(+(st.credited_xp)||0)+'</b></span>';
+  if(bgXP>0)h+='<span style="font-size:12px;color:#aaa;">BG Grant: <b style="color:var(--ye);">'+bgXP+'</b></span>';
   h+='<span style="font-size:11px;color:#777;">Attr XP: '+attrXP+'</span>';
   h+='<span style="font-size:11px;color:#777;">Skill XP: '+skillXP+'</span>';
   h+='<span style="font-size:12px;color:var(--a2);">Spent: <b>'+spent+'</b></span>';
@@ -8408,6 +8499,21 @@ function ccPickFromCache(pidx){
     if(b.traits&&b.traits[1])lines.push('\nBENEFIT 2:\n'+b.traits[1]);
     if(b.traits&&b.traits[2])lines.push('\nDRAWBACK:\n'+b.traits[2]);
     ccState.background_desc=lines.join('\n');
+    // Apply background grants
+    const bg=BG_GRANTS[b.name]||{};
+    if(bg.skills)Object.entries(bg.skills).forEach(([sk,r])=>{ccState[sk]=Math.max(ccState[sk]||0,r);});
+    if(bg.all_skills){const r=bg.all_skills;CC_ALL_SKILLS.forEach(sk=>{ccState[sk]=Math.max(ccState[sk]||0,r);});}
+    // Set pending choices
+    ccState.bg_choices=bg.choice_skills?bg.choice_skills.map((c,i)=>({...c,idx:i})):[];
+    ccState.bg_choice_done={};
+    // Update perm values to reflect bg attr bonuses
+    CC_ATTR_KEYS.forEach(ab=>{
+      const base=ccGetAttrBase(ab);
+      if((ccState[ab+'_perm']||0)<base)ccState[ab+'_perm']=base;
+      ccState[ab]=(ccState[ab+'_perm']||0)+(ccState[ab+'_bonus']||0);
+    });
+    ccUpdateBgGrantedXP();
+    ccRecalcHealthMorale();
   }
   else if(type==='occupation'){const o=item;ccState.occupation=o.name||'';const lines=[o.desc||'',...(o.details||[])].filter(Boolean);ccState.occupation_desc=lines.join('\n');}
   ccState.picker=null;ccState.pickerSearch='';render();
@@ -8422,14 +8528,16 @@ function ccExportRoll20(){
   a('background',st.background||'');a('sex',st.sex||'');a('age',st.age||0);a('appararent_age',st.apparent_age||0);
   a('background_desc',st.background_desc||'');a('occupation_desc',st.occupation_desc||'');
   ['PHYSICAL','MENTAL','SOCIAL','ACUITY','ENDURANCE','SPEED','WITS','WILLPOWER'].forEach(ab=>{
-    a(ab,st[ab]||0);a(ab+'_base',st[ab+'_base']||0);a(ab+'_perm',st[ab+'_perm']||0);a(ab+'_bonus',st[ab+'_bonus']||0);
+    const eff=(st[ab+'_perm']||0)+(st[ab+'_bonus']||0);
+    a(ab,eff);a(ab+'_base',ccGetAttrBase(ab));a(ab+'_perm',st[ab+'_perm']||0);a(ab+'_bonus',st[ab+'_bonus']||0);
   });
+  ccRecalcHealthMorale();
   a('HEALTH',st.HEALTH||0,st.HEALTH_max||0);a('MORALE',st.MORALE||0,st.MORALE_max||0);a('CHI',st.CHI||0,st.CHI_max||0);
-  a('total_xp',st.total_xp||0);a('credited_xp',st.credited_xp||0);a('attribute_xp',st.attribute_xp||0);
+  a('total_xp',st.total_xp||0);a('credited_xp',st.credited_xp||0);a('bg_granted_xp',st.bg_granted_xp||0);a('attribute_xp',ccCalcAttrXP());
   a('spent_xp',spent);a('available_xp',available);
   a('init_move',st.init_move||'');a('init_standard',st.init_standard||'');a('init_quick',st.init_quick||'');a('init_complex',st.init_complex||'');
   a('armorsoak',st.armorsoak||'');a('armorsoak_bonus',st.armorsoak_bonus||0);
-  CC_ALL_SKILLS.forEach(s=>{a(s,st[s]||0);a(s+'_bonus',0);});
+  CC_ALL_SKILLS.forEach(s=>{a(s,st[s]||0);a(s+'_bonus',st[s+'_bonus']||0);a(s+'_crit',st[s+'_crit']||'10');});
   for(let i=1;i<=10;i++){const t=st.talents[i-1]||{};a('talent'+i+'_name',t.name||'');a('talent'+i+'_skill',t.skill||'');a('talent'+i+'_category',t.category||'');a('talent'+i+'_xp_cost',t.xp_cost||0);a('talent'+i+'_effect',t.effect||'');}
   for(let i=1;i<=5;i++){const e=st.evolutions[i-1]||{};a('evo'+i+'_name',e.name||'');a('evo'+i+'_type',e.type||'');a('evo'+i+'_tier',e.tier||'');a('evo'+i+'_effect',e.effect||'');}
   for(let i=1;i<=6;i++){const w=st.weapons[i-1]||{};a('weapon'+i+'_name',w.name||'');a('weapon'+i+'_skill',w.skill||'');a('weapon'+i+'_dmg',w.dmg||'');a('weapon'+i+'_dmgtype',w.dmgtype||'');a('weapon'+i+'_power',w.power||0);a('weapon'+i+'_expertise',w.expertise||0);a('weapon'+i+'_special',w.special||'');a('weapon'+i+'_close_range',w.close_range||'');a('weapon'+i+'_medium_range',w.medium_range||'');a('weapon'+i+'_long_range',w.long_range||'');a('weapon'+i+'_rof',w.rof||'');a('weapon'+i+'_ammo',w.ammo||0);a('weapon'+i+'_currentammo',w.currentammo||0);a('weapon'+i+'_reload',w.reload||'');a('weapon'+i+'_dmgtarget',w.dmgtarget||'');}
@@ -8609,19 +8717,48 @@ function ccRenderAttributes(){
   const st=ccState;
   const raceObj=st.race?g.races.find(r=>r.name===st.race):null;
   const ABS=['PHYSICAL','MENTAL','SOCIAL','ACUITY','ENDURANCE','SPEED','WITS','WILLPOWER'];
-  const RK={PHYSICAL:'physical',MENTAL:'mental',SOCIAL:'social',ACUITY:'acuity',ENDURANCE:'endurance',SPEED:'speed',WITS:'wits',WILLPOWER:'willpower'};
-  let h=ccSecHead('CORE ATTRIBUTES'+(st.race?' — '+esc(st.race):''));
+  ccRecalcHealthMorale();
+  let h=ccSecHead('CORE ATTRIBUTES'+(st.race?' — '+esc(st.race):'')+(st.background?' · '+esc(st.background):''));
+  h+='<div style="font-size:10px;color:#666;margin-bottom:8px;">Base = racial avg + background bonus (free). Perm = XP-purchased. Final = Perm + Bonus.</div>';
   h+='<table style="width:100%;border-collapse:collapse;">';
-  h+='<tr style="font-size:10px;color:#888;"><th style="text-align:left;padding:4px 8px;">Attribute</th><th style="width:80px;padding:4px;">Base</th><th style="width:80px;padding:4px;">Perm</th><th style="width:80px;padding:4px;">Current</th><th style="width:80px;padding:4px;">Bonus</th>';
-  if(raceObj)h+='<th style="padding:4px;color:var(--a3);width:140px;">Racial Range</th>';
+  h+='<tr style="font-size:10px;color:#888;">';
+  h+='<th style="text-align:left;padding:4px 8px;">Attribute</th>';
+  h+='<th style="width:60px;padding:4px;">Base<br><span style="font-size:9px;color:#444;">free</span></th>';
+  h+='<th style="width:80px;padding:4px;">Perm<br><span style="font-size:9px;color:#444;">XP-bought</span></th>';
+  h+='<th style="width:120px;padding:4px;">Bonus<br><span style="font-size:9px;color:#444;">circumstantial</span></th>';
+  h+='<th style="width:55px;padding:4px;">Final<br><span style="font-size:9px;color:#444;">perm+bonus</span></th>';
+  if(raceObj)h+='<th style="padding:4px;color:var(--a3);width:130px;">Racial Range</th>';
   h+='</tr>';
   ABS.forEach(ab=>{
-    const rs=raceObj&&raceObj.stats[RK[ab]]?raceObj.stats[RK[ab]]:null;
+    const base=ccGetAttrBase(ab);
+    const perm=+(st[ab+'_perm'])||0;
+    const bonus=+(st[ab+'_bonus'])||0;
+    const final_v=perm+bonus;
+    const rs=raceObj&&raceObj.stats[CC_ATTR_RK[ab]]?raceObj.stats[CC_ATTR_RK[ab]]:null;
+    const xpCost=ccAttrXPCost(base,perm);
+    const bgBonus=(BG_GRANTS[st.background]||{}).attrs;
+    const hasBgBonus=bgBonus&&bgBonus[ab];
     h+='<tr style="border-top:1px solid rgba(255,255,255,.06);">';
     h+='<td style="padding:5px 8px;font-family:\'Orbitron\',sans-serif;font-size:11px;color:var(--a);">'+ab+'</td>';
-    [ab+'_base',ab+'_perm',ab,ab+'_bonus'].forEach(k=>{
-      h+='<td style="padding:3px 4px;text-align:center;"><input type="number" value="'+(+(st[k])||0)+'" style="width:68px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.22);color:var(--tx);padding:3px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:13px;" oninput="ccState[\''+k+'\']=+this.value||0;"></td>';
+    // Base — read-only
+    h+='<td style="padding:3px 4px;text-align:center;">';
+    h+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:15px;color:'+(hasBgBonus?'var(--ye)':'var(--a3)')+';font-weight:bold;">'+base+'</div>';
+    if(hasBgBonus)h+='<div style="font-size:9px;color:var(--ye);">+'+bgBonus[ab]+' bg</div>';
+    h+='</td>';
+    // Perm — editable onchange
+    h+='<td style="padding:3px 4px;text-align:center;">';
+    h+='<input type="number" value="'+perm+'" style="width:56px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.22);color:var(--tx);padding:3px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:13px;" onchange="ccSetAttrPerm(\''+ab+'\',this.value);">';
+    if(xpCost>0)h+='<div style="font-size:9px;color:var(--a2);">'+xpCost+' xp</div>';
+    h+='</td>';
+    // Bonus dropdown
+    h+='<td style="padding:3px 4px;text-align:center;"><select style="'+CC_SEL+'" onchange="ccSetAttrBonus(\''+ab+'\',this.value);">';
+    [['None',0],['Small Bonus +1',1],['Large Bonus +3',3],['Small Penalty −1',-1],['Large Penalty −3',-3]].forEach(([lbl,val])=>{
+      h+='<option value="'+val+'"'+(bonus===val?' selected':'')+'>'+lbl+'</option>';
     });
+    h+='</select></td>';
+    // Final value
+    h+='<td style="padding:3px 4px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:16px;font-weight:bold;color:var(--tx);">'+final_v+'</td>';
+    // Racial range
     if(raceObj){
       h+='<td style="padding:3px 8px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:11px;">';
       h+=rs?esc(rs.min)+' / <b style="color:var(--a);">'+esc(rs.avg)+'</b> / '+esc(rs.max):'<span style="color:#444;">—</span>';
@@ -8630,12 +8767,29 @@ function ccRenderAttributes(){
     h+='</tr>';
   });
   h+='</table>';
+  // Health/Morale/CHI — max values auto-calculated, current values editable
+  const bg_obj=BG_GRANTS[st.background]||{};
   h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:18px;">';
   h+='<div>'+ccSecHead('HEALTH & MORALE');
+  h+='<div style="font-size:10px;color:#666;margin-bottom:6px;">Max HP = 10 + END · Max Morale = 10 + WILL · CHI = 5</div>';
   h+='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">';
-  [['HEALTH','HP Curr'],['HEALTH_max','HP Max'],['MORALE','Morale'],['MORALE_max','Morale Max'],['CHI','CHI'],['CHI_max','CHI Max']].forEach(([k,lbl])=>{
-    h+='<div><div style="font-size:10px;color:#888;margin-bottom:2px;">'+lbl+'</div><input type="number" value="'+(+(st[k])||0)+'" style="width:100%;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.22);color:var(--tx);padding:4px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:13px;box-sizing:border-box;" oninput="ccState[\''+k+'\']=+this.value||0;"></div>';
+  const hpMax=st.HEALTH_max,mMax=st.MORALE_max,chiMax=st.CHI_max;
+  [['HEALTH','HP Curr',false],['HEALTH_max','HP Max ✦',true,hpMax],['MORALE','Morale',false],['MORALE_max','Morale Max ✦',true,mMax],['CHI','CHI',false],['CHI_max','CHI Max ✦',true,chiMax]].forEach(([k,lbl,auto,autoVal])=>{
+    h+='<div><div style="font-size:10px;color:#888;margin-bottom:2px;">'+lbl+'</div>';
+    if(auto){
+      h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.1);color:var(--gr);padding:4px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:13px;border-radius:3px;">'+autoVal+'</div>';
+    } else {
+      h+='<input type="number" value="'+(+(st[k])||0)+'" style="width:100%;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.22);color:var(--tx);padding:4px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:13px;box-sizing:border-box;" oninput="ccState[\''+k+'\']=+this.value||0;">';
+    }
+    h+='</div>';
   });
+  if(bg_obj.health||bg_obj.morale||bg_obj.chi){
+    h+='<div style="grid-column:1/-1;font-size:10px;color:var(--ye);">Background bonus: ';
+    if(bg_obj.health)h+='+'+bg_obj.health+' HP ';
+    if(bg_obj.morale)h+='+'+bg_obj.morale+' Morale ';
+    if(bg_obj.chi)h+='+'+bg_obj.chi+' CHI ';
+    h+='</div>';
+  }
   h+='</div></div>';
   h+='<div>'+ccSecHead('INITIATIVE');
   h+='<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;">';
@@ -8649,20 +8803,75 @@ function ccRenderAttributes(){
 function ccRenderSkills(){
   const st=ccState;
   const spent=ccCalcSpentXP();
-  const avail=(+(st.total_xp)||0)-spent+(+(st.credited_xp)||0);
+  const bgXP=+(st.bg_granted_xp)||0;
+  const avail=(+(st.total_xp)||0)+(+(st.credited_xp)||0)+bgXP-spent;
   let h='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">';
   h+='<div style="font-family:\'Orbitron\',sans-serif;font-size:12px;color:var(--a);">SKILLS</div>';
-  h+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:12px;">Spent: <span style="color:var(--a2);">'+spent+'</span> | Available: <span style="color:'+(avail>=0?'var(--gr)':'var(--re)')+';">'+avail+'</span> | <span style="font-size:10px;color:#666;">Cost = N×(N+1)÷2</span></div>';
+  h+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:12px;">Spent: <span style="color:var(--a2);">'+spent+'</span> | Available: <span style="color:'+(avail>=0?'var(--gr)':'var(--re)')+';">'+avail+'</span> | <span style="font-size:10px;color:#666;">Cost = N×(N+1)÷2 · Click skill name to expand</span></div>';
   h+='</div>';
+  // Background skill choices pending
+  const bgChoices=st.bg_choices||[];
+  const bg=BG_GRANTS[st.background]||{};
+  const pendingChoices=bgChoices.filter(c=>{
+    const done=(st.bg_choice_done||{})[c.idx]||[];
+    return done.length<c.count;
+  });
+  if(pendingChoices.length>0){
+    h+='<div style="background:rgba(255,200,0,.07);border:1px solid var(--ye);border-radius:6px;padding:10px;margin-bottom:14px;">';
+    h+='<div style="font-size:12px;color:var(--ye);font-weight:bold;margin-bottom:8px;">⚠ Background Choices Pending — '+esc(st.background)+'</div>';
+    pendingChoices.forEach(c=>{
+      const done=(st.bg_choice_done||{})[c.idx]||[];
+      const remaining=c.count-done.length;
+      h+='<div style="margin-bottom:8px;">';
+      h+='<div style="font-size:11px;color:#ccc;margin-bottom:5px;">'+esc(c.label)+' <span style="color:#888;">('+remaining+' more to choose)</span></div>';
+      h+='<div style="display:flex;flex-wrap:wrap;gap:4px;">';
+      const opts=c.from?({'PHYSICAL':CC_SKILLS_PHYS,'MENTAL':CC_SKILLS_MENT,'SOCIAL':CC_SKILLS_SOCI,'ACUITY':CC_SKILLS_ACUI}[c.from]||[]):( c.options||[]);
+      opts.forEach(sk=>{
+        const picked=done.includes(sk);
+        h+='<button onclick="ccBgChoicePick('+c.idx+',\''+sk+'\');" style="background:'+(picked?'rgba(255,200,0,.3)':'rgba(0,0,0,.4)')+';border:1px solid '+(picked?'var(--ye)':'rgba(255,255,255,.2)')+';color:'+(picked?'var(--ye)':'#aaa')+';padding:3px 8px;border-radius:3px;cursor:pointer;font-size:11px;">'+(picked?'✓ ':'')+sk.replace(/_/g,' ')+'</button>';
+      });
+      h+='</div></div>';
+    });
+    h+='</div>';
+  }
+  // Get bg fixed/all skill grants for indicator
+  const bgSkGrants={};
+  if(bg.skills)Object.entries(bg.skills).forEach(([sk,r])=>{bgSkGrants[sk]=r;});
+  if(bg.all_skills)CC_ALL_SKILLS.forEach(sk=>{bgSkGrants[sk]=bg.all_skills;});
+  if(bg.choice_skills)(st.bg_choice_done?bg.choice_skills.forEach((c,idx)=>{const done=(st.bg_choice_done[idx]||[]);done.forEach(sk=>{bgSkGrants[sk]=c.rank;});}):null);
+  const CRIT_OPTS=['10','9-10','8-10','7-10','6-10','5-10','4-10','3-10','2-10','1-10'];
   h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">';
   [['Physical',CC_SKILLS_PHYS,'PHYSICAL'],['Mental',CC_SKILLS_MENT,'MENTAL'],['Social',CC_SKILLS_SOCI,'SOCIAL'],['Acuity',CC_SKILLS_ACUI,'ACUITY']].forEach(([grp,skills,ab])=>{
     h+='<div>';
     h+='<div style="font-family:\'Orbitron\',sans-serif;font-size:11px;color:var(--a);margin-bottom:8px;text-align:center;background:rgba(0,200,255,.08);padding:4px 2px;border-radius:3px;">'+grp+'<span style="font-size:9px;color:#666;display:block;">'+ab+'</span></div>';
     skills.forEach(sk=>{
       const v=+(st[sk])||0;const cost=v*(v+1)/2;
-      h+='<div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">';
-      h+='<input type="number" min="0" max="10" value="'+v+'" style="width:44px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.22);color:var(--tx);padding:2px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:13px;" onchange="ccState[\''+sk+'\']=Math.max(0,Math.min(10,+this.value||0));render();">';
-      h+='<div style="flex:1;"><div style="font-size:11px;">'+sk.replace(/_/g,' ')+'</div><div style="font-size:9px;color:#555;">'+cost+' xp'+(v<10?' | +'+( v+1)+' next':'')+'</div></div>';
+      const expanded=!!(st.sk_expanded&&st.sk_expanded[sk]);
+      const isBgGrant=bgSkGrants[sk]&&v<=bgSkGrants[sk];
+      const skCrit=st[sk+'_crit']||'10';
+      const skBonus=+(st[sk+'_bonus'])||0;
+      const skBonusLbl=skBonus===1?'+1':skBonus===3?'+3':skBonus===-1?'−1':skBonus===-3?'−3':'';
+      h+='<div style="border:1px solid rgba(255,255,255,'+(expanded?'.12':'.04')+');border-radius:3px;margin-bottom:3px;">';
+      h+='<div style="display:flex;align-items:center;gap:4px;padding:2px 4px;">';
+      h+='<input type="number" min="0" max="10" value="'+v+'" style="width:40px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.22);color:var(--tx);padding:2px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:13px;" onclick="event.stopPropagation();" onchange="ccState[\''+sk+'\']=Math.max(0,Math.min(10,+this.value||0));render();">';
+      h+='<div style="flex:1;cursor:pointer;" onclick="ccToggleSkillExpand(\''+sk+'\');">';
+      h+='<div style="font-size:11px;color:'+(isBgGrant?'var(--ye)':'var(--tx)')+';">'+sk.replace(/_/g,' ')+(isBgGrant?'<span style="font-size:9px;color:var(--ye);margin-left:3px;">BG</span>':'')+'</div>';
+      h+='<div style="font-size:9px;color:#555;">'+cost+' xp'+(v<10?' | +'+(v+1)+' next':'')+(skBonus!==0?' | '+skBonusLbl:'')+' | ▸</div>';
+      h+='</div></div>';
+      if(expanded){
+        h+='<div style="padding:5px 8px;background:rgba(0,0,0,.25);border-top:1px solid rgba(255,255,255,.06);">';
+        h+='<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">';
+        h+='<div><div style="font-size:9px;color:#666;margin-bottom:2px;">Crit Range</div>';
+        h+='<select style="background:#111;border:1px solid rgba(0,200,255,.2);color:var(--tx);padding:2px 4px;font-size:10px;" onchange="ccState[\''+sk+'_crit\']=this.value;">';
+        CRIT_OPTS.forEach(opt=>{h+='<option value="'+opt+'"'+(skCrit===opt?' selected':'')+'>'+opt+'</option>';});
+        h+='</select></div>';
+        h+='<div><div style="font-size:9px;color:#666;margin-bottom:2px;">Modifier</div>';
+        h+='<select style="background:#111;border:1px solid rgba(0,200,255,.2);color:var(--tx);padding:2px 4px;font-size:10px;" onchange="ccState[\''+sk+'_bonus\']=+this.value;">';
+        [['None',0],['Small +1',1],['Large +3',3],['Small −1',-1],['Large −3',-3]].forEach(([lbl,val])=>{
+          h+='<option value="'+val+'"'+(skBonus===val?' selected':'')+'>'+lbl+'</option>';
+        });
+        h+='</select></div></div></div>';
+      }
       h+='</div>';
     });
     h+='</div>';
