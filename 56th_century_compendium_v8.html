@@ -8329,7 +8329,15 @@ function ccPickFromCache(pidx){
   else if(type==='armor'){const a=item;const ar=ccState.armor[slot];ar.name=a.name||'';ar.type=a.category||'';}
   else if(type==='datacom'){const d=item;const dc=ccState.datacoms[slot];dc.name=d.name||'';dc.cpu=d.cpu||0;dc.mem=d.memory||0;dc.nanite=d.nanite||0;dc.expertise=d.expertise_bonus||0;['phys','energy','tech','spirit'].forEach(k=>{dc['def_'+k]=d['def_'+k]||'None';});dc.special=(Array.isArray(d.special)?d.special.join(' '):d.special)||'';}
   else if(type==='program'){const p=item;const pr=ccState.programs[slot];pr.name=p.name||'';pr.type=p.type||'';pr.cpu=p.cpu||0;pr.mem=p.memory||0;pr.passive=p.passive||'';pr.active=p.active||'';}
-  else if(type==='background'){const b=item;ccState.background=b.name||'';const lines=[b.desc||'',...(b.traits||[])].filter(Boolean);ccState.background_desc=lines.join('\n');}
+  else if(type==='background'){
+    const b=item;ccState.background=b.name||'';
+    const lines=[];
+    if(b.desc)lines.push(b.desc);
+    if(b.traits&&b.traits[0])lines.push('\nBENEFIT 1:\n'+b.traits[0]);
+    if(b.traits&&b.traits[1])lines.push('\nBENEFIT 2:\n'+b.traits[1]);
+    if(b.traits&&b.traits[2])lines.push('\nDRAWBACK:\n'+b.traits[2]);
+    ccState.background_desc=lines.join('\n');
+  }
   else if(type==='occupation'){const o=item;ccState.occupation=o.name||'';const lines=[o.desc||'',...(o.details||[])].filter(Boolean);ccState.occupation_desc=lines.join('\n');}
   ccState.picker=null;ccState.pickerSearch='';render();
 }
@@ -8391,7 +8399,11 @@ function ccRenderPicker(){
   else if(type==='armor'){items=g.armor||[];title='Armor for slot '+(slot+1);bdr='var(--gr)';}
   else if(type==='datacom'){items=g.datacoms||[];title='Datacom for slot '+(slot+1);}
   else if(type==='program'){items=(g.software&&g.software.programs)||[];title='Program for slot '+(slot+1);bdr='var(--a3)';}
-  else if(type==='background'){items=g.backgrounds||[];title='Background';bdr='var(--ye)';}
+  else if(type==='background'){
+    const rf=st.race;
+    items=(g.backgrounds||[]).filter(b=>!rf||b.race==='ANY'||b.race===rf);
+    title='Background'+(rf?' ('+rf+' + ANY)':'');bdr='var(--ye)';
+  }
   else if(type==='occupation'){items=g.occupations||[];title='Occupation';bdr='var(--a2)';}
   const matches=items.filter(x=>{
     if(!pq)return true;
@@ -8414,7 +8426,13 @@ function ccRenderPicker(){
     else if(type==='armor')sub=esc(x.category||'');
     else if(type==='datacom')sub='CPU '+(x.cpu||'?')+' | Mem '+(x.memory||'?')+' | Nanite '+(x.nanite||'?');
     else if(type==='program')sub=esc(x.type||'')+(x.cpu?' | CPU '+x.cpu:'')+(x.memory?' | Mem '+x.memory:'');
-    else if(type==='background')sub=(x.race?'Race: '+esc(x.race)+' · ':'')+(x.desc||'').slice(0,80)+(x.desc&&x.desc.length>80?'…':'');
+    else if(type==='background'){
+      const raceTag=x.race&&x.race!=='ANY'?'<span style="color:var(--ye);font-weight:bold;">'+esc(x.race)+'</span> · ':'';
+      const b0=x.traits&&x.traits[0]?x.traits[0].slice(0,60)+(x.traits[0].length>60?'…':''):'';
+      const b2=x.traits&&x.traits[2]?x.traits[2].slice(0,50)+(x.traits[2].length>50?'…':''):'';
+      sub=raceTag+(b0?'<span style="color:var(--gr);">✓ '+esc(b0)+'</span>':'')+
+          (b2?'<br><span style="color:var(--re);">✗ '+esc(b2)+'</span>':'');
+    }
     else if(type==='occupation')sub=(x.desc||'').slice(0,80)+((x.desc||'').length>80?'…':'');
     h+='<div style="padding:5px 8px;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer;" onclick="ccPickFromCache('+pi+');">';
     h+='<div style="font-size:12px;color:var(--tx);">'+esc(x.name||'')+'</div>';
