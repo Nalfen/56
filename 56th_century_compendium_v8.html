@@ -8330,7 +8330,7 @@ function ccMakeFreshState(){
     ...sk,
     talents:Array(3).fill(0).map(()=>({name:'',skill:'',category:'',xp_cost:0,effect:'',credited:false})),
     evolutions:Array(2).fill(0).map(()=>({name:'',type:'',tier:'',effect:'',credited:false})),
-    weapons:Array(6).fill(0).map(()=>({name:'',skill:'',dmg:'',dmgtype:'',power:0,expertise:0,special:'',close_range:'',medium_range:'',long_range:'',rof:'',ammo:0,currentammo:0,reload:'',dmgtarget:'',mfr:'Generic',base_data:null,options:[]})),
+    weapons:Array(6).fill(0).map(()=>({name:'',skill:'',dmg:'',dmgtype:'',power:0,expertise:0,special:'',close_range:'',medium_range:'',long_range:'',rof:'',ammo:0,currentammo:0,reload:'',mfr:'Generic',base_data:null,options:[]})),
     armor:Array(2).fill(0).map(()=>({name:'',type:'',def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',special:'',soak_expr:'',charges:0,regen:'',mfr:'Generic',base_data:null,options:[]})),
     datacoms:Array(3).fill(0).map(()=>({name:'',cpu:0,mem:0,nanite:0,def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',def_dmg:'',int_ext:0,int_int:0,int_main:0,expertise:0,special:'',mfr:'Generic',base_data:null,options:[]})),
     programs:Array(10).fill(0).map(()=>({name:'',type:'',cpu:0,mem:0,passive:'',active:''})),
@@ -8530,6 +8530,9 @@ function ccApplyMfrToWpnSlot(i){
   if(!applied)return;
   wp.name=applied.name||'';wp.dmg=applied.damage||'';wp.dmgtype=applied.type||'';
   wp.special=(Array.isArray(applied.special)?applied.special.join(' '):applied.special)||'';
+  wp.close_range=applied.range_short||'';wp.medium_range=applied.range_med||'';wp.long_range=applied.range_long||'';
+  wp.rof=applied.rof||'';wp.ammo=+(applied.ammo)||0;wp.reload=applied.reload||'';
+  wp.power=+(applied.power_num)||0;wp.expertise=+(applied.expertise)||0;
 }
 
 function ccApplyMfrToArmorSlot(i){
@@ -8704,6 +8707,9 @@ function ccPickFromCache(pidx){
     const aw=applied||w;
     wp.name=aw.name||'';wp.dmg=aw.damage||'';wp.dmgtype=aw.type||'';
     wp.special=(Array.isArray(aw.special)?aw.special.join(' '):aw.special)||'';
+    wp.close_range=aw.range_short||'';wp.medium_range=aw.range_med||'';wp.long_range=aw.range_long||'';
+    wp.rof=aw.rof||'';wp.ammo=+(aw.ammo)||0;wp.reload=aw.reload||'';
+    wp.power=+(aw.power_num)||0;wp.expertise=+(aw.expertise)||0;
   }
   else if(type==='armor'){
     const a=item;const ar=ccState.armor[slot];
@@ -9381,10 +9387,9 @@ function ccRenderCombat(){
     h+='<input type="number" placeholder="Ammo" value="'+(+(w.ammo)||0)+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].ammo=+this.value||0;">';
     h+='<input type="number" placeholder="Exp" value="'+(+(w.expertise)||0)+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].expertise=+this.value||0;">';
     h+='</div>';
-    h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-bottom:5px;">';
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:5px;">';
     h+='<input type="number" placeholder="Power" value="'+(+(w.power)||0)+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].power=+this.value||0;">';
     h+='<input type="text" placeholder="Reload" value="'+esc(w.reload||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].reload=this.value;">';
-    h+='<input type="text" placeholder="DMG Target" value="'+esc(w.dmgtarget||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].dmgtarget=this.value;">';
     h+='</div>';
     // Options row
     h+='<div style="display:flex;flex-wrap:wrap;gap:4px;align-items:center;">';
