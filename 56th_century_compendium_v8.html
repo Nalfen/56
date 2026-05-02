@@ -8284,16 +8284,17 @@ function ccMakeFreshState(){
     tab:'identity',
     name:'',race:'',occupation:'',background:'',sex:'',age:'',apparent_age:'',
     background_desc:'',occupation_desc:'',
-    PHYSICAL:1,PHYSICAL_base:1,PHYSICAL_perm:1,PHYSICAL_bonus:0,
-    MENTAL:1,MENTAL_base:1,MENTAL_perm:1,MENTAL_bonus:0,
-    SOCIAL:1,SOCIAL_base:1,SOCIAL_perm:1,SOCIAL_bonus:0,
-    ACUITY:1,ACUITY_base:1,ACUITY_perm:1,ACUITY_bonus:0,
+    clone:null,attr_variance:{},
+    PHYSICAL:0,PHYSICAL_base:0,PHYSICAL_perm:0,PHYSICAL_bonus:0,
+    MENTAL:0,MENTAL_base:0,MENTAL_perm:0,MENTAL_bonus:0,
+    SOCIAL:0,SOCIAL_base:0,SOCIAL_perm:0,SOCIAL_bonus:0,
+    ACUITY:0,ACUITY_base:0,ACUITY_perm:0,ACUITY_bonus:0,
     ENDURANCE:3,ENDURANCE_base:3,ENDURANCE_perm:3,ENDURANCE_bonus:0,
     SPEED:3,SPEED_base:3,SPEED_perm:3,SPEED_bonus:0,
     WITS:3,WITS_base:3,WITS_perm:3,WITS_bonus:0,
     WILLPOWER:3,WILLPOWER_base:3,WILLPOWER_perm:3,WILLPOWER_bonus:0,
     HEALTH:10,HEALTH_max:10,MORALE:10,MORALE_max:10,CHI:5,CHI_max:5,
-    total_xp:0,credited_xp:0,attribute_xp:0,
+    total_xp:50,credited_xp:0,
     init_move:'',init_standard:'',init_quick:'',init_complex:'',
     armorsoak:'',armorsoak_bonus:0,
     ...sk,
@@ -8314,11 +8315,80 @@ function ccMakeFreshState(){
 let ccState=ccMakeFreshState();
 let ccPickerCache=[];
 
+const CC_ATTR_KEYS=['PHYSICAL','MENTAL','SOCIAL','ACUITY','ENDURANCE','SPEED','WITS','WILLPOWER'];
+const CC_ATTR_RK={PHYSICAL:'physical',MENTAL:'mental',SOCIAL:'social',ACUITY:'acuity',ENDURANCE:'endurance',SPEED:'speed',WITS:'wits',WILLPOWER:'willpower'};
+
+function ccGetRaceObj(){return ccState.race?g.races.find(r=>r.name===ccState.race):null;}
+
+function ccAttrXPCost(base,cur){
+  // base = racial average (free starting point); cur = current value
+  // negative range: linear 5xp/step; positive range: triangular 5*(n*(n+1)/2)
+  if(base===cur)return 0;
+  let xp=0;
+  if(base<0&&cur<=0){xp=(cur-base)*5;}
+  else if(base<0&&cur>0){xp=(-base*5)+(5*cur*(cur+1)/2);}
+  else{xp=5*(cur*(cur+1)/2)-5*(base*(base+1)/2);}
+  return Math.max(0,xp);
+}
+
+function ccCalcAttrXP(){
+  const st=ccState;const ro=ccGetRaceObj();
+  return CC_ATTR_KEYS.reduce((s,ab)=>{
+    const rs=ro&&ro.stats[CC_ATTR_RK[ab]];
+    const base=rs?+(rs.avg)||0:+(st[ab+'_base'])||0;
+    return s+ccAttrXPCost(base,+(st[ab])||0);
+  },0);
+}
+
 function ccCalcSpentXP(){
-  let s=+(ccState.attribute_xp)||0;
+  let s=ccCalcAttrXP();
   CC_ALL_SKILLS.forEach(sk=>{const v=ccState[sk]||0;s+=v*(v+1)/2;});
   return s;
 }
+
+function ccApplyRaceDefaults(raceObj){
+  if(!raceObj)return;
+  CC_ATTR_KEYS.forEach(ab=>{
+    const rs=raceObj.stats[CC_ATTR_RK[ab]];
+    if(rs){const avg=+(rs.avg)||0;ccState[ab]=avg;ccState[ab+'_base']=avg;ccState[ab+'_perm']=avg;}
+  });
+}
+
+function ccRollNaturalBirth(){
+  const ro=ccGetRaceObj();
+  if(!ro){alert('Select a race first before rolling attributes.');return;}
+  const rollDie=()=>{const r=Math.floor(Math.random()*10)+1;return r<=3?-1:r<=7?0:1;};
+  const v={};
+  ['PHYSICAL','MENTAL','SOCIAL','ACUITY'].forEach(ab=>{
+    v[ab]={minVar:rollDie()+rollDie()+rollDie(),maxVar:rollDie()+rollDie()+rollDie()};
+  });
+  ccState.attr_variance=v;
+  ccApplyRaceDefaults(ro);
+  render();
+}
+
+function ccXPBar(){
+  const st=ccState;
+  const attrXP=ccCalcAttrXP();
+  const skillXP=(()=>{let s=0;CC_ALL_SKILLS.forEach(sk=>{const v=st[sk]||0;s+=v*(v+1)/2;});return s;})();
+  const spent=attrXP+skillXP;
+  const avail=(+(st.total_xp)||0)+(+(st.credited_xp)||0)-spent;
+  const over=avail<0;
+  let h='<div style="background:rgba(0,0,0,.5);border:1px solid rgba(0,200,255,.25);border-radius:5px;padding:8px 14px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;">';
+  h+='<span style="font-family:\'Orbitron\',sans-serif;font-size:10px;color:var(--a);letter-spacing:1px;">XP</span>';
+  h+='<span style="font-size:12px;color:#aaa;">Pool: <b style="color:var(--tx);">'+(+(st.total_xp)||0)+'</b></span>';
+  h+='<span style="font-size:12px;color:#aaa;">Credited: <b style="color:var(--gr);">'+(+(st.credited_xp)||0)+'</b></span>';
+  h+='<span style="font-size:11px;color:#777;">Attr XP: '+attrXP+'</span>';
+  h+='<span style="font-size:11px;color:#777;">Skill XP: '+skillXP+'</span>';
+  h+='<span style="font-size:12px;color:var(--a2);">Spent: <b>'+spent+'</b></span>';
+  h+='<span style="font-size:14px;font-weight:bold;color:'+(over?'var(--re)':'var(--gr)')+';">'+(over?'':'+')+avail+' XP</span>';
+  h+='<span style="margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap;">';
+  h+='<label style="font-size:10px;color:#666;">Pool</label><input type="number" value="'+(+(st.total_xp)||0)+'" style="width:55px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.2);color:var(--tx);padding:2px 4px;font-size:11px;text-align:center;box-sizing:border-box;" onchange="ccState.total_xp=+this.value||0;render();">';
+  h+='<label style="font-size:10px;color:#666;">Credited</label><input type="number" value="'+(+(st.credited_xp)||0)+'" style="width:55px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.2);color:var(--tx);padding:2px 4px;font-size:11px;text-align:center;box-sizing:border-box;" onchange="ccState.credited_xp=+this.value||0;render();">';
+  h+='</span></div>';
+  return h;
+}
+
 function ccRandName(){ccState.name=CC_NAMES_FIRST[Math.floor(Math.random()*CC_NAMES_FIRST.length)]+' '+CC_NAMES_LAST[Math.floor(Math.random()*CC_NAMES_LAST.length)];render();}
 function ccPickFromCache(pidx){
   const item=ccPickerCache[pidx];if(!item||!ccState.picker)return;
@@ -8446,16 +8516,15 @@ function ccRenderPicker(){
 
 function ccRenderIdentity(){
   const st=ccState;
-  const spent=ccCalcSpentXP();
-  const avail=(+(st.total_xp)||0)-spent+(+(st.credited_xp)||0);
-  const raceObj=st.race?g.races.find(r=>r.name===st.race):null;
+  const raceObj=ccGetRaceObj();
   let h=ccRenderPicker();
   h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">';
-  // Left col
+  // Left col — identity fields
   h+='<div>'+ccSecHead('IDENTITY');
   h+=ccLbl('Character Name','<div style="display:flex;gap:6px;"><input type="text" value="'+esc(st.name||'')+'" style="'+CC_INP+'" oninput="ccState.name=this.value;"><button onclick="ccRandName();" style="background:rgba(0,200,255,.15);border:1px solid var(--a);color:var(--a);padding:3px 8px;border-radius:4px;cursor:pointer;font-size:11px;white-space:nowrap;">🎲 Random</button></div>');
-  // Race dropdown
-  h+='<div style="margin-bottom:8px;"><div style="font-size:10px;color:#888;margin-bottom:2px;">Race</div><select style="'+CC_SEL.replace('font-size:11px','font-size:12px')+'padding:4px;" onchange="ccState.race=this.value;render();">';
+  // Race dropdown — applying racial defaults on change
+  h+='<div style="margin-bottom:8px;"><div style="font-size:10px;color:#888;margin-bottom:2px;">Race</div>';
+  h+='<select style="'+CC_SEL.replace('font-size:11px','font-size:12px')+'padding:4px;" onchange="ccState.race=this.value;ccApplyRaceDefaults(g.races.find(r=>r.name===this.value));render();">';
   h+='<option value="">— Select race —</option>';
   g.races.forEach(r=>{h+='<option value="'+esc(r.name)+'"'+(st.race===r.name?' selected':'')+'>'+esc(r.name)+'</option>';});
   h+='</select></div>';
@@ -8466,20 +8535,13 @@ function ccRenderIdentity(){
   h+=ccLbl('Real Age','<input type="number" value="'+(st.age||'')+'" style="'+CC_INP+'" oninput="ccState.age=this.value;">');
   h+=ccLbl('Apparent Age','<input type="number" value="'+(st.apparent_age||'')+'" style="'+CC_INP+'" oninput="ccState.apparent_age=this.value;">');
   h+='</div></div>';
-  // Right col
-  h+='<div>'+ccSecHead('DETAILS & EXPERIENCE');
-  h+=ccLbl('Background Details','<textarea style="'+CC_INP+'height:70px;resize:vertical;" oninput="ccState.background_desc=this.value;">'+esc(st.background_desc||'')+'</textarea>');
-  h+=ccLbl('Occupation Details','<textarea style="'+CC_INP+'height:70px;resize:vertical;" oninput="ccState.occupation_desc=this.value;">'+esc(st.occupation_desc||'')+'</textarea>');
-  h+='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;">';
-  [['total_xp','Total XP'],['credited_xp','Credited XP'],['attribute_xp','Attr XP']].forEach(([k,lbl])=>{
-    h+='<div><div style="font-size:10px;color:#888;margin-bottom:2px;">'+lbl+'</div><input type="number" value="'+(+(st[k])||0)+'" style="'+CC_INP+'" onchange="ccState.'+k+'=+this.value||0;render();"></div>';
-  });
-  h+='</div>';
-  h+='<div style="display:flex;gap:16px;font-family:\'Share Tech Mono\',monospace;font-size:13px;">';
-  h+='<span>Spent: <span style="color:var(--a2);">'+spent+' XP</span></span>';
-  h+='<span>Available: <span style="color:'+(avail>=0?'var(--gr)':'var(--re)')+';">'+avail+' XP</span></span>';
-  h+='</div></div></div>';
-  // Racial hint
+  // Right col — details
+  h+='<div>'+ccSecHead('BACKGROUND & OCCUPATION DETAILS');
+  h+=ccLbl('Background Details','<textarea style="'+CC_INP+'height:100px;resize:vertical;" oninput="ccState.background_desc=this.value;">'+esc(st.background_desc||'')+'</textarea>');
+  h+=ccLbl('Occupation Details','<textarea style="'+CC_INP+'height:100px;resize:vertical;" oninput="ccState.occupation_desc=this.value;">'+esc(st.occupation_desc||'')+'</textarea>');
+  h+='<div style="margin-top:4px;"><label style="font-size:10px;color:#888;">Notes</label><textarea style="'+CC_INP+'height:60px;resize:vertical;" oninput="ccState.notes=this.value;">'+esc(st.notes||'')+'</textarea></div>';
+  h+='</div></div>';
+  // Racial hint panel
   if(raceObj){
     h+='<div style="margin-top:14px;background:rgba(0,200,255,.05);border:1px solid rgba(0,200,255,.2);border-radius:5px;padding:10px;">';
     h+='<div style="font-family:\'Orbitron\',sans-serif;font-size:11px;color:var(--a);margin-bottom:8px;">'+esc(raceObj.name)+' — RACIAL STAT RANGES (min / avg / max)</div>';
@@ -8491,6 +8553,7 @@ function ccRenderIdentity(){
     });
     h+='</div>';
     if(raceObj.racial)h+='<div style="margin-top:6px;font-size:11px;color:#aaa;"><b style="color:var(--a);">Racial:</b> '+esc(raceObj.racial)+'</div>';
+    if(raceObj.evolution)h+='<div style="margin-top:4px;font-size:11px;color:#aaa;"><b style="color:var(--a3);">Evolution:</b> '+esc(raceObj.evolution)+'</div>';
     h+='</div>';
   }
   return h;
@@ -11965,6 +12028,7 @@ function render(){
       html+='<button onclick="ccState.tab=\''+tid+'\';ccState.picker=null;render();" style="background:'+(act?'var(--a)':'rgba(0,200,255,.1)')+';color:'+(act?'#000':'var(--a)')+';border:1px solid var(--a);border-radius:5px;padding:5px 12px;cursor:pointer;font-size:12px;font-weight:bold;">'+tlabel+'</button>';
     });
     html+='</div>';
+    html+=ccXPBar();
     if(st.tab==='identity')html+=ccRenderIdentity();
     else if(st.tab==='attributes')html+=ccRenderAttributes();
     else if(st.tab==='skills')html+=ccRenderSkills();
