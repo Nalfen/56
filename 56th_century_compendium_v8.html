@@ -9391,13 +9391,20 @@ function ccRenderCombat(){
     h+='<input type="number" placeholder="Power" value="'+(+(w.power)||0)+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].power=+this.value||0;">';
     h+='<input type="text" placeholder="Reload" value="'+esc(w.reload||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].reload=this.value;">';
     h+='</div>';
-    // Options row
-    h+='<div style="display:flex;flex-wrap:wrap;gap:4px;align-items:center;">';
-    (w.options||[]).forEach((opt,oi)=>{
-      h+='<span style="font-size:10px;background:rgba(255,107,53,.12);border:1px solid rgba(255,107,53,.3);color:var(--a2);border-radius:3px;padding:1px 6px;display:flex;gap:4px;align-items:center;">'+esc(opt)+'<span style="cursor:pointer;color:#888;" onclick="ccRemoveItemOption(\'weapons\','+i+','+oi+');">×</span></span>';
-    });
-    h+='<button onclick="ccState.picker={type:\'wpn_option\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:none;border:1px dashed rgba(255,107,53,.3);color:#888;padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">+ Option</button>';
-    h+='</div>';
+    // Options row (gated on OPT/OPT+ in special)
+    const wSpec=w.special||'';
+    const wHasOptPlus=/\bOPT\+/i.test(wSpec),wHasOpt=/\bOPT\b/i.test(wSpec);
+    const wMaxOpts=wHasOptPlus?2:wHasOpt?1:0;
+    const wOptCount=(w.options||[]).length;
+    if(wMaxOpts>0||wOptCount>0){
+      h+='<div style="display:flex;flex-wrap:wrap;gap:4px;align-items:center;">';
+      (w.options||[]).forEach((opt,oi)=>{
+        h+='<span style="font-size:10px;background:rgba(255,107,53,.12);border:1px solid rgba(255,107,53,.3);color:var(--a2);border-radius:3px;padding:1px 6px;display:flex;gap:4px;align-items:center;">'+esc(opt)+'<span style="cursor:pointer;color:#888;" onclick="ccRemoveItemOption(\'weapons\','+i+','+oi+');">×</span></span>';
+      });
+      if(wOptCount<wMaxOpts)h+='<button onclick="ccState.picker={type:\'wpn_option\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:none;border:1px dashed rgba(255,107,53,.3);color:#888;padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">+ Option</button>';
+      else if(wMaxOpts>0)h+='<span style="font-size:10px;color:#555;">Max options reached ('+wMaxOpts+')</span>';
+      h+='</div>';
+    }
     h+='</div>';
   });
   // Armor
@@ -9429,13 +9436,20 @@ function ccRenderCombat(){
     h+='<div><div style="font-size:9px;color:#666;">Charges</div><input type="number" value="'+(+(ar.charges)||0)+'" style="'+CC_INP_SM+'" oninput="ccState.armor['+i+'].charges=+this.value||0;"></div>';
     h+='<div><div style="font-size:9px;color:#666;">Special</div><input type="text" value="'+esc(ar.special||'')+'" style="'+CC_INP_SM+'" oninput="ccState.armor['+i+'].special=this.value;"></div>';
     h+='</div>';
-    // Options row
-    h+='<div style="display:flex;flex-wrap:wrap;gap:4px;align-items:center;">';
-    (ar.options||[]).forEach((opt,oi)=>{
-      h+='<span style="font-size:10px;background:rgba(0,200,100,.1);border:1px solid rgba(0,200,100,.25);color:var(--gr);border-radius:3px;padding:1px 6px;display:flex;gap:4px;align-items:center;">'+esc(opt)+'<span style="cursor:pointer;color:#888;" onclick="ccRemoveItemOption(\'armor\','+i+','+oi+');">×</span></span>';
-    });
-    h+='<button onclick="ccState.picker={type:\'armor_option\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:none;border:1px dashed rgba(0,200,100,.25);color:#888;padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">+ Option</button>';
-    h+='</div>';
+    // Options row (gated on OPT/OPT+ in special)
+    const arSpec=ar.special||'';
+    const arHasOptPlus=/\bOPT\+/i.test(arSpec),arHasOpt=/\bOPT\b/i.test(arSpec);
+    const arMaxOpts=arHasOptPlus?2:arHasOpt?1:0;
+    const arOptCount=(ar.options||[]).length;
+    if(arMaxOpts>0||arOptCount>0){
+      h+='<div style="display:flex;flex-wrap:wrap;gap:4px;align-items:center;">';
+      (ar.options||[]).forEach((opt,oi)=>{
+        h+='<span style="font-size:10px;background:rgba(0,200,100,.1);border:1px solid rgba(0,200,100,.25);color:var(--gr);border-radius:3px;padding:1px 6px;display:flex;gap:4px;align-items:center;">'+esc(opt)+'<span style="cursor:pointer;color:#888;" onclick="ccRemoveItemOption(\'armor\','+i+','+oi+');">×</span></span>';
+      });
+      if(arOptCount<arMaxOpts)h+='<button onclick="ccState.picker={type:\'armor_option\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:none;border:1px dashed rgba(0,200,100,.25);color:#888;padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">+ Option</button>';
+      else if(arMaxOpts>0)h+='<span style="font-size:10px;color:#555;">Max options reached ('+arMaxOpts+')</span>';
+      h+='</div>';
+    }
     h+='</div>';
   });
   h+='<div style="display:flex;gap:10px;align-items:center;margin-top:8px;"><span style="font-size:11px;color:#888;">Armor Soak:</span>';
@@ -9483,13 +9497,20 @@ function ccRenderTech(){
     h+='<div><div style="font-size:9px;color:#666;">Expertise</div><input type="number" value="'+(+(d.expertise)||0)+'" style="'+CC_INP_SM+'" oninput="ccState.datacoms['+i+'].expertise=+this.value||0;"></div>';
     h+='</div>';
     h+='<input type="text" placeholder="Special..." value="'+esc(d.special||'')+'" style="'+CC_INP_SM+'margin-top:3px;margin-bottom:5px;" oninput="ccState.datacoms['+i+'].special=this.value;">';
-    // Options row
-    h+='<div style="display:flex;flex-wrap:wrap;gap:4px;align-items:center;">';
-    (d.options||[]).forEach((opt,oi)=>{
-      h+='<span style="font-size:10px;background:rgba(0,200,255,.08);border:1px solid rgba(0,200,255,.2);color:var(--a);border-radius:3px;padding:1px 6px;display:flex;gap:4px;align-items:center;">'+esc(opt)+'<span style="cursor:pointer;color:#888;" onclick="ccRemoveItemOption(\'datacoms\','+i+','+oi+');">×</span></span>';
-    });
-    h+='<button onclick="ccState.picker={type:\'dc_option\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:none;border:1px dashed rgba(0,200,255,.2);color:#888;padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">+ Option</button>';
-    h+='</div>';
+    // Options row (gated on OPT/OPT+ in special)
+    const dcSpec=d.special||'';
+    const dcHasOptPlus=/\bOPT\+/i.test(dcSpec),dcHasOpt=/\bOPT\b/i.test(dcSpec);
+    const dcMaxOpts=dcHasOptPlus?2:dcHasOpt?1:0;
+    const dcOptCount=(d.options||[]).length;
+    if(dcMaxOpts>0||dcOptCount>0){
+      h+='<div style="display:flex;flex-wrap:wrap;gap:4px;align-items:center;">';
+      (d.options||[]).forEach((opt,oi)=>{
+        h+='<span style="font-size:10px;background:rgba(0,200,255,.08);border:1px solid rgba(0,200,255,.2);color:var(--a);border-radius:3px;padding:1px 6px;display:flex;gap:4px;align-items:center;">'+esc(opt)+'<span style="cursor:pointer;color:#888;" onclick="ccRemoveItemOption(\'datacoms\','+i+','+oi+');">×</span></span>';
+      });
+      if(dcOptCount<dcMaxOpts)h+='<button onclick="ccState.picker={type:\'dc_option\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:none;border:1px dashed rgba(0,200,255,.2);color:#888;padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">+ Option</button>';
+      else if(dcMaxOpts>0)h+='<span style="font-size:10px;color:#555;">Max options reached ('+dcMaxOpts+')</span>';
+      h+='</div>';
+    }
     h+='</div>';
   });
   // Programs
