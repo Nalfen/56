@@ -8335,6 +8335,7 @@ function ccMakeFreshState(){
     datacoms:Array(3).fill(0).map(()=>({name:'',cpu:0,mem:0,nanite:0,def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',def_dmg:'',int_ext:0,int_int:0,int_main:0,expertise:0,special:'',mfr:'Generic',options:[]})),
     programs:Array(10).fill(0).map(()=>({name:'',type:'',cpu:0,mem:0,passive:'',active:''})),
     gadgets:Array(5).fill(0).map(()=>({name:'',nanite:0,effect:''})),
+    credits:0,credits_spent:0,gear_cat_filter:'',gear_search:'',
     spells:Array(16).fill(0).map(()=>({name:'',domain:''})),
     items:Array(20).fill(0).map(()=>({name:'',size:'0',qty:1})),
     items2:Array(20).fill(0).map(()=>({name:'',size:'0',qty:1})),
@@ -8554,6 +8555,57 @@ function ccRemoveItemOption(kind,slot,idx){
   ccState[kind][slot].options.splice(idx,1);render();
 }
 
+const CC_SIZE_TO_VAL={'Tiny':'0.25','Small':'1','Medium':'2','Large':'3','Ex.Large':'12','Huge':'12','Variable':'0','—':'0'};
+const CC_SIZE_LOAD={'0.25':0,'1':1,'2':6,'3':9,'12':12,'0':0};
+const CC_SIZE_OPTS=[['0','None'],['0.25','Tiny (0)'],['1','Small (1)'],['2','Medium (6)'],['3','Large (9)'],['12','XL (12)'],['0','In Hands']];
+
+function ccParseOccCredits(occName){
+  const occ=(g.occupations||[]).find(o=>o.name===occName);
+  if(!occ)return 0;
+  for(const d of occ.details||[]){
+    const m=d.match(/starting funds[:\s]+(\d+(?:\.\d+)?)([km]?)/i);
+    if(m){
+      let v=parseFloat(m[1]);
+      const u=(m[2]||'').toLowerCase();
+      if(u==='k')v*=1000;
+      else if(u==='m')v*=1000000;
+      return Math.round(v);
+    }
+  }
+  return 0;
+}
+
+function ccBuyItem(idx){
+  const st=ccState;
+  const item=(g.equipment||[])[idx];if(!item)return;
+  const cost=+(item.cost)||0;
+  const remaining=(+(st.credits)||0)-(+(st.credits_spent)||0);
+  if(cost>remaining&&cost>0){alert('Not enough credits (need '+fmt(cost)+', have '+fmt(remaining)+')');return;}
+  // Find first empty slot in items
+  let placed=false;
+  for(let i=0;i<st.items.length;i++){
+    if(!st.items[i].name){
+      st.items[i].name=item.name||'';
+      st.items[i].size=CC_SIZE_TO_VAL[item.size]||'1';
+      st.items[i].qty=1;
+      placed=true;break;
+    }
+  }
+  if(!placed){
+    for(let i=0;i<st.items2.length;i++){
+      if(!st.items2[i].name){
+        st.items2[i].name=item.name||'';
+        st.items2[i].size=CC_SIZE_TO_VAL[item.size]||'1';
+        st.items2[i].qty=1;
+        placed=true;break;
+      }
+    }
+  }
+  if(!placed){alert('All loadout slots full.');return;}
+  st.credits_spent=(+(st.credits_spent)||0)+cost;
+  render();
+}
+
 function ccXPBar(){
   const st=ccState;
   const attrXP=ccCalcAttrXP();
@@ -8639,7 +8691,7 @@ function ccPickFromCache(pidx){
     ccUpdateBgGrantedXP();
     ccRecalcHealthMorale();
   }
-  else if(type==='occupation'){const o=item;ccState.occupation=o.name||'';const lines=[o.desc||'',...(o.details||[])].filter(Boolean);ccState.occupation_desc=lines.join('\n');}
+  else if(type==='occupation'){const o=item;ccState.occupation=o.name||'';const lines=[o.desc||'',...(o.details||[])].filter(Boolean);ccState.occupation_desc=lines.join('\n');const startCr=ccParseOccCredits(o.name||'');if(startCr>0)ccState.credits=startCr;}
   ccState.picker=null;ccState.pickerSearch='';render();
 }
 function ccExportRoll20(){
@@ -8669,6 +8721,7 @@ function ccExportRoll20(){
   for(let i=1;i<=3;i++){const d=st.datacoms[i-1]||{};const dcOpts=(d.options||[]).join(', ');a('datacom'+i+'_name',d.name||'');a('datacom'+i+'_mfr',d.mfr||'Generic');a('datacom'+i+'_cpu',d.cpu||0);a('datacom'+i+'_mem',d.mem||0);a('datacom'+i+'_nanite',d.nanite||0);a('datacom'+i+'_def_phys',d.def_phys||'None');a('datacom'+i+'_def_energy',d.def_energy||'None');a('datacom'+i+'_def_tech',d.def_tech||'None');a('datacom'+i+'_def_spirit',d.def_spirit||'None');a('datacom'+i+'_def_dmg',d.def_dmg||'');a('datacom'+i+'_int_ext',d.int_ext||0);a('datacom'+i+'_int_int',d.int_int||0);a('datacom'+i+'_int_main',d.int_main||0);a('datacom'+i+'_expertise',d.expertise||0);a('datacom'+i+'_special',(d.special||'')+(dcOpts?' ['+dcOpts+']':''));a('datacom'+i+'_options',dcOpts);}
   for(let i=1;i<=10;i++){const p=st.programs[i-1]||{};a('program'+i+'_name',p.name||'');a('program'+i+'_type',p.type||'');a('program'+i+'_cpu',p.cpu||0);a('program'+i+'_mem',p.mem||0);a('program'+i+'_passive',p.passive||'');a('program'+i+'_active',p.active||'');}
   for(let i=1;i<=5;i++){const gd=st.gadgets[i-1]||{};a('gadget'+i+'_name',gd.name||'');a('gadget'+i+'_nanite',gd.nanite||0);a('gadget'+i+'_effect',gd.effect||'');}
+  a('credits',+(st.credits)||0);a('credits_spent',+(st.credits_spent)||0);a('credits_remaining',(+(st.credits)||0)-(+(st.credits_spent)||0));
   for(let i=1;i<=16;i++){const sp=st.spells[i-1]||{};a('spell'+i+'_name',sp.name||'');a('spell'+i+'_domain',sp.domain||'');}
   for(let i=1;i<=20;i++){const it=st.items[i-1]||{};a('item'+i+'_name',it.name||'');a('item'+i+'_size',it.size||'0');a('item'+i+'_qty',it.qty||1);}
   for(let i=1;i<=20;i++){const it=st.items2[i-1]||{};a('item'+(i+20)+'_name',it.name||'');a('item'+(i+20)+'_size',it.size||'0');a('item'+(i+20)+'_qty',it.qty||1);}
@@ -9400,7 +9453,6 @@ function ccRenderTech(){
 
 function ccRenderMagicGear(){
   const st=ccState;
-  const sizeOpts=[['0','None'],['0.25','Tiny'],['1','Small'],['2','Medium'],['3','Large'],['0','In Hands']];
   let h=ccSecHead('SPELLS — 16 slots','var(--a3)');
   h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:18px;">';
   st.spells.forEach((sp,i)=>{
@@ -9411,17 +9463,77 @@ function ccRenderMagicGear(){
     h+='</div>';
   });
   h+='</div>';
+
+  // ── GEAR SHOP ──────────────────────────────────────────────────────────────
+  const remaining=(+(st.credits)||0)-(+(st.credits_spent)||0);
+  const credOver=remaining<0;
+  h+=ccSecHead('GEAR SHOP','var(--gr)');
+  h+='<div style="background:rgba(0,0,0,.4);border:1px solid rgba(0,200,100,.2);border-radius:5px;padding:10px 14px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;">';
+  h+='<span style="font-family:\'Orbitron\',sans-serif;font-size:10px;color:var(--gr);">CREDITS</span>';
+  if(st.occupation)h+='<span style="font-size:11px;color:#888;">Occ. start: <b style="color:var(--ye);">'+fmt(ccParseOccCredits(st.occupation))+'</b></span>';
+  h+='<span style="font-size:11px;color:#aaa;">Budget: <b style="color:var(--tx);">'+fmt(+(st.credits)||0)+'</b></span>';
+  h+='<span style="font-size:11px;color:#aaa;">Spent: <b style="color:var(--a2);">'+fmt(+(st.credits_spent)||0)+'</b></span>';
+  h+='<span style="font-size:14px;font-weight:bold;color:'+(credOver?'var(--re)':'var(--gr)')+';">'+(credOver?'':'+')+fmt(remaining)+'</span>';
+  h+='<div style="margin-left:auto;display:flex;gap:8px;align-items:center;">';
+  h+='<label style="font-size:10px;color:#666;">Budget</label><input type="number" value="'+(+(st.credits)||0)+'" style="width:90px;'+CC_INP_SM+'margin-bottom:0;" onchange="ccState.credits=+this.value||0;render();">';
+  h+='<label style="font-size:10px;color:#666;">Spent</label><input type="number" value="'+(+(st.credits_spent)||0)+'" style="width:80px;'+CC_INP_SM+'margin-bottom:0;" onchange="ccState.credits_spent=+this.value||0;render();">';
+  h+='</div></div>';
+
+  // Catalog
+  const allEqCats=[...new Set((g.equipment||[]).map(x=>x.category||''))].sort();
+  const curCat=st.gear_cat_filter||'';const gearSq=(st.gear_search||'').toLowerCase();
+  h+='<div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px;">';
+  h+='<button onclick="ccState.gear_cat_filter=\'\';render();" style="background:'+(curCat===''?'rgba(0,200,100,.25)':'rgba(0,0,0,.4)')+';border:1px solid rgba(0,200,100,'+(curCat===''?'.5':'.2')+');color:'+(curCat===''?'var(--gr)':'#888')+';padding:2px 8px;border-radius:3px;cursor:pointer;font-size:10px;">All</button>';
+  allEqCats.forEach(cat=>{
+    const sel=curCat===cat;
+    h+='<button onclick="ccState.gear_cat_filter=\''+esc(cat).replace(/'/g,"\\'")+'\';render();" style="background:'+(sel?'rgba(0,200,100,.2)':'rgba(0,0,0,.4)')+';border:1px solid rgba(0,200,100,'+(sel?'.4':'.15')+');color:'+(sel?'var(--gr)':'#777')+';padding:2px 8px;border-radius:3px;cursor:pointer;font-size:10px;">'+esc(cat)+'</button>';
+  });
+  h+='</div>';
+  h+='<input type="text" placeholder="Search equipment..." value="'+esc(st.gear_search||'')+'" style="'+CC_INP+'margin-bottom:8px;" oninput="ccState.gear_search=this.value;render();">';
+
+  const catItems=(g.equipment||[]).map((it,gi)=>({it,gi})).filter(({it})=>{
+    if(curCat&&it.category!==curCat)return false;
+    if(gearSq&&!(it.name||'').toLowerCase().includes(gearSq)&&!(it.category||'').toLowerCase().includes(gearSq)&&!(it.effect||'').toLowerCase().includes(gearSq))return false;
+    return true;
+  });
+  h+='<div style="max-height:340px;overflow-y:auto;border:1px solid rgba(0,200,100,.1);border-radius:4px;margin-bottom:14px;">';
+  if(catItems.length===0)h+='<div style="padding:12px;text-align:center;color:#555;font-size:11px;">No items match</div>';
+  catItems.forEach(({it,gi})=>{
+    const cost=+(it.cost)||0;
+    const sizeLoad=CC_SIZE_LOAD[CC_SIZE_TO_VAL[it.size||'']||'1']||0;
+    const sizeLabel=it.size||'—';
+    const canAfford=cost===0||remaining>=cost;
+    h+='<div style="display:grid;grid-template-columns:1fr auto auto auto;gap:8px;align-items:center;padding:5px 10px;border-bottom:1px solid rgba(255,255,255,.05);">';
+    h+='<div>';
+    h+='<div style="font-size:11px;color:var(--tx);">'+esc(it.name||'')+'</div>';
+    if(it.effect)h+='<div style="font-size:10px;color:#666;margin-top:1px;">'+esc(it.effect.substring(0,80)+(it.effect.length>80?'…':''))+'</div>';
+    h+='</div>';
+    h+='<span style="font-size:10px;color:#777;white-space:nowrap;">'+esc(sizeLabel)+(sizeLoad>0?' ('+sizeLoad+' load)':'')+'</span>';
+    h+='<span style="font-size:11px;color:var(--gr);white-space:nowrap;font-family:\'Share Tech Mono\',monospace;">'+(cost>0?fmt(cost)+' Cr':'Free')+'</span>';
+    h+='<button onclick="ccBuyItem('+gi+');" style="background:'+(canAfford?'rgba(0,200,100,.12)':'rgba(0,0,0,.3)')+';border:1px solid '+(canAfford?'var(--gr)':'#333')+';color:'+(canAfford?'var(--gr)':'#444')+';padding:2px 9px;border-radius:3px;cursor:pointer;font-size:10px;"'+(canAfford?'':' title="Not enough credits"')+'>Buy</button>';
+    h+='</div>';
+  });
+  h+='</div>';
+
+  // ── GEAR & LOADOUT ──────────────────────────────────────────────────────────
+  // Compute total load
+  let totalLoad=0;
+  [...st.items,...st.items2].forEach(it=>{
+    const u=CC_SIZE_LOAD[it.size]||0;
+    totalLoad+=u*(+(it.qty)||1);
+  });
+  const loadMax=+(st.charloadmax)||0;
   h+=ccSecHead('GEAR & LOADOUT');
   h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:16px;">';
   ['items','items2'].forEach((key,li)=>{
     h+='<div><div style="font-size:11px;color:var(--a);margin-bottom:6px;font-family:\'Orbitron\',sans-serif;">'+(li===0?'LOADOUT 1 (On You)':'LOADOUT 2 (Storage)')+'</div>';
-    h+='<div style="display:grid;grid-template-columns:3fr 1fr 50px;gap:3px;font-size:9px;color:#555;margin-bottom:3px;"><span>Item</span><span>Size</span><span>Qty</span></div>';
+    h+='<div style="display:grid;grid-template-columns:3fr 1fr 50px;gap:3px;font-size:9px;color:#555;margin-bottom:3px;"><span>Item</span><span>Size (load)</span><span>Qty</span></div>';
     for(let idx=0;idx<20;idx++){
       const it=st[key][idx];
       h+='<div style="display:grid;grid-template-columns:3fr 1fr 50px;gap:2px;margin-bottom:2px;">';
       h+='<input type="text" placeholder="Item '+(idx+1)+'" value="'+esc(it.name||'')+'" style="'+CC_INP_SM+'margin-bottom:0;" oninput="ccState.'+key+'['+idx+'].name=this.value;">';
       h+='<select style="'+CC_SEL+'margin-bottom:0;" onchange="ccState.'+key+'['+idx+'].size=this.value;">';
-      sizeOpts.forEach(([v,l])=>{h+='<option value="'+v+'"'+(it.size===v?' selected':'')+'>'+l+'</option>';});
+      CC_SIZE_OPTS.forEach(([v,l])=>{h+='<option value="'+v+'"'+(it.size===v?' selected':'')+'>'+l+'</option>';});
       h+='</select>';
       h+='<input type="number" min="1" value="'+(+(it.qty)||1)+'" style="'+CC_INP_SM+'margin-bottom:0;" oninput="ccState.'+key+'['+idx+'].qty=+this.value||1;">';
       h+='</div>';
@@ -9429,8 +9541,9 @@ function ccRenderMagicGear(){
     h+='</div>';
   });
   h+='</div>';
-  h+='<div style="display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;">';
-  h+='<div>'+ccSecHead('MAX LOAD')+'<input type="text" placeholder="e.g. 12" value="'+esc(st.charloadmax||'')+'" style="width:120px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.25);color:var(--tx);padding:4px 6px;font-size:12px;" oninput="ccState.charloadmax=this.value;"></div>';
+  h+='<div style="display:grid;grid-template-columns:auto auto 1fr;gap:20px;align-items:start;">';
+  h+='<div>'+ccSecHead('MAX LOAD')+'<input type="text" placeholder="e.g. 12" value="'+esc(st.charloadmax||'')+'" style="width:80px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.25);color:var(--tx);padding:4px 6px;font-size:12px;" oninput="ccState.charloadmax=this.value;"></div>';
+  h+='<div style="padding-top:22px;"><span style="font-size:12px;color:'+(loadMax&&totalLoad>loadMax?'var(--re)':'#aaa')+';">Load: <b style="color:var(--tx);">'+totalLoad+'</b>'+(loadMax?' / '+loadMax:'')+'</span></div>';
   h+='<div>'+ccSecHead('NOTES')+'<textarea style="'+CC_INP+'height:100px;resize:vertical;" oninput="ccState.notes=this.value;">'+esc(st.notes||'')+'</textarea></div>';
   h+='</div>';
   return h;
