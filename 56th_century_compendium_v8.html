@@ -8298,8 +8298,8 @@ function ccMakeFreshState(){
     init_move:'',init_standard:'',init_quick:'',init_complex:'',
     armorsoak:'',armorsoak_bonus:0,
     ...sk,
-    talents:Array(10).fill(0).map(()=>({name:'',skill:'',category:'',xp_cost:0,effect:''})),
-    evolutions:Array(5).fill(0).map(()=>({name:'',type:'',tier:'',effect:''})),
+    talents:Array(3).fill(0).map(()=>({name:'',skill:'',category:'',xp_cost:0,effect:'',credited:false})),
+    evolutions:Array(2).fill(0).map(()=>({name:'',type:'',tier:'',effect:'',credited:false})),
     weapons:Array(6).fill(0).map(()=>({name:'',skill:'',dmg:'',dmgtype:'',power:0,expertise:0,special:'',close_range:'',medium_range:'',long_range:'',rof:'',ammo:0,currentammo:0,reload:'',dmgtarget:''})),
     armor:Array(2).fill(0).map(()=>({name:'',type:'',def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',special:'',soak_expr:'',charges:0,regen:''})),
     datacoms:Array(3).fill(0).map(()=>({name:'',cpu:0,mem:0,nanite:0,def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',def_dmg:'',int_ext:0,int_int:0,int_main:0,expertise:0,special:''})),
@@ -8394,8 +8394,8 @@ function ccRandName(){ccState.name=CC_NAMES_FIRST[Math.floor(Math.random()*CC_NA
 function ccPickFromCache(pidx){
   const item=ccPickerCache[pidx];if(!item||!ccState.picker)return;
   const {type,slot}=ccState.picker;
-  if(type==='talent'){const t=item;ccState.talents[slot]={name:t.name||'',skill:t.skill||'',category:t.category||'',xp_cost:t.cost||0,effect:t.effect||''};}
-  else if(type==='evolution'){const e=item;ccState.evolutions[slot]={name:e.name||'',type:e.evo_type||'',tier:e.tier||'',effect:e.effect||''};}
+  if(type==='talent'){const t=item;ccState.talents[slot]={name:t.name||'',skill:t.skill||'',category:t.category||'',xp_cost:+(t.cost)||0,effect:t.effect||'',credited:false};}
+  else if(type==='evolution'){const e=item;ccState.evolutions[slot]={name:e.name||'',type:e.evo_type||'',tier:e.tier||'',effect:e.effect||'',credited:false};}
   else if(type==='weapon'){const w=item;const wp=ccState.weapons[slot];wp.name=w.name||'';wp.dmg=w.damage||'';wp.dmgtype=w.type||'';wp.special=(Array.isArray(w.special)?w.special.join(' '):w.special)||'';}
   else if(type==='armor'){const a=item;const ar=ccState.armor[slot];ar.name=a.name||'';ar.type=a.category||'';}
   else if(type==='datacom'){const d=item;const dc=ccState.datacoms[slot];dc.name=d.name||'';dc.cpu=d.cpu||0;dc.mem=d.memory||0;dc.nanite=d.nanite||0;dc.expertise=d.expertise_bonus||0;['phys','energy','tech','spirit'].forEach(k=>{dc['def_'+k]=d['def_'+k]||'None';});dc.special=(Array.isArray(d.special)?d.special.join(' '):d.special)||'';}
@@ -8671,40 +8671,131 @@ function ccRenderSkills(){
   return h;
 }
 
+// ── Talent point helpers ──────────────────────────────────────────────────────
+const CC_TALENT_CATS={
+  PHYSICAL:CC_SKILLS_PHYS,MENTAL:CC_SKILLS_MENT,
+  SOCIAL:CC_SKILLS_SOCI,ACUITY:CC_SKILLS_ACUI
+};
+function ccTalentPoints(cat){
+  return (CC_TALENT_CATS[cat]||[]).reduce((s,sk)=>s+(ccState[sk]||0),0);
+}
+function ccTalentUsed(cat){
+  return ccState.talents.filter(t=>t.name&&(t.category||'').toUpperCase()===cat)
+    .reduce((s,t)=>s+(+(t.xp_cost)||0),0);
+}
+
+// ── Evolution helpers ─────────────────────────────────────────────────────────
+function ccEvoTierCost(tier){
+  const t=(tier||'').toUpperCase();
+  if(t.includes('III')||t==='3')return 3;
+  if(t.includes('II')||t==='2')return 2;
+  return 1;
+}
+function ccEvoUsed(){
+  return ccState.evolutions.reduce((s,e)=>s+(e.name?ccEvoTierCost(e.tier):0),0);
+}
+function ccEvoSoftCap(){
+  return (+(ccState.ENDURANCE)||0)+(+(ccState.WILLPOWER)||0);
+}
+function ccEvoHasPrereq(evo,idx){
+  if(!evo.name)return true;
+  const t=(evo.tier||'').toUpperCase();
+  if(!t.includes('II')&&!t.includes('III')&&t!=='2'&&t!=='3')return true; // TIER I always OK
+  const needTier=t.includes('III')||t==='3'?'II':'I';
+  return ccState.evolutions.some((e,i)=>i!==idx&&e.name===evo.name&&(e.tier||'').toUpperCase().includes(needTier));
+}
+
 function ccRenderTalents(){
   const st=ccState;
   let h=ccRenderPicker();
   h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">';
-  // Talents
-  h+='<div>'+ccSecHead('TALENTS — 10 slots');
+
+  // ── TALENTS ──────────────────────────────────────────────────────────────
+  // Talent point summary per category
+  const TCATS=['PHYSICAL','MENTAL','SOCIAL','ACUITY'];
+  const TCAT_COL={PHYSICAL:'var(--a2)',MENTAL:'var(--a)',SOCIAL:'var(--gr)',ACUITY:'var(--ye)'};
+  let tpSummary='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;">';
+  TCATS.forEach(cat=>{
+    const avail=ccTalentPoints(cat);
+    const used=ccTalentUsed(cat);
+    const over=used>avail;
+    tpSummary+='<span style="font-size:10px;background:rgba(0,0,0,.4);border:1px solid '+(over?'var(--re)':'rgba(255,255,255,.1)')+';border-radius:3px;padding:2px 6px;">';
+    tpSummary+='<span style="color:'+TCAT_COL[cat]+';">'+cat.slice(0,4)+'</span> ';
+    tpSummary+='<span style="color:'+(over?'var(--re)':'#aaa')+';">'+used+'/'+avail+'</span></span>';
+  });
+  tpSummary+='<span style="font-size:9px;color:#555;align-self:center;">TP = total skill levels in category</span></div>';
+
+  h+='<div>';
+  h+=ccSecHead('TALENTS <span style="font-size:10px;color:#666;font-family:sans-serif;">'+st.talents.length+' slots</span>');
+  h+=tpSummary;
+
   st.talents.forEach((t,i)=>{
-    h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.07);border-radius:4px;padding:7px;margin-bottom:6px;">';
-    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;"><span style="font-size:10px;color:#666;">Slot '+(i+1)+'</span>';
-    h+='<button onclick="ccState.picker={type:\'talent\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:rgba(0,200,255,.1);border:1px solid var(--a);color:var(--a);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">Browse</button></div>';
+    const catUpper=(t.category||'').toUpperCase();
+    const avail=catUpper?ccTalentPoints(catUpper):0;
+    const cost=+(t.xp_cost)||0;
+    const overBudget=catUpper&&cost>0&&ccTalentUsed(catUpper)>avail;
+    const credited=t.credited||false;
+    h+='<div style="background:rgba(0,0,0,.3);border:1px solid '+(overBudget?'var(--re)':'rgba(255,255,255,.07)')+';border-radius:4px;padding:7px;margin-bottom:6px;">';
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">';
+    h+='<span style="font-size:10px;color:#555;">#'+(i+1)+'</span>';
+    h+='<div style="display:flex;gap:4px;">';
+    h+='<label style="font-size:9px;color:#666;align-self:center;"><input type="checkbox"'+(credited?' checked':'')+' onchange="ccState.talents['+i+'].credited=this.checked;" style="margin-right:3px;">Credited</label>';
+    h+='<button onclick="ccState.picker={type:\'talent\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:rgba(0,200,255,.1);border:1px solid var(--a);color:var(--a);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">Browse</button>';
+    h+='<button onclick="ccState.talents.splice('+i+',1);render();" style="background:none;border:1px solid #333;color:#555;padding:1px 5px;border-radius:3px;cursor:pointer;font-size:10px;">✕</button>';
+    h+='</div></div>';
     h+='<input type="text" placeholder="Talent name" value="'+esc(t.name||'')+'" style="'+CC_INP+'margin-bottom:3px;" oninput="ccState.talents['+i+'].name=this.value;">';
     h+='<div style="display:grid;grid-template-columns:1fr 1fr auto;gap:3px;margin-bottom:3px;">';
     h+='<input type="text" placeholder="Skill" value="'+esc(t.skill||'')+'" style="'+CC_INP_SM+'" oninput="ccState.talents['+i+'].skill=this.value;">';
     h+='<input type="text" placeholder="Category" value="'+esc(t.category||'')+'" style="'+CC_INP_SM+'" oninput="ccState.talents['+i+'].category=this.value;">';
-    h+='<input type="number" placeholder="XP" value="'+(+(t.xp_cost)||0)+'" style="width:48px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.15);color:var(--a2);padding:2px 3px;font-size:11px;" oninput="ccState.talents['+i+'].xp_cost=+this.value||0;">';
+    h+='<input type="number" title="Talent point cost" value="'+(+(t.xp_cost)||0)+'" style="width:44px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.15);color:var(--a2);padding:2px 3px;font-size:11px;" oninput="ccState.talents['+i+'].xp_cost=+this.value||0;">';
     h+='</div>';
     h+='<input type="text" placeholder="Effect..." value="'+esc(t.effect||'')+'" style="'+CC_INP_SM+'" oninput="ccState.talents['+i+'].effect=this.value;">';
     h+='</div>';
   });
+  h+='<button onclick="ccState.talents.push({name:\'\',skill:\'\',category:\'\',xp_cost:0,effect:\'\',credited:false});render();" style="background:rgba(0,200,255,.08);border:1px dashed rgba(0,200,255,.3);color:var(--a);padding:5px;width:100%;border-radius:4px;cursor:pointer;font-size:11px;">+ Add Talent Slot</button>';
   h+='</div>';
-  // Evolutions
-  h+='<div>'+ccSecHead('EVOLUTIONS — 5 slots','var(--a3)');
+
+  // ── EVOLUTIONS ────────────────────────────────────────────────────────────
+  const evoUsed=ccEvoUsed();
+  const evoCap=ccEvoSoftCap();
+  const evoOver=evoUsed>evoCap;
+  const evoCapStr=evoCap>0?evoCap+'(END '++(st.ENDURANCE||0)+' + WILL '+(+(st.WILLPOWER)||0)+')':'—';
+
+  h+='<div>';
+  h+=ccSecHead('EVOLUTIONS <span style="font-size:10px;color:#666;font-family:sans-serif;">'+st.evolutions.length+' slots</span>','var(--a3)');
+
+  // Evo points bar
+  h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:11px;">';
+  h+='<span style="color:#aaa;">Evo Points: <b style="color:'+(evoOver?'var(--re)':'var(--a3)')+';">'+evoUsed+'</b> / <b>'+evoCap+'</b></span>';
+  h+='<span style="font-size:10px;color:#555;">(END+WILL soft cap)</span>';
+  if(evoOver)h+='<span style="color:var(--re);font-size:10px;font-weight:bold;">⚠ OVER CAP — see Evolution rules</span>';
+  h+='</div>';
+
   st.evolutions.forEach((e,i)=>{
-    h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(163,85,247,.15);border-radius:4px;padding:7px;margin-bottom:6px;">';
-    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;"><span style="font-size:10px;color:#666;">Slot '+(i+1)+'</span>';
-    h+='<button onclick="ccState.picker={type:\'evolution\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:rgba(163,85,247,.1);border:1px solid var(--a3);color:var(--a3);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">Browse</button></div>';
-    h+='<input type="text" placeholder="Evolution name" value="'+esc(e.name||'')+'" style="'+CC_INP.replace('rgba(0,200,255,.25)','rgba(163,85,247,.3)')+'margin-bottom:3px;" oninput="ccState.evolutions['+i+'].name=this.value;">';
+    const cost=e.name?ccEvoTierCost(e.tier):0;
+    const prereqOK=ccEvoHasPrereq(e,i);
+    const borderCol=!prereqOK?'var(--re)':evoOver&&cost>0?'var(--ye)':'rgba(163,85,247,.15)';
+    h+='<div style="background:rgba(0,0,0,.3);border:1px solid '+borderCol+';border-radius:4px;padding:7px;margin-bottom:6px;">';
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">';
+    h+='<span style="font-size:10px;color:#555;">#'+(i+1)+'</span>';
+    h+='<div style="display:flex;align-items:center;gap:4px;">';
+    if(cost>0)h+='<span style="font-size:10px;color:var(--a3);">'+cost+' EP</span>';
+    if(!prereqOK)h+='<span style="font-size:9px;color:var(--re);">⚠ needs Tier '+(((e.tier||'').toUpperCase().includes('III'))?'II':'I')+'</span>';
+    h+='<label style="font-size:9px;color:#666;"><input type="checkbox"'+(e.credited?' checked':'')+' onchange="ccState.evolutions['+i+'].credited=this.checked;" style="margin-right:3px;">Credited</label>';
+    h+='<button onclick="ccState.picker={type:\'evolution\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:rgba(163,85,247,.1);border:1px solid var(--a3);color:var(--a3);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">Browse</button>';
+    h+='<button onclick="ccState.evolutions.splice('+i+',1);render();" style="background:none;border:1px solid #333;color:#555;padding:1px 5px;border-radius:3px;cursor:pointer;font-size:10px;">✕</button>';
+    h+='</div></div>';
+    const inp3=CC_INP.replace('rgba(0,200,255,.25)','rgba(163,85,247,.3)');
+    const inp3sm=CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.2)');
+    h+='<input type="text" placeholder="Evolution name" value="'+esc(e.name||'')+'" style="'+inp3+'margin-bottom:3px;" oninput="ccState.evolutions['+i+'].name=this.value;">';
     h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;">';
-    h+='<input type="text" placeholder="Type" value="'+esc(e.type||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.2)')+'margin-bottom:0;" oninput="ccState.evolutions['+i+'].type=this.value;">';
-    h+='<input type="text" placeholder="Tier" value="'+esc(e.tier||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.2)')+'margin-bottom:0;" oninput="ccState.evolutions['+i+'].tier=this.value;">';
+    h+='<input type="text" placeholder="Type (GENETICS/CYBER/MAGIC)" value="'+esc(e.type||'')+'" style="'+inp3sm+'margin-bottom:0;" oninput="ccState.evolutions['+i+'].type=this.value;">';
+    h+='<input type="text" placeholder="Tier (TIER I/II/III)" value="'+esc(e.tier||'')+'" style="'+inp3sm+'margin-bottom:0;" oninput="ccState.evolutions['+i+'].tier=this.value;">';
     h+='</div>';
-    h+='<input type="text" placeholder="Effect..." value="'+esc(e.effect||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.2)')+'margin-top:3px;" oninput="ccState.evolutions['+i+'].effect=this.value;">';
+    h+='<input type="text" placeholder="Effect..." value="'+esc(e.effect||'')+'" style="'+inp3sm+'margin-top:3px;" oninput="ccState.evolutions['+i+'].effect=this.value;">';
     h+='</div>';
   });
+  h+='<button onclick="ccState.evolutions.push({name:\'\',type:\'\',tier:\'\',effect:\'\',credited:false});render();" style="background:rgba(163,85,247,.08);border:1px dashed rgba(163,85,247,.3);color:var(--a3);padding:5px;width:100%;border-radius:4px;cursor:pointer;font-size:11px;">+ Add Evolution Slot</button>';
   h+='</div></div>';
   return h;
 }
