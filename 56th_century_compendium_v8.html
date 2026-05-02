@@ -8623,14 +8623,11 @@ function ccRenderPicker(){
   return h;
 }
 
-function ccRenderIdentity(){
+function ccRenderOriginBlock(){
   const st=ccState;
-  const raceObj=ccGetRaceObj();
-  let h=ccRenderPicker();
-  // ── STEP 1: Clone / Natural Birth ─────────────────────────────────────────
   const cloneChosen=st.clone!==null;
-  h+='<div style="border:2px solid '+(cloneChosen?'rgba(0,200,255,.3)':'var(--a)')+';border-radius:8px;padding:14px;margin-bottom:16px;background:rgba(0,200,255,.03);">';
-  h+='<div style="font-family:\'Orbitron\',sans-serif;font-size:11px;color:var(--a);margin-bottom:10px;letter-spacing:1px;">STEP 1 — ORIGIN: Clone or Natural Birth?</div>';
+  let h='<div style="border:2px solid '+(cloneChosen?'rgba(0,200,255,.3)':'var(--a)')+';border-radius:8px;padding:14px;margin-bottom:16px;background:rgba(0,200,255,.03);">';
+  h+='<div style="font-family:\'Orbitron\',sans-serif;font-size:11px;color:var(--a);margin-bottom:10px;letter-spacing:1px;">ORIGIN — Clone or Natural Birth?</div>';
   if(!cloneChosen){
     h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">';
     h+='<div style="background:rgba(0,200,255,.06);border:1px solid rgba(0,200,255,.2);border-radius:6px;padding:10px;">';
@@ -8649,19 +8646,17 @@ function ccRenderIdentity(){
     h+='<div style="display:flex;align-items:center;gap:12px;">';
     h+='<span style="color:'+col+';font-weight:bold;font-size:13px;">'+(st.clone?'🧬':'🌱')+' '+label+'</span>';
     if(!st.clone){
-      // Natural birth — show dice rolls or roll button
       if(!st.nb_rolled||!st.race){
         h+='<button onclick="ccRollNaturalBirth();" style="background:rgba(163,85,247,.2);border:1px solid var(--a3);color:var(--a3);padding:4px 10px;border-radius:4px;cursor:pointer;font-size:11px;">';
         h+=(st.race?'🎲 Roll Attributes':'Select a race first then roll')+'</button>';
       } else {
-        // Show results
         h+='<div style="display:flex;gap:10px;flex-wrap:wrap;">';
         ['PHYSICAL','MENTAL','SOCIAL','ACUITY'].forEach(ab=>{
           const v=st.attr_variance[ab]||{};
           const ro=ccGetRaceObj();const rs=ro&&ro.stats[CC_ATTR_RK[ab]];
           const rMin=rs?+(rs.min)||0:0;const rMax=rs?+(rs.max)||0:0;
           const pMin=rMin+(v.minVar||0);const pMax=rMax+(v.maxVar||0);
-          h+='<span style="font-size:11px;font-family:\'Share Tech Mono\',monospace;color:#aaa;">'+ab.slice(0,4)+': <b style="color:var(--tx);">'+pMin+'/'+pMax+'</b></span>';
+          h+='<span style="font-size:11px;font-family:\'Share Tech Mono\',monospace;color:#aaa;">'+ab.slice(0,4)+': <b style="color:var(--a3);">'+pMin+'/'+pMax+'</b></span>';
         });
         h+='</div>';
         h+='<button onclick="ccRollNaturalBirth();" style="background:rgba(163,85,247,.1);border:1px solid rgba(163,85,247,.3);color:var(--a3);padding:2px 8px;border-radius:4px;cursor:pointer;font-size:10px;">Re-roll</button>';
@@ -8671,6 +8666,21 @@ function ccRenderIdentity(){
     h+='</div>';
   }
   h+='</div>';
+  return h;
+}
+
+function ccRenderIdentity(){
+  const st=ccState;
+  const raceObj=ccGetRaceObj();
+  let h=ccRenderPicker();
+  // Compact origin status (full picker is on Attributes tab)
+  if(st.clone===null){
+    h+='<div style="background:rgba(255,107,53,.07);border:1px solid rgba(255,107,53,.3);border-radius:6px;padding:8px 12px;margin-bottom:14px;font-size:11px;color:var(--a2);">⚠ Origin not yet chosen — go to the <b>Attributes</b> tab to select Clone Vat or Natural Birth.</div>';
+  } else {
+    const col=st.clone?'var(--a)':'var(--a3)';
+    const lbl=st.clone?'🧬 Clone Vat':'🌱 Natural Birth';
+    h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:8px 12px;margin-bottom:14px;font-size:11px;color:'+col+';">'+lbl+((!st.clone&&st.nb_rolled)?' — attributes rolled':'')+'</div>';
+  }
   // ──────────────────────────────────────────────────────────────────────────
   h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">';
   // Left col — identity fields
@@ -8755,7 +8765,8 @@ function ccRenderAttributes(){
   const raceObj=st.race?g.races.find(r=>r.name===st.race):null;
   const ABS=['PHYSICAL','MENTAL','SOCIAL','ACUITY','ENDURANCE','SPEED','WITS','WILLPOWER'];
   ccRecalcHealthMorale();
-  let h=ccSecHead('CORE ATTRIBUTES'+(st.race?' — '+esc(st.race):'')+(st.background?' · '+esc(st.background):''));
+  let h=ccRenderOriginBlock();
+  h+=ccSecHead('CORE ATTRIBUTES'+(st.race?' — '+esc(st.race):'')+(st.background?' · '+esc(st.background):''));
   h+='<div style="font-size:10px;color:#666;margin-bottom:8px;">Base = racial avg + background bonus (free). Perm = XP-purchased. Final = Perm + Bonus.</div>';
   h+='<table style="width:100%;border-collapse:collapse;">';
   h+='<tr style="font-size:10px;color:#888;">';
