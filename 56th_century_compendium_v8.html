@@ -8407,6 +8407,19 @@ function ccToggleSkillExpand(sk){
   ccState.sk_expanded[sk]=!ccState.sk_expanded[sk];render();
 }
 
+function ccGetSkillFloor(sk){
+  const bg=BG_GRANTS[ccState.background]||{};
+  if(bg.all_skills)return bg.all_skills;
+  if(bg.skills&&bg.skills[sk])return bg.skills[sk];
+  if(bg.choice_skills&&ccState.bg_choice_done){
+    for(const idx in ccState.bg_choice_done){
+      const done=ccState.bg_choice_done[idx]||[];
+      if(done.includes(sk))return(bg.choice_skills[idx]||{}).rank||0;
+    }
+  }
+  return 0;
+}
+
 function ccAttrXPCost(base,cur){
   if(base===cur)return 0;
   let xp=0;
@@ -8902,7 +8915,8 @@ function ccRenderSkills(){
       const skBonusLbl=skBonus===1?'+1':skBonus===3?'+3':skBonus===-1?'−1':skBonus===-3?'−3':'';
       h+='<div style="border:1px solid rgba(255,255,255,'+(expanded?'.12':'.04')+');border-radius:3px;margin-bottom:3px;">';
       h+='<div style="display:flex;align-items:center;gap:4px;padding:2px 4px;">';
-      h+='<input type="number" min="0" max="10" value="'+v+'" style="width:40px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.22);color:var(--tx);padding:2px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:13px;" onclick="event.stopPropagation();" onchange="ccState[\''+sk+'\']=Math.max(0,Math.min(10,+this.value||0));render();">';
+      const floor=ccGetSkillFloor(sk);
+      h+='<input type="number" min="'+floor+'" max="10" value="'+v+'" style="width:40px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.22);color:var(--tx);padding:2px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:13px;" onclick="event.stopPropagation();" onchange="ccState[\''+sk+'\']=Math.max(ccGetSkillFloor(\''+sk+'\'),Math.min(10,+this.value||0));render();">';
       h+='<div style="flex:1;cursor:pointer;" onclick="ccToggleSkillExpand(\''+sk+'\');">';
       h+='<div style="font-size:11px;color:'+(isBgGrant?'var(--ye)':'var(--tx)')+';">'+sk.replace(/_/g,' ')+(isBgGrant?'<span style="font-size:9px;color:var(--ye);margin-left:3px;">BG</span>':'')+'</div>';
       h+='<div style="font-size:9px;color:#555;">'+cost+' xp'+(v<10?' | +'+(v+1)+' next':'')+(skBonus!==0?' | '+skBonusLbl:'')+' | ▸</div>';
