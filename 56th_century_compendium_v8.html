@@ -8819,7 +8819,7 @@ function ccRenderPicker(){
   if(type==='talent'){items=g.talents||[];title='Talent for slot '+(slot+1);}
   else if(type==='evolution'){items=(g.evolutions&&g.evolutions.entries)||[];title='Evolution for slot '+(slot+1);bdr='var(--a3)';}
   else if(type==='weapon'){items=g.weapons||[];title='Weapon for slot '+(slot+1);bdr='var(--a2)';}
-  else if(type==='armor'){items=g.armor||[];title='Armor for slot '+(slot+1);bdr='var(--gr)';}
+  else if(type==='armor'){items=g.armor||[];title='Defense for slot '+(slot+1)+' (Armors, Forcefields, Barriers, Datacoms)';bdr='var(--gr)';}
   else if(type==='datacom'){items=g.datacoms||[];title='Datacom for slot '+(slot+1);}
   else if(type==='program'){items=(g.software&&g.software.programs)||[];title='Program for slot '+(slot+1);bdr='var(--a3)';}
   else if(type==='gadget'){items=(g.software&&g.software.gadgets)||[];title='Gadget for slot '+(slot+1);bdr='var(--a2)';}
@@ -8862,7 +8862,7 @@ function ccRenderPicker(){
     if(type==='talent')h+='<div style="font-size:10px;color:#888;">'+esc(x.skill||'')+(x.category?' · '+esc(x.category):'')+'  —  '+(x.cost||0)+' XP</div>';
     else if(type==='evolution')h+='<div style="font-size:10px;color:#888;">'+esc(x.evo_type||'')+' · Tier '+esc(x.tier||'?')+'</div>';
     else if(type==='weapon')h+='<div style="font-size:10px;color:#888;">'+esc(x.category||'')+(x.damage?' | '+esc(x.damage):'')+(x.type?' | '+esc(x.type):'')+'</div>';
-    else if(type==='armor')h+='<div style="font-size:10px;color:#888;">'+esc(x.category||'')+'</div>';
+    else if(type==='armor')h+='<div style="font-size:10px;color:#888;">'+esc(x.type||x.category||'')+(x.availability?' · '+esc(x.availability):'')+(x.cost?' · '+fmt(+(x.cost)||0)+' Cr':'')+'</div>';
     else if(type==='datacom')h+='<div style="font-size:10px;color:#888;">CPU '+(x.cpu||'?')+' | Mem '+(x.memory||'?')+' | Nanite '+(x.nanite||'?')+'</div>';
     else if(type==='program')h+='<div style="font-size:10px;color:#888;">'+esc(x.type||'')+(x.cpu?' | CPU '+x.cpu:'')+(x.memory?' | Mem '+x.memory:'')+'</div>';
     else if(type==='gadget')h+='<div style="font-size:10px;color:#888;">Nanite '+(x.nanite||'?')+' · '+esc(x.availability||'')+'</div><div style="font-size:10px;color:#666;margin-top:2px;">'+esc(x.desc||x.effect||'')+'</div>';
@@ -9407,12 +9407,12 @@ function ccRenderCombat(){
     }
     h+='</div>';
   });
-  // Armor
-  h+=ccSecHead('ARMOR — 2 slots','var(--gr)');
+  // Defense (armors, forcefields, barriers, datacoms)
+  h+=ccSecHead('DEFENSE — 2 slots <span style="font-size:9px;color:#555;font-family:sans-serif;">(armors · forcefields · barriers · datacoms)</span>','var(--gr)');
   st.armor.forEach((ar,i)=>{
     h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.07);border-radius:4px;padding:7px;margin-bottom:7px;">';
     h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">';
-    h+='<span style="font-size:10px;color:#666;">Armor '+(i+1)+'</span>';
+    h+='<span style="font-size:10px;color:#666;">Defense '+(i+1)+'</span>';
     h+='<div style="display:flex;gap:4px;align-items:center;">';
     h+='<select style="background:#111;border:1px solid rgba(0,200,100,.25);color:var(--gr);padding:1px 4px;font-size:10px;" onchange="ccState.armor['+i+'].mfr=this.value;ccApplyMfrToArmorSlot('+i+');render();">';
     ARMOR_MFRS.forEach(m=>{h+='<option value="'+esc(m)+'"'+(ar.mfr===m?' selected':'')+'>'+esc(m)+'</option>';});
@@ -9452,7 +9452,7 @@ function ccRenderCombat(){
     }
     h+='</div>';
   });
-  h+='<div style="display:flex;gap:10px;align-items:center;margin-top:8px;"><span style="font-size:11px;color:#888;">Armor Soak:</span>';
+  h+='<div style="display:flex;gap:10px;align-items:center;margin-top:8px;"><span style="font-size:11px;color:#888;">Base Soak:</span>';
   h+='<input type="text" placeholder="expr e.g. 3D" value="'+esc(st.armorsoak||'')+'" style="width:90px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.2);color:var(--tx);padding:3px 5px;font-size:11px;" oninput="ccState.armorsoak=this.value;">';
   h+='<input type="number" placeholder="+bonus" value="'+(+(st.armorsoak_bonus)||0)+'" style="width:60px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.2);color:var(--tx);padding:3px 5px;font-size:11px;" oninput="ccState.armorsoak_bonus=+this.value||0;"></div>';
   return h;
