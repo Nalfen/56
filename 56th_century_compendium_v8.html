@@ -8281,26 +8281,29 @@ const CC_RACE_ATTR_MAP={PHYSICAL:'physical',MENTAL:'mental',SOCIAL:'social',ACUI
 const BG_GRANTS={
   'Scholar':{skills:{Academics:5,Etiquette:5},choice_skills:[{count:1,from:'MENTAL',rank:5,label:'Choose 1 Mental skill at rank 5'}],attrs:{MENTAL:1}},
   'Artist':{skills:{Acting:5,Flair:5}},
-  'Crime syndicate':{skills:{Intimidation:5,Streetwise:5}},
+  'Crime syndicate':{skills:{Intimidation:5,Streetwise:5},talents:[{name:'Or Else'}]},
   'Ridge Racer':{skills:{Piloting:6},attrs:{WITS:1}},
   'Genome Soldier':{choice_skills:[{count:2,options:['Heavy_Weapons','Martial_Arts','Piloting','Tactics'],rank:5,label:'Choose 2 combat skills at rank 5'}],attrs:{PHYSICAL:1,ACUITY:1,ENDURANCE:1,WILLPOWER:1}},
   'Drifter':{all_skills:2},
   'Deep space explorer':{attrs:{WILLPOWER:1}},
-  'Darkspacer':{attrs:{ENDURANCE:1}},
-  'Family of thieves':{attrs:{ACUITY:1}},
+  'Darkspacer':{attrs:{ENDURANCE:1},talents:[{name:'Home field advantage'}]},
+  'Family of thieves':{attrs:{ACUITY:1},choice_talents:[{count:1,options:['Pack Rat','Mugging','Fake News','Rolling with the punches'],label:'Choose 1 talent (Family of thieves)'}]},
   'Sorcerous background':{attrs:{WITS:1},chi:2},
   'Imaginary friend':{attrs:{ACUITY:1}},
   'Warrior of Titan':{attrs:{ENDURANCE:1}},
-  'Bonded laborer':{attrs:{ENDURANCE:1,PHYSICAL:1,WILLPOWER:1}},
-  'Pit Slave':{health:2,morale:2},
+  'Bonded laborer':{attrs:{ENDURANCE:1,PHYSICAL:1,WILLPOWER:1},talents:[{name:'Very Strong'}]},
+  'Pit Slave':{health:2,morale:2,talents:[{name:'Brutal fighter'},{name:'Akimbo'}]},
   'Mangaran Brave':{health:5,attrs:{WITS:1}},
   'Skalan Samurai':{attrs:{ENDURANCE:1}},
   'Chain breaker':{attrs:{SOCIAL:1}},
   'Matricide':{attrs:{ACUITY:1}},
   'Politician':{attrs:{SOCIAL:1}},
   'Data Jockey':{attrs:{MENTAL:1}},
-  'Salvaged Droid':{attrs:{ACUITY:1,MENTAL:1},health:3,morale:3},
+  'Salvaged Droid':{attrs:{ACUITY:1,MENTAL:1},health:3,morale:3,evos:[{name:'Subdermal Plating',tier:'TIER II'}]},
   'Guinnea Pig':{attrs:{ENDURANCE:1}},
+  'Trueborn':{attrs:{ACUITY:1},talents:[{name:'Nerulian Noble'}]},
+  'Assassin':{talents:[{name:'Assassination'}]},
+  'Fledgeling AI':{evos:[{name:'Skill imprinting',tier:'TIER I',free:true},{name:'Skill imprinting',tier:'TIER II',free:true}]},
 };
 
 function ccMakeFreshState(){
@@ -8321,7 +8324,7 @@ function ccMakeFreshState(){
     WILLPOWER:3,WILLPOWER_base:3,WILLPOWER_perm:3,WILLPOWER_bonus:0,
     HEALTH:10,HEALTH_max:10,MORALE:10,MORALE_max:10,CHI:5,CHI_max:5,
     total_xp:50,credited_xp:0,bg_granted_xp:0,
-    bg_choices:[],bg_choice_done:{},sk_expanded:{},
+    bg_choices:[],bg_choice_done:{},bg_talent_choice_done:{},sk_expanded:{},
     init_move:'',init_standard:'',init_quick:'',init_complex:'',
     armorsoak:'',armorsoak_bonus:0,
     ...sk,
@@ -8418,6 +8421,56 @@ function ccGetSkillFloor(sk){
     }
   }
   return 0;
+}
+
+function ccLookupTalent(name){
+  const t=g.talents.find(t=>t.name===name);
+  if(!t)return null;
+  return {name:t.name,skill:t.skill||'',category:t.category||'',xp_cost:+(t.cost)||0,effect:t.effect||''};
+}
+
+function ccLookupEvo(name,tier){
+  const e=(g.evolutions.entries||[]).find(e=>e.name===name&&e.tier===tier);
+  if(!e)return null;
+  return {name:e.name,type:e.evo_type||'',tier:e.tier||'',effect:e.effect||''};
+}
+
+function ccApplyBgTalentsEvos(bgName){
+  const bg=BG_GRANTS[bgName]||{};
+  // Remove existing bg-granted talents and evos
+  ccState.talents=ccState.talents.filter(t=>!t.bg_granted);
+  ccState.evolutions=ccState.evolutions.filter(e=>!e.bg_granted);
+  // Add fixed talent grants
+  if(bg.talents){
+    bg.talents.forEach(tg=>{
+      const found=ccLookupTalent(tg.name);
+      if(found)ccState.talents.push({...found,credited:true,bg_granted:true});
+    });
+  }
+  // Add fixed evo grants
+  if(bg.evos){
+    bg.evos.forEach(eg=>{
+      const found=ccLookupEvo(eg.name,eg.tier);
+      if(found)ccState.evolutions.push({...found,credited:true,bg_granted:true,free:eg.free||false});
+    });
+  }
+}
+
+function ccBgTalentChoicePick(choiceIdx,talentName){
+  const bg=BG_GRANTS[ccState.background]||{};
+  const choice=bg.choice_talents&&bg.choice_talents[choiceIdx];if(!choice)return;
+  if(!ccState.bg_talent_choice_done)ccState.bg_talent_choice_done={};
+  const done=[...(ccState.bg_talent_choice_done[choiceIdx]||[])];
+  // Remove previously chosen talents for this choice slot
+  ccState.talents=ccState.talents.filter(t=>!(t.bg_granted&&t.bg_choice_idx===choiceIdx));
+  if(done.includes(talentName)){
+    ccState.bg_talent_choice_done[choiceIdx]=done.filter(n=>n!==talentName);
+  } else if(done.length<choice.count){
+    done.push(talentName);ccState.bg_talent_choice_done[choiceIdx]=done;
+    const found=ccLookupTalent(talentName);
+    if(found)ccState.talents.push({...found,credited:true,bg_granted:true,bg_choice_idx:choiceIdx});
+  }
+  render();
 }
 
 function ccAttrXPCost(base,cur){
@@ -8519,12 +8572,15 @@ function ccPickFromCache(pidx){
     // Set pending choices
     ccState.bg_choices=bg.choice_skills?bg.choice_skills.map((c,i)=>({...c,idx:i})):[];
     ccState.bg_choice_done={};
+    ccState.bg_talent_choice_done={};
     // Update perm values to reflect bg attr bonuses
     CC_ATTR_KEYS.forEach(ab=>{
       const base=ccGetAttrBase(ab);
       if((ccState[ab+'_perm']||0)<base)ccState[ab+'_perm']=base;
       ccState[ab]=(ccState[ab+'_perm']||0)+(ccState[ab+'_bonus']||0);
     });
+    // Apply bg-granted talents and evos
+    ccApplyBgTalentsEvos(b.name||'');
     ccUpdateBgGrantedXP();
     ccRecalcHealthMorale();
   }
@@ -8952,7 +9008,7 @@ function ccTalentPoints(cat){
   return (CC_TALENT_CATS[cat]||[]).reduce((s,sk)=>s+(ccState[sk]||0),0);
 }
 function ccTalentUsed(cat){
-  return ccState.talents.filter(t=>t.name&&(t.category||'').toUpperCase()===cat)
+  return ccState.talents.filter(t=>t.name&&!t.bg_granted&&(t.category||'').toUpperCase()===cat)
     .reduce((s,t)=>s+(+(t.xp_cost)||0),0);
 }
 
@@ -8964,13 +9020,14 @@ function ccEvoTierCost(tier){
   return 1;
 }
 function ccEvoUsed(){
-  return ccState.evolutions.reduce((s,e)=>s+(e.name?ccEvoTierCost(e.tier):0),0);
+  return ccState.evolutions.reduce((s,e)=>s+(e.name&&!e.free?ccEvoTierCost(e.tier):0),0);
 }
 function ccEvoSoftCap(){
   return (+(ccState.ENDURANCE)||0)+(+(ccState.WILLPOWER)||0);
 }
 function ccEvoHasPrereq(evo,idx){
   if(!evo.name)return true;
+  if(evo.bg_granted)return true;
   const t=(evo.tier||'').toUpperCase();
   if(!t.includes('II')&&!t.includes('III')&&t!=='2'&&t!=='3')return true; // TIER I always OK
   const needTier=t.includes('III')||t==='3'?'II':'I';
@@ -9001,27 +9058,51 @@ function ccRenderTalents(){
   h+=ccSecHead('TALENTS <span style="font-size:10px;color:#666;font-family:sans-serif;">'+st.talents.length+' slots</span>');
   h+=tpSummary;
 
+  // Pending talent choices from background
+  const bgTalentChoices=(BG_GRANTS[st.background]||{}).choice_talents||[];
+  bgTalentChoices.forEach((c,idx)=>{
+    const done=(st.bg_talent_choice_done&&st.bg_talent_choice_done[idx])||[];
+    if(done.length<c.count){
+      h+='<div style="background:rgba(255,200,0,.08);border:1px solid rgba(255,200,0,.35);border-radius:4px;padding:8px 10px;margin-bottom:8px;">';
+      h+='<div style="font-size:10px;color:var(--ye);margin-bottom:6px;">⚠ '+esc(c.label)+'</div>';
+      h+='<div style="display:flex;flex-wrap:wrap;gap:5px;">';
+      c.options.forEach(opt=>{
+        const picked=done.includes(opt);
+        h+='<button onclick="ccBgTalentChoicePick('+idx+',\''+esc(opt)+'\');" style="background:'+(picked?'rgba(255,200,0,.25)':'rgba(0,0,0,.4)')+';border:1px solid '+(picked?'var(--ye)':'rgba(255,255,255,.15)')+';color:'+(picked?'var(--ye)':'#aaa')+';padding:3px 8px;border-radius:3px;cursor:pointer;font-size:11px;">'+esc(opt)+(picked?' ✓':'')+'</button>';
+      });
+      h+='</div></div>';
+    }
+  });
+
   st.talents.forEach((t,i)=>{
     const catUpper=(t.category||'').toUpperCase();
     const avail=catUpper?ccTalentPoints(catUpper):0;
     const cost=+(t.xp_cost)||0;
-    const overBudget=catUpper&&cost>0&&ccTalentUsed(catUpper)>avail;
-    const credited=t.credited||false;
-    h+='<div style="background:rgba(0,0,0,.3);border:1px solid '+(overBudget?'var(--re)':'rgba(255,255,255,.07)')+';border-radius:4px;padding:7px;margin-bottom:6px;">';
+    const overBudget=catUpper&&cost>0&&!t.bg_granted&&ccTalentUsed(catUpper)>avail;
+    const isBg=t.bg_granted||false;
+    const borderCol=isBg?'rgba(255,200,0,.3)':overBudget?'var(--re)':'rgba(255,255,255,.07)';
+    h+='<div style="background:rgba(0,0,0,.3);border:1px solid '+borderCol+';border-radius:4px;padding:7px;margin-bottom:6px;">';
     h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">';
+    h+='<div style="display:flex;gap:5px;align-items:center;">';
     h+='<span style="font-size:10px;color:#555;">#'+(i+1)+'</span>';
-    h+='<div style="display:flex;gap:4px;">';
-    h+='<label style="font-size:9px;color:#666;align-self:center;"><input type="checkbox"'+(credited?' checked':'')+' onchange="ccState.talents['+i+'].credited=this.checked;" style="margin-right:3px;">Credited</label>';
-    h+='<button onclick="ccState.picker={type:\'talent\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:rgba(0,200,255,.1);border:1px solid var(--a);color:var(--a);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">Browse</button>';
-    h+='<button onclick="ccState.talents.splice('+i+',1);render();" style="background:none;border:1px solid #333;color:#555;padding:1px 5px;border-radius:3px;cursor:pointer;font-size:10px;">✕</button>';
-    h+='</div></div>';
-    h+='<input type="text" placeholder="Talent name" value="'+esc(t.name||'')+'" style="'+CC_INP+'margin-bottom:3px;" oninput="ccState.talents['+i+'].name=this.value;">';
-    h+='<div style="display:grid;grid-template-columns:1fr 1fr auto;gap:3px;margin-bottom:3px;">';
-    h+='<input type="text" placeholder="Skill" value="'+esc(t.skill||'')+'" style="'+CC_INP_SM+'" oninput="ccState.talents['+i+'].skill=this.value;">';
-    h+='<input type="text" placeholder="Category" value="'+esc(t.category||'')+'" style="'+CC_INP_SM+'" oninput="ccState.talents['+i+'].category=this.value;">';
-    h+='<input type="number" title="Talent point cost" value="'+(+(t.xp_cost)||0)+'" style="width:44px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.15);color:var(--a2);padding:2px 3px;font-size:11px;" oninput="ccState.talents['+i+'].xp_cost=+this.value||0;">';
+    if(isBg)h+='<span style="font-size:9px;background:rgba(255,200,0,.15);border:1px solid rgba(255,200,0,.4);color:var(--ye);border-radius:3px;padding:1px 5px;">BG</span>';
     h+='</div>';
-    h+='<input type="text" placeholder="Effect..." value="'+esc(t.effect||'')+'" style="'+CC_INP_SM+'" oninput="ccState.talents['+i+'].effect=this.value;">';
+    h+='<div style="display:flex;gap:4px;">';
+    if(isBg){
+      h+='<span style="font-size:9px;color:var(--ye);align-self:center;padding:1px 6px;">Auto-credited</span>';
+    } else {
+      h+='<label style="font-size:9px;color:#666;align-self:center;"><input type="checkbox"'+(t.credited?' checked':'')+' onchange="ccState.talents['+i+'].credited=this.checked;" style="margin-right:3px;">Credited</label>';
+      h+='<button onclick="ccState.picker={type:\'talent\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:rgba(0,200,255,.1);border:1px solid var(--a);color:var(--a);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">Browse</button>';
+    }
+    h+='<button '+(isBg?'disabled style="opacity:0.25;cursor:default;"':'')+' onclick="ccState.talents.splice('+i+',1);render();" style="background:none;border:1px solid #333;color:#555;padding:1px 5px;border-radius:3px;cursor:pointer;font-size:10px;">✕</button>';
+    h+='</div></div>';
+    h+='<input type="text" placeholder="Talent name" value="'+esc(t.name||'')+'"'+(isBg?' readonly':'')+' style="'+CC_INP+'margin-bottom:3px;'+(isBg?'opacity:0.8;':'')+'" oninput="ccState.talents['+i+'].name=this.value;">';
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr auto;gap:3px;margin-bottom:3px;">';
+    h+='<input type="text" placeholder="Skill" value="'+esc(t.skill||'')+'"'+(isBg?' readonly':'')+' style="'+CC_INP_SM+'" oninput="ccState.talents['+i+'].skill=this.value;">';
+    h+='<input type="text" placeholder="Category" value="'+esc(t.category||'')+'"'+(isBg?' readonly':'')+' style="'+CC_INP_SM+'" oninput="ccState.talents['+i+'].category=this.value;">';
+    h+='<input type="number" title="Talent point cost" value="'+(+(t.xp_cost)||0)+'"'+(isBg?' readonly':'')+' style="width:44px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.15);color:var(--a2);padding:2px 3px;font-size:11px;" oninput="ccState.talents['+i+'].xp_cost=+this.value||0;">';
+    h+='</div>';
+    h+='<input type="text" placeholder="Effect..." value="'+esc(t.effect||'')+'"'+(isBg?' readonly':'')+' style="'+CC_INP_SM+'" oninput="ccState.talents['+i+'].effect=this.value;">';
     h+='</div>';
   });
   h+='<button onclick="ccState.talents.push({name:\'\',skill:\'\',category:\'\',xp_cost:0,effect:\'\',credited:false});render();" style="background:rgba(0,200,255,.08);border:1px dashed rgba(0,200,255,.3);color:var(--a);padding:5px;width:100%;border-radius:4px;cursor:pointer;font-size:11px;">+ Add Talent Slot</button>';
@@ -9044,27 +9125,36 @@ function ccRenderTalents(){
   h+='</div>';
 
   st.evolutions.forEach((e,i)=>{
-    const cost=e.name?ccEvoTierCost(e.tier):0;
+    const isBgEvo=e.bg_granted||false;
+    const cost=e.name&&!e.free?ccEvoTierCost(e.tier):0;
     const prereqOK=ccEvoHasPrereq(e,i);
-    const borderCol=!prereqOK?'var(--re)':evoOver&&cost>0?'var(--ye)':'rgba(163,85,247,.15)';
+    const borderCol=isBgEvo?'rgba(255,200,0,.3)':!prereqOK?'var(--re)':evoOver&&cost>0?'var(--ye)':'rgba(163,85,247,.15)';
     h+='<div style="background:rgba(0,0,0,.3);border:1px solid '+borderCol+';border-radius:4px;padding:7px;margin-bottom:6px;">';
     h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">';
+    h+='<div style="display:flex;gap:5px;align-items:center;">';
     h+='<span style="font-size:10px;color:#555;">#'+(i+1)+'</span>';
+    if(isBgEvo)h+='<span style="font-size:9px;background:rgba(255,200,0,.15);border:1px solid rgba(255,200,0,.4);color:var(--ye);border-radius:3px;padding:1px 5px;">BG</span>';
+    if(e.free)h+='<span style="font-size:9px;background:rgba(0,200,100,.12);border:1px solid rgba(0,200,100,.3);color:var(--gr);border-radius:3px;padding:1px 5px;">FREE</span>';
+    h+='</div>';
     h+='<div style="display:flex;align-items:center;gap:4px;">';
     if(cost>0)h+='<span style="font-size:10px;color:var(--a3);">'+cost+' EP</span>';
     if(!prereqOK)h+='<span style="font-size:9px;color:var(--re);">⚠ needs Tier '+(((e.tier||'').toUpperCase().includes('III'))?'II':'I')+'</span>';
-    h+='<label style="font-size:9px;color:#666;"><input type="checkbox"'+(e.credited?' checked':'')+' onchange="ccState.evolutions['+i+'].credited=this.checked;" style="margin-right:3px;">Credited</label>';
-    h+='<button onclick="ccState.picker={type:\'evolution\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:rgba(163,85,247,.1);border:1px solid var(--a3);color:var(--a3);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">Browse</button>';
-    h+='<button onclick="ccState.evolutions.splice('+i+',1);render();" style="background:none;border:1px solid #333;color:#555;padding:1px 5px;border-radius:3px;cursor:pointer;font-size:10px;">✕</button>';
+    if(isBgEvo){
+      h+='<span style="font-size:9px;color:var(--ye);padding:1px 6px;">Auto-credited</span>';
+    } else {
+      h+='<label style="font-size:9px;color:#666;"><input type="checkbox"'+(e.credited?' checked':'')+' onchange="ccState.evolutions['+i+'].credited=this.checked;" style="margin-right:3px;">Credited</label>';
+      h+='<button onclick="ccState.picker={type:\'evolution\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:rgba(163,85,247,.1);border:1px solid var(--a3);color:var(--a3);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">Browse</button>';
+    }
+    h+='<button '+(isBgEvo?'disabled style="opacity:0.25;cursor:default;"':'')+' onclick="ccState.evolutions.splice('+i+',1);render();" style="background:none;border:1px solid #333;color:#555;padding:1px 5px;border-radius:3px;cursor:pointer;font-size:10px;">✕</button>';
     h+='</div></div>';
     const inp3=CC_INP.replace('rgba(0,200,255,.25)','rgba(163,85,247,.3)');
     const inp3sm=CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.2)');
-    h+='<input type="text" placeholder="Evolution name" value="'+esc(e.name||'')+'" style="'+inp3+'margin-bottom:3px;" oninput="ccState.evolutions['+i+'].name=this.value;">';
+    h+='<input type="text" placeholder="Evolution name" value="'+esc(e.name||'')+'"'+(isBgEvo?' readonly':'')+' style="'+inp3+'margin-bottom:3px;" oninput="ccState.evolutions['+i+'].name=this.value;">';
     h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;">';
-    h+='<input type="text" placeholder="Type (GENETICS/CYBER/MAGIC)" value="'+esc(e.type||'')+'" style="'+inp3sm+'margin-bottom:0;" oninput="ccState.evolutions['+i+'].type=this.value;">';
-    h+='<input type="text" placeholder="Tier (TIER I/II/III)" value="'+esc(e.tier||'')+'" style="'+inp3sm+'margin-bottom:0;" oninput="ccState.evolutions['+i+'].tier=this.value;">';
+    h+='<input type="text" placeholder="Type (GENETICS/CYBER/MAGIC)" value="'+esc(e.type||'')+'"'+(isBgEvo?' readonly':'')+' style="'+inp3sm+'margin-bottom:0;" oninput="ccState.evolutions['+i+'].type=this.value;">';
+    h+='<input type="text" placeholder="Tier (TIER I/II/III)" value="'+esc(e.tier||'')+'"'+(isBgEvo?' readonly':'')+' style="'+inp3sm+'margin-bottom:0;" oninput="ccState.evolutions['+i+'].tier=this.value;">';
     h+='</div>';
-    h+='<input type="text" placeholder="Effect..." value="'+esc(e.effect||'')+'" style="'+inp3sm+'margin-top:3px;" oninput="ccState.evolutions['+i+'].effect=this.value;">';
+    h+='<input type="text" placeholder="Effect..." value="'+esc(e.effect||'')+'"'+(isBgEvo?' readonly':'')+' style="'+inp3sm+'margin-top:3px;" oninput="ccState.evolutions['+i+'].effect=this.value;">';
     h+='</div>';
   });
   h+='<button onclick="ccState.evolutions.push({name:\'\',type:\'\',tier:\'\',effect:\'\',credited:false});render();" style="background:rgba(163,85,247,.08);border:1px dashed rgba(163,85,247,.3);color:var(--a3);padding:5px;width:100%;border-radius:4px;cursor:pointer;font-size:11px;">+ Add Evolution Slot</button>';
