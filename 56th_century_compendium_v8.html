@@ -931,6 +931,7 @@ function paraHtml(str){
 
 // ─── Manufacturer logic ───────────────────────────────────────────────────────
 const AVAIL=['COMMON','UNCOMMON','RARE','LIMITED','UNIQUE','CLASSIFIED'];
+const MED_LEGAL=['no permit','restricted','illegal','classified'];
 const POWER_STR={3:'Low',6:'Medium',9:'High',10:'High',11:'High',12:'High',13:'High',14:'High',15:'EXTREME',66:'LOC',77:'LOC+1'};
 
 function applyWpnMfr(item,mfrName){
@@ -1063,6 +1064,10 @@ function applyMedMfr(item,mfrName){
   if(sMod){const si=SIZES.indexOf((w.size||'TINY').toUpperCase());w.size=SIZES[Math.max(0,Math.min(SIZES.length-1,si+sMod))];}
   const avMod=parseInt(m.avail_mod||0);
   if(avMod){const ai=AVAIL.indexOf((w.availability||'COMMON').toUpperCase().trim());const ni=ai+avMod;if(ni>=AVAIL.length)return null;w.availability=AVAIL[Math.max(0,ni)];}
+  const tMod=parseInt(m.tox_mod||0);
+  if(tMod&&w.toxicity!==undefined)w.toxicity=Math.max(0,(+(w.toxicity)||0)+tMod);
+  const lMod=parseInt(m.legality_mod||0);
+  if(lMod){const li=MED_LEGAL.indexOf((w.legality||'').toLowerCase());if(li>=0){const nl=li+lMod;if(nl>=MED_LEGAL.length)return null;w.legality=MED_LEGAL[Math.max(0,nl)];}}
   const pm=parseFloat(m.price_mult||1);
   if(pm&&pm!==1&&w.cost)w.cost=String(Math.round(parseFloat(w.cost)*pm));
   if(abbr)w.name=w.name+' '+abbr;
@@ -8884,6 +8889,13 @@ function ccRenderPicker(){
   const MELEE_THROW_CATS=new Set(['Melee Weapons (Martial Arts)','Ranged / Throwing Weapons (Dexterity)']);
   const matches=items.filter(x=>{
     if(meleeOnlyMfr&&!MELEE_THROW_CATS.has(x.category))return false;
+    if(pickerMfrPre!=='Generic'){
+      let chk=null;
+      if(type==='weapon')chk=applyWpnMfr({...x},pickerMfrPre);
+      else if(type==='armor')chk=applyArmorMfr({...x},pickerMfrPre);
+      else if(type==='datacom')chk=applyDatacomMfr({...x},pickerMfrPre);
+      if(chk===null)return false;
+    }
     if(!pq)return true;
     const n=(x.name||'').toLowerCase();
     return n.includes(pq)||(x.skill||x.category||x.evo_type||x.type||x.race||'').toLowerCase().includes(pq)||(x.desc||'').toLowerCase().includes(pq);
@@ -8933,7 +8945,7 @@ function ccRenderPicker(){
       const xwSpecStr=Array.isArray(xw.special)?xw.special.join(' '):(xw.special||'');
       const xwSpecChg=pickerMfr!=='Generic'&&xwSpecStr!==(Array.isArray(x.special)?x.special.join(' '):(x.special||''));
       h+='<div style="font-size:10px;color:#888;">'+esc(xw.category||'')+(xw.damage?' | '+(dmgChg?'<b style="color:var(--a2);">':'')+esc(xw.damage)+(dmgChg?'</b>':''):'')+(xw.type?' | '+esc(xw.type):'')+(xw.range_short?' | '+(rngChg?'<span style="color:var(--ye);">':'')+esc(xw.range_short)+'/'+esc(xw.range_med||'—')+'/'+esc(xw.range_long||'—')+(rngChg?'</span>':''):'')+( xwSpecStr?' | '+(xwSpecChg?'<span style="color:var(--a3);">':'')+esc(xwSpecStr)+(xwSpecChg?'</span>':''):'')+'</div>';
-      if(pickerMfr!=='Generic')h+='<div style="font-size:9px;color:var(--a3);">'+esc(pickerMfr)+(xw.cost?' · '+fmt(+(xw.cost)||0)+' Cr':'')+'</div>';
+      if(pickerMfr!=='Generic'){const availChg=xw.availability&&xw.availability!==x.availability;h+='<div style="font-size:9px;color:var(--a3);">'+esc(pickerMfr)+(xw.cost?' · '+fmt(+(xw.cost)||0)+' Cr':'')+(availChg?' · <span style="color:var(--ye);">'+esc(xw.availability)+'</span>':'')+'</div>';}
     }
     else if(type==='armor'){
       const xa=applyArmorMfr({...x},pickerMfr)||x;
@@ -8946,7 +8958,7 @@ function ccRenderPicker(){
       const xaSpecStr=Array.isArray(xa.special)?xa.special.join(' '):(xa.special||'');
       const xaSpecChg=pickerMfr!=='Generic'&&xaSpecStr!==(Array.isArray(x.special)?x.special.join(' '):(x.special||''));
       h+='<div style="font-size:10px;color:#888;">'+esc(xa.type||xa.category||'')+(xa.soak?' | '+(soakChg?'<b style="color:var(--ye);">':'')+esc(xa.soak)+(soakChg?'</b>':''):'')+(defParts.length?' | '+defParts.join(' '):'')+( xaSpecStr?' | '+(xaSpecChg?'<span style="color:var(--a3);">':'')+esc(xaSpecStr)+(xaSpecChg?'</span>':''):'')+(xa.cost?' · '+fmt(+(xa.cost)||0)+' Cr':'')+'</div>';
-      if(pickerMfr!=='Generic')h+='<div style="font-size:9px;color:var(--gr);">'+esc(pickerMfr)+'</div>';
+      if(pickerMfr!=='Generic'){const availChg=xa.availability&&xa.availability!==x.availability;h+='<div style="font-size:9px;color:var(--gr);">'+esc(pickerMfr)+(xa.cost?' · '+fmt(+(xa.cost)||0)+' Cr':'')+(availChg?' · <span style="color:var(--ye);">'+esc(xa.availability)+'</span>':'')+'</div>';}
     }
     else if(type==='datacom'){
       const xd=applyDatacomMfr({...x},pickerMfr)||x;
@@ -8967,7 +8979,7 @@ function ccRenderPicker(){
         +(dcDef.length?' | '+dcDef.join(' '):'')
         +(dcSpecStr?' | '+(dcSpecChg?'<span style="color:var(--a3);">':'')+esc(dcSpecStr)+(dcSpecChg?'</span>':''):'')
         +'</div>';
-      if(pickerMfr!=='Generic')h+='<div style="font-size:9px;color:var(--a);">'+esc(pickerMfr)+(xd.cost?' · '+fmt(+(xd.cost)||0)+' Cr':'')+'</div>';
+      if(pickerMfr!=='Generic'){const availChg=xd.availability&&xd.availability!==x.availability;h+='<div style="font-size:9px;color:var(--a);">'+esc(pickerMfr)+(xd.cost?' · '+fmt(+(xd.cost)||0)+' Cr':'')+(availChg?' · <span style="color:var(--ye);">'+esc(xd.availability)+'</span>':'')+'</div>';}
     }
     else if(type==='program')h+='<div style="font-size:10px;color:#888;">'+esc(x.type||'')+(x.cpu?' | CPU '+x.cpu:'')+(x.memory?' | Mem '+x.memory:'')+'</div>';
     else if(type==='gadget')h+='<div style="font-size:10px;color:#666;margin-top:2px;">'+esc(x.desc||x.effect||'')+'</div>';
@@ -9726,28 +9738,33 @@ function ccRenderMagicGear(){
   h+='<input type="text" placeholder="Search medical..." value="'+esc(st.med_search||'')+'" style="'+CC_INP+'margin-bottom:8px;" oninput="ccState.med_search=this.value;render();">';
   const medMfr=st.med_mfr_filter||'Generic';
   const medSq=(st.med_search||'').toLowerCase();
-  const medFiltered=(g.medical||[]).map((it,mi)=>({it:applyMedMfr({...it},medMfr)||it,mi})).filter(({it})=>{
+  const medFiltered=(g.medical||[]).map((it,mi)=>({base:it,it:applyMedMfr({...it},medMfr),mi})).filter(({it,base})=>{
+    if(!it)return false; // impossible with this manufacturer
     if(medSq&&!(it.name||'').toLowerCase().includes(medSq)&&!(it.effect||'').toLowerCase().includes(medSq)&&!(it.application||'').toLowerCase().includes(medSq))return false;
     return true;
   });
   h+='<div style="max-height:300px;overflow-y:auto;border:1px solid rgba(239,68,68,.15);border-radius:4px;margin-bottom:14px;">';
   if(medFiltered.length===0)h+='<div style="padding:12px;text-align:center;color:#555;font-size:11px;">No items match</div>';
-  medFiltered.forEach(({it,mi})=>{
+  medFiltered.forEach(({it,base,mi})=>{
     const cost=+(it.cost)||0;
     const canAfford=cost===0||(remaining>=cost);
+    const toxChg=medMfr!=='Generic'&&it.toxicity!==base.toxicity;
+    const availChg=medMfr!=='Generic'&&it.availability!==base.availability;
+    const legalChg=medMfr!=='Generic'&&(it.legality||'').toLowerCase()!==(base.legality||'').toLowerCase();
     h+='<div style="display:grid;grid-template-columns:1fr auto auto auto;gap:8px;align-items:center;padding:5px 10px;border-bottom:1px solid rgba(255,255,255,.05);">';
     h+='<div>';
     h+='<div style="font-size:11px;color:var(--tx);">'+esc(it.name||'');
-    if(it.toxicity)h+=' <span style="font-size:9px;color:var(--re);margin-left:4px;">☠'+esc(String(it.toxicity))+'</span>';
+    if(it.toxicity!=null)h+=' <span style="font-size:9px;'+(toxChg?'color:var(--a2);font-weight:bold;':'color:var(--re);')+'margin-left:4px;">☠'+esc(String(it.toxicity))+'</span>';
     h+='</div>';
     const pills=[];
     if(it.application)pills.push(esc(it.application));
     if(it.action)pills.push(esc(it.action));
     if(it.size)pills.push(esc(it.size));
+    if(availChg)pills.push('<span style="color:var(--ye);">'+esc(it.availability)+'</span>');
     if(pills.length)h+='<div style="font-size:9px;color:#666;margin-top:1px;">'+pills.join(' · ')+'</div>';
     if(it.effect)h+='<div style="font-size:10px;color:#555;margin-top:1px;">'+esc(it.effect.substring(0,80)+(it.effect.length>80?'…':''))+'</div>';
     h+='</div>';
-    h+='<span style="font-size:10px;color:#666;white-space:nowrap;">'+esc(it.legality||'—')+'</span>';
+    h+='<span style="font-size:10px;'+(legalChg?'color:var(--ye);font-weight:bold;':'color:#666;')+'white-space:nowrap;">'+esc(it.legality||'—')+'</span>';
     h+='<span style="font-size:11px;color:var(--re);white-space:nowrap;font-family:\'Share Tech Mono\',monospace;">'+(cost>0?fmt(cost)+' Cr':'Free')+'</span>';
     h+='<button onclick="ccBuyMedItem('+mi+',\''+esc(medMfr).replace(/'/g,"\\'")+'\');" style="background:'+(canAfford?'rgba(239,68,68,.1)':'rgba(0,0,0,.3)')+';border:1px solid '+(canAfford?'var(--re)':'#333')+';color:'+(canAfford?'var(--re)':'#444')+';padding:2px 9px;border-radius:3px;cursor:pointer;font-size:10px;"'+(canAfford?'':' title="Not enough credits"')+'>Buy</button>';
     h+='</div>';
