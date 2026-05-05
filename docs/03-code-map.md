@@ -60,7 +60,10 @@
 | `buildShipComps()` | Expand ship catalog | none | Populates `g.catalog.ship_components` |
 | `buildDroneParts()` | Expand drone catalog | none | Populates `g.catalog.drone_parts` |
 | `ccExportRoll20()` | Export character to JSON | none (reads ccState) | Downloads Roll20 JSON file |
-| `ccPickFromCache(pidx)` | Apply picker selection | picker cache index | Mutates ccState slot, calls render() |
+| `ccPickFromCache(pidx)` | Apply picker selection | picker cache index | Mutates ccState slot (applying `picker.mfr`), calls render() |
+| `ccRenderPicker()` | Render browse picker modal | none (reads ccState.picker) | HTML string; includes mfr dropdown for weapon/armor/datacom, applies mfr mods to item previews, filters melee-only mfrs |
+| `ccRenderCombat()` | Render Combat tab | none (reads ccState) | HTML string; labeled inputs, mfr-change highlight coloring, bst() hoverable special tags |
+| `ccRenderTech()` | Render Tech tab | none (reads ccState) | HTML string; labeled inputs, bst() hoverable special tags on datacoms |
 | `ccAutoTrackedSpent()` | Sum auto-tracked costs | none (reads ccState) | number — total credits for weapons+armor+datacoms+evos |
 | `ccCalcWeaponCost(wp)` | Weapon credit cost | weapon slot object | number |
 | `ccCalcArmorCost(ar)` | Armor/defense credit cost | armor slot object | number |
@@ -75,12 +78,12 @@
 | `tab` | string | Active tab: `'origin'`, `'attributes'`, `'advancement'`, `'combat'`, `'tech'`, `'magicgear'` |
 | `weapons[6]` | array | Weapon slots: `{name, skill, dmg, dmgtype, power, expertise, special, close_range, medium_range, long_range, rof, ammo, currentammo, reload, mfr, base_data, options[]}` |
 | `armor[2]` | array | Defense slots: `{name, type, def_phys/energy/tech/spirit, special, soak_expr, charges, regen, mfr, base_data, options[]}` |
-| `datacoms[3]` | array | Datacom slots: `{name, cpu, mem, nanite, def_*, special, mfr, base_data, options[]}` |
+| `datacoms[3]` | array | Datacom slots: `{name, cpu, mem, nanite, def_phys/energy/tech/spirit, def_dmg, int_ext/int_int/int_main, expertise, special, mfr, base_data, options[]}` — note: `nanite` in state vs `nanites` in `g.datacoms` data; `def_phys` in state vs `def_physical` in data |
 | `evolutions[]` | array | `{name, type, tier, effect, credited, bg_granted?, free?}` |
 | `talents[]` | array | `{name, skill, category, xp_cost, effect, credited, bg_granted?}` |
 | `credits` | number | Starting budget |
 | `credits_spent` | number | Manual gear purchases (Gear Shop) |
-| `picker` | obj/null | Active picker: `{type, slot}` |
+| `picker` | obj/null | Active picker: `{type, slot, mfr?}` — `mfr` tracks selected manufacturer inside the picker window |
 | `bg_choices[]` | array | Pending background skill choices |
 
 ## Data schemas
