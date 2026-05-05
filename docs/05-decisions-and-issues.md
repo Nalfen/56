@@ -61,12 +61,14 @@
 
 ## Known issues
 
-### None currently tracked
+#### Mono-Med Customs availability uses wrong logic
+- **Symptom**: Selecting Mono-Med Customs in the medical shop shifts items by `avail_mod: -10`, which clamps to COMMON for most items instead of showing UNIQUE
+- **Root cause**: `applyMedMfr` applies a generic numeric shift; Mono-Med needs a special-case override to UNIQUE
+- **Status**: Active — tracked in `work/5.0/`
+- **Workaround**: None; select Generic to see unmodified availability
 
-Add new issues here as they are discovered. Format:
-
-#### [Issue title]
-- **Symptom**: what the user/developer sees
-- **Root cause**: why it happens
-- **Status**: Active / Mitigated / Won't Fix
-- **Workaround**: how to deal with it now
+#### Size changes not shown in picker previews
+- **Symptom**: Manufacturers with `size_mod` (Altair Biomed, Goodman Holistic, Diva Solutions, Mono-Med Customs, some datacoms) change item size but the picker preview row doesn't display or highlight the change
+- **Root cause**: Size is not rendered in the medical shop item row or the datacom picker preview
+- **Status**: Active — tracked in `work/5.0/`
+- **Workaround**: Check the manufacturer info banner above the item list for a size tier note

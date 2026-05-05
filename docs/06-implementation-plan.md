@@ -72,6 +72,18 @@
 
 ---
 
+## Milestone 5.0 — Manufacturer picker display fixes
+**Goal**: Remaining display gaps in the character creator manufacturer system.
+**Status**: todo — see `work/5.0/`
+
+| Feature | Status |
+|---|---|
+| Mono-Med Customs: force availability to UNIQUE instead of shifting by avail_mod | todo |
+| Size changes shown + highlighted in medical gear shop when manufacturer changes size | todo |
+| Size changes shown + highlighted in datacom picker when manufacturer changes size | todo |
+
+---
+
 ## Backlog (unscheduled)
 
 - Rename "armor" references throughout the character creator to "defense" for clarity → see drafts if created
