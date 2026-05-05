@@ -8893,7 +8893,9 @@ function ccRenderPicker(){
       const xw=applyWpnMfr({...x},pickerMfr)||x;
       const dmgChg=pickerMfr!=='Generic'&&xw.damage!==x.damage;
       const rngChg=pickerMfr!=='Generic'&&(xw.range_short!==x.range_short||xw.range_med!==x.range_med||xw.range_long!==x.range_long);
-      h+='<div style="font-size:10px;color:#888;">'+esc(xw.category||'')+(xw.damage?' | '+(dmgChg?'<b style="color:var(--a2);">':'')+esc(xw.damage)+(dmgChg?'</b>':''):'')+(xw.type?' | '+esc(xw.type):'')+(xw.range_short?' | '+(rngChg?'<span style="color:var(--ye);">':'')+esc(xw.range_short)+'/'+esc(xw.range_med||'—')+'/'+esc(xw.range_long||'—')+(rngChg?'</span>':''):'')+'</div>';
+      const xwSpecStr=Array.isArray(xw.special)?xw.special.join(' '):(xw.special||'');
+      const xwSpecChg=pickerMfr!=='Generic'&&xwSpecStr!==(Array.isArray(x.special)?x.special.join(' '):(x.special||''));
+      h+='<div style="font-size:10px;color:#888;">'+esc(xw.category||'')+(xw.damage?' | '+(dmgChg?'<b style="color:var(--a2);">':'')+esc(xw.damage)+(dmgChg?'</b>':''):'')+(xw.type?' | '+esc(xw.type):'')+(xw.range_short?' | '+(rngChg?'<span style="color:var(--ye);">':'')+esc(xw.range_short)+'/'+esc(xw.range_med||'—')+'/'+esc(xw.range_long||'—')+(rngChg?'</span>':''):'')+( xwSpecStr?' | '+(xwSpecChg?'<span style="color:var(--a3);">':'')+esc(xwSpecStr)+(xwSpecChg?'</span>':''):'')+'</div>';
       if(pickerMfr!=='Generic')h+='<div style="font-size:9px;color:var(--a3);">'+esc(pickerMfr)+(xw.cost?' · '+fmt(+(xw.cost)||0)+' Cr':'')+'</div>';
     }
     else if(type==='armor'){
@@ -8903,7 +8905,9 @@ function ccRenderPicker(){
         const chg=pickerMfr!=='Generic'&&v!==(x['def_'+k]||'None');
         return (chg?'<b style="color:var(--gr);">':'')+k.slice(0,4).toUpperCase()+':'+v+(chg?'</b>':'');
       }).filter(Boolean);
-      h+='<div style="font-size:10px;color:#888;">'+esc(xa.type||xa.category||'')+(xa.soak?' | '+esc(xa.soak):'')+(defParts.length?' | '+defParts.join(' '):'')+(xa.cost?' · '+fmt(+(xa.cost)||0)+' Cr':'')+'</div>';
+      const xaSpecStr=Array.isArray(xa.special)?xa.special.join(' '):(xa.special||'');
+      const xaSpecChg=pickerMfr!=='Generic'&&xaSpecStr!==(Array.isArray(x.special)?x.special.join(' '):(x.special||''));
+      h+='<div style="font-size:10px;color:#888;">'+esc(xa.type||xa.category||'')+(xa.soak?' | '+esc(xa.soak):'')+(defParts.length?' | '+defParts.join(' '):'')+( xaSpecStr?' | '+(xaSpecChg?'<span style="color:var(--a3);">':'')+esc(xaSpecStr)+(xaSpecChg?'</span>':''):'')+(xa.cost?' · '+fmt(+(xa.cost)||0)+' Cr':'')+'</div>';
       if(pickerMfr!=='Generic')h+='<div style="font-size:9px;color:var(--gr);">'+esc(pickerMfr)+'</div>';
     }
     else if(type==='datacom'){
@@ -9420,13 +9424,17 @@ function ccRenderTalents(){
 function ccRenderCombat(){
   const st=ccState;
   const DEF=['None','Low','Medium','High','Extreme'];
+  const lbl=t=>'<div style="font-size:9px;color:#666;margin-bottom:1px;">'+t+'</div>';
+  const capDef=s=>s?(s.charAt(0).toUpperCase()+s.slice(1).toLowerCase()):'None';
   let h=ccRenderPicker();
   h+=ccMiniCreditsBar('combat & defense auto-tracked');
   // Weapons
   h+=ccSecHead('WEAPONS — 6 slots','var(--a2)');
   st.weapons.forEach((w,i)=>{
+    const wBase=w.base_data&&w.mfr&&w.mfr!=='Generic'?(applyWpnMfr({...w.base_data},'Generic')||w.base_data):null;
+    const whi=(cur,base)=>wBase&&String(cur||'')!==String(base||'')?'color:var(--a2);':'';
     h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.07);border-radius:4px;padding:7px;margin-bottom:7px;">';
-    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">';
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">';
     h+='<span style="font-size:10px;color:#666;">Weapon '+(i+1)+'</span>';
     h+='<div style="display:flex;gap:4px;align-items:center;">';
     if(w.mfr&&w.mfr!=='Generic')h+='<span style="font-size:10px;color:var(--a2);font-family:\'Share Tech Mono\',monospace;">'+esc(w.mfr)+'</span>';
@@ -9434,24 +9442,31 @@ function ccRenderCombat(){
     const wCost=ccCalcWeaponCost(w);
     if(wCost>0)h+='<span style="font-size:10px;color:var(--gr);font-family:\'Share Tech Mono\',monospace;">'+fmt(wCost)+' Cr</span>';
     h+='</div></div>';
-    h+='<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:5px;margin-bottom:4px;">';
-    h+='<input type="text" placeholder="Name" value="'+esc(w.name||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].name=this.value;">';
-    h+='<input type="text" placeholder="Skill" value="'+esc(w.skill||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].skill=this.value;">';
-    h+='<input type="text" placeholder="DMG" value="'+esc(w.dmg||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].dmg=this.value;">';
-    h+='<input type="text" placeholder="Type" value="'+esc(w.dmgtype||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].dmgtype=this.value;">';
+    // Row 1: Name | Skill | Damage | Type
+    h+='<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4px;margin-bottom:3px;">';
+    h+='<div>'+lbl('Name')+'<input type="text" value="'+esc(w.name||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].name=this.value;"></div>';
+    h+='<div>'+lbl('Skill')+'<input type="text" value="'+esc(w.skill||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].skill=this.value;"></div>';
+    h+='<div>'+lbl('Damage')+'<input type="text" value="'+esc(w.dmg||'')+'" style="'+CC_INP_SM+whi(w.dmg,wBase&&wBase.damage)+'" oninput="ccState.weapons['+i+'].dmg=this.value;"></div>';
+    h+='<div>'+lbl('Type')+'<input type="text" value="'+esc(w.dmgtype||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].dmgtype=this.value;"></div>';
     h+='</div>';
-    h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr 55px 50px;gap:3px;margin-bottom:4px;">';
-    [['close_range','Close'],['medium_range','Med'],['long_range','Long'],['rof','RoF'],['special','Special']].forEach(([k,pl])=>{
-      h+='<input type="text" placeholder="'+pl+'" value="'+esc(w[k]||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].'+k+'=this.value;">';
+    // Row 2: Close | Med | Long | RoF | Special | Ammo | Expertise
+    h+='<div style="display:grid;grid-template-columns:55px 55px 60px 40px 2fr 48px 48px;gap:3px;margin-bottom:3px;">';
+    [['close_range','Close',wBase&&wBase.range_short],['medium_range','Med',wBase&&wBase.range_med],['long_range','Long',wBase&&wBase.range_long]].forEach(([k,lbl_,base])=>{
+      h+='<div>'+lbl(lbl_)+'<input type="text" value="'+esc(w[k]||'')+'" style="'+CC_INP_SM+whi(w[k],base)+'" oninput="ccState.weapons['+i+'].'+k+'=this.value;"></div>';
     });
-    h+='<input type="number" placeholder="Ammo" value="'+(+(w.ammo)||0)+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].ammo=+this.value||0;">';
-    h+='<input type="number" placeholder="Exp" value="'+(+(w.expertise)||0)+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].expertise=+this.value||0;">';
+    h+='<div>'+lbl('RoF')+'<input type="text" value="'+esc(w.rof||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].rof=this.value;"></div>';
+    h+='<div>'+lbl('Special')+'<input type="text" value="'+esc(w.special||'')+'" style="'+CC_INP_SM+whi(w.special,wBase&&wBase.special)+'" oninput="ccState.weapons['+i+'].special=this.value;"></div>';
+    h+='<div>'+lbl('Ammo')+'<input type="number" value="'+(+(w.ammo)||0)+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].ammo=+this.value||0;"></div>';
+    h+='<div>'+lbl('Exp.')+'<input type="number" value="'+(+(w.expertise)||0)+'" style="'+CC_INP_SM+whi(w.expertise,wBase&&wBase.expertise)+'" oninput="ccState.weapons['+i+'].expertise=+this.value||0;"></div>';
     h+='</div>';
-    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:5px;">';
-    h+='<input type="number" placeholder="Power" value="'+(+(w.power)||0)+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].power=+this.value||0;">';
-    h+='<input type="text" placeholder="Reload" value="'+esc(w.reload||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].reload=this.value;">';
+    // Row 3: Power | Reload
+    h+='<div style="display:grid;grid-template-columns:70px 1fr;gap:3px;margin-bottom:3px;">';
+    h+='<div>'+lbl('Power')+'<input type="number" value="'+(+(w.power)||0)+'" style="'+CC_INP_SM+whi(w.power,wBase&&wBase.power_num)+'" oninput="ccState.weapons['+i+'].power=+this.value||0;"></div>';
+    h+='<div>'+lbl('Reload')+'<input type="text" value="'+esc(w.reload||'')+'" style="'+CC_INP_SM+whi(w.reload,wBase&&wBase.reload)+'" oninput="ccState.weapons['+i+'].reload=this.value;"></div>';
     h+='</div>';
-    // Options row (gated on OPT/OPT+ in special)
+    // Hoverable special tags
+    if(w.special)h+='<div style="margin-bottom:4px;display:flex;flex-wrap:wrap;gap:3px;">'+bst(w.special)+'</div>';
+    // Options row
     const wSpec=w.special||'';
     const wHasOptPlus=/\bOPT\+/i.test(wSpec),wHasOpt=/\bOPT\b/i.test(wSpec);
     const wMaxOpts=wHasOptPlus?2:wHasOpt?1:0;
@@ -9467,11 +9482,14 @@ function ccRenderCombat(){
     }
     h+='</div>';
   });
-  // Defense (armors, forcefields, barriers, datacoms)
+  // Defense
   h+=ccSecHead('DEFENSE — 2 slots <span style="font-size:9px;color:#555;font-family:sans-serif;">(armors · forcefields · barriers · datacoms)</span>','var(--gr)');
   st.armor.forEach((ar,i)=>{
+    const arBase=ar.base_data&&ar.mfr&&ar.mfr!=='Generic'?(applyArmorMfr({...ar.base_data},'Generic')||ar.base_data):null;
+    const ahi=(cur,base)=>arBase&&String(cur||'')!==String(base||'')?'color:var(--a2);':'';
+    const defBase=k=>arBase?capDef(arBase['def_'+k]||'None'):'';
     h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.07);border-radius:4px;padding:7px;margin-bottom:7px;">';
-    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">';
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">';
     h+='<span style="font-size:10px;color:#666;">Defense '+(i+1)+'</span>';
     h+='<div style="display:flex;gap:4px;align-items:center;">';
     if(ar.mfr&&ar.mfr!=='Generic')h+='<span style="font-size:10px;color:var(--gr);font-family:\'Share Tech Mono\',monospace;">'+esc(ar.mfr)+'</span>';
@@ -9479,22 +9497,28 @@ function ccRenderCombat(){
     const arCost=ccCalcArmorCost(ar);
     if(arCost>0)h+='<span style="font-size:10px;color:var(--gr);font-family:\'Share Tech Mono\',monospace;">'+fmt(arCost)+' Cr</span>';
     h+='</div></div>';
-    h+='<div style="display:grid;grid-template-columns:2fr 1fr;gap:5px;margin-bottom:5px;">';
-    h+='<input type="text" placeholder="Armor name" value="'+esc(ar.name||'')+'" style="'+CC_INP_SM+'" oninput="ccState.armor['+i+'].name=this.value;">';
-    h+='<input type="text" placeholder="Type" value="'+esc(ar.type||'')+'" style="'+CC_INP_SM+'" oninput="ccState.armor['+i+'].type=this.value;">';
+    h+='<div style="display:grid;grid-template-columns:2fr 1fr;gap:4px;margin-bottom:4px;">';
+    h+='<div>'+lbl('Name')+'<input type="text" value="'+esc(ar.name||'')+'" style="'+CC_INP_SM+'" oninput="ccState.armor['+i+'].name=this.value;"></div>';
+    h+='<div>'+lbl('Type')+'<input type="text" value="'+esc(ar.type||'')+'" style="'+CC_INP_SM+'" oninput="ccState.armor['+i+'].type=this.value;"></div>';
     h+='</div>';
-    h+='<div style="display:grid;grid-template-columns:repeat(4,1fr) 1fr 1fr 1fr;gap:3px;margin-bottom:5px;">';
+    h+='<div style="display:grid;grid-template-columns:repeat(4,1fr) 1fr 1fr 1fr;gap:3px;margin-bottom:3px;">';
     ['phys','energy','tech','spirit'].forEach(dk=>{
-      h+='<div><div style="font-size:9px;color:#666;">'+dk.charAt(0).toUpperCase()+dk.slice(1)+'</div>';
-      h+='<select style="'+CC_SEL+'" onchange="ccState.armor['+i+'].def_'+dk+'=this.value;">';
+      const defChg=arBase&&ar['def_'+dk]!==defBase('def_'+dk.replace('phys','physical').replace('spirit','spiritual'));
+      // map state key back to data key
+      const dataKey=dk==='phys'?'physical':dk==='spirit'?'spiritual':dk;
+      const baseDefVal=defBase('def_'+dataKey);
+      const changed=arBase&&ar['def_'+dk]!==baseDefVal;
+      h+='<div>'+lbl({phys:'Physical',energy:'Energy',tech:'Tech',spirit:'Spirit'}[dk])+'<select style="'+CC_SEL+(changed?'color:var(--a2);border-color:rgba(255,107,53,.5);':'')+'" onchange="ccState.armor['+i+'].def_'+dk+'=this.value;">';
       DEF.forEach(o=>{h+='<option value="'+o+'"'+(ar['def_'+dk]===o?' selected':'')+'>'+o+'</option>';});
       h+='</select></div>';
     });
-    h+='<div><div style="font-size:9px;color:#666;">Soak Expr</div><input type="text" placeholder="3D" value="'+esc(ar.soak_expr||'')+'" style="'+CC_INP_SM+'" oninput="ccState.armor['+i+'].soak_expr=this.value;"></div>';
-    h+='<div><div style="font-size:9px;color:#666;">Charges</div><input type="number" value="'+(+(ar.charges)||0)+'" style="'+CC_INP_SM+'" oninput="ccState.armor['+i+'].charges=+this.value||0;"></div>';
-    h+='<div><div style="font-size:9px;color:#666;">Special</div><input type="text" value="'+esc(ar.special||'')+'" style="'+CC_INP_SM+'" oninput="ccState.armor['+i+'].special=this.value;"></div>';
+    const soakChg=arBase&&ar.soak_expr!==(arBase.soak||'');
+    h+='<div>'+lbl('Soak')+'<input type="text" placeholder="3D" value="'+esc(ar.soak_expr||'')+'" style="'+CC_INP_SM+ahi(ar.soak_expr,arBase&&arBase.soak)+'" oninput="ccState.armor['+i+'].soak_expr=this.value;"></div>';
+    h+='<div>'+lbl('Charges')+'<input type="number" value="'+(+(ar.charges)||0)+'" style="'+CC_INP_SM+'" oninput="ccState.armor['+i+'].charges=+this.value||0;"></div>';
+    h+='<div>'+lbl('Special')+'<input type="text" value="'+esc(ar.special||'')+'" style="'+CC_INP_SM+ahi(ar.special,arBase&&arBase.special)+'" oninput="ccState.armor['+i+'].special=this.value;"></div>';
     h+='</div>';
-    // Options row (gated on OPT/OPT+ in special)
+    if(ar.special)h+='<div style="margin-bottom:4px;display:flex;flex-wrap:wrap;gap:3px;">'+bst(ar.special)+'</div>';
+    // Options row
     const arSpec=ar.special||'';
     const arHasOptPlus=/\bOPT\+/i.test(arSpec),arHasOpt=/\bOPT\b/i.test(arSpec);
     const arMaxOpts=arHasOptPlus?2:arHasOpt?1:0;
@@ -9533,8 +9557,8 @@ function ccRenderTech(){
     const dcCost=ccCalcDatacomCost(d);
     if(dcCost>0)h+='<span style="font-size:10px;color:var(--gr);font-family:\'Share Tech Mono\',monospace;">'+fmt(dcCost)+' Cr</span>';
     h+='</div></div>';
-    h+='<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4px;margin-bottom:4px;">';
-    h+='<input type="text" placeholder="Datacom name" value="'+esc(d.name||'')+'" style="'+CC_INP_SM+'" oninput="ccState.datacoms['+i+'].name=this.value;">';
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:4px;margin-bottom:4px;">';
+    h+='<div><div style="font-size:9px;color:#666;">NAME</div><input type="text" placeholder="Datacom name" value="'+esc(d.name||'')+'" style="'+CC_INP_SM+'" oninput="ccState.datacoms['+i+'].name=this.value;"></div>';
     ['cpu','mem','nanite'].forEach(k=>{
       h+='<div><div style="font-size:9px;color:#666;">'+k.toUpperCase()+'</div><input type="number" value="'+(+(d[k])||0)+'" style="'+CC_INP_SM+'" oninput="ccState.datacoms['+i+'].'+k+'=+this.value||0;"></div>';
     });
@@ -9552,7 +9576,8 @@ function ccRenderTech(){
     });
     h+='<div><div style="font-size:9px;color:#666;">Expertise</div><input type="number" value="'+(+(d.expertise)||0)+'" style="'+CC_INP_SM+'" oninput="ccState.datacoms['+i+'].expertise=+this.value||0;"></div>';
     h+='</div>';
-    h+='<input type="text" placeholder="Special..." value="'+esc(d.special||'')+'" style="'+CC_INP_SM+'margin-top:3px;margin-bottom:5px;" oninput="ccState.datacoms['+i+'].special=this.value;">';
+    h+='<input type="text" placeholder="Special..." value="'+esc(d.special||'')+'" style="'+CC_INP_SM+'margin-top:3px;margin-bottom:3px;" oninput="ccState.datacoms['+i+'].special=this.value;">';
+    if(d.special){const bstH=bst(d.special);if(bstH)h+='<div style="margin-bottom:5px;">'+bstH+'</div>';else h+='<div style="margin-bottom:5px;"></div>';}else{h+='<div style="margin-bottom:5px;"></div>';}
     // Options row (gated on OPT/OPT+ in special)
     const dcSpec=d.special||'';
     const dcHasOptPlus=/\bOPT\+/i.test(dcSpec),dcHasOpt=/\bOPT\b/i.test(dcSpec);
@@ -9578,9 +9603,9 @@ function ccRenderTech(){
     h+='<button onclick="ccState.picker={type:\'program\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:rgba(163,85,247,.08);border:1px solid var(--a3);color:var(--a3);padding:1px 6px;border-radius:3px;cursor:pointer;font-size:9px;">Browse</button></div>';
     h+='<input type="text" placeholder="Program name" value="'+esc(p.name||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.2)')+'margin-bottom:3px;" oninput="ccState.programs['+i+'].name=this.value;">';
     h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-bottom:3px;">';
-    h+='<input type="text" placeholder="Type" value="'+esc(p.type||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.15)')+'margin-bottom:0;" oninput="ccState.programs['+i+'].type=this.value;">';
-    h+='<input type="number" placeholder="CPU" value="'+(+(p.cpu)||0)+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.15)')+'margin-bottom:0;" oninput="ccState.programs['+i+'].cpu=+this.value||0;">';
-    h+='<input type="number" placeholder="Mem" value="'+(+(p.mem)||0)+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.15)')+'margin-bottom:0;" oninput="ccState.programs['+i+'].mem=+this.value||0;">';
+    h+='<div><div style="font-size:9px;color:#666;">TYPE</div><input type="text" placeholder="Type" value="'+esc(p.type||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.15)')+'margin-bottom:0;" oninput="ccState.programs['+i+'].type=this.value;"></div>';
+    h+='<div><div style="font-size:9px;color:#666;">CPU</div><input type="number" placeholder="CPU" value="'+(+(p.cpu)||0)+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.15)')+'margin-bottom:0;" oninput="ccState.programs['+i+'].cpu=+this.value||0;"></div>';
+    h+='<div><div style="font-size:9px;color:#666;">MEM</div><input type="number" placeholder="Mem" value="'+(+(p.mem)||0)+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.15)')+'margin-bottom:0;" oninput="ccState.programs['+i+'].mem=+this.value||0;"></div>';
     h+='</div>';
     h+='<input type="text" placeholder="Passive..." value="'+esc(p.passive||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.1)')+'margin-bottom:2px;" oninput="ccState.programs['+i+'].passive=this.value;">';
     h+='<input type="text" placeholder="Active..." value="'+esc(p.active||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.1)')+'" oninput="ccState.programs['+i+'].active=this.value;">';
@@ -9596,8 +9621,8 @@ function ccRenderTech(){
     h+='<span style="font-size:10px;color:#555;">Gadget '+(i+1)+'</span>';
     h+='<button onclick="ccState.picker={type:\'gadget\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:rgba(255,107,53,.08);border:1px solid rgba(255,107,53,.4);color:var(--a2);padding:0px 5px;border-radius:3px;cursor:pointer;font-size:9px;">Browse</button>';
     h+='</div>';
-    h+='<input type="text" placeholder="Name" value="'+esc(gad.name||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(255,107,53,.2)')+'margin-bottom:3px;" oninput="ccState.gadgets['+i+'].name=this.value;">';
-    h+='<input type="number" placeholder="Nanite" value="'+(+(gad.nanite)||0)+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(255,107,53,.15)')+'margin-bottom:3px;" oninput="ccState.gadgets['+i+'].nanite=+this.value||0;">';
+    h+='<div><div style="font-size:9px;color:#666;">NAME</div><input type="text" placeholder="Name" value="'+esc(gad.name||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(255,107,53,.2)')+'margin-bottom:0;" oninput="ccState.gadgets['+i+'].name=this.value;"></div>';
+    h+='<div style="margin-top:3px;"><div style="font-size:9px;color:#666;">NANITE</div><input type="number" placeholder="Nanite" value="'+(+(gad.nanite)||0)+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(255,107,53,.15)')+'margin-bottom:0;" oninput="ccState.gadgets['+i+'].nanite=+this.value||0;"></div>';
     h+='<input type="text" placeholder="Effect..." value="'+esc(gad.effect||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(255,107,53,.1)')+'" oninput="ccState.gadgets['+i+'].effect=this.value;">';
     h+='</div>';
   });
