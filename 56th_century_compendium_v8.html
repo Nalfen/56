@@ -8876,6 +8876,7 @@ function ccRenderPicker(){
     DATACOM_MFRS.forEach(m=>{h+='<option value="'+esc(m)+'"'+(curMfr===m?' selected':'')+'>'+esc(m)+'</option>';});
     h+='</select></div>';
   }
+  const pickerMfr=st.picker.mfr||'Generic';
   h+='<div style="max-height:420px;overflow-y:auto;">';
   ccPickerCache.forEach((x,pi)=>{
     h+='<div style="padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07);cursor:pointer;transition:background .1s;" onmouseenter="this.style.background=\'rgba(255,255,255,.04)\'" onmouseleave="this.style.background=\'\'" onclick="ccPickFromCache('+pi+');">';
@@ -8884,11 +8885,20 @@ function ccRenderPicker(){
     h+=esc(x.name||'')+'</div>';
     if(type==='talent')h+='<div style="font-size:10px;color:#888;">'+esc(x.skill||'')+(x.category?' · '+esc(x.category):'')+'  —  '+(x.cost||0)+' XP</div>';
     else if(type==='evolution')h+='<div style="font-size:10px;color:#888;">'+esc(x.evo_type||'')+' · Tier '+esc(x.tier||'?')+'</div>';
-    else if(type==='weapon')h+='<div style="font-size:10px;color:#888;">'+esc(x.category||'')+(x.damage?' | '+esc(x.damage):'')+(x.type?' | '+esc(x.type):'')+'</div>';
-    else if(type==='armor')h+='<div style="font-size:10px;color:#888;">'+esc(x.type||x.category||'')+(x.availability?' · '+esc(x.availability):'')+(x.cost?' · '+fmt(+(x.cost)||0)+' Cr':'')+'</div>';
+    else if(type==='weapon'){
+      const xw=applyWpnMfr({...x},pickerMfr)||x;
+      h+='<div style="font-size:10px;color:#888;">'+esc(xw.category||'')+(xw.damage?' | <b style="color:var(--a2);">'+esc(xw.damage)+'</b>':'')+(xw.type?' | '+esc(xw.type):'')+(xw.range_short?' | '+esc(xw.range_short)+'/'+esc(xw.range_med||'—')+'/'+esc(xw.range_long||'—'):'')+'</div>';
+      if(pickerMfr!=='Generic'&&xw.name!==x.name)h+='<div style="font-size:9px;color:var(--a3);">'+esc(pickerMfr)+(xw.cost?' · '+fmt(+(xw.cost)||0)+' Cr':'')+'</div>';
+    }
+    else if(type==='armor'){
+      const xa=applyArmorMfr({...x},pickerMfr)||x;
+      const defParts=['physical','energy','tech','spiritual'].map(k=>{const v=xa['def_'+k]||'None';return v==='None'?null:k.slice(0,4).toUpperCase()+':'+v;}).filter(Boolean);
+      h+='<div style="font-size:10px;color:#888;">'+esc(xa.type||xa.category||'')+(xa.soak?' | '+esc(xa.soak):'')+(defParts.length?' | '+defParts.join(' '):'')+(xa.cost?' · '+fmt(+(xa.cost)||0)+' Cr':'')+'</div>';
+      if(pickerMfr!=='Generic')h+='<div style="font-size:9px;color:var(--gr);">'+esc(pickerMfr)+'</div>';
+    }
     else if(type==='datacom')h+='<div style="font-size:10px;color:#888;">CPU '+(x.cpu||'?')+' | Mem '+(x.memory||'?')+' | Nanite '+(x.nanite||'?')+'</div>';
     else if(type==='program')h+='<div style="font-size:10px;color:#888;">'+esc(x.type||'')+(x.cpu?' | CPU '+x.cpu:'')+(x.memory?' | Mem '+x.memory:'')+'</div>';
-    else if(type==='gadget')h+='<div style="font-size:10px;color:#888;">Nanite '+(x.nanite||'?')+' · '+esc(x.availability||'')+'</div><div style="font-size:10px;color:#666;margin-top:2px;">'+esc(x.desc||x.effect||'')+'</div>';
+    else if(type==='gadget')h+='<div style="font-size:10px;color:#666;margin-top:2px;">'+esc(x.desc||x.effect||'')+'</div>';
     else if(type==='wpn_option'||type==='armor_option'||type==='dc_option')h+='<div style="font-size:10px;color:#888;">×'+esc(x.cost||'1')+'cost · '+esc(x.availability||'')+'</div><div style="font-size:10px;color:#666;margin-top:2px;">'+esc(x.desc||'')+'</div>';
     else if(type==='background'){
       if(x.traits&&x.traits[0])h+='<div style="font-size:10px;color:var(--gr);line-height:1.4;margin-bottom:2px;">✓ '+esc(x.traits[0])+'</div>';
@@ -9405,9 +9415,7 @@ function ccRenderCombat(){
     h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">';
     h+='<span style="font-size:10px;color:#666;">Weapon '+(i+1)+'</span>';
     h+='<div style="display:flex;gap:4px;align-items:center;">';
-    h+='<select style="background:#111;border:1px solid rgba(255,107,53,.25);color:var(--a2);padding:1px 4px;font-size:10px;" onchange="ccState.weapons['+i+'].mfr=this.value;ccApplyMfrToWpnSlot('+i+');render();">';
-    WPN_MFRS.forEach(m=>{h+='<option value="'+esc(m)+'"'+(w.mfr===m?' selected':'')+'>'+esc(m)+'</option>';});
-    h+='</select>';
+    if(w.mfr&&w.mfr!=='Generic')h+='<span style="font-size:10px;color:var(--a2);font-family:\'Share Tech Mono\',monospace;">'+esc(w.mfr)+'</span>';
     h+='<button onclick="ccState.picker={type:\'weapon\',slot:'+i+',mfr:ccState.weapons['+i+'].mfr||\'Generic\'};ccState.pickerSearch=\'\';render();" style="background:rgba(255,107,53,.1);border:1px solid var(--a2);color:var(--a2);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">Browse</button>';
     const wCost=ccCalcWeaponCost(w);
     if(wCost>0)h+='<span style="font-size:10px;color:var(--gr);font-family:\'Share Tech Mono\',monospace;">'+fmt(wCost)+' Cr</span>';
@@ -9452,9 +9460,7 @@ function ccRenderCombat(){
     h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">';
     h+='<span style="font-size:10px;color:#666;">Defense '+(i+1)+'</span>';
     h+='<div style="display:flex;gap:4px;align-items:center;">';
-    h+='<select style="background:#111;border:1px solid rgba(0,200,100,.25);color:var(--gr);padding:1px 4px;font-size:10px;" onchange="ccState.armor['+i+'].mfr=this.value;ccApplyMfrToArmorSlot('+i+');render();">';
-    ARMOR_MFRS.forEach(m=>{h+='<option value="'+esc(m)+'"'+(ar.mfr===m?' selected':'')+'>'+esc(m)+'</option>';});
-    h+='</select>';
+    if(ar.mfr&&ar.mfr!=='Generic')h+='<span style="font-size:10px;color:var(--gr);font-family:\'Share Tech Mono\',monospace;">'+esc(ar.mfr)+'</span>';
     h+='<button onclick="ccState.picker={type:\'armor\',slot:'+i+',mfr:ccState.armor['+i+'].mfr||\'Generic\'};ccState.pickerSearch=\'\';render();" style="background:rgba(0,200,100,.1);border:1px solid var(--gr);color:var(--gr);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">Browse</button>';
     const arCost=ccCalcArmorCost(ar);
     if(arCost>0)h+='<span style="font-size:10px;color:var(--gr);font-family:\'Share Tech Mono\',monospace;">'+fmt(arCost)+' Cr</span>';
@@ -9508,9 +9514,7 @@ function ccRenderTech(){
     h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">';
     h+='<span style="font-size:10px;color:#666;">Datacom '+(i+1)+'</span>';
     h+='<div style="display:flex;gap:4px;align-items:center;">';
-    h+='<select style="background:#111;border:1px solid rgba(0,200,255,.2);color:var(--a);padding:1px 4px;font-size:10px;" onchange="ccState.datacoms['+i+'].mfr=this.value;render();">';
-    DATACOM_MFRS.forEach(m=>{h+='<option value="'+esc(m)+'"'+(d.mfr===m?' selected':'')+'>'+esc(m)+'</option>';});
-    h+='</select>';
+    if(d.mfr&&d.mfr!=='Generic')h+='<span style="font-size:10px;color:var(--a);font-family:\'Share Tech Mono\',monospace;">'+esc(d.mfr)+'</span>';
     h+='<button onclick="ccState.picker={type:\'datacom\',slot:'+i+',mfr:ccState.datacoms['+i+'].mfr||\'Generic\'};ccState.pickerSearch=\'\';render();" style="background:rgba(0,200,255,.1);border:1px solid var(--a);color:var(--a);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">Browse</button>';
     const dcCost=ccCalcDatacomCost(d);
     if(dcCost>0)h+='<span style="font-size:10px;color:var(--gr);font-family:\'Share Tech Mono\',monospace;">'+fmt(dcCost)+' Cr</span>';
