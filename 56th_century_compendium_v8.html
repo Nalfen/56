@@ -1031,6 +1031,28 @@ function applyArmorMfr(item, mfrName){
 }
 
 
+function applyDatacomMfr(item,mfrName){
+  if(!mfrName||mfrName==='Generic')return item;
+  const m=g.manufacturers[mfrName];if(!m)return item;
+  const w={...item};
+  const pm=parseFloat(m.price_mult||1);if(pm&&pm!==1&&w.cost)w.cost=String(Math.round(parseFloat(w.cost)*pm));
+  const avNum=parseInt(m.avail_mod||0);const avIdx=AVAIL.indexOf((w.availability||'COMMON').toUpperCase().trim());const newAvIdx=avIdx+avNum;
+  if(newAvIdx>=AVAIL.length)return null;if(avNum)w.availability=AVAIL[Math.max(0,newAvIdx)];
+  const cpuM=parseInt(m.cpu_mod||0),memM=parseInt(m.mem_mod||0),nanM=parseInt(m.nan_mod||0);
+  if(cpuM&&w.cpu_num!==undefined)w.cpu=String(w.cpu_num+cpuM);
+  if(memM&&w.mem_num!==undefined)w.memory=String(w.mem_num+memM);
+  if(nanM&&w.nan_num!==undefined)w.nanites=String(w.nan_num+nanM);
+  const sysM=parseInt(m.sys_mod||0);if(sysM&&w.system!=null){const sv=parseInt(w.system)||0;w.system=String(sv+sysM);}
+  if(m.dc_def_choice){const defFieldMap={physical:'def_physical',energy:'def_energy',tech:'def_tech',spiritual:'def_spiritual'};const defKey=defFieldMap[mfrState.dcDef||'physical']||'def_physical';let boosted=defShift(w[defKey]||'NONE',3);if(boosted==='EXTREME')boosted='HIGH';w[defKey]=boosted;}
+  const expM=parseInt(m.expertise_mod||0);if(expM&&w.exp_num!==undefined)w.expertise=String(w.exp_num+expM);
+  const sizeM=parseInt(m.size_mod||0);if(sizeM){const SIZES=['Tiny','Small','Medium','Large','Ex.Large'];const si=SIZES.findIndex(s=>s.toLowerCase()===String(w.size||'').toLowerCase());if(si>=0)w.size=SIZES[Math.max(0,Math.min(SIZES.length-1,si+sizeM))];}
+  const smaxM=parseInt(m.soak_max_mod||0),sminM=parseInt(m.soak_min_mod||0);
+  if((smaxM||sminM)&&w.soak_max!==undefined){const d=w.soak_max+smaxM-w.soak_min-sminM;const f=w.soak_min+sminM;if(d>=0&&f>=0)w.soak=d+'D + '+f;}
+  if(m.special){const ex=w.special||'';w.special=(ex?ex+' ':'')+m.special;}
+  if(m.abbr)w.name=w.name+' '+m.abbr;
+  return w;
+}
+
 function applyMedMfr(item,mfrName){
   if(!mfrName||mfrName==='Generic')return item;
   const mfrs=g.medical_manufacturers||{};
@@ -8912,9 +8934,25 @@ function ccRenderPicker(){
       if(pickerMfr!=='Generic')h+='<div style="font-size:9px;color:var(--gr);">'+esc(pickerMfr)+'</div>';
     }
     else if(type==='datacom'){
-      const dcNan=x.nanites!=null?x.nanites:'?';
-      const dcDef=['physical','energy','tech','spiritual'].map(k=>{const v=x['def_'+k];return v&&v!=='NONE'?k.slice(0,4).toUpperCase()+':'+v:null;}).filter(Boolean);
-      h+='<div style="font-size:10px;color:#888;">CPU '+(x.cpu||'?')+' | Mem '+(x.memory||'?')+' | Nanite '+dcNan+(dcDef.length?' | '+dcDef.join(' '):'')+'</div>';
+      const xd=applyDatacomMfr({...x},pickerMfr)||x;
+      const cpuChg=pickerMfr!=='Generic'&&xd.cpu!==x.cpu;
+      const memChg=pickerMfr!=='Generic'&&xd.memory!==x.memory;
+      const nanChg=pickerMfr!=='Generic'&&String(xd.nanites??'')!==String(x.nanites??'');
+      const dcDef=['physical','energy','tech','spiritual'].map(k=>{
+        const v=xd['def_'+k];if(!v||v==='NONE')return null;
+        const chg=pickerMfr!=='Generic'&&v!==(x['def_'+k]||'NONE');
+        return (chg?'<b style="color:var(--a);">':'')+k.slice(0,4).toUpperCase()+':'+v+(chg?'</b>':'');
+      }).filter(Boolean);
+      const dcSpecStr=Array.isArray(xd.special)?xd.special.join(' '):(xd.special||'');
+      const dcSpecChg=pickerMfr!=='Generic'&&dcSpecStr!==(Array.isArray(x.special)?x.special.join(' '):(x.special||''));
+      h+='<div style="font-size:10px;color:#888;">'
+        +'CPU '+(cpuChg?'<b style="color:var(--gr);">':'')+esc(xd.cpu||'?')+(cpuChg?'</b>':'')
+        +' | Mem '+(memChg?'<b style="color:var(--gr);">':'')+esc(xd.memory||'?')+(memChg?'</b>':'')
+        +' | Nanite '+(nanChg?'<b style="color:var(--a3);">':'')+esc(xd.nanites!=null?xd.nanites:'?')+(nanChg?'</b>':'')
+        +(dcDef.length?' | '+dcDef.join(' '):'')
+        +(dcSpecStr?' | '+(dcSpecChg?'<span style="color:var(--a3);">':'')+esc(dcSpecStr)+(dcSpecChg?'</span>':''):'')
+        +'</div>';
+      if(pickerMfr!=='Generic')h+='<div style="font-size:9px;color:var(--a);">'+esc(pickerMfr)+(xd.cost?' · '+fmt(+(xd.cost)||0)+' Cr':'')+'</div>';
     }
     else if(type==='program')h+='<div style="font-size:10px;color:#888;">'+esc(x.type||'')+(x.cpu?' | CPU '+x.cpu:'')+(x.memory?' | Mem '+x.memory:'')+'</div>';
     else if(type==='gadget')h+='<div style="font-size:10px;color:#666;margin-top:2px;">'+esc(x.desc||x.effect||'')+'</div>';
@@ -11268,35 +11306,7 @@ function render(){
     const curMfr=mfrState.datacoms;
     const dcTypes=[...new Set(g.datacoms.map(d=>d.type))].filter(Boolean);
     const source=g.datacoms.map(item=>{
-      if(curMfr==='Generic')return item;
-      const m=g.manufacturers[curMfr];if(!m)return item;
-      const w={...item};
-      // Cost
-      const pm=parseFloat(m.price_mult||1);if(pm&&pm!==1&&w.cost)w.cost=String(Math.round(parseFloat(w.cost)*pm));
-      // Availability
-      const avNum=parseInt(m.avail_mod||0);const avIdx=AVAIL.indexOf((w.availability||'COMMON').toUpperCase().trim());const newAvIdx=avIdx+avNum;
-      if(newAvIdx>=AVAIL.length)return null;if(avNum)w.availability=AVAIL[Math.max(0,newAvIdx)];
-      // Numeric stats: add modifiers to base values
-      const cpuM=parseInt(m.cpu_mod||0),memM=parseInt(m.mem_mod||0),nanM=parseInt(m.nan_mod||0);
-      if(cpuM&&w.cpu_num!==undefined)w.cpu=String(w.cpu_num+cpuM);
-      if(memM&&w.mem_num!==undefined)w.memory=String(w.mem_num+memM);
-      if(nanM&&w.nan_num!==undefined)w.nanites=String(w.nan_num+nanM);
-      // System value (from int slot conversion)
-      const sysM=parseInt(m.sys_mod||0);if(sysM&&w.system!=null){const sv=parseInt(w.system)||0;w.system=String(sv+sysM);}
-      // Defense choice boost (from core slot conversion, player picks one defense, max High)
-      if(m.dc_def_choice){const defFieldMap={physical:'def_physical',energy:'def_energy',tech:'def_tech',spiritual:'def_spiritual'};const defKey=defFieldMap[mfrState.dcDef||'physical']||'def_physical';let boosted=defShift(w[defKey]||'NONE',3);if(boosted==='EXTREME')boosted='HIGH';w[defKey]=boosted;}
-      // Expertise
-      const expM=parseInt(m.expertise_mod||0);if(expM&&w.exp_num!==undefined)w.expertise=String(w.exp_num+expM);
-      // Size: shift category
-      const sizeM=parseInt(m.size_mod||0);
-      if(sizeM){const SIZES=['Tiny','Small','Medium','Large','Ex.Large'];const si=SIZES.findIndex(s=>s.toLowerCase()===String(w.size||'').toLowerCase());if(si>=0)w.size=SIZES[Math.max(0,Math.min(SIZES.length-1,si+sizeM))];}
-      // Soak
-      const smaxM=parseInt(m.soak_max_mod||0),sminM=parseInt(m.soak_min_mod||0);
-      if((smaxM||sminM)&&w.soak_max!==undefined){const d=w.soak_max+smaxM-w.soak_min-sminM;const f=w.soak_min+sminM;if(d>=0&&f>=0)w.soak=d+'D + '+f;}
-      // Special
-      if(m.special){const ex=w.special||'';w.special=(ex?ex+' ':'')+m.special;}
-      if(m.abbr)w.name=w.name+' '+m.abbr;
-      return w;
+      return applyDatacomMfr({...item},curMfr);
     }).filter(Boolean);
     const F=source.filter(d=>ms([d.name,d.type,d.info,d.special])).filter(d=>!af||d.type===af);
     cnt=F.length;
