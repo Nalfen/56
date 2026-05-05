@@ -1,5 +1,7 @@
 # CLAUDE.md — 56th Century Compendium
 
+> **AI Rule:** Read `docs/00-ai-rules.md` before every task.
+
 ## Project Overview
 
 This repository contains the **56th Century Compendium**, a self-contained browser-based reference tool for the *56th Century* tabletop RPG system. The compendium is delivered as single-file HTML documents with all data, styles, and logic embedded inline — no build system, no external dependencies (except Google Fonts via CDN), and no server required.
