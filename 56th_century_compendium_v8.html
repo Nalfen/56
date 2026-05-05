@@ -8725,7 +8725,7 @@ function ccPickFromCache(pidx){
       ar['def_'+(dm[k]||k)]=raw.charAt(0).toUpperCase()+raw.slice(1).toLowerCase();
     });
   }
-  else if(type==='datacom'){const d=item;const dc=ccState.datacoms[slot];dc.base_data={...d};dc.options=[];dc.mfr=ccState.picker.mfr||dc.mfr||'Generic';dc.name=d.name||'';dc.cpu=+(d.cpu)||0;dc.mem=+(d.memory)||0;dc.nanite=+(d.nanites)||0;dc.expertise=+(d.expertise_bonus)||0;['phys','energy','tech','spirit'].forEach(k=>{dc['def_'+k]=d['def_'+k]||'None';});dc.special=(Array.isArray(d.special)?d.special.join(' '):d.special)||'';}
+  else if(type==='datacom'){const d=item;const dc=ccState.datacoms[slot];dc.base_data={...d};dc.options=[];dc.mfr=ccState.picker.mfr||dc.mfr||'Generic';dc.name=d.name||'';dc.cpu=+(d.cpu)||0;dc.mem=+(d.memory)||0;dc.nanite=+(d.nanites!=null?d.nanites:d.nanite)||0;dc.expertise=+(d.expertise_bonus)||0;dc.def_phys=d.def_physical||d.def_phys||'None';dc.def_energy=d.def_energy||'None';dc.def_tech=d.def_tech||'None';dc.def_spirit=d.def_spiritual||d.def_spirit||'None';dc.special=(Array.isArray(d.special)?d.special.join(' '):d.special)||'';}
   else if(type==='program'){const p=item;const pr=ccState.programs[slot];pr.name=p.name||'';pr.type=p.type||'';pr.cpu=p.cpu||0;pr.mem=p.memory||0;pr.passive=p.passive||'';pr.active=p.active||'';}
   else if(type==='gadget'){const gd=item;const gs=ccState.gadgets[slot];gs.name=gd.name||'';gs.nanite=+(gd.nanite)||0;gs.effect=gd.effect||gd.desc||'';}
   else if(type==='wpn_option'){ccAddItemOption('weapons',slot,item.name);}
@@ -8842,7 +8842,11 @@ function ccRenderPicker(){
     title='Background'+(rf?' ('+rf+' + ANY)':'');bdr='var(--ye)';
   }
   else if(type==='occupation'){items=g.occupations||[];title='Occupation';bdr='var(--a2)';}
+  const pickerMfrPre=st.picker&&st.picker.mfr||'Generic';
+  const meleeOnlyMfr=type==='weapon'&&WPN_MFRS_MELEE_ONLY.has(pickerMfrPre);
+  const MELEE_THROW_CATS=new Set(['Melee Weapons (Martial Arts)','Ranged / Throwing Weapons (Dexterity)']);
   const matches=items.filter(x=>{
+    if(meleeOnlyMfr&&!MELEE_THROW_CATS.has(x.category))return false;
     if(!pq)return true;
     const n=(x.name||'').toLowerCase();
     return n.includes(pq)||(x.skill||x.category||x.evo_type||x.type||x.race||'').toLowerCase().includes(pq)||(x.desc||'').toLowerCase().includes(pq);
@@ -8887,16 +8891,26 @@ function ccRenderPicker(){
     else if(type==='evolution')h+='<div style="font-size:10px;color:#888;">'+esc(x.evo_type||'')+' · Tier '+esc(x.tier||'?')+'</div>';
     else if(type==='weapon'){
       const xw=applyWpnMfr({...x},pickerMfr)||x;
-      h+='<div style="font-size:10px;color:#888;">'+esc(xw.category||'')+(xw.damage?' | <b style="color:var(--a2);">'+esc(xw.damage)+'</b>':'')+(xw.type?' | '+esc(xw.type):'')+(xw.range_short?' | '+esc(xw.range_short)+'/'+esc(xw.range_med||'—')+'/'+esc(xw.range_long||'—'):'')+'</div>';
-      if(pickerMfr!=='Generic'&&xw.name!==x.name)h+='<div style="font-size:9px;color:var(--a3);">'+esc(pickerMfr)+(xw.cost?' · '+fmt(+(xw.cost)||0)+' Cr':'')+'</div>';
+      const dmgChg=pickerMfr!=='Generic'&&xw.damage!==x.damage;
+      const rngChg=pickerMfr!=='Generic'&&(xw.range_short!==x.range_short||xw.range_med!==x.range_med||xw.range_long!==x.range_long);
+      h+='<div style="font-size:10px;color:#888;">'+esc(xw.category||'')+(xw.damage?' | '+(dmgChg?'<b style="color:var(--a2);">':'')+esc(xw.damage)+(dmgChg?'</b>':''):'')+(xw.type?' | '+esc(xw.type):'')+(xw.range_short?' | '+(rngChg?'<span style="color:var(--ye);">':'')+esc(xw.range_short)+'/'+esc(xw.range_med||'—')+'/'+esc(xw.range_long||'—')+(rngChg?'</span>':''):'')+'</div>';
+      if(pickerMfr!=='Generic')h+='<div style="font-size:9px;color:var(--a3);">'+esc(pickerMfr)+(xw.cost?' · '+fmt(+(xw.cost)||0)+' Cr':'')+'</div>';
     }
     else if(type==='armor'){
       const xa=applyArmorMfr({...x},pickerMfr)||x;
-      const defParts=['physical','energy','tech','spiritual'].map(k=>{const v=xa['def_'+k]||'None';return v==='None'?null:k.slice(0,4).toUpperCase()+':'+v;}).filter(Boolean);
+      const defParts=['physical','energy','tech','spiritual'].map(k=>{
+        const v=xa['def_'+k]||'None';if(v==='None')return null;
+        const chg=pickerMfr!=='Generic'&&v!==(x['def_'+k]||'None');
+        return (chg?'<b style="color:var(--gr);">':'')+k.slice(0,4).toUpperCase()+':'+v+(chg?'</b>':'');
+      }).filter(Boolean);
       h+='<div style="font-size:10px;color:#888;">'+esc(xa.type||xa.category||'')+(xa.soak?' | '+esc(xa.soak):'')+(defParts.length?' | '+defParts.join(' '):'')+(xa.cost?' · '+fmt(+(xa.cost)||0)+' Cr':'')+'</div>';
       if(pickerMfr!=='Generic')h+='<div style="font-size:9px;color:var(--gr);">'+esc(pickerMfr)+'</div>';
     }
-    else if(type==='datacom')h+='<div style="font-size:10px;color:#888;">CPU '+(x.cpu||'?')+' | Mem '+(x.memory||'?')+' | Nanite '+(x.nanite||'?')+'</div>';
+    else if(type==='datacom'){
+      const dcNan=x.nanites!=null?x.nanites:'?';
+      const dcDef=['physical','energy','tech','spiritual'].map(k=>{const v=x['def_'+k];return v&&v!=='NONE'?k.slice(0,4).toUpperCase()+':'+v:null;}).filter(Boolean);
+      h+='<div style="font-size:10px;color:#888;">CPU '+(x.cpu||'?')+' | Mem '+(x.memory||'?')+' | Nanite '+dcNan+(dcDef.length?' | '+dcDef.join(' '):'')+'</div>';
+    }
     else if(type==='program')h+='<div style="font-size:10px;color:#888;">'+esc(x.type||'')+(x.cpu?' | CPU '+x.cpu:'')+(x.memory?' | Mem '+x.memory:'')+'</div>';
     else if(type==='gadget')h+='<div style="font-size:10px;color:#666;margin-top:2px;">'+esc(x.desc||x.effect||'')+'</div>';
     else if(type==='wpn_option'||type==='armor_option'||type==='dc_option')h+='<div style="font-size:10px;color:#888;">×'+esc(x.cost||'1')+'cost · '+esc(x.availability||'')+'</div><div style="font-size:10px;color:#666;margin-top:2px;">'+esc(x.desc||'')+'</div>';
