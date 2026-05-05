@@ -8358,7 +8358,7 @@ function ccMakeFreshState(){
     datacoms:Array(3).fill(0).map(()=>({name:'',cpu:0,mem:0,nanite:0,def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',def_dmg:'',int_ext:0,int_int:0,int_main:0,expertise:0,special:'',mfr:'Generic',base_data:null,options:[]})),
     programs:Array(10).fill(0).map(()=>({name:'',type:'',cpu:0,mem:0,passive:'',active:''})),
     gadgets:Array(5).fill(0).map(()=>({name:'',nanite:0,effect:''})),
-    credits:0,credits_spent:0,gear_cat_filter:'',gear_search:'',
+    credits:0,credits_spent:0,gear_cat_filter:'',gear_search:'',med_mfr_filter:'Generic',med_search:'',
     spells:Array(16).fill(0).map(()=>({name:'',domain:''})),
     items:Array(20).fill(0).map(()=>({name:'',size:'0',qty:1})),
     items2:Array(20).fill(0).map(()=>({name:'',size:'0',qty:1})),
@@ -8627,6 +8627,21 @@ function ccBuyItem(idx){
       }
     }
   }
+  if(!placed){alert('All loadout slots full.');return;}
+  st.credits_spent=(+(st.credits_spent)||0)+cost;
+  render();
+}
+
+function ccBuyMedItem(idx,mfrName){
+  const st=ccState;
+  const base=(g.medical||[])[idx];if(!base)return;
+  const item=applyMedMfr({...base},mfrName||'Generic')||base;
+  const cost=+(item.cost)||0;
+  const remaining=(+(st.credits)||0)-(+(st.credits_spent)||0);
+  if(cost>remaining&&cost>0){alert('Not enough credits (need '+fmt(cost)+', have '+fmt(remaining)+')');return;}
+  let placed=false;
+  for(let i=0;i<st.items.length;i++){if(!st.items[i].name){st.items[i].name=item.name||'';st.items[i].size=CC_SIZE_TO_VAL[item.size]||'0.25';st.items[i].qty=1;placed=true;break;}}
+  if(!placed){for(let i=0;i<st.items2.length;i++){if(!st.items2[i].name){st.items2[i].name=item.name||'';st.items2[i].size=CC_SIZE_TO_VAL[item.size]||'0.25';st.items2[i].qty=1;placed=true;break;}}}
   if(!placed){alert('All loadout slots full.');return;}
   st.credits_spent=(+(st.credits_spent)||0)+cost;
   render();
@@ -9699,6 +9714,48 @@ function ccRenderMagicGear(){
   h+='<label style="font-size:10px;color:#666;">Gear spent</label><input type="number" value="'+(+(st.credits_spent)||0)+'" style="width:80px;'+CC_INP_SM+'margin-bottom:0;" onchange="ccState.credits_spent=+this.value||0;render();">';
   h+='</div></div>';
 
+  // ── MEDICAL ────────────────────────────────────────────────────────────────
+  h+=ccSecHead('MEDICAL SUPPLIES','var(--re)');
+  // Manufacturer selector
+  h+='<div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:7px;">';
+  MEDICAL_MFRS.forEach(mfr=>{
+    const sel=st.med_mfr_filter===mfr;
+    h+='<button onclick="ccState.med_mfr_filter=\''+esc(mfr).replace(/'/g,"\\'")+'\';render();" style="background:'+(sel?'rgba(239,68,68,.2)':'rgba(0,0,0,.4)')+';border:1px solid rgba(239,68,68,'+(sel?'.5':'.2')+');color:'+(sel?'var(--re)':'#777')+';padding:2px 8px;border-radius:3px;cursor:pointer;font-size:10px;">'+esc(mfr)+'</button>';
+  });
+  h+='</div>';
+  h+='<input type="text" placeholder="Search medical..." value="'+esc(st.med_search||'')+'" style="'+CC_INP+'margin-bottom:8px;" oninput="ccState.med_search=this.value;render();">';
+  const medMfr=st.med_mfr_filter||'Generic';
+  const medSq=(st.med_search||'').toLowerCase();
+  const medFiltered=(g.medical||[]).map((it,mi)=>({it:applyMedMfr({...it},medMfr)||it,mi})).filter(({it})=>{
+    if(medSq&&!(it.name||'').toLowerCase().includes(medSq)&&!(it.effect||'').toLowerCase().includes(medSq)&&!(it.application||'').toLowerCase().includes(medSq))return false;
+    return true;
+  });
+  h+='<div style="max-height:300px;overflow-y:auto;border:1px solid rgba(239,68,68,.15);border-radius:4px;margin-bottom:14px;">';
+  if(medFiltered.length===0)h+='<div style="padding:12px;text-align:center;color:#555;font-size:11px;">No items match</div>';
+  medFiltered.forEach(({it,mi})=>{
+    const cost=+(it.cost)||0;
+    const canAfford=cost===0||(remaining>=cost);
+    h+='<div style="display:grid;grid-template-columns:1fr auto auto auto;gap:8px;align-items:center;padding:5px 10px;border-bottom:1px solid rgba(255,255,255,.05);">';
+    h+='<div>';
+    h+='<div style="font-size:11px;color:var(--tx);">'+esc(it.name||'');
+    if(it.toxicity)h+=' <span style="font-size:9px;color:var(--re);margin-left:4px;">☠'+esc(String(it.toxicity))+'</span>';
+    h+='</div>';
+    const pills=[];
+    if(it.application)pills.push(esc(it.application));
+    if(it.action)pills.push(esc(it.action));
+    if(it.size)pills.push(esc(it.size));
+    if(pills.length)h+='<div style="font-size:9px;color:#666;margin-top:1px;">'+pills.join(' · ')+'</div>';
+    if(it.effect)h+='<div style="font-size:10px;color:#555;margin-top:1px;">'+esc(it.effect.substring(0,80)+(it.effect.length>80?'…':''))+'</div>';
+    h+='</div>';
+    h+='<span style="font-size:10px;color:#666;white-space:nowrap;">'+esc(it.legality||'—')+'</span>';
+    h+='<span style="font-size:11px;color:var(--re);white-space:nowrap;font-family:\'Share Tech Mono\',monospace;">'+(cost>0?fmt(cost)+' Cr':'Free')+'</span>';
+    h+='<button onclick="ccBuyMedItem('+mi+',\''+esc(medMfr).replace(/'/g,"\\'")+'\');" style="background:'+(canAfford?'rgba(239,68,68,.1)':'rgba(0,0,0,.3)')+';border:1px solid '+(canAfford?'var(--re)':'#333')+';color:'+(canAfford?'var(--re)':'#444')+';padding:2px 9px;border-radius:3px;cursor:pointer;font-size:10px;"'+(canAfford?'':' title="Not enough credits"')+'>Buy</button>';
+    h+='</div>';
+  });
+  h+='</div>';
+
+  // ── EQUIPMENT ──────────────────────────────────────────────────────────────
+  h+=ccSecHead('EQUIPMENT CATALOG','var(--gr)');
   // Catalog
   const allEqCats=[...new Set((g.equipment||[]).map(x=>x.category||''))].sort();
   const curCat=st.gear_cat_filter||'';const gearSq=(st.gear_search||'').toLowerCase();
@@ -9734,6 +9791,14 @@ function ccRenderMagicGear(){
     h+='</div>';
   });
   h+='</div>';
+
+  // ── VEHICLES (placeholder) ─────────────────────────────────────────────────
+  h+=ccSecHead('VEHICLES','var(--a2)');
+  h+='<div style="background:rgba(0,0,0,.3);border:1px dashed rgba(255,107,53,.2);border-radius:5px;padding:16px;text-align:center;margin-bottom:14px;color:#555;font-size:11px;">Vehicle purchase coming soon</div>';
+
+  // ── DRONES (placeholder) ───────────────────────────────────────────────────
+  h+=ccSecHead('DRONES','var(--a3)');
+  h+='<div style="background:rgba(0,0,0,.3);border:1px dashed rgba(163,85,247,.2);border-radius:5px;padding:16px;text-align:center;margin-bottom:14px;color:#555;font-size:11px;">Drone purchase coming soon</div>';
 
   // ── GEAR & LOADOUT ──────────────────────────────────────────────────────────
   // Compute total load
