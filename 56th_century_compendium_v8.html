@@ -8905,9 +8905,10 @@ function ccRenderPicker(){
         const chg=pickerMfr!=='Generic'&&v!==(x['def_'+k]||'None');
         return (chg?'<b style="color:var(--gr);">':'')+k.slice(0,4).toUpperCase()+':'+v+(chg?'</b>':'');
       }).filter(Boolean);
+      const soakChg=pickerMfr!=='Generic'&&xa.soak!==x.soak;
       const xaSpecStr=Array.isArray(xa.special)?xa.special.join(' '):(xa.special||'');
       const xaSpecChg=pickerMfr!=='Generic'&&xaSpecStr!==(Array.isArray(x.special)?x.special.join(' '):(x.special||''));
-      h+='<div style="font-size:10px;color:#888;">'+esc(xa.type||xa.category||'')+(xa.soak?' | '+esc(xa.soak):'')+(defParts.length?' | '+defParts.join(' '):'')+( xaSpecStr?' | '+(xaSpecChg?'<span style="color:var(--a3);">':'')+esc(xaSpecStr)+(xaSpecChg?'</span>':''):'')+(xa.cost?' · '+fmt(+(xa.cost)||0)+' Cr':'')+'</div>';
+      h+='<div style="font-size:10px;color:#888;">'+esc(xa.type||xa.category||'')+(xa.soak?' | '+(soakChg?'<b style="color:var(--ye);">':'')+esc(xa.soak)+(soakChg?'</b>':''):'')+(defParts.length?' | '+defParts.join(' '):'')+( xaSpecStr?' | '+(xaSpecChg?'<span style="color:var(--a3);">':'')+esc(xaSpecStr)+(xaSpecChg?'</span>':''):'')+(xa.cost?' · '+fmt(+(xa.cost)||0)+' Cr':'')+'</div>';
       if(pickerMfr!=='Generic')h+='<div style="font-size:9px;color:var(--gr);">'+esc(pickerMfr)+'</div>';
     }
     else if(type==='datacom'){
