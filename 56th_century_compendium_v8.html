@@ -1062,8 +1062,8 @@ function applyMedMfr(item,mfrName){
   const SIZES=['TINY','SMALL','MEDIUM','LARGE','EX.LARGE'];
   const sMod=parseInt(m.size_mod||0);
   if(sMod){const si=SIZES.indexOf((w.size||'TINY').toUpperCase());w.size=SIZES[Math.max(0,Math.min(SIZES.length-1,si+sMod))];}
-  const avMod=parseInt(m.avail_mod||0);
-  if(avMod){const ai=AVAIL.indexOf((w.availability||'COMMON').toUpperCase().trim());const ni=ai+avMod;if(ni>=AVAIL.length)return null;w.availability=AVAIL[Math.max(0,ni)];}
+  if(mfrName==='Mono-Med Customs'){w.availability='UNIQUE';}
+  else{const avMod=parseInt(m.avail_mod||0);if(avMod){const ai=AVAIL.indexOf((w.availability||'COMMON').toUpperCase().trim());const ni=ai+avMod;if(ni>=AVAIL.length)return null;w.availability=AVAIL[Math.max(0,ni)];}}
   const tMod=parseInt(m.tox_mod||0);
   if(tMod&&w.toxicity!==undefined)w.toxicity=Math.max(0,(+(w.toxicity)||0)+tMod);
   const lMod=parseInt(m.legality_mod||0);
@@ -8972,10 +8972,12 @@ function ccRenderPicker(){
       }).filter(Boolean);
       const dcSpecStr=Array.isArray(xd.special)?xd.special.join(' '):(xd.special||'');
       const dcSpecChg=pickerMfr!=='Generic'&&dcSpecStr!==(Array.isArray(x.special)?x.special.join(' '):(x.special||''));
+      const dcSizeChg=pickerMfr!=='Generic'&&(xd.size||'')!==(x.size||'');
       h+='<div style="font-size:10px;color:#888;">'
         +'CPU '+(cpuChg?'<b style="color:var(--gr);">':'')+esc(xd.cpu||'?')+(cpuChg?'</b>':'')
         +' | Mem '+(memChg?'<b style="color:var(--gr);">':'')+esc(xd.memory||'?')+(memChg?'</b>':'')
         +' | Nanite '+(nanChg?'<b style="color:var(--a3);">':'')+esc(xd.nanites!=null?xd.nanites:'?')+(nanChg?'</b>':'')
+        +(xd.size?' | '+(dcSizeChg?'<span style="color:var(--a2);">':'')+esc(xd.size)+(dcSizeChg?'</span>':''):'')
         +(dcDef.length?' | '+dcDef.join(' '):'')
         +(dcSpecStr?' | '+(dcSpecChg?'<span style="color:var(--a3);">':'')+esc(dcSpecStr)+(dcSpecChg?'</span>':''):'')
         +'</div>';
@@ -9756,10 +9758,11 @@ function ccRenderMagicGear(){
     h+='<div style="font-size:11px;color:var(--tx);">'+esc(it.name||'');
     if(it.toxicity!=null)h+=' <span style="font-size:9px;'+(toxChg?'color:var(--a2);font-weight:bold;':'color:var(--re);')+'margin-left:4px;">☠'+esc(String(it.toxicity))+'</span>';
     h+='</div>';
+    const sizeChg=medMfr!=='Generic'&&(it.size||'').toUpperCase()!==(base.size||'').toUpperCase();
     const pills=[];
     if(it.application)pills.push(esc(it.application));
     if(it.action)pills.push(esc(it.action));
-    if(it.size)pills.push(esc(it.size));
+    if(it.size)pills.push((sizeChg?'<span style="color:var(--a2);font-weight:bold;">':'')+esc(it.size)+(sizeChg?'</span>':''));
     if(availChg)pills.push('<span style="color:var(--ye);">'+esc(it.availability)+'</span>');
     if(pills.length)h+='<div style="font-size:9px;color:#666;margin-top:1px;">'+pills.join(' · ')+'</div>';
     if(it.effect)h+='<div style="font-size:10px;color:#555;margin-top:1px;">'+esc(it.effect.substring(0,80)+(it.effect.length>80?'…':''))+'</div>';
