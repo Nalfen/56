@@ -63,4 +63,4 @@
 
 ~~#### Mono-Med Customs availability uses wrong logic~~ — **Fixed (5.0)**
 
-~~#### Size changes not shown in picker previews~~ — **Fixed (5.0)**
+~~#### Size changes not shown in picker previews~~ — **Fixed (5.0 + 5.1)**

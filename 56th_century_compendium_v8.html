@@ -963,6 +963,10 @@ function applyWpnMfr(item,mfrName){
   // Expertise
   const eMod=parseInt(m.expertise_mod||0);
   if(eMod&&w.expertise)w.expertise=String(Math.max(0,parseInt(w.expertise)+eMod));
+  // Size
+  const WPN_SIZES=['Tiny','Small','Medium','Large'];
+  const szMod=parseInt(m.size_mod||0);
+  if(szMod&&w.size){const si=WPN_SIZES.findIndex(s=>s.toLowerCase()===(w.size||'').toLowerCase());if(si>=0)w.size=WPN_SIZES[Math.max(0,Math.min(WPN_SIZES.length-1,si+szMod))];}
   // Cost
   const pm=parseFloat(m.price_mult||1);
   if(pm&&pm!==1&&w.cost)w.cost=String(Math.round(parseFloat(w.cost)*pm));
@@ -8944,7 +8948,8 @@ function ccRenderPicker(){
       const rngChg=pickerMfr!=='Generic'&&(xw.range_short!==x.range_short||xw.range_med!==x.range_med||xw.range_long!==x.range_long);
       const xwSpecStr=Array.isArray(xw.special)?xw.special.join(' '):(xw.special||'');
       const xwSpecChg=pickerMfr!=='Generic'&&xwSpecStr!==(Array.isArray(x.special)?x.special.join(' '):(x.special||''));
-      h+='<div style="font-size:10px;color:#888;">'+esc(xw.category||'')+(xw.damage?' | '+(dmgChg?'<b style="color:var(--a2);">':'')+esc(xw.damage)+(dmgChg?'</b>':''):'')+(xw.type?' | '+esc(xw.type):'')+(xw.range_short?' | '+(rngChg?'<span style="color:var(--ye);">':'')+esc(xw.range_short)+'/'+esc(xw.range_med||'—')+'/'+esc(xw.range_long||'—')+(rngChg?'</span>':''):'')+( xwSpecStr?' | '+(xwSpecChg?'<span style="color:var(--a3);">':'')+esc(xwSpecStr)+(xwSpecChg?'</span>':''):'')+'</div>';
+      const xwSizeChg=pickerMfr!=='Generic'&&(xw.size||'')!==(x.size||'');
+      h+='<div style="font-size:10px;color:#888;">'+esc(xw.category||'')+(xw.damage?' | '+(dmgChg?'<b style="color:var(--a2);">':'')+esc(xw.damage)+(dmgChg?'</b>':''):'')+(xw.type?' | '+esc(xw.type):'')+(xw.range_short?' | '+(rngChg?'<span style="color:var(--ye);">':'')+esc(xw.range_short)+'/'+esc(xw.range_med||'—')+'/'+esc(xw.range_long||'—')+(rngChg?'</span>':''):'')+(xw.size?' | '+(xwSizeChg?'<span style="color:var(--a2);">':'')+esc(xw.size)+(xwSizeChg?'</span>':''):'')+(xwSpecStr?' | '+(xwSpecChg?'<span style="color:var(--a3);">':'')+esc(xwSpecStr)+(xwSpecChg?'</span>':''):'')+'</div>';
       if(pickerMfr!=='Generic'){const availChg=xw.availability&&xw.availability!==x.availability;h+='<div style="font-size:9px;color:var(--a3);">'+esc(pickerMfr)+(xw.cost?' · '+fmt(+(xw.cost)||0)+' Cr':'')+(availChg?' · <span style="color:var(--ye);">'+esc(xw.availability)+'</span>':'')+'</div>';}
     }
     else if(type==='armor'){
