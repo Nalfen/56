@@ -81,6 +81,7 @@
 | Mono-Med Customs: force availability to UNIQUE instead of shifting by avail_mod | done |
 | Size changes shown + highlighted in medical gear shop when manufacturer changes size | done |
 | Size changes shown + highlighted in datacom picker when manufacturer changes size | done |
+| Size changes shown + highlighted in weapon picker; `applyWpnMfr` now applies `size_mod` | done |
 
 ---
 

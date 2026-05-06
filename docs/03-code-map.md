@@ -93,6 +93,22 @@ CREATING A CHARACTER · CHARACTER ADVANCEMENT · BASIC RULES · ARMORS · WEAPON
 
 Picker melee filter uses `MELEE_THROW_CATS = new Set(['Melee Weapons (Martial Arts)', 'Ranged / Throwing Weapons (Dexterity)'])` — Powered Melee is intentionally excluded.
 
+Size scales used by `apply*Mfr`:
+- `WPN_SIZES = ['Tiny','Small','Medium','Large']` — weapon size (used by `applyWpnMfr`)
+- `MED_SIZES = ['TINY','SMALL','MEDIUM','LARGE','EX.LARGE']` — medical item size (used by `applyMedMfr`)
+
+Manufacturers with `size_mod`:
+| Manufacturer | Section | size_mod |
+|---|---|---|
+| Kintech | weapons | +1 |
+| Arms Corp | weapons | +1 |
+| Securicorp | datacoms | +1 |
+| Carnifex | datacoms | +1 |
+| Altair Biomed | medical | +1 |
+| Goodman Holistic | medical | +1 |
+| Diva Solutions | medical | +2 |
+| Mono-Med Customs | medical | +5 |
+
 ---
 
 ## Ammunition system constants
@@ -192,9 +208,9 @@ Last entry always has `sysRegex: null` (catches unmatched systems as "Others").
 | `rarCls(avail)` | Rarity border class | availability string | `.rar-*` class |
 | `defCls(tier)` | Defense pill class | tier string | `.dp-*` class |
 | `bst(sp)` | Special property tags | special string | HTML pill string with tooltips |
-| `applyWpnMfr(item, mfr)` | Apply weapon mfr mods | item obj, mfr name | Modified item copy (or null if avail exceeded) |
-| `applyArmorMfr(item, mfr)` | Apply armor mfr mods | item obj, mfr name | Modified item copy |
-| `applyMedMfr(item, mfr)` | Apply medical mfr mods | item obj, mfr name | Modified item copy |
+| `applyWpnMfr(item, mfr)` | Apply weapon mfr mods | item obj, mfr name | Modified item copy (or null if avail exceeded); applies avail, power, damage, range, expertise, size (`WPN_SIZES`), cost, special |
+| `applyArmorMfr(item, mfr)` | Apply armor mfr mods | item obj, mfr name | Modified item copy (or null); applies avail, cost, defense tiers, soak, Kintech def-choice bonus |
+| `applyMedMfr(item, mfr)` | Apply medical mfr mods | item obj, mfr name | Modified item copy (or null); Mono-Med Customs always sets availability to UNIQUE; others shift via avail_mod |
 | `defShift(current, mod)` | Shift defense tier | tier string, numeric mod | New tier string |
 | `calcShip(comps, cls)` | Accumulate ship stats | component code array, class string | Stats object |
 | `calcDrone(dbState)` | Accumulate drone stats | dbState object | Stats object or null |
@@ -202,7 +218,7 @@ Last entry always has `sysRegex: null` (catches unmatched systems as "Others").
 | `buildDroneParts()` | Expand drone catalog | none | Populates `g.catalog.drone_parts` |
 | `ccExportRoll20()` | Export character to JSON | none (reads ccState) | Downloads Roll20 JSON file |
 | `ccPickFromCache(pidx)` | Apply picker selection | picker cache index | Mutates ccState slot (applying `picker.mfr`), calls render() |
-| `ccRenderPicker()` | Render browse picker modal | none (reads ccState.picker) | HTML string; includes mfr dropdown for weapon/armor/datacom, applies mfr mods to item previews, filters melee-only mfrs |
+| `ccRenderPicker()` | Render browse picker modal | none (reads ccState.picker) | HTML string; includes mfr dropdown for weapon/armor/datacom, applies mfr mods to item previews, filters melee-only mfrs; highlights changed stats orange/yellow (damage, range, soak, size, availability) and green/purple (defense, special) |
 | `ccRenderCombat()` | Render Combat tab | none (reads ccState) | HTML string; labeled inputs, mfr-change highlight coloring, bst() hoverable special tags |
 | `ccRenderTech()` | Render Tech tab | none (reads ccState) | HTML string; labeled inputs, bst() hoverable special tags on datacoms |
 | `ccAutoTrackedSpent()` | Sum auto-tracked costs | none (reads ccState) | number — total credits for weapons+armor+datacoms+evos |
@@ -244,6 +260,7 @@ Last entry always has `sysRegex: null` (catches unmatched systems as "Others").
 | power | string | `"High"` |
 | power_num | number | `9` |
 | max_dice / min_dice | number | `6`, `2` |
+| size | string | `"Small"` — Tiny / Small / Medium / Large |
 | special | string | `"OPT AUTO"` |
 | availability | string | `"UNCOMMON"` |
 | legality | string | `"Legal"` |
