@@ -65,15 +65,16 @@
 
 ~~#### Size changes not shown in picker previews~~ — **Fixed (5.0 + 5.1)**
 
-#### Character creator coverage gaps — 112 mechanical effects untracked (audit 2026-05-12)
+~~#### Character creator coverage gaps — 112 mechanical effects untracked (audit 2026-05-12)~~ — **Tiers 1–4 complete (Milestone 6.0)**
 
-Full audit of `g.backgrounds`, `g.occupations`, `g.talents`, `g.evolutions.entries` found 112 effects described in game data that are not surfaced or stored in the CC. Tracked in `work/6.0/`. Summary:
+Full audit of `g.backgrounds`, `g.occupations`, `g.talents`, `g.evolutions.entries` found 112 effects. Tiers 1–4 implemented. See `docs/06-implementation-plan.md` and `work/6.0/02_tasks.md` for full status. T5 (contacts, equipment grants, full modifier stack) remains backlog.
 
-| Category | Count | Example gaps |
-|---|---|---|
-| Backgrounds | 24 | Racial max reductions, resource locks (CHI=0, SURGE=0), damage vulnerabilities |
-| Occupations | 17 | Every occupation has a "SMALL bonus to one of two skill pairs" — never presented or stored |
-| Talents | 31 | Passive/conditional combat bonuses and skill bonuses — display only needed |
-| Evolutions | 40 | Tier passive bonuses (attribute, defense, skill) — partially trackable |
+#### Occupation bonus enforcement (Decision 11)
+- **Problem**: Occupation bonus selector (T2-B) only showed a display reminder — the `sk_bonus` modifier was not actually set on the chosen skill pair.
+- **Decision**: `ccApplyOccBonus(pi)` function clears old pair bonuses and sets `sk_bonus=1` for the new pair. Tracks active pair in `occ_bonus_skills[]`. Called from occupation bonus buttons and from `ccPickFromCache` (clears on occupation change).
+- **Trade-off**: If user manually set `sk_bonus` on those skills, it gets overwritten (replaced with 1) when picking an OCC pair. If user already had >1 bonus on that skill, OCC pick only sets to 1. Acceptable — occupation bonus is a small +1 and display makes the source clear with "OCC" pill.
 
-Tiers 1–3 (display improvements + occupation bonus choice + resource locks) are feasible and scheduled for Milestone 6.0. Tiers 4–5 are deferred/backlog.
+#### Evolution attribute bonuses: annotation vs. auto-apply (Decision 12)
+- **Problem**: T4-B called for evolution attribute bonuses auto-applied to Attributes tab. Most evo attribute bonuses are conditional (during reactions, against specific damage types) rather than flat permanent increases.
+- **Decision**: Implemented as a read-only annotation panel on the Attributes tab that surfaces active evolutions mentioning attribute keywords. Bonuses are applied manually by the player via the existing attribute fields.
+- **Trade-off**: Does not automate bonus application. Prevents over-automation of conditional rules that require situational judgement.

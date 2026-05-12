@@ -98,7 +98,7 @@
 
 ## Milestone 6.0 — Character Creator Coverage Gap
 **Goal**: Surface the 112 mechanical effects in backgrounds, occupations, talents, and evolutions that the character creator currently ignores.
-**Status**: planned — see `work/6.0/`
+**Status**: in progress — see `work/6.0/`
 
 Full audit conducted 2026-05-12. Gaps categorised into 5 implementation tiers.
 
@@ -107,13 +107,15 @@ Full audit conducted 2026-05-12. Gaps categorised into 5 implementation tiers.
 | T1-A | Talent effect text displayed beneath each talent slot | done |
 | T1-B | Evolution effect text displayed beneath each evo slot | done |
 | T1-C | Background traits list on Origin tab | done |
+| T1-D | Talent/evo effect text in picker browse list | done |
+| T1-E | Skill row visual indicators for bonus and crit range | done |
 | T2-A | BG_GRANTS extended with `attr_max_mods` for backgrounds that reduce racial maxes | done |
-| T2-B | Occupation skill bonus choice (all 17 occupations) — pick between two skill pairs; display reminder | done |
+| T2-B | Occupation skill bonus choice — mechanically enforced via `ccApplyOccBonus()` | done |
 | T2-C | Resource locks: Spirit Judge SURGE=0, Imaginary Friend CHI=0, Void Soul CHI=0 | done (bg-based; Void Soul deferred) |
 | T3 | Passive Abilities panel — read-only list of passive effects from active talents + evolutions | done |
-| T4-A | Occupation skill bonuses as tracked modifiers on Skills tab (deferred) | deferred |
-| T4-B | Evolution attribute bonuses auto-applied to Attributes tab (deferred) | deferred |
-| T4-C | Background combat/vulnerability notes panel (deferred) | deferred |
+| T4-A | Occupation skill bonuses enforced as tracked `sk_bonus` modifiers via `occ_bonus_skills[]` | done |
+| T4-B | Evolution attribute notes panel on Attributes tab (display-only; bonuses are conditional) | done |
+| T4-C | Background combat/vulnerability notes panel on Combat tab | done |
 | T5-A | Contacts / faction access section | backlog |
 | T5-B | Starting equipment grants from backgrounds | backlog |
 | T5-C | Full passive modifier enforcement (modifier stack system) | backlog |

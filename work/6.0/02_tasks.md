@@ -7,6 +7,8 @@
 | T1-A | Talent effect text shown beneath each talent slot in `ccRenderAdvancement()` | done — upgraded from `<input>` to `<textarea rows="2">` |
 | T1-B | Evolution effect text shown beneath each evo slot | done — upgraded from `<input>` to `<textarea rows="2">` |
 | T1-C | Background `traits[]` list displayed on Origin tab below background selector | done — formatted BENEFIT 1 / BENEFIT 2 / DRAWBACK cards rendered from `g.backgrounds` |
+| T1-D | Talent/evo effect text shown in picker browse list before selecting | done — `x.effect` rendered below name row in `ccRenderPicker()` for talent and evo rows |
+| T1-E | Skill row visual indicators for bonus and crit range | done — colored pill (OCC/+/−) in skill collapsed row; yellow ◆ pill for non-default crit range |
 
 ## Tier 2 — Small state additions
 
@@ -34,9 +36,9 @@
 
 | # | Item | Status |
 |---|---|---|
-| T4-A | Occupation skill bonuses as tracked modifiers on Skills tab (not just reminder) | deferred |
-| T4-B | Evolution attribute bonuses auto-applied to Attributes tab | deferred |
-| T4-C | Background combat/vulnerability notes panel | deferred |
+| T4-A | Occupation skill bonuses as tracked modifiers on Skills tab (not just reminder) | done — `ccApplyOccBonus(pi)` sets `sk_bonus=1` on chosen pair; tracked in `occ_bonus_skills[]`; OCC pill shown in skill rows |
+| T4-B | Evolution attribute bonuses — annotation panel on Attributes tab | done — read-only EVOLUTION ATTRIBUTE NOTES panel shows active evos with attribute keywords; bonuses conditional so display-only |
+| T4-C | Background combat/vulnerability notes panel | done — BACKGROUND COMBAT NOTES panel at bottom of Combat tab shows all traits (BENEFIT 1/2/DRAWBACK) color-coded |
 
 ## Tier 5 — Backlog
 
