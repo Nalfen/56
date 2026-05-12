@@ -9146,151 +9146,184 @@ function ccRenderOriginBlock(){
 function ccRenderIdentity(){
   const st=ccState;
   const raceObj=ccGetRaceObj();
+  ccRecalcHealthMorale();
   let h=ccRenderPicker();
-  // Compact origin status (full picker is on Attributes tab)
+  // Origin status bar
   if(st.clone===null){
-    h+='<div style="background:rgba(255,107,53,.07);border:1px solid rgba(255,107,53,.3);border-radius:6px;padding:8px 12px;margin-bottom:14px;font-size:11px;color:var(--a2);">⚠ Origin not yet chosen — go to the <b>Attributes</b> tab to select Clone Vat or Natural Birth.</div>';
+    h+='<div style="background:rgba(255,107,53,.07);border:1px solid rgba(255,107,53,.3);border-radius:6px;padding:8px 12px;margin-bottom:12px;font-size:11px;color:var(--a2);">⚠ Origin not yet chosen — go to the <b>Attributes</b> tab to select Clone Vat or Natural Birth.</div>';
   } else {
     const col=st.clone?'var(--a)':'var(--a3)';
     const lbl=st.clone?'🧬 Clone Vat':'🌱 Natural Birth';
-    h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:8px 12px;margin-bottom:14px;font-size:11px;color:'+col+';">'+lbl+((!st.clone&&st.nb_rolled)?' — attributes rolled':'')+'</div>';
+    h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:6px 12px;margin-bottom:12px;font-size:11px;color:'+col+';">'+lbl+((!st.clone&&st.nb_rolled)?' — attributes rolled':'')+'<button onclick="ccState.clone=null;ccState.attr_variance={};ccState.nb_rolled=false;render();" style="margin-left:10px;background:none;border:1px solid #444;color:#666;padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">Change</button></div>';
   }
-  // ──────────────────────────────────────────────────────────────────────────
-  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">';
-  // Left col — identity fields
-  h+='<div>'+ccSecHead('IDENTITY');
-  h+=ccLbl('Character Name','<div style="display:flex;gap:6px;"><input type="text" value="'+esc(st.name||'')+'" style="'+CC_INP+'" oninput="ccState.name=this.value;"><button onclick="ccRandName();" style="background:rgba(0,200,255,.15);border:1px solid var(--a);color:var(--a);padding:3px 8px;border-radius:4px;cursor:pointer;font-size:11px;white-space:nowrap;">🎲 Random</button></div>');
-  // Race dropdown — applying racial defaults on change
+  // ── Two-column: Identity fields | Compact attribute editor ──────────────────
+  h+='<div style="display:grid;grid-template-columns:1fr 1.4fr;gap:18px;align-items:start;">';
+  // ── LEFT: Identity fields ───────────────────────────────────────────────────
+  h+='<div>';
+  h+=ccSecHead('IDENTITY');
+  h+=ccLbl('Character Name','<div style="display:flex;gap:5px;"><input type="text" value="'+esc(st.name||'')+'" style="'+CC_INP+'" oninput="ccState.name=this.value;"><button onclick="ccRandName();" style="background:rgba(0,200,255,.15);border:1px solid var(--a);color:var(--a);padding:3px 8px;border-radius:4px;cursor:pointer;font-size:11px;white-space:nowrap;">🎲</button></div>');
   h+='<div style="margin-bottom:8px;"><div style="font-size:10px;color:#888;margin-bottom:2px;">Race</div>';
   h+='<select style="'+CC_SEL.replace('font-size:11px','font-size:12px')+'padding:4px;" onchange="ccState.race=this.value;ccApplyRaceDefaults(g.races.find(r=>r.name===this.value));render();">';
   h+='<option value="">— Select race —</option>';
   g.races.forEach(r=>{h+='<option value="'+esc(r.name)+'"'+(st.race===r.name?' selected':'')+'>'+esc(r.name)+'</option>';});
   h+='</select></div>';
-  h+=ccLbl('Occupation','<div style="display:flex;gap:6px;"><input type="text" value="'+esc(st.occupation||'')+'" style="'+CC_INP+'" oninput="ccState.occupation=this.value;"><button onclick="ccState.picker={type:\'occupation\'};ccState.pickerSearch=\'\';render();" style="background:rgba(255,107,53,.15);border:1px solid var(--a2);color:var(--a2);padding:3px 8px;border-radius:4px;cursor:pointer;font-size:11px;white-space:nowrap;">Browse</button></div>');
-  h+=ccLbl('Background','<div style="display:flex;gap:6px;"><input type="text" value="'+esc(st.background||'')+'" style="'+CC_INP+'" oninput="ccState.background=this.value;"><button onclick="ccState.picker={type:\'background\'};ccState.pickerSearch=\'\';render();" style="background:rgba(255,200,0,.1);border:1px solid var(--ye);color:var(--ye);padding:3px 8px;border-radius:4px;cursor:pointer;font-size:11px;white-space:nowrap;">Browse</button></div>');
+  h+=ccLbl('Occupation','<div style="display:flex;gap:5px;"><input type="text" value="'+esc(st.occupation||'')+'" style="'+CC_INP+'" oninput="ccState.occupation=this.value;"><button onclick="ccState.picker={type:\'occupation\'};ccState.pickerSearch=\'\';render();" style="background:rgba(255,107,53,.15);border:1px solid var(--a2);color:var(--a2);padding:3px 8px;border-radius:4px;cursor:pointer;font-size:11px;white-space:nowrap;">Browse</button></div>');
+  h+=ccLbl('Background','<div style="display:flex;gap:5px;"><input type="text" value="'+esc(st.background||'')+'" style="'+CC_INP+'" oninput="ccState.background=this.value;"><button onclick="ccState.picker={type:\'background\'};ccState.pickerSearch=\'\';render();" style="background:rgba(255,200,0,.1);border:1px solid var(--ye);color:var(--ye);padding:3px 8px;border-radius:4px;cursor:pointer;font-size:11px;white-space:nowrap;">Browse</button></div>');
   h+=ccLbl('Sex','<input type="text" value="'+esc(st.sex||'')+'" style="'+CC_INP+'" oninput="ccState.sex=this.value;">');
   h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">';
   h+=ccLbl('Real Age','<input type="number" value="'+(st.age||'')+'" style="'+CC_INP+'" oninput="ccState.age=this.value;">');
   h+=ccLbl('Apparent Age','<input type="number" value="'+(st.apparent_age||'')+'" style="'+CC_INP+'" oninput="ccState.apparent_age=this.value;">');
-  h+='</div></div>';
-  // Right col — details
-  h+='<div>'+ccSecHead('BACKGROUND & OCCUPATION DETAILS');
-  // Background traits — formatted display
-  if(st.background){
-    const bgObj=(g.backgrounds||[]).find(b=>b.name===st.background);
-    if(bgObj&&bgObj.traits&&bgObj.traits.length){
-      h+='<div style="margin-bottom:8px;">';
-      const traitLabels=['BENEFIT 1','BENEFIT 2','DRAWBACK'];
-      const traitCols=['rgba(0,200,100,.12)','rgba(0,200,100,.08)','rgba(255,80,80,.12)'];
-      const traitBord=['rgba(0,200,100,.35)','rgba(0,200,100,.2)','rgba(255,80,80,.3)'];
-      const traitTxtCol=['var(--gr)','var(--gr)','var(--re)'];
-      bgObj.traits.forEach((tr,ti)=>{
-        h+='<div style="background:'+traitCols[ti]||traitCols[2]+';border:1px solid '+(traitBord[ti]||traitBord[2])+';border-radius:4px;padding:6px 8px;margin-bottom:4px;">';
-        h+='<div style="font-size:9px;color:'+(traitTxtCol[ti]||'var(--re)')+';font-family:\'Orbitron\',sans-serif;margin-bottom:3px;">'+(traitLabels[ti]||'TRAIT '+(ti+1))+'</div>';
-        h+='<div style="font-size:10px;color:#bbb;line-height:1.4;">'+esc(tr)+'</div>';
-        h+='</div>';
-      });
-      h+='</div>';
-    }
-  }
-  h+=ccLbl('Background Notes','<textarea style="'+CC_INP+'height:70px;resize:vertical;" oninput="ccState.background_desc=this.value;">'+esc(st.background_desc||'')+'</textarea>');
-  // Occupation skill bonus choice
-  const occBonusEntry=OCC_BONUS[st.occupation];
-  if(occBonusEntry){
-    const chosen=st.occupation_bonus_choice;
-    const picks=st.occ_bonus_picks||[];
-    h+='<div style="margin-bottom:8px;background:rgba(255,107,53,.06);border:1px solid rgba(255,107,53,.25);border-radius:4px;padding:8px;">';
-    if(Array.isArray(occBonusEntry)){
-      h+='<div style="font-size:10px;color:var(--a2);margin-bottom:6px;font-family:\'Orbitron\',sans-serif;">OCCUPATION BONUS — Choose one skill pair</div>';
-      occBonusEntry.forEach((pair,pi)=>{
-        const isChosen=chosen===pi;
-        const label=pair.map(s=>s.replace(/_/g,' ')).join(' + ');
-        h+='<button onclick="ccApplyOccBonus('+pi+');render();" style="display:block;width:100%;text-align:left;margin-bottom:4px;background:'+(isChosen?'rgba(255,107,53,.25)':'rgba(0,0,0,.3)')+';border:1px solid '+(isChosen?'var(--a2)':'rgba(255,255,255,.1)')+';color:'+(isChosen?'var(--a2)':'#aaa')+';padding:5px 9px;border-radius:3px;cursor:pointer;font-size:11px;">'+(isChosen?'✓ ':'')+esc(label)+'</button>';
-      });
-      if(chosen!==null&&chosen!==undefined){
-        const pickedPair=occBonusEntry[chosen].map(s=>s.replace(/_/g,' ')).join(' + ');
-        h+='<div style="font-size:9px;color:var(--a2);margin-top:2px;">SMALL bonus (+1) applied to: '+esc(pickedPair)+' — reflected in Skills tab</div>';
-      }
-    } else if(occBonusEntry.fixed&&!occBonusEntry.pick){
-      h+='<div style="font-size:10px;color:var(--gr);margin-bottom:4px;font-family:\'Orbitron\',sans-serif;">✓ OCCUPATION BONUS — Auto-applied</div>';
-      h+='<div style="font-size:10px;color:#bbb;">SMALL bonus on: '+occBonusEntry.fixed.map(s=>esc(s.replace(/_/g,' '))).join(', ')+'</div>';
-    } else if(!occBonusEntry.fixed&&occBonusEntry.pick){
-      h+='<div style="font-size:10px;color:var(--a2);margin-bottom:6px;font-family:\'Orbitron\',sans-serif;">OCCUPATION BONUS — Pick '+occBonusEntry.pick+' skills ('+picks.length+'/'+occBonusEntry.pick+' selected)</div>';
-      h+='<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:4px;">';
-      occBonusEntry.from.forEach(sk=>{
-        const isSel=picks.includes(sk);
-        const canPick=!isSel&&picks.length<occBonusEntry.pick;
-        h+='<button onclick="ccToggleOccPick(\''+sk+'\');" style="background:'+(isSel?'rgba(255,107,53,.3)':'rgba(0,0,0,.3)')+';border:1px solid '+(isSel?'var(--a2)':'rgba(255,255,255,.15)')+';color:'+(isSel?'var(--a2)':(canPick?'#aaa':'#555'))+';padding:4px 10px;border-radius:3px;cursor:'+(canPick||isSel?'pointer':'default')+';font-size:11px;">'+(isSel?'✓ ':'')+esc(sk.replace(/_/g,' '))+'</button>';
-      });
-      h+='</div>';
-      if(picks.length===occBonusEntry.pick)h+='<div style="font-size:9px;color:var(--a2);margin-top:2px;">SMALL bonus (+1) applied to: '+picks.map(s=>esc(s.replace(/_/g,' '))).join(' + ')+'</div>';
-      else h+='<div style="font-size:9px;color:var(--ye);margin-top:2px;">Select '+(occBonusEntry.pick-picks.length)+' more skill'+(occBonusEntry.pick-picks.length>1?'s':'')+'  to complete</div>';
-    } else if(occBonusEntry.fixed&&occBonusEntry.pick){
-      h+='<div style="font-size:10px;color:var(--a2);margin-bottom:6px;font-family:\'Orbitron\',sans-serif;">OCCUPATION BONUS — Fixed skills + choose one</div>';
-      h+='<div style="font-size:10px;color:var(--gr);margin-bottom:5px;">✓ Auto-applied: '+occBonusEntry.fixed.map(s=>esc(s.replace(/_/g,' '))).join(', ')+'</div>';
-      h+='<div style="font-size:10px;color:#888;margin-bottom:4px;">Additionally, choose one:</div>';
-      occBonusEntry.from.forEach((sk,si)=>{
-        const isChosen=chosen===si;
-        h+='<button onclick="ccApplyOccBonus('+si+');render();" style="display:inline-block;margin-right:4px;margin-bottom:4px;background:'+(isChosen?'rgba(255,107,53,.25)':'rgba(0,0,0,.3)')+';border:1px solid '+(isChosen?'var(--a2)':'rgba(255,255,255,.1)')+';color:'+(isChosen?'var(--a2)':'#aaa')+';padding:4px 10px;border-radius:3px;cursor:pointer;font-size:11px;">'+(isChosen?'✓ ':'')+esc(sk.replace(/_/g,' '))+'</button>';
-      });
-      if(chosen!==null&&chosen!==undefined)h+='<div style="font-size:9px;color:var(--a2);margin-top:2px;">SMALL bonus (+1) on: '+[...occBonusEntry.fixed,...(chosen!==null?[occBonusEntry.from[chosen]]:[])].map(s=>esc(s.replace(/_/g,' '))).join(', ')+'</div>';
-    }
-    h+='</div>';
-  }
-  h+=ccLbl('Occupation Details','<textarea style="'+CC_INP+'height:70px;resize:vertical;" oninput="ccState.occupation_desc=this.value;">'+esc(st.occupation_desc||'')+'</textarea>');
-  h+='<div style="margin-top:4px;"><label style="font-size:10px;color:#888;">Notes</label><textarea style="'+CC_INP+'height:60px;resize:vertical;" oninput="ccState.notes=this.value;">'+esc(st.notes||'')+'</textarea></div>';
-  h+='</div></div>';
-  // ── Info cards at bottom ─────────────────────────────────────────────────────
-  if(raceObj){
+  h+='</div>';
+  h+=ccLbl('Notes','<textarea style="'+CC_INP+'height:55px;resize:vertical;" oninput="ccState.notes=this.value;">'+esc(st.notes||'')+'</textarea>');
+  h+='</div>';
+  // ── RIGHT: Compact attribute editor ─────────────────────────────────────────
+  h+='<div>';
+  h+=ccSecHead('ATTRIBUTES'+(st.race?' — '+esc(st.race):''));
+  const ABS=['PHYSICAL','MENTAL','SOCIAL','ACUITY','ENDURANCE','SPEED','WITS','WILLPOWER'];
+  const bgGrant=BG_GRANTS[st.background]||{};
+  h+='<table style="width:100%;border-collapse:collapse;font-size:10px;">';
+  h+='<tr style="color:#666;"><th style="text-align:left;padding:2px 4px;font-weight:normal;">Attr</th><th style="padding:2px 4px;font-weight:normal;width:32px;">Base</th><th style="padding:2px 4px;font-weight:normal;width:52px;">Perm</th><th style="padding:2px 4px;font-weight:normal;width:80px;">Bonus</th><th style="padding:2px 4px;font-weight:normal;width:36px;">Final</th>'+(raceObj?'<th style="padding:2px 4px;font-weight:normal;color:var(--a3);">Range</th>':'')+'</tr>';
+  ABS.forEach(ab=>{
+    const base=ccGetAttrBase(ab);
+    const perm=+(st[ab+'_perm'])||0;
+    const bonus=+(st[ab+'_bonus'])||0;
+    const final_v=perm+bonus;
+    const rs=raceObj&&raceObj.stats[CC_ATTR_RK[ab]];
+    const hasBgBonus=bgGrant.attrs&&bgGrant.attrs[ab];
+    const noMax=bgGrant.no_racial_max;
+    const attrMod=(bgGrant.attr_max_mods&&bgGrant.attr_max_mods[ab])||0;
     const isNB=st.clone===false&&st.nb_rolled;
-    h+='<div style="margin-top:14px;background:rgba(0,200,255,.05);border:1px solid rgba(0,200,255,.2);border-radius:5px;padding:12px;">';
-    h+='<div style="font-family:\'Orbitron\',sans-serif;font-size:11px;color:var(--a);margin-bottom:8px;">'+esc(raceObj.name)+(isNB?' — NATURAL BIRTH RANGES (rolled)':' — RACIAL STAT RANGES')+'  <span style="font-size:9px;color:#555;">min / avg / max</span></div>';
-    h+='<div style="display:grid;grid-template-columns:repeat(8,1fr);gap:6px;font-family:\'Share Tech Mono\',monospace;font-size:10px;">';
-    const PRIMARY_ATTRS=['physical','mental','social','acuity'];
-    ['physical','mental','social','acuity','endurance','speed','wits','willpower'].forEach(rk=>{
-      const rs=raceObj.stats[rk]||{};
-      let minV=esc(rs.min||'?'),maxV=esc(rs.max||'?');
-      const abKey=rk.toUpperCase();
-      if(isNB&&PRIMARY_ATTRS.includes(rk)&&st.attr_variance[abKey]){
-        const v=st.attr_variance[abKey];
-        minV='<span style="color:var(--a3);">'+(+(rs.min||0)+(v.minVar||0))+'</span>';
-        maxV='<span style="color:var(--a3);">'+(+(rs.max||0)+(v.maxVar||0))+'</span>';
-      }
-      h+='<div><div style="color:#666;margin-bottom:2px;">'+rk.slice(0,4).toUpperCase()+'</div>';
-      h+='<div>'+minV+' / <b style="color:var(--a);">'+esc(rs.avg||'?')+'</b> / '+maxV+'</div></div>';
-    });
-    h+='</div>';
-    if(raceObj.racial)h+='<div style="margin-top:8px;font-size:11px;color:#aaa;border-top:1px solid rgba(255,255,255,.06);padding-top:6px;"><b style="color:var(--a);">Racial:</b> '+esc(raceObj.racial)+'</div>';
-    if(raceObj.evolution)h+='<div style="margin-top:4px;font-size:11px;color:#aaa;"><b style="color:var(--a3);">Evolution:</b> '+esc(raceObj.evolution)+'</div>';
+    const PRIMARY_ATTRS_RK=['physical','mental','social','acuity'];
+    const rk=CC_ATTR_RK[ab];
+    h+='<tr style="border-top:1px solid rgba(255,255,255,.05);">';
+    h+='<td style="padding:2px 4px;font-family:\'Orbitron\',sans-serif;font-size:9px;color:var(--a);">'+ab.slice(0,4)+'</td>';
+    h+='<td style="padding:2px 4px;text-align:center;font-family:\'Share Tech Mono\',monospace;color:'+(hasBgBonus?'var(--ye)':'#aaa')+';">'+base+(hasBgBonus?'<sup style="color:var(--ye);font-size:8px;">bg</sup>':'')+'</td>';
+    h+='<td style="padding:2px 2px;text-align:center;"><input type="number" value="'+perm+'" style="width:46px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.2);color:var(--tx);padding:1px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:12px;" onchange="ccSetAttrPerm(\''+ab+'\',this.value);render();"></td>';
+    h+='<td style="padding:2px 2px;"><select style="background:#111;border:1px solid rgba(0,200,255,.15);color:var(--tx);padding:1px 2px;font-size:9px;width:100%;" onchange="ccSetAttrBonus(\''+ab+'\',this.value);">';
+    [['None',0],['+1',1],['+3',3],['-1',-1],['-3',-3]].forEach(([lbl,val])=>{h+='<option value="'+val+'"'+(bonus===val?' selected':'')+'>'+lbl+'</option>';});
+    h+='</select></td>';
+    h+='<td style="padding:2px 4px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:14px;font-weight:bold;color:var(--tx);">'+final_v+'</td>';
+    if(raceObj){
+      h+='<td style="padding:2px 4px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:10px;color:var(--a3);">';
+      if(rs){
+        let minV=rs.min,maxV=rs.max;
+        if(isNB&&PRIMARY_ATTRS_RK.includes(rk)&&st.attr_variance[ab]){const v=st.attr_variance[ab];minV=(+(rs.min||0)+(v.minVar||0));maxV=(+(rs.max||0)+(v.maxVar||0));}
+        let maxDisp=noMax?'<span style="color:var(--ye);">∞</span>':(attrMod?'<span style="color:var(--re);">'+(+(maxV)+(attrMod))+'</span>':maxV);
+        h+=minV+'/<b style="color:var(--a);">'+rs.avg+'</b>/'+maxDisp;
+      } else h+='<span style="color:#444;">—</span>';
+      h+='</td>';
+    }
+    h+='</tr>';
+  });
+  h+='</table>';
+  // HP / Morale / CHI
+  h+='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px;">';
+  const hpMax=st.HEALTH_max,mMax=st.MORALE_max,chiMax=st.CHI_max;
+  [['HEALTH',st.HEALTH,hpMax,'var(--re)'],['MORALE',st.MORALE,mMax,'var(--a3)'],['CHI',st.CHI,chiMax,'var(--a)']].forEach(([k,cur,max,col])=>{
+    h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:5px 6px;">';
+    h+='<div style="font-size:9px;color:'+col+';font-family:\'Orbitron\',sans-serif;margin-bottom:3px;">'+k+'</div>';
+    h+='<div style="display:flex;gap:4px;align-items:center;">';
+    h+='<input type="number" value="'+cur+'" style="width:38px;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.15);color:var(--tx);padding:2px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:12px;" oninput="ccState[\''+k+'\']=+this.value||0;">';
+    h+='<span style="font-size:10px;color:#555;">/ <b style="color:'+col+';font-size:12px;">'+max+'</b></span>';
+    h+='</div></div>';
+  });
+  h+='</div>';
+  if(bgGrant.chi_lock||bgGrant.surge_lock){
+    h+='<div style="font-size:10px;margin-top:5px;">';
+    if(bgGrant.chi_lock)h+='<span style="color:var(--re);">⛔ CHI MAX locked at 0</span> ';
+    if(bgGrant.surge_lock)h+='<span style="color:var(--re);">⛔ SURGE MAX locked at 0</span>';
     h+='</div>';
   }
-  // Background info card
+  if(raceObj&&(raceObj.racial||raceObj.evolution)){
+    h+='<div style="margin-top:8px;border-top:1px solid rgba(255,255,255,.06);padding-top:6px;">';
+    if(raceObj.racial)h+='<div style="font-size:10px;color:#aaa;margin-bottom:2px;"><span style="color:var(--a);font-weight:bold;">Racial:</span> '+esc(raceObj.racial)+'</div>';
+    if(raceObj.evolution)h+='<div style="font-size:10px;color:#aaa;"><span style="color:var(--a3);font-weight:bold;">Evolution:</span> '+esc(raceObj.evolution)+'</div>';
+    h+='</div>';
+  }
+  h+='</div>';
+  h+='</div>'; // end 2-col grid
+  // ── BELOW: Background + Occupation detail boxes (full width) ─────────────────
   if(st.background){
     const bgObj=(g.backgrounds||[]).find(b=>b.name===st.background);
     if(bgObj){
-      h+='<div style="margin-top:10px;background:rgba(255,200,0,.04);border:1px solid rgba(255,200,0,.25);border-radius:5px;padding:12px;">';
-      h+='<div style="font-family:\'Orbitron\',sans-serif;font-size:11px;color:var(--ye);margin-bottom:6px;">BACKGROUND — '+esc(bgObj.name)+(bgObj.race&&bgObj.race!=='ANY'?' <span style="color:#888;font-size:10px;">('+esc(bgObj.race)+')</span>':'')+'</div>';
-      if(bgObj.desc)h+='<div style="font-size:11px;color:#aaa;margin-bottom:8px;">'+esc(bgObj.desc)+'</div>';
-      if(bgObj.traits&&bgObj.traits[0])h+='<div style="margin-bottom:6px;"><div style="font-size:10px;color:var(--gr);font-weight:bold;margin-bottom:2px;">✓ BENEFIT 1</div><div style="font-size:11px;color:#ccc;line-height:1.5;">'+esc(bgObj.traits[0])+'</div></div>';
-      if(bgObj.traits&&bgObj.traits[1])h+='<div style="margin-bottom:6px;"><div style="font-size:10px;color:var(--gr);font-weight:bold;margin-bottom:2px;">✓ BENEFIT 2</div><div style="font-size:11px;color:#ccc;line-height:1.5;">'+esc(bgObj.traits[1])+'</div></div>';
-      if(bgObj.traits&&bgObj.traits[2])h+='<div><div style="font-size:10px;color:var(--re);font-weight:bold;margin-bottom:2px;">✗ DRAWBACK</div><div style="font-size:11px;color:#ccc;line-height:1.5;">'+esc(bgObj.traits[2])+'</div></div>';
+      h+='<div style="margin-top:14px;background:rgba(255,200,0,.03);border:1px solid rgba(255,200,0,.22);border-radius:6px;padding:12px;">';
+      h+=ccSecHead('BACKGROUND — '+esc(bgObj.name)+(bgObj.race&&bgObj.race!=='ANY'?' <span style="font-size:10px;color:#777;">('+esc(bgObj.race)+')</span>':''),'var(--ye)');
+      if(bgObj.desc)h+='<div style="font-size:11px;color:#aaa;margin-bottom:10px;line-height:1.5;">'+esc(bgObj.desc)+'</div>';
+      if(bgObj.traits&&bgObj.traits.length){
+        const traitLabels=['BENEFIT 1','BENEFIT 2','DRAWBACK'];
+        const traitBg=['rgba(0,200,100,.08)','rgba(0,200,100,.05)','rgba(255,80,80,.08)'];
+        const traitBord=['rgba(0,200,100,.3)','rgba(0,200,100,.18)','rgba(255,80,80,.28)'];
+        const traitCol=['var(--gr)','var(--gr)','var(--re)'];
+        h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px;">';
+        bgObj.traits.forEach((tr,ti)=>{
+          h+='<div style="background:'+(traitBg[ti]||traitBg[2])+';border:1px solid '+(traitBord[ti]||traitBord[2])+';border-radius:4px;padding:7px 8px;">';
+          h+='<div style="font-size:9px;color:'+(traitCol[ti]||'var(--re)')+';font-family:\'Orbitron\',sans-serif;margin-bottom:4px;">'+(traitLabels[ti]||'TRAIT '+(ti+1))+'</div>';
+          h+='<div style="font-size:10px;color:#bbb;line-height:1.45;">'+esc(tr)+'</div>';
+          h+='</div>';
+        });
+        h+='</div>';
+      }
+      h+=ccLbl('Background Notes','<textarea style="'+CC_INP+'height:55px;resize:vertical;" oninput="ccState.background_desc=this.value;">'+esc(st.background_desc||'')+'</textarea>');
       h+='</div>';
     }
   }
-  // Occupation info card
   if(st.occupation){
     const occObj=(g.occupations||[]).find(o=>o.name===st.occupation);
+    const occBonusEntry=OCC_BONUS[st.occupation];
+    h+='<div style="margin-top:10px;background:rgba(255,107,53,.03);border:1px solid rgba(255,107,53,.22);border-radius:6px;padding:12px;">';
+    h+=ccSecHead('OCCUPATION — '+esc(st.occupation),'var(--a2)');
     if(occObj){
-      h+='<div style="margin-top:10px;background:rgba(255,107,53,.04);border:1px solid rgba(255,107,53,.25);border-radius:5px;padding:12px;">';
-      h+='<div style="font-family:\'Orbitron\',sans-serif;font-size:11px;color:var(--a2);margin-bottom:6px;">OCCUPATION — '+esc(occObj.name)+'</div>';
       if(occObj.desc)h+='<div style="font-size:11px;color:#aaa;margin-bottom:8px;line-height:1.5;">'+esc(occObj.desc)+'</div>';
       if(occObj.details&&occObj.details.length){
-        h+='<div style="border-top:1px solid rgba(255,107,53,.15);padding-top:6px;">';
-        occObj.details.forEach(d=>{h+='<div style="font-size:11px;color:#ccc;margin-bottom:4px;line-height:1.5;">• '+esc(d)+'</div>';});
+        h+='<div style="margin-bottom:10px;">';
+        occObj.details.forEach(d=>{h+='<div style="font-size:11px;color:#ccc;margin-bottom:3px;line-height:1.5;">• '+esc(d)+'</div>';});
         h+='</div>';
+      }
+    }
+    // Occupation skill bonus choice
+    if(occBonusEntry){
+      const chosen=st.occupation_bonus_choice;
+      const picks=st.occ_bonus_picks||[];
+      h+='<div style="background:rgba(255,107,53,.06);border:1px solid rgba(255,107,53,.25);border-radius:4px;padding:8px;margin-bottom:8px;">';
+      if(Array.isArray(occBonusEntry)){
+        h+='<div style="font-size:10px;color:var(--a2);margin-bottom:6px;font-family:\'Orbitron\',sans-serif;">SKILL BONUS — Choose one pair</div>';
+        occBonusEntry.forEach((pair,pi)=>{
+          const isChosen=chosen===pi;
+          const label=pair.map(s=>s.replace(/_/g,' ')).join(' + ');
+          h+='<button onclick="ccApplyOccBonus('+pi+');render();" style="display:inline-block;margin-right:5px;margin-bottom:4px;background:'+(isChosen?'rgba(255,107,53,.25)':'rgba(0,0,0,.3)')+';border:1px solid '+(isChosen?'var(--a2)':'rgba(255,255,255,.1)')+';color:'+(isChosen?'var(--a2)':'#aaa')+';padding:4px 10px;border-radius:3px;cursor:pointer;font-size:11px;">'+(isChosen?'✓ ':'')+esc(label)+'</button>';
+        });
+        if(chosen!==null&&chosen!==undefined){
+          const pickedPair=occBonusEntry[chosen].map(s=>s.replace(/_/g,' ')).join(' + ');
+          h+='<div style="font-size:9px;color:var(--a2);margin-top:4px;">+1 applied to: '+esc(pickedPair)+' — reflected in Skills tab</div>';
+        }
+      } else if(occBonusEntry.fixed&&!occBonusEntry.pick){
+        h+='<div style="font-size:10px;color:var(--gr);font-family:\'Orbitron\',sans-serif;">✓ SKILL BONUS — Auto-applied</div>';
+        h+='<div style="font-size:10px;color:#bbb;margin-top:3px;">+1 on: '+occBonusEntry.fixed.map(s=>esc(s.replace(/_/g,' '))).join(', ')+'</div>';
+      } else if(!occBonusEntry.fixed&&occBonusEntry.pick){
+        h+='<div style="font-size:10px;color:var(--a2);margin-bottom:6px;font-family:\'Orbitron\',sans-serif;">SKILL BONUS — Pick '+occBonusEntry.pick+' ('+picks.length+'/'+occBonusEntry.pick+')</div>';
+        h+='<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:4px;">';
+        occBonusEntry.from.forEach(sk=>{
+          const isSel=picks.includes(sk);
+          const canPick=!isSel&&picks.length<occBonusEntry.pick;
+          h+='<button onclick="ccToggleOccPick(\''+sk+'\');" style="background:'+(isSel?'rgba(255,107,53,.3)':'rgba(0,0,0,.3)')+';border:1px solid '+(isSel?'var(--a2)':'rgba(255,255,255,.15)')+';color:'+(isSel?'var(--a2)':(canPick?'#aaa':'#555'))+';padding:3px 9px;border-radius:3px;cursor:'+(canPick||isSel?'pointer':'default')+';font-size:11px;">'+(isSel?'✓ ':'')+esc(sk.replace(/_/g,' '))+'</button>';
+        });
+        h+='</div>';
+        if(picks.length===occBonusEntry.pick)h+='<div style="font-size:9px;color:var(--a2);">+1 applied to: '+picks.map(s=>esc(s.replace(/_/g,' '))).join(' + ')+'</div>';
+        else h+='<div style="font-size:9px;color:var(--ye);">Select '+(occBonusEntry.pick-picks.length)+' more to complete</div>';
+      } else if(occBonusEntry.fixed&&occBonusEntry.pick){
+        h+='<div style="font-size:10px;color:var(--a2);margin-bottom:5px;font-family:\'Orbitron\',sans-serif;">SKILL BONUS — Fixed + choose one</div>';
+        h+='<div style="font-size:10px;color:var(--gr);margin-bottom:5px;">✓ Auto-applied: '+occBonusEntry.fixed.map(s=>esc(s.replace(/_/g,' '))).join(', ')+'</div>';
+        h+='<div style="font-size:10px;color:#888;margin-bottom:4px;">Additionally, choose one:</div>';
+        occBonusEntry.from.forEach((sk,si)=>{
+          const isChosen=chosen===si;
+          h+='<button onclick="ccApplyOccBonus('+si+');render();" style="display:inline-block;margin-right:4px;background:'+(isChosen?'rgba(255,107,53,.25)':'rgba(0,0,0,.3)')+';border:1px solid '+(isChosen?'var(--a2)':'rgba(255,255,255,.1)')+';color:'+(isChosen?'var(--a2)':'#aaa')+';padding:4px 10px;border-radius:3px;cursor:pointer;font-size:11px;">'+(isChosen?'✓ ':'')+esc(sk.replace(/_/g,' '))+'</button>';
+        });
+        if(chosen!==null&&chosen!==undefined)h+='<div style="font-size:9px;color:var(--a2);margin-top:4px;">+1 on: '+[...occBonusEntry.fixed,...[occBonusEntry.from[chosen]]].map(s=>esc(s.replace(/_/g,' '))).join(', ')+'</div>';
       }
       h+='</div>';
     }
+    h+=ccLbl('Occupation Notes','<textarea style="'+CC_INP+'height:50px;resize:vertical;" oninput="ccState.occupation_desc=this.value;">'+esc(st.occupation_desc||'')+'</textarea>');
+    h+='</div>';
   }
   return h;
 }
