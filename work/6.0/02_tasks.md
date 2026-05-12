@@ -26,9 +26,9 @@
 
 | # | Item | Status |
 |---|---|---|
-| T3 | Build passive abilities read-only panel from active talents + evos | todo |
-| T3 | Group passive effects by COMBAT / DEFENSE / SKILL / SPECIAL | todo |
-| T3 | Decide placement: Advancement tab sub-section or Combat tab strip | todo |
+| T3 | Build passive abilities read-only panel from active talents + evos | done |
+| T3 | Group passive effects by COMBAT / DEFENSE / SKILL / SPECIAL | done — grouped by talent category (color-coded) and evo type (GENETICS/CYBER/MAGIC) |
+| T3 | Decide placement: Advancement tab sub-section or Combat tab strip | done — placed at bottom of Advancement tab below the talents+evos grid |
 
 ## Tier 4 — Medium complexity (deferred)
 

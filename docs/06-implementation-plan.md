@@ -110,7 +110,7 @@ Full audit conducted 2026-05-12. Gaps categorised into 5 implementation tiers.
 | T2-A | BG_GRANTS extended with `attr_max_mods` for backgrounds that reduce racial maxes | done |
 | T2-B | Occupation skill bonus choice (all 17 occupations) — pick between two skill pairs; display reminder | done |
 | T2-C | Resource locks: Spirit Judge SURGE=0, Imaginary Friend CHI=0, Void Soul CHI=0 | done (bg-based; Void Soul deferred) |
-| T3 | Passive Abilities panel — read-only list of passive effects from active talents + evolutions | todo |
+| T3 | Passive Abilities panel — read-only list of passive effects from active talents + evolutions | done |
 | T4-A | Occupation skill bonuses as tracked modifiers on Skills tab (deferred) | deferred |
 | T4-B | Evolution attribute bonuses auto-applied to Attributes tab (deferred) | deferred |
 | T4-C | Background combat/vulnerability notes panel (deferred) | deferred |
