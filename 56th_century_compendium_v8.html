@@ -9148,16 +9148,10 @@ function ccRenderIdentity(){
   const raceObj=ccGetRaceObj();
   ccRecalcHealthMorale();
   let h=ccRenderPicker();
-  // Origin status bar
-  if(st.clone===null){
-    h+='<div style="background:rgba(255,107,53,.07);border:1px solid rgba(255,107,53,.3);border-radius:6px;padding:8px 12px;margin-bottom:12px;font-size:11px;color:var(--a2);">⚠ Origin not yet chosen — go to the <b>Attributes</b> tab to select Clone Vat or Natural Birth.</div>';
-  } else {
-    const col=st.clone?'var(--a)':'var(--a3)';
-    const lbl=st.clone?'🧬 Clone Vat':'🌱 Natural Birth';
-    h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:6px 12px;margin-bottom:12px;font-size:11px;color:'+col+';">'+lbl+((!st.clone&&st.nb_rolled)?' — attributes rolled':'')+'<button onclick="ccState.clone=null;ccState.attr_variance={};ccState.nb_rolled=false;render();" style="margin-left:10px;background:none;border:1px solid #444;color:#666;padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10px;">Change</button></div>';
-  }
-  // ── Two-column: Identity fields | Compact attribute editor ──────────────────
-  h+='<div style="display:grid;grid-template-columns:1fr 1.4fr;gap:18px;align-items:start;">';
+  const ABS=['PHYSICAL','MENTAL','SOCIAL','ACUITY','ENDURANCE','SPEED','WITS','WILLPOWER'];
+  const bgGrant=BG_GRANTS[st.background]||{};
+  // ── Two-column: Identity fields | Full attribute editor ──────────────────────
+  h+='<div style="display:grid;grid-template-columns:1fr 1.6fr;gap:18px;align-items:start;">';
   // ── LEFT: Identity fields ───────────────────────────────────────────────────
   h+='<div>';
   h+=ccSecHead('IDENTITY');
@@ -9176,77 +9170,126 @@ function ccRenderIdentity(){
   h+='</div>';
   h+=ccLbl('Notes','<textarea style="'+CC_INP+'height:55px;resize:vertical;" oninput="ccState.notes=this.value;">'+esc(st.notes||'')+'</textarea>');
   h+='</div>';
-  // ── RIGHT: Compact attribute editor ─────────────────────────────────────────
+  // ── RIGHT: Full attribute editor (replaces Attributes tab) ──────────────────
   h+='<div>';
-  h+=ccSecHead('ATTRIBUTES'+(st.race?' — '+esc(st.race):''));
-  const ABS=['PHYSICAL','MENTAL','SOCIAL','ACUITY','ENDURANCE','SPEED','WITS','WILLPOWER'];
-  const bgGrant=BG_GRANTS[st.background]||{};
-  h+='<table style="width:100%;border-collapse:collapse;font-size:10px;">';
-  h+='<tr style="color:#666;"><th style="text-align:left;padding:2px 4px;font-weight:normal;">Attr</th><th style="padding:2px 4px;font-weight:normal;width:32px;">Base</th><th style="padding:2px 4px;font-weight:normal;width:52px;">Perm</th><th style="padding:2px 4px;font-weight:normal;width:80px;">Bonus</th><th style="padding:2px 4px;font-weight:normal;width:36px;">Final</th>'+(raceObj?'<th style="padding:2px 4px;font-weight:normal;color:var(--a3);">Range</th>':'')+'</tr>';
+  h+=ccSecHead('ATTRIBUTES'+(st.race?' — '+esc(st.race):'')+(st.background?' · '+esc(st.background):''));
+  h+='<div style="font-size:10px;color:#555;margin-bottom:6px;">Base = racial avg + bg bonus (free) · Perm = XP-purchased · Final = Perm + Bonus</div>';
+  h+='<table style="width:100%;border-collapse:collapse;">';
+  h+='<tr style="font-size:10px;color:#666;">';
+  h+='<th style="text-align:left;padding:3px 6px;font-weight:normal;">Attribute</th>';
+  h+='<th style="width:48px;padding:3px 4px;font-weight:normal;">Base</th>';
+  h+='<th style="width:70px;padding:3px 4px;font-weight:normal;">Perm<br><span style="font-size:9px;color:#444;">XP</span></th>';
+  h+='<th style="width:110px;padding:3px 4px;font-weight:normal;">Bonus</th>';
+  h+='<th style="width:46px;padding:3px 4px;font-weight:normal;">Final</th>';
+  if(raceObj)h+='<th style="padding:3px 4px;font-weight:normal;color:var(--a3);">Range</th>';
+  h+='</tr>';
   ABS.forEach(ab=>{
     const base=ccGetAttrBase(ab);
     const perm=+(st[ab+'_perm'])||0;
     const bonus=+(st[ab+'_bonus'])||0;
     const final_v=perm+bonus;
-    const rs=raceObj&&raceObj.stats[CC_ATTR_RK[ab]];
+    const rs=raceObj&&raceObj.stats[CC_ATTR_RK[ab]]?raceObj.stats[CC_ATTR_RK[ab]]:null;
+    const xpCost=ccAttrXPCost(base,perm);
     const hasBgBonus=bgGrant.attrs&&bgGrant.attrs[ab];
     const noMax=bgGrant.no_racial_max;
     const attrMod=(bgGrant.attr_max_mods&&bgGrant.attr_max_mods[ab])||0;
     const isNB=st.clone===false&&st.nb_rolled;
     const PRIMARY_ATTRS_RK=['physical','mental','social','acuity'];
     const rk=CC_ATTR_RK[ab];
-    h+='<tr style="border-top:1px solid rgba(255,255,255,.05);">';
-    h+='<td style="padding:2px 4px;font-family:\'Orbitron\',sans-serif;font-size:9px;color:var(--a);">'+ab.slice(0,4)+'</td>';
-    h+='<td style="padding:2px 4px;text-align:center;font-family:\'Share Tech Mono\',monospace;color:'+(hasBgBonus?'var(--ye)':'#aaa')+';">'+base+(hasBgBonus?'<sup style="color:var(--ye);font-size:8px;">bg</sup>':'')+'</td>';
-    h+='<td style="padding:2px 2px;text-align:center;"><input type="number" value="'+perm+'" style="width:46px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.2);color:var(--tx);padding:1px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:12px;" onchange="ccSetAttrPerm(\''+ab+'\',this.value);render();"></td>';
-    h+='<td style="padding:2px 2px;"><select style="background:#111;border:1px solid rgba(0,200,255,.15);color:var(--tx);padding:1px 2px;font-size:9px;width:100%;" onchange="ccSetAttrBonus(\''+ab+'\',this.value);">';
-    [['None',0],['+1',1],['+3',3],['-1',-1],['-3',-3]].forEach(([lbl,val])=>{h+='<option value="'+val+'"'+(bonus===val?' selected':'')+'>'+lbl+'</option>';});
+    h+='<tr style="border-top:1px solid rgba(255,255,255,.06);">';
+    h+='<td style="padding:4px 6px;font-family:\'Orbitron\',sans-serif;font-size:10px;color:var(--a);">'+ab+'</td>';
+    // Base — read-only
+    h+='<td style="padding:2px 4px;text-align:center;">';
+    h+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:14px;color:'+(hasBgBonus?'var(--ye)':'var(--a3)')+';font-weight:bold;">'+base+'</div>';
+    if(hasBgBonus)h+='<div style="font-size:8px;color:var(--ye);">+'+bgGrant.attrs[ab]+' bg</div>';
+    h+='</td>';
+    // Perm — editable
+    h+='<td style="padding:2px 3px;text-align:center;">';
+    h+='<input type="number" value="'+perm+'" style="width:48px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.22);color:var(--tx);padding:2px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:12px;" onchange="ccSetAttrPerm(\''+ab+'\',this.value);">';
+    if(xpCost>0)h+='<div style="font-size:8px;color:var(--a2);">'+xpCost+' xp</div>';
+    h+='</td>';
+    // Bonus dropdown — short labels to save space
+    h+='<td style="padding:2px 3px;"><select style="'+CC_SEL+'width:100%;" onchange="ccSetAttrBonus(\''+ab+'\',this.value);">';
+    [['None',0],['+1 Small',1],['+3 Large',3],['−1 Small',-1],['−3 Large',-3]].forEach(([lbl,val])=>{
+      h+='<option value="'+val+'"'+(bonus===val?' selected':'')+'>'+lbl+'</option>';
+    });
     h+='</select></td>';
-    h+='<td style="padding:2px 4px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:14px;font-weight:bold;color:var(--tx);">'+final_v+'</td>';
+    // Final
+    h+='<td style="padding:2px 4px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:15px;font-weight:bold;color:var(--tx);">'+final_v+'</td>';
+    // Racial range
     if(raceObj){
-      h+='<td style="padding:2px 4px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:10px;color:var(--a3);">';
+      h+='<td style="padding:2px 4px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:10px;">';
       if(rs){
-        let minV=rs.min,maxV=rs.max;
-        if(isNB&&PRIMARY_ATTRS_RK.includes(rk)&&st.attr_variance[ab]){const v=st.attr_variance[ab];minV=(+(rs.min||0)+(v.minVar||0));maxV=(+(rs.max||0)+(v.maxVar||0));}
-        let maxDisp=noMax?'<span style="color:var(--ye);">∞</span>':(attrMod?'<span style="color:var(--re);">'+(+(maxV)+(attrMod))+'</span>':maxV);
-        h+=minV+'/<b style="color:var(--a);">'+rs.avg+'</b>/'+maxDisp;
-      } else h+='<span style="color:#444;">—</span>';
+        let minV=esc(rs.min),maxV=esc(rs.max);
+        if(isNB&&PRIMARY_ATTRS_RK.includes(rk)&&st.attr_variance[ab]){
+          const v=st.attr_variance[ab];
+          minV='<span style="color:var(--a3);">'+(+(rs.min||0)+(v.minVar||0))+'</span>';
+          maxV='<span style="color:var(--a3);">'+(+(rs.max||0)+(v.maxVar||0))+'</span>';
+        }
+        if(noMax)maxV='<span style="color:var(--ye);" title="No racial maximum (Subject 0056)">∞</span>';
+        else if(attrMod){const adjMax=+(rs.max||0)+(isNB&&PRIMARY_ATTRS_RK.includes(rk)&&st.attr_variance[ab]?(st.attr_variance[ab].maxVar||0):0)+attrMod;maxV='<span style="color:var(--re);" title="Racial max reduced by background">'+adjMax+'</span>';}
+        h+=minV+' / <b style="color:var(--a);">'+esc(rs.avg)+'</b> / '+maxV;
+      } else {h+='<span style="color:#444;">—</span>';}
       h+='</td>';
     }
     h+='</tr>';
   });
   h+='</table>';
-  // HP / Morale / CHI
-  h+='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px;">';
+  // HP / Morale / CHI + Initiative side by side
+  h+='<div style="display:grid;grid-template-columns:1.2fr 1fr;gap:10px;margin-top:12px;">';
+  // Health & Morale block
+  h+='<div>';
+  h+=ccSecHead('HEALTH & MORALE');
+  h+='<div style="font-size:9px;color:#555;margin-bottom:5px;">Max HP = 10 + END · Morale = 10 + WILL · CHI = 5</div>';
+  h+='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;">';
   const hpMax=st.HEALTH_max,mMax=st.MORALE_max,chiMax=st.CHI_max;
-  [['HEALTH',st.HEALTH,hpMax,'var(--re)'],['MORALE',st.MORALE,mMax,'var(--a3)'],['CHI',st.CHI,chiMax,'var(--a)']].forEach(([k,cur,max,col])=>{
-    h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:5px 6px;">';
-    h+='<div style="font-size:9px;color:'+col+';font-family:\'Orbitron\',sans-serif;margin-bottom:3px;">'+k+'</div>';
-    h+='<div style="display:flex;gap:4px;align-items:center;">';
-    h+='<input type="number" value="'+cur+'" style="width:38px;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.15);color:var(--tx);padding:2px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:12px;" oninput="ccState[\''+k+'\']=+this.value||0;">';
-    h+='<span style="font-size:10px;color:#555;">/ <b style="color:'+col+';font-size:12px;">'+max+'</b></span>';
-    h+='</div></div>';
+  [['HEALTH','var(--re)',st.HEALTH,hpMax],['MORALE','var(--a3)',st.MORALE,mMax],['CHI','var(--a)',st.CHI,chiMax]].forEach(([k,col,cur,max])=>{
+    h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:5px 5px;">';
+    h+='<div style="font-size:8px;color:'+col+';font-family:\'Orbitron\',sans-serif;margin-bottom:3px;">'+k+'</div>';
+    h+='<input type="number" value="'+cur+'" style="width:100%;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.15);color:var(--tx);padding:2px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:12px;box-sizing:border-box;" oninput="ccState[\''+k+'\']=+this.value||0;">';
+    h+='<div style="text-align:center;font-size:9px;color:#555;margin-top:2px;">max <b style="color:'+col+';">'+max+'</b></div>';
+    h+='</div>';
   });
   h+='</div>';
   if(bgGrant.chi_lock||bgGrant.surge_lock){
-    h+='<div style="font-size:10px;margin-top:5px;">';
-    if(bgGrant.chi_lock)h+='<span style="color:var(--re);">⛔ CHI MAX locked at 0</span> ';
-    if(bgGrant.surge_lock)h+='<span style="color:var(--re);">⛔ SURGE MAX locked at 0</span>';
+    h+='<div style="font-size:9px;margin-top:4px;">';
+    if(bgGrant.chi_lock)h+='<span style="color:var(--re);">⛔ CHI locked at 0</span> ';
+    if(bgGrant.surge_lock)h+='<span style="color:var(--re);">⛔ SURGE locked at 0</span>';
     h+='</div>';
   }
+  if(bgGrant.health||bgGrant.morale||bgGrant.chi){
+    h+='<div style="font-size:9px;color:var(--ye);margin-top:3px;">';
+    if(bgGrant.health)h+='+'+bgGrant.health+' HP ';
+    if(bgGrant.morale)h+='+'+bgGrant.morale+' Morale ';
+    if(bgGrant.chi)h+='+'+bgGrant.chi+' CHI ';
+    h+='(bg)</div>';
+  }
+  h+='</div>';
+  // Initiative block
+  h+='<div>';
+  h+=ccSecHead('INITIATIVE');
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;">';
+  [['init_move','Move'],['init_standard','Standard'],['init_quick','Quick'],['init_complex','Complex']].forEach(([k,lbl])=>{
+    h+='<div><div style="font-size:9px;color:#777;margin-bottom:2px;">'+lbl+'</div><input type="text" value="'+esc(st[k]||'')+'" placeholder="e.g. 4" style="'+CC_INP+'" oninput="ccState[\''+k+'\']=this.value;"></div>';
+  });
+  h+='</div>';
   if(raceObj&&(raceObj.racial||raceObj.evolution)){
     h+='<div style="margin-top:8px;border-top:1px solid rgba(255,255,255,.06);padding-top:6px;">';
-    if(raceObj.racial)h+='<div style="font-size:10px;color:#aaa;margin-bottom:2px;"><span style="color:var(--a);font-weight:bold;">Racial:</span> '+esc(raceObj.racial)+'</div>';
-    if(raceObj.evolution)h+='<div style="font-size:10px;color:#aaa;"><span style="color:var(--a3);font-weight:bold;">Evolution:</span> '+esc(raceObj.evolution)+'</div>';
+    if(raceObj.racial)h+='<div style="font-size:9px;color:#aaa;margin-bottom:2px;"><span style="color:var(--a);font-weight:bold;">Racial:</span> '+esc(raceObj.racial)+'</div>';
+    if(raceObj.evolution)h+='<div style="font-size:9px;color:#aaa;"><span style="color:var(--a3);font-weight:bold;">Evo:</span> '+esc(raceObj.evolution)+'</div>';
     h+='</div>';
   }
   h+='</div>';
+  h+='</div>'; // end HP/Initiative row
+  h+='</div>';
   h+='</div>'; // end 2-col grid
-  // ── BELOW: Background + Occupation detail boxes (full width) ─────────────────
+  // ── BELOW: Origin + Background + Occupation detail boxes (full width) ────────
+  h+='<div style="margin-top:14px;">';
+  h+=ccRenderOriginBlock();
   if(st.background){
     const bgObj=(g.backgrounds||[]).find(b=>b.name===st.background);
     if(bgObj){
-      h+='<div style="margin-top:14px;background:rgba(255,200,0,.03);border:1px solid rgba(255,200,0,.22);border-radius:6px;padding:12px;">';
+      h+='<div style="margin-top:10px;background:rgba(255,200,0,.03);border:1px solid rgba(255,200,0,.22);border-radius:6px;padding:12px;">';
       h+=ccSecHead('BACKGROUND — '+esc(bgObj.name)+(bgObj.race&&bgObj.race!=='ANY'?' <span style="font-size:10px;color:#777;">('+esc(bgObj.race)+')</span>':''),'var(--ye)');
       if(bgObj.desc)h+='<div style="font-size:11px;color:#aaa;margin-bottom:10px;line-height:1.5;">'+esc(bgObj.desc)+'</div>';
       if(bgObj.traits&&bgObj.traits.length){
@@ -9280,7 +9323,6 @@ function ccRenderIdentity(){
         h+='</div>';
       }
     }
-    // Occupation skill bonus choice
     if(occBonusEntry){
       const chosen=st.occupation_bonus_choice;
       const picks=st.occ_bonus_picks||[];
@@ -9325,6 +9367,23 @@ function ccRenderIdentity(){
     h+=ccLbl('Occupation Notes','<textarea style="'+CC_INP+'height:50px;resize:vertical;" oninput="ccState.occupation_desc=this.value;">'+esc(st.occupation_desc||'')+'</textarea>');
     h+='</div>';
   }
+  // Evolution attribute notes (T4-B)
+  const ATTR_KEYWORDS=['PHYSICAL','MENTAL','SOCIAL','ACUITY','ENDURANCE','SPEED','WITS','WILLPOWER','ATTRIBUTE','attribute'];
+  const evoAttrNotes=st.evolutions.filter(e=>e.name&&e.effect&&ATTR_KEYWORDS.some(kw=>e.effect.includes(kw)));
+  if(evoAttrNotes.length){
+    h+='<div style="margin-top:10px;">';
+    h+=ccSecHead('EVOLUTION ATTRIBUTE NOTES','var(--a3)');
+    h+='<div style="font-size:10px;color:#888;margin-bottom:6px;">Active evolutions with attribute effects — apply bonuses manually in the table above.</div>';
+    h+='<div style="display:flex;flex-direction:column;gap:6px;">';
+    evoAttrNotes.forEach(e=>{
+      h+='<div style="background:rgba(168,85,247,.07);border:1px solid rgba(168,85,247,.25);border-radius:4px;padding:7px 10px;">';
+      h+='<div style="font-size:11px;color:var(--a3);font-weight:bold;margin-bottom:3px;">'+esc(e.name)+(e.tier?' <span style="font-size:9px;color:#888;">'+esc(e.tier)+'</span>':'')+'</div>';
+      h+='<div style="font-size:10px;color:#bbb;line-height:1.4;">'+esc(e.effect)+'</div>';
+      h+='</div>';
+    });
+    h+='</div></div>';
+  }
+  h+='</div>'; // end below section
   return h;
 }
 
@@ -13282,7 +13341,8 @@ function render(){
   else if(cs==='char_creator'){
     cnt=1;
     const st=ccState;
-    const TABS=[['identity','Identity'],['attributes','Attributes'],['skills','Skills'],['talents','Talents & Evos'],['combat','Combat'],['tech','Tech'],['magic','Magic'],['gear','Gear']];
+    if(st.tab==='attributes')st.tab='identity';
+    const TABS=[['identity','Identity'],['skills','Skills'],['talents','Talents & Evos'],['combat','Combat'],['tech','Tech'],['magic','Magic'],['gear','Gear']];
     html+='<div style="padding:12px;">';
     html+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">';
     html+='<div style="font-family:\'Orbitron\',sans-serif;font-size:18px;color:var(--a);">👤 CHARACTER CREATOR</div>';
@@ -13298,7 +13358,6 @@ function render(){
     html+='</div>';
     html+=ccXPBar();
     if(st.tab==='identity')html+=ccRenderIdentity();
-    else if(st.tab==='attributes')html+=ccRenderAttributes();
     else if(st.tab==='skills')html+=ccRenderSkills();
     else if(st.tab==='talents')html+=ccRenderTalents();
     else if(st.tab==='combat')html+=ccRenderCombat();
