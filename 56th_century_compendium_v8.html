@@ -8361,6 +8361,21 @@ const OCC_BONUS={
   'Worker':            [['Journeyman','Scavenging'],['Science','Engineering']],
 };
 
+function ccApplyOccBonus(pi){
+  const st=ccState;
+  // Remove bonus from previously-chosen pair
+  (st.occ_bonus_skills||[]).forEach(sk=>{if(st[sk+'_bonus']===1)st[sk+'_bonus']=0;});
+  st.occ_bonus_skills=[];
+  st.occupation_bonus_choice=null;
+  if(pi===null||pi===undefined)return;
+  const pairs=OCC_BONUS[st.occupation];
+  if(!pairs||!pairs[pi])return;
+  const pair=pairs[pi].map(s=>s.replace(/ /g,'_'));
+  pair.forEach(sk=>{if(st[sk+'_bonus']===0)st[sk+'_bonus']=1;});
+  st.occ_bonus_skills=pair;
+  st.occupation_bonus_choice=pi;
+}
+
 function ccMakeFreshState(){
   const sk={};
   CC_ALL_SKILLS.forEach(s=>{sk[s]=0;sk[s+'_crit']='10';sk[s+'_bonus']=0;});
@@ -8390,7 +8405,7 @@ function ccMakeFreshState(){
     datacoms:Array(3).fill(0).map(()=>({name:'',cpu:0,mem:0,nanite:0,def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',def_dmg:'',int_ext:0,int_int:0,int_main:0,expertise:0,special:'',mfr:'Generic',base_data:null,options:[]})),
     programs:Array(10).fill(0).map(()=>({name:'',type:'',cpu:0,mem:0,passive:'',active:''})),
     gadgets:Array(5).fill(0).map(()=>({name:'',nanite:0,effect:''})),
-    occupation_bonus_choice:null,
+    occupation_bonus_choice:null,occ_bonus_skills:[],
     credits:0,credits_spent:0,gear_cat_filter:'',gear_search:'',med_mfr_filter:'Generic',med_search:'',
     spells:Array(16).fill(0).map(()=>({name:'',domain:''})),
     items:Array(20).fill(0).map(()=>({name:'',size:'0',qty:1})),
@@ -8828,7 +8843,7 @@ function ccPickFromCache(pidx){
     ccUpdateBgGrantedXP();
     ccRecalcHealthMorale();
   }
-  else if(type==='occupation'){const o=item;ccState.occupation=o.name||'';const lines=[o.desc||'',...(o.details||[])].filter(Boolean);ccState.occupation_desc=lines.join('\n');const startCr=ccParseOccCredits(o.name||'');if(startCr>0)ccState.credits=startCr;ccState.occupation_bonus_choice=null;}
+  else if(type==='occupation'){const o=item;ccState.occupation=o.name||'';const lines=[o.desc||'',...(o.details||[])].filter(Boolean);ccState.occupation_desc=lines.join('\n');const startCr=ccParseOccCredits(o.name||'');if(startCr>0)ccState.credits=startCr;ccApplyOccBonus(null);}
   ccState.picker=null;ccState.pickerSearch='';render();
 }
 function ccExportRoll20(){
@@ -8964,8 +8979,8 @@ function ccRenderPicker(){
     h+='<div style="font-size:12px;font-weight:bold;color:var(--tx);margin-bottom:3px;">';
     if(type==='background'&&x.race&&x.race!=='ANY')h+='<span style="color:var(--ye);font-size:10px;margin-right:5px;">['+esc(x.race)+']</span>';
     h+=esc(x.name||'')+'</div>';
-    if(type==='talent')h+='<div style="font-size:10px;color:#888;">'+esc(x.skill||'')+(x.category?' · '+esc(x.category):'')+'  —  '+(x.cost||0)+' XP</div>';
-    else if(type==='evolution')h+='<div style="font-size:10px;color:#888;">'+esc(x.evo_type||'')+' · Tier '+esc(x.tier||'?')+'</div>';
+    if(type==='talent'){h+='<div style="font-size:10px;color:#888;">'+esc(x.skill||'')+(x.category?' · '+esc(x.category):'')+'  —  '+(x.cost||0)+' XP</div>';if(x.effect)h+='<div style="font-size:10px;color:#aaa;margin-top:3px;line-height:1.4;white-space:pre-wrap;">'+esc(x.effect)+'</div>';}
+    else if(type==='evolution'){h+='<div style="font-size:10px;color:#888;">'+esc(x.evo_type||'')+' · Tier '+esc(x.tier||'?')+'</div>';if(x.effect)h+='<div style="font-size:10px;color:#aaa;margin-top:3px;line-height:1.4;white-space:pre-wrap;">'+esc(x.effect)+'</div>';}
     else if(type==='weapon'){
       const xw=applyWpnMfr({...x},pickerMfr)||x;
       const dmgChg=pickerMfr!=='Generic'&&xw.damage!==x.damage;
@@ -9137,11 +9152,11 @@ function ccRenderIdentity(){
     occBonus.forEach((pair,pi)=>{
       const isChosen=chosen===pi;
       const label=pair.map(s=>s.replace(/_/g,' ')).join(' + ');
-      h+='<button onclick="ccState.occupation_bonus_choice='+pi+';render();" style="display:block;width:100%;text-align:left;margin-bottom:4px;background:'+(isChosen?'rgba(255,107,53,.25)':'rgba(0,0,0,.3)')+';border:1px solid '+(isChosen?'var(--a2)':'rgba(255,255,255,.1)')+';color:'+(isChosen?'var(--a2)':'#aaa')+';padding:5px 9px;border-radius:3px;cursor:pointer;font-size:11px;">'+(isChosen?'✓ ':'')+esc(label)+'</button>';
+      h+='<button onclick="ccApplyOccBonus('+pi+');render();" style="display:block;width:100%;text-align:left;margin-bottom:4px;background:'+(isChosen?'rgba(255,107,53,.25)':'rgba(0,0,0,.3)')+';border:1px solid '+(isChosen?'var(--a2)':'rgba(255,255,255,.1)')+';color:'+(isChosen?'var(--a2)':'#aaa')+';padding:5px 9px;border-radius:3px;cursor:pointer;font-size:11px;">'+(isChosen?'✓ ':'')+esc(label)+'</button>';
     });
     if(chosen!==null&&chosen!==undefined){
       const pickedPair=occBonus[chosen].map(s=>s.replace(/_/g,' ')).join(' + ');
-      h+='<div style="font-size:9px;color:var(--a2);margin-top:2px;">SMALL bonus to: '+esc(pickedPair)+' — reminder only, not enforced mechanically</div>';
+      h+='<div style="font-size:9px;color:var(--a2);margin-top:2px;">SMALL bonus (+1) applied to: '+esc(pickedPair)+' — reflected in Skills tab</div>';
     }
     h+='</div>';
   }
@@ -9308,6 +9323,21 @@ function ccRenderAttributes(){
     h+='<div><div style="font-size:10px;color:#888;margin-bottom:2px;">'+lbl+'</div><input type="text" value="'+esc(st[k]||'')+'" placeholder="e.g. 4" style="'+CC_INP+'" oninput="ccState[\''+k+'\']=this.value;"></div>';
   });
   h+='</div></div></div>';
+  // T4-B: Active evolution attribute notes
+  const ATTR_KEYWORDS=['PHYSICAL','MENTAL','SOCIAL','ACUITY','ENDURANCE','SPEED','WITS','WILLPOWER','ATTRIBUTE','attribute'];
+  const evoAttrNotes=st.evolutions.filter(e=>e.name&&e.effect&&ATTR_KEYWORDS.some(kw=>e.effect.includes(kw)));
+  if(evoAttrNotes.length){
+    h+=ccSecHead('EVOLUTION ATTRIBUTE NOTES','var(--a3)');
+    h+='<div style="font-size:10px;color:#888;margin-bottom:6px;">Active evolutions with attribute effects (display only — apply bonuses manually in the table above).</div>';
+    h+='<div style="display:flex;flex-direction:column;gap:6px;">';
+    evoAttrNotes.forEach(e=>{
+      h+='<div style="background:rgba(168,85,247,.07);border:1px solid rgba(168,85,247,.25);border-radius:4px;padding:7px 10px;">';
+      h+='<div style="font-size:11px;color:var(--a3);font-weight:bold;margin-bottom:3px;">'+esc(e.name)+(e.tier?' <span style="font-size:9px;color:#888;">'+esc(e.tier)+'</span>':'')+'</div>';
+      h+='<div style="font-size:10px;color:#bbb;line-height:1.4;">'+esc(e.effect)+'</div>';
+      h+='</div>';
+    });
+    h+='</div>';
+  }
   return h;
 }
 
@@ -9368,7 +9398,10 @@ function ccRenderSkills(){
       h+='<input type="number" min="'+floor+'" max="10" value="'+v+'" style="width:40px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.22);color:var(--tx);padding:2px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:13px;" onclick="event.stopPropagation();" onchange="ccState[\''+sk+'\']=Math.max(ccGetSkillFloor(\''+sk+'\'),Math.min(10,+this.value||0));render();">';
       h+='<div style="flex:1;cursor:pointer;" onclick="ccToggleSkillExpand(\''+sk+'\');">';
       h+='<div style="font-size:11px;color:'+(isBgGrant?'var(--ye)':'var(--tx)')+';">'+sk.replace(/_/g,' ')+(isBgGrant?'<span style="font-size:9px;color:var(--ye);margin-left:3px;">BG</span>':'')+'</div>';
-      h+='<div style="font-size:9px;color:#555;">'+cost+' xp'+(v<10?' | +'+(v+1)+' next':'')+(skBonus!==0?' | '+skBonusLbl:'')+' | ▸</div>';
+      const isOccBonus=st.occ_bonus_skills&&st.occ_bonus_skills.includes(sk);
+      const skPill=skBonus!==0?'<span style="background:'+(isOccBonus?'var(--a2)':(skBonus>0?'var(--gr)':'var(--re)'))+';color:#000;border-radius:2px;padding:0 3px;font-size:8px;font-weight:bold;margin-left:3px;">'+(isOccBonus?'OCC ':'')+skBonusLbl+'</span>':'';
+      const critPill=skCrit!=='10'?'<span style="background:var(--ye);color:#000;border-radius:2px;padding:0 3px;font-size:8px;font-weight:bold;margin-left:3px;">◆'+skCrit+'</span>':'';
+      h+='<div style="font-size:9px;color:#555;">'+cost+' xp'+(v<10?' | +'+(v+1)+' next':'')+skPill+critPill+' | ▸</div>';
       h+='</div></div>';
       if(expanded){
         h+='<div style="padding:5px 8px;background:rgba(0,0,0,.25);border-top:1px solid rgba(255,255,255,.06);">';
@@ -9710,6 +9743,23 @@ function ccRenderCombat(){
   h+='<div style="display:flex;gap:10px;align-items:center;margin-top:8px;"><span style="font-size:11px;color:#888;">Base Soak:</span>';
   h+='<input type="text" placeholder="expr e.g. 3D" value="'+esc(st.armorsoak||'')+'" style="width:90px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.2);color:var(--tx);padding:3px 5px;font-size:11px;" oninput="ccState.armorsoak=this.value;">';
   h+='<input type="number" placeholder="+bonus" value="'+(+(st.armorsoak_bonus)||0)+'" style="width:60px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.2);color:var(--tx);padding:3px 5px;font-size:11px;" oninput="ccState.armorsoak_bonus=+this.value||0;"></div>';
+  // T4-C: Background combat/vulnerability notes
+  if(st.background){
+    const bgObj=(g.backgrounds||[]).find(b=>b.name===st.background);
+    if(bgObj&&bgObj.traits&&bgObj.traits.length){
+      h+=ccSecHead('BACKGROUND COMBAT NOTES — '+esc(st.background),'var(--ye)');
+      const traitLabels=['BENEFIT 1','BENEFIT 2','DRAWBACK'];
+      const traitBord=['rgba(0,200,100,.3)','rgba(0,200,100,.2)','rgba(255,80,80,.3)'];
+      const traitBg=['rgba(0,200,100,.06)','rgba(0,200,100,.04)','rgba(255,80,80,.08)'];
+      const traitCol=['var(--gr)','var(--gr)','var(--re)'];
+      bgObj.traits.forEach((tr,ti)=>{
+        h+='<div style="background:'+( traitBg[ti]||traitBg[2])+';border:1px solid '+(traitBord[ti]||traitBord[2])+';border-radius:4px;padding:7px 10px;margin-bottom:5px;">';
+        h+='<div style="font-size:9px;color:'+(traitCol[ti]||'var(--re)')+';font-family:\'Orbitron\',sans-serif;margin-bottom:3px;">'+(traitLabels[ti]||'TRAIT '+(ti+1))+'</div>';
+        h+='<div style="font-size:10px;color:#bbb;line-height:1.4;">'+esc(tr)+'</div>';
+        h+='</div>';
+      });
+    }
+  }
   return h;
 }
 
