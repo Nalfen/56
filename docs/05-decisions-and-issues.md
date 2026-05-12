@@ -64,3 +64,16 @@
 ~~#### Mono-Med Customs availability uses wrong logic~~ — **Fixed (5.0)**
 
 ~~#### Size changes not shown in picker previews~~ — **Fixed (5.0 + 5.1)**
+
+#### Character creator coverage gaps — 112 mechanical effects untracked (audit 2026-05-12)
+
+Full audit of `g.backgrounds`, `g.occupations`, `g.talents`, `g.evolutions.entries` found 112 effects described in game data that are not surfaced or stored in the CC. Tracked in `work/6.0/`. Summary:
+
+| Category | Count | Example gaps |
+|---|---|---|
+| Backgrounds | 24 | Racial max reductions, resource locks (CHI=0, SURGE=0), damage vulnerabilities |
+| Occupations | 17 | Every occupation has a "SMALL bonus to one of two skill pairs" — never presented or stored |
+| Talents | 31 | Passive/conditional combat bonuses and skill bonuses — display only needed |
+| Evolutions | 40 | Tier passive bonuses (attribute, defense, skill) — partially trackable |
+
+Tiers 1–3 (display improvements + occupation bonus choice + resource locks) are feasible and scheduled for Milestone 6.0. Tiers 4–5 are deferred/backlog.
