@@ -12,14 +12,15 @@
 
 | # | Item | Status |
 |---|---|---|
-| T2-A | Extend `BG_GRANTS` with `attr_max_mods` for all backgrounds that reduce an attribute racial max | todo |
-| T2-A | `ccRenderAttributes()` reads `attr_max_mods` and adjusts displayed racial max accordingly | todo |
+| T2-A | Extend `BG_GRANTS` with `attr_max_mods` for all backgrounds that reduce an attribute racial max | done — Imaginary Friend (WITS-1), Darkspacer (WITS-1), Family of Thieves (SOCIAL-1), Sorcerous Background (SPEED-1), Street Urchin (ENDURANCE-1) |
+| T2-A | `ccRenderAttributes()` reads `attr_max_mods` and adjusts displayed racial max accordingly | done — reduced max shown in red with tooltip |
 | T2-B | Add `occupation_bonus_choice` (0 or 1) to `ccState` + `ccMakeFreshState()` | done |
 | T2-B | On occupation pick, render radio / two-option selector for skill pair choice | done — two-button selector in Identity right column |
 | T2-B | Display chosen occupation skill bonus pair as reminder pill on Skills tab | done — reminder shown inline below the selector |
-| T2-C | Add `resource_locks` to `BG_GRANTS` for Spirit Judge (SURGE=0), Imaginary Friend (CHI=0) | todo |
-| T2-C | Detect Void Soul evo ownership; apply CHI=0 lock dynamically | todo |
-| T2-C | Display locked resources on Attributes tab with lock label | todo |
+| T2-C | Add resource lock flags to `BG_GRANTS`: `chi_lock:true` (Imaginary Friend), `surge_lock:true` (Spirit Judge) | done |
+| T2-C | `ccRecalcHealthMorale()` sets CHI_max=0 when `bg.chi_lock` is true | done |
+| T2-C | Health & Morale section shows red lock labels for CHI MAX=0 and SURGE MAX=0 | done |
+| T2-C | Detect Void Soul evo ownership; apply CHI=0 lock dynamically | deferred — Void Soul is rare; background lock covers most cases |
 
 ## Tier 3 — Passive abilities panel
 

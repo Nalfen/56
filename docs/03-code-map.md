@@ -234,6 +234,17 @@ Last entry always has `sysRegex: null` (catches unmatched systems as "Others").
 |---|---|
 | `OCC_BONUS` | Dict of occupation name → `[[skillA, skillB], [skillC, skillD]]` — the two skill-pair options the player chooses from at character creation for a SMALL passive bonus |
 
+### BG_GRANTS extended fields (Milestone 6.0)
+
+| Field | Type | Purpose |
+|---|---|---|
+| `attr_max_mods` | `{ATTR: number}` | Reduces displayed racial max for named attributes; shown in red with tooltip in `ccRenderAttributes()` |
+| `chi_lock` | `true` | Sets CHI_max to 0 in `ccRecalcHealthMorale()`; shown as red label in Health section |
+| `surge_lock` | `true` | Display-only: shows "SURGE MAX locked at 0" label; SURGE not tracked in ccState |
+
+Backgrounds with `attr_max_mods`: Imaginary Friend (WITS−1), Darkspacer (WITS−1), Family of Thieves (SOCIAL−1), Sorcerous Background (SPEED−1), Street Urchin (ENDURANCE−1).
+Backgrounds with resource locks: Imaginary Friend (`chi_lock`), Spirit Judge (`surge_lock`).
+
 ---
 
 ## Character Creator state (`ccState`) — key fields

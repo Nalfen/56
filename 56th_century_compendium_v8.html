@@ -8317,10 +8317,10 @@ const BG_GRANTS={
   'Genome Soldier':{choice_skills:[{count:2,options:['Heavy_Weapons','Martial_Arts','Piloting','Tactics'],rank:5,label:'Choose 2 combat skills at rank 5'}],attrs:{PHYSICAL:1,ACUITY:1,ENDURANCE:1,WILLPOWER:1}},
   'Drifter':{all_skills:2},
   'Deep space explorer':{attrs:{WILLPOWER:1}},
-  'Darkspacer':{attrs:{ENDURANCE:1},talents:[{name:'Home field advantage'}]},
-  'Family of thieves':{attrs:{ACUITY:1},choice_talents:[{count:1,options:['Pack Rat','Mugging','Fake News','Rolling with the punches'],label:'Choose 1 talent (Family of thieves)'}]},
-  'Sorcerous background':{attrs:{WITS:1},chi:2},
-  'Imaginary friend':{attrs:{ACUITY:1}},
+  'Darkspacer':{attrs:{ENDURANCE:1},talents:[{name:'Home field advantage'}],attr_max_mods:{WITS:-1}},
+  'Family of thieves':{attrs:{ACUITY:1},choice_talents:[{count:1,options:['Pack Rat','Mugging','Fake News','Rolling with the punches'],label:'Choose 1 talent (Family of thieves)'}],attr_max_mods:{SOCIAL:-1}},
+  'Sorcerous background':{attrs:{WITS:1},chi:2,attr_max_mods:{SPEED:-1}},
+  'Imaginary friend':{attrs:{ACUITY:1},attr_max_mods:{WITS:-1},chi_lock:true},
   'Warrior of Titan':{attrs:{ENDURANCE:1}},
   'Bonded laborer':{attrs:{ENDURANCE:1,PHYSICAL:1,WILLPOWER:1},talents:[{name:'Very Strong'}]},
   'Pit Slave':{health:2,morale:2,talents:[{name:'Brutal fighter'},{name:'Akimbo'}]},
@@ -8336,6 +8336,8 @@ const BG_GRANTS={
   'Assassin':{talents:[{name:'Assassination'}]},
   'Fledgeling AI':{evos:[{name:'Skill imprinting',tier:'TIER I',free:true},{name:'Skill imprinting',tier:'TIER II',free:true}]},
   'Subject 0056':{no_racial_max:true},
+  'Street urchin':{attr_max_mods:{ENDURANCE:-1}},
+  'Spirit Judge':{surge_lock:true},
 };
 
 // Occupation skill-bonus pairs — player picks one pair at character creation (SMALL passive bonus)
@@ -8417,7 +8419,7 @@ function ccRecalcHealthMorale(){
   const st=ccState;const bg=BG_GRANTS[st.background]||{};
   st.HEALTH_max=10+(+(st.ENDURANCE_perm)||0)+(+(st.ENDURANCE_bonus)||0)+(bg.health||0);
   st.MORALE_max=10+(+(st.WILLPOWER_perm)||0)+(+(st.WILLPOWER_bonus)||0)+(bg.morale||0);
-  st.CHI_max=5+(bg.chi||0);
+  st.CHI_max=bg.chi_lock?0:5+(bg.chi||0);
 }
 
 function ccSetAttrPerm(ab,val){
@@ -9254,7 +9256,9 @@ function ccRenderAttributes(){
         const isNB=st.clone===false&&st.nb_rolled;
         const PRIMARY_ATTRS_RK=['physical','mental','social','acuity'];
         const rk=CC_ATTR_RK[ab];
-        const noMax=(BG_GRANTS[st.background]||{}).no_racial_max;
+        const bgGrant=BG_GRANTS[st.background]||{};
+        const noMax=bgGrant.no_racial_max;
+        const attrMod=(bgGrant.attr_max_mods&&bgGrant.attr_max_mods[ab])||0;
         let minV=esc(rs.min),maxV=esc(rs.max);
         if(isNB&&PRIMARY_ATTRS_RK.includes(rk)&&st.attr_variance[ab]){
           const v=st.attr_variance[ab];
@@ -9262,6 +9266,7 @@ function ccRenderAttributes(){
           maxV='<span style="color:var(--a3);">'+(+(rs.max||0)+(v.maxVar||0))+'</span>';
         }
         if(noMax)maxV='<span style="color:var(--ye);" title="No racial maximum (Subject 0056)">∞</span>';
+        else if(attrMod){const adjMax=+(rs.max||0)+(isNB&&PRIMARY_ATTRS_RK.includes(rk)&&st.attr_variance[ab]?(st.attr_variance[ab].maxVar||0):0)+attrMod;maxV='<span style="color:var(--re);" title="Racial max reduced by background ('+attrMod+')">'+adjMax+'</span>';}
         h+=minV+' / <b style="color:var(--a);">'+esc(rs.avg)+'</b> / '+maxV;
       } else {
         h+='<span style="color:#444;">—</span>';
@@ -9287,11 +9292,13 @@ function ccRenderAttributes(){
     }
     h+='</div>';
   });
-  if(bg_obj.health||bg_obj.morale||bg_obj.chi){
-    h+='<div style="grid-column:1/-1;font-size:10px;color:var(--ye);">Background bonus: ';
+  if(bg_obj.health||bg_obj.morale||bg_obj.chi||bg_obj.chi_lock||bg_obj.surge_lock){
+    h+='<div style="grid-column:1/-1;font-size:10px;color:var(--ye);">Background: ';
     if(bg_obj.health)h+='+'+bg_obj.health+' HP ';
     if(bg_obj.morale)h+='+'+bg_obj.morale+' Morale ';
     if(bg_obj.chi)h+='+'+bg_obj.chi+' CHI ';
+    if(bg_obj.chi_lock)h+='<span style="color:var(--re);">CHI MAX locked at 0 </span>';
+    if(bg_obj.surge_lock)h+='<span style="color:var(--re);">SURGE MAX locked at 0 </span>';
     h+='</div>';
   }
   h+='</div></div>';
