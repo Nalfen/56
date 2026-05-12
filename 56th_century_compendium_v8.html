@@ -8342,38 +8342,89 @@ const BG_GRANTS={
 
 // Occupation skill-bonus pairs — player picks one pair at character creation (SMALL passive bonus)
 const OCC_BONUS={
-  'Arms collector':     [['Gunslinger','Engineering'],['Marksman','Technology']],
-  'Bartender':         [['Charm','Subterfuge'],['Flair','Etiquette']],
-  'Bounty Hunter':     [['Intimidation','Martial_Arts'],['Cyberintel','Gunslinger']],
-  'Corporate':         [['Leadership','Etiquette'],['Technology','Intuition']],
-  'Diplomat':          [['Charm','Subterfuge'],['Negotiation','Etiquette']],
-  'Drug Dealer':       [['Science','Academic'],['Scavenging','Medicine']],
-  'Entertainer':       [['Flair','Etiquette'],['Acting','Charm']],
-  'Explorer':          [['Survival','Marksman'],['Scavenging','Gunslinger']],
-  'Hooverboard Pro':   [['Piloting','Flair'],['Athletic','Navigation']],
-  'Investigator':      [['Subterfuge','Search'],['Concealment','Streetwise']],
-  'Law enforcement':   [['Intimidation','Martial_Arts'],['Academics','Streetwise']],
-  'Outlaw':            [['Subterfuge','Concealment'],['Streetwise','Dexterity']],
-  'Scientific':        [['Medicine','Science'],['Academic','Galactic_Knowledge']],
-  'Trader':            [['Negotiation','Charm'],['Scavenging','Streetwise']],
-  'Transporter':       [['Piloting','Etiquette'],['Negotiation','Journeyman']],
-  'Virtual Activist':  [['Cyberintel','Hacking'],['Technology','Operator']],
-  'Worker':            [['Journeyman','Scavenging'],['Science','Engineering']],
+  // Standard: pick one of two pairs (user chooses)
+  'Arms collector':          [['Gunslinger','Engineering'],['Marksman','Technology']],
+  'Auctionneer':             [['Galactic_Knowledge','Negotiation'],['Academics','Charm']],
+  'Bartender':               [['Charm','Subterfuge'],['Flair','Etiquette']],
+  'Bounty Hunter':           [['Intimidation','Martial_Arts'],['Cyberintel','Gunslinger']],
+  'Corporate':               [['Leadership','Etiquette'],['Technology','Intuition']],
+  'Corporate Thief':         [['Hacking','Subterfuge'],['Dexterity','Technology']],
+  'Diplomat':                [['Charm','Subterfuge'],['Negotiation','Etiquette']],
+  'Drug Dealer':             [['Science','Academics'],['Scavenging','Medicine']],
+  'Entertainer':             [['Flair','Etiquette'],['Acting','Charm']],
+  'Explorer':                [['Survival','Marksman'],['Scavenging','Gunslinger']],
+  'Fortuneteller':           [['Spiritual','Intuition'],['Subterfuge','Binding']],
+  'Hooverboard Pro':         [['Piloting','Flair'],['Athletics','Navigation']],
+  'Influencer':              [['Etiquette','Galactic_Knowledge'],['Charm','Subterfuge']],
+  'Investigator':            [['Subterfuge','Search'],['Concealment','Streetwise']],
+  'Junker':                  [['Scavenging','Navigation'],['Repair','Resilience']],
+  'Law enforcement':         [['Intimidation','Martial_Arts'],['Academics','Streetwise']],
+  'Life Extension Technician':[['Medicine','Etiquette'],['Technology','Science']],
+  'Mercenary':               [['Heavy_Weapons','Martial_Arts'],['Concealment','Marksman']],
+  'Nova Canon Operator':     [['Engineering','Technology'],['Heavy_Weapons','Tactics']],
+  'Outlaw':                  [['Subterfuge','Concealment'],['Streetwise','Dexterity']],
+  'Pilot':                   [['Piloting','Navigation'],['Survival','Repair']],
+  'Pyromaniac':              [['Engineering','Scavenging'],['Technology','Heavy_Weapons']],
+  'Ripperdoc':               [['Science','Medicine'],['Technology','Scavenging']],
+  'Scientific':              [['Medicine','Science'],['Academics','Galactic_Knowledge']],
+  'Trader':                  [['Negotiation','Charm'],['Scavenging','Streetwise']],
+  'Transporter':             [['Piloting','Etiquette'],['Negotiation','Craft']],
+  'TRONIK disposal specialist':[['Hacking','Cyberintel'],['Technology','Operator']],
+  'Virtual Activist':        [['Cyberintel','Hacking'],['Technology','Operator']],
+  'Worker':                  [['Craft','Scavenging'],['Science','Engineering']],
+  // Fixed: auto-applied when occupation is selected (no player choice)
+  'Ex. Cultist':             {fixed:['Charm','Intimidation','Intuition']},
+  // Pick N from list (player picks exactly N)
+  'Soldier':                 {pick:2,from:['Heavy_Weapons','Tactics','Marksman','Engineering']},
+  // Fixed skills auto-applied + pick 1 from options
+  'Mage':                    {fixed:['Spiritual','Binding'],pick:1,from:['Intuition','Resilience']},
 };
 
-function ccApplyOccBonus(pi){
+function ccApplyOccBonus(pi,newPicks){
   const st=ccState;
-  // Remove bonus from previously-chosen pair
   (st.occ_bonus_skills||[]).forEach(sk=>{if(st[sk+'_bonus']===1)st[sk+'_bonus']=0;});
   st.occ_bonus_skills=[];
   st.occupation_bonus_choice=null;
-  if(pi===null||pi===undefined)return;
-  const pairs=OCC_BONUS[st.occupation];
-  if(!pairs||!pairs[pi])return;
-  const pair=pairs[pi].map(s=>s.replace(/ /g,'_'));
-  pair.forEach(sk=>{if(st[sk+'_bonus']===0)st[sk+'_bonus']=1;});
-  st.occ_bonus_skills=pair;
-  st.occupation_bonus_choice=pi;
+  const entry=OCC_BONUS[st.occupation];
+  if(!entry){st.occ_bonus_picks=[];return;}
+  if(pi===null&&!entry.fixed){st.occ_bonus_picks=[];return;}
+  if(Array.isArray(entry)){
+    if(pi===null||!entry[pi])return;
+    entry[pi].forEach(s=>{if(st[s+'_bonus']===0)st[s+'_bonus']=1;});
+    st.occ_bonus_skills=entry[pi];
+    st.occupation_bonus_choice=pi;
+  } else if(entry.fixed&&!entry.pick){
+    entry.fixed.forEach(s=>{if(st[s+'_bonus']===0)st[s+'_bonus']=1;});
+    st.occ_bonus_skills=[...entry.fixed];
+    st.occupation_bonus_choice=0;
+  } else if(!entry.fixed&&entry.pick){
+    const picks=newPicks!==undefined?newPicks:(st.occ_bonus_picks||[]);
+    st.occ_bonus_picks=picks;
+    picks.forEach(s=>{if(st[s+'_bonus']===0)st[s+'_bonus']=1;});
+    st.occ_bonus_skills=[...picks];
+    if(picks.length>=entry.pick)st.occupation_bonus_choice=0;
+  } else if(entry.fixed&&entry.pick){
+    entry.fixed.forEach(s=>{if(st[s+'_bonus']===0)st[s+'_bonus']=1;});
+    st.occ_bonus_skills=[...entry.fixed];
+    if(pi!==null&&pi!==undefined&&entry.from&&entry.from[pi]){
+      const choiceSk=entry.from[pi];
+      if(st[choiceSk+'_bonus']===0)st[choiceSk+'_bonus']=1;
+      st.occ_bonus_skills.push(choiceSk);
+      st.occupation_bonus_choice=pi;
+    }
+  }
+}
+
+function ccToggleOccPick(sk){
+  const st=ccState;
+  const entry=OCC_BONUS[st.occupation];
+  if(!entry||Array.isArray(entry)||entry.fixed)return;
+  let picks=[...(st.occ_bonus_picks||[])];
+  const idx=picks.indexOf(sk);
+  if(idx>=0)picks.splice(idx,1);
+  else if(picks.length<entry.pick)picks.push(sk);
+  ccApplyOccBonus(0,picks);
+  render();
 }
 
 function ccMakeFreshState(){
@@ -8405,7 +8456,7 @@ function ccMakeFreshState(){
     datacoms:Array(3).fill(0).map(()=>({name:'',cpu:0,mem:0,nanite:0,def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',def_dmg:'',int_ext:0,int_int:0,int_main:0,expertise:0,special:'',mfr:'Generic',base_data:null,options:[]})),
     programs:Array(10).fill(0).map(()=>({name:'',type:'',cpu:0,mem:0,passive:'',active:''})),
     gadgets:Array(5).fill(0).map(()=>({name:'',nanite:0,effect:''})),
-    occupation_bonus_choice:null,occ_bonus_skills:[],
+    occupation_bonus_choice:null,occ_bonus_skills:[],occ_bonus_picks:[],
     credits:0,credits_spent:0,gear_cat_filter:'',gear_search:'',med_mfr_filter:'Generic',med_search:'',
     spells:Array(16).fill(0).map(()=>({name:'',domain:''})),
     items:Array(20).fill(0).map(()=>({name:'',size:'0',qty:1})),
@@ -9144,19 +9195,45 @@ function ccRenderIdentity(){
   }
   h+=ccLbl('Background Notes','<textarea style="'+CC_INP+'height:70px;resize:vertical;" oninput="ccState.background_desc=this.value;">'+esc(st.background_desc||'')+'</textarea>');
   // Occupation skill bonus choice
-  const occBonus=OCC_BONUS[st.occupation];
-  if(occBonus){
+  const occBonusEntry=OCC_BONUS[st.occupation];
+  if(occBonusEntry){
     const chosen=st.occupation_bonus_choice;
+    const picks=st.occ_bonus_picks||[];
     h+='<div style="margin-bottom:8px;background:rgba(255,107,53,.06);border:1px solid rgba(255,107,53,.25);border-radius:4px;padding:8px;">';
-    h+='<div style="font-size:10px;color:var(--a2);margin-bottom:6px;font-family:\'Orbitron\',sans-serif;">OCCUPATION BONUS — Choose one skill pair (SMALL passive bonus)</div>';
-    occBonus.forEach((pair,pi)=>{
-      const isChosen=chosen===pi;
-      const label=pair.map(s=>s.replace(/_/g,' ')).join(' + ');
-      h+='<button onclick="ccApplyOccBonus('+pi+');render();" style="display:block;width:100%;text-align:left;margin-bottom:4px;background:'+(isChosen?'rgba(255,107,53,.25)':'rgba(0,0,0,.3)')+';border:1px solid '+(isChosen?'var(--a2)':'rgba(255,255,255,.1)')+';color:'+(isChosen?'var(--a2)':'#aaa')+';padding:5px 9px;border-radius:3px;cursor:pointer;font-size:11px;">'+(isChosen?'✓ ':'')+esc(label)+'</button>';
-    });
-    if(chosen!==null&&chosen!==undefined){
-      const pickedPair=occBonus[chosen].map(s=>s.replace(/_/g,' ')).join(' + ');
-      h+='<div style="font-size:9px;color:var(--a2);margin-top:2px;">SMALL bonus (+1) applied to: '+esc(pickedPair)+' — reflected in Skills tab</div>';
+    if(Array.isArray(occBonusEntry)){
+      h+='<div style="font-size:10px;color:var(--a2);margin-bottom:6px;font-family:\'Orbitron\',sans-serif;">OCCUPATION BONUS — Choose one skill pair</div>';
+      occBonusEntry.forEach((pair,pi)=>{
+        const isChosen=chosen===pi;
+        const label=pair.map(s=>s.replace(/_/g,' ')).join(' + ');
+        h+='<button onclick="ccApplyOccBonus('+pi+');render();" style="display:block;width:100%;text-align:left;margin-bottom:4px;background:'+(isChosen?'rgba(255,107,53,.25)':'rgba(0,0,0,.3)')+';border:1px solid '+(isChosen?'var(--a2)':'rgba(255,255,255,.1)')+';color:'+(isChosen?'var(--a2)':'#aaa')+';padding:5px 9px;border-radius:3px;cursor:pointer;font-size:11px;">'+(isChosen?'✓ ':'')+esc(label)+'</button>';
+      });
+      if(chosen!==null&&chosen!==undefined){
+        const pickedPair=occBonusEntry[chosen].map(s=>s.replace(/_/g,' ')).join(' + ');
+        h+='<div style="font-size:9px;color:var(--a2);margin-top:2px;">SMALL bonus (+1) applied to: '+esc(pickedPair)+' — reflected in Skills tab</div>';
+      }
+    } else if(occBonusEntry.fixed&&!occBonusEntry.pick){
+      h+='<div style="font-size:10px;color:var(--gr);margin-bottom:4px;font-family:\'Orbitron\',sans-serif;">✓ OCCUPATION BONUS — Auto-applied</div>';
+      h+='<div style="font-size:10px;color:#bbb;">SMALL bonus on: '+occBonusEntry.fixed.map(s=>esc(s.replace(/_/g,' '))).join(', ')+'</div>';
+    } else if(!occBonusEntry.fixed&&occBonusEntry.pick){
+      h+='<div style="font-size:10px;color:var(--a2);margin-bottom:6px;font-family:\'Orbitron\',sans-serif;">OCCUPATION BONUS — Pick '+occBonusEntry.pick+' skills ('+picks.length+'/'+occBonusEntry.pick+' selected)</div>';
+      h+='<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:4px;">';
+      occBonusEntry.from.forEach(sk=>{
+        const isSel=picks.includes(sk);
+        const canPick=!isSel&&picks.length<occBonusEntry.pick;
+        h+='<button onclick="ccToggleOccPick(\''+sk+'\');" style="background:'+(isSel?'rgba(255,107,53,.3)':'rgba(0,0,0,.3)')+';border:1px solid '+(isSel?'var(--a2)':'rgba(255,255,255,.15)')+';color:'+(isSel?'var(--a2)':(canPick?'#aaa':'#555'))+';padding:4px 10px;border-radius:3px;cursor:'+(canPick||isSel?'pointer':'default')+';font-size:11px;">'+(isSel?'✓ ':'')+esc(sk.replace(/_/g,' '))+'</button>';
+      });
+      h+='</div>';
+      if(picks.length===occBonusEntry.pick)h+='<div style="font-size:9px;color:var(--a2);margin-top:2px;">SMALL bonus (+1) applied to: '+picks.map(s=>esc(s.replace(/_/g,' '))).join(' + ')+'</div>';
+      else h+='<div style="font-size:9px;color:var(--ye);margin-top:2px;">Select '+(occBonusEntry.pick-picks.length)+' more skill'+(occBonusEntry.pick-picks.length>1?'s':'')+'  to complete</div>';
+    } else if(occBonusEntry.fixed&&occBonusEntry.pick){
+      h+='<div style="font-size:10px;color:var(--a2);margin-bottom:6px;font-family:\'Orbitron\',sans-serif;">OCCUPATION BONUS — Fixed skills + choose one</div>';
+      h+='<div style="font-size:10px;color:var(--gr);margin-bottom:5px;">✓ Auto-applied: '+occBonusEntry.fixed.map(s=>esc(s.replace(/_/g,' '))).join(', ')+'</div>';
+      h+='<div style="font-size:10px;color:#888;margin-bottom:4px;">Additionally, choose one:</div>';
+      occBonusEntry.from.forEach((sk,si)=>{
+        const isChosen=chosen===si;
+        h+='<button onclick="ccApplyOccBonus('+si+');render();" style="display:inline-block;margin-right:4px;margin-bottom:4px;background:'+(isChosen?'rgba(255,107,53,.25)':'rgba(0,0,0,.3)')+';border:1px solid '+(isChosen?'var(--a2)':'rgba(255,255,255,.1)')+';color:'+(isChosen?'var(--a2)':'#aaa')+';padding:4px 10px;border-radius:3px;cursor:pointer;font-size:11px;">'+(isChosen?'✓ ':'')+esc(sk.replace(/_/g,' '))+'</button>';
+      });
+      if(chosen!==null&&chosen!==undefined)h+='<div style="font-size:9px;color:var(--a2);margin-top:2px;">SMALL bonus (+1) on: '+[...occBonusEntry.fixed,...(chosen!==null?[occBonusEntry.from[chosen]]:[])].map(s=>esc(s.replace(/_/g,' '))).join(', ')+'</div>';
     }
     h+='</div>';
   }
