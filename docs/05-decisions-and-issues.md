@@ -14,6 +14,8 @@
 | 8 | Melee-only manufacturers use restricted category set | `WPN_MFRS_MELEE_ONLY` (Dilithium, Monomolecular) filter picker to `Melee Weapons (Martial Arts)` + `Ranged / Throwing Weapons (Dexterity)` only — Powered Melee excluded | inline |
 | 9 | Data field name divergence: datacoms | `g.datacoms` uses `nanites` (plural) and `def_physical`/`def_spiritual`; `ccState.datacoms[]` uses `nanite` (singular) and `def_phys`/`def_spirit`. Mapping happens in `ccPickFromCache` | inline |
 | 10 | Racial max removed for Subject 0056 | `BG_GRANTS['Subject 0056'].no_racial_max = true` causes `ccRenderAttributes()` to render `∞` instead of the racial max value | inline |
+| 13 | Attributes tab merged into Identity | Identity tab now contains origin block (top), identity fields (left col), attribute table (right col), health/morale/initiative (full-width row), and detail boxes below (background, occupation, racial traits, evo notes). Attributes tab removed from nav. | inline |
+| 14 | Picker lists sorted alphabetically | Background and occupation pickers sort by `name.localeCompare()` at render time; race select also sorted. Source arrays unchanged. | inline |
 
 ### Inline decisions
 

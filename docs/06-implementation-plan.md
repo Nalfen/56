@@ -85,6 +85,26 @@
 
 ---
 
+---
+
+## Milestone 7.0 — Identity Tab UX Refinements
+**Goal**: Restructure the Identity tab for a cleaner, less cluttered layout.
+**Status**: done
+
+| Feature | Status |
+|---|---|
+| Merge Attributes tab into Identity (eliminate standalone tab) | done |
+| Origin block (Clone/Natural Birth) at top full-width | done |
+| Left col: identity fields; Right col: full attribute table with XP costs | done |
+| Health/Morale/CHI + Initiative as full-width section below 2-col | done |
+| Racial traits (racial/evolution/environment) in own detail box below | done |
+| Background, Occupation detail boxes below (traits grid + notes) | done |
+| Evolution attribute notes box below (T4-B, display-only) | done |
+| Background and Occupation pickers sorted alphabetically | done |
+| Race selector sorted alphabetically | done |
+
+---
+
 ## Backlog (unscheduled)
 
 - Rename "armor" references throughout the character creator to "defense" for clarity → see drafts if created

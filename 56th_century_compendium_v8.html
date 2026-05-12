@@ -8974,10 +8974,10 @@ function ccRenderPicker(){
   }
   else if(type==='background'){
     const rf=st.race;
-    items=(g.backgrounds||[]).filter(b=>!rf||b.race==='ANY'||b.race===rf);
+    items=(g.backgrounds||[]).filter(b=>!rf||b.race==='ANY'||b.race===rf).slice().sort((a,b)=>a.name.localeCompare(b.name));
     title='Background'+(rf?' ('+rf+' + ANY)':'');bdr='var(--ye)';
   }
-  else if(type==='occupation'){items=g.occupations||[];title='Occupation';bdr='var(--a2)';}
+  else if(type==='occupation'){items=(g.occupations||[]).slice().sort((a,b)=>a.name.localeCompare(b.name));title='Occupation';bdr='var(--a2)';}
   const pickerMfrPre=st.picker&&st.picker.mfr||'Generic';
   const meleeOnlyMfr=type==='weapon'&&WPN_MFRS_MELEE_ONLY.has(pickerMfrPre);
   const MELEE_THROW_CATS=new Set(['Melee Weapons (Martial Arts)','Ranged / Throwing Weapons (Dexterity)']);
@@ -9150,16 +9150,18 @@ function ccRenderIdentity(){
   let h=ccRenderPicker();
   const ABS=['PHYSICAL','MENTAL','SOCIAL','ACUITY','ENDURANCE','SPEED','WITS','WILLPOWER'];
   const bgGrant=BG_GRANTS[st.background]||{};
-  // ── Two-column: Identity fields | Full attribute editor ──────────────────────
-  h+='<div style="display:grid;grid-template-columns:1fr 1.6fr;gap:18px;align-items:start;">';
-  // ── LEFT: Identity fields ───────────────────────────────────────────────────
+  // ── 1. Origin block (full width, always at top) ──────────────────────────────
+  h+=ccRenderOriginBlock();
+  // ── 2. Two-column: Identity fields | Attribute table ────────────────────────
+  h+='<div style="display:grid;grid-template-columns:1fr 1.6fr;gap:18px;align-items:start;margin-top:14px;">';
+  // ── LEFT: Identity fields ────────────────────────────────────────────────────
   h+='<div>';
   h+=ccSecHead('IDENTITY');
   h+=ccLbl('Character Name','<div style="display:flex;gap:5px;"><input type="text" value="'+esc(st.name||'')+'" style="'+CC_INP+'" oninput="ccState.name=this.value;"><button onclick="ccRandName();" style="background:rgba(0,200,255,.15);border:1px solid var(--a);color:var(--a);padding:3px 8px;border-radius:4px;cursor:pointer;font-size:11px;white-space:nowrap;">🎲</button></div>');
   h+='<div style="margin-bottom:8px;"><div style="font-size:10px;color:#888;margin-bottom:2px;">Race</div>';
   h+='<select style="'+CC_SEL.replace('font-size:11px','font-size:12px')+'padding:4px;" onchange="ccState.race=this.value;ccApplyRaceDefaults(g.races.find(r=>r.name===this.value));render();">';
   h+='<option value="">— Select race —</option>';
-  g.races.forEach(r=>{h+='<option value="'+esc(r.name)+'"'+(st.race===r.name?' selected':'')+'>'+esc(r.name)+'</option>';});
+  (g.races||[]).slice().sort((a,b)=>a.name.localeCompare(b.name)).forEach(r=>{h+='<option value="'+esc(r.name)+'"'+(st.race===r.name?' selected':'')+'>'+esc(r.name)+'</option>';});
   h+='</select></div>';
   h+=ccLbl('Occupation','<div style="display:flex;gap:5px;"><input type="text" value="'+esc(st.occupation||'')+'" style="'+CC_INP+'" oninput="ccState.occupation=this.value;"><button onclick="ccState.picker={type:\'occupation\'};ccState.pickerSearch=\'\';render();" style="background:rgba(255,107,53,.15);border:1px solid var(--a2);color:var(--a2);padding:3px 8px;border-radius:4px;cursor:pointer;font-size:11px;white-space:nowrap;">Browse</button></div>');
   h+=ccLbl('Background','<div style="display:flex;gap:5px;"><input type="text" value="'+esc(st.background||'')+'" style="'+CC_INP+'" oninput="ccState.background=this.value;"><button onclick="ccState.picker={type:\'background\'};ccState.pickerSearch=\'\';render();" style="background:rgba(255,200,0,.1);border:1px solid var(--ye);color:var(--ye);padding:3px 8px;border-radius:4px;cursor:pointer;font-size:11px;white-space:nowrap;">Browse</button></div>');
@@ -9170,7 +9172,7 @@ function ccRenderIdentity(){
   h+='</div>';
   h+=ccLbl('Notes','<textarea style="'+CC_INP+'height:55px;resize:vertical;" oninput="ccState.notes=this.value;">'+esc(st.notes||'')+'</textarea>');
   h+='</div>';
-  // ── RIGHT: Full attribute editor (replaces Attributes tab) ──────────────────
+  // ── RIGHT: Full attribute table ──────────────────────────────────────────────
   h+='<div>';
   h+=ccSecHead('ATTRIBUTES'+(st.race?' — '+esc(st.race):'')+(st.background?' · '+esc(st.background):''));
   h+='<div style="font-size:10px;color:#555;margin-bottom:6px;">Base = racial avg + bg bonus (free) · Perm = XP-purchased · Final = Perm + Bonus</div>';
@@ -9198,25 +9200,20 @@ function ccRenderIdentity(){
     const rk=CC_ATTR_RK[ab];
     h+='<tr style="border-top:1px solid rgba(255,255,255,.06);">';
     h+='<td style="padding:4px 6px;font-family:\'Orbitron\',sans-serif;font-size:10px;color:var(--a);">'+ab+'</td>';
-    // Base — read-only
     h+='<td style="padding:2px 4px;text-align:center;">';
     h+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:14px;color:'+(hasBgBonus?'var(--ye)':'var(--a3)')+';font-weight:bold;">'+base+'</div>';
     if(hasBgBonus)h+='<div style="font-size:8px;color:var(--ye);">+'+bgGrant.attrs[ab]+' bg</div>';
     h+='</td>';
-    // Perm — editable
     h+='<td style="padding:2px 3px;text-align:center;">';
     h+='<input type="number" value="'+perm+'" style="width:48px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.22);color:var(--tx);padding:2px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:12px;" onchange="ccSetAttrPerm(\''+ab+'\',this.value);">';
     if(xpCost>0)h+='<div style="font-size:8px;color:var(--a2);">'+xpCost+' xp</div>';
     h+='</td>';
-    // Bonus dropdown — short labels to save space
     h+='<td style="padding:2px 3px;"><select style="'+CC_SEL+'width:100%;" onchange="ccSetAttrBonus(\''+ab+'\',this.value);">';
     [['None',0],['+1 Small',1],['+3 Large',3],['−1 Small',-1],['−3 Large',-3]].forEach(([lbl,val])=>{
       h+='<option value="'+val+'"'+(bonus===val?' selected':'')+'>'+lbl+'</option>';
     });
     h+='</select></td>';
-    // Final
     h+='<td style="padding:2px 4px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:15px;font-weight:bold;color:var(--tx);">'+final_v+'</td>';
-    // Racial range
     if(raceObj){
       h+='<td style="padding:2px 4px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:10px;">';
       if(rs){
@@ -9235,57 +9232,48 @@ function ccRenderIdentity(){
     h+='</tr>';
   });
   h+='</table>';
-  // HP / Morale / CHI + Initiative side by side
-  h+='<div style="display:grid;grid-template-columns:1.2fr 1fr;gap:10px;margin-top:12px;">';
-  // Health & Morale block
-  h+='<div>';
+  h+='</div>';
+  h+='</div>'; // end 2-col grid
+  // ── 3. Health / Morale / CHI + Initiative — full width ──────────────────────
+  h+='<div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;margin-top:14px;">';
+  // Health & Morale
+  h+='<div style="background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:10px;">';
   h+=ccSecHead('HEALTH & MORALE');
-  h+='<div style="font-size:9px;color:#555;margin-bottom:5px;">Max HP = 10 + END · Morale = 10 + WILL · CHI = 5</div>';
-  h+='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;">';
+  h+='<div style="font-size:9px;color:#555;margin-bottom:6px;">Max HP = 10 + ENDURANCE · Max Morale = 10 + WILLPOWER · CHI = 5</div>';
+  h+='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px;">';
   const hpMax=st.HEALTH_max,mMax=st.MORALE_max,chiMax=st.CHI_max;
   [['HEALTH','var(--re)',st.HEALTH,hpMax],['MORALE','var(--a3)',st.MORALE,mMax],['CHI','var(--a)',st.CHI,chiMax]].forEach(([k,col,cur,max])=>{
-    h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:5px 5px;">';
-    h+='<div style="font-size:8px;color:'+col+';font-family:\'Orbitron\',sans-serif;margin-bottom:3px;">'+k+'</div>';
-    h+='<input type="number" value="'+cur+'" style="width:100%;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.15);color:var(--tx);padding:2px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:12px;box-sizing:border-box;" oninput="ccState[\''+k+'\']=+this.value||0;">';
-    h+='<div style="text-align:center;font-size:9px;color:#555;margin-top:2px;">max <b style="color:'+col+';">'+max+'</b></div>';
+    h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:7px 6px;">';
+    h+='<div style="font-size:9px;color:'+col+';font-family:\'Orbitron\',sans-serif;margin-bottom:4px;">'+k+'</div>';
+    h+='<input type="number" value="'+cur+'" style="width:100%;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.15);color:var(--tx);padding:3px;text-align:center;font-family:\'Share Tech Mono\',monospace;font-size:13px;box-sizing:border-box;" oninput="ccState[\''+k+'\']=+this.value||0;">';
+    h+='<div style="text-align:center;font-size:9px;color:#555;margin-top:3px;">max <b style="color:'+col+';">'+max+'</b></div>';
     h+='</div>';
   });
   h+='</div>';
   if(bgGrant.chi_lock||bgGrant.surge_lock){
-    h+='<div style="font-size:9px;margin-top:4px;">';
-    if(bgGrant.chi_lock)h+='<span style="color:var(--re);">⛔ CHI locked at 0</span> ';
-    if(bgGrant.surge_lock)h+='<span style="color:var(--re);">⛔ SURGE locked at 0</span>';
+    h+='<div style="font-size:9px;margin-top:5px;">';
+    if(bgGrant.chi_lock)h+='<span style="color:var(--re);">⛔ CHI locked at 0 (background)</span> ';
+    if(bgGrant.surge_lock)h+='<span style="color:var(--re);">⛔ SURGE locked at 0 (background)</span>';
     h+='</div>';
   }
   if(bgGrant.health||bgGrant.morale||bgGrant.chi){
-    h+='<div style="font-size:9px;color:var(--ye);margin-top:3px;">';
+    h+='<div style="font-size:9px;color:var(--ye);margin-top:4px;">';
     if(bgGrant.health)h+='+'+bgGrant.health+' HP ';
     if(bgGrant.morale)h+='+'+bgGrant.morale+' Morale ';
     if(bgGrant.chi)h+='+'+bgGrant.chi+' CHI ';
-    h+='(bg)</div>';
+    h+='from background</div>';
   }
   h+='</div>';
-  // Initiative block
-  h+='<div>';
+  // Initiative
+  h+='<div style="background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:10px;">';
   h+=ccSecHead('INITIATIVE');
-  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;">';
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;">';
   [['init_move','Move'],['init_standard','Standard'],['init_quick','Quick'],['init_complex','Complex']].forEach(([k,lbl])=>{
     h+='<div><div style="font-size:9px;color:#777;margin-bottom:2px;">'+lbl+'</div><input type="text" value="'+esc(st[k]||'')+'" placeholder="e.g. 4" style="'+CC_INP+'" oninput="ccState[\''+k+'\']=this.value;"></div>';
   });
-  h+='</div>';
-  if(raceObj&&(raceObj.racial||raceObj.evolution)){
-    h+='<div style="margin-top:8px;border-top:1px solid rgba(255,255,255,.06);padding-top:6px;">';
-    if(raceObj.racial)h+='<div style="font-size:9px;color:#aaa;margin-bottom:2px;"><span style="color:var(--a);font-weight:bold;">Racial:</span> '+esc(raceObj.racial)+'</div>';
-    if(raceObj.evolution)h+='<div style="font-size:9px;color:#aaa;"><span style="color:var(--a3);font-weight:bold;">Evo:</span> '+esc(raceObj.evolution)+'</div>';
-    h+='</div>';
-  }
-  h+='</div>';
-  h+='</div>'; // end HP/Initiative row
-  h+='</div>';
-  h+='</div>'; // end 2-col grid
-  // ── BELOW: Origin + Background + Occupation detail boxes (full width) ────────
-  h+='<div style="margin-top:14px;">';
-  h+=ccRenderOriginBlock();
+  h+='</div></div>';
+  h+='</div>'; // end HP+Initiative row
+  // ── 4. Detail boxes: Background, Occupation, Racial traits, Evo attr notes ──
   if(st.background){
     const bgObj=(g.backgrounds||[]).find(b=>b.name===st.background);
     if(bgObj){
@@ -9367,23 +9355,36 @@ function ccRenderIdentity(){
     h+=ccLbl('Occupation Notes','<textarea style="'+CC_INP+'height:50px;resize:vertical;" oninput="ccState.occupation_desc=this.value;">'+esc(st.occupation_desc||'')+'</textarea>');
     h+='</div>';
   }
+  // Racial traits box
+  if(raceObj){
+    h+='<div style="margin-top:10px;background:rgba(0,200,255,.02);border:1px solid rgba(0,200,255,.18);border-radius:6px;padding:12px;">';
+    h+=ccSecHead('RACIAL TRAITS — '+esc(st.race),'var(--a)');
+    const traitDefs=[['Racial Ability','var(--a)',raceObj.racial],['Evolution Ability','var(--a3)',raceObj.evolution],['Environment Trait','var(--gr)',raceObj.environment]];
+    traitDefs.forEach(([lbl,col,txt])=>{
+      if(!txt)return;
+      h+='<div style="margin-bottom:8px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.07);border-radius:4px;padding:8px 10px;">';
+      h+='<div style="font-size:9px;color:'+col+';font-family:\'Orbitron\',sans-serif;margin-bottom:4px;">'+lbl+'</div>';
+      h+='<div style="font-size:11px;color:#ccc;line-height:1.5;">'+esc(txt)+'</div>';
+      h+='</div>';
+    });
+    h+='</div>';
+  }
   // Evolution attribute notes (T4-B)
   const ATTR_KEYWORDS=['PHYSICAL','MENTAL','SOCIAL','ACUITY','ENDURANCE','SPEED','WITS','WILLPOWER','ATTRIBUTE','attribute'];
   const evoAttrNotes=st.evolutions.filter(e=>e.name&&e.effect&&ATTR_KEYWORDS.some(kw=>e.effect.includes(kw)));
   if(evoAttrNotes.length){
-    h+='<div style="margin-top:10px;">';
+    h+='<div style="margin-top:10px;background:rgba(168,85,247,.03);border:1px solid rgba(168,85,247,.2);border-radius:6px;padding:12px;">';
     h+=ccSecHead('EVOLUTION ATTRIBUTE NOTES','var(--a3)');
-    h+='<div style="font-size:10px;color:#888;margin-bottom:6px;">Active evolutions with attribute effects — apply bonuses manually in the table above.</div>';
+    h+='<div style="font-size:10px;color:#888;margin-bottom:6px;">Active evolutions with attribute effects — apply bonuses manually in the attribute table above.</div>';
     h+='<div style="display:flex;flex-direction:column;gap:6px;">';
     evoAttrNotes.forEach(e=>{
-      h+='<div style="background:rgba(168,85,247,.07);border:1px solid rgba(168,85,247,.25);border-radius:4px;padding:7px 10px;">';
+      h+='<div style="background:rgba(0,0,0,.25);border:1px solid rgba(168,85,247,.2);border-radius:4px;padding:7px 10px;">';
       h+='<div style="font-size:11px;color:var(--a3);font-weight:bold;margin-bottom:3px;">'+esc(e.name)+(e.tier?' <span style="font-size:9px;color:#888;">'+esc(e.tier)+'</span>':'')+'</div>';
       h+='<div style="font-size:10px;color:#bbb;line-height:1.4;">'+esc(e.effect)+'</div>';
       h+='</div>';
     });
     h+='</div></div>';
   }
-  h+='</div>'; // end below section
   return h;
 }
 

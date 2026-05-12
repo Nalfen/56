@@ -54,8 +54,19 @@
 | # | Item | Status |
 |---|---|---|
 | D1 | Update `docs/03-code-map.md` with new CC state fields and render functions | todo |
-| D2 | Update `docs/05-decisions-and-issues.md` with decisions made | todo |
-| D3 | Commit + push both branches | todo |
+| D2 | Update `docs/05-decisions-and-issues.md` with decisions made | done |
+| D3 | Commit + push both branches | done |
+
+## Milestone 7.0 — Identity Tab UX Refinements (post 6.0)
+
+| # | Item | Status |
+|---|---|---|
+| M7-1 | Merge Attributes tab into Identity; remove Attributes from nav | done |
+| M7-2 | Origin block (Clone/Natural Birth) moved to top of Identity tab | done |
+| M7-3 | Health/Morale/CHI + Initiative as full-width row below 2-col grid | done |
+| M7-4 | Racial traits (racial/evolution/environment) in own detail box | done |
+| M7-5 | Background and Occupation pickers sorted alphabetically | done |
+| M7-6 | Race selector sorted alphabetically | done |
 
 ---
 
