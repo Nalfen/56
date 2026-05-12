@@ -8338,6 +8338,27 @@ const BG_GRANTS={
   'Subject 0056':{no_racial_max:true},
 };
 
+// Occupation skill-bonus pairs — player picks one pair at character creation (SMALL passive bonus)
+const OCC_BONUS={
+  'Arms collector':     [['Gunslinger','Engineering'],['Marksman','Technology']],
+  'Bartender':         [['Charm','Subterfuge'],['Flair','Etiquette']],
+  'Bounty Hunter':     [['Intimidation','Martial_Arts'],['Cyberintel','Gunslinger']],
+  'Corporate':         [['Leadership','Etiquette'],['Technology','Intuition']],
+  'Diplomat':          [['Charm','Subterfuge'],['Negotiation','Etiquette']],
+  'Drug Dealer':       [['Science','Academic'],['Scavenging','Medicine']],
+  'Entertainer':       [['Flair','Etiquette'],['Acting','Charm']],
+  'Explorer':          [['Survival','Marksman'],['Scavenging','Gunslinger']],
+  'Hooverboard Pro':   [['Piloting','Flair'],['Athletic','Navigation']],
+  'Investigator':      [['Subterfuge','Search'],['Concealment','Streetwise']],
+  'Law enforcement':   [['Intimidation','Martial_Arts'],['Academics','Streetwise']],
+  'Outlaw':            [['Subterfuge','Concealment'],['Streetwise','Dexterity']],
+  'Scientific':        [['Medicine','Science'],['Academic','Galactic_Knowledge']],
+  'Trader':            [['Negotiation','Charm'],['Scavenging','Streetwise']],
+  'Transporter':       [['Piloting','Etiquette'],['Negotiation','Journeyman']],
+  'Virtual Activist':  [['Cyberintel','Hacking'],['Technology','Operator']],
+  'Worker':            [['Journeyman','Scavenging'],['Science','Engineering']],
+};
+
 function ccMakeFreshState(){
   const sk={};
   CC_ALL_SKILLS.forEach(s=>{sk[s]=0;sk[s+'_crit']='10';sk[s+'_bonus']=0;});
@@ -8367,6 +8388,7 @@ function ccMakeFreshState(){
     datacoms:Array(3).fill(0).map(()=>({name:'',cpu:0,mem:0,nanite:0,def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',def_dmg:'',int_ext:0,int_int:0,int_main:0,expertise:0,special:'',mfr:'Generic',base_data:null,options:[]})),
     programs:Array(10).fill(0).map(()=>({name:'',type:'',cpu:0,mem:0,passive:'',active:''})),
     gadgets:Array(5).fill(0).map(()=>({name:'',nanite:0,effect:''})),
+    occupation_bonus_choice:null,
     credits:0,credits_spent:0,gear_cat_filter:'',gear_search:'',med_mfr_filter:'Generic',med_search:'',
     spells:Array(16).fill(0).map(()=>({name:'',domain:''})),
     items:Array(20).fill(0).map(()=>({name:'',size:'0',qty:1})),
@@ -8804,7 +8826,7 @@ function ccPickFromCache(pidx){
     ccUpdateBgGrantedXP();
     ccRecalcHealthMorale();
   }
-  else if(type==='occupation'){const o=item;ccState.occupation=o.name||'';const lines=[o.desc||'',...(o.details||[])].filter(Boolean);ccState.occupation_desc=lines.join('\n');const startCr=ccParseOccCredits(o.name||'');if(startCr>0)ccState.credits=startCr;}
+  else if(type==='occupation'){const o=item;ccState.occupation=o.name||'';const lines=[o.desc||'',...(o.details||[])].filter(Boolean);ccState.occupation_desc=lines.join('\n');const startCr=ccParseOccCredits(o.name||'');if(startCr>0)ccState.credits=startCr;ccState.occupation_bonus_choice=null;}
   ccState.picker=null;ccState.pickerSearch='';render();
 }
 function ccExportRoll20(){
@@ -9085,8 +9107,43 @@ function ccRenderIdentity(){
   h+='</div></div>';
   // Right col — details
   h+='<div>'+ccSecHead('BACKGROUND & OCCUPATION DETAILS');
-  h+=ccLbl('Background Details','<textarea style="'+CC_INP+'height:100px;resize:vertical;" oninput="ccState.background_desc=this.value;">'+esc(st.background_desc||'')+'</textarea>');
-  h+=ccLbl('Occupation Details','<textarea style="'+CC_INP+'height:100px;resize:vertical;" oninput="ccState.occupation_desc=this.value;">'+esc(st.occupation_desc||'')+'</textarea>');
+  // Background traits — formatted display
+  if(st.background){
+    const bgObj=(g.backgrounds||[]).find(b=>b.name===st.background);
+    if(bgObj&&bgObj.traits&&bgObj.traits.length){
+      h+='<div style="margin-bottom:8px;">';
+      const traitLabels=['BENEFIT 1','BENEFIT 2','DRAWBACK'];
+      const traitCols=['rgba(0,200,100,.12)','rgba(0,200,100,.08)','rgba(255,80,80,.12)'];
+      const traitBord=['rgba(0,200,100,.35)','rgba(0,200,100,.2)','rgba(255,80,80,.3)'];
+      const traitTxtCol=['var(--gr)','var(--gr)','var(--re)'];
+      bgObj.traits.forEach((tr,ti)=>{
+        h+='<div style="background:'+traitCols[ti]||traitCols[2]+';border:1px solid '+(traitBord[ti]||traitBord[2])+';border-radius:4px;padding:6px 8px;margin-bottom:4px;">';
+        h+='<div style="font-size:9px;color:'+(traitTxtCol[ti]||'var(--re)')+';font-family:\'Orbitron\',sans-serif;margin-bottom:3px;">'+(traitLabels[ti]||'TRAIT '+(ti+1))+'</div>';
+        h+='<div style="font-size:10px;color:#bbb;line-height:1.4;">'+esc(tr)+'</div>';
+        h+='</div>';
+      });
+      h+='</div>';
+    }
+  }
+  h+=ccLbl('Background Notes','<textarea style="'+CC_INP+'height:70px;resize:vertical;" oninput="ccState.background_desc=this.value;">'+esc(st.background_desc||'')+'</textarea>');
+  // Occupation skill bonus choice
+  const occBonus=OCC_BONUS[st.occupation];
+  if(occBonus){
+    const chosen=st.occupation_bonus_choice;
+    h+='<div style="margin-bottom:8px;background:rgba(255,107,53,.06);border:1px solid rgba(255,107,53,.25);border-radius:4px;padding:8px;">';
+    h+='<div style="font-size:10px;color:var(--a2);margin-bottom:6px;font-family:\'Orbitron\',sans-serif;">OCCUPATION BONUS — Choose one skill pair (SMALL passive bonus)</div>';
+    occBonus.forEach((pair,pi)=>{
+      const isChosen=chosen===pi;
+      const label=pair.map(s=>s.replace(/_/g,' ')).join(' + ');
+      h+='<button onclick="ccState.occupation_bonus_choice='+pi+';render();" style="display:block;width:100%;text-align:left;margin-bottom:4px;background:'+(isChosen?'rgba(255,107,53,.25)':'rgba(0,0,0,.3)')+';border:1px solid '+(isChosen?'var(--a2)':'rgba(255,255,255,.1)')+';color:'+(isChosen?'var(--a2)':'#aaa')+';padding:5px 9px;border-radius:3px;cursor:pointer;font-size:11px;">'+(isChosen?'✓ ':'')+esc(label)+'</button>';
+    });
+    if(chosen!==null&&chosen!==undefined){
+      const pickedPair=occBonus[chosen].map(s=>s.replace(/_/g,' ')).join(' + ');
+      h+='<div style="font-size:9px;color:var(--a2);margin-top:2px;">SMALL bonus to: '+esc(pickedPair)+' — reminder only, not enforced mechanically</div>';
+    }
+    h+='</div>';
+  }
+  h+=ccLbl('Occupation Details','<textarea style="'+CC_INP+'height:70px;resize:vertical;" oninput="ccState.occupation_desc=this.value;">'+esc(st.occupation_desc||'')+'</textarea>');
   h+='<div style="margin-top:4px;"><label style="font-size:10px;color:#888;">Notes</label><textarea style="'+CC_INP+'height:60px;resize:vertical;" oninput="ccState.notes=this.value;">'+esc(st.notes||'')+'</textarea></div>';
   h+='</div></div>';
   // ── Info cards at bottom ─────────────────────────────────────────────────────
@@ -9431,7 +9488,7 @@ function ccRenderTalents(){
     h+='<input type="text" placeholder="Category" value="'+esc(t.category||'')+'"'+(isBg?' readonly':'')+' style="'+CC_INP_SM+'" oninput="ccState.talents['+i+'].category=this.value;">';
     h+='<input type="number" title="Talent point cost" value="'+(+(t.xp_cost)||0)+'"'+(isBg?' readonly':'')+' style="width:44px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.15);color:var(--a2);padding:2px 3px;font-size:11px;" oninput="ccState.talents['+i+'].xp_cost=+this.value||0;">';
     h+='</div>';
-    h+='<input type="text" placeholder="Effect..." value="'+esc(t.effect||'')+'"'+(isBg?' readonly':'')+' style="'+CC_INP_SM+'" oninput="ccState.talents['+i+'].effect=this.value;">';
+    h+='<textarea rows="2" placeholder="Effect..."'+(isBg?' readonly':'')+' style="'+CC_INP_SM+'resize:vertical;" oninput="ccState.talents['+i+'].effect=this.value;">'+esc(t.effect||'')+'</textarea>';
     h+='</div>';
   });
   h+='<button onclick="ccState.talents.push({name:\'\',skill:\'\',category:\'\',xp_cost:0,effect:\'\',credited:false});render();" style="background:rgba(0,200,255,.08);border:1px dashed rgba(0,200,255,.3);color:var(--a);padding:5px;width:100%;border-radius:4px;cursor:pointer;font-size:11px;">+ Add Talent Slot</button>';
@@ -9486,7 +9543,7 @@ function ccRenderTalents(){
     h+='<input type="text" placeholder="Type (GENETICS/CYBER/MAGIC)" value="'+esc(e.type||'')+'"'+(isBgEvo?' readonly':'')+' style="'+inp3sm+'margin-bottom:0;" oninput="ccState.evolutions['+i+'].type=this.value;">';
     h+='<input type="text" placeholder="Tier (TIER I/II/III)" value="'+esc(e.tier||'')+'"'+(isBgEvo?' readonly':'')+' style="'+inp3sm+'margin-bottom:0;" oninput="ccState.evolutions['+i+'].tier=this.value;">';
     h+='</div>';
-    h+='<input type="text" placeholder="Effect..." value="'+esc(e.effect||'')+'"'+(isBgEvo?' readonly':'')+' style="'+inp3sm+'margin-top:3px;" oninput="ccState.evolutions['+i+'].effect=this.value;">';
+    h+='<textarea rows="2" placeholder="Effect..."'+(isBgEvo?' readonly':'')+' style="'+inp3sm+'margin-top:3px;resize:vertical;" oninput="ccState.evolutions['+i+'].effect=this.value;">'+esc(e.effect||'')+'</textarea>';
     h+='</div>';
   });
   h+='<button onclick="ccState.evolutions.push({name:\'\',type:\'\',tier:\'\',effect:\'\',credited:false});render();" style="background:rgba(163,85,247,.08);border:1px dashed rgba(163,85,247,.3);color:var(--a3);padding:5px;width:100%;border-radius:4px;cursor:pointer;font-size:11px;">+ Add Evolution Slot</button>';

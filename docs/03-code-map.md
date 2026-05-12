@@ -228,6 +228,14 @@ Last entry always has `sysRegex: null` (catches unmatched systems as "Others").
 | `ccCalcEvoCreditCost(e)` | Evolution credit cost | evo slot object | number (0 if free/bg_granted) |
 | `egExportVTT()` | Export enemy to VTT-ES JSON | none (reads egState) | Downloads JSON file |
 
+## Milestone 6.0 constants
+
+| Constant | Purpose |
+|---|---|
+| `OCC_BONUS` | Dict of occupation name → `[[skillA, skillB], [skillC, skillD]]` — the two skill-pair options the player chooses from at character creation for a SMALL passive bonus |
+
+---
+
 ## Character Creator state (`ccState`) — key fields
 
 | Field | Type | Description |
@@ -240,6 +248,7 @@ Last entry always has `sysRegex: null` (catches unmatched systems as "Others").
 | `talents[]` | array | `{name, skill, category, xp_cost, effect, credited, bg_granted?}` |
 | `credits` | number | Starting budget |
 | `credits_spent` | number | Manual gear purchases (Gear Shop) |
+| `occupation_bonus_choice` | null \| 0 \| 1 | Which skill-pair bonus the player picked from `OCC_BONUS[occupation]`; null = not yet chosen |
 | `picker` | obj/null | Active picker: `{type, slot, mfr?}` — `mfr` tracks selected manufacturer inside the picker window |
 | `bg_choices[]` | array | Pending background skill choices |
 
