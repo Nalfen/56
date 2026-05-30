@@ -9041,7 +9041,7 @@ function ccRenderPicker(){
       const xwSpecChg=pickerMfr!=='Generic'&&xwSpecStr!==(Array.isArray(x.special)?x.special.join(' '):(x.special||''));
       const xwSizeChg=pickerMfr!=='Generic'&&(xw.size||'')!==(x.size||'');
       h+='<div style="font-size:10px;color:#888;">'+esc(xw.category||'')+(xw.damage?' | '+(dmgChg?'<b style="color:var(--a2);">':'')+esc(xw.damage)+(dmgChg?'</b>':''):'')+(xw.type?' | '+esc(xw.type):'')+(xw.range_short?' | '+(rngChg?'<span style="color:var(--ye);">':'')+esc(xw.range_short)+'/'+esc(xw.range_med||'—')+'/'+esc(xw.range_long||'—')+(rngChg?'</span>':''):'')+(xw.size?' | '+(xwSizeChg?'<span style="color:var(--a2);">':'')+esc(xw.size)+(xwSizeChg?'</span>':''):'')+(xwSpecStr?' | '+(xwSpecChg?'<span style="color:var(--a3);">':'')+esc(xwSpecStr)+(xwSpecChg?'</span>':''):'')+'</div>';
-      if(pickerMfr!=='Generic'){const availChg=xw.availability&&xw.availability!==x.availability;h+='<div style="font-size:9px;color:var(--a3);">'+esc(pickerMfr)+(xw.cost?' · '+fmt(+(xw.cost)||0)+' Cr':'')+(availChg?' · <span style="color:var(--ye);">'+esc(xw.availability)+'</span>':'')+'</div>';}
+      if(pickerMfr!=='Generic'){const availChg=xw.availability&&xw.availability!==x.availability;const anyChg=dmgChg||rngChg||xwSpecChg||xwSizeChg||availChg;if(anyChg)h+='<div style="font-size:9px;color:var(--a3);">'+esc(pickerMfr)+(xw.cost?' · '+fmt(+(xw.cost)||0)+' Cr':'')+(availChg?' · <span style="color:var(--ye);">'+esc(xw.availability)+'</span>':'')+'</div>';}
     }
     else if(type==='armor'){
       const xa=applyArmorMfr({...x},pickerMfr)||x;
@@ -9054,7 +9054,7 @@ function ccRenderPicker(){
       const xaSpecStr=Array.isArray(xa.special)?xa.special.join(' '):(xa.special||'');
       const xaSpecChg=pickerMfr!=='Generic'&&xaSpecStr!==(Array.isArray(x.special)?x.special.join(' '):(x.special||''));
       h+='<div style="font-size:10px;color:#888;">'+esc(xa.type||xa.category||'')+(xa.soak?' | '+(soakChg?'<b style="color:var(--ye);">':'')+esc(xa.soak)+(soakChg?'</b>':''):'')+(defParts.length?' | '+defParts.join(' '):'')+( xaSpecStr?' | '+(xaSpecChg?'<span style="color:var(--a3);">':'')+esc(xaSpecStr)+(xaSpecChg?'</span>':''):'')+(xa.cost?' · '+fmt(+(xa.cost)||0)+' Cr':'')+'</div>';
-      if(pickerMfr!=='Generic'){const availChg=xa.availability&&xa.availability!==x.availability;h+='<div style="font-size:9px;color:var(--gr);">'+esc(pickerMfr)+(xa.cost?' · '+fmt(+(xa.cost)||0)+' Cr':'')+(availChg?' · <span style="color:var(--ye);">'+esc(xa.availability)+'</span>':'')+'</div>';}
+      if(pickerMfr!=='Generic'){const availChg=xa.availability&&xa.availability!==x.availability;const armorDefChg=['physical','energy','tech','spiritual'].some(k=>(xa['def_'+k]||'None')!==(x['def_'+k]||'None'));const anyArmorChg=soakChg||xaSpecChg||armorDefChg||availChg;if(anyArmorChg)h+='<div style="font-size:9px;color:var(--gr);">'+esc(pickerMfr)+(xa.cost?' · '+fmt(+(xa.cost)||0)+' Cr':'')+(availChg?' · <span style="color:var(--ye);">'+esc(xa.availability)+'</span>':'')+'</div>';}
     }
     else if(type==='datacom'){
       const xd=applyDatacomMfr({...x},pickerMfr)||x;
@@ -9077,7 +9077,7 @@ function ccRenderPicker(){
         +(dcDef.length?' | '+dcDef.join(' '):'')
         +(dcSpecStr?' | '+(dcSpecChg?'<span style="color:var(--a3);">':'')+esc(dcSpecStr)+(dcSpecChg?'</span>':''):'')
         +'</div>';
-      if(pickerMfr!=='Generic'){const availChg=xd.availability&&xd.availability!==x.availability;h+='<div style="font-size:9px;color:var(--a);">'+esc(pickerMfr)+(xd.cost?' · '+fmt(+(xd.cost)||0)+' Cr':'')+(availChg?' · <span style="color:var(--ye);">'+esc(xd.availability)+'</span>':'')+'</div>';}
+      if(pickerMfr!=='Generic'){const availChg=xd.availability&&xd.availability!==x.availability;const dcDefChg=['physical','energy','tech','spiritual'].some(k=>(xd['def_'+k]||'NONE')!==(x['def_'+k]||'NONE'));const anyDcChg=cpuChg||memChg||nanChg||dcSizeChg||dcSpecChg||dcDefChg||availChg;if(anyDcChg)h+='<div style="font-size:9px;color:var(--a);">'+esc(pickerMfr)+(xd.cost?' · '+fmt(+(xd.cost)||0)+' Cr':'')+(availChg?' · <span style="color:var(--ye);">'+esc(xd.availability)+'</span>':'')+'</div>';}
     }
     else if(type==='program')h+='<div style="font-size:10px;color:#888;">'+esc(x.type||'')+(x.cpu?' | CPU '+x.cpu:'')+(x.memory?' | Mem '+x.memory:'')+'</div>';
     else if(type==='gadget')h+='<div style="font-size:10px;color:#666;margin-top:2px;">'+esc(x.desc||x.effect||'')+'</div>';
