@@ -68,6 +68,15 @@
 | M7-5 | Background and Occupation pickers sorted alphabetically | done |
 | M7-6 | Race selector sorted alphabetically | done |
 
+## Post-M7 Bug Fixes
+
+| # | Item | Status |
+|---|---|---|
+| BF-1 | XP bar negative on fresh load — secondary attrs initialized to 0 in `ccMakeFreshState()` | done |
+| BF-2 | Skills grid clips Acuity column on mobile — `repeat(auto-fill,minmax(160px,1fr))` | done |
+| BF-3 | Picker modal off-screen on mobile when scrolled — `position:fixed` overlay | done |
+| BF-4 | Manufacturer badge on all picker items — `anyChg` guard for weapon/armor/datacom | done |
+
 ---
 
 ## Known gaps by source (full audit reference)

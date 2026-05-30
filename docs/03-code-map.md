@@ -236,11 +236,11 @@ Last entry always has `sysRegex: null` (catches unmatched systems as "Others").
 | `ccPickFromCache(pidx)` | Apply picker selection | picker cache index | Mutates ccState slot (applying `picker.mfr`), calls render() |
 | `ccApplyOccBonus(pi, newPicks?)` | Apply occupation skill bonuses | `pi` = pair/pick index or null; `newPicks` = explicit picks array (optional) | Clears old OCC bonuses, applies new ones to `sk_bonus`, writes `occ_bonus_skills`, `occ_bonus_picks`, `occupation_bonus_choice` |
 | `ccToggleOccPick(sk)` | Toggle a skill in pick-N selection | skill key string | Adds/removes from `occ_bonus_picks`, calls `ccApplyOccBonus`, calls `render()` |
-| `ccRenderPicker()` | Render browse picker modal | none (reads ccState.picker) | HTML string; sorted A-Z for background/occupation types; includes mfr dropdown for weapon/armor/datacom; effect text shown for talent/evo types; highlights changed stats |
+| `ccRenderPicker()` | Render browse picker modal | none (reads ccState.picker) | HTML string; `position:fixed` fullscreen overlay (z-index:999), backdrop-click closes; sorted A-Z for background/occupation types; includes mfr dropdown for weapon/armor/datacom; effect text shown for talent/evo types; highlights changed stats; manufacturer badge shown only when at least one stat actually differs from base (`anyChg` guard on all three item types) |
 | `ccRenderIdentity()` | Render Identity tab (merged with Attributes, M7.0) | none (reads ccState) | HTML string. Structure: (1) Origin block full-width, (2) 2-col grid: left=identity fields, right=full attribute table with XP costs + racial range, (3) full-width Health/Morale/CHI + Initiative row, (4) detail boxes: Background (traits grid + notes), Occupation (bonus picker + notes), Racial Traits (racial/evolution/environment), Evolution Attribute Notes |
 | `ccRenderOriginBlock()` | Render Clone Vat / Natural Birth selector | none (reads ccState) | HTML string; shows selection UI when `clone===null`, compact status bar when chosen |
 | `ccRenderAttributes()` | (Dead code — M7.0) | — | Was the standalone Attributes tab renderer; route redirected to `ccRenderIdentity()`. Retained in file but no longer called. |
-| `ccRenderSkills()` | Render Skills tab | none (reads ccState) | HTML string; OCC pill on skills with `occ_bonus_skills` bonus; ◆ crit pill on skills with non-default crit range |
+| `ccRenderSkills()` | Render Skills tab | none (reads ccState) | HTML string; OCC pill on skills with `occ_bonus_skills` bonus; ◆ crit pill on skills with non-default crit range; 4-column grid uses `repeat(auto-fill,minmax(160px,1fr))` for responsive mobile layout |
 | `ccRenderTalents()` | Render Talents & Evos tab | none (reads ccState) | HTML string; effect text shown beneath each slot; Passive Abilities panel at bottom (auto-compiled from active talents + evos, grouped by talent category / evo type) |
 | `ccRenderCombat()` | Render Combat tab | none (reads ccState) | HTML string; Background Combat Notes panel at bottom (BENEFIT 1/2/DRAWBACK cards, color-coded) |
 | `ccRenderTech()` | Render Tech tab | none (reads ccState) | HTML string; labeled inputs, bst() hoverable special tags on datacoms |
@@ -250,6 +250,7 @@ Last entry always has `sysRegex: null` (catches unmatched systems as "Others").
 | `ccCalcDatacomCost(dc)` | Datacom credit cost | datacom slot object | number |
 | `ccCalcEvoCreditCost(e)` | Evolution credit cost | evo slot object | number (0 if free/bg_granted) |
 | `ccRecalcHealthMorale()` | Recalculate resource maximums | none (reads ccState) | Mutates `HEALTH_max`, `MORALE_max`, `CHI_max`; respects `bgGrant.chi_lock`, `bgGrant.health/morale/chi` |
+| `ccMakeFreshState()` | Build default ccState | none | Returns a fresh state object. Secondary attributes (ENDURANCE, SPEED, WITS, WILLPOWER) initialised to 0 — NOT 3 — to avoid negative XP on load before a race is selected. |
 | `egExportVTT()` | Export enemy to VTT-ES JSON | none (reads egState) | Downloads JSON file |
 
 ## Milestone 6.0 constants

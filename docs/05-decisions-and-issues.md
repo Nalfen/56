@@ -76,7 +76,37 @@ Full audit of `g.backgrounds`, `g.occupations`, `g.talents`, `g.evolutions.entri
 - **Decision**: `ccApplyOccBonus(pi)` function clears old pair bonuses and sets `sk_bonus=1` for the new pair. Tracks active pair in `occ_bonus_skills[]`. Called from occupation bonus buttons and from `ccPickFromCache` (clears on occupation change).
 - **Trade-off**: If user manually set `sk_bonus` on those skills, it gets overwritten (replaced with 1) when picking an OCC pair. If user already had >1 bonus on that skill, OCC pick only sets to 1. Acceptable — occupation bonus is a small +1 and display makes the source clear with "OCC" pill.
 
+#### Identity tab layout — merged with Attributes (Decision 13)
+- **Problem**: Standalone Attributes tab was separate from Identity, causing fragmented UX and redundant navigation.
+- **Decision**: Eliminated Attributes tab; merged into Identity tab. Layout: (1) Origin block full-width at top, (2) 2-col grid: left=identity fields, right=full attribute table with XP costs + racial range, (3) full-width Health/Morale/CHI + Initiative row, (4) detail boxes: Background (traits grid + notes), Occupation (bonus picker + notes), Racial Traits (racial/evolution/environment), Evolution Attribute Notes. `ccRenderAttributes()` is now dead code; any `ccState.tab === 'attributes'` is redirected to `'identity'` at render time.
+- **Trade-off**: Identity tab is now the heaviest tab. Accepted — it provides a single comprehensive character overview.
+
+#### Picker lists sorted alphabetically (Decision 14)
+- **Problem**: Background and occupation pickers were unsorted, making it slow to scan long lists.
+- **Decision**: Background picker filters then sorts via `slice().sort((a,b)=>a.name.localeCompare(b.name))` at render time. Occupation picker and race `<select>` sorted the same way. Source arrays in `g` are unchanged.
+- **Trade-off**: Sort is applied at render time on every picker open — negligible cost.
+
 #### Evolution attribute bonuses: annotation vs. auto-apply (Decision 12)
 - **Problem**: T4-B called for evolution attribute bonuses auto-applied to Attributes tab. Most evo attribute bonuses are conditional (during reactions, against specific damage types) rather than flat permanent increases.
 - **Decision**: Implemented as a read-only annotation panel on the Attributes tab that surfaces active evolutions mentioning attribute keywords. Bonuses are applied manually by the player via the existing attribute fields.
 - **Trade-off**: Does not automate bonus application. Prevents over-automation of conditional rules that require situational judgement.
+
+---
+
+## Resolved bugs (post 6.0)
+
+~~#### XP bar shows negative on fresh character creator load~~ — **Fixed**
+- **Root cause**: `ccMakeFreshState()` initialised secondary attributes (ENDURANCE, SPEED, WITS, WILLPOWER) to `3`. `ccGetAttrBase()` returns `0` when no race is selected. `ccAttrXPCost(0, 3) = 30` × 4 = 120 XP consumed against a 50-point pool → −70.
+- **Fix**: All secondary attribute initial values changed to `0` in `ccMakeFreshState()`. XP pool starts at 0 until a race is picked, at which point the racial avg becomes the base and cost resets to 0.
+
+~~#### Skills grid clips Acuity column on narrow mobile screens~~ — **Fixed**
+- **Root cause**: `grid-template-columns: repeat(4, 1fr)` forced exactly 4 equal columns regardless of viewport width.
+- **Fix**: Changed to `repeat(auto-fill, minmax(160px, 1fr))` — columns collapse gracefully on narrow screens.
+
+~~#### Picker modal opens off-screen when user has scrolled down~~ — **Fixed**
+- **Root cause**: Picker was rendered as inline HTML at the top of the tab content area. When the user was scrolled partway down, the picker appeared above the visible viewport.
+- **Fix**: Picker is now a `position:fixed` fullscreen backdrop overlay (z-index:999) with the picker panel centered at the top of the screen. Clicking outside the panel closes it.
+
+~~#### Manufacturer badge shown on all items in picker regardless of stat changes~~ — **Fixed**
+- **Root cause**: The manufacturer badge line fired for every item whenever `pickerMfr !== 'Generic'`, even if that manufacturer made no changes to the item's stats.
+- **Fix**: Added `anyChg` boolean guard on all three item types in `ccRenderPicker()`. Badge only renders when at least one stat (damage, range, special, soak, defense tiers, CPU, memory, nanites, size, or availability) actually differs from the base item after applying the manufacturer. Weapons, armor, and datacoms all fixed.
