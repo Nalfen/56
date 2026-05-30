@@ -9516,9 +9516,13 @@ function ccRenderSkills(){
   const spent=ccCalcSpentXP();
   const bgXP=+(st.bg_granted_xp)||0;
   const avail=(+(st.total_xp)||0)+(+(st.credited_xp)||0)+bgXP-spent;
-  let h='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">';
+  let h='<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px;margin-bottom:12px;">';
   h+='<div style="font-family:\'Orbitron\',sans-serif;font-size:12px;color:var(--a);">SKILLS</div>';
-  h+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:12px;">Spent: <span style="color:var(--a2);">'+spent+'</span> | Available: <span style="color:'+(avail>=0?'var(--gr)':'var(--re)')+';">'+avail+'</span> | <span style="font-size:10px;color:#666;">Cost = N×(N+1)÷2 · Click skill name to expand</span></div>';
+  h+='<div style="font-family:\'Share Tech Mono\',monospace;font-size:11px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;">'+
+     '<span>Spent: <b style="color:var(--a2);">'+spent+'</b></span>'+
+     '<span>Available: <b style="color:'+(avail>=0?'var(--gr)':'var(--re)')+';">'+avail+'</b></span>'+
+     '<span style="font-size:9px;color:#555;">N×(N+1)÷2 · tap name to expand</span>'+
+     '</div>';
   h+='</div>';
   // Background skill choices pending
   const bgChoices=st.bg_choices||[];
@@ -9551,7 +9555,7 @@ function ccRenderSkills(){
   if(bg.all_skills)CC_ALL_SKILLS.forEach(sk=>{bgSkGrants[sk]=bg.all_skills;});
   if(bg.choice_skills)(st.bg_choice_done?bg.choice_skills.forEach((c,idx)=>{const done=(st.bg_choice_done[idx]||[]);done.forEach(sk=>{bgSkGrants[sk]=c.rank;});}):null);
   const CRIT_OPTS=['10','9-10','8-10','7-10','6-10','5-10','4-10','3-10','2-10','1-10'];
-  h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">';
+  h+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;">';
   [['Physical',CC_SKILLS_PHYS,'PHYSICAL'],['Mental',CC_SKILLS_MENT,'MENTAL'],['Social',CC_SKILLS_SOCI,'SOCIAL'],['Acuity',CC_SKILLS_ACUI,'ACUITY']].forEach(([grp,skills,ab])=>{
     h+='<div>';
     h+='<div style="font-family:\'Orbitron\',sans-serif;font-size:11px;color:var(--a);margin-bottom:8px;text-align:center;background:rgba(0,200,255,.08);padding:4px 2px;border-radius:3px;">'+grp+'<span style="font-size:9px;color:#666;display:block;">'+ab+'</span></div>';
