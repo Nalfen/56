@@ -53,7 +53,7 @@
 
 | # | Item | Status |
 |---|---|---|
-| D1 | Update `docs/03-code-map.md` with new CC state fields and render functions | todo |
+| D1 | Update `docs/03-code-map.md` with new CC state fields and render functions | done |
 | D2 | Update `docs/05-decisions-and-issues.md` with decisions made | done |
 | D3 | Commit + push both branches | done |
 

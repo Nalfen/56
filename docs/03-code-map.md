@@ -2,6 +2,22 @@
 
 > All code lives in `56th_century_compendium_v8.html`. Line numbers are approximate and shift with edits.
 
+## Character Creator tabs (`char_creator` section)
+
+| Tab ID | Label | Renderer | Notes |
+|---|---|---|---|
+| `identity` | Identity | `ccRenderIdentity()` | Default tab; contains full attribute editor + origin block + detail boxes |
+| `skills` | Skills | `ccRenderSkills()` | |
+| `talents` | Talents & Evos | `ccRenderTalents()` | Passive Abilities panel at bottom |
+| `combat` | Combat | `ccRenderCombat()` | Background Combat Notes panel at bottom |
+| `tech` | Tech | `ccRenderTech()` | |
+| `magic` | Magic | `ccRenderMagicGear()` | |
+| `gear` | Gear | `ccRenderMagicGear()` | Same renderer as Magic, different branch |
+
+`'attributes'` tab was removed in M7.0. Any `ccState.tab === 'attributes'` is silently redirected to `'identity'` in the render dispatch.
+
+---
+
 ## Navigation sections (sidebar → renderer mapping)
 
 | `data-s` value | Label | Renderer / Logic |
@@ -218,29 +234,51 @@ Last entry always has `sysRegex: null` (catches unmatched systems as "Others").
 | `buildDroneParts()` | Expand drone catalog | none | Populates `g.catalog.drone_parts` |
 | `ccExportRoll20()` | Export character to JSON | none (reads ccState) | Downloads Roll20 JSON file |
 | `ccPickFromCache(pidx)` | Apply picker selection | picker cache index | Mutates ccState slot (applying `picker.mfr`), calls render() |
-| `ccRenderPicker()` | Render browse picker modal | none (reads ccState.picker) | HTML string; includes mfr dropdown for weapon/armor/datacom, applies mfr mods to item previews, filters melee-only mfrs; highlights changed stats orange/yellow (damage, range, soak, size, availability) and green/purple (defense, special) |
-| `ccRenderCombat()` | Render Combat tab | none (reads ccState) | HTML string; labeled inputs, mfr-change highlight coloring, bst() hoverable special tags |
+| `ccApplyOccBonus(pi, newPicks?)` | Apply occupation skill bonuses | `pi` = pair/pick index or null; `newPicks` = explicit picks array (optional) | Clears old OCC bonuses, applies new ones to `sk_bonus`, writes `occ_bonus_skills`, `occ_bonus_picks`, `occupation_bonus_choice` |
+| `ccToggleOccPick(sk)` | Toggle a skill in pick-N selection | skill key string | Adds/removes from `occ_bonus_picks`, calls `ccApplyOccBonus`, calls `render()` |
+| `ccRenderPicker()` | Render browse picker modal | none (reads ccState.picker) | HTML string; sorted A-Z for background/occupation types; includes mfr dropdown for weapon/armor/datacom; effect text shown for talent/evo types; highlights changed stats |
+| `ccRenderIdentity()` | Render Identity tab (merged with Attributes, M7.0) | none (reads ccState) | HTML string. Structure: (1) Origin block full-width, (2) 2-col grid: left=identity fields, right=full attribute table with XP costs + racial range, (3) full-width Health/Morale/CHI + Initiative row, (4) detail boxes: Background (traits grid + notes), Occupation (bonus picker + notes), Racial Traits (racial/evolution/environment), Evolution Attribute Notes |
+| `ccRenderOriginBlock()` | Render Clone Vat / Natural Birth selector | none (reads ccState) | HTML string; shows selection UI when `clone===null`, compact status bar when chosen |
+| `ccRenderAttributes()` | (Dead code — M7.0) | — | Was the standalone Attributes tab renderer; route redirected to `ccRenderIdentity()`. Retained in file but no longer called. |
+| `ccRenderSkills()` | Render Skills tab | none (reads ccState) | HTML string; OCC pill on skills with `occ_bonus_skills` bonus; ◆ crit pill on skills with non-default crit range |
+| `ccRenderTalents()` | Render Talents & Evos tab | none (reads ccState) | HTML string; effect text shown beneath each slot; Passive Abilities panel at bottom (auto-compiled from active talents + evos, grouped by talent category / evo type) |
+| `ccRenderCombat()` | Render Combat tab | none (reads ccState) | HTML string; Background Combat Notes panel at bottom (BENEFIT 1/2/DRAWBACK cards, color-coded) |
 | `ccRenderTech()` | Render Tech tab | none (reads ccState) | HTML string; labeled inputs, bst() hoverable special tags on datacoms |
 | `ccAutoTrackedSpent()` | Sum auto-tracked costs | none (reads ccState) | number — total credits for weapons+armor+datacoms+evos |
 | `ccCalcWeaponCost(wp)` | Weapon credit cost | weapon slot object | number |
 | `ccCalcArmorCost(ar)` | Armor/defense credit cost | armor slot object | number |
 | `ccCalcDatacomCost(dc)` | Datacom credit cost | datacom slot object | number |
 | `ccCalcEvoCreditCost(e)` | Evolution credit cost | evo slot object | number (0 if free/bg_granted) |
+| `ccRecalcHealthMorale()` | Recalculate resource maximums | none (reads ccState) | Mutates `HEALTH_max`, `MORALE_max`, `CHI_max`; respects `bgGrant.chi_lock`, `bgGrant.health/morale/chi` |
 | `egExportVTT()` | Export enemy to VTT-ES JSON | none (reads egState) | Downloads JSON file |
 
 ## Milestone 6.0 constants
 
 | Constant | Purpose |
 |---|---|
-| `OCC_BONUS` | Dict of occupation name → `[[skillA, skillB], [skillC, skillD]]` — the two skill-pair options the player chooses from at character creation for a SMALL passive bonus |
+| `OCC_BONUS` | Dict of occupation name → skill bonus definition. Four schema variants supported: |
+
+**OCC_BONUS schema variants:**
+
+| Variant | Shape | Behaviour |
+|---|---|---|
+| Standard (pair choice) | `[[skA,skB],[skC,skD]]` | Player picks one of two pairs; UI shows two buttons |
+| Fixed (auto-apply) | `{fixed:[sk,...]}` | Bonuses applied immediately on occupation pick; no player choice needed |
+| Pick-N | `{pick:N, from:[sk,...]}` | Player picks exactly N skills from the list (e.g. Soldier picks 2 from 4) |
+| Fixed + Pick-1 | `{fixed:[sk,...], pick:1, from:[sk,...]}` | Fixed skills auto-applied, player also picks 1 from the list (e.g. Mage) |
 
 ### BG_GRANTS extended fields (Milestone 6.0)
 
 | Field | Type | Purpose |
 |---|---|---|
-| `attr_max_mods` | `{ATTR: number}` | Reduces displayed racial max for named attributes; shown in red with tooltip in `ccRenderAttributes()` |
+| `attrs` | `{ATTR: number}` | Free base attribute bonuses from background (shown in yellow in attribute table) |
+| `attr_max_mods` | `{ATTR: number}` | Reduces displayed racial max for named attributes; shown in red with tooltip in Identity tab |
+| `no_racial_max` | `true` | Removes racial max cap entirely; renders ∞ in yellow (Subject 0056 background) |
 | `chi_lock` | `true` | Sets CHI_max to 0 in `ccRecalcHealthMorale()`; shown as red label in Health section |
 | `surge_lock` | `true` | Display-only: shows "SURGE MAX locked at 0" label; SURGE not tracked in ccState |
+| `health` | number | Bonus HP added to HEALTH_max |
+| `morale` | number | Bonus Morale added to MORALE_max |
+| `chi` | number | Bonus CHI added to CHI_max |
 
 Backgrounds with `attr_max_mods`: Imaginary Friend (WITS−1), Darkspacer (WITS−1), Family of Thieves (SOCIAL−1), Sorcerous Background (SPEED−1), Street Urchin (ENDURANCE−1).
 Backgrounds with resource locks: Imaginary Friend (`chi_lock`), Spirit Judge (`surge_lock`).
@@ -251,16 +289,35 @@ Backgrounds with resource locks: Imaginary Friend (`chi_lock`), Spirit Judge (`s
 
 | Field | Type | Description |
 |---|---|---|
-| `tab` | string | Active tab: `'origin'`, `'attributes'`, `'advancement'`, `'combat'`, `'tech'`, `'magicgear'` |
+| `tab` | string | Active tab: `'identity'`, `'skills'`, `'talents'`, `'combat'`, `'tech'`, `'magic'`, `'gear'`. Note: `'attributes'` no longer exists (merged into `'identity'` in M7.0). Any persisted `'attributes'` state is redirected to `'identity'` at render time. |
+| `name` | string | Character name |
+| `race` | string | Race name (matches `g.races[].name`) |
+| `occupation` | string | Occupation name |
+| `background` | string | Background name |
+| `sex` | string | Character sex/gender text |
+| `age` / `apparent_age` | string | Real and apparent ages |
+| `notes` | string | Free-form character notes |
+| `clone` | bool \| null | `true` = Clone Vat, `false` = Natural Birth, `null` = not yet chosen |
+| `nb_rolled` | bool | Whether Natural Birth attribute variance dice have been rolled |
+| `attr_variance` | obj | Natural Birth variance per attribute: `{PHYSICAL:{minVar,maxVar}, …}` |
+| `PHYSICAL_perm` … `WILLPOWER_perm` | number | XP-purchased permanent attribute value for each of 8 attributes |
+| `PHYSICAL_bonus` … `WILLPOWER_bonus` | number | Circumstantial attribute bonus (0, ±1, ±3) |
+| `HEALTH` / `MORALE` / `CHI` | number | Current resource values (editable) |
+| `HEALTH_max` / `MORALE_max` / `CHI_max` | number | Max resource values (auto-calculated by `ccRecalcHealthMorale()`) |
+| `init_move` / `init_standard` / `init_quick` / `init_complex` | string | Initiative values (free-text) |
 | `weapons[6]` | array | Weapon slots: `{name, skill, dmg, dmgtype, power, expertise, special, close_range, medium_range, long_range, rof, ammo, currentammo, reload, mfr, base_data, options[]}` |
 | `armor[2]` | array | Defense slots: `{name, type, def_phys/energy/tech/spirit, special, soak_expr, charges, regen, mfr, base_data, options[]}` |
-| `datacoms[3]` | array | Datacom slots: `{name, cpu, mem, nanite, def_phys/energy/tech/spirit, def_dmg, int_ext/int_int/int_main, expertise, special, mfr, base_data, options[]}` — note: `nanite` in state vs `nanites` in `g.datacoms` data; `def_phys` in state vs `def_physical` in data |
+| `datacoms[3]` | array | Datacom slots: `{name, cpu, mem, nanite, def_phys/energy/tech/spirit, def_dmg, int_ext/int_int/int_main, expertise, special, mfr, base_data, options[]}` — note: `nanite` in state vs `nanites` in `g.datacoms`; `def_phys` in state vs `def_physical` in data |
 | `evolutions[]` | array | `{name, type, tier, effect, credited, bg_granted?, free?}` |
 | `talents[]` | array | `{name, skill, category, xp_cost, effect, credited, bg_granted?}` |
 | `credits` | number | Starting budget |
 | `credits_spent` | number | Manual gear purchases (Gear Shop) |
-| `occupation_bonus_choice` | null \| 0 \| 1 | Which skill-pair bonus the player picked from `OCC_BONUS[occupation]`; null = not yet chosen |
-| `picker` | obj/null | Active picker: `{type, slot, mfr?}` — `mfr` tracks selected manufacturer inside the picker window |
+| `background_desc` | string | Player notes for background box |
+| `occupation_desc` | string | Player notes for occupation box |
+| `occupation_bonus_choice` | null \| number | Which bonus option was picked from `OCC_BONUS[occupation]`: index of pair (standard), 0 (fixed/pick-N complete), or index of pick-1 choice. `null` = not yet chosen. |
+| `occ_bonus_skills[]` | string[] | Skill keys currently carrying the OCC bonus (+1). Cleared and rewritten by `ccApplyOccBonus()` on every occupation or choice change. |
+| `occ_bonus_picks[]` | string[] | In-progress skill picks for pick-N occupation types (e.g. Soldier). Accumulates until `entry.pick` count is reached. |
+| `picker` | obj \| null | Active picker: `{type, slot, mfr?}` — `mfr` tracks selected manufacturer inside the picker window |
 | `bg_choices[]` | array | Pending background skill choices |
 
 ## Data schemas
