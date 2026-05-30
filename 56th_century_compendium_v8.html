@@ -8995,12 +8995,13 @@ function ccRenderPicker(){
     return n.includes(pq)||(x.skill||x.category||x.evo_type||x.type||x.race||'').toLowerCase().includes(pq)||(x.desc||'').toLowerCase().includes(pq);
   });
   ccPickerCache=matches.slice(0,40);
-  let h='<div style="background:rgba(0,0,0,.7);border:1px solid '+bdr+';border-radius:6px;padding:12px;margin-bottom:14px;">';
+  let h='<div onclick="if(event.target===this){ccState.picker=null;ccState.pickerSearch=\'\';render();}" style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:999;display:flex;align-items:flex-start;justify-content:center;padding:12px;box-sizing:border-box;overflow-y:auto;">';
+  h+='<div style="background:#111;border:1px solid '+bdr+';border-radius:8px;padding:14px;width:100%;max-width:680px;margin-top:8px;box-sizing:border-box;">';
   h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">';
   h+='<div style="font-family:\'Orbitron\',sans-serif;font-size:12px;color:'+bdr+';">Pick '+esc(title)+'</div>';
-  h+='<button onclick="ccState.picker=null;ccState.pickerSearch=\'\';render();" style="background:none;border:1px solid #555;color:#888;padding:2px 8px;border-radius:3px;cursor:pointer;font-size:11px;">✕ Close</button>';
+  h+='<button onclick="ccState.picker=null;ccState.pickerSearch=\'\';render();" style="background:none;border:1px solid #555;color:#888;padding:2px 10px;border-radius:3px;cursor:pointer;font-size:14px;">✕</button>';
   h+='</div>';
-  h+='<input type="text" placeholder="Search..." value="'+esc(st.pickerSearch||'')+'" style="'+CC_INP+'margin-bottom:8px;" oninput="ccState.pickerSearch=this.value;render();">';
+  h+='<input type="text" placeholder="Search..." value="'+esc(st.pickerSearch||'')+'" style="'+CC_INP+'margin-bottom:8px;" oninput="ccState.pickerSearch=this.value;render();" autofocus>';
   if(type==='weapon'){
     const curMfr=st.picker.mfr||'Generic';
     h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">';
@@ -9093,7 +9094,7 @@ function ccRenderPicker(){
     h+='</div>';
   });
   if(matches.length>40)h+='<div style="text-align:center;font-size:10px;color:#555;padding:5px;">'+matches.length+' total — refine search</div>';
-  h+='</div></div>';
+  h+='</div></div></div>';
   return h;
 }
 
