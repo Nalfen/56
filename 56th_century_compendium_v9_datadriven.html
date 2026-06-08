@@ -4390,11 +4390,15 @@ function ccMakeFreshState(){
     items:Array(20).fill(0).map(()=>({name:'',size:'0',qty:1})),
     items2:Array(20).fill(0).map(()=>({name:'',size:'0',qty:1})),
     charloadmax:'',notes:'',
-    picker:null,pickerSearch:''
+    picker:null,pickerSearch:'',pickerCat:null,pickerAvailOnly:false
   };
 }
 let ccState=ccMakeFreshState();
 let ccPickerCache=[];
+let ccPickerFacets=[];
+function ccPickCat(i){ccState.pickerCat=(i<0?'ALL':ccPickerFacets[i]);render();}
+function ccToggleAvailOnly(){ccState.pickerAvailOnly=!ccState.pickerAvailOnly;render();}
+function ccDefFamily(t){t=(t||'').toLowerCase();if(t.indexOf('barrier')>=0)return 'Barrier';if(t.indexOf('forcefield')>=0||t.indexOf('shield')>=0)return 'Forcefield';if(t.indexOf('datacom')>=0||t.indexOf('network')>=0)return 'Datacom';return 'Armor';}
 
 const CC_ATTR_KEYS=['PHYSICAL','MENTAL','SOCIAL','ACUITY','ENDURANCE','SPEED','WITS','WILLPOWER'];
 const CC_ATTR_RK={PHYSICAL:'physical',MENTAL:'mental',SOCIAL:'social',ACUITY:'acuity',ENDURANCE:'endurance',SPEED:'speed',WITS:'wits',WILLPOWER:'willpower'};
@@ -4922,13 +4926,35 @@ function ccRenderPicker(){
     const n=(x.name||'').toLowerCase();
     return n.includes(pq)||(x.skill||x.category||x.evo_type||x.type||x.race||'').toLowerCase().includes(pq)||(x.desc||'').toLowerCase().includes(pq);
   });
-  ccPickerCache=matches.slice(0,40);
+  // ── Category facet + availability filter ──────────────────────────────────
+  let facetOpts=null,getFacet=null;
+  if(type==='talent'){facetOpts=['PHYSICAL','MENTAL','SOCIAL','ACUITY'];getFacet=x=>(x.category||'').toUpperCase();}
+  else if(type==='evolution'){facetOpts=['GENETICS','CYBERNETICS','MAGIC'];getFacet=x=>(x.evo_type||'').toUpperCase();}
+  else if(type==='weapon'){facetOpts=[];items.forEach(x=>{const c=x.category||'';if(c&&facetOpts.indexOf(c)<0)facetOpts.push(c);});getFacet=x=>x.category||'';}
+  else if(type==='armor'){facetOpts=['Armor','Forcefield','Barrier','Datacom'];getFacet=x=>ccDefFamily(x.type||'');}
+  ccPickerFacets=facetOpts||[];
+  let pickerCat=st.pickerCat;
+  if(facetOpts&&pickerCat!=='ALL'&&facetOpts.indexOf(pickerCat)<0)pickerCat=facetOpts[0];
+  let fmatches=matches;
+  if(facetOpts&&pickerCat&&pickerCat!=='ALL')fmatches=fmatches.filter(x=>getFacet(x)===pickerCat);
+  if(type==='talent'&&st.pickerAvailOnly)fmatches=fmatches.filter(x=>{const c=(x.category||'').toUpperCase();const rem=ccTalentPoints(c)-ccTalentUsed(c);return (+(x.cost)||0)<=rem;});
+  ccPickerCache=fmatches.slice(0,150);
   let h='<div style="background:rgba(0,0,0,.7);border:1px solid '+bdr+';border-radius:6px;padding:12px;margin-bottom:14px;">';
   h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">';
   h+='<div style="font-family:\'Orbitron\',sans-serif;font-size:12px;color:'+bdr+';">Pick '+esc(title)+'</div>';
   h+='<button onclick="ccState.picker=null;ccState.pickerSearch=\'\';render();" style="background:none;border:1px solid #555;color:#888;padding:2px 8px;border-radius:3px;cursor:pointer;font-size:11px;">✕ Close</button>';
   h+='</div>';
   h+='<input type="text" placeholder="Search..." value="'+esc(st.pickerSearch||'')+'" style="'+CC_INP+'margin-bottom:8px;" oninput="ccState.pickerSearch=this.value;render();">';
+  if(facetOpts&&facetOpts.length){
+    h+='<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px;align-items:center;">';
+    const fbtn=(val,lbl,i)=>{const sel=(pickerCat===val);return '<button onclick="ccPickCat('+i+')" style="background:'+(sel?'rgba(0,200,255,.22)':'rgba(0,0,0,.4)')+';border:1px solid '+(sel?bdr:'rgba(255,255,255,.15)')+';color:'+(sel?bdr:'#999')+';padding:2px 8px;border-radius:3px;cursor:pointer;font-size:10px;font-family:\'Share Tech Mono\',monospace;">'+esc(lbl)+'</button>';};
+    h+=fbtn('ALL','ALL',-1);
+    facetOpts.forEach((c,i)=>{h+=fbtn(c,c,i);});
+    if(type==='talent'){
+      h+='<label style="font-size:10px;color:#aaa;margin-left:6px;display:flex;align-items:center;gap:3px;cursor:pointer;"><input type="checkbox" '+(st.pickerAvailOnly?'checked':'')+' onchange="ccToggleAvailOnly()" style="margin:0;">Available only</label>';
+    }
+    h+='</div>';
+  }
   if(type==='weapon'){
     const curMfr=st.picker.mfr||'Generic';
     h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">';
@@ -6080,8 +6106,26 @@ function ccRenderMagicGear(){
     const u=CC_SIZE_LOAD[it.size]||0;
     totalLoad+=u*(+(it.qty)||1);
   });
+  const ccAutoCarry=[];
+  const ccBulky=sz=>{const k=(sz||'').toLowerCase().replace(/[\s.]/g,'');return k==='huge'||k==='exlarge'||k==='massive'||k==='colossal';};
+  st.weapons.forEach((w,i)=>{if(w.name){const sz=(w.base_data&&w.base_data.size)||'';const bulky=ccBulky(sz);const u=bulky?0:(CC_SIZE_LOAD[CC_SIZE_TO_VAL[sz]||'1']||0);ccAutoCarry.push({label:'Weapon '+(i+1),name:w.name,size:sz,load:u,bulky:bulky});if(!bulky)totalLoad+=u;}});
+  st.datacoms.forEach((d,i)=>{if(d.name){const sz=(d.base_data&&d.base_data.size)||'';const bulky=ccBulky(sz);const u=bulky?0:(CC_SIZE_LOAD[CC_SIZE_TO_VAL[sz]||'0.25']||0);ccAutoCarry.push({label:'Datacom '+(i+1),name:d.name,size:sz,load:u,bulky:bulky});if(!bulky)totalLoad+=u;}});
   const loadMax=+(st.charloadmax)||0;
   h+=ccSecHead('GEAR & LOADOUT');
+  if(ccAutoCarry.length){
+    h+='<div style="background:rgba(0,200,255,.05);border:1px solid rgba(0,200,255,.2);border-radius:5px;padding:8px 10px;margin-bottom:14px;">';
+    h+='<div style="font-size:10px;color:var(--a);font-family:\'Orbitron\',sans-serif;margin-bottom:6px;">EQUIPPED — AUTO (weapons &amp; datacoms from Combat &amp; Tech)</div>';
+    h+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:4px;">';
+    ccAutoCarry.forEach(c=>{
+      h+='<div style="display:flex;align-items:center;gap:8px;font-size:11px;background:rgba(0,0,0,.3);border:1px solid '+(c.bulky?'rgba(255,200,0,.25)':'rgba(255,255,255,.06)')+';border-radius:3px;padding:3px 8px;">';
+      h+='<span style="color:#777;white-space:nowrap;">'+esc(c.label)+'</span>';
+      h+='<span style="color:var(--tx);flex:1;">'+esc(c.name)+'</span>';
+      if(c.bulky)h+='<span title="Too large to carry on you — store elsewhere" style="font-size:9px;color:var(--ye);border:1px solid rgba(255,200,0,.4);border-radius:3px;padding:0 5px;white-space:nowrap;">STORAGE · '+esc(c.size||'')+'</span>';
+      else h+='<span style="color:#888;white-space:nowrap;">'+esc(c.size||'—')+(c.load?' ('+c.load+')':'')+'</span>';
+      h+='</div>';
+    });
+    h+='</div></div>';
+  }
   h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:16px;">';
   ['items','items2'].forEach((key,li)=>{
     h+='<div><div style="font-size:11px;color:var(--a);margin-bottom:6px;font-family:\'Orbitron\',sans-serif;">'+(li===0?'LOADOUT 1 (On You)':'LOADOUT 2 (Storage)')+'</div>';
