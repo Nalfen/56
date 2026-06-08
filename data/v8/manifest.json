@@ -1,0 +1,15 @@
+{
+  "files": [
+    "weapons.json",
+    "armor.json",
+    "equipment.json",
+    "medical.json",
+    "characters.json",
+    "talents.json",
+    "magic.json",
+    "hacking.json",
+    "rules.json",
+    "glossary.json",
+    "galaxy.json"
+  ]
+}

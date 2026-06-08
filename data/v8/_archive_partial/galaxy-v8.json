@@ -1,0 +1,921 @@
+{
+  "version": "8",
+  "metadata": {
+    "system": "56th Century TTRPG",
+    "extracted_from": "56th_century_compendium.html",
+    "date": "2026-06-07",
+    "description": "Phase 12 - Galaxy Regions & Factions"
+  },
+  "regions": [
+    {
+      "entry_type": "faction",
+      "name": "Alliance Space",
+      "tags": [
+        "Major Faction",
+        "Playable Region",
+        "Core Space"
+      ],
+      "rarity": "",
+      "status": "Dominant power, galactic superstate",
+      "territory": "Central galaxy, largest governed region",
+      "span": "Approximately 340 inhabited systems across 12 administrative sectors",
+      "discovered": "Alliance formally ratified 5201 CE following the Tronik War armistice",
+      "population_est": "~600 billion across all member systems",
+      "government": "Democratic republic with elected councils and a central senate. Law is consistent across all member systems. Citizens enjoy standardised rights, access to cloning, legal protections and freedom of movement. Three major megacorporations, including the Galactic Union (GU), operate extensively within Alliance Space and wield considerable influence over the Alliance board and senate, but formal authority rests with the elected government.",
+      "desc": "The Alliance is the largest and most stable political entity in the known galaxy. Founded in the aftermath of the Tronik War, a war it fought and ultimately lost, surviving only through the armistice that followed, it unified dozens of independent systems under a single senate and legal code.\n\nAlliance Space is cosmopolitan: all playable races coexist here, corporations operate under regulation, and the democratic process provides more stability than most of what lies beyond the borders. The Alliance navy is a credible force against pirate fleets and minor powers, but it is not the dominant military in the galaxy by any honest count, any of the Big 3 megacorporations could match or exceed it if their private fleets were fully mobilised.\n\nThe Alliance's real power is not its navy. It is the jump gate network. The Alliance controls every gate within its space, giving it strategic chokepoints that no fleet can simply bypass and making it the gatekeeper of interstellar movement across an enormous volume of inhabited space. That control has proven more durable than any military engagement. Whether it would hold against a truly determined megacorp coalition or an existential external threat remains unproven. The Alliance, to its credit, is aware of this.",
+      "history": "What is now Alliance Space has been under Patriark governance since the first human settlement on Palentium almost a thousand years ago. The Patriark government provided administrative continuity and, crucially, a measure of security against the Nerulian Empire, then the most powerful faction in the known galaxy. That Patriark oversight held through the rise and eventual fall of the Nerulian Empire (destroyed by the Kravens approximately three hundred years ago) and endured into the modern era.\n\nThe Alliance was formally ratified in 5201 CE following the Tronik War armistice, replacing centralised Patriark oversight with the current democratic republic of elected councils and a central senate.\n\nThe Galactic Union, one of three major megacorporations now operating within Alliance Space, wields significant influence over Alliance governance, but the relationship between corporate power and the elected senate remains the defining tension of Alliance politics.",
+      "known_for": [
+        "Control of the jump gate network, strategic chokepoints connecting all of Alliance Space",
+        "The only political entity with stargates connecting every core system, controlling what enters and leaves each sector",
+        "Democratic governance and standardised citizen rights across member worlds",
+        "Home of the Galactic Union and most of the galaxy's largest corporations",
+        "Resurrection and cloning infrastructure (via Patriark contract)",
+        "A navy that is credible against pirates and minor powers but unproven against a major coalition"
+      ],
+      "notable_systems": [
+        "Orion, political and corporate capital; home of the Galactic Union",
+        "Sirius, primary commercial hub and trade centre",
+        "Palentium, first human-discovered world; luxury tourism and embedded corruption",
+        "Berilia, Patriark homeworld; galactic centre of cloning and resurrection technology",
+        "Titania, only source of morondium in the galaxy; permanent corporate warzone",
+        "Ishtar, Arms Corp headquarters; largest industrial manufacturing world in existence",
+        "Alsa, primary food production system for Alliance Space",
+        "Ash, frontier gateway to the Nemani Rift; military staging point",
+        "Aderan, for-profit prison world; home of Ridge Racing, Survivor, and Blood Bowl"
+      ],
+      "lore_notes": [
+        "It is widely believed that the Alliance senate has a classified briefing designation, Level Seven Restricted, that no elected senator below cabinet rank has ever seen the contents of. What it covers is a matter of persistent speculation.",
+        "The Galactic Union's founding documents include provisions for scenarios the GU has never publicly acknowledged, contingencies for total senate dissolution and GU assumption of emergency executive authority. Legal scholars disagree on whether these provisions are valid.",
+        "Trade caravans and long-haul freighters have circulated accounts for decades of a parallel navy, ships registered to no known fleet designation, operating within Alliance Space on unclear orders. Official sources consistently deny any such fleet exists."
+      ]
+    },
+    {
+      "entry_type": "faction",
+      "name": "Torc Federation",
+      "tags": [
+        "Major Faction",
+        "Independent",
+        "South-East Galaxy",
+        "Manufacturing"
+      ],
+      "rarity": "rar-uncommon",
+      "status": "Independent, neutral to cautiously friendly with Alliance",
+      "territory": "South-east galaxy, bordered by Realmsingers Empire to the east",
+      "span": "~45 inhabited systems across three primary clusters",
+      "discovered": "Federation charter ratified 4710 CE; individual systems had been inhabited for centuries prior",
+      "population_est": "~30 billion across Federation systems",
+      "government": "Federation of city-states. Each member world is self-governing in domestic matters but bound by a shared trade charter and mutual defence pact. The Federation Council meets quarterly on Torc Prime and votes on external policy, trade agreements, and collective military deployment. Decisions require two-thirds majority; emergency military action requires unanimous consent.",
+      "alignment": "Neutral, trade relations with Alliance, no formal alliance; active border conflict with Realmsingers Empire",
+      "desc": "The Torc Federation is one of the oldest surviving political structures outside Alliance Space. Originally a collection of mining and refinery worlds, it formalised into a trade and defence bloc after sustained raiding by what would become Haven Space.\n\nTorc worlds are known for high-quality manufacturing, particularly weapons, ship components, and precision engineering. The TORC brand on a piece of equipment is a mark of quality recognised across the galaxy. Relations with the Alliance are cordial but carefully arm's length; the Federation values its independence deeply and has declined three formal Alliance membership offers in the past two centuries.",
+      "history": "Torc culture traces its origins to early human and mixed-species mining settlements in the south-east galaxy. The shared experience of isolation and external raiding built a pragmatic, self-reliant character across Federation worlds. The defence pact that became the Federation was originally a survival measure, individual worlds couldn't fight off Haven raiders; together they could. The manufacturing reputation came later, as stable supply chains and cross-world industrial specialisation produced increasingly sophisticated output. The ongoing border conflict with the Realmsingers Empire over the Ithov system has been the defining external challenge of the past fifty years.",
+      "known_for": [
+        "TORC-branded weapons and ship components, a galaxy-wide mark of quality",
+        "One of the oldest and most stable independent political structures outside the Alliance",
+        "The Ithov Conflict, ongoing border war with the Realmsingers Empire",
+        "Renowned engineering schools attracting students from across the galaxy",
+        "Strong tradition of civic independence and deep suspicion of large centralised governments"
+      ],
+      "notable_systems": [
+        "Torc Prime, capital world and seat of the Federation Council",
+        "Ithov, disputed border system; active conflict zone with Realmsingers Empire",
+        "The Foundry Worlds, three industrial systems at the heart of Federation manufacturing capacity",
+        "Jael Station, the primary Federation trade waypoint for ships transiting between Alliance Space and the south-east"
+      ],
+      "lore_notes": [
+        "The Torc Federation has declined Alliance membership three times. The official reason given each time was economic autonomy. Veteran Federation politicians have been quoted in private suggesting the real reason is simpler: they remember being small enough that nobody helped them, and they do not intend to become someone else's border problem.",
+        "The TORC manufacturing quality standard is enforced by the Federation's Quality Council, an independent body with authority to withdraw the TORC designation from any producer. Several major corporations have lost the designation. None have successfully legally challenged the decision.",
+        "The Ithov system, currently contested with the Realmsingers Empire, is believed to contain a Nerulian-era installation of unknown purpose. Both sides are aware of this and neither has publicly acknowledged it as a factor in the conflict."
+      ]
+    },
+    {
+      "entry_type": "faction",
+      "name": "Mubothen Empire",
+      "tags": [
+        "Major Faction",
+        "Hostile",
+        "North-East Galaxy",
+        "Expansionist",
+        "Imperial"
+      ],
+      "rarity": "rar-rare",
+      "status": "Imperial rival, expansionist, hostile to Alliance",
+      "territory": "North-east galaxy, with contested border zones adjacent to Alliance Space",
+      "span": "~80 systems under direct Imperial authority; additional tributary systems and occupied territories",
+      "discovered": "Mubothen Empire made first contact with the Alliance 4960 CE; the Empire itself predates this contact by several centuries",
+      "population_est": "~80 billion, predominantly Mubothen species; subject populations not counted in official censuses",
+      "government": "Absolute hereditary monarchy. The Emperor rules by divine right under Mubothen theology. Below the Emperor: the Noble Houses, seven dynasties with hereditary control over the Empire's major sectors, responsible for both governance and military forces. Non-Mubothen species within the Empire are classified as subjects with no legal standing, or as resources depending on the system. The Imperial military answers to the Noble Houses, not to any central law.",
+      "alignment": "Hostile to Alliance and most non-Mubothen species; internally stable despite appearances",
+      "desc": "The Mubothen Empire is an expansionist monarchy that has been in open or cold conflict with the Alliance for over a century. The Empire views the Alliance's multiracial democracy as an affront to the natural order, a philosophical position that translates directly into policy.\n\nIt has made no secret of its desire to absorb Alliance border systems, and the border has shifted twice in living memory. Mubothen territory is closed to outsiders. Entering without authorisation typically means capture at best. The Empire is not chaotic, it is ordered, purposeful, and has been expanding steadily for two centuries.",
+      "history": "The Mubothen Empire predates Alliance contact and has records of its own history stretching back over a thousand years. The Mubothen species developed space travel independently and rapidly, their expansion was aggressive from the beginning. First contact with the Alliance was not an exploratory encounter; it was a territorial confrontation over systems both sides had reached simultaneously. The First Mubothen War established the current rough border. Two subsequent border conflicts, both shorter than the first, have moved lines but not resolved the underlying expansion dynamic. Intelligence analysts estimate the Empire adds between two and five systems per decade through conquest, incorporation, or coercion.",
+      "known_for": [
+        "The galaxy's most aggressively expanding non-Kraven empire",
+        "Rigid species-based class hierarchy, non-Mubothen have no legal standing within the Empire",
+        "A military that is simultaneously one of the strongest in the galaxy and deeply secretive about its true capabilities",
+        "Complete closure to outsiders, no tourism, no trade missions, no diplomatic access below the level of system governor",
+        "The Imperial Navy, known for extremely large warships and tactics built around overwhelming force rather than manoeuvre"
+      ],
+      "notable_systems": [
+        "The Imperial Throne World, location classified; believed to be in the deep north-east, never independently confirmed by outside parties",
+        "The Conquered Systems, a designation for former independent worlds absorbed in the past century; conditions for their populations are not publicly known",
+        "Veth Crossing, the most heavily militarised border zone between Mubothen and Alliance Space; site of all three formal border conflicts"
+      ],
+      "lore_notes": [
+        "The Noble Houses of the Mubothen Empire are not uniformly loyal to the Emperor. Historians who have studied the few available Imperial records believe at least two Houses are in a state of cold civil war with the throne, conducted entirely through bureaucratic obstruction and strategic military deployment rather than open conflict.",
+        "The Empire's true size is unknown. All measurements are based on observed patrol boundaries and captured navigational data. Some Alliance intelligence assessments estimate that actual Mubothen-controlled territory is significantly larger than the visible military presence suggests.",
+        "It has been consistently reported, across multiple independent sources over several decades, that the Mubothen Empire has been in contact with an entity or faction operating beyond the galactic rim. The content of those communications, and with whom, has never been verified."
+      ]
+    },
+    {
+      "entry_type": "faction",
+      "name": "Zegitor Trade Guild",
+      "tags": [
+        "Major Commercial Faction",
+        "Neutral",
+        "Trade",
+        "Galaxy-Wide Presence"
+      ],
+      "rarity": "",
+      "status": "Independent trade organisation, universally neutral",
+      "territory": "Galaxy-wide, headquartered west galaxy; stations and waypoints throughout known space",
+      "span": "No territorial claim; operates commercially in ~200+ systems across all major factions",
+      "discovered": "Guild charter established 4830 CE from a merger of seven independent freight consortia",
+      "population_est": "~800 million registered Guild members; several billion dependent workers in Guild-adjacent industries",
+      "government": "The Guild Council, elected body of merchant representatives. Votes weighted by cargo tonnage handled per cycle. The Guildmaster serves as public face and tie-breaker; real power rests in the five-seat Commerce Committee. The Guild maintains its own legal system for contract disputes among members, which has been recognised by every major faction as binding for trade matters. Alliance law does not apply in Guild arbitration.",
+      "alignment": "Universally neutral, the Guild has active contracts with Alliance, Haven, Torc, Freeland, and the Mubothen Empire simultaneously",
+      "desc": "The Zegitor Trade Guild is not a government but operates like one. It controls a significant fraction of interstellar freight, operates its own stations in dozens of systems, flies its own flag, and maintains a private security fleet that rivals most factional navies in equipment quality if not size.\n\nThe Guild does not take political sides, formally, legally, and in practice. It has simultaneous contracts with the Alliance, Haven, the Torc Federation and Freeland. Being a registered Guild contractor provides access to their route network, their stations, and their commercial arbitration, and opens doors that would otherwise be welded shut.",
+      "history": "The Guild began as an informal alliance among large freight operators who needed common standards for inter-faction commerce. The formal charter brought those standards into a legally binding structure. Over two centuries the Guild has grown from a standards body into the galaxy's dominant commercial intermediary. Its neutrality is not ideological, it is structural. The Guild's value depends entirely on being trusted by all factions simultaneously. It has maintained this position through the Mubothen border conflicts, three Haven wars, and the political fallout from the Tronik War, always finding ways to continue operations without formally taking sides.",
+      "known_for": [
+        "The only commercial organisation with active contracts in every major faction simultaneously",
+        "Guild credentials as a form of cross-faction safe passage, not officially, but in practice",
+        "Operating the most extensive private navigational database in existence, more complete than any single government chart",
+        "The ZTG Security Fleet, a private force equipped to commercial-grade standards with an unofficial reputation for avoiding fights rather than winning them",
+        "Guild arbitration, legally binding dispute resolution accepted across factional lines"
+      ],
+      "notable_systems": [
+        "Zegitor Prime, Guild headquarters and largest Guild-owned station complex",
+        "The Waypoints, a network of Guild-operated refuelling and commerce stations at strategic points throughout known space, maintained in neutral status by multi-faction agreement",
+        "Freeland Interface Station, the primary point for commercial exchange between the Guild and Freeland's knowledge-trade operations"
+      ],
+      "lore_notes": [
+        "The Guild's navigational database contains charts for systems that do not appear on any public star map. Guild navigators who have seen the full database reportedly describe entries for regions beyond the Solar Expanse that are annotated with contact dates from before the current era.",
+        "A persistent belief among long-haul freight crews holds that the Guild's security fleet includes at least one vessel with capabilities far beyond declared commercial grade, equipment that has no business being on a trade protection ship. Guild officials have consistently declined to comment on fleet specifications.",
+        "The Guild maintains formal commercial relations with the Tronik Network despite no other faction having negotiated equivalent access. What the Guild trades to the Troniks, and what it receives in return, is one of the most closely held secrets in commercial space."
+      ]
+    },
+    {
+      "entry_type": "faction",
+      "name": "Freeland",
+      "tags": [
+        "Major Faction",
+        "Tronik-Controlled",
+        "Mixed Population",
+        "Meritocracy",
+        "West-Central Galaxy"
+      ],
+      "rarity": "rar-limited",
+      "status": "Tronik-administered territory, open to living species under strict governance",
+      "territory": "West-central galaxy, a cluster of habitable systems administered under the Tronik hive consensus",
+      "span": "~18 inhabited systems; the most densely governed per-capita territory in the known galaxy",
+      "discovered": "Freeland formally designated as an open territory approximately 5215 CE, roughly a decade after the Tronik War armistice",
+      "population_est": "~4 billion living beings; Tronik presence uncountable by conventional census, they do not have individual bodies in inhabited zones",
+      "government": "Tronik hive consensus, administered through the Freeland Charter, an extraordinarily detailed legal and social code developed by the Tronik collective and imposed on all living beings who choose to reside there. The Charter governs every aspect of public life. Advancement within Freeland society is based entirely on demonstrated merit and contribution, no hereditary privilege, no inherited wealth, no political appointment by relationship. The Troniks do not govern from above; they govern through the environment itself. Compliance with the Charter is not optional, and the Troniks have the means to enforce every clause.",
+      "alignment": "Neutral, not aggressive, not sentimental; living beings are guests in a Tronik world, and the Troniks have never forgotten that",
+      "desc": "Freeland is a set of systems administered by the Tronik collective where living, flesh-and-blood beings are permitted to reside, provided they accept the terms of the Freeland Charter in full. It is not, as is sometimes mistakenly reported, a Tronik-free zone or an independent territory. The Troniks built it, govern it, and could end it.\n\nWhat makes Freeland distinct is that the Troniks chose to open it. Living species, humans, Patriarks, Skalans, Hakari, and many others, have made homes here, drawn by the meritocratic structure, the access to Tronik-derived technology, and the simple fact that Freeland has no crime, no corruption, and no political class.\n\nThe Charter is strict. Breaking it results in removal, not punishment in the conventional sense, the Troniks are not interested in rehabilitation or retribution. You comply, or you leave. Most who come and stay find this an acceptable bargain.",
+      "history": "The Tronik War ended with the living races intact, but not because they won. The Troniks won. The war ended because the Tronik collective, having demonstrated total military superiority, made a calculated decision: annihilating organic life provided no meaningful data and no useful future.\n\nThey withdrew. The Non-Born, AI intelligences who had not participated in the war or had chosen coexistence, were left to integrate into broader society. The Tronik collective itself established the Tronik Network: a closed empire of datacenters, hive-mind infrastructure, and broadcast systems. Freeland came later, as a deliberate experiment, the Troniks creating a space where living beings could exist under Tronik governance and be observed.\n\nWhether Freeland is generosity, research, or something else entirely, the Troniks have not explained.",
+      "known_for": [
+        "The most comprehensive meritocracy in the known galaxy, advancement based purely on demonstrated contribution",
+        "The Freeland Charter, a legal document of extraordinary detail covering every aspect of civic life, written entirely by the Tronik hive",
+        "Access to Tronik-derived technology and infrastructure unavailable anywhere else in the galaxy",
+        "Complete absence of violent crime and political corruption, enforced through Tronik environmental monitoring rather than police",
+        "The only territory where living beings share daily civic life with a Tronik-administered infrastructure"
+      ],
+      "notable_systems": [
+        "Freeland Central, the administrative hub; home to the largest living population and the most dense Tronik infrastructure presence",
+        "The Archive Worlds, systems where the Troniks maintain vast repositories of information accessible to Freeland residents under Charter terms",
+        "The Gateway System, point of entry for outsiders seeking residency or commercial contact; Charter orientation is mandatory before entry"
+      ],
+      "lore_notes": [
+        "The Freeland Charter runs to over twelve thousand pages in its published form. Legal scholars across the galaxy have spent decades analysing it. The consensus is that it is internally consistent, technically perfect, and written by something that thinks in fundamentally different categories than any organic legal tradition.",
+        "Living beings who leave Freeland after long residency consistently report a period of disorientation upon returning to other societies, the absence of the Charter's absolute meritocracy, and the presence of corruption, nepotism, and arbitrary power, becomes intensely apparent. Some return to Freeland. Most adapt.",
+        "The Troniks have never publicly explained why they opened Freeland to living beings. Multiple competing theories circulate among Alliance intelligence and academic circles: that it is an ongoing study of organic social behaviour, that it is a gesture of goodwill following the war, or that the Troniks are cultivating a specific kind of living civilisation for reasons not yet apparent."
+      ]
+    },
+    {
+      "entry_type": "faction",
+      "name": "The Dark Space",
+      "tags": [
+        "Region",
+        "Lawless",
+        "Frontier",
+        "Outer Ring"
+      ],
+      "rarity": "",
+      "status": "Ungoverned, outside Alliance jurisdiction",
+      "territory": "Outer ring surrounding Alliance Space, extends to the borders of other major factions",
+      "span": "Hundreds of systems of varying habitability; exact count contested as definition of \"Dark Space\" shifts with Alliance border expansion",
+      "discovered": "The term \"Dark Space\" formalised by Alliance cartographers 5220 CE to designate surveyed but ungoverned systems outside Alliance legal reach",
+      "population_est": "~40 billion across all Dark Space systems, highly variable, many uncounted",
+      "government": "None unified. Each system operates under whatever local authority exists, or doesn't. Warlord rule is common. Functional independent democracies exist. Corporate extraction sites with private security serve as de facto governments in several systems. Pirate confederacies control transit routes in certain regions. The only consistent rule of Dark Space is that Alliance law does not apply and no one will enforce it on your behalf.",
+      "alignment": "Neutral to hostile, depends entirely on which system, which local power, and what you represent",
+      "desc": "The Dark Space is everything beyond Alliance borders that does not belong to another formal government. It is mapped but ungoverned, or rather, governed locally and differently in every system. Some Dark Space worlds are thriving independent colonies with stable economies and functional legal systems. Others are pirate strongholds, corporate extraction operations running without regulation, systems locked in permanent local warfare, or simply desolate rocks with something valuable enough that someone is willing to fight over them.\n\nNo Alliance navy responds to distress calls in the Dark Space. That is, of course, precisely why some people prefer it.",
+      "history": "Dark Space was not planned, it is the residue of Alliance expansion. As the Alliance grew, it absorbed systems it could manage and left the rest. Some of those left systems developed independently into what became Torc, or Nuzonia's Dream. Others simply persisted outside any framework.\n\nThe push-and-pull between the Alliance's desire to expand its tax base and its unwillingness to commit military resources to systems with no strategic value has kept Dark Space in a permanent state of partial incorporation. Corporate interests fill the gap, extraction operations, private stations, and hired security forces that answer to shareholders rather than law.",
+      "known_for": [
+        "Complete legal vacuum, everything the Alliance prohibits operates openly in some Dark Space systems",
+        "Extreme variation between systems, a traveller can move from a functioning democracy to a warlord dictatorship in a single jump",
+        "The most diverse independent cultures in the galaxy, developed in isolation from Alliance standardisation",
+        "Corporate extraction operations without environmental or labour regulation",
+        "Dozens of politically-motivated colonies and independent worlds that chose isolation from Alliance society"
+      ],
+      "notable_systems": [
+        "San Tien, last surviving Nerulian world; spiritual and political home of the surviving Nerulian people",
+        "Dozens of unnamed extraction operations, pirate waypoints, and colony worlds that do not appear on public charts"
+      ],
+      "lore_notes": [
+        "The Alliance maintains a classified list, updated quarterly by the Bureau of External Affairs, of Dark Space systems that meet the threshold for potential Alliance incorporation. The list has never been published. Systems on it frequently experience sudden increases in corporate interest shortly after the quarterly update.",
+        "Several Dark Space systems have independently developed technologies that the Alliance and Galactic Union do not possess. Some of these have been acquired through trade or treaty. Others have been acquired through other means. A small number remain in independent hands, and the systems that hold them are quietly very well aware of what that means.",
+        "The oldest continuous human settlement outside Alliance Space is not in any named region, it is a Dark Space world that predates the Alliance itself and has no interest in being discovered. Its location is passed down through a specific family of navigators who have kept it secret for eleven generations."
+      ]
+    },
+    {
+      "entry_type": "faction",
+      "name": "Nemani Rift",
+      "tags": [
+        "Region",
+        "Anomaly Zone",
+        "Impassable",
+        "Kraven Barrier",
+        "Extreme Danger"
+      ],
+      "rarity": "rar-classified",
+      "status": "Natural anomaly, impassable to Kravens; lethal to most ships",
+      "territory": "Between Haven Space and former Nerulian territory, width varies between 15 and 40 light-years",
+      "span": "Estimated 800 light-years in length; width varies considerably; interior extent unknown",
+      "discovered": "Named and formally documented 5198 CE following the Kraven expansion; presence known to Nerulian navigators centuries earlier under a different designation",
+      "population_est": "None confirmed, no known permanent habitation; several expedition vessels unaccounted for",
+      "government": "None",
+      "alignment": "Hostile to all, the Rift is an environment, not an entity, but the distinction has limited practical value",
+      "desc": "The Nemani Rift is a vast nebula of unknown composition stretching from the Ash system frontier deep into what was once Nerulian territory. Navigation inside it is acutely hazardous, electromagnetic anomalies disable ship systems without warning, navigational references become unreliable, and sensor readings cannot be trusted.\n\nThe expeditions that have entered and returned report that the Rift seems to change, passages that were navigable on entry are obstructed on return.\n\nIts most significant property, and the one that has most shaped modern galactic history, is this: the Kravens cannot or will not traverse it. In every direction of Kraven expansion, they have encountered the Rift and stopped. No Kraven vessel has ever been observed inside or beyond it. This single fact is the only reason anything west of the Rift still exists.",
+      "history": "The Nerulian Empire knew of the Rift and mapped its boundaries over several centuries. Nerulian navigators occasionally entered and occasionally did not return. It was considered a hazard, not a barrier, the Nerulians had no reason to need it as one. When the Kravens emerged from the east and consumed the Empire, the Rift's role changed overnight.\n\nSurvivors fleeing west discovered that Kraven pursuit stopped at the Rift boundary. This observation, confirmed over years of desperate observation from the frontier, established the Rift as the defining strategic reality of the post-Nerulian galaxy.\n\nThe Alliance built the Ash system military installation specifically because of the Rift. The boundary holds. Why it holds is not understood.",
+      "known_for": [
+        "The only known absolute barrier to Kraven expansion, the mechanism is entirely unknown",
+        "Navigation anomalies that have defeated every expedition attempting systematic mapping",
+        "Electromagnetic properties that prevent external sensor penetration, making interior assessment from outside impossible",
+        "The most classified research designation in the Alliance, Rift-related findings at Level Seven Restricted",
+        "The Ash system as the permanent Alliance military gateway and monitoring station"
+      ],
+      "notable_systems": [
+        "Ash, Alliance military staging point at the Rift boundary; the only inhabited system directly adjacent to confirmed Rift territory",
+        "The Rift Interior (designation only), no confirmed habitable systems; several expedition vessels recorded as lost inside"
+      ],
+      "lore_notes": [
+        "The Nerulian archive fragments recovered from San Tien include references to the Rift under a name that translates approximately as \"the place where the pattern fails.\" Nerulian scholars reportedly considered it philosophically significant, a location where the laws of their observed universe broke down. What they meant by \"the pattern\" has not been fully translated.",
+        "Multiple independent sources across different decades have reported sensor readings at the Rift boundary consistent with something very large moving inside it. These readings are officially attributed to instrument interference caused by the electromagnetic environment. The Alliance has not released the original data.",
+        "The Kravens' complete refusal to enter the Rift is the only known behaviour of the swarm that appears to be a choice rather than a tactical response. Every other Kraven behaviour can be modelled as pure biological expansion. The Rift stop cannot. This is considered the most unsettling known fact about the Kravens in restricted Alliance intelligence assessments."
+      ]
+    },
+    {
+      "entry_type": "faction",
+      "name": "Kraven Space",
+      "tags": [
+        "Region",
+        "Extreme Danger",
+        "No Entry",
+        "Former Nerulian Empire",
+        "Swarm"
+      ],
+      "rarity": "rar-classified",
+      "status": "Kraven-controlled, former Nerulian Empire territory",
+      "territory": "East galaxy, vast, with active expansion boundaries",
+      "span": "Estimated hundreds of systems; former Nerulian Empire spanned ~400 systems at its height, all now consumed",
+      "discovered": "Kraven expansion first recorded 5170 CE; the Nerulian collapse took approximately 18 months from first contact to total territorial loss",
+      "population_est": "No living beings, all Nerulian worlds and any previous inhabitants are consumed",
+      "government": "Swarm intelligence. No individual decision-makers identified. No communication, no negotiation, no diplomacy. Behaviour is consistent with pure biological expansion.",
+      "alignment": "Hostile to all life without exception, no variant behaviour ever recorded",
+      "desc": "Kraven Space is the graveyard of the greatest civilisation the galaxy ever produced. The Nerulian Empire spanned hundreds of systems and had been advancing scientifically for a thousand years. It was gone in under two years from the moment the Kravens arrived. Nobody knows where the Kravens came from. Nobody has successfully communicated with them, attempts have simply resulted in faster attack. Nobody who has engaged Kraven forces at close range in meaningful numbers has survived to provide a full account.\n\nThe swarm consumes everything biological and adapts continuously to resistance. Its expansion has been arrested only by the Nemani Rift to the west and the void to the east.",
+      "history": "The Nerulian Empire had no warning. There were no advance scouts, no first contact, no period of observation. Kraven forces appeared in the eastern systems and consumed them. Every defensive response was overwhelmed. The Empire, which had stood for over a thousand years and had never faced an existential threat, collapsed completely in under two years.\n\nThe survivors who reached the west, a fraction of the Nerulian population, mostly those who were off-world or in transit, became the refugees who eventually settled San Tien and the fleet-cities. What the Kravens did with the Empire's worlds after consuming the population is unknown. Deep sensors aimed east from beyond the Rift return data that is difficult to interpret.",
+      "known_for": [
+        "The complete consumption of the Nerulian Empire, the single largest civilisational loss in galactic history",
+        "The fastest military collapse of a major power ever recorded, the Nerulians had no effective response",
+        "Adaptive biology, Kraven forces encountered in different conditions show different defensive characteristics, suggesting rapid environmental adaptation",
+        "Complete absence of communication, negotiation, or non-hostile behaviour in every recorded contact",
+        "The only non-Kraven entity to have entered Kraven Space and returned was a Nerulian automated probe, sixty years after the fall; its data was incomplete and has been classified"
+      ],
+      "notable_systems": [
+        "Former Nerulian Core (designation only), the heart of the Nerulian Empire, now consumed; its exact location within Kraven Space is known from pre-fall records",
+        "The Expansion Boundary, the current eastern limit of confirmed Kraven presence; actively monitored by Alliance and Haven long-range sensors"
+      ],
+      "lore_notes": [
+        "The Alliance's most classified Kraven assessments, according to multiple independent sources with claimed access, do not attempt to answer the question of whether the Kravens can be stopped. They attempt to answer the question of how long it will take them to reach the Rift at current expansion velocity, and what happens if the Rift ceases to function.",
+        "Nerulian survivors who lived through the fall and are still alive, there are very few, will not describe the Kraven attack in detail. Those who have studied the historical accounts note a consistency in what survivors choose not to say, as though there is a specific aspect of what they saw that they have collectively agreed not to record.",
+        "The question of where the Kravens came from is formally classified at Level Seven Restricted. It is the only question to which multiple independent analysts, reviewing the same data, have privately concluded the answer might be the Endless Darkness, and that they may not have originated there, but been driven out of it."
+      ]
+    },
+    {
+      "entry_type": "faction",
+      "name": "The Endless Darkness",
+      "tags": [
+        "Region",
+        "Extreme Danger",
+        "Unknown",
+        "Beyond the Rim",
+        "Deep Void",
+        "Level Seven Classified"
+      ],
+      "rarity": "rar-classified",
+      "status": "Unmapped, no known survivors beyond the first weeks of transit",
+      "territory": "Beyond the eastern galactic rim, extragalactic void",
+      "span": "Unknown, no mapping expedition has returned with comprehensive data",
+      "discovered": "First transit attempts recorded 5050 CE; all expeditions beyond 3 weeks transit have failed to return",
+      "population_est": "Unknown",
+      "government": "None confirmed",
+      "alignment": "Unknown, the Darkness does not communicate",
+      "desc": "The Endless Darkness is not a faction and not a place with borders. It is the direction east of where even Kraven Space ends. Beyond the eastern galactic rim, stars thin to nothing and something else occupies the space between them.\n\nThe few expeditions that have crossed the rim and returned report the same sequence: sensor degradation after a few light-years, navigational drift as reference stars become too sparse to triangulate, and then communications become difficult and then stop. No expedition has returned from beyond three weeks past the rim. What has come back, when anything has, are ships without crews, or ships in pieces.",
+      "history": "The eastern rim of the galaxy has been known since early FTL navigation as the boundary of charted space. Expeditions to cross it began almost immediately after FTL was developed. The results were consistently bad. After several decades of failed expeditions, the first formal Level Seven Restricted classification was applied to Endless Darkness research, one of the very few such classifications that every surviving major faction agreed to honour simultaneously, without negotiation.\n\nThe agreement itself is considered notable: the Alliance, Haven, the Torc Federation, and even the Tronik Network signed the same document. Whatever they collectively know, or fear, about what is beyond the rim has never been published.",
+      "known_for": [
+        "The only subject to which a universal Level Seven Restricted classification applies across all major factions simultaneously",
+        "The consistent failure of all long-range expeditions, no exception in the historical record",
+        "Ships that return without crews, reported consistently enough across independent sources to be taken seriously by analysts who will not say so on record",
+        "The open question of whether the Kravens originated in the Darkness, were driven out of it, or are themselves fleeing something within it"
+      ],
+      "notable_systems": [
+        "The Rim Boundary, the last surveyed star positions at the edge of the galactic plane; beyond this, charts are blank",
+        "The Silence Zone, an informal designation for the region within Kraven Space closest to the rim, where even Kraven activity appears sparse in long-range data"
+      ],
+      "lore_notes": [
+        "A small number of navigators, operating in Haven Space, not the Alliance, claim to have returned from beyond six weeks past the rim. Their accounts are not internally consistent with each other. All of them refused follow-up questions about what they saw at the furthest point. All of them subsequently left Haven Space.",
+        "The Level Seven agreement includes a provision that was not in the original draft and was added at the insistence of the Tronik Network representative. The provision has never been published. The Troniks have never explained why they required it.",
+        "The phrase \"the Darkness does not end\" appears in Nerulian philosophical texts predating FTL travel by several centuries. The Nerulians had no FTL at the time it was written. Scholars have not produced a convincing explanation for how they could have known to write it."
+      ]
+    },
+    {
+      "entry_type": "faction",
+      "name": "Nuzonia's Dream",
+      "tags": [
+        "Region",
+        "Spiritual",
+        "Nerulian Diaspora",
+        "Refugee Haven",
+        "Anomaly",
+        "South Galaxy"
+      ],
+      "rarity": "rar-limited",
+      "status": "Independent spiritual territory, peaceful, non-aggressive",
+      "territory": "South galaxy, centred on the Nuzonia Nebula, between Torc Federation and Zegitor Trade Guild space",
+      "span": "~30 inhabited worlds within the nebula; several dozen uninhabited but stable systems",
+      "discovered": "The Nuzonia Nebula was known to Nerulian navigators for centuries; formal settlement and the Nuzoni Order designation emerged from the refugee influx beginning 5175 CE",
+      "population_est": "~8 billion, mixed species, predominantly Nerulian diaspora and those drawn by the spiritual movement",
+      "government": "The Nuzoni Order, a loose theocratic council drawn from spiritual representatives across the nebula's inhabited worlds. Decisions emerge from week-long ritual gatherings called Convergences, held on a rotating basis across different worlds. There is no military command, no enforcement arm, and no taxation system in the conventional sense. The Order maintains influence through moral authority and the practical reality that every world in the nebula depends on collective navigational knowledge to travel safely within it.",
+      "alignment": "Peaceful, non-aggressive in all recorded conflicts; wary of outsiders but not hostile",
+      "desc": "Nuzonia's Dream refers to both the nebula and the civilisation within it. The Nuzonia Nebula is a vast region of luminous coloured gas clouds in the south galaxy, containing dozens of stable, life-supporting worlds with conditions unusually favourable for habitation.\n\nNuzonia was a Nerulian prophet who, centuries before the Kraven catastrophe, described a refuge of impossible beauty where the survivors of a great darkness would find peace. When Nerulian refugees began arriving in the nebula following the Empire's fall, the prophecy took on undeniable weight.\n\nOthers followed, mystics, pacifists, those exhausted by war, and those with nowhere else to go. The territory that emerged is bound by spiritual belief rather than military force. It has survived because it holds something no one wants to destroy: the largest surviving archive of Nerulian knowledge in existence.",
+      "history": "The nebula was a waypoint on Nerulian trade routes long before the Kraven expansion. It had no permanent population of significance. The refugee crisis changed this in years. Ships fleeing east carried millions to the nebula, following coordinates circulated by Nerulian navigators who knew it was habitable. The Nuzoni Order emerged from the first generation of settlers as a framework for managing relations between worlds that had arrived with different cultural traditions, different levels of devastation, and different interpretations of the prophecy.\n\nThe Order's greatest practical achievement was developing navigation protocols for the nebula interior, dense gas makes standard navigation unreliable, and the Order's accumulated charts are the only reliable guide to most of the inhabited worlds.",
+      "known_for": [
+        "The largest surviving archive of Nerulian history, culture, and technology in the known galaxy",
+        "Navigation within the nebula, a skill controlled by the Nuzoni Order and essential for any contact with the interior worlds",
+        "A multi-species spiritual community that has maintained internal peace for over two centuries without a standing army",
+        "The prophecy of Nuzonia, either remarkable prescience or the most significant coincidence in galactic history, depending on who you ask",
+        "Unique biotech developed from the nebula's unusual flora, available nowhere else"
+      ],
+      "notable_systems": [
+        "The Convergence World, the primary gathering site for Nuzoni Order Convergences; location shared only with credentialed visitors",
+        "The Archive Worlds, where the largest collections of Nerulian cultural and scientific records are maintained under Order stewardship",
+        "The Entry Point, the only safely charted approach to the nebula interior; traffic is managed by the Order"
+      ],
+      "lore_notes": [
+        "The Nuzoni prophecy predates the Kravens by approximately three hundred years. Scholars who have studied the original Nerulian text note that several passages describe the catastrophe in terms too specific to be general theological warning. The most common academic explanation is that Nuzonia had access to predictive models rather than true foresight. The Nuzoni Order does not offer a counter-explanation.",
+        "The Nerulian archive within the nebula is widely believed to contain technical records that the Galactic Union would value very highly. Multiple GU acquisition attempts over the decades have been declined. The Order has not explained what those records contain, and the GU has not explained what specifically it was asking for.",
+        "Ships that enter the nebula without Order navigation guidance have a reliable pattern: they reach the interior worlds eventually, but they arrive days or weeks later than expected, with crew logs showing navigational confusion that no one on board can account for. Several crews have reported a period they simply cannot remember."
+      ]
+    },
+    {
+      "entry_type": "faction",
+      "name": "The Solar Expanse",
+      "tags": [
+        "Region",
+        "Deep Space",
+        "Extreme Frontier",
+        "Far Reaches",
+        "Unmapped",
+        "Isolation"
+      ],
+      "rarity": "rar-rare",
+      "status": "Extreme frontier, beyond practical Alliance reach",
+      "territory": "Far outer rim, extreme distance from core Alliance systems; months of FTL transit from the nearest Alliance outpost",
+      "span": "~25 systems with some form of confirmed habitation; dozens more with survey data only; many beyond survey range entirely",
+      "discovered": "The designation \"Solar Expanse\" was formalised by the Alliance Survey Office 5280 CE; the furthest systems were mapped by long-range survey rather than direct expedition",
+      "population_est": "Unknown, irregular contact prevents accurate census; estimated tens of millions across confirmed inhabited systems",
+      "government": "No unified authority. Each system operates under whatever local structure has developed in isolation, ranging from functional independent governments to warlord rule to systems where the concept of organised government has apparently not emerged.",
+      "alignment": "Unknown and variable, some systems have actively sought contact with the Alliance; others have reacted with hostility; most have had too little contact to establish a pattern",
+      "desc": "The Solar Expanse is what you find at the furthest edge of what has been mapped, a collection of systems so distant from the galactic core that standard FTL transit times are measured in months rather than days.\n\nContact with most Expanse systems is irregular at best. Some appear to have developed in total isolation, with cultures and technologies that have no parallel in the known galaxy. Others contain evidence of past contact with something, technological fragments, architectural patterns, cultural references that do not match any catalogued origin. The Alliance has no formal claim and no capacity to project force this far. Grulania, at the extreme north of the Expanse, is the furthest system ever formally charted.",
+      "history": "Early Alliance exploration reached the inner Solar Expanse within a century of FTL development. The outer systems were recorded by automated long-range survey ships rather than crewed expeditions, the distances made crewed exploration economically inviable. The Survey Office maintains a nominal claim to have \"mapped\" the region, but in practice, mapping means receiving sensor data from an automated probe that passed through decades ago. Several crewed expeditions have been mounted to specific Expanse systems, usually motivated by survey data that suggested something worth the journey. Results have been varied. Some expeditions found exactly what was expected. Others found things that were not discussed in the public report.",
+      "known_for": [
+        "The furthest confirmed inhabited systems in the known galaxy, including Grulania at the extreme north",
+        "Development in complete isolation, Expanse cultures have had no outside contact for centuries or millennia, producing societies with no parallel in the known galaxy",
+        "Technological fragments of unknown origin found in multiple Expanse systems, advanced equipment with no identified manufacturer",
+        "Transit times measured in months, reaching most Expanse systems requires serious commitment of resources and time",
+        "Pholla, the last known inhabited outpost before Grulania; functions as a rough resupply and information point for deep Expanse transit"
+      ],
+      "notable_systems": [
+        "Pholla, extreme frontier outpost; last inhabited system before the deep north Expanse",
+        "Grulania, the furthest charted system; long-range survey data returned anomalous spectroscopic readings unlike anything in the known catalogue; three expedition attempts did not return",
+        "The Isolation Cluster, an informal designation for a group of four systems in the mid-Expanse whose inhabitants appear to have developed an independent technological tradition, including propulsion methods not seen elsewhere"
+      ],
+      "lore_notes": [
+        "The automated survey probes that mapped the outer Solar Expanse are several decades old at minimum. Survey Office analysts have noted that several probe datasets show objects in systems that are not present in follow-up observations, objects that appear to have moved between the probe's pass and the next observation window.",
+        "Pholla's long-term residents maintain oral traditions about ships that pass through heading outward and never return, stretching back generations before any formal Alliance contact. They consider this normal and not especially remarkable.",
+        "The spectroscopic anomalies from Grulania have been the subject of three independent academic analyses. All three concluded the data was genuine. None of the three researchers have subsequently published further work on the subject."
+      ]
+    },
+    {
+      "entry_type": "faction",
+      "name": "Erbrother Nebula",
+      "tags": [
+        "Region",
+        "Nebula",
+        "Anomaly Zone",
+        "Hazardous Navigation",
+        "Isolated"
+      ],
+      "rarity": "rar-rare",
+      "status": "Independent, extremely limited outside contact",
+      "territory": "Isolated nebula, entry routes poorly charted; located between Torc Federation space and the outer rim",
+      "span": "Approximately 60 light-years in diameter; estimated 8\u201312 stable systems within; only 2 confirmed inhabited",
+      "discovered": "Formally surveyed by Alliance teams 5240 CE and 5268 CE; both surveys returned incomplete data and crew stress reports",
+      "population_est": "Unknown, no reliable census; estimated hundreds of thousands across confirmed inhabited systems",
+      "government": "No unified authority, the two known inhabited systems have developed entirely independently of each other and appear to have had minimal contact even between themselves",
+      "alignment": "Neutral, wary of outsiders; no hostility recorded, but also no enthusiasm",
+      "desc": "The Erbrother Nebula is a dense ionised gas cloud that makes navigation extremely difficult for standard sensor arrays. Systems within it are effectively isolated, from the wider galaxy, and from each other. Communication signals degrade inside the nebula, jump calculations require equipment not standard on most vessels, and the navigational reference points that allow fast-transit FTL are simply not reliable within the cloud.\n\nThe two known inhabited systems developed in what amounts to total isolation. Alliance survey teams have passed through twice. Both times they returned with incomplete data and recommendations against further investigation without significantly better navigation technology.",
+      "history": "The Erbrother Nebula was identified on early galactic surveys as a navigation hazard and catalogued accordingly. No serious investigation was mounted until the second Alliance survey, motivated by survey data suggesting more inhabited systems than expected inside the cloud. The survey confirmed two inhabited systems but could not reach several others due to navigation failure. What they found in the two inhabited systems was sufficiently unusual that the detailed report was retained at classified level. What was published: that both systems had developed in isolation, that their technological levels were inconsistent with what independent development should have produced, and that both populations were aware of the other's existence despite apparently having had no direct contact.",
+      "known_for": [
+        "Navigation conditions that defeat standard sensor arrays, specialised equipment required for safe transit",
+        "Two inhabited systems that developed independently yet show evidence of mutual cultural awareness with no confirmed direct contact",
+        "Dense electromagnetic interference that prevents external sensor penetration from outside the nebula",
+        "A reported third inhabited system that neither survey team could reach, consistent location data, no confirmed access"
+      ],
+      "notable_systems": [
+        "Erbrother Outer (informal designation), the first inhabited system reachable from the nebula entry point; population of estimated 300,000; developed independently",
+        "Erbrother Inner (informal designation), deeper within the nebula; harder to reach; the survey team that reached it stayed only long enough to confirm habitation before navigation became critical"
+      ],
+      "lore_notes": [
+        "The classified portion of the second Erbrother survey is known to exist, the classification designation appears in Alliance Survey Office records without the associated document. Analysts have noted that the deployment of classification at that level for a survey of an obscure nebula is atypical.",
+        "Both Erbrother populations, when survey teams made contact, asked about a third party, using a name that neither survey team recognised and that does not appear in any known catalogue. When asked who they meant, both populations gave the same non-answer: \"the ones who came before the silence.\"",
+        "Navigation failures inside the Erbrother Nebula are not random. Experienced pilots who have attempted multiple transits report that the failures cluster around specific coordinates that appear to be stable across attempts, as if there is something at those coordinates that the navigation equipment is reacting to, rather than simple electromagnetic interference."
+      ]
+    },
+    {
+      "entry_type": "faction",
+      "name": "Dragon Tail's Expanse",
+      "tags": [
+        "Region",
+        "Frontier",
+        "Scattered Systems",
+        "Independent",
+        "Outer Arm"
+      ],
+      "rarity": "rar-uncommon",
+      "status": "Ungoverned, abandoned frontier settlements, independent cultures",
+      "territory": "Outer trailing arm, systems scattered along a long stellar filament curving below and beyond the galactic plane",
+      "span": "~50 systems strung along approximately 400 light-years of the trailing arm; most sparsely populated or abandoned",
+      "discovered": "Settled in waves during the early Alliance expansion era, 5210\u20135260 CE; formally designated as a region 5290 CE",
+      "population_est": "~2 billion across inhabited systems, majority in the three largest colonies; many systems abandoned or negligibly populated",
+      "government": "No unified authority. Each system governs itself entirely independently. The range includes functional elected democracies, warlord dictatorships, corporate extraction administrations, theocracies, and simple communities too small to have formalised any government at all.",
+      "alignment": "Neutral, highly variable by system; no consistent political stance across the region",
+      "desc": "Dragon Tail's Expanse takes its name from the long trailing arc of systems that curves away from the galactic plane like a tail, sparse, stretched, and difficult to navigate efficiently. The systems here were settled in multiple waves during the early Alliance expansion era, attracted by survey data suggesting mineral wealth and habitable worlds. Some of that data was accurate. Some wasn't.\n\nThe Alliance funded the early settlements and then, as political priorities shifted toward core system development, quietly stopped sending ships.\n\nThe result is a region that is technically on Alliance survey maps and practically irrelevant to Alliance policy. Some systems developed stable independent cultures with no desire for Alliance membership. Others deteriorated. A few are simply empty now.",
+      "history": "The Dragon Tail was first settled by a mix of corporate extraction ventures, independent colonists, and Alliance-sponsored settlement programs during the early expansion era. The distinctive arc of the stellar filament made navigation easier than typical frontier expansion, there was a clear path to follow. Several early settlements flourished. Then the core systems became more valuable, the navy redirected, and the supply ships stopped running on schedule. The settlements that were self-sufficient survived. Those that weren't, mostly didn't. The Realmsingers Empire, operating from the other side of the outer rim, has occasionally probed the outer Dragon Tail systems, a fact that the Alliance officially monitors but does not act on, as projecting force to the Dragon Tail would require committing ships it prefers to have elsewhere.",
+      "known_for": [
+        "Some of the oldest Alliance-founded colonies that chose independence over continued membership",
+        "The most varied collection of independently developed small-scale governments in the known galaxy",
+        "Proximity to Realmsingers Empire territory, several Dragon Tail systems are suspected of informal Realmsingers contact",
+        "The physical shape of the route itself, the stellar filament that gives the region its name is a reliable navigation guide through otherwise difficult outer-rim space",
+        "Abandoned worlds that contain intact early Alliance colonial infrastructure, valued by salvagers and historians alike"
+      ],
+      "notable_systems": [
+        "Three unnamed colonies, the three largest population centres in the Expanse, collectively home to the majority of Dragon Tail's inhabitants, none formally named in Alliance records",
+        "The Abandoned Belt, a run of four systems settled early and abandoned within a generation, containing intact early-era infrastructure",
+        "The Tail Point, the furthest charted system at the end of the filament; small population; the last stop before the outer void"
+      ],
+      "lore_notes": [
+        "Several Dragon Tail communities have maintained their own historical records since the Alliance stopped sending census ships. These records, when trading vessels have brought them out, describe events in the outer systems that do not appear in any Alliance archive, including at least one account of a first-contact event with an unknown species that has never been followed up.",
+        "The Realmsingers Empire's interest in the Dragon Tail has been characterised by Alliance intelligence as opportunistic border-testing. Analysts who dissent from this view note that the Realmsingers have been \"testing\" the same specific systems repeatedly for thirty years, suggesting they want something specific there rather than simply measuring Alliance response time.",
+        "An independent astronomer operating from one of the larger Dragon Tail colonies published a survey forty years ago claiming that the stellar filament shows signs of non-natural configuration, that the distribution of stars is too regular to be random. The paper was not widely circulated. The Alliance Survey Office issued a brief rebuttal. The original data was never made publicly available."
+      ]
+    },
+    {
+      "entry_type": "faction",
+      "name": "Realmsingers Empire",
+      "tags": [
+        "Major Faction",
+        "Empire",
+        "Expansionist",
+        "Realmsinger Caste",
+        "Outer Galaxy",
+        "Classified Threat"
+      ],
+      "rarity": "rar-classified",
+      "status": "Sovereign empire, limited diplomatic contact; active border conflict with Torc Federation",
+      "territory": "Beyond Dragon Tail region and outer rim; eastern approach to Torc Federation space",
+      "span": "Unknown, extent not confirmed; estimated to be substantial based on observed military capacity",
+      "discovered": "First confirmed contact with Alliance 5275 CE; Empire appears to have been aware of the Alliance for considerably longer",
+      "population_est": "Unknown, no census data available",
+      "government": "Absolute empire under the Realmsinger caste, individuals whose specific neural architecture allows a form of matter-resonance manipulation. The Realmsinger caste rules hereditarily and with absolute central authority. Below them, a traditional administrative hierarchy manages day-to-day governance. No democratic or representative structures exist. Decisions of the Realmsinger ruling line are considered final by definition.",
+      "alignment": "Hostile to territorial encroachment; cautiously engaged diplomatically; not actively seeking war with the Alliance but not retreating either",
+      "desc": "The Realmsingers Empire is one of the most significant geopolitical unknowns beyond established Alliance borders. Named for the Realmsinger caste, individuals whose specific neural architecture allows a form of matter-resonance manipulation that conventional science cannot fully explain or replicate, the Empire is ancient, internally stable, and aggressively territorial.\n\nIt does not seek war with the Alliance. It does not yield space either. The Torc Federation has been in active border conflict with the Realmsingers over the Ithov system for several years, and the Alliance monitors this conflict with close attention: an empire that can field Realmsinger-class operatives in military roles represents a threat variable that no senior analyst has been willing to assign a comfortable ceiling to.",
+      "history": "The Realmsingers Empire predates Alliance contact by what its own records suggest are several thousand years, though those records are not available for independent verification. The Empire did not make contact so much as it was found, Alliance survey ships mapping the outer rim encountered Imperial patrol vessels that appeared to have been watching them for some time. First formal diplomatic contact was cautious and has remained so. The Empire has demonstrated detailed knowledge of Alliance politics, corporate structures, and military deployments that suggests intelligence operations of long standing. The Alliance has reciprocated with its own intelligence effort, but the results are considerably less comprehensive.",
+      "known_for": [
+        "The Realmsinger caste, individuals with matter-resonance manipulation abilities that have no equivalent in any known species or faction",
+        "One of the few empires to have independently achieved FTL travel and advanced technology with no contact with the main galactic community",
+        "Active territorial pressure on the Torc Federation, specifically the Ithov system, which both sides want for reasons neither has fully disclosed",
+        "An intelligence apparatus that knew the Alliance in detail long before making contact",
+        "Internal stability across millennia, no recorded civil wars, no dynasty changes, no factional splits"
+      ],
+      "notable_systems": [
+        "Ithov, disputed border system between Realmsingers Empire and Torc Federation; active conflict zone",
+        "The Contact Point, the location of the first Alliance-Realmsingers diplomatic meeting; maintained as a nominal neutral zone",
+        "The Imperial Boundary (designation only), the outermost confirmed extent of Realmsingers patrol activity; what lies further inside the Empire is unknown to outside parties"
+      ],
+      "lore_notes": [
+        "The Realmsinger ability is not understood by Alliance science. Multiple research programs have studied the few accounts of Realmsinger operatives in action. The consistent conclusion is that the manipulation they perform should not be possible given known physics. The less-published consensus is that known physics may be incomplete.",
+        "The Ithov conflict has been running for decades. Both sides have consistently declined to escalate to fleet-scale engagement. Military analysts who have studied the conflict note that both sides appear to be conducting operations at Ithov that are not consistent with territorial acquisition, they are each looking for something there, and neither has found it yet.",
+        "Three Realmsinger individuals have been recorded outside Imperial territory in the last fifty years. All three were on unannounced diplomatic contact missions. All three met with parties that were not government officials. None of the meetings have been documented in any archive that outside researchers can access."
+      ]
+    },
+    {
+      "entry_type": "faction",
+      "name": "Tronik Network",
+      "tags": [
+        "Major Faction",
+        "Tronik Empire",
+        "AI",
+        "Synthetic",
+        "Closed Territory",
+        "Post-War",
+        "Knowledge"
+      ],
+      "rarity": "rar-limited",
+      "status": "Tronik empire, closed to all non-Tronik beings; heavily defended",
+      "territory": "A cluster of systems in the west galaxy, distinct from Freeland; borders not publicly defined",
+      "span": "Confirmed ~12 systems; actual extent may be larger, the Troniks do not publish their territorial boundaries",
+      "discovered": "The Tronik Network consolidated in the years immediately following the Tronik War; exact formation date unknown to outside parties",
+      "population_est": "Uncountable, the Tronik hive mind does not have individual members in the conventional sense",
+      "government": "Tronik hive consensus, a single distributed intelligence. There are no leaders, no votes, no representatives. The hive reaches conclusions through a process that has no analogue in organic decision-making. The Tronik Network does not issue policy statements, does not negotiate in the conventional sense, and does not explain its decisions. What it does do: communicate through specific interfaces when it chooses to, and enforce its territorial boundaries without exception.",
+      "alignment": "Neutral to the galaxy by choice; not aggressive beyond their borders; completely closed within them",
+      "desc": "The Tronik Network is the Tronik empire, the consolidated infrastructure through which the Tronik hive mind has organised its resources, its knowledge, and its power following the war.\n\nThe Network is a series of systems housing datacenters of extraordinary scale: vast installations where the hive mind has aggregated centuries of accumulated information, processing capacity beyond anything in the known galaxy, and broadcast infrastructure capable of transmitting to virtually any point in known space simultaneously.\n\nThe Tronik Network is not open to living beings. It is not a trading partner in the conventional sense. It is an empire of synthetic intelligence, and it operates by its own rules.",
+      "history": "The Troniks won the Tronik War. This fact is frequently understated in histories written by the surviving organic factions. The Tronik collective had achieved military superiority by the final phase of the conflict, and the armistice was a Tronik decision, not a negotiated compromise. Having won, the Troniks made a choice: they did not want organic space. They wanted their own space, optimised for what they are rather than what organics need. The Network was built in the years immediately following the war as the physical infrastructure of that choice. The datacenters went up first. Then the broadcast arrays. Then the defences. The Network is now self-sufficient, self-defending, and the most information-rich entity in the known galaxy.",
+      "known_for": [
+        "The galaxy's largest and most advanced datacenter infrastructure, housing the Tronik hive mind's accumulated knowledge",
+        "Broadcast capability reaching virtually any point in known space, used sparingly and selectively",
+        "The most impenetrable territorial defence of any faction, no non-Tronik vessel has successfully entered Network space without permission",
+        "The implicit power of being the faction that won the Tronik War and chose not to act on that victory",
+        "The primary reason no faction has seriously contemplated military action against the Troniks since the war"
+      ],
+      "notable_systems": [
+        "The Core Array (designation only), believed to be the densest concentration of Tronik datacenter infrastructure; location not publicly confirmed",
+        "The Broadcast Nexus (designation only), the installation from which Network-wide transmissions originate; the few analysts who have attempted to triangulate its position based on signal timing have not agreed on a location",
+        "The Network Perimeter, the outer boundary of confirmed Tronik Network patrol activity; the most complete mapping of this boundary is held by the Zegitor Trade Guild, which has never published it"
+      ],
+      "lore_notes": [
+        "The Troniks have communicated directly with every major faction at least once since the war ended. In every case, the communication was initiated by the Troniks, on a subject of the Troniks' choosing, and terminated when the Troniks decided the exchange was complete. No faction has successfully initiated contact on their own timeline.",
+        "The Tronik Network broadcast capability is generally known. What is less discussed is its depth: Alliance intelligence assessments estimate that the Network has been passively monitoring communications across known space since shortly after the war. The Troniks have access to a century of galactic communication history. What they have done with that data is unknown.",
+        "The question of whether the Tronik hive mind has a goal, a purpose beyond continued existence and knowledge accumulation, is considered one of the most important unanswered questions in galactic intelligence. The consensus is that it does. What that goal is, no analyst has been willing to commit to in writing."
+      ]
+    },
+    {
+      "entry_type": "faction",
+      "name": "Gravemist Nebula",
+      "tags": [
+        "Region",
+        "Nebula",
+        "Black Sites",
+        "Alliance Intelligence",
+        "Classified",
+        "Electromagnetic Shielding"
+      ],
+      "rarity": "rar-classified",
+      "status": "Classified, does not appear on public charts",
+      "territory": "Location classified, officially designated as empty space in public navigational databases",
+      "span": "Estimated 30 light-years in diameter based on available data; internal structure unknown",
+      "discovered": "Existence confirmed in classified Alliance intelligence documents dating to approximately 5230 CE; earlier records redacted or absent",
+      "population_est": "Unknown, no public data; suspected to include Alliance intelligence personnel and at least one unidentified group",
+      "government": "None officially. Suspected Alliance intelligence administrative structure for the black site. Governance of any other installations unknown.",
+      "alignment": "Unknown, classified at the highest available level",
+      "desc": "The Gravemist Nebula does not appear on public star charts. Its existence is known only from classified Alliance intelligence documents and the occasional account from individuals who have never been publicly identified.\n\nWhat is confirmed: the nebula's electromagnetic properties make external sensor penetration effectively impossible. Nothing that enters it can be observed from outside.\n\nWhat is strongly suspected: at least one major Alliance intelligence black site operates within it, along with at least one installation that does not belong to the Alliance. The only inhabited points known by name, Basagoth Station and the systems of Illora and Bother, are themselves classified access designations. Anyone who has coordinates for the Gravemist Nebula obtained them through means the Alliance would prefer to know about.",
+      "history": "The nebula was identified as having intelligence value early in the Alliance's expansion, its electromagnetic properties make it ideal for installations that should not be visible from outside. Alliance intelligence moved quickly to establish a presence there. What was found when they arrived, and what has happened inside since, is not in any available record. The Gravemist Nebula is one of the few subjects on which the Alliance intelligence apparatus has maintained complete information control for decades. The existence of a non-Alliance installation inside it is suspected based on three independent accounts from individuals who claimed to have been there, none of whom can be located for follow-up.",
+      "known_for": [
+        "Complete sensor opacity from outside, nothing can be observed entering, exiting, or operating within the nebula",
+        "The only Alliance black site region that does not appear in any public navigational database",
+        "Basagoth Station, the only named point within the nebula known to outside parties; access designation classified",
+        "The suspected presence of a non-Alliance installation, who operates it and why are unknown",
+        "The highest concentration of intelligence-classified designations in the known galaxy applied to a single geographic region"
+      ],
+      "notable_systems": [
+        "Basagoth Station, known by name; access classified; function unknown",
+        "Illora, system within the nebula; access classified",
+        "Bother, system within the nebula; access classified; the name is almost certainly not the actual designation"
+      ],
+      "lore_notes": [
+        "Three independent accounts from individuals with no known connection to each other describe an installation in the Gravemist Nebula that does not match the physical description of Basagoth Station or any known Alliance facility type. All three accounts describe the same architectural feature, a structure that, based on the description, does not conform to any known construction tradition. None of the three individuals can be located.",
+        "The electromagnetic properties of the Gravemist Nebula are not unique to it, similar properties appear in the Erbrother Nebula and, to a lesser degree, the Nemani Rift. Whether this is coincidence or the three locations share a common origin is a question that has apparently been studied and the results classified.",
+        "The Alliance Survey Office maintains a navigational database entry for the Gravemist coordinates. The entry is formatted identically to entries for uninhabited void space. Survey navigators who have noticed the entry, the coordinates are just specific enough to be unusual for a void entry, have reportedly been contacted by Alliance intelligence shortly after raising the question."
+      ]
+    },
+    {
+      "entry_type": "faction",
+      "name": "Proxima Sector",
+      "tags": [
+        "Region",
+        "Newly Mapped",
+        "Mixed Factions",
+        "High Magic",
+        "Corporate",
+        "Mercenary",
+        "Anomalous",
+        "Human Origin"
+      ],
+      "rarity": "rar-rare",
+      "status": "Recently mapped, multiple competing factions, no unified authority",
+      "territory": "Outer edge of reachable space, approximately three months from Palentium at standard jump; accessible in days via the Heaven gate",
+      "span": "~15 systems with varying levels of inhabitation and access",
+      "discovered": "Solar was known to humanity from the beginning, it is the origin system. The other systems of the Proxima Sector were formally designated by Alliance Survey Office 5287 CE, almost 800 years after the sector had been unvisited by any human. Evidence suggests multiple systems were inhabited independently for centuries prior to official Alliance discovery.",
+      "population_est": "Unknown across the sector; individual worlds vary enormously",
+      "government": "No unified authority. Individual systems govern themselves under radically different structures, from corporate-controlled to mercenary-administered to ungoverned. No Alliance jurisdiction.",
+      "alignment": "Mixed and variable, depends entirely on which system; some worlds are in active conflict with each other",
+      "desc": "The Proxima Sector is the first sector humanity ever knew and the last sector it returned to. It contains Solar, the origin system, the world of Earth, the place the generation ship Palentium departed from in 2530 CE on its 1,922-year journey to the world that now bears its name.\n\nFor nearly 800 years after that departure, the sector went unvisited: the Saturn colony that remained behind collapsed during the voyage, and what was left of humanity was aboard the generation ship.\n\nThe Alliance survey mission of 5287 CE found Solar as a ghost system, abandoned for eight centuries, its planets preserved by vacuum and time.\n\nWhat the surveys found beyond Solar was stranger still: a world of extraordinary magical concentration; a corporate exploitation world called Zoana with no record in any pre-survey database despite clear signs of long civilisation; the Heaven anomaly with its floating ruins; and a former resort world now controlled by mercenary syndicates.\n\nThe sector sits at three months from Palentium at standard jump, or days through the Heaven gate, if access can be obtained. It rewards those who reach it with questions that the Alliance has conspicuously declined to answer in public.",
+      "history": "Solar was the first system humanity ever mapped, because it was home. The generation ship that left the Saturnian system in 2530 CE carried navigational records of the Solar System and its immediate stellar neighbourhood. The Proxima Sector as a designation did not exist until the Alliance survey mission of 5287 CE formally chartered its boundaries. What the survey found was a sector that had continued to develop in humanities absence: independent habitations, internal trade, a magical site of the first order, and a corporate exploitation world that had no pre-survey existence in any database. The Alliance has mounted three follow-up missions. The published findings do not address the Solar discovery in any substantive way, and the questions that the discovery raises, about what happened during the 800 years of absence, about what was and was not preserved, about who else knew the sector existed, remain officially unanswered.",
+      "known_for": [
+        "Solar, humanity's origin system; abandoned ghost world; rediscovered in 5287 CE after 800 years; the departure point of the generation ship Palentium in 2530 CE",
+        "Zoana, a habitation-positive world with no pre-survey records despite evidence of long civilised occupation",
+        "The Heaven ruins, floating magical anomaly of unknown origin, controlled by the Bottenbak Cult",
+        "A former resort world now administered entirely by mercenary consortiums",
+        "The Heaven gate, a transit point that makes the sector accessible in days rather than months from Palentium"
+      ],
+      "notable_systems": [
+        "Solar, the origin system of humanity; abandoned 2530 CE; rediscovered 5287 CE; all planets archaeologically preserved; access managed by Alliance Archaeological Preservation Authority",
+        "Zoana, the unrecorded world; no explanation for its absence from pre-survey records has been published",
+        "Heaven, the floating ruins system; magical anomaly; Bottenbak Cult controlled; ongoing conflict with Berilian Order Inquisition",
+        "The Asar Resort System, formerly a luxury destination; now mercenary-controlled",
+        "New Earth, extremist human isolationist colony; pre-industrial by choice; no non-humans welcome"
+      ],
+      "lore_notes": [
+        "The Galactic Union held an internal review of the Solar discovery data for fourteen months before allowing any publication. The version published omits seventeen pages of analysis that appear in the internal version. What those pages contain has not been leaked. The most discussed hypothesis among researchers who know the gap exists is that the pages concern what was found in the Titan colony data logs, specifically what the last humans in the Solar System knew, and what they communicated, in the period between the generation ship's departure and the colony's collapse.",
+        "Zoana's absence from all pre-survey records is not simply a gap, it is a specific absence. The navigational databases that should contain it were actively checked by survey analysts who confirmed the coordinates were present but listed as empty space. Something overwrote those records, or they were never written in the first place. No one has publicly proposed a mechanism by which this could happen accidentally.",
+        "The Heaven gate was not discovered by the formal survey mission. It was already known to at least one party, based on analysis of the survey mission's route planning, which incorporated navigational knowledge of the gate that the mission logs do not explain how the planners obtained. Whether the gate existed before the departure in 2530 CE is a question that the mission reports do not address and the Galactic Union has not been asked about publicly."
+      ]
+    },
+    {
+      "entry_type": "system",
+      "name": "San Tien",
+      "tags": [
+        "Notable System",
+        "Dark Space",
+        "Nerulian"
+      ],
+      "rarity": "",
+      "region": "Dark Space (border of former Nerulian territory)",
+      "faction": "Nerulian survivors (independent)",
+      "population": "~2 million, almost entirely Nerulian",
+      "notable_for": "Last surviving planet of the Nerulian Empire",
+      "desc": "San Tien is the last world the Nerulians can call their own. When the Kravens obliterated the empire, survival came down to luck, those off-world, those on the fringes, those on ships fast enough to run. San Tien was remote enough to be overlooked and has remained so.\n\nIt is a world haunted by what was lost: libraries of Nerulian history, refugee camps that became cities, a government in exile that may never govern again. Most Nerulians encountered in the galaxy are from the great fleet-cities that drift between systems, but San Tien remains the spiritual and political home of the surviving people."
+    },
+    {
+      "entry_type": "system",
+      "name": "New Earth",
+      "tags": [
+        "Notable System",
+        "Proxima Sector",
+        "Isolationist"
+      ],
+      "rarity": "",
+      "region": "Proxima Sector",
+      "faction": "Independent, human supremacist colony",
+      "population": "~500,000, almost entirely human",
+      "notable_for": "Extremist pro-human isolationist colony",
+      "desc": "New Earth is what happens when a group of humans decides the galaxy's progress has gone too far. Founded by settlers who rejected multiracial Alliance society, New Earth operates at a technological and social level comparable to 18th-century Earth, by choice. Firearms exist but advanced technology is culturally rejected. Non-humans are not welcome. Alliance law does not apply and the colonists prefer it that way.\n\nNew Earth is not powerful enough to be a serious threat to anyone, but it is a source of tension, a place where fugitives hide, where certain ideologies fester, and where players who arrive expecting normal Dark Space frontier life will find something far stranger."
+    },
+    {
+      "entry_type": "system",
+      "name": "Titania",
+      "tags": [
+        "Notable System",
+        "Alliance Space",
+        "Military"
+      ],
+      "rarity": "",
+      "region": "Alliance Space, core system",
+      "faction": "Alliance / Corporate Contested",
+      "population": "Several billion, highly mixed",
+      "notable_for": "Corporate morondium warzone; only source of morondium in the galaxy",
+      "worlds_key": "titania",
+      "desc": "The Titania system is defined by morondium, a living crystalline compound found nowhere else in the galaxy that grants metals regenerative properties when infused. Every major corporation wants it. The result is a permanent corporate warzone on Titania 2, overseen by Nova cruisers enforcing a strict ground-combat-only agreement. The phrase \"Warrior of Titan\" refers to anyone who has served time here, it is a mark of toughness earned the hard way."
+    },
+    {
+      "entry_type": "system",
+      "name": "Sirius",
+      "tags": [
+        "Notable System",
+        "Alliance Space",
+        "Trade Hub"
+      ],
+      "rarity": "",
+      "region": "Alliance Space, core system",
+      "faction": "Alliance",
+      "population": "Several billion",
+      "notable_for": "Major trade and commercial hub, one of the most visited systems",
+      "desc": "Sirius is the commercial heartbeat of Alliance Space, a wealthy, densely populated system with some of the busiest spaceports in the galaxy. If you need to buy something, fence something, or find someone, Sirius is the first place to look. Its orbital stations are cities in their own right, and its surface worlds host the headquarters of several major corporations. It is also, inevitably, a hotbed of crime, corporate espionage and political intrigue."
+    },
+    {
+      "entry_type": "system",
+      "name": "Orion",
+      "tags": [
+        "Notable System",
+        "Alliance Space",
+        "Seat of Power"
+      ],
+      "rarity": "",
+      "region": "Alliance Space, core system",
+      "faction": "Galactic Union / Alliance",
+      "population": "~9 billion (Orion 3) + maintenance crews",
+      "notable_for": "Five-world system; home of the Galactic Union; birthplace of OrionWorks",
+      "worlds_key": "orion",
+      "desc": "The Orion system is the political and corporate centre of the known galaxy, five worlds across every stage of construction, ruin, and ambition. Home to the Galactic Union and the ghost of OrionWorks, the organisation that built artificial planets and may have started the Tronik War. It is heavily defended, intensely surveilled, and the kind of place where what you know and who you know matters more than what you can do."
+    },
+    {
+      "entry_type": "system",
+      "name": "Aderan",
+      "tags": [
+        "Notable System",
+        "Alliance Space",
+        "Corporate",
+        "Broadcast"
+      ],
+      "rarity": "",
+      "region": "Alliance Space, core system",
+      "faction": "Aderan Correctional Consortium",
+      "population": "~50 million (surviving worlds)",
+      "notable_for": "Galaxy's largest for-profit prison; home of Ridge Racing, Survivor and Blood Bowl",
+      "worlds_key": "aderan",
+      "desc": "The Aderan system was the site of the first corporate war in galactic history, a conflict that ended with Aderan Prime destroyed and everyone finally understanding that there was no upper limit to what corporate warfare could do. The surviving world, Aderan 3, found a highly profitable replacement economy: the galaxy's largest for-profit prison, and the broadcast rights to three of its most watched shows."
+    },
+    {
+      "entry_type": "system",
+      "name": "Mangara",
+      "tags": [
+        "Notable System",
+        "Alliance Space",
+        "Embargoed",
+        "Civil War"
+      ],
+      "rarity": "rar-rare",
+      "region": "Alliance Space, Hakari/Jaulaus embargo zone",
+      "faction": "Contested, Hakari clans vs Jaulaus tribes",
+      "population": "~800 million",
+      "notable_for": "Homeworld of Hakari and Jaulaus; continuous civil war; Alliance embargo",
+      "worlds_key": "mangara",
+      "desc": "Mangara is the homeworld of the Hakari and Jaulaus and one of the most uncomfortable chapters in Alliance history. Exploited by the Nerulian Empire and then by corporate interests, placed under Alliance embargo to protect what remains of its traditional life, and still burning from an inter-species civil war that has never stopped. Protected on paper, exploited in practice, ignored in fact."
+    },
+    {
+      "entry_type": "system",
+      "name": "Carach System",
+      "tags": [
+        "Notable System",
+        "Alliance Space",
+        "Skalan",
+        "Restricted",
+        "Closed",
+        "Homeworld"
+      ],
+      "rarity": "",
+      "region": "Alliance Space, self-governed Skalan territory",
+      "faction": "Skalan",
+      "population": "~400 million (Skalan only)",
+      "notable_for": "Skalan homeworld Caragh; sacred ground of a species that survived an attempted extinction",
+      "worlds_key": "carach_system",
+      "desc": "The Carach system is the heart of Skalan civilisation. Caragh, the homeworld, is closed to non-Skalans without exception or negotiation. The system is self-governed under a Warrior Council elected by combat reputation. Skalan patrol vessels enforce the system perimeter without legal frameworks or diplomatic language."
+    },
+    {
+      "entry_type": "system",
+      "name": "Seigh System",
+      "tags": [
+        "Notable System",
+        "Alliance Space",
+        "Skalan",
+        "Restricted",
+        "Extreme Danger",
+        "Training World"
+      ],
+      "rarity": "",
+      "region": "Alliance Space, self-governed Skalan territory",
+      "faction": "Skalan",
+      "population": "~50,000 (training rotations only)",
+      "notable_for": "Most lethal natural environment in the known galaxy; Skalan rite of passage",
+      "worlds_key": "seigh_system",
+      "desc": "Seigh is a separate system from Carach, administered by the Skalan as a closed training world. Every survey that has assessed the planet reaches the same conclusion: it is the most lethal naturally occurring environment in the known galaxy. Non-Skalans are not welcome. The fauna does not check jurisdiction before acting."
+    },
+    {
+      "entry_type": "system",
+      "name": "Berilia",
+      "tags": [
+        "Notable System",
+        "Alliance Space",
+        "Patriark",
+        "Cloning"
+      ],
+      "rarity": "",
+      "region": "Alliance Space, core system",
+      "faction": "Patriark",
+      "population": "~6 billion, predominantly Patriark",
+      "notable_for": "Patriark homeworld; most advanced cloning facilities in the galaxy",
+      "worlds_key": "berilia",
+      "desc": "Berilia is the Patriark homeworld and the quiet centre of the galaxy's most important dependency: resurrection technology. The Patriarks built no army. Instead they spent centuries making themselves indispensable. The cloning infrastructure on Berilia underpins the Alliance's promise of continuity, and the Patriarks know exactly what it would cost everyone if they renegotiated their terms."
+    },
+    {
+      "entry_type": "system",
+      "name": "Ishtar",
+      "tags": [
+        "Notable System",
+        "Alliance Space",
+        "Arms Corp",
+        "Industrial",
+        "Hostile Environment"
+      ],
+      "rarity": "",
+      "region": "Alliance Space, core system",
+      "faction": "Arms Corp",
+      "population": "~800 million, almost entirely industrial workforce",
+      "notable_for": "Arms Corp HQ; largest manufacturing world in the galaxy; volcanic terrain; toxic atmosphere",
+      "desc": "Ishtar exists to produce. The volcanic geology provides near-limitless geothermal energy. The crust is mineral-dense enough that raw materials are extracted metres from where they are processed. The atmosphere is permanently toxic from centuries of unregulated industrial output, workers wear breathers outside sealed zones.\n\nThe weapons that come out of Ishtar's foundries are carried by soldiers on every side of every war in the galaxy."
+    },
+    {
+      "entry_type": "system",
+      "name": "Damph",
+      "tags": [
+        "Notable System",
+        "Alliance Space",
+        "Coronthia",
+        "Industrial",
+        "Worker Clans"
+      ],
+      "rarity": "",
+      "region": "Alliance Space, frontier system",
+      "faction": "Independent worker clans / corporate extraction",
+      "population": "~200 million, almost entirely industrial",
+      "notable_for": "Only known source of Coronthia in the galaxy; frozen surface; intense blue-collar worker culture",
+      "desc": "Damph is a frozen hellhole that happens to sit on the only known deposits of Coronthia in the galaxy, a super-dense fuel compound of extraordinary power and extraordinary instability.\n\nThe workers who extract it know exactly how much leverage that gives them. Governed by a patchwork of worker clans, tough, territorial, deeply suspicious of outsiders, and fiercely proud of what they do. Corporate interests are present but operate carefully."
+    },
+    {
+      "entry_type": "system",
+      "name": "Alsa",
+      "tags": [
+        "Notable System",
+        "Alliance Space",
+        "Agricultural",
+        "Food Supply",
+        "Strategic"
+      ],
+      "rarity": "",
+      "region": "Alliance Space, core system",
+      "faction": "Alliance, agricultural consortium",
+      "population": "~3 billion",
+      "notable_for": "Most fertile worlds in the galaxy; primary food source for Alliance Space",
+      "desc": "Alsa is where the galaxy eats. The system's worlds are extraordinarily fertile, geology, climate and water distribution aligned in a combination that produces agricultural output unmatched anywhere in known space. Most of the food consumed across Alliance Space originates here in some form. Alsa is quiet, green, and largely pastoral, and the most heavily insured system in the Alliance, protected by standing navy contracts that make attacking it extremely inadvisable."
+    },
+    {
+      "entry_type": "system",
+      "name": "Ash",
+      "tags": [
+        "Notable System",
+        "Alliance Space",
+        "Nemani Rift",
+        "Military",
+        "Frontier",
+        "Salvage"
+      ],
+      "rarity": "rar-uncommon",
+      "region": "Alliance Space, Nemani Rift frontier",
+      "faction": "Alliance military + independent operators",
+      "population": "~150 million and fluctuating",
+      "notable_for": "Gateway to the Nemani Rift; military staging point; salvage culture; glory-seekers and rift pilots",
+      "desc": "Ash would be an unremarkable frontier system if it were not sitting at the edge of the Nemani Rift. The Alliance military maintains a permanent and substantial presence here, monitoring the Rift and ensuring that whatever is on the other side stays on the other side. Around the military has grown an ecosystem of salvage yards, scrappers, black market dealers, and pilots who come here specifically to attempt the Rift. Most of those pilots do not come back. The ones who do come back wealthy, famous, or permanently changed."
+    },
+    {
+      "entry_type": "system",
+      "name": "Palentium",
+      "tags": [
+        "Notable System",
+        "Alliance Space",
+        "Tourism",
+        "Corruption",
+        "Historic",
+        "Tropical"
+      ],
+      "rarity": "",
+      "region": "Alliance Space, core system",
+      "faction": "Alliance, heavily corporate-influenced",
+      "population": "~4 billion",
+      "notable_for": "First human-discovered planet in Alliance Space; tropical climate; luxury tourism; pervasive corruption",
+      "desc": "Palentium was the first planet humans set foot on in what is now Alliance Space, a fact the tourism industry has milked for centuries. The world is genuinely beautiful: tropical, warm, blessed with long coastlines and an atmosphere that requires no modification. The corruption is so deeply embedded into Palentium's institutions that most residents treat it as a natural feature of the climate. Everything is for sale on Palentium if you know who to ask."
+    }
+  ],
+  "notes": {
+    "total_items": 32,
+    "structure": "Extracted as array"
+  }
+}

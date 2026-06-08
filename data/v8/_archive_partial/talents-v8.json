@@ -1,0 +1,3071 @@
+{
+  "version": "8",
+  "metadata": {
+    "system": "56th Century TTRPG",
+    "extracted_from": "56th_century_compendium.html (line 726)",
+    "date": "2026-06-07",
+    "description": "Complete talent system: 382 talents with prerequisites and effects"
+  },
+  "talents": [
+    {
+      "category": "PHYSICAL",
+      "name": "Adapted Cloning",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "5",
+      "effect": "You no longer suffer the negative effects of cloning,  (No temporary stat loss.)"
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Armor Training",
+      "skill": "MIGHT",
+      "req": "0",
+      "cost": "5",
+      "effect": "Remove the encumbrance of LIGHT ARMOR and reduce the ENCUMBRANCE of MEDIUM/HEAVY ARMORS to SMALL and MEDIUM respectivelly."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Baseball",
+      "skill": "MARTIAL ARTS",
+      "req": "0",
+      "cost": "5",
+      "effect": "While using a melee weapon or if you have a free hand; you can use an QUICK REACTION Martial Art skill check to deviate the grenade 1m per success. Return grenade to sender on CRIT."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Better than new",
+      "skill": "REPAIR",
+      "req": "0",
+      "cost": "5",
+      "effect": "If you used a JOURNEYMAN check to fix or repair a device all your rolls using that device are LUCKY until the end of the SCENE."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Brutal fighter",
+      "skill": "MARTIAL ARTS",
+      "req": "0",
+      "cost": "5",
+      "effect": "Gain a SMALL bonus to DAMAGE of your unarmed or natural weapon attacks and increase POWER by 1 category (Max HIGH) on COMPLEX attacks."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Built to last",
+      "skill": "CRAFT",
+      "req": "0",
+      "cost": "5",
+      "effect": "Objects you CRAFT are always tougher. Items gain the DUR+ tag."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Cat's Grace",
+      "skill": "ATHLETICS",
+      "req": "0",
+      "cost": "5",
+      "effect": "When climbing, walking ledges or balancing on tight surfaces you do not treat the terrain as difficult. You still cannot run."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Combat Rider",
+      "skill": "PILOTING",
+      "req": "0",
+      "cost": "5",
+      "effect": "You are trained to fight from a vehicle or mount, increase all DEFENSES by 1 category when in a vehicle or mount."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Coordinated assault",
+      "skill": "MARTIAL ARTS",
+      "req": "0",
+      "cost": "5",
+      "effect": "When flanking with someone else with this talent you both gain a SMALL bonus to DEFENSES and DAMAGE against the flanked target. If 2 or more allies with this talent are flanking with you the bonus is LARGE."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Daredevil",
+      "skill": "ATHLETICS",
+      "req": "0",
+      "cost": "5",
+      "effect": "You rolls are lucky when rolling any PHYSICAL skills doing stunts and acrobatics."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Eyes on the prize",
+      "skill": "SCAVENGE",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can now perform a SCAVENGE as a QUICK action and it can also be done in combat. You gain the minimum possible materials when doing so."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Fake is the new Real",
+      "skill": "CRAFT",
+      "req": "0",
+      "cost": "5",
+      "effect": "Any fake item you create looks so real that any skill checks done to determine it's true nature have a LARGE penalty. On a critical success the item is \"Real\"."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Fast Draw",
+      "skill": "ATHLETICS",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can draw or holster weapons as a free action instead of a QUICK action. (Max of once per round)."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Grease Monkey",
+      "skill": "REPAIR",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can fix just about anything. Your character does not suffer penalties when working with devices that are unknown. (No alien tech)."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Gusto Certified",
+      "skill": "CRAFT",
+      "req": "0",
+      "cost": "5",
+      "effect": "Dismantling items, breaching doors and scavenging action time is cut in half."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Hidden Gems",
+      "skill": "SCAVENGE",
+      "req": "0",
+      "cost": "5",
+      "effect": "When scavenging a part you have a 50% chance to find components of a higher quality then the source had."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Home field advantage",
+      "skill": "SURVIVAL",
+      "req": "0",
+      "cost": "5",
+      "effect": "You automatically have BAD cover when in an area in which you had to perform a survival check. This improves to GOOD cover if you already had some form of COVER."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "I can take it",
+      "skill": "RESILIENCE",
+      "req": "0",
+      "cost": "5",
+      "effect": "When rolling on EVO AFFLICTIONS from too much EVOs the GM's roll are UNLUCKY. (Roll twice pick the lowest result)."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Improved Reflexes",
+      "skill": "ATHLETICS",
+      "req": "0",
+      "cost": "5",
+      "effect": "Gain a LARGE bonus to SPEED defense during any round where you rolled an ATHLETIC check."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Iron man",
+      "skill": "RESILIENCE",
+      "req": "0",
+      "cost": "5",
+      "effect": "Gain a SMALL bonus to your RESILIENCE checks."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Junkie",
+      "skill": "RESILIENCE",
+      "req": "0",
+      "cost": "5",
+      "effect": "When rolling a TOXIC SHOCK, you can reduce the final result by making a RESILIENCE skill check to reduce the TOXIC SHOCK result."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Mash EM!",
+      "skill": "PILOTING",
+      "req": "0",
+      "cost": "5",
+      "effect": "Your vehicle is considered 1 size category larger when determining collision damage"
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Mr. Torgue",
+      "skill": "DEMOLITION",
+      "req": "0",
+      "cost": "5",
+      "effect": "Any attacks with the EXPLOSIVE modifier gains a SMALL bonus to DMG. POWER increased by 1 CATEGORY (Max HIGH) against the target at the epicenter of the explosion (max 1 target)."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Noogie Slam",
+      "skill": "MARTIAL ARTS",
+      "req": "0",
+      "cost": "5",
+      "effect": "If you MOVE before a melee attack you add a SMALL bonus to your damage. If you RUN you instead gain a LARGE bonus."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Potential",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can replace any PHYSICAL skill check roll with your highest PHYSICAL talent score divided by 10 (For example 40 talent means you roll with a skill of  4)."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Psy Punch",
+      "skill": "PRIMALIST",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can change your natural attacks to inflict SPIRITUAL damage instead of PHYSICAL. Player's choice before attacking."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Ramming speed",
+      "skill": "PILOTING",
+      "req": "0",
+      "cost": "5",
+      "effect": "While performing a ramming action your vehicule has a LARGE bonus to it's STRUCTURE."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Reverse Engineer",
+      "skill": "SCAVENGE",
+      "req": "0",
+      "cost": "5",
+      "effect": "When a crafting  skill result would result in a destroyed result, you automatically recover 50% of the value in materials."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Safety First",
+      "skill": "DEMOLITION",
+      "req": "0",
+      "cost": "5",
+      "effect": "Explosives devices you use do not detonate unless you want them to."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Specialist's touch",
+      "skill": "CRAFT",
+      "req": "0",
+      "cost": "5",
+      "effect": "Any items made by you have a SMALL bonus to their expertise when wielded by you."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Spray and Pray",
+      "skill": "HEAVY WEAPONS",
+      "req": "0",
+      "cost": "5",
+      "effect": "When using cover fire you can declare twice as much area as covered locations"
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Take Cover",
+      "skill": "ATHLETICS",
+      "req": "0",
+      "cost": "5",
+      "effect": "When you use your QUICK action to SHIFT, you can move 2 meters instead of only 1."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Tumble",
+      "skill": "ATHLETICS",
+      "req": "0",
+      "cost": "5",
+      "effect": "You are trained at breaking falls; gain a LARGE bonus to ATHLETICS check when reducing fall damage."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Versatile Fighter",
+      "skill": "MARTIAL ARTS",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can take a SMALL penalty to your next melee attack add DP or DEADLY as an attack modifier."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Very Strong",
+      "skill": "MIGHT",
+      "req": "0",
+      "cost": "5",
+      "effect": "Increase the maximum weight for lift and hold by 50% and 100% for push and pull actions."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Vice Grip",
+      "skill": "MIGHT",
+      "req": "0",
+      "cost": "5",
+      "effect": "When you hold something, someone or onto something, anyone attempting to take it from you or break free has a LARGE penalty to any check required."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Who needs tools ?",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "5",
+      "effect": "You don't need tools to build your items, you forge them with your mind. Replace the need for any simple tools as long as you have CHI"
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Wolverine",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "5",
+      "effect": "Your natural weapons are fully hidden while not in use. That weapon now has a Passive CONCEALMENT 6."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Action Hero",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "If you aren't the intended target of an area attack you take the minimum damage."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Akimbo",
+      "skill": "MARTIAL ARTS",
+      "req": "0",
+      "cost": "10",
+      "effect": "Attacking with two weapons no longer has a SMALL penalty."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Berserk",
+      "skill": "RESILIENCE",
+      "req": "0",
+      "cost": "10",
+      "effect": "When suffering from LIGHT TRAUMA, gain a  SMALL bonus to your melee damage. Increase bonus to LARGE on SEVERE TRAUMA."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Bloodied Frenzy",
+      "skill": "RESILIENCE",
+      "req": "0",
+      "cost": "10",
+      "effect": "Gain a SURGE point when aquiring any TRAUMA; it must be used on that same turn. If the surge is not used the point is lost."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Cheetah",
+      "skill": "ATHLETICS",
+      "req": "0",
+      "cost": "10",
+      "effect": "Increase your base movement by 1."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Crack Driver",
+      "skill": "PILOTING",
+      "req": "0",
+      "cost": "10",
+      "effect": "Chose a specific type of vehicle or mount you gain a LARGE bonus on any PHYSICAL skill checks involving that vehicle"
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Demolition Expert",
+      "skill": "DEMOLITION",
+      "req": "0",
+      "cost": "10",
+      "effect": "Gain a LARGE bonus to damage against any non living targets while using Two Handed Melee weapons or Heavy Weapons."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Evasive Maneuvers",
+      "skill": "PILOTING",
+      "req": "0",
+      "cost": "10",
+      "effect": "Increase the base HANDLING of any ship you pilot by 1."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Finesse",
+      "skill": "MARTIAL ARTS",
+      "req": "0",
+      "cost": "10",
+      "effect": "All melee weapons at least 3 EXPERTISE when wielded by you."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Gravity Training",
+      "skill": "SURVIVAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "SPACE is no longer difficult terrain to you."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Hardened Scales",
+      "skill": "RACIAL",
+      "req": "JAULAUS",
+      "cost": "10",
+      "effect": "Gain a SMALL bonus to all SOAK rolls ."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Just a scratch",
+      "skill": "PILOTING",
+      "req": "0",
+      "cost": "10",
+      "effect": "Vehicle TRAUMA does not add any skill check penalty until the section (EXTERNAL/INTERNAL/CORE) is destroyed"
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Let me Try",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "You can use your PHYSICAL attribute instead of MENTAL to perform a skill check but the result takes some form of damage from your \"intervention\"."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Look at those guns!",
+      "skill": "RACIAL",
+      "req": "HUMAN",
+      "cost": "10",
+      "effect": "When the intended target is a HUMAN, you can use your PHYSICAL attribute for your SOCIAL skill checks; doing so incurs a SMALL penalty  to your skill check."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Loyal Defender",
+      "skill": "RACIAL",
+      "req": "SKALANDER",
+      "cost": "10",
+      "effect": "When you perform actions to protect your OATH they gain a LARGE bonus to DEFENSES skill checks until next maintenance. Bonus is lost if you perform actions on any targets other than your OATH's charge."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Make em Dance",
+      "skill": "HEAVY WEAPONS",
+      "req": "0",
+      "cost": "10",
+      "effect": "You have a LARGE skill bonus when using cover fire."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Nerulian Noble",
+      "skill": "RACIAL",
+      "req": "NERULIAN",
+      "cost": "10",
+      "effect": "You are Nerulian royalty. Gain a LARGE bonus to any SOCIAL skill against NERULIAN that knows who you are have and a SMALL one against the ones that do not know you."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "One Man Crew",
+      "skill": "PILOTING",
+      "req": "0",
+      "cost": "10",
+      "effect": "You can do it all: You can operate a vehicle type when under minimum crew. Increase DC of all actions by 1 per 10% of missing crew."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Pack Rat",
+      "skill": "MIGHT",
+      "req": "0",
+      "cost": "10",
+      "effect": "Your carrying capacity increases by 5 for a total of 15 points."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Pain tolerance",
+      "skill": "RESILIENCE",
+      "req": "0",
+      "cost": "10",
+      "effect": "When taking Morale or Health damage you can use your highest between ENDURANCE or WILLPOWER"
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Quantity not Quality",
+      "skill": "SCAVENGE",
+      "req": "0",
+      "cost": "10",
+      "effect": "When scavenging, you can choose to get twice as much ressources but the ressources are of a lesser quality than the original ones."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Rending Claws",
+      "skill": "RACIAL",
+      "req": "HAKARI",
+      "cost": "10",
+      "effect": "If you cause a critical hit with your claws the damage gains the ONG special modifier."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Resource Efficiency",
+      "skill": "CRAFT",
+      "req": "0",
+      "cost": "10",
+      "effect": "You can take a LARGE penalty to CRAFT or REPAIR skill checks to consume 50% less materials or credits when creating, modifying or repairing items."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "ROID RAGE!",
+      "skill": "MIGHT",
+      "req": "0",
+      "cost": "10",
+      "effect": "While TOXICITY exceeds your PHYSICAL attribute, you TOXICITY level replaces PHYSICAL attribute."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Sledgehammer Surgery",
+      "skill": "ATHLETICS",
+      "req": "0",
+      "cost": "10",
+      "effect": "Replace a MEDICINE roll with ATHLETIC with a LARGE penality. On success the skill works as normal, on faillure it causes a MINOR HEALTH TRAUMA."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Specialist",
+      "skill": "HEAVY WEAPONS",
+      "req": "0",
+      "cost": "10",
+      "effect": "Increase the minimum POWER of a category of weapons to [MEDIUM] (rifles, pistols, shotguns, bombs, energy melee, etc.)"
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Speed Freak",
+      "skill": "PILOTING",
+      "req": "0",
+      "cost": "10",
+      "effect": "You ignore all Vehicle DC penalty based on speed."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Terrain specialist",
+      "skill": "SURVIVAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "Choose a terrain type (Urban, Wilderness, Space or Interiors) your non combat PHYSICAL skill rolls are lucky while in that environment."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Vicious Counter",
+      "skill": "MARTIAL ARTS",
+      "req": "0",
+      "cost": "10",
+      "effect": "When a MELEE attack against you results in a miss, if you have a QUICK weapon and QUICK action available you can use them to attack the target that missed you with a LARGE damage bonus."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "War dancer",
+      "skill": "MARTIAL ARTS",
+      "req": "0",
+      "cost": "10",
+      "effect": "You are no longer limited to performing the exact same action when dual wielding, your secondary action can be different from your primary, including using a ranged weapon and a melee weapon at the same time."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Advanced Potential",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "15",
+      "effect": "Choose one EVO. All tiers of that EVO carries over to your body after cloning."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Armor Specialist",
+      "skill": "RESILIENCE",
+      "req": "0",
+      "cost": "15",
+      "effect": "You gain a SMALL bonus to soak checks when wearing ARMOR. Bonus is LARGE if wearing LIGHT ARMOR."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Crash specialist",
+      "skill": "PILOTING",
+      "req": "0",
+      "cost": "15",
+      "effect": "When a maneuver or hit would cause a destroyed result you can roll a PILOTING check DC5 to save the vehicle with 1 HULL remaining. No effect if the vehicle only had 1 HULL remaining."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Fatal Flaw",
+      "skill": "DEMOLITION",
+      "req": "0",
+      "cost": "15",
+      "effect": "When scoring a critical success while using a HUGE, MASSIVE or COLOSSAL weapon you automatically cause a TRAUMA regardless of the damage dealt."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Hotshot",
+      "skill": "HEAVY WEAPONS",
+      "req": "0",
+      "cost": "15",
+      "effect": "When performing a BURST or FULL-AUTO attack, you can drain all of your ENERGY weapon magazine (must be full) to increase power to [HIGH] or [EXTREME] if the weapon has 27 or more AMMO."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Juggernaut",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "15",
+      "effect": "Your base movement speed and base number of actions can never be reduced below their base value (Prevents dazed, slow etc). Does not prevent STUN."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Knocka!",
+      "skill": "MARTIAL ARTS",
+      "req": "0",
+      "cost": "15",
+      "effect": "When performing melee 2H attacks, any target suffering a TRAUMA from one of your hits is knocked PRONE."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Never Cornered",
+      "skill": "ATHLETICS",
+      "req": "0",
+      "cost": "15",
+      "effect": "You cannot be flanked by only 2 opponents (Ignore BREACHED). Flanking you requires at least 3 people."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Old Fashioned",
+      "skill": "SCAVENGE",
+      "req": "0",
+      "cost": "15",
+      "effect": "You understand how materials and CHI interact. You can now scavenge RELICS."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Organ Harvester",
+      "skill": "SCAVENGE",
+      "req": "0",
+      "cost": "15",
+      "effect": "You are precise enough to salvage EVO Cybernetics or Genetic parts form your foes. Your roll suffers a LARGE penality when salvaging for those."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Pain drinker",
+      "skill": "RESILIENCE",
+      "req": "NONBORN",
+      "cost": "15",
+      "effect": "You have messed up pain receptors. TRAUMA is motivation to you. Gain a SMALL bonus to all skills when suffering from TRAUMA. Your WITS and ACUITY are not reduced by TRAUMA."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Smooth Operator",
+      "skill": "PILOTING",
+      "req": "0",
+      "cost": "15",
+      "effect": "When you are piloting, you never grants DISADVANTAGE to the rest of the crew no matter your result."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Stunt performer",
+      "skill": "ATHLETICS",
+      "req": "0",
+      "cost": "15",
+      "effect": "When making ATHLETICS checks to show off you gain a LARGE bonus to FLAIR checks and can instead use FLAIR for ATHLETIC checks or ATHLETIC checks for FLAIR checks."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Tough as nails",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "15",
+      "effect": "You get a SMALL bonus to ENDURANCE checks. This bonus can exceed your maximum racial value."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Turtle up",
+      "skill": "PRIMALIST",
+      "req": "0",
+      "cost": "15",
+      "effect": "When using a PRIMALIST BARRIER, during a maintenance, you can increase all DEFENSES by 1 category (Max [HIGH]) but you are SLOWED. You can SUSTAIN or END this effect during MAINTENANCE."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Whirling Dervish",
+      "skill": "MARTIAL ARTS",
+      "req": "0",
+      "cost": "15",
+      "effect": "While using a COMPLEX action to perform a melee attack you gain a LARGE bonus to your SPEED defense until the next maintenance."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Breaking Punch",
+      "skill": "MARTIAL ARTS",
+      "req": "0",
+      "cost": "20",
+      "effect": "When attacking a BREACHED target with an Unarmed or Natural attack, double your expertise result (up to max) and deal maximum damage."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Evolved Being",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "20",
+      "effect": "You have evolved past your race's limitations. One negative effect from your RACE or BACKGROUND no longer has any effect"
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Finetune",
+      "skill": "HEAVY WEAPONS",
+      "req": "0",
+      "cost": "20",
+      "effect": "Repeating a FULL AUTO attack against a target that you previously hit by FULL AUTO will double your EXPERTISE result (Max 10). Bonus is lost if you perform any other action than FULL AUTO."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Immortal",
+      "skill": "RESILIENCE",
+      "req": "0",
+      "cost": "20",
+      "effect": "When gaining a LIGHT TRAUMA you immediately recover your ENDURANCE as HEALTH and your WILLPOWER as MORALE. On a SEVERE TRAUMA, double the recovery."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Last stand",
+      "skill": "SURVIVAL",
+      "req": "0",
+      "cost": "20",
+      "effect": "When suffering from any TRAUMA your DEFENSE rolls are LUCKY."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Make it rain",
+      "skill": "HEAVY WEAPONS",
+      "req": "0",
+      "cost": "20",
+      "effect": "After a full auto action, the same action can be repeated as a Normal action. This bonus ends when you take any other action (including movement) or run out of ammo."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "The cycle of life",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "20",
+      "effect": "When one of your SPELLS powers causes TRAUMA or DYING against a living target, all allies within 10m recover 1 HEALTH and 1 MORALE."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Troll's Blood",
+      "skill": "RESILIENCE",
+      "req": "JAULAUS",
+      "cost": "20",
+      "effect": "Increase your natural regeneration to 2 wounds per round and regeneration still works under TRAUMA."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Deadly attack",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "25",
+      "effect": "You can perform a SIMPLE attack as a COMPLEX action instead of a REGULAR action. On hit, you automatically score a critical hit."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Eternal",
+      "skill": "RACIAL",
+      "req": "PSYLON",
+      "cost": "25",
+      "effect": "As long as a single molecule of your body remains you may reform your body within 1 week"
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Firestarter",
+      "skill": "HEAVY WEAPONS",
+      "req": "0",
+      "cost": "25",
+      "effect": "All Energy weapon grants ONG (Ongoing Damage) special modifier when used by you."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Ignore Pain",
+      "skill": "RESILIENCE",
+      "req": "0",
+      "cost": "25",
+      "effect": "Gain a new SURGE ability: You can spend a SURGE to ignore all damage from a single hit."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Its Aliiiive!",
+      "skill": "REPAIR",
+      "req": "0",
+      "cost": "25",
+      "effect": "You can prevent a DESTROYED result on an item/device no matter how damaged it is without needing any tools or parts. The item will function normally for up to a SCENE before being destroyed for good."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Molecular Salvage",
+      "skill": "SCAVENGE",
+      "req": "0",
+      "cost": "25",
+      "effect": "You somehow always know how to get materials needed for any task or need. As long as you have something closeby you can scavenge you have materials for the task at hand."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "Walk on the Wild Side",
+      "skill": "ATHLETICS",
+      "req": "0",
+      "cost": "25",
+      "effect": "You double your physical prowess when calculating results of ATHLETICS skill checks (jump height, distance etc). You treat all forms of movement as regular movement (can run while climbing for example)."
+    },
+    {
+      "category": "PHYSICAL",
+      "name": "You did WHAT?!?",
+      "skill": "PILOTING",
+      "req": "0",
+      "cost": "25",
+      "effect": "You can set vehicle HANDLING to 10  for a round regardless of what you are piloting but your vehicle takes an amount of HULL damage equal handling difference with its base handling."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Anatomical knowledge",
+      "skill": "MEDICINE",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can make any of your hits deal STUN damage instead of the original damage type."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Archaic languages",
+      "skill": "GALACTIC KNOWLEDGE",
+      "req": "0",
+      "cost": "5",
+      "effect": "When making MENTAL skill rolls dealing with ancient and forgotten topics you gain a LARGE bonus."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Chat Request",
+      "skill": "HACKING",
+      "req": "0",
+      "cost": "5",
+      "effect": "Removes the HACKING penalty for MEDIUM range and lowers the long range penalty to a SMALL penalty only."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Culture Knack",
+      "skill": "GALACTIC KNOWLEDGE",
+      "req": "0",
+      "cost": "5",
+      "effect": "You assimilate cultures quickly. When in a SOCIAL challenge, you can roll a Galactic Knowledge check, if successful you have a SMALL bonus to all SOCIAL rolls that relate to that culture."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Duct Tape Band-Aids!",
+      "skill": "MEDICINE",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can scrounge for materials to make your medicine roll even if you do not have any supplies SMALL penalty to the medicine check."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Encrypted Channels",
+      "skill": "OPERATOR",
+      "req": "0",
+      "cost": "5",
+      "effect": "Your Drones and Robots have a LARGE DEFENSE bonus to TECH defense as long as your INTERNAL network is operationnal."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Field Medic",
+      "skill": "MEDICINE",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can perform MEDICINE check as a QUICK action."
+    },
+    {
+      "category": "MENTAL",
+      "name": "How hard can it be",
+      "skill": "GALACTIC KNOWLEDGE",
+      "req": "0",
+      "cost": "5",
+      "effect": "You know a few things about alien tech, enough to attempt to use it with a LARGE penalty. If successful the device performs as intended, or not\u2026."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Immunologist",
+      "skill": "MEDICINE",
+      "req": "0",
+      "cost": "5",
+      "effect": "Gain a LARGE roll bonus to any roll made against TOXICITY or POISONS (including LIFEBANE SOAK)."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Infinite Probabilities",
+      "skill": "OPERATOR",
+      "req": "0",
+      "cost": "5",
+      "effect": "While directly OPERATING a device gain a SMALL bonus to all skill checks done with that device."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Jury Rig",
+      "skill": "ENGINEERING",
+      "req": "0",
+      "cost": "5",
+      "effect": "Your blueprints are extremly ressource efficient. Increase DC by 1 per 10% missing resource (Max 90%)."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Make it Work",
+      "skill": "SCIENCE",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can use non conventional power sources with your devices, all checks made with that device have a SMALL penalty. (could have additional side effects)"
+    },
+    {
+      "category": "MENTAL",
+      "name": "Obscure Knowledge",
+      "skill": "GALACTIC KNOWLEDGE",
+      "req": "0",
+      "cost": "5",
+      "effect": "You know a lot about obscure things and foreign languages. Gain a LARGE bonus with any skill check where communication with an obscure language is needed."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Perfect Dose",
+      "skill": "MEDICINE",
+      "req": "0",
+      "cost": "5",
+      "effect": "If your MEDICAL roll is twice as high as the requirement to succeed on TOXICITY, the drug you apply does not increase TOXICITY."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Perfect Student",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "5",
+      "effect": "When an ally uses an ASSIST action on you that was modified by one of their TALENTS you gain those benefits as well until the end of the turn."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Personal Code",
+      "skill": "HACKING",
+      "req": "0",
+      "cost": "5",
+      "effect": "You have your own coding language, When acquiring a ROUTINE, PROGRAM or GADGET you can permanently modify it so that it cannot run on anything other than your own DATACOM."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Pocket Dimension",
+      "skill": "BINDING",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can store 3 unit of storage inside a hidden pocket dimension that you can access by spending a QUICK action. Keeping items inside a Pocket Dimension requires a SUSTAIN."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Predictive Behavior",
+      "skill": "CYBERINTEL",
+      "req": "0",
+      "cost": "5",
+      "effect": "You gain a SMALL bonus to SPEED and a WITS against anyone you have Lock-On against."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Quick and Dirty Solution",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "5",
+      "effect": "Allows you to finish any non-combat MENTAL skill in half the time but with double the DC."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Quick Fake",
+      "skill": "TECHNOLOGY",
+      "req": "0",
+      "cost": "5",
+      "effect": "Allows you to forge ID and documents while already engage in a challenge. Skill check has a LARGE penalty."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Reliable junk",
+      "skill": "ENGINEERING",
+      "req": "0",
+      "cost": "5",
+      "effect": "When using items with less EXPERTISE than your ENGINEERING rank you can ignore the first critical failure result in every scene. A second critical failure in the same scene will have it's normal effect."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Self medicate",
+      "skill": "MEDICINE",
+      "req": "0",
+      "cost": "5",
+      "effect": "MEDICAL skill checks used on yourself are LUCKY."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Shutdown",
+      "skill": "HACKING",
+      "req": "0",
+      "cost": "5",
+      "effect": "Gain a SMALL bonus to all SYSTEM damage."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Strong Encryption",
+      "skill": "HACKING",
+      "req": "0",
+      "cost": "5",
+      "effect": "Members of your network can sacrifice 1 CPU as a QUICK action to increase their TECH defense to [HIGH] against the next attack."
+    },
+    {
+      "category": "MENTAL",
+      "name": "The art of War",
+      "skill": "ACADEMIC",
+      "req": "0",
+      "cost": "5",
+      "effect": "When making a TACTIC check, if your ACADEMIC score is higher than your TACTICS, gian a SMALL bonus. If both ACADEMIC and GALACTIC KNOWLEDGE are higher, the bonus is LARGE."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Toxicologist",
+      "skill": "MEDICINE",
+      "req": "0",
+      "cost": "5",
+      "effect": "When the damage you deal has the POISON, LIFEBANE or ONG special modifier you gain SMALL bonus to DAMAGE and POWER is increased by 1 category (Max [HIGH])."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Train Beast",
+      "skill": "ACADEMIC",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can train sentient lifeforms to perform tasks above their MENTAL rating. Any command you give to a trained target is done at a MENTAL score of 0."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Trust the Science",
+      "skill": "SCIENCE",
+      "req": "0",
+      "cost": "5",
+      "effect": "When someone with Trust the SCIENCE tries to use a SOCIAL skill to lie, bluff or convince someone of something you know is false, anyone else with Trust the Science can also roll. Pick the best out of all the rolls."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Universal Flaws",
+      "skill": "ACADEMIC",
+      "req": "0",
+      "cost": "5",
+      "effect": "When attacking objects, machines and structures you can score critical hits."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Applied Physics",
+      "skill": "ACADEMIC",
+      "req": "0",
+      "cost": "10",
+      "effect": "If you perform a MENTAL skill check before using a PHYSICAL skill you can use your MENTAL ATTRIBUTE for that physical skill check."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Artificial Deception",
+      "skill": "CYBERINTEL",
+      "req": "0",
+      "cost": "10",
+      "effect": "You are adept at fooling AI's. All non combat related skill checks are LUCKY when dealing with AI's, Drones, Robots or TRONIKS."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Brute Force",
+      "skill": "HACKING",
+      "req": "0",
+      "cost": "10",
+      "effect": "You can re-roll any CYBERINTEL or HACKING attempt but the re-roll cannot be OBFUSCATED. (Once per ROUND)"
+    },
+    {
+      "category": "MENTAL",
+      "name": "Calculated Risks",
+      "skill": "ACADEMIC",
+      "req": "0",
+      "cost": "10",
+      "effect": "When defending against any attack you can use your WITS instead of the intended DEFENSE. If you still get hit, your opponents gets a critical success."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Code Scavenger",
+      "skill": "HACKING",
+      "req": "0",
+      "cost": "10",
+      "effect": "When losing a NETWORK layer (EXTERNAL or INTERNAL), you can save one SOFTWARE of your choice by moving it to the next layer (EXTERNAL->INTERNAL or INTERNAL->CORE)."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Cool headed",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "After a successful DEFENSE check you get a LARGE bonus to any MENTAL skills used in the same round."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Cyber-Thief",
+      "skill": "HACKING",
+      "req": "0",
+      "cost": "10",
+      "effect": "Once per SCENE, when rolling your first OBFUSCATE you roll twice and take the best result."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Elixir of Immortality",
+      "skill": "MEDICINE",
+      "req": "0",
+      "cost": "10",
+      "effect": "Targets you administer drugs to, have their HEALTH pools increased by the TOXICITY of the drug you administered until the drugs wears off."
+    },
+    {
+      "category": "MENTAL",
+      "name": "EMP Arcs",
+      "skill": "SCIENCE",
+      "req": "0",
+      "cost": "10",
+      "effect": "When you hit a forcefield with an EMP attack you can cause an explosion that deals the same damage in a 1m radius."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Empath",
+      "skill": "GENERAL",
+      "req": "PSYLON",
+      "cost": "10",
+      "effect": "You figured out emotions; they are wonderful. Stabbing is an emotion, right? Your PSYLON character can now manifest emotions, when he feels like it."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Feels real",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "Your EVO Cybernetics have a LARGE bonus to CYBER SHOCK rolls."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Fleshsmith",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "When you install an EVO's any SUCCESS rolled above the target DC are added to the target's WILLPOWER+ENDURANCE result when checking for possible drawbacks"
+    },
+    {
+      "category": "MENTAL",
+      "name": "Ghost Decoy",
+      "skill": "OPERATOR",
+      "req": "0",
+      "cost": "10",
+      "effect": "While operating, the device you control gain a LARGE bonus CONCEALMENT. If the device does not have CONCEALMENT, it now has PASSIVE CONCEALMENT 3."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Grey Area",
+      "skill": "ENGINEERING",
+      "req": "0",
+      "cost": "10",
+      "effect": "You can re-engineer items to pass as legal versions of Illegal items. Increase DC by the Availability penalty of the item."
+    },
+    {
+      "category": "MENTAL",
+      "name": "I am the fucking manual",
+      "skill": "ACADEMIC",
+      "req": "0",
+      "cost": "10",
+      "effect": "When you receive an ASSIST for a MENTAL SKILL from someone with less skill than yourself, they gain a LARGE bonus to their ASSIST check."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Just do it !",
+      "skill": "GENERAL",
+      "req": "HAKARI",
+      "cost": "10",
+      "effect": "You have learned to act before you think, any MENTAL tasks done as a QUICK action receive a LARGE bonus but CRIT FAILURE range is increased by 1."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Life Better!",
+      "skill": "SCIENCE",
+      "req": "0",
+      "cost": "10",
+      "effect": "People always seems to trust your research so you never run out of Guinea pigs. Cuts research and crafting times by 50%"
+    },
+    {
+      "category": "MENTAL",
+      "name": "Lizard Brain",
+      "skill": "GENERAL",
+      "req": "JAULAUS",
+      "cost": "10",
+      "effect": "Gain a SMALL bonus to any actions involving : fighting, fleeing, feeding, fearing and fornicationning???"
+    },
+    {
+      "category": "MENTAL",
+      "name": "Mad Genius",
+      "skill": "ENGINEERING",
+      "req": "0",
+      "cost": "10",
+      "effect": "When performing a MENTAL skill check to modify, build or destroy something you can ignore one failed result (only once per lifetime of the target)."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Math Genius",
+      "skill": "ACADEMIC",
+      "req": "0",
+      "cost": "10",
+      "effect": "As long as the MENTAL roll you are making involves mathematics you gain a LARGE bonus."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Nanite Time",
+      "skill": "TECHNOLOGY",
+      "req": "0",
+      "cost": "10",
+      "effect": "Whenever someone with Nanite Time activates a GADGET, anyone else with the Nanite Time talent can also activate a GADGET of their choice as a QUICK action."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Paladin",
+      "skill": "GENERAL",
+      "req": "SKALANDER",
+      "cost": "10",
+      "effect": "If you combat action is intended to defend one of your allies, your honorable warrior bonus becomes LARGE."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Pop Culture",
+      "skill": "GALACTIC KNOWLEDGE",
+      "req": "0",
+      "cost": "10",
+      "effect": "You have a LARGE bonus to any skill check where knowledge of popular culture, customs and what is generally popular in the galaxy is relevant."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Proxyfy",
+      "skill": "HACKING",
+      "req": "0",
+      "cost": "10",
+      "effect": "When your OBFUSCATION runs out, you have a grace period of 1 ROUND before the alarm goes off."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Quick Breach",
+      "skill": "ENGINEERING",
+      "req": "0",
+      "cost": "10",
+      "effect": "You can perform a, ENGINEERING check at DC 5 to breach a door as a QUICK action with anything that can deal damage to it."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Rolling with the punches",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "When hit, you can skip your speed defence roll to instead add it to your total soak value"
+    },
+    {
+      "category": "MENTAL",
+      "name": "Rushed Design",
+      "skill": "ENGINEERING",
+      "req": "0",
+      "cost": "10",
+      "effect": "Allows you to create a flawed but functional item in 10% of the time that would normally be required. Item will have a major flaw."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Second Skin",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "When wearing LIGHT armor you cannot be BREACHED"
+    },
+    {
+      "category": "MENTAL",
+      "name": "Secure connection",
+      "skill": "CYBERINTEL",
+      "req": "0",
+      "cost": "10",
+      "effect": "On a successful attack against an INTERNAL NETWORK, you raise the TECH DEFENSE of your entire NETWORK to [HIGH] against any attacks coming from the assaulted network."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Sloppy Code",
+      "skill": "TECHNOLOGY",
+      "req": "0",
+      "cost": "10",
+      "effect": "Whenever your INTERNAL NETWORK is not at 100% SYSTEM, your datacom runs so slowly that all HACKING, CYBERINTEL or OPERATOR action done by you or your attackers now requires a COMPLEX action."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Socialized Medicine",
+      "skill": "MEDICINE",
+      "req": "0",
+      "cost": "10",
+      "effect": "When performing an action that results in the recovery of HEALTH or MORALE; If that action was a critical success everyone else with the Socialized Medicine also recover the same amount of HEALTH or MORALE."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Stubborn",
+      "skill": "SCIENCE",
+      "req": "0",
+      "cost": "10",
+      "effect": "You have insane determination when it comes to science. You can spend 1 SURGE to reroll a SCIENCE check"
+    },
+    {
+      "category": "MENTAL",
+      "name": "Takeover",
+      "skill": "TECHNOLOGY",
+      "req": "0",
+      "cost": "10",
+      "effect": "When you reduce a CORE NETWORK to 0 SYSTEM, you have the option of taking control of it or a connected device running on it instead of destroying it. (Treat the controlled device as a DRONE)"
+    },
+    {
+      "category": "MENTAL",
+      "name": "Time is relative",
+      "skill": "SPIRITUAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "You can spend 1 CHI to switch INITIATIVE between you and a willing party member (You both roll initiative)."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Trauma Doc",
+      "skill": "MEDICINE",
+      "req": "0",
+      "cost": "10",
+      "effect": "When you restore HEALTH, MORALE, remove AILMENTS, TRAUMAS or stabilize a patient with medical supplies the patient gains an additional point of HEALTH and MORALE."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Tutor",
+      "skill": "ACADEMIC",
+      "req": "0",
+      "cost": "10",
+      "effect": "When you are training someone on a skill you know you cut the training time in half."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Viral Code",
+      "skill": "HACKING",
+      "req": "0",
+      "cost": "10",
+      "effect": "When using a CYBER ATTACK against a LOCK on target, you gain a LARGE bonus to SYSTEM damage."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Advanced Potential",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "15",
+      "effect": "Choose one EVO. All tiers of that EVO carries over to your body after cloning."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Astral Form",
+      "skill": "GENERAL",
+      "req": "PATRIARK",
+      "cost": "15",
+      "effect": "You do not need to die before posessing someone, you can posess a willing ally and leave your body behind. Your body will appear as dead and can decay if left unattended for too long."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Expert Operator",
+      "skill": "OPERATOR",
+      "req": "0",
+      "cost": "15",
+      "effect": "If you perform a CYBERINTEL or HACKING action, you can perform 1 OPERATOR action per turn for free. (Operator action is equal to the action spent)"
+    },
+    {
+      "category": "MENTAL",
+      "name": "Flawless Reincarnation",
+      "skill": "RACIAL",
+      "req": "PATRIARK",
+      "cost": "15",
+      "effect": "If your host dies while you are posessing it, you are not DESTROYED if you can possess a new host within 10m. If there is no valid host within 10m, you are DESTROYED."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Ghost in the Machine",
+      "skill": "OPERATOR",
+      "req": "0",
+      "cost": "15",
+      "effect": "When you disconnect from a Drone or Hack, you can still act as if you were connected for an additional round (those actions are Free and done during next maintenance phase)."
+    },
+    {
+      "category": "MENTAL",
+      "name": "I can explain this",
+      "skill": "GALACTIC KNOWLEDGE",
+      "req": "0",
+      "cost": "15",
+      "effect": "You extensive knowledge of the law grants a SMALL bonus to any skills where the law might have an impact. You can also modify legality class of item you own by 1 category."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Logic Incarnate",
+      "skill": "ACADEMIC",
+      "req": "0",
+      "cost": "15",
+      "effect": "As long as you can solve something logically your MENTAL skill check are LUCKY"
+    },
+    {
+      "category": "MENTAL",
+      "name": "Sharp",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "15",
+      "effect": "You get a SMALL bonus to WITS checks. This bonus can exceed your maximum racial value."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Single-Mindedness",
+      "skill": "GENERAL",
+      "req": "HUMAN",
+      "cost": "15",
+      "effect": "Your skill chosen at character creation now has a LARGE bonus and CRITICAL range increase to +2. You can no longer have permanent bonuses to any other skills."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Spell Echo",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "15",
+      "effect": "You can spend double the amount of CHI for the spell you cast for it to happen again at the exact same space and moment in the following round."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Tronik bane",
+      "skill": "TECHNOLOGY",
+      "req": "0",
+      "cost": "15",
+      "effect": "Gain a LARGE skill bonus and the DEADLY modifier against any non living target. (MACHINES, TRONIK, BOTS, ROBOTS, STRUCTURES and AI's.)."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Wall breaker",
+      "skill": "HACKING",
+      "req": "0",
+      "cost": "15",
+      "effect": "When your CYBER ATTACK deals SYSTEM damage, your rolls are LUCKY."
+    },
+    {
+      "category": "MENTAL",
+      "name": "When in doubt C12",
+      "skill": "ENGINEERING",
+      "req": "0",
+      "cost": "15",
+      "effect": "When using explosives you can make an ENGINEERING check to remove up to 20 degree of radius from the explosion radius per success."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Backup Plan",
+      "skill": "GENERAL",
+      "req": "NONBORN",
+      "cost": "20",
+      "effect": "Any IDs you present or create are always valid against DEVICES, MACHINES, AI's or TRONIKS."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Fix Nature",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "20",
+      "effect": "You can remove any negative parts of your Background or Race (other than starting racial attributes). Those negative effects no longer apply to you."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Predictive Model",
+      "skill": "ACADEMIC",
+      "req": "0",
+      "cost": "20",
+      "effect": "When a target repeats an action against you, that it already performed during this SCENE; You gain a LARGE bonus to your DEFENSE."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Prince of pain",
+      "skill": "GENERAL",
+      "req": "NERULIAN",
+      "cost": "20",
+      "effect": "You have perfected the art of causing suffering. When dealing damage with a MELEE attack you apply a VULNERABILITY 1 to ALL (ailment, cummulative) and can change the damage type to STUN."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Symbiotic Piloting",
+      "skill": "OPERATOR",
+      "req": "0",
+      "cost": "20",
+      "effect": "When using OPERATOR to control a vehicle. HANDLING increases by 3 (max 10), HULL by 1 and any crew on board have a SMALL bonus to any skill check that uses the vehicle."
+    },
+    {
+      "category": "MENTAL",
+      "name": "The Red Pill",
+      "skill": "MEDICINE",
+      "req": "0",
+      "cost": "20",
+      "effect": "Drugs you administer last twice as long and have a 50% Increased effect (round up), when applicable. No effects on drugs without numerical values or durations."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Armstrong",
+      "skill": "SCIENCE",
+      "req": "JAULAUS",
+      "cost": "25",
+      "effect": "You have somehow figured out that might applies to all aspects of life. You can replace the ATTRIBUTE bonus of all skill checks with PHYSICAL if you chose so."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Digital Ghost",
+      "skill": "TECHNOLOGY",
+      "req": "0",
+      "cost": "25",
+      "effect": "Your mind takes a form for itself, you can perform HACKING, OPERATOR or CYBERINTEL actions during MAINTENANCE. Those actions cost MORALE instead of CPU. Max MORALE per turn is equal to WITS."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Geno morph",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "25",
+      "effect": "Your body can morph between two entirely different set of genetic EVO. (Requires a full REST to change)"
+    },
+    {
+      "category": "MENTAL",
+      "name": "Insane Genius",
+      "skill": "ENGINEERING",
+      "req": "SKILL LVL 10",
+      "cost": "25",
+      "effect": "You can create plans for an item that breaks the rules (One time GM approval)"
+    },
+    {
+      "category": "MENTAL",
+      "name": "Internal logic",
+      "skill": "TECHNOLOGY",
+      "req": "NONBORN",
+      "cost": "25",
+      "effect": "You can store one PROGRAM or ROUTINE inside your mind. It no longer cost CPU or MEMORY, cannot be scanned, found or hacked by anyone but it can only be used by you and cannot be shared with anyone."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Limitless Potential",
+      "skill": "GENERAL",
+      "req": "EVO III",
+      "cost": "25",
+      "effect": "One of your TIER 3 EVO, chosen at random, has evolved to TIER 4 (GM's Decision)."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Perfect Ghost",
+      "skill": "OPERATOR",
+      "req": "0",
+      "cost": "25",
+      "effect": "If you die in the same round that you performed a CYBERINTEL, HACKING or OPERATOR action, as a free action, you can store a FULL backup of yourself on the device you used the skill check on."
+    },
+    {
+      "category": "MENTAL",
+      "name": "Play God",
+      "skill": "SCIENCE",
+      "req": "0",
+      "cost": "25",
+      "effect": "Create your own race with GM approval. (Neutral stat distribution, 1 racial , evolution and environment trait)"
+    },
+    {
+      "category": "MENTAL",
+      "name": "Soul anchor",
+      "skill": "SPIRITUAL",
+      "req": "0",
+      "cost": "25",
+      "effect": "Should you die, you can as a FREE action pull your past self and come back to life instantly as you were at any moment during the last SCENE. This cannot occur more than once per full rest."
+    },
+    {
+      "category": "MENTAL",
+      "name": "The answer is 42",
+      "skill": "GENERAL",
+      "req": "SKILL LVL 10",
+      "cost": "25",
+      "effect": "You know one of the secret of the universe, that knowledge is unexplained but grants you a serious advantage (GM choice)"
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Alley Rat",
+      "skill": "STREETWISE",
+      "req": "0",
+      "cost": "5",
+      "effect": "You have a knack for finding the best escape routes and making your pursuers lives miserable. When being chased in an URBAN environment anyone following you is in difficult terrain."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Beginners Luck",
+      "skill": "ETIQUETTE",
+      "req": "0",
+      "cost": "5",
+      "effect": "When rolling any SOCIAL skills in which you have a skill rank of less than 4 you get a SMALL bonus on all roll as everyone attributes any of your mistakes to a lack of training."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Blind Confidence",
+      "skill": "LEADERSHIP",
+      "req": "0",
+      "cost": "5",
+      "effect": "You mount or trained beasts can use all of your DEFENSIVE attributes instead of it's own when in your company."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Con Artist",
+      "skill": "SUBTERFUGE",
+      "req": "0",
+      "cost": "5",
+      "effect": "You are great at fooling people and dragging them into your elaborate plans. You have a SMALL bonus when using social skills to fool, con or lie to people."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Coordinated strike",
+      "skill": "LEADERSHIP",
+      "req": "0",
+      "cost": "5",
+      "effect": "Whenever someone with the Coordinated Strike talent makes an INITIATIVE check, Any other player with the Coordinated Strike talent can act at that initiative instead of rolling theirs."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Crowd Fighter",
+      "skill": "STREETWISE",
+      "req": "0",
+      "cost": "5",
+      "effect": "When fighting in a populated urban environment you can use bystanders as GOOD cover"
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Culture Knack",
+      "skill": "ETIQUETTE",
+      "req": "0",
+      "cost": "5",
+      "effect": "You have a knack for fitting in.  If you spend at least a SCENE in an environment, you gain a SMALL bonus to ETIQUETTE and STREETWISE checks made in that environment."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Extorsion",
+      "skill": "INTIMIDATION",
+      "req": "0",
+      "cost": "5",
+      "effect": "On a successful INTIMIDATE check you gain a LARGE bonus to any SOCIAL skill against the target. Relationship level with the target will drop by 2 after the deal."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Faking it",
+      "skill": "FLAIR",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can attempt to use ETIQUETTE or FLAIR with a SMALL penalty to impress/intimidate a target instead of INTIMIDATE. However if you fail, you ridicule yourself and lose your result as MORALE."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Family connexions",
+      "skill": "RACIAL",
+      "req": "0",
+      "cost": "5",
+      "effect": "All contacts of the same race as yourself count as 1 level higher."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Fast Friends",
+      "skill": "CHARM",
+      "req": "0",
+      "cost": "5",
+      "effect": "People tend to trust you and befriend you quickly, every successful social challenge with an adversary will improve their disposition by 1."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Fence",
+      "skill": "STREETWISE",
+      "req": "0",
+      "cost": "5",
+      "effect": "You have a second innate sense when  figuring out who might accept illegal goods. On a successful STREETWISE check you know if a normal merchant will do illegal deals."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Good Cop Bad Cop",
+      "skill": "NEGOCIATION",
+      "req": "0",
+      "cost": "5",
+      "effect": "If you have a partner when performing a SOCIAL challenge and they also have this talent, your partner can reroll your SOCIAL skill (using their scores) and you can reroll theirs (once per round)."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Greaseball",
+      "skill": "SUBTERFUGE",
+      "req": "0",
+      "cost": "5",
+      "effect": "You are kind of shady. When making SOCIAL checks you have a LARGE bonus in dealing with criminals but a SMALL penalty with non criminals."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Hide in plain sight",
+      "skill": "STREETWISE",
+      "req": "0",
+      "cost": "5",
+      "effect": "When in a crowd you automatically gain passive CONCEALMENT at a level equal to your STREETWISE."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Hostile Takeover",
+      "skill": "NEGOCIATION",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can purchase what is not for sale: If you faill a NEGOTIATION check against AVAILABILITY you can multiply and pay the AVAILABILITY DC of an item in credits to force a success."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Human Supremacy",
+      "skill": "RACIAL",
+      "req": "HUMAN",
+      "cost": "5",
+      "effect": "Gain a small bonus on social interactions involving other HUMANS only."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "I know Johnny",
+      "skill": "FLAIR",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can add the value of a relevant contact to your dice pool when making SOCIAL checks. Doing so exposes your contact and may lead to consequences."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "I tried being nice",
+      "skill": "RACIAL",
+      "req": "HAKARI",
+      "cost": "5",
+      "effect": "If you attempt a CHARM roll and failed, your can try again using INTIMIDATE with a LARGE bonus."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "I'm innocent, I swear",
+      "skill": "SUBTERFUGE",
+      "req": "0",
+      "cost": "5",
+      "effect": "You have a SMALL bonus to any SKILL check used to explain something you are being accused of."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Impressionist",
+      "skill": "ACTING",
+      "req": "0",
+      "cost": "5",
+      "effect": "If you performed a successful INTUITION, SCAN or TACTICS check against someone you gain a LARGE bonus to ACTING checks to pass yourself off as that target."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Instigator",
+      "skill": "SUBTERFUGE",
+      "req": "0",
+      "cost": "5",
+      "effect": "You're great at starting shit and not being seen as the instigator. When a SOCIAL challenge results in combat you always start the fight with free CONCEALMENT."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Legal Smuggling",
+      "skill": "STREETWISE",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can disguise the legality of items you own or smuggle. Gain a LARGE bonus to any SOCIAL skill used to explain or conceal the legality of an item."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Magic Adept",
+      "skill": "SPIRITUAL",
+      "req": "0",
+      "cost": "5",
+      "effect": "You gain mastery of a spell. (can be taken multiple times)"
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Mitigating Circumstances",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "5",
+      "effect": "If you used a non combat social skill against a target(s) prior to combat, your SOAK rolls are at maximum value against that target(s) during the first combat round of that SCENE."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Pacifist",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "5",
+      "effect": "When an opponent surrenders peacefully or you avoid combat through a SOCIAL skill check you regain your WILLPOWER in morale"
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Propaganda",
+      "skill": "LEADERSHIP",
+      "req": "0",
+      "cost": "5",
+      "effect": "If you use a SOCIAL skill that causes a MORALE hit in a non combat setting you can double the morale loss."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Red Tape",
+      "skill": "NEGOCIATION",
+      "req": "0",
+      "cost": "5",
+      "effect": "You know enough about official procedures to delay or accelerate most procedures by an additional 10% per success."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Roger that",
+      "skill": "LEADERSHIP",
+      "req": "0",
+      "cost": "5",
+      "effect": "When following directions given by someone else you have a SMALL bonus to any skill check required to complete that task."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Self medicating",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "5",
+      "effect": "When a DRUG you take results in a TOXIC SHOCK roll you double the effects of that DRUG for it's duration."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Skip Bullshit",
+      "skill": "NEGOCIATION",
+      "req": "0",
+      "cost": "5",
+      "effect": "Every extra success you get in a SOCIAL check can modify the price of purchased or sold items by 10% (max 50%)"
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Social adept",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "5",
+      "effect": "When an ally uses an ASSIST action on you. gain all of their SOCIAL TALENTS until the end of the turn."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Socialite",
+      "skill": "ACTING",
+      "req": "0",
+      "cost": "5",
+      "effect": "You are great at dealing with famous people. Gain a SMALL bonus to all SOCIAL checks made when interacting with anyone with any ranks of FAME or INFAMY."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Street Fighter",
+      "skill": "STREETWISE",
+      "req": "0",
+      "cost": "5",
+      "effect": "As long as you are in an urban environment, you can improvise a Knife, Nightstick or Staff from things around you as a free action."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Striking Looks",
+      "skill": "FLAIR",
+      "req": "0",
+      "cost": "5",
+      "effect": "You are an exceptionally attractive sample of your specie, add a SMALL bonus to SOCIAL rolls when interacting with compatible partners."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Trendsetter",
+      "skill": "FLAIR",
+      "req": "0",
+      "cost": "5",
+      "effect": "You appearance is legendary. As long all of your visible equipment and items are of LIMITED rarity or higher you have a SMALL bonus to your SOCIAL ATTRIBUTE."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Trumpspeak",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "5",
+      "effect": "You are adept at communicating with lesser forms of intelligence. Gain a LARGE bonus to all social skills when target is under 0 MENTAL but a SMALL penalty against anyone over 0 MENTAL."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Walking Menace",
+      "skill": "INTIMIDATION",
+      "req": "0",
+      "cost": "5",
+      "effect": "Your EVOs are terryfying. Any SKILL checks against you that triggers an EVO modified roll will cause a 10m visual panic to those that can see it (Tier of the EVO used Vs their WITS or must run/take cover)"
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Well connected",
+      "skill": "NEGOCIATION",
+      "req": "0",
+      "cost": "5",
+      "effect": "Gain a SMALL bonus when using NEGOTIATION to check for availability against an existing contact. Bonus increases to LARGE if the contact is specific (Arms dealers for a weapon etc)."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "You talk too much",
+      "skill": "RACIAL",
+      "req": "JAULAUS",
+      "cost": "5",
+      "effect": "If someone use a SOCIAL skill on you, you have LARGE bonus to DMG against that person on your next action."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Act like you belong",
+      "skill": "ETIQUETTE",
+      "req": "0",
+      "cost": "10",
+      "effect": "A successful ETIQUETTE checks grants a LARGE bonus to CONCEALMENT when in an environment that requires an ETIQUETTE roll."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "As seen on TV!",
+      "skill": "SUBTERFUGE",
+      "req": "0",
+      "cost": "10",
+      "effect": "You can use an ACTING, CHARM or SUBTERFUGE check to replace any MENTAL skill check but with a LARGE penalty; everyone is convinced that you know what you are doing."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Cooperative Spellcasting",
+      "skill": "SPIRITUAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "When an ally with cooperative spellcasting talent is within spell range, If both cast the same spell, in the same round, you combine the Skill roll of both spell casters into one single powerful spell. (Max result 10)."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Deep ties",
+      "skill": "STREETWISE",
+      "req": "0",
+      "cost": "10",
+      "effect": "When interacting with anyone who is part of your contact list (allies and enemies) your SOCIAL checks have a LARGE bonus"
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Emotional Processing",
+      "skill": "RACIAL",
+      "req": "NON-BORN",
+      "cost": "10",
+      "effect": "You have somehow figured out exactly how emotions and feelings work. You can give yourself a SMALL bonus on any skill check that could be tied to an emotional state"
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Ex. Cop",
+      "skill": "STREETWISE",
+      "req": "0",
+      "cost": "10",
+      "effect": "When using SOCIAL skills in an illegal context you gain a LARGE bonus or penalty depending on circumstances."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Fake News",
+      "skill": "CHARM",
+      "req": "0",
+      "cost": "10",
+      "effect": "You are great at convincing people that their knowledge is wrong. A succesful SOCIAL skill check vs WILLPOWER to apply a LARGE penalty to a MENTAL skill an opponent is performing."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Fascinating Orator",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "When in a SOCIAL challenge you get one chance to recover from a failure. (reroll any skill checks once per challenge)."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Fear of death",
+      "skill": "INTIMIDATION",
+      "req": "0",
+      "cost": "10",
+      "effect": "When trying to INTIMIDATE someone gain a LARGE bonus to you roll if the target has any TRAUMA."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Healer",
+      "skill": "RACIAL",
+      "req": "PATRIARK",
+      "cost": "10",
+      "effect": "When one of your actions recovers the target's HEALTH or MORALE you elminiate one TRAUMA if the amount recovered exceeds the target's WILLPOWER or ENDURANCE."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Infamous",
+      "skill": "RACIAL",
+      "req": "NERULIAN",
+      "cost": "10",
+      "effect": "You have truly learned to use your race's bad rep to your advantage. If your INFAMY is higher than the target's WITS you gain a LARGE bonus to hostile SOCIAL actions."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Instant motivation",
+      "skill": "LEADERSHIP",
+      "req": "0",
+      "cost": "10",
+      "effect": "Troops, allies or units you command gain a SURGE whenever one of your LEADERSHIP rolls was a Critical Success."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Jabberwocky",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "With at least 1 week of preparation, you can create a \"real\" lie, even random people will know about it and believe in it. DC8 to find out the truth."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Look alive",
+      "skill": "LEADERSHIP",
+      "req": "0",
+      "cost": "10",
+      "effect": "Make a LEADERSHIP check as a STANDARD action Vs the WILLPOWER of all allies within earshot. Success, refresh the QUICK action of that ally."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Look out!",
+      "skill": "LEADERSHIP",
+      "req": "0",
+      "cost": "10",
+      "effect": "As a QUICK interrupt you can make a LEADERSHIP check with to grant X additional HEALTH SOAK to one ally in hearing range. All other allies in range gain a SMALL bonus to SOAK"
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Look over there",
+      "skill": "CHARM",
+      "req": "0",
+      "cost": "10",
+      "effect": "Allies have a SMALL bonus to ALL SKILLS against targets that were affected by any of your SOCIAL skills until the next maintenance phase."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Metabeing",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "Gain a SMALL bonus to all SOCIAL skill checks as long as the DC does not exceed your EVO total."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "No mercy",
+      "skill": "INTIMIDATION",
+      "req": "0",
+      "cost": "10",
+      "effect": "The power of all your attacks when an enemy is suffering from TRAUMA is increased by 1 category. (Max [HIGH])."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Oh Captain, My Captain",
+      "skill": "LEADERSHIP",
+      "req": "0",
+      "cost": "10",
+      "effect": "When performing an ASSIST action, you can help out using LEADERSHIP instead of any other skills."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Or Else",
+      "skill": "INTIMIDATION",
+      "req": "0",
+      "cost": "10",
+      "effect": "You can use INTIMIDATE checks instead of any other SOCIAL skill but your roll suffers a LARGE penalty."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Ordinary Joe",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "For some reason you look like everybody, people tend to forget anything specific about you. You have an SMALL bonus to WITS and WILLPOWER defense against SOCIAL skills."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Power though!",
+      "skill": "LEADERSHIP",
+      "req": "0",
+      "cost": "10",
+      "effect": "As a QUICK interrupt you can make a LEADERSHIP check with to grant X additional MORALE SOAK to one ally in hearing range. All other allies in range gain a SMALL bonus to SOAK."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Precognition",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "You sometimes have glimpses of the future. Once per SCENE you can reroll your luck dice or automatically win INITIATIVE."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Razor's Edge",
+      "skill": "SPIRITUAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "When using RAW CHI your control rolls are lucky."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Secret Identity",
+      "skill": "ACTING",
+      "req": "0",
+      "cost": "10",
+      "effect": "You're well trained at maintaining secret identities. Anyone attempting to uncover who you really are suffers a LARGE penalty."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Selective Psychosis",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "When you trigger an EVO based AILMENT, you can replace an existing AILMENT with it."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Shocking",
+      "skill": "INTIMIDATION",
+      "req": "0",
+      "cost": "10",
+      "effect": "When wounding a target with a CRITICAL HIT or cause a SEVERE TRAUMA, you cause all enemies in visual range to also lose a point of MORALE."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Sociopath",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "Anytime you deal a CRITICAL HIT or cause a TRAUMA, you restore 1 MORALE to yourself"
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Street shopping",
+      "skill": "STREETWISE",
+      "req": "0",
+      "cost": "10",
+      "effect": "When using STREETWISE to find non legal goods, your AVAILABILITY result is increased by 1. If you exceed the needed availibility for an item you were looking for you also negate the legality tax."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "The greatest distraction",
+      "skill": "ACTING",
+      "req": "0",
+      "cost": "10",
+      "effect": "When you use a SOCIAL skill in a challenge, all of your allies have a SMALL bonus to ACUITY skill checks until next maintenance."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Virtual God",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "You can use your MENTAL attribute instead of your SOCIAL for any SOCIAL skills against machines or devices."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Weaponized Fear",
+      "skill": "RACIAL",
+      "req": "NON-BORN",
+      "cost": "10",
+      "effect": "As long as your morale is full you gain a LARGE bonus on all skills checks against MACHINES, TRONIK, BOTS, ROBOTS and AI's."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Working the crowd",
+      "skill": "ACTING",
+      "req": "0",
+      "cost": "10",
+      "effect": "When 2 or more allies are in a SCENE with you, you can include them in your ACTING role. Your acting roll now counts for them as well."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Advanced Potential",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "15",
+      "effect": "Choose one EVO. All tiers of that EVO carries over to your body after cloning."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Best Friend",
+      "skill": "CHARM",
+      "req": "0",
+      "cost": "15",
+      "effect": "People never hate you, at worst they may dislike you, improve liking of everyone by 1 category. (Friendly, Appreciative, Neutral, Disliked, Hated)"
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Compassion",
+      "skill": "CHARM",
+      "req": "0",
+      "cost": "15",
+      "effect": "Whenever you restore HEALTH to a target or yourself, you restore an equal amount of MORALE and vice-versa."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Curse Weaver",
+      "skill": "INTIMIDATE",
+      "req": "0",
+      "cost": "15",
+      "effect": "AILMENTS you inflict are hard to recover from. Target recovery rolls are UNLUCKY"
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Despair",
+      "skill": "RACIAL",
+      "req": "SKALANDER",
+      "cost": "15",
+      "effect": "You cause double morale loss to any enemy in your veil range."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Disturbing",
+      "skill": "RACIAL",
+      "req": "PSYLON",
+      "cost": "15",
+      "effect": "Your behavior is extremely alien to other races, when singled out by SOCIAL skills you have LARGE bonus to all of your DEFENSES."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Enthrall",
+      "skill": "ACTING",
+      "req": "0",
+      "cost": "15",
+      "effect": "You have a gift when it comes to occupying people's attention. Any target of one of your SOCIAL skill checks suffers a LARGE penalty to any actions not directed against you."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "I didin't see anything",
+      "skill": "SUBTERFUGE",
+      "req": "0",
+      "cost": "15",
+      "effect": "On a successful SUBTERFUGE Vs target's WITS, Once per SCENE you can convince the target to ignore one action they just witnessed. Roll has a LARGE or SMALL penalty if the action is hard to ignore."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Living Horror",
+      "skill": "INTIMIDATE",
+      "req": "0",
+      "cost": "15",
+      "effect": "Any MORALE damage you deal gains the CRIT special modifier or improve critical range if it already had it."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Poker Face",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "15",
+      "effect": "You get a SMALL bonus to WITS checks. This bonus can exceed your maximum racial value."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Predict Actions",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "15",
+      "effect": "Once per SOCIAL challenge you can ask the DM for the result of a SOCIAL action before you decide to use it"
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Psychological deterent",
+      "skill": "MARKSMAN",
+      "req": "0",
+      "cost": "15",
+      "effect": "When using a MARKSMAN attack from CONCEALMENT, any HEALTH based attack will also damage MORALE until you are spotted."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Rabid Fans",
+      "skill": "FLAIR",
+      "req": "0",
+      "cost": "15",
+      "effect": "When challenged in a crowded environment where you are known, people will rush to defend you. Opponents have a LARGE penalty to all skill checks."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Starstruck",
+      "skill": "CHARM",
+      "req": "FAME  or INFAMY LVL 5+",
+      "cost": "15",
+      "effect": "People are in awe of you. Everyone that attempts to make any SKILL checks against you have a SMALL penalty."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Bolstering Veil",
+      "skill": "RACIAL",
+      "req": "PATRIARK",
+      "cost": "20",
+      "effect": "Allies in range of your Veil cannot drop lower than your current morale"
+    },
+    {
+      "category": "SOCIAL",
+      "name": "EVO's what EVO?",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "20",
+      "effect": "Your EVO's do not cause the usual drawbacks of having EVO rank 1, 2 and 3."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Pain specialist",
+      "skill": "INTIMIDATION",
+      "req": "0",
+      "cost": "20",
+      "effect": "If your damage cause a TRAUMA, check the damage against the target's WILLPOWER and ENDURANCE. If the damage exceeds the other one too, the target gains the TRAUMA on both pools."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Death Veil",
+      "skill": "RACIAL",
+      "req": "SKALANDER",
+      "cost": "25",
+      "effect": "When enemies within your veil suffer a morale loss, they take an equal amount of health damage in addition to the morale loss."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Multiple Personality",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "25",
+      "effect": "Gain one additional Background allowed to your race.  (GM's Approval)"
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Perfect Actor",
+      "skill": "ACTING",
+      "req": "HUMAN",
+      "cost": "25",
+      "effect": "On a critical success with ACTING, when passing yourself, as another race, you also gain their RACIAL traits while maintaining the role."
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Spiritual Genesis",
+      "skill": "SPIRITUAL",
+      "req": "0",
+      "cost": "25",
+      "effect": "You can create a new SPELL or BARRIER. This is unique to you, does not count against the limit of your spirit and cannot be learned or counterspelled by anyone else. (Final effect subjected to GM's approval)"
+    },
+    {
+      "category": "SOCIAL",
+      "name": "Trueborn Sorcerer",
+      "skill": "SPIRITUAL",
+      "req": "NERULIAN",
+      "cost": "25",
+      "effect": "You can pay the CHI cost of any spells using a willing ally's CHI within the spell range. Direct hits with your spells makes targets count as willing allies for the purpose of this ability until the end of the SCENE."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Bounty Hunter",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "5",
+      "effect": "When engaged in a challenge with a target you investigated prior to that SCENE, you gain SMALL bonus to all your rolls against that same target."
+    },
+    {
+      "category": "ACUITY",
+      "name": "CHI Surge",
+      "skill": "BINDING",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can add any amount of your own personal CHI to the RAW pool as a QUICK action"
+    },
+    {
+      "category": "ACUITY",
+      "name": "Close Quarters",
+      "skill": "GUNSLINGER",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can use Tiny and Small ranged weapons in melee without giving COUNTER attacks."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Counter Magics",
+      "skill": "BINDING",
+      "req": "0",
+      "cost": "5",
+      "effect": "When you successful defend vs a spell you gain LARGE bonus on the next CHI power you use. (bonus is lost if not used in the same scene.)"
+    },
+    {
+      "category": "ACUITY",
+      "name": "Don't Panic",
+      "skill": "TACTICS",
+      "req": "0",
+      "cost": "5",
+      "effect": "During a surprise round you have a SMALL bonus to all of your DEFENSES"
+    },
+    {
+      "category": "ACUITY",
+      "name": "Eagle Eyed",
+      "skill": "PERCEPTION",
+      "req": "0",
+      "cost": "5",
+      "effect": "Removes penalty on medium range attacks and reduce long range penalty to a SMALL penalty."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Energy Transfer",
+      "skill": "BINDING",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can spend personal CHI as a free action during mainternance to reduce the recharge of a device by 1 round per CHI spent."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Escape Artist",
+      "skill": "DEXTERITY",
+      "req": "0",
+      "cost": "5",
+      "effect": "You are trained at escaping bonds and restraints. Gain a LARGE bonus to DEXTERITY or ATHLETICS checks made to escape bindings and holds."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Fast Change",
+      "skill": "CONCEALMENT",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can use a COMPLEX action to change into or out of disguise. Provides a LARGE bonus to CONCEALEMENT if you were not seen during the change."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Fated magic",
+      "skill": "SPIRITUAL",
+      "req": "0",
+      "cost": "5",
+      "effect": "When using CHI (personal or RAW), you add a SMALL bonus to all numeric values if your luck roll was a success or a SMALL penalty on failure. Transform to LARGE if luck roll was a critical success/failure."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Finger in the Hole",
+      "skill": "NAVIGATION",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can use and navigate Wormholes allowing travel to areas not covered by gates (Modifies travel time by +/- 100%) but your NAVIGATION skill check has a LARGE penalty to figure out where you will end up."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Galactic Shortcut",
+      "skill": "NAVIGATION",
+      "req": "0",
+      "cost": "5",
+      "effect": "When travelling on established routes you always cut down travel times by 10% per success above what was required. (Max 50%)."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Hole in one",
+      "skill": "DEXTERITY",
+      "req": "0",
+      "cost": "5",
+      "effect": "You decide in which direction your DEVIATION goes."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Impalement Artist",
+      "skill": "DEXTERITY",
+      "req": "0",
+      "cost": "5",
+      "effect": "SMALL and TINY melee thrown weapons all gain the QUICK keyword."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Infiltrate",
+      "skill": "CONCEALMENT",
+      "req": "0",
+      "cost": "5",
+      "effect": "When a CONCEALMENT skill checks is made by someone with the INFILTRATE talent everyone else with the INFILTRATE talent can pick that roll instead of theirs."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Inner peace",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "5",
+      "effect": "Anytime you restore HEALTH or MORALE via skills, items or magic to a target other than yourself, you recover 1 MORALE."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Keen senses",
+      "skill": "AWARENESS",
+      "req": "0",
+      "cost": "5",
+      "effect": "AWARENESS checks have no penalties from visual impairments like darkness, smoke, fog."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Mr. Smith",
+      "skill": "CONCEALMENT",
+      "req": "0",
+      "cost": "5",
+      "effect": "You know how to look as normal as possible. Gain a LARGE bonus to CONCEALMENT when making rolls in a crowded area (more than 10 people)."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Navigate Blind",
+      "skill": "NAVIGATION",
+      "req": "0",
+      "cost": "5",
+      "effect": "You do not suffer any penalties when navigating in unknown environments."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Omens",
+      "skill": "AWARENESS",
+      "req": "0",
+      "cost": "5",
+      "effect": "Your AWARENESS (including passive) can now detect paranormal as well."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Opportunist",
+      "skill": "TACTICS",
+      "req": "0",
+      "cost": "5",
+      "effect": "During a surprise round you initiated, all your rolls are lucky"
+    },
+    {
+      "category": "ACUITY",
+      "name": "Overwhelming presence",
+      "skill": "INTUITION",
+      "req": "SKALANDER or PATRIARK",
+      "cost": "5",
+      "effect": "The bonus from your VEIL is increased to LARGE when you can TOUCH your target."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Psychometry",
+      "skill": "INTUITION",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can take 30 minutes to feel the last 24h of an object or a person. Roll INTUITION, the info you get is tied to your roll result."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Running Reload",
+      "skill": "GUNSLINGER",
+      "req": "0",
+      "cost": "5",
+      "effect": "As long as you have a free hand you can reload your weapon while performing another action by taking a SMALL penalty to that action  (except shoot that weapon obviously)."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Shadowrun",
+      "skill": "CONCEALMENT",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can run while in CONCEALMENT but take a LARGE penalty to your result. (If it lowers your CONCEALMENT to 0 or less, you are visible to everyone)."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Sharpshooter",
+      "skill": "MARKSMAN",
+      "req": "0",
+      "cost": "5",
+      "effect": "If you perform an AIM action, you can skip the SMALL bonus to instead ignore all range penalties."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Smuggling",
+      "skill": "CONCEALMENT",
+      "req": "0",
+      "cost": "5",
+      "effect": "When concealing items on your person search attempts will be unlucky."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Spell slinger",
+      "skill": "DEXTERITY",
+      "req": "0",
+      "cost": "5",
+      "effect": "When casting spells through RELIC SHARDS you can use a DEXTERITY check to throw the relic into a target. This roll determines if the spell hits or not."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Star Compass",
+      "skill": "NAVIGATION",
+      "req": "0",
+      "cost": "5",
+      "effect": "You always know where you are in the galaxy. Gain a LARGE bonus to any ACUITY check where knowing where you are is important."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Tactical Deployment",
+      "skill": "TACTICS",
+      "req": "0",
+      "cost": "5",
+      "effect": "If you rolled a TACTICS Vs the enemy WITS before a scene, at the start of the combat, once everyone is in place but before any actions are taken, you can reposition yourself by X meters"
+    },
+    {
+      "category": "ACUITY",
+      "name": "Tactical Insight",
+      "skill": "TACTICS",
+      "req": "0",
+      "cost": "5",
+      "effect": "In the first round of combat as a QUICK action you can roll TACTICS Vs ENEMY WITS if you succeed your entire team automatically wins initiative checks until next MAINTENANCE."
+    },
+    {
+      "category": "ACUITY",
+      "name": "The Best Distraction",
+      "skill": "DEXTERITY",
+      "req": "0",
+      "cost": "5",
+      "effect": "You can attempt to use DEXTERITY to steal items that are Larger than small with a (SMALL penalty) or being held (LARGE penalty)."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Treasure Hunter",
+      "skill": "SEARCH",
+      "req": "0",
+      "cost": "5",
+      "effect": "You have a LARGE bonus when using SEARCH to find hidden doors, safes or concealed treasures."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Unnatural Predator",
+      "skill": "CONCEALMENT",
+      "req": "0",
+      "cost": "5",
+      "effect": "When attacking from CONCEALMENT you can chose what damage type you want to do (PHYSICAL, ENERGY, TECH, SPIRITUAL)"
+    },
+    {
+      "category": "ACUITY",
+      "name": "You're a Natural",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "5",
+      "effect": "When an ally uses an ASSIST action on you. gain all of their ACUITY TALENTS until the end of the turn."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Acute senses",
+      "skill": "SEARCH",
+      "req": "0",
+      "cost": "10",
+      "effect": "One of your senses (pick one when you select this talent) is highly developed. SEARCH checks that rely on that sense exclusively are LUCKY."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Always Alert",
+      "skill": "AWARENESS",
+      "req": "0",
+      "cost": "10",
+      "effect": "You have a permanent SMALL bonus to your passive AWARENESS"
+    },
+    {
+      "category": "ACUITY",
+      "name": "Blindsight",
+      "skill": "GENERAL",
+      "req": "JAULAUS",
+      "cost": "10",
+      "effect": "When targets are within your hearing or smell range (50m) you do not suffer from any range penalty and ignore visual impairments."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Counter-Intel",
+      "skill": "TACTICS",
+      "req": "0",
+      "cost": "10",
+      "effect": "You can perform  a TACTICS checks as a FREE action each maintenance phase but you have a SMALL penalty."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Critical weakness",
+      "skill": "TACTICS",
+      "req": "0",
+      "cost": "10",
+      "effect": "When successfully using TACTICS to identify a target, until the end of the scene; you increase CRITICAL range by 1 against vs that same enemy."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Defensive reoload",
+      "skill": "MARKSMAN",
+      "req": "0",
+      "cost": "10",
+      "effect": "When performing a RELOAD action or during a RECHARGE action you increase all your DEFENSES by 1 category against anyone over 50m from your position."
+    },
+    {
+      "category": "ACUITY",
+      "name": "First strike",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "You always roll twice when checking for INITIATIVE, pick either result."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Guerilla",
+      "skill": "TACTICS",
+      "req": "0",
+      "cost": "10",
+      "effect": "You get a full round instead of a single action during your surprise round"
+    },
+    {
+      "category": "ACUITY",
+      "name": "Hunker Down",
+      "skill": "CONCEALMENT",
+      "req": "0",
+      "cost": "10",
+      "effect": "When you lose CONCEALMENT from being spotted, you have a LARGE bonus to all your defenses until the next maintenance phase."
+    },
+    {
+      "category": "ACUITY",
+      "name": "I Know You!",
+      "skill": "TACTICS",
+      "req": "0",
+      "cost": "10",
+      "effect": "If you rolled tactics to identify an enemy before combat, during the combat scene you have a SMALL bonus to all rolls made against that target."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Mind reader",
+      "skill": "INTUITION",
+      "req": "0",
+      "cost": "10",
+      "effect": "Use a QUICK action to roll INTUITION vs the target's WITS to predict all of its actions for the following round. Your DEFENSES have a LARGE bonus against the target actions until next MAINTENANCE."
+    },
+    {
+      "category": "ACUITY",
+      "name": "MOB mentality",
+      "skill": "GENERAL",
+      "req": "HUMAN",
+      "cost": "10",
+      "effect": "When using the same SKILL as an ally on the same target you increase your critical range by 1 category."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Mugging",
+      "skill": "DEXTERITY",
+      "req": "0",
+      "cost": "10",
+      "effect": "You can attempt to pick pocket a tiny object when making a successful melee attack as a free action. Roll (DEXTERITY Vs SPEED). Must have a free hand."
+    },
+    {
+      "category": "ACUITY",
+      "name": "My Precious!",
+      "skill": "BINDING",
+      "req": "0",
+      "cost": "10",
+      "effect": "You gain twice as much Relic experience for the purpose of making magical items"
+    },
+    {
+      "category": "ACUITY",
+      "name": "Nightstalker",
+      "skill": "GENERAL",
+      "req": "HAKARI",
+      "cost": "10",
+      "effect": "When dealing with opponents suffering from environmental penalties you gain a LARGE bonus to SKILL checks and  DAMAGE."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Peephole",
+      "skill": "NAVIGATION",
+      "req": "0",
+      "cost": "10",
+      "effect": "You can perform NAVIGATION checks with a LARGE penalty to know the layout of a room behind a closed door."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Persistent spirit",
+      "skill": "BINDING",
+      "req": "0",
+      "cost": "10",
+      "effect": "When you are RESTING ; your spirit remains active and you can SUSTAIN effects."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Ranger veteran",
+      "skill": "MARKSMAN",
+      "req": "0",
+      "cost": "10",
+      "effect": "When in a SCENE with someone else with the Ranger Veteran talent, whenever you are attacking the same target, one of you can instead add their marksman result to the other player."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Shadow form",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "All of your MAGIC powers have INV  (Can be used from concealment without any penalty when no enemy are within 10m)"
+    },
+    {
+      "category": "ACUITY",
+      "name": "Shardslinger",
+      "skill": "BINDING",
+      "req": "0",
+      "cost": "10",
+      "effect": "Enemies attempting to COUNTERSPELL spells you use through a RELIC have a LARGE penality to their skill check."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Share Chi",
+      "skill": "SPIRITUAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "You can tap a target for their CHI by touching them. (Martial arts required for unwilling targets)."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Shared Bonds",
+      "skill": "BINDING",
+      "req": "0",
+      "cost": "10",
+      "effect": "When binding a target or his spirit you gain the benefits of its magical EVO's if any."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Shortcut",
+      "skill": "NAVIGATION",
+      "req": "0",
+      "cost": "10",
+      "effect": "You can attempt to find a shortcut when none is apparent. Cut down travel time by 50% but your NAVIGATION skill check has a LARGE penalty to figure out where you end up."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Sniff out weakness",
+      "skill": "TACTICS",
+      "req": "0",
+      "cost": "10",
+      "effect": "When attacking a target that has a DEFENSIVE penalty of any kind (Flanked, Prone, Restrained etc.), you gain a LARGE bonus to DAMAGE and increase POWER by 1 category (Max [HIGH])."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Soul thief",
+      "skill": "SPIRITUAL",
+      "req": "0",
+      "cost": "10",
+      "effect": "When targeted by any effect that cost CHI you gain the CHI spent by the caster as your own. The CHI is not added to the RAW pool."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Spiritual reprograming",
+      "skill": "GENERAL",
+      "req": "NON-BORN",
+      "cost": "10",
+      "effect": "You have attained enlightenment; your maximum CHI is now 3 and you can gain SPIRITS, SPELLS and POWERS."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Subtle Veil",
+      "skill": "RACIAL",
+      "req": "PATRIARK",
+      "cost": "10",
+      "effect": "You influence your veil ability to change your features, you gain a SMALL bonus to ACUITY checks vs targets within your veil range."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Therapy by proxy",
+      "skill": "RACIAL",
+      "req": "PSYLON",
+      "cost": "10",
+      "effect": "PSYLONS can ignore a MORALE TRAUMA by passing it to a willing ally within 10m. On a successful INTUITION + LARGE penalty Vs a target's WITS you can pass it to an unwilling target."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Throwing expert",
+      "skill": "DEXTERITY",
+      "req": "0",
+      "cost": "10",
+      "effect": "You are an expert at throwing items. You can duel wield throwing items without any penalty and can throw at different targets."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Total Absence",
+      "skill": "CONCEALMENT",
+      "req": "0",
+      "cost": "10",
+      "effect": "When using CONCEALMENT you can take a LARGE penalty to have type II (electronic) and type III (psychic) concealment as well"
+    },
+    {
+      "category": "ACUITY",
+      "name": "Trick Shot",
+      "skill": "PERCEPTION",
+      "req": "0",
+      "cost": "10",
+      "effect": "You can perform attacks that normally require COMPLEX actions as a REGULAR action instead of COMPLEX but the attack has a LARGE penalty."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Unveiled Truths",
+      "skill": "GENERAL",
+      "req": "SKALANDER",
+      "cost": "10",
+      "effect": "Any target within your VEIL range has a LARGE penalty to CONCEALMENT, SUBTERFUGE and any skills check used to lie or pass as someone they are not."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Advanced Potential",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "15",
+      "effect": "Choose one EVO. All tiers of that EVO carries over to your body after cloning."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Assassination",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "15",
+      "effect": "If you used a non damaging ACUITY skill against a target; your next combat skill check against the target is a CRITICAL success with SMALL bonus to DAMAGE or a LARGE one if you used two ACUITY skills."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Back to Back",
+      "skill": "TACTICS",
+      "req": "0",
+      "cost": "15",
+      "effect": "When fighting next to an ally with the Back to Back talent you can make defensive rolls (DEFEND, DEFLECT and SOAK) for one another. Damage goes to the intended target regardless of who defended against it."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Circus Performer",
+      "skill": "DEXTERITY",
+      "req": "0",
+      "cost": "15",
+      "effect": "All of your DEXTERITY skill checks counts their targets as BREACHED"
+    },
+    {
+      "category": "ACUITY",
+      "name": "Enslaver",
+      "skill": "BINDING",
+      "req": "0",
+      "cost": "15",
+      "effect": "Gain a SMALL bonus to all SKILLS and DAMAGE while binding an enemy AWAKENED SPIRIT, or LARGE one if the SPIRIT is MANIFESTED. Bonus is loss if the SPIRIT or it's owner DIES."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Fast shadow",
+      "skill": "CONCEALMENT",
+      "req": "0",
+      "cost": "15",
+      "effect": "While in CONCEALMENT your movement speed is no longer reduced."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Instant Stealth",
+      "skill": "CONCEALMENT",
+      "req": "0",
+      "cost": "15",
+      "effect": "You can enter CONCEALMENT even while in plain sight but suffer a LARGE penalty."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Make it count",
+      "skill": "MARKSMAN",
+      "req": "0",
+      "cost": "15",
+      "effect": "Your PRECISION HIT (no burst or full auto) at long range have their POWER increased by 2 categories (Max [EXTREME])."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Neat Trick",
+      "skill": "GUNSLINGER",
+      "req": "0",
+      "cost": "15",
+      "effect": "When taking a COMPLEX action to shoot, if your EXPERTISE result is 5 or more you can discard it's bonus and replace it with any SPECIAL property normally allowed on that weapon."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Pistolier",
+      "skill": "GUNSLINGER",
+      "req": "0",
+      "cost": "15",
+      "effect": "All pistols have CRIT when you fire them, increase critical range by 1 if it already had it."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Slippery",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "15",
+      "effect": "You get a SMALL bonus to SPEED checks. This bonus can exceed your maximum racial value."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Snipe",
+      "skill": "MARKSMAN",
+      "req": "0",
+      "cost": "15",
+      "effect": "All PRECISION MARKSMAN attacks done at long range from CONCEALMENT are always CRITICAL hits."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Void touched",
+      "skill": "GENERAL",
+      "req": "NERULIAN",
+      "cost": "15",
+      "effect": "Your Blood of Aiur no longer grants additional CHI. Instead, your base CHI is added to any DEFENSIVE ATTRIBUTES (Max 10) when defending against MAGIC. You can no longer use PERSONAL CHI for SPELLS."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Combat Trance",
+      "skill": "GENERAL",
+      "req": "0",
+      "cost": "20",
+      "effect": "When engaged in combat you gain a LARGE bonus to your WITS and WILLPOWER defense."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Ghost arms",
+      "skill": "ELEMENTALIST",
+      "req": "0",
+      "cost": "20",
+      "effect": "Anytime you use an ELEMENTALIST spell or power you manifest a spiritual arms during that round. While the arms are in play, they can perform one STANDARD non spell action of your choice."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Homunculus",
+      "skill": "BINDING",
+      "req": "0",
+      "cost": "20",
+      "effect": "When taking HEALTH damage that results in a TRAUMA, the next round your blood animates into a version of yourself. The Homunculus will last one round and can cast any of your SPELLS without CHI."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Mana Leech",
+      "skill": "SPIRITUAL",
+      "req": "0",
+      "cost": "20",
+      "effect": "Your NATURAL attacks have SPIRITBANE, in addition, anyone touching, damaging or striking you loses one point of CHI (per action).  Any CHI lost by this effect is added to your CHI pool."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Atomic Nomz Nomz",
+      "skill": "GENERAL",
+      "req": "PSYLON",
+      "cost": "25",
+      "effect": "You are fully immune from any form of ENERGY damage. You just feel a slight tingling when an ENERGY attacks hit you."
+    },
+    {
+      "category": "ACUITY",
+      "name": "God Mode",
+      "skill": "TACTICS",
+      "req": "0",
+      "cost": "25",
+      "effect": "If you successfully rolled a TACTIC check before combat. You can cancel one action of your choice (yours, enemy or ally) during the next SCENE. Action will have no effect."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Ninja",
+      "skill": "CONCEALMENT",
+      "req": "0",
+      "cost": "25",
+      "effect": "You can use any skills or perform any action while CONCEALED without incuring penalties to your CONCEALMENT."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Obliteration",
+      "skill": "ELEMENTALIST",
+      "req": "0",
+      "cost": "25",
+      "effect": "Enemies defense against your MAGIC powers have unlucky rolls."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Perfect predator",
+      "skill": "TACTICS",
+      "req": "HAKARI",
+      "cost": "25",
+      "effect": "Your direct (non aoe) attacks all have X-ALL"
+    },
+    {
+      "category": "ACUITY",
+      "name": "Playing with Dark Forces",
+      "skill": "BINDING",
+      "req": "0",
+      "cost": "25",
+      "effect": "Create an exclusive GOD tier RELIC. Check with GM for details."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Ricochet",
+      "skill": "DEXTERITY",
+      "req": "0",
+      "cost": "25",
+      "effect": "You can shoot and throw items across corners. Ignore Line of Sight rules and COVER if you can hit the target as long as there is a path to them."
+    },
+    {
+      "category": "ACUITY",
+      "name": "Voltaic metabolism",
+      "skill": "ELEMENTALIST",
+      "req": "0",
+      "cost": "25",
+      "effect": "When hit by an energy attack, if you cast an ELEMENTALIST spell as a QUICK reaction you take no damage and the spell cost no CHI."
+    }
+  ],
+  "notes": {
+    "total_talents": 382,
+    "structure": "Each talent includes name, prerequisites, cost, effects, and mechanics"
+  }
+}
