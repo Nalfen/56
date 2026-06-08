@@ -1,0 +1,329 @@
+{
+  "version": "8",
+  "metadata": {
+    "system": "56th Century TTRPG",
+    "extracted_from": "56th_century_compendium.html (line 726)",
+    "date": "2026-06-07",
+    "description": "Vehicles: 35 vehicle types"
+  },
+  "vehicles": [
+    {
+      "name": "Generic Sports Car",
+      "manufacturer": "Generic",
+      "size": "Tiny",
+      "durability": 20,
+      "structure": 3,
+      "availability": "Common",
+      "special": "System : 2"
+    },
+    {
+      "name": "F1-Mach",
+      "manufacturer": "Vexon",
+      "size": "Medium",
+      "durability": 20,
+      "structure": 3,
+      "availability": "Limited",
+      "special": "System : 2"
+    },
+    {
+      "name": "Vexon Speed VI",
+      "manufacturer": "Vexon",
+      "size": "Small",
+      "durability": 20,
+      "structure": 2,
+      "availability": "Rare",
+      "special": "System : 2"
+    },
+    {
+      "name": "Hoverboard",
+      "manufacturer": "Generic",
+      "size": "Tiny",
+      "durability": 10,
+      "structure": 1,
+      "availability": "Common",
+      "special": "System : 2"
+    },
+    {
+      "name": "Zang'Hai Rabbit",
+      "manufacturer": "Zang'Hai",
+      "size": "Small",
+      "durability": 15,
+      "structure": 2,
+      "availability": "Common",
+      "special": "System : 2"
+    },
+    {
+      "name": "Dragonboard 8",
+      "manufacturer": "Yamato",
+      "size": "Tiny",
+      "durability": 15,
+      "structure": 1,
+      "availability": "Uncommon",
+      "special": "System : 2"
+    },
+    {
+      "name": "Red Hunter",
+      "manufacturer": "Torc",
+      "size": "Medium",
+      "durability": 30,
+      "structure": 4,
+      "availability": "Uncommon",
+      "special": "System : 2"
+    },
+    {
+      "name": "X-Fire",
+      "manufacturer": "Unknown",
+      "size": "Small",
+      "durability": 20,
+      "structure": 2,
+      "availability": "Common",
+      "special": "System : 2"
+    },
+    {
+      "name": "GU-701 Cargo",
+      "manufacturer": "Galactic Union",
+      "size": "Ex.Large",
+      "durability": 20,
+      "structure": 5,
+      "availability": "Rare",
+      "special": "System : 2"
+    },
+    {
+      "name": "Nightsky",
+      "manufacturer": "Lansing",
+      "size": "Small",
+      "durability": 20,
+      "structure": 4,
+      "availability": "Limited",
+      "special": "System : 2"
+    },
+    {
+      "name": "The Bunker",
+      "manufacturer": "Kintech",
+      "size": "Ex.Large",
+      "durability": 20,
+      "structure": 6,
+      "availability": "Limited",
+      "special": "System : 2"
+    },
+    {
+      "name": "Generic VUS",
+      "manufacturer": "Zang'Hai",
+      "size": "Medium",
+      "durability": 15,
+      "structure": 3,
+      "availability": "Common",
+      "special": "System : 2"
+    },
+    {
+      "name": "MALI-III",
+      "manufacturer": "Malivaux",
+      "size": "Medium",
+      "durability": 20,
+      "structure": 2,
+      "availability": "Unique",
+      "special": "System : 2"
+    },
+    {
+      "name": "Torc Rover",
+      "manufacturer": "Torc",
+      "size": "Medium",
+      "durability": 30,
+      "structure": 4,
+      "availability": "Uncommon",
+      "special": "System : 2"
+    },
+    {
+      "name": "Ridge Racer Prime",
+      "manufacturer": "Galactic Union",
+      "size": "Medium",
+      "durability": 20,
+      "structure": 3,
+      "availability": "Rare",
+      "special": "System : 2"
+    },
+    {
+      "name": "Torc Rover X3 Ranger",
+      "manufacturer": "Torc",
+      "size": "Medium",
+      "durability": 30,
+      "structure": 5,
+      "availability": "Rare",
+      "special": "System : 2"
+    },
+    {
+      "name": "GU Solo-1",
+      "manufacturer": "Galactic Union",
+      "size": "Small",
+      "durability": 20,
+      "structure": 3,
+      "availability": "Uncommon",
+      "special": "System : 2"
+    },
+    {
+      "name": "Explorer 100",
+      "manufacturer": "Galactic Union",
+      "size": "Small",
+      "durability": 20,
+      "structure": 3,
+      "availability": "Uncommon",
+      "special": "System : 2"
+    },
+    {
+      "name": "Linghuini",
+      "manufacturer": "Independent",
+      "size": "Medium",
+      "durability": 20,
+      "structure": 3,
+      "availability": "Rare",
+      "special": "System : 2"
+    },
+    {
+      "name": "Deep Diver Six",
+      "manufacturer": "Kintech",
+      "size": "Small",
+      "durability": 20,
+      "structure": 4,
+      "availability": "Classified",
+      "special": "System : 2"
+    },
+    {
+      "name": "Ridge F\u00f6rden C\u00e4maren",
+      "manufacturer": "Zang'Hai",
+      "size": "Medium",
+      "durability": 15,
+      "structure": 3,
+      "availability": "Uncommon",
+      "special": "System : 2"
+    },
+    {
+      "name": "Freedom",
+      "manufacturer": "Lansing",
+      "size": "Large",
+      "durability": 25,
+      "structure": 7,
+      "availability": "Classified",
+      "special": "System : 2"
+    },
+    {
+      "name": "Delorean 56",
+      "manufacturer": "Nakamura",
+      "size": "Medium",
+      "durability": 20,
+      "structure": 4,
+      "availability": "Limited",
+      "special": "System : 2"
+    },
+    {
+      "name": "Maximus Fortress",
+      "manufacturer": "Yamato",
+      "size": "Massive",
+      "durability": 50,
+      "structure": 5,
+      "availability": "Rare",
+      "special": "System : 2"
+    },
+    {
+      "name": "White Rabbit",
+      "manufacturer": "Galactic Union",
+      "size": "Small",
+      "durability": 40,
+      "structure": 5,
+      "availability": "Common",
+      "special": "System : 2"
+    },
+    {
+      "name": "Eclipse VI",
+      "manufacturer": "Lansing",
+      "size": "Huge",
+      "durability": 40,
+      "structure": 6,
+      "availability": "Limited",
+      "special": "System : 2"
+    },
+    {
+      "name": "Warrior-2",
+      "manufacturer": "Torc",
+      "size": "Large",
+      "durability": 45,
+      "structure": 6,
+      "availability": "Rare",
+      "special": "System : 2"
+    },
+    {
+      "name": "The luxurious retreat",
+      "manufacturer": "Independent",
+      "size": "Large",
+      "durability": 35,
+      "structure": 5,
+      "availability": "Rare",
+      "special": "System : 2"
+    },
+    {
+      "name": "Web Defender 1",
+      "manufacturer": "Yamato",
+      "size": "Medium",
+      "durability": 60,
+      "structure": 7,
+      "availability": "Uncommon",
+      "special": "System : 2"
+    },
+    {
+      "name": "Sea King III",
+      "manufacturer": "Zang'Hai",
+      "size": "Medium",
+      "durability": 15,
+      "structure": 3,
+      "availability": "Common",
+      "special": "System : 2"
+    },
+    {
+      "name": "Bear 52",
+      "manufacturer": "Yamato",
+      "size": "Ex.Large",
+      "durability": 60,
+      "structure": 7,
+      "availability": "Rare",
+      "special": "System : 2"
+    },
+    {
+      "name": "Vexon Sea Fighter V",
+      "manufacturer": "Vexon",
+      "size": "Small",
+      "durability": 20,
+      "structure": 3,
+      "availability": "Rare",
+      "special": "System : 2"
+    },
+    {
+      "name": "Orbitor",
+      "manufacturer": "Galactic Union",
+      "size": "Medium",
+      "durability": 30,
+      "structure": 5,
+      "availability": "Uncommon",
+      "special": "System : 2"
+    },
+    {
+      "name": "Medusa",
+      "manufacturer": "Nakamura",
+      "size": "Medium",
+      "durability": 35,
+      "structure": 5,
+      "availability": "Unique",
+      "special": "System : 2"
+    },
+    {
+      "name": "BL-BU306 \"Black Butcher\"",
+      "manufacturer": "Nakamura",
+      "size": "Large",
+      "durability": 45,
+      "structure": 6,
+      "availability": "Unique",
+      "special": "System : 2"
+    }
+  ],
+  "notes": {
+    "total_items": 35
+  }
+}

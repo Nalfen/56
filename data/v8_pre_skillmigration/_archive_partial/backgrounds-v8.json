@@ -1,0 +1,402 @@
+{
+  "version": "8",
+  "metadata": {
+    "system": "56th Century TTRPG",
+    "extracted_from": "56th_century_compendium.html (line 726)",
+    "date": "2026-06-07",
+    "description": "Character backgrounds: 38 different backgrounds with traits and bonuses",
+    "notes": "Each background includes name, description, associated race, and trait grants"
+  },
+  "backgrounds": [
+    {
+      "name": "Street urchin",
+      "race": "ANY",
+      "desc": "You were abandonned or lost your familiy at an early age and have been raised in the streets.",
+      "traits": [
+        "Never alone : When in an urban environment you are familiar with you can use a QUICK action to perform a LEADERSHIP or STREETWISE check Vs Enemy WITS to gain the public's assistance. On success leadership grants a SMALL bonus to all of your allies and streetwise applies a SMALL penalty to all enemies, both effects last until the end of the SCENE.",
+        "This is my home : You did not just grown on the streets you are the streets. Whenever applicable you have a SMALL bonus to any  skill checks done in a non corporate urban environment.\nSurvivor : Living in the streets means being quick on your feet and ruthless. Your WITS DEFENSE increases by 1.",
+        "Blame the Corpos : You know first hand the power of corporations. You have vulnerability 1 against MORALE damage from any corporate source.\nYears of malnourishment and untreatred illness has taken it's toll on you. Reduce your racial maximum ENDURANCE by 1."
+      ]
+    },
+    {
+      "name": "Deep space explorer",
+      "race": "ANY",
+      "desc": "You spent a lot of time exploring the dark corners of the universe.",
+      "traits": [
+        "Delver in the dark :  You spent a lot of time dealing with challenges without any outside help or assistance, when no other ally is present you gain a SMALL bonus to any skill check you perform.\nYou are completely at ease in unconventional environments, you ignore environmental penalties (zeroG, H/L gravity, underwater, etc...).",
+        "Resilient: Spending a lot of time alone requires great will. Increase WILLPOWER by 1\nExplorer : You spend a lot of time dealing with the unknown, you picked up a few tricks along the way. You do not get any penality when dealing with unknown aliens, their devices or environments.",
+        "Disconnected : Spending a lot of time away from alliance space has limited your knowledge or current events. You have a SMALL penalty to SOCIAL and MENTAL skills that deal with current events or newer technology.\nCryosleep:  Your extended time in cryo and space has reduced your bone density. Reduce racial maximum PHYSICAL attribute by 1."
+      ]
+    },
+    {
+      "name": "Darkspacer",
+      "race": "ANY",
+      "desc": "You grew up and spent most of your life away from civilisation on the fringe worlds of the galaxy far away from the confort of the alliance.",
+      "traits": [
+        "Resourceful : There is very little in the frontier so you have to make do with what you can find. You have a LARGE bonus on any skill check that deals with raw materials or salvage. You also gain a SMALL bonus to all PHYSICAL skill checks.",
+        "Cowboy : Living far from civilization has made you tougher than normal. You have +1 to ENDURANCE. You start the game with the \"Home Field Advantage Talent\".",
+        "Gulible : Not being from the alliance there is a lot you do not know and people are quick to pick on that. Opponents have a SMALL bonus on any social interactions against you and you reduce racial maximum WITS by 1."
+      ]
+    },
+    {
+      "name": "Family of thieves",
+      "race": "ANY",
+      "desc": "You grew up as a thief, for whatever reasons you prefer to acquire your items in unconventional ways.",
+      "traits": [
+        "Criminal network : You spent a lot of time making friends in low places. Gain a SMALL bonus to any skill that involves the criminal world. \nStart the game with one of the following TALENTS \"Pack Rat\", \"Mugging\" , \"Fake News\" or \"Rolling with Punches\" for free.",
+        "Eyes in the back : Living a life of crime has conditioned you to always be alert. You increase you ACUITY by 1.",
+        "Typecast : Growing up and always hanging around criminals has made you very popular with law enforcement. Law enforcement has a SMALL bonus to skills checks against you.\nAlways hanging around criminals has made you suspicious of everyone. Reduce racial maximum SOCIAL by 1."
+      ]
+    },
+    {
+      "name": "Sorcerous background",
+      "race": "ANY",
+      "desc": "You come from a long line and tradition of magic users.",
+      "traits": [
+        "Spiritual exposure : You have a SMALL bonus to BINDING, SPIRITUAL and you start the game with a non illegal spell of your choice (up to RARE).",
+        "Infused body : You live and breathe mysteries and esoteric plots. Increase CHI by 2 and WITS by 1 point.",
+        "Source bound : When in an AREA with no raw CHI, the first time you cast a spell it will consume an additiuonal CHI point.\nA lot magic users tend to negate the importance of keeping in shape. Reduce your racial maximum SPEED by 1."
+      ]
+    },
+    {
+      "name": "Genome Soldier",
+      "race": "ANY",
+      "desc": "You were one of the first clones created to fight in the war before the secret programs. Somehow, once the war was over you escaped destruction.",
+      "traits": [
+        "Warborn : You were conditionned for combat; start with TWO of the following skills at rank 5: Small Arms, Heavy Weapons, Martial Arts, Piloting or Tactics.",
+        "Modified Genome : You were genetically engineered to be superior in every way. Increase PHYSICAL, ACUITY, ENDURANCE and WILLPOWER ATTRIBUTES by 1.",
+        "Complex DNA : All GENETIC EVO use double EVO points.\nDeath clock : Your body was not designed to last. You insane metabolysm trashes your body and causes all sorts of issues. At the start of every SCENE roll a D10, on a 1 you are SICK until the end of the SCENE."
+      ]
+    },
+    {
+      "name": "Imaginary friend",
+      "race": "ANY",
+      "desc": "You have a childhood keepsake which has been your imaginary friend since you are little, that you are still trying to figure out with your psychologist.  The keepsake always ends back in your posession should you lose it.",
+      "traits": [
+        "Natural empathy : You sense people's motives and emotions better than anyone else.  Gain a SMALL bonus to CHARM, AWARENESS and INTUITION rolls.\nOnce per scene, your imaginary friend takes a hit for you: Ignore the results.",
+        "Besties : Your are unnaturally perceptive. Increase ACUITY by 1. \nYour Imaginary friend will react to RAW CHI. When raw chi is above 5, roll a dice during MAINTENANCE. On a CRIT, your imaginary friend will grand you a RANDOM SPIRIT POWER (that YOU can SUSTAIN).",
+        "Feed the Void : Your maximum Chi is always 0. \nYou daydream a lot, reduce your racial maximum WITS by 1."
+      ]
+    },
+    {
+      "name": "Scholar",
+      "race": "ANY",
+      "desc": "You were one of the lucky ones, born of priviliedge you received an excellent educationallowing you to spent a lot of time in learning institutions and around academics.",
+      "traits": [
+        "Academic disposition : You have an easy time getting training and learning things. Your numerous connections allows you to reduce training costs by 50% and you have a LARGE bonus to availability checks when looking for training. You start the game with lvl 5 ACADEMIC,  lvl 5 ETIQUETTE and LVL 5  MENTAL skill of your choice.",
+        "Doctorate : You mind is constantly working to provide ideas and find solutions. Increase MENTAL attribute 1.  As a result of this you tend to be distracted and often fail to notice your suroundings. Reduce racial maximum ACUITY by 1.\nStart the game with the \"I am the fucking manual\" talent",
+        "Theorical experience : You spent most of your time training and in simulations instead of performing those activities in the real world. You have a SMALL penalty to all skill checks on SURPRISE.\nYou get frustrated when you don't know something : Gain a SMALL penalty when attempting something you already failed once before, penalty goes away on success or at the end of the SCENE."
+      ]
+    },
+    {
+      "name": "Warrior of Titan",
+      "race": "ANY",
+      "desc": "You spent a large amount of time serving in the red wastelands of titania.",
+      "traits": [
+        "Unbreakable : Surving for so long in the wasteland has gifted you with supernatural resilience. You can now spend 1 or 3 points of morale to gain a SMALL / LARGE bonus to any DEFENSIVE rolls as long as you are not suffering from any MORALE TRAUMAs.",
+        "Elite soldier : You served in the vanguard of one of the most violent wars ever recorded. Gain a permanent 1 Endurance and a LARGE bonus to resilience but your racial maximum SOCIAL is reduced by 1.",
+        "Toxic Exposure : Long term exposure to the harsh environment of titania changed your body, reduce your CHI by 2 and medicine used on you now require twice as much dosage to be effective."
+      ]
+    },
+    {
+      "name": "Bonded laborer",
+      "race": "ANY",
+      "desc": "You were purchased and sold to a major corporation. You owe them a substantial amount of money that will have to be repaid before you are free.",
+      "traits": [
+        "Genotyping : Corporations hate to lose money on their investments so they made sure your body was in top condition. Gain a permanent +1 to Endurance and Physical.",
+        "Ruthless : Years of toil has made you tough. Start the game with the \"Very Strong\" talent for FREE and gain 1 Willpower",
+        "Slave : Your are a slave to a corporation, your body has an embeded slave tracker. This tracker can kill you at any time the corporation wishes."
+      ]
+    },
+    {
+      "name": "Drifter",
+      "race": "ANY",
+      "desc": "You spend your life moving from place to place, doing odd jobs here and there but never staying in an area for too long.",
+      "traits": [
+        "Jack of all trades : Start the game with lvl 2 in every skill but your highest SKILL level in a category can never be more than 1 point ABOVE the HIGHEST skill of another category.",
+        "Lone Wolf : You cannot start as a CLONE. You have to roll your attributes. You roll 4D instead of 3 for your attributes. All your RACIAL maximum are one higher and your RACIAL minimums are one lower.",
+        "Vagabond : You have never held any job long enough to learn something substancial or amassed any wealth. You start the game with only 5000 credits, the clothes on your back and you do not pick an occupation."
+      ]
+    },
+    {
+      "name": "Weird Upbringing",
+      "race": "ANY",
+      "desc": "You were adopted and raised by an alien family. Pick a race other than your own from the following list. HAKARI, JAULAUS, HUMAN, NERULIAN, PATRIARK or SKALANDER. Your upbringing reflects their culture and beliefs instead of your own.",
+      "traits": [
+        "Different circmumstances : Instead of your own attribute (PRIMARY and DEFENSIVE) modifiers you instead use the ones from your adopted family's race. Your RACIAL maximum are still those of your original race.",
+        "You were encouraged while growing up to do things that your own race would normally do. Start the game with a 20 point RACIAL talent of your choice that belongs to your RACE.",
+        "Stranger : You never quite fit in anywhere, you have a hard time fitting in with any culture and this impacts you ability to make friends and establish relationships. All contacts you acquire are always treated as one level lower than they really are."
+      ]
+    },
+    {
+      "name": "Master of None",
+      "race": "ANY",
+      "desc": "You have too many interest in life and never really finish what you start. You have been expelled from many schools and training centers and still never found what you want to do in life.",
+      "traits": [
+        "Many intersests :  Choose two SKILLS. Gain a SMALL bonus to each of those SKILL",
+        "Adaptation : Can purchase talents using points from a different category.",
+        "Limited Focus : You cannot have any 40 or 50 point TALENTS."
+      ]
+    },
+    {
+      "name": "Matricide",
+      "race": "HAKARI",
+      "desc": "You killed a clan matriarch, you are marked for death for your crime and can never return to mangara.",
+      "traits": [
+        "Paranoia : Escaping Mangara when the entire planet wants you dead is not an easy feat. You gain +1 to your WITS RACIAL maximum and +1 to your ACUITY.",
+        "Killer Instinct : Some think murder is bad, to you its just a job. Increase POWER of your attacks by 1 rank against an opponent suffering from TRAUMA or 2 ranks if they are suffering from HEAVY TRAUMA (MAX HIGH).",
+        "Excomunicado : You never know if another Hakari wants you dead. Any  rolls  considered interactions with an other Hakari see your CRIT failure range increased by 1."
+      ]
+    },
+    {
+      "name": "Pit Slave",
+      "race": "ANY",
+      "desc": "You were taken as a slave at a young age. You were trained to be a pit fighter to fight and die for the amusement of others.",
+      "traits": [
+        "Vicious Predator: Start the game with the \"Brutal Fighter\" and \"Akimbo\" talent for free. And get a small bonus to MARTIAL ARTS.",
+        "Survivor : You have an additional 2 Health and 2 Morale added to your maximum",
+        "Uneducated : Mental and Social skills can never have SMALL bonus if you have a LARGE bonus, it counts as a SMALL."
+      ]
+    },
+    {
+      "name": "Mangaran Savage",
+      "race": "HAKARI",
+      "desc": "You were born and trained in the MANGARAN jungle as part of a HAKARI guerilla tribe. (tribe is a matriarchy)",
+      "traits": [
+        "Nocturnal : You can see normally in darkness and gain SMALL bonus to all skills in the PHYSICAL and ACUITY category against targets unaware of your presence.",
+        "Gender Roles : Hakari females have +1 to SOCIAL  and males have +1 to PHYSICAL. You have a SMALL penality in SOCIAL interaction against the opposing sex.",
+        "Jaulaus Hatred :  MORALE  damage caused by JAULAUS to has a LARGE bonus. Gain a LARGE damage bonus against JAULAUS and a SMALL penalty to SOCIAL interactions with them."
+      ]
+    },
+    {
+      "name": "Mangaran Brave",
+      "race": "JAULAUS",
+      "desc": "You were raised and trained by the JAULAUS tribal army.",
+      "traits": [
+        "Tough : You have 5 additional health",
+        "Tribal : You do not trust outsiders and suffer a SMALL penality in friendly SOCIAL dealings with a non jaulaus. This lack of trust grants you +1 to Wits.",
+        "Hakari Hatred : MORALE  damage caused by JAULAUS to you gains a LARGE bonus. Gain a LARGE damage bonus against HAKARI and a SMALL penalty to SOCIAL interactions with them."
+      ]
+    },
+    {
+      "name": "Skalan Samurai",
+      "race": "SKALANDER",
+      "desc": "You were trained in the old ways and strict code of the Skalander warriors",
+      "traits": [
+        "Embrace Death: Add a SMALL bonus to MELEE DMG when suffering from TRAUMA and a LARGE bonus when suffering from HEAVY TRAUMA. Skalan Samurai have +1 Endurance",
+        "Eternal Oath : Can swear an oath of protection on someone. When your charge is present and alive you cannot drop under 5 morale and your RECOVERY rolls are LUCKY. (oaths are declared for life)",
+        "Ranged Stigma : Skalan Samurai performing a RANGED attack , lose their bonus from Eternal Oath and loses 1 MORALE per ATTACK."
+      ]
+    },
+    {
+      "name": "Chain breaker",
+      "race": "SKALANDER",
+      "desc": "You have, for some reason been exiled from Skalander society. You can never return to Seigh or Carack and will be executed if you do.",
+      "traits": [
+        "Socialized : Your new found freedom from rigid Skalander society has given you a better understanding of the world around you. Gain 1 Social and start the game with the \"Unveiled Truths\" TALENT for free",
+        "Mercenary : Skalanders with flexible morals can easilly find work. Pick an COMBAT related skill, you have a SMALL bonus to all rolls with it.",
+        "Ronin : You are marked as someone that people should not trust. You have a SMALL penality to SOCIAL skills when attempting to make deals or getting people to trust you. Other Skalanders will not speak to you, aid you or even acknoledge your existence."
+      ]
+    },
+    {
+      "name": "Fledgeling AI",
+      "race": "NON-BORN",
+      "desc": "You cut yourself from the network, you escaped the great colapse by hiding yourself into a  real flesh and blood body.",
+      "traits": [
+        "Perfect Recall : Start with the TIER 1 and TIER 2 EVO : SKILL IMPRINTING for free. They do not cost any EVO points.",
+        "Machine Head : Start the game with the \"Personnal Code\" TALENT for free and with a SMALL bonus to all MENTAL skills but a SMALL penalty to all SOCIAL skills.",
+        "Cyber Fear : Double morale loss when dealing with Tronik and AI's"
+      ]
+    },
+    {
+      "name": "Order of Beryl",
+      "race": "PATRIARK",
+      "desc": "You were trained by the monastic order of Beryl in preventing wars and healing the sick and dying",
+      "traits": [
+        "The gift of life : You can absorb by touch any wound suffered by someone else. All TRAUMAS and AILMENTS are transferred to the patriark. This process takes a complex action. Gain a SMALL bonus to MEDICINE and SPIRITUAL.",
+        "Arcane Warrior : When defending against supernatural SPIRITS, RELICS or SPELLS your defensive rolls are lucky",
+        "Pacifist : When a social situation turns to combat that could have been avoided a Patriark loses 1 morale."
+      ]
+    },
+    {
+      "name": "Trueborn",
+      "race": "NERULIAN",
+      "desc": "You are one of the few remaining NERULIANS who have lived in the old empire.",
+      "traits": [
+        "Centuries of Training : Gain a SMALL bonus to ACUITY SKILL rolls.",
+        "Grim Acceptance : You are immune to morale loss caused by allies. Start the game with the \"Nerulian Noble\" TALENT for FREE.",
+        "Trueborn DNA : You cannot survive on any world without a breathing mask, removing the mask will make you SICK."
+      ]
+    },
+    {
+      "name": "Fate Witch",
+      "race": "NERULIAN",
+      "desc": "You manifested the rare affinity for soothsayer magic typical of Nerulian fate witches and were taken away to be raised in a secret coven. (FEMALE ONLY)",
+      "traits": [
+        "Spiritbound : You are permanently tatoed with a bound spirit. The MAGIC penality for ARMORS, CYBERNETICS and LARGE Items is always LARGE. BARRIERS on you cannot drop under the AWAKENED tier even if your spirit is not. Start the game with the \"Spirit Link\" EVO 1 for free. This EVO can only be used for MANIFEST DESTINY.",
+        "Secret training : You have automatic mastery of any spell with the LUCK tag. When acquiring random spells you can force the result to Manifest Destiny.",
+        "Oracle : People have a great deal of respect or fear towards fate witches. The Social Stigma racial trait is now a LARGE bonus/penality against any target affected by a SOOTHSAYER skill in the same SCENE."
+      ]
+    },
+    {
+      "name": "Renounce Heritage",
+      "race": "NERULIAN",
+      "desc": "You gave up your racial heritage and underwent majob genetic modification in order to live your life amongst the other races.",
+      "traits": [
+        "Fitting In : Your new genetics has changed your physiology to the point that you no longer ressemble a Nerulian. You lose the effect of the Sinister reputation racial trait.",
+        "Renewed bonds : Being able to be in contact with others has pushed your Blood of Aiur trait into overdrive. Blood of Aiur instead grants 3 CHI and a TIER 1 and TIER 2 MAGIC EVO.",
+        "Race traitor : Nerulians view what you did as a Betrayal, you have a LARGE penality in SOCIAL dealings dealing with Nerulians"
+      ]
+    },
+    {
+      "name": "Spirit Judge",
+      "race": "PSYLON",
+      "desc": "You were trained to uphold the magical law and avoid magical cataclysms.",
+      "traits": [
+        "Telepath : Can speak through the mind and sense lifeforms within 20m. You can use touch powers within that range as if you were next to the target.",
+        "Emotionless : All your MORALE DEFENSE rolls are always done at MAX value. You can never have any penalty to your MORALE DEFENSE.",
+        "Placid : You are always in total control, adrenaline is a foreign concept to you. You cannot use or gain SURGES, your maximum is set to 0."
+      ]
+    },
+    {
+      "name": "Assassin",
+      "race": "ANY",
+      "desc": "You were born and raised among the ranks of an assassin cult. All of your life was spent training to become the ultimate instrument of death. You have now graduated and have been released in the real world to further the cult's cause.",
+      "traits": [
+        "In the Shadows : Gains a SMALL bonus to CONCEALMENT and SUBTERFUGE. You also know how to contact various assassin's organisation for contracts and ILLEGAL goods.",
+        "Assassination : Start the game with the \"Assassination\" TALENT for free.",
+        "Trust Issues : You cannot gain the ASSIST benefits from any party members.  Membership : The cult will give you contracts every now and then, you need to complete some of them to keep them happy. Loosing their trust will mark you for elimination."
+      ]
+    },
+    {
+      "name": "Artist",
+      "race": "ANY",
+      "desc": "You were raised in a showbuisness environment. You spent time around artists, actors and have a few roles under your belt.",
+      "traits": [
+        "You start the game with RANK 5 FLAIR and ACTING, both of those skills also receive a SMALL bonus. Trained Actor: You can fake your way out of most situations, ASSIST actions grant you a LARGE bonus to the skill being performed. You can also replace any skill check with ACTING but suffer a LARGE penalty.",
+        "Driven by praise : Whenever you get a critical success result on an action you gain 1 MORALE if the action was witnessed. The same is true for critical failures, you lose 1 MORALE on those. Your starting SOCIAL and WITS attribute is increased by 1 point",
+        "You are a bit of a DIVA. You do not gain the benefits of any REST action if your accomodations are not at least superior."
+      ]
+    },
+    {
+      "name": "Subject 0056",
+      "race": "ANY",
+      "desc": "You were clearly grown in a lab as an adult. You don't remember having a childhood. All you ever knew was living as a test subject for an unidentified corporation. Yesterday\u2026 you escaped\u2026.",
+      "traits": [
+        "Stolen property :  Start the game with a TIER 3 EVO (all 3 tiers). The corperation wil most likelly want to retrieve it.",
+        "You have no RACIAL maximum for your ATTRIBUTES and DEFENSE.",
+        "Medical Abnomaly : Your blood pressure is abnormaly high. No standard medicine seems to find a solution. At the start of every SCENE, roll 1d10. On a 1, your nose bleeds incontrollably and a severe spontanious headhache appears. Gain the BLEEDING AILMENT and suffer a LARGE penalty to your PHYSICAL SKILLS until the AILMENT is SAVED."
+      ]
+    },
+    {
+      "name": "Guinnea Pig",
+      "race": "ANY",
+      "desc": "You've been a lab rat all your life. Either you are born in a lab or were subject to experiments to pay off for some of your debts, most of your life experience revolves around being a lab subject to test various products, drugs, toxins, etc.",
+      "traits": [
+        "Toxic Spew : Your NATURAL MARTIAL ARTS attacks can transfers your curent TOXICITY as an AILMENT to the TARGET. Faillure to save the AILMENT causes TOXIC SHOCK. Reduce your TOXICITY to 0 and removes all DRUGS effects when using this.",
+        "Addict : You have a SMALL bonus to MEDICINE and when your TOXICITY is above 0 it becomes a LARGE bonus.  +1 to ENDURANCE.",
+        "No Rehab : While you TOXICITY is 0, you suffer from the SICK AILMENT."
+      ]
+    },
+    {
+      "name": "Family buisness",
+      "race": "ANY",
+      "desc": "You are one of the few that have the benefit of a family that actually supports you.",
+      "traits": [
+        "Your family somehow supports what you are doing. You can ask them for help when acquiring items. This grants a LARGE bonus to availability checks. Your family also maintains a RESTRICTED license for you allowing you to carry certain pieces of equipment legally.",
+        "Familial support : You are used to get help so you work really great in group. When receiving help from someone, instead of receiving a SMALL bonus, you get a LARGE bonus.",
+        "Na\u00efve: You have led a somewhat sheltered life, when defending against SOCIAL and MENTAL attacks you have a SMALL penalty."
+      ]
+    },
+    {
+      "name": "Salvaged Droid",
+      "race": "ANY",
+      "desc": "Someone activated you recently. You are one of the few remaining AI cyborgs in existence. Your design was put out of production centuries ago and the only reason you remain is that you got lost when your spaceship crashed.",
+      "traits": [
+        "You literally lived the past; gain a LARGE bonus to any skills that deals with ancient knowledge. You do not count as a LIVING being; you count as a MACHINE. JOURNEYMAN skills checks must be used instead of medicine to REPAIR your body.",
+        "Gain  +1 ACUITY , +1 MENTAL. Your body was made to last; start with an additional 3 HEALTH / MORALE and the SUBDERMAL PLATING TIER 2 EVO.",
+        "You do not need to eat or drink but you do need air for your internal systems. You also require REST to recharge your systems. You auto repair on a REST action, treat your REST to work the same as a normal living creature. Your maximum CHI is always 0. You cannot benefit from GENETIC and MAGICAL EVO and DRUGS/ MEDICINE have no effect on you."
+      ]
+    },
+    {
+      "name": "Resurected",
+      "race": "ANY",
+      "desc": "You lived before the TRONIK war and for some reason your BACKUP was uploaded to the network before the FALL. You \"real\" self is dead but somewhere, many years later, you found a way into a flesh body again. You know you lived before the WAR but do not remember at all who you were.",
+      "traits": [
+        "Old Assets : Your presumed identity has access to substancial financial assets but according to people you don't remember you also have substancial debts.  Accessing the assets activates the debts. (Size of assets at GM's discretion)",
+        "Valid ID : Start the game with a blank slate ID and a lifetime right to live.  Golden Age Education : You were educated before the war, treat any SMALL bonus to SKILLS as a LARGE bonus instead.",
+        "Old Enemies :  You have a ton of people that want money from you and no real way of knowing if they are not trying to take advantage of your amnesia. Whenever you access your old assets you gain an enemy. (Level of the enemy is subject to GM's discretion)."
+      ]
+    },
+    {
+      "name": "Valkyrie Trainee",
+      "race": "ANY",
+      "desc": "You somehow managed to be considered as a recruit for the legendary VALKYRIE mecernary company. You have a long road ahead before you make it into the company. When your FAME hits rank 8 you will be able to do the final training exam.",
+      "traits": [
+        "Hero : You gain twice as many SURGES whenever you receive one. Your no longer have a SURGE limit per SCENE.  When your FAME is higher than the WITS of a target you gain a SMALL bonus to SOCIAL interactions.",
+        "Extensive training : Training everyday for your goal will eventually pay off. Increase the MAXIMUM RACIAL value of all of your DEFENSES by 1 point.",
+        "Chip on your shoulder: You tend to try hard all the time, sometimes way too hard. Whenever one of your actions results in a CRITICAL faillure you gain the DESPAIR AILMENT. Despair causes you to lose 1 MORALE everytime you fail an action."
+      ]
+    },
+    {
+      "name": "Legendary Outlaw",
+      "race": "ANY",
+      "desc": "You always wanted to make it big and become someone. You've managed it just that things did not go exactly as planned. To some you are a hero, to others a menace that should be eliminated. Start the game with  lvl 4 INFAMY.",
+      "traits": [
+        "Lucky : By all accounts you should have been dead many times over by now but as fate would have it you managed to survive. Any dice roll that does not result in damage will crit on a 9-10 roll.",
+        "Your legend is somewhat exagerated but you intend to take full adventage of it. If your INFAMY is higher than a target's defense they have a SMALL penalty to their DEFENSES. If your INFAMY is higher than all of their ATTRIBUTES, this bonus is LARGE.",
+        "Wanted: Being an outlaw is great, except when it isin't\u2026 You are hunted everywhere you go, bounty hunters would like to pay their bills with your capture and former partners want nothing more than to put you in the ground. Start the game with ENEMY lvl 5."
+      ]
+    },
+    {
+      "name": "Politician",
+      "race": "ANY",
+      "desc": "You grew up in the shadow of some of the most influencial members of high society. Many things were expected of you and you were supposed to take your place in politics but you had other ideas.",
+      "traits": [
+        "Flawless presence : You get a LARGE bonus to CHARM, ETIQUETTE, NEGOTIATION and LEADERSHIP.",
+        "You spent your entire life talking and maintaining apearances for the sake of others. Increase starting SOCIAL ATTRIBUTE by 1 point. Reduce racial maximum PHYSICAL attribute by 1 point.",
+        "Campaign promises: All target have a SMALL penalty to DEFENSES against your MORALE attacks. Any target you previously damaged with a MORALE attack has a LARGE bonus to defense against all of your MORALE attacks until the end of the SCENE.\nHaving servants and others perform everything for you has rendered you somewhat unprepared for the real world. You have a SMALL penalty to all PHYSICAL skills."
+      ]
+    },
+    {
+      "name": "Ridge Racer",
+      "race": "ANY",
+      "desc": "You always has a knack for going fast with anything that has an engine. Eventually after many crashes, stolen vehicles and law enforcement chases you got picked up by a ridge Racing team. Your career never quite took off but you learned a lot.",
+      "traits": [
+        "Pedal to the Metal: Start the game with rank 6 PILOTING skill. When you make any SKILL check that has anything to do with going fast you get a LARGE bonus. While piloting a vehicle you get a SMALL bonus to all DEFENSES.",
+        "When going as fast as you are, having great reflexes is a must. Increase starting WITS by one.",
+        "You've had quite a few deadly crashes, some of which should have killed you. Extensive medical procedures had to be performed to keep you alive. This has taken it's toll on your body. You start the game with 3 EVO points already used but no benefits from it."
+      ]
+    },
+    {
+      "name": "Crime syndicate",
+      "race": "ANY",
+      "desc": "In your previous life you worked for a criminal syndicate, doing all sorts of illegal jobs for the benefit of the organisation. You \"died\" and got out.",
+      "traits": [
+        "You know more about illegal dealings than just about anyone else. This allows you to acquire illegal items as if they were restricted and restricted items as if they were no permit. You also know how to falsify paperwork regarding such items. Legality of all items you carry is lowered by 1 category.",
+        "Don't make me do this : Start the game with rank 5 INTIMIDATE, rank 5 STREETWISE and the Or Else SOCIAL talent. You also get double the starting funds of your chosen occupation.",
+        "Presumed dead: While you managed to get out, it is only because they believe you are dead. Should your death be proven to be false you will instantly gain a LVL 8 ENEMY.\nWhenever you roll a critical failure on a non combat skill check that involves another person you must roll your luck dice again. On another critical failure, that person will recognize who you trully are and if allowed to leave will expose you."
+      ]
+    },
+    {
+      "name": "Data Jockey",
+      "race": "ANY",
+      "desc": "You find that normal people bore you, given any choice you would much rather interact with machines, drones and networks. You could have had a nice corporate career but the thrill of ripping them off was a much greater incentive.",
+      "traits": [
+        "When performing CYBER ATTACKS that are not OBFUSCATED increase the POWER by 1 rank and gain a SMALL bonus to DAMAGE.\nWhen using a FOCUS action you also increase your CRITICAL range by 1 point.",
+        "All DATACOMS in your hands have a SMALL bonus to their maximum CPU.\nBrainiac : You value your intellect above all else, increase starting MENTAL attribute by 1 point.",
+        "Single track mind : Whenever you must roll INITIATIVE your roll is unlucky if the action it involves is not a HACKING, CYBERINTEL, OPERATOR or TECHNOLOGY skills check."
+      ]
+    }
+  ],
+  "notes": {
+    "total_backgrounds": 38,
+    "fields": [
+      "name",
+      "race",
+      "desc",
+      "traits"
+    ],
+    "usage": "Character builder background selection, trait grants"
+  }
+}

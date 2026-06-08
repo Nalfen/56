@@ -1155,8 +1155,8 @@ function mfrInfo(sec,mfr){
   return parts.length?'<div class="mfr-info">'+(m.abbr?esc(m.abbr)+' \u2014 ':'')+parts.map(esc).join(' \xb7 ')+'</div>':'';
 }
 
-const CAT_LBL={'Pistols and Handguns (Gunslinger)':'PISTOLS','Rifles (Marksman)':'RIFLES','Sniper Rifles and Tactical Weapons (Marksman)':'SNIPERS','Auto pistols and S.M.G (Gunslinger)':'SMG','Shotguns (Gunslinger)':'SHOTGUNS','Machine Guns (Heavy weapons)':'MACHINE GUNS','Launchers and AT Weapons (Heavy weapons)':'LAUNCHERS','Vehicle weapons(Heavy weapons)':'VEHICLE','Explosives (Engineering or Dexterity)':'EXPLOSIVES','Melee Weapons (Martial Arts)':'MELEE','Powered Melee Weapons (Martial Arts)':'PWR MELEE','Ranged / Throwing Weapons (Dexterity)':'THROWING'};
-const MELEE_CATS=new Set(['Melee Weapons (Martial Arts)','Powered Melee Weapons (Martial Arts)','Ranged / Throwing Weapons (Dexterity)']);
+const CAT_LBL={'Pistols and Handguns (Gunslinger)':'PISTOLS','Rifles (Marksman)':'RIFLES','Sniper Rifles and Tactical Weapons (Marksman)':'SNIPERS','Auto pistols and S.M.G (Gunslinger)':'SMG','Shotguns (Gunslinger)':'SHOTGUNS','Machine Guns (Heavy weapons)':'MACHINE GUNS','Launchers and AT Weapons (Heavy weapons)':'LAUNCHERS','Vehicle weapons(Heavy weapons)':'VEHICLE','Explosives (Heavy Weapons, Engineering or Projectiles)':'EXPLOSIVES','Melee Weapons (Melee Weapons)':'MELEE','Powered Melee Weapons (Melee Weapons)':'PWR MELEE','Ranged / Throwing Weapons (Projectiles)':'THROWING'};
+const MELEE_CATS=new Set(['Melee Weapons (Melee Weapons)','Powered Melee Weapons (Melee Weapons)','Ranged / Throwing Weapons (Projectiles)']);
 const WPN_MFRS=['Generic','Malivaux','Kintech','Nakamura','Arms Corp',"Zang'Hai",'TORC','Voran','Dilithium','Monomolecular'];
 const WPN_MFRS_MELEE_ONLY=new Set(['Dilithium','Monomolecular']);
 const ARMOR_MFRS=['Generic','Kintech','Harsh','Santech','BMS','Acer'];
@@ -1447,12 +1447,7 @@ const DB_ZONE={
   external:{label:'EXTERNAL', color:'#ff6b35', dc_mod:-1, cost_mod:0.85, info:'-1 DC / x0.85 cost (exposed)'},
 };
 const DB_DEF_RANKS=['NONE','LOW','MEDIUM','HIGH','EXTREME'];
-const DB_SKILLS={
-  Physical:['Athletics','Craft','Heavy Weapons','Martial Arts','Might','Piloting','Repair','Resilience','Scavenging','Survival'],
-  Mental:  ['Academics','Cyberintel','Engineering','Galactic Knowledge','Hacking','Medicine','Navigation','Parascience','Science','Technology'],
-  Social:  ['Acting','Charm','Etiquette','Flair','Intimidation','Leadership','Negotiation','Spiritual','Streetwise','Subterfuge'],
-  Acuity:  ['Awareness','Binding','Concealment','Dexterity','Gunslinger','Intuition','Marksman','Operator','Search','Tactics'],
-};
+const DB_SKILLS={Physical:g.skills.filter(s=>s.category==='Physical').map(s=>s.name),Mental:g.skills.filter(s=>s.category==='Mental').map(s=>s.name),Social:g.skills.filter(s=>s.category==='Social').map(s=>s.name),Acuity:g.skills.filter(s=>s.category==='Acuity').map(s=>s.name)};
 
 const DB_COMP={
   // ── POWER ───────────────────────────────────────────────────────────────
@@ -1752,15 +1747,15 @@ const DB_COMP={
   // ── ENGINEERING ─────────────────────────────────────────────────────────
   REPAIR_ARM:{name:'Repair Arm',icon:'🔧',loc:['ext'],
     tiers:[
-      {name:'Tool Arm',slots:2,pwr:2,price:2000,dc:2,dur:4,rarity:'COMMON',legality:'LEGAL',note:' Enables Repair checks through the drone on external targets. SMALL penalty to Repair checks.'},
-      {name:'Welder Arm',slots:3,pwr:3,price:5000,dc:3,dur:5,rarity:'UNCOMMON',legality:'LEGAL',note:' Enables Repair checks through the drone on external targets. No modifier to Repair checks. Handles structural and electronic repairs.'},
-      {name:'Nano-Repair',slots:4,pwr:5,price:18000,dc:5,dur:5,rarity:'RARE',legality:'LEGAL',note:' Enables Repair checks through the drone on external targets. SMALL bonus to Repair checks. Expends NANITES for precision repairs.'},
+      {name:'Tool Arm',slots:2,pwr:2,price:2000,dc:2,dur:4,rarity:'COMMON',legality:'LEGAL',note:' Enables Fabrication checks through the drone on external targets. SMALL penalty to Fabrication checks.'},
+      {name:'Welder Arm',slots:3,pwr:3,price:5000,dc:3,dur:5,rarity:'UNCOMMON',legality:'LEGAL',note:' Enables Fabrication checks through the drone on external targets. No modifier to Fabrication checks. Handles structural and electronic repairs.'},
+      {name:'Nano-Repair',slots:4,pwr:5,price:18000,dc:5,dur:5,rarity:'RARE',legality:'LEGAL',note:' Enables Fabrication checks through the drone on external targets. SMALL bonus to Fabrication checks. Expends NANITES for precision repairs.'},
     ]},
   FABRICATOR:{name:'Fabricator',icon:'⚙',loc:['int'],
     tiers:[
-      {name:'Print Unit',slots:3,pwr:3,price:5000,dc:4,dur:4,rarity:'UNCOMMON',legality:'LEGAL',note:' Enables Craft checks through the drone. SMALL penalty to Craft checks. Prints small objects from raw materials.'},
-      {name:'Micro-Factory',slots:5,pwr:5,price:20000,dc:6,dur:5,rarity:'RARE',legality:'RESTRICTED',note:' Enables Craft checks through the drone. No modifier to Craft checks. Prints complex components and drone parts. Restricted.'},
-      {name:'Mol. Assembler',slots:6,pwr:8,price:60000,dc:8,dur:6,rarity:'LIMITED',legality:'CLASSIFIED',note:' Enables Craft checks through the drone. SMALL bonus to Craft checks. Constructs objects at the molecular level. Classified.'},
+      {name:'Print Unit',slots:3,pwr:3,price:5000,dc:4,dur:4,rarity:'UNCOMMON',legality:'LEGAL',note:' Enables Fabrication checks through the drone. SMALL penalty to Fabrication checks. Prints small objects from raw materials.'},
+      {name:'Micro-Factory',slots:5,pwr:5,price:20000,dc:6,dur:5,rarity:'RARE',legality:'RESTRICTED',note:' Enables Fabrication checks through the drone. No modifier to Fabrication checks. Prints complex components and drone parts. Restricted.'},
+      {name:'Mol. Assembler',slots:6,pwr:8,price:60000,dc:8,dur:6,rarity:'LIMITED',legality:'CLASSIFIED',note:' Enables Fabrication checks through the drone. SMALL bonus to Fabrication checks. Constructs objects at the molecular level. Classified.'},
     ]},
   NANITE_SYS:{name:'Nanite Storage',icon:'🦠',loc:['core','int'],
     tiers:[
@@ -4123,53 +4118,44 @@ const EG_NAMES_FIRST=['Zarak','Voss','Kiran','Maelix','Drath','Sevik','Nyla','To
 const EG_NAMES_LAST=['Kreth','Vann','Solax','Morth','Darkyn','Xan','Droven','Karas','Brix','Veloth','Zane','Morr','Hexon','Threx','Kael','Onvex','Brath','Sarek','Dren','Kovax','Lurex','Jarv','Solvax','Thane','Krix','Orneth','Varr','Dakx','Solmyr','Grenk','Haxis','Vorta','Rynn','Bekk','Xelun','Davan','Korrn','Jalex','Morthis','Vexon'];
 const EG_ARCHETYPES={
   // ── Combat ───────────────────────────────────────────────────────────────────
-  soldier:{label:'Soldier',chi:false,armorType:'medium',weaponCats:['Rifles (Marksman)','Auto pistols and S.M.G (Gunslinger)'],skills:{Marksman:1,Tactics:1,Resilience:1,Athletics:0,Heavy_Weapons:0,Concealment:0}},
-  sniper:{label:'Sniper',chi:false,armorType:'light',weaponCats:['Sniper Rifles and Tactical Weapons (Marksman)','Pistols and Handguns (Gunslinger)'],skills:{Marksman:1,Concealment:1,Awareness:1,Tactics:0,Search:0}},
-  brawler:{label:'Brawler',chi:false,armorType:'heavy',weaponCats:['Melee Weapons (Martial Arts)','Powered Melee Weapons (Martial Arts)'],skills:{Martial_Arts:1,Might:1,Athletics:1,Resilience:1,Intimidation:0}},
-  assassin:{label:'Assassin',chi:false,armorType:'light',weaponCats:['Pistols and Handguns (Gunslinger)','Melee Weapons (Martial Arts)'],skills:{Concealment:1,Gunslinger:1,Subterfuge:1,Dexterity:1,Awareness:0}},
-  mage:{label:'Mage',chi:true,isMage:true,armorType:'light',weaponCats:['Melee Weapons (Martial Arts)','Ranged / Throwing Weapons (Dexterity)'],skills:{Spiritual:1,Parascience:1,Binding:1,Awareness:0,Intuition:0}},
+  soldier:{label:'Soldier',chi:false,armorType:'medium',weaponCats:['Rifles (Marksman)','Auto pistols and S.M.G (Gunslinger)'],skills:{Marksman:1,Tactics:1,Athletics:1,'Heavy Weapons':0,Stealth:0}},
+  sniper:{label:'Sniper',chi:false,armorType:'light',weaponCats:['Sniper Rifles and Tactical Weapons (Marksman)','Pistols and Handguns (Gunslinger)'],skills:{Marksman:1,Stealth:1,Awareness:1,Tactics:0,Search:0}},
+  brawler:{label:'Brawler',chi:false,armorType:'heavy',weaponCats:['Melee Weapons (Melee Weapons)','Powered Melee Weapons (Melee Weapons)'],skills:{'Melee Weapons':1,Athletics:1,Intimidation:0}},
+  assassin:{label:'Assassin',chi:false,armorType:'light',weaponCats:['Pistols and Handguns (Gunslinger)','Melee Weapons (Melee Weapons)'],skills:{Stealth:1,Gunslinger:1,Subterfuge:1,Larceny:1,Awareness:0}},
+  mage:{label:'Mage',chi:true,isMage:true,armorType:'light',weaponCats:['Melee Weapons (Melee Weapons)','Ranged / Throwing Weapons (Projectiles)'],skills:{Spiritual:1,Occultism:1,Binding:1,Awareness:0,Insight:0}},
   hacker:{label:'Hacker',chi:false,isHacker:true,armorType:'light',weaponCats:['Pistols and Handguns (Gunslinger)'],skills:{Hacking:1,Cyberintel:1,Technology:1,Operator:1,Science:0}},
   commander:{label:'Commander',chi:false,armorType:'medium',weaponCats:['Auto pistols and S.M.G (Gunslinger)','Pistols and Handguns (Gunslinger)'],skills:{Leadership:1,Tactics:1,Intimidation:1,Gunslinger:0,Negotiation:0}},
-  heavy:{label:'Heavy Gunner',chi:false,armorType:'heavy',weaponCats:['Machine Guns (Heavy weapons)','Launchers and AT Weapons (Heavy weapons)'],skills:{Heavy_Weapons:1,Resilience:1,Might:1,Athletics:0,Tactics:0}},
+  heavy:{label:'Heavy Gunner',chi:false,armorType:'heavy',weaponCats:['Machine Guns (Heavy weapons)','Launchers and AT Weapons (Heavy weapons)'],skills:{'Heavy Weapons':1,Athletics:1,Tactics:0}},
   // ── Military Force ────────────────────────────────────────────────────────────
-  mil_infantry:{label:'Infantry Soldier',chi:false,armorType:'medium',weaponCats:['Rifles (Marksman)','Auto pistols and S.M.G (Gunslinger)'],skills:{Marksman:1,Athletics:1,Resilience:1,Tactics:1,Survival:0,Heavy_Weapons:0,Concealment:0}},
-  mil_sniper:{label:'Military Sniper',chi:false,armorType:'light',weaponCats:['Sniper Rifles and Tactical Weapons (Marksman)'],skills:{Marksman:1,Concealment:1,Awareness:1,Search:1,Tactics:0,Intuition:0}},
-  mil_heavy:{label:'Heavy Weapons Specialist',chi:false,armorType:'heavy',weaponCats:['Machine Guns (Heavy weapons)','Launchers and AT Weapons (Heavy weapons)'],skills:{Heavy_Weapons:1,Resilience:1,Might:1,Athletics:0,Tactics:0,Operator:0}},
-  mil_medic:{label:'Combat Medic',chi:false,armorType:'light',weaponCats:['Pistols and Handguns (Gunslinger)','Rifles (Marksman)'],skills:{Medicine:1,Science:1,Resilience:1,Gunslinger:0,Awareness:0,Technology:0}},
-  mil_engineer:{label:'Combat Engineer',chi:false,armorType:'medium',weaponCats:['Rifles (Marksman)','Explosives (Engineering or Dexterity)'],skills:{Engineering:1,Technology:1,Repair:1,Marksman:0,Science:0,Tactics:0}},
+  mil_infantry:{label:'Infantry Soldier',chi:false,armorType:'medium',weaponCats:['Rifles (Marksman)','Auto pistols and S.M.G (Gunslinger)'],skills:{Marksman:1,Athletics:1,Tactics:1,Survival:0,'Heavy Weapons':0,Stealth:0}},
+  mil_sniper:{label:'Military Sniper',chi:false,armorType:'light',weaponCats:['Sniper Rifles and Tactical Weapons (Marksman)'],skills:{Marksman:1,Stealth:1,Awareness:1,Search:1,Tactics:0,Insight:0}},
+  mil_heavy:{label:'Heavy Weapons Specialist',chi:false,armorType:'heavy',weaponCats:['Machine Guns (Heavy weapons)','Launchers and AT Weapons (Heavy weapons)'],skills:{'Heavy Weapons':1,Athletics:1,Tactics:0,Operator:0}},
+  mil_medic:{label:'Combat Medic',chi:false,armorType:'light',weaponCats:['Pistols and Handguns (Gunslinger)','Rifles (Marksman)'],skills:{Medicine:1,Science:1,Athletics:1,Gunslinger:0,Awareness:0,Technology:0}},
+  mil_engineer:{label:'Combat Engineer',chi:false,armorType:'medium',weaponCats:['Rifles (Marksman)','Explosives (Heavy Weapons, Engineering or Projectiles)'],skills:{Engineering:1,Technology:1,Fabrication:1,Marksman:0,Science:0,Tactics:0}},
   mil_pilot:{label:'Military Pilot',chi:false,armorType:'medium',weaponCats:['Pistols and Handguns (Gunslinger)','Rifles (Marksman)'],skills:{Piloting:1,Operator:1,Navigation:1,Gunslinger:0,Awareness:0,Technology:0}},
-  mil_officer:{label:'Military Officer',chi:false,armorType:'medium',weaponCats:['Auto pistols and S.M.G (Gunslinger)','Pistols and Handguns (Gunslinger)'],skills:{Leadership:1,Tactics:1,Intimidation:1,Negotiation:0,Galactic_Knowledge:0,Gunslinger:0}},
-  mil_spec_ops:{label:'Special Operations',chi:false,armorType:'light',weaponCats:['Rifles (Marksman)','Pistols and Handguns (Gunslinger)','Melee Weapons (Martial Arts)'],skills:{Marksman:1,Concealment:1,Martial_Arts:1,Awareness:1,Dexterity:0,Subterfuge:0,Tactics:0}},
+  mil_officer:{label:'Military Officer',chi:false,armorType:'medium',weaponCats:['Auto pistols and S.M.G (Gunslinger)','Pistols and Handguns (Gunslinger)'],skills:{Leadership:1,Tactics:1,Intimidation:1,Negotiation:0,'Galactic Knowledge':0,Gunslinger:0}},
+  mil_spec_ops:{label:'Special Operations',chi:false,armorType:'light',weaponCats:['Rifles (Marksman)','Pistols and Handguns (Gunslinger)','Melee Weapons (Melee Weapons)'],skills:{Marksman:1,Stealth:1,'Melee Weapons':1,Awareness:1,Larceny:0,Subterfuge:0,Tactics:0}},
   // ── Police Force ──────────────────────────────────────────────────────────────
-  pol_officer:{label:'Police Officer',chi:false,armorType:'medium',weaponCats:['Pistols and Handguns (Gunslinger)','Auto pistols and S.M.G (Gunslinger)'],skills:{Gunslinger:1,Intimidation:1,Awareness:1,Athletics:1,Resilience:0,Streetwise:0}},
-  pol_investigator:{label:'Investigator',chi:false,armorType:'light',weaponCats:['Pistols and Handguns (Gunslinger)'],skills:{Search:1,Intuition:1,Awareness:1,Cyberintel:1,Academics:0,Subterfuge:0}},
+  pol_officer:{label:'Police Officer',chi:false,armorType:'medium',weaponCats:['Pistols and Handguns (Gunslinger)','Auto pistols and S.M.G (Gunslinger)'],skills:{Gunslinger:1,Intimidation:1,Awareness:1,Athletics:1,Streetwise:0}},
+  pol_investigator:{label:'Investigator',chi:false,armorType:'light',weaponCats:['Pistols and Handguns (Gunslinger)'],skills:{Search:1,Insight:1,Awareness:1,Cyberintel:1,'Social Science':0,Subterfuge:0}},
   pol_captain:{label:'Police Captain',chi:false,armorType:'medium',weaponCats:['Pistols and Handguns (Gunslinger)','Auto pistols and S.M.G (Gunslinger)'],skills:{Leadership:1,Intimidation:1,Negotiation:1,Tactics:1,Gunslinger:0,Awareness:0}},
-  pol_detective:{label:'Detective',chi:false,armorType:'light',weaponCats:['Pistols and Handguns (Gunslinger)'],skills:{Intuition:1,Search:1,Subterfuge:1,Streetwise:1,Awareness:0,Academics:0}},
+  pol_detective:{label:'Detective',chi:false,armorType:'light',weaponCats:['Pistols and Handguns (Gunslinger)'],skills:{Insight:1,Search:1,Subterfuge:1,Streetwise:1,Awareness:0,'Social Science':0}},
   // ── Gang ──────────────────────────────────────────────────────────────────────
-  gang_enforcer:{label:'Gang Enforcer',chi:false,armorType:'medium',weaponCats:['Melee Weapons (Martial Arts)','Pistols and Handguns (Gunslinger)','Auto pistols and S.M.G (Gunslinger)'],skills:{Martial_Arts:1,Intimidation:1,Might:1,Athletics:1,Gunslinger:0,Streetwise:0}},
-  gang_smuggler:{label:'Smuggler',chi:false,armorType:'light',weaponCats:['Pistols and Handguns (Gunslinger)','Auto pistols and S.M.G (Gunslinger)'],skills:{Subterfuge:1,Streetwise:1,Gunslinger:1,Piloting:0,Navigation:0,Concealment:0}},
-  gang_hitman:{label:'Hitman',chi:false,armorType:'light',weaponCats:['Pistols and Handguns (Gunslinger)','Rifles (Marksman)','Melee Weapons (Martial Arts)'],skills:{Gunslinger:1,Concealment:1,Dexterity:1,Awareness:1,Subterfuge:0,Martial_Arts:0}},
+  gang_enforcer:{label:'Gang Enforcer',chi:false,armorType:'medium',weaponCats:['Melee Weapons (Melee Weapons)','Pistols and Handguns (Gunslinger)','Auto pistols and S.M.G (Gunslinger)'],skills:{'Melee Weapons':1,Intimidation:1,Athletics:1,Gunslinger:0,Streetwise:0}},
+  gang_smuggler:{label:'Smuggler',chi:false,armorType:'light',weaponCats:['Pistols and Handguns (Gunslinger)','Auto pistols and S.M.G (Gunslinger)'],skills:{Subterfuge:1,Streetwise:1,Gunslinger:1,Piloting:0,Navigation:0,Stealth:0}},
+  gang_hitman:{label:'Hitman',chi:false,armorType:'light',weaponCats:['Pistols and Handguns (Gunslinger)','Rifles (Marksman)','Melee Weapons (Melee Weapons)'],skills:{Gunslinger:1,Stealth:1,Larceny:1,Awareness:1,Subterfuge:0,'Melee Weapons':0}},
   // ── Corporate ─────────────────────────────────────────────────────────────────
-  corp_guard:{label:'Corporate Guard',chi:false,armorType:'medium',weaponCats:['Rifles (Marksman)','Pistols and Handguns (Gunslinger)','Auto pistols and S.M.G (Gunslinger)'],skills:{Gunslinger:1,Marksman:1,Tactics:1,Athletics:0,Resilience:0,Awareness:0}},
-  corp_agent:{label:'Corporate Agent',chi:false,armorType:'light',weaponCats:['Pistols and Handguns (Gunslinger)','Rifles (Marksman)'],skills:{Subterfuge:1,Gunslinger:1,Awareness:1,Charm:1,Etiquette:0,Concealment:0}},
-  corp_executive:{label:'Corporate Executive',chi:false,armorType:'light',weaponCats:['Pistols and Handguns (Gunslinger)'],skills:{Negotiation:1,Leadership:1,Charm:1,Etiquette:1,Intimidation:0,Academics:0}}
+  corp_guard:{label:'Corporate Guard',chi:false,armorType:'medium',weaponCats:['Rifles (Marksman)','Pistols and Handguns (Gunslinger)','Auto pistols and S.M.G (Gunslinger)'],skills:{Gunslinger:1,Marksman:1,Tactics:1,Athletics:0,Awareness:0}},
+  corp_agent:{label:'Corporate Agent',chi:false,armorType:'light',weaponCats:['Pistols and Handguns (Gunslinger)','Rifles (Marksman)'],skills:{Subterfuge:1,Gunslinger:1,Awareness:1,Charm:1,Protocol:0,Stealth:0}},
+  corp_executive:{label:'Corporate Executive',chi:false,armorType:'light',weaponCats:['Pistols and Handguns (Gunslinger)'],skills:{Negotiation:1,Leadership:1,Charm:1,Protocol:1,Intimidation:0,'Social Science':0}}
 };
 const EG_TIER_ORDER=['henchmen','regular','elite','boss'];
 const EG_TIER_BASE={henchmen:{hp:5,fixed:true},regular:{hp:10,fixed:false},elite:{hp:15,fixed:false},boss:{hp:20,fixed:false}};
 const EG_AVAIL_BY_TIER={henchmen:['COMMON'],regular:['COMMON','UNCOMMON'],elite:['COMMON','UNCOMMON','RARE'],boss:['COMMON','UNCOMMON','RARE','LIMITED','UNIQUE']};
 const EG_LEGAL_BY_TIER={henchmen:['No Permit'],regular:['No Permit','Restricted'],elite:['No Permit','Restricted','Illegal'],boss:['No Permit','Restricted','Illegal','Classified']};
-const EG_SKILLS_ALL=[
-  {key:'Athletics',cat:'Physical'},{key:'Craft',cat:'Physical'},{key:'Heavy_Weapons',cat:'Physical'},{key:'Martial_Arts',cat:'Physical'},{key:'Might',cat:'Physical'},
-  {key:'Piloting',cat:'Physical'},{key:'Repair',cat:'Physical'},{key:'Resilience',cat:'Physical'},{key:'Scavenging',cat:'Physical'},{key:'Survival',cat:'Physical'},
-  {key:'Academics',cat:'Mental'},{key:'Cyberintel',cat:'Mental'},{key:'Engineering',cat:'Mental'},{key:'Galactic_Knowledge',cat:'Mental'},{key:'Hacking',cat:'Mental'},
-  {key:'Medicine',cat:'Mental'},{key:'Navigation',cat:'Mental'},{key:'Parascience',cat:'Mental'},{key:'Science',cat:'Mental'},{key:'Technology',cat:'Mental'},
-  {key:'Acting',cat:'Social'},{key:'Charm',cat:'Social'},{key:'Etiquette',cat:'Social'},{key:'Flair',cat:'Social'},{key:'Intimidation',cat:'Social'},
-  {key:'Leadership',cat:'Social'},{key:'Negotiation',cat:'Social'},{key:'Spiritual',cat:'Social'},{key:'Streetwise',cat:'Social'},{key:'Subterfuge',cat:'Social'},
-  {key:'Awareness',cat:'Acuity'},{key:'Binding',cat:'Acuity'},{key:'Concealment',cat:'Acuity'},{key:'Dexterity',cat:'Acuity'},{key:'Gunslinger',cat:'Acuity'},
-  {key:'Intuition',cat:'Acuity'},{key:'Marksman',cat:'Acuity'},{key:'Operator',cat:'Acuity'},{key:'Search',cat:'Acuity'},{key:'Tactics',cat:'Acuity'}
-];
-const EG_SKILL_DISP={'Heavy_Weapons':'Heavy Weapons','Martial_Arts':'Martial Arts','Galactic_Knowledge':'Galactic Knowledge'};
-const EG_WPN_SKILL_MAP={'Pistols and Handguns (Gunslinger)':'Gunslinger','Auto pistols and S.M.G (Gunslinger)':'Gunslinger','Shotguns (Gunslinger)':'Gunslinger','Rifles (Marksman)':'Marksman','Sniper Rifles and Tactical Weapons (Marksman)':'Marksman','Melee Weapons (Martial Arts)':'Martial_Arts','Powered Melee Weapons (Martial Arts)':'Martial_Arts','Machine Guns (Heavy weapons)':'Heavy_Weapons','Launchers and AT Weapons (Heavy weapons)':'Heavy_Weapons','Vehicle weapons(Heavy weapons)':'Heavy_Weapons','Ranged / Throwing Weapons (Dexterity)':'Dexterity','Explosives (Engineering or Dexterity)':'Dexterity'};
+const EG_SKILLS_ALL = g.skills.map(s=>({key:s.name,cat:s.category}));
+const EG_SKILL_DISP={'Heavy Weapons':'Heavy Weapons','Melee Weapons':'Melee Weapons','Galactic Knowledge':'Galactic Knowledge','Social Science':'Social Science','Hand-to-Hand':'Hand-to-Hand'};
+const EG_WPN_SKILL_MAP={'Pistols and Handguns (Gunslinger)':'Gunslinger','Auto pistols and S.M.G (Gunslinger)':'Gunslinger','Shotguns (Gunslinger)':'Gunslinger','Rifles (Marksman)':'Marksman','Sniper Rifles and Tactical Weapons (Marksman)':'Marksman','Melee Weapons (Melee Weapons)':'Melee Weapons','Powered Melee Weapons (Melee Weapons)':'Melee Weapons','Machine Guns (Heavy weapons)':'Heavy Weapons','Launchers and AT Weapons (Heavy weapons)':'Heavy Weapons','Vehicle weapons(Heavy weapons)':'Heavy Weapons','Ranged / Throwing Weapons (Projectiles)':'Projectiles','Explosives (Heavy Weapons, Engineering or Projectiles)':'Heavy Weapons'};
 // Reverse map: skill → weapon categories
 const EG_SKILL_WPN_CATS={};
 (function(){Object.entries(EG_WPN_SKILL_MAP).forEach(([cat,sk])=>{if(!EG_SKILL_WPN_CATS[sk])EG_SKILL_WPN_CATS[sk]=[];EG_SKILL_WPN_CATS[sk].push(cat);});})();
@@ -4228,85 +4214,19 @@ const EG_GROUP_TEMPLATES={
 };
 
 // ─── Character Creator ────────────────────────────────────────────────────────
-const CC_SKILLS_PHYS=['Athletics','Craft','Heavy_Weapons','Martial_Arts','Might','Piloting','Repair','Resilience','Scavenging','Survival'];
-const CC_SKILLS_MENT=['Academics','Cyberintel','Engineering','Galactic_Knowledge','Hacking','Medicine','Navigation','Parascience','Science','Technology'];
-const CC_SKILLS_SOCI=['Acting','Charm','Etiquette','Flair','Intimidation','Leadership','Negotiation','Spiritual','Streetwise','Subterfuge'];
-const CC_SKILLS_ACUI=['Awareness','Binding','Concealment','Dexterity','Gunslinger','Intuition','Marksman','Operator','Search','Tactics'];
+const CC_SKILLS_PHYS = g.skills.filter(s=>s.category==='Physical').map(s=>s.name);
+const CC_SKILLS_MENT = g.skills.filter(s=>s.category==='Mental').map(s=>s.name);
+const CC_SKILLS_SOCI = g.skills.filter(s=>s.category==='Social').map(s=>s.name);
+const CC_SKILLS_ACUI = g.skills.filter(s=>s.category==='Acuity').map(s=>s.name);
 const CC_ALL_SKILLS=[...CC_SKILLS_PHYS,...CC_SKILLS_MENT,...CC_SKILLS_SOCI,...CC_SKILLS_ACUI];
 const CC_NAMES_FIRST=['Aria','Brek','Cal','Dara','Evan','Fenn','Gaia','Hale','Ixa','Jin','Kael','Lyra','Mira','Nex','Ora','Pax','Quinn','Rael','Saya','Tova','Ursa','Vela','Wrex','Xan','Yara','Zeph','Asha','Brix','Crix','Dax','Ember','Fyra','Hex','Iris'];
 const CC_NAMES_LAST=['Voss','Dhar','Kline','Sato','Cruz','Thane','Bale','Quin','Nara','Cole','Frost','Mars','Chen','Wolf','Dale','Park','Han','Sky','Russ','Faye','Drake','Holt','Ives','Jax','Kade','Lorne'];
 const CC_RACE_ATTR_MAP={PHYSICAL:'physical',MENTAL:'mental',SOCIAL:'social',ACUITY:'acuity',ENDURANCE:'endurance',SPEED:'speed',WITS:'wits',WILLPOWER:'willpower'};
 
-const BG_GRANTS={
-  'Scholar':{skills:{Academics:5,Etiquette:5},choice_skills:[{count:1,from:'MENTAL',rank:5,label:'Choose 1 Mental skill at rank 5'}],attrs:{MENTAL:1}},
-  'Artist':{skills:{Acting:5,Flair:5}},
-  'Crime syndicate':{skills:{Intimidation:5,Streetwise:5},talents:[{name:'Or Else'}]},
-  'Ridge Racer':{skills:{Piloting:6},attrs:{WITS:1}},
-  'Genome Soldier':{choice_skills:[{count:2,options:['Heavy_Weapons','Martial_Arts','Piloting','Tactics'],rank:5,label:'Choose 2 combat skills at rank 5'}],attrs:{PHYSICAL:1,ACUITY:1,ENDURANCE:1,WILLPOWER:1}},
-  'Drifter':{all_skills:2},
-  'Deep space explorer':{attrs:{WILLPOWER:1}},
-  'Darkspacer':{attrs:{ENDURANCE:1},talents:[{name:'Home field advantage'}],attr_max_mods:{WITS:-1}},
-  'Family of thieves':{attrs:{ACUITY:1},choice_talents:[{count:1,options:['Pack Rat','Mugging','Fake News','Rolling with the punches'],label:'Choose 1 talent (Family of thieves)'}],attr_max_mods:{SOCIAL:-1}},
-  'Sorcerous background':{attrs:{WITS:1},chi:2,attr_max_mods:{SPEED:-1}},
-  'Imaginary friend':{attrs:{ACUITY:1},attr_max_mods:{WITS:-1},chi_lock:true},
-  'Warrior of Titan':{attrs:{ENDURANCE:1}},
-  'Bonded laborer':{attrs:{ENDURANCE:1,PHYSICAL:1,WILLPOWER:1},talents:[{name:'Very Strong'}]},
-  'Pit Slave':{health:2,morale:2,talents:[{name:'Brutal fighter'},{name:'Akimbo'}]},
-  'Mangaran Brave':{health:5,attrs:{WITS:1}},
-  'Skalan Samurai':{attrs:{ENDURANCE:1}},
-  'Chain breaker':{attrs:{SOCIAL:1}},
-  'Matricide':{attrs:{ACUITY:1}},
-  'Politician':{attrs:{SOCIAL:1}},
-  'Data Jockey':{attrs:{MENTAL:1}},
-  'Salvaged Droid':{attrs:{ACUITY:1,MENTAL:1},health:3,morale:3,evos:[{name:'Subdermal Plating',tier:'TIER II'}]},
-  'Guinnea Pig':{attrs:{ENDURANCE:1}},
-  'Trueborn':{attrs:{ACUITY:1},talents:[{name:'Nerulian Noble'}]},
-  'Assassin':{talents:[{name:'Assassination'}]},
-  'Fledgeling AI':{evos:[{name:'Skill imprinting',tier:'TIER I',free:true},{name:'Skill imprinting',tier:'TIER II',free:true}]},
-  'Subject 0056':{no_racial_max:true},
-  'Street urchin':{attr_max_mods:{ENDURANCE:-1}},
-  'Spirit Judge':{surge_lock:true},
-};
+const BG_GRANTS=Object.fromEntries((g.backgrounds||[]).filter(x=>x.grants).map(x=>[x.name,x.grants]));
 
 // Occupation skill-bonus pairs — player picks one pair at character creation (SMALL passive bonus)
-const OCC_BONUS={
-  // Standard: pick one of two pairs (user chooses)
-  'Arms collector':          [['Gunslinger','Engineering'],['Marksman','Technology']],
-  'Auctionneer':             [['Galactic_Knowledge','Negotiation'],['Academics','Charm']],
-  'Bartender':               [['Charm','Subterfuge'],['Flair','Etiquette']],
-  'Bounty Hunter':           [['Intimidation','Martial_Arts'],['Cyberintel','Gunslinger']],
-  'Corporate':               [['Leadership','Etiquette'],['Technology','Intuition']],
-  'Corporate Thief':         [['Hacking','Subterfuge'],['Dexterity','Technology']],
-  'Diplomat':                [['Charm','Subterfuge'],['Negotiation','Etiquette']],
-  'Drug Dealer':             [['Science','Academics'],['Scavenging','Medicine']],
-  'Entertainer':             [['Flair','Etiquette'],['Acting','Charm']],
-  'Explorer':                [['Survival','Marksman'],['Scavenging','Gunslinger']],
-  'Fortuneteller':           [['Spiritual','Intuition'],['Subterfuge','Binding']],
-  'Hooverboard Pro':         [['Piloting','Flair'],['Athletics','Navigation']],
-  'Influencer':              [['Etiquette','Galactic_Knowledge'],['Charm','Subterfuge']],
-  'Investigator':            [['Subterfuge','Search'],['Concealment','Streetwise']],
-  'Junker':                  [['Scavenging','Navigation'],['Repair','Resilience']],
-  'Law enforcement':         [['Intimidation','Martial_Arts'],['Academics','Streetwise']],
-  'Life Extension Technician':[['Medicine','Etiquette'],['Technology','Science']],
-  'Mercenary':               [['Heavy_Weapons','Martial_Arts'],['Concealment','Marksman']],
-  'Nova Canon Operator':     [['Engineering','Technology'],['Heavy_Weapons','Tactics']],
-  'Outlaw':                  [['Subterfuge','Concealment'],['Streetwise','Dexterity']],
-  'Pilot':                   [['Piloting','Navigation'],['Survival','Repair']],
-  'Pyromaniac':              [['Engineering','Scavenging'],['Technology','Heavy_Weapons']],
-  'Ripperdoc':               [['Science','Medicine'],['Technology','Scavenging']],
-  'Scientific':              [['Medicine','Science'],['Academics','Galactic_Knowledge']],
-  'Trader':                  [['Negotiation','Charm'],['Scavenging','Streetwise']],
-  'Transporter':             [['Piloting','Etiquette'],['Negotiation','Craft']],
-  'TRONIK disposal specialist':[['Hacking','Cyberintel'],['Technology','Operator']],
-  'Virtual Activist':        [['Cyberintel','Hacking'],['Technology','Operator']],
-  'Worker':                  [['Craft','Scavenging'],['Science','Engineering']],
-  // Fixed: auto-applied when occupation is selected (no player choice)
-  'Ex. Cultist':             {fixed:['Charm','Intimidation','Intuition']},
-  // Pick N from list (player picks exactly N)
-  'Soldier':                 {pick:2,from:['Heavy_Weapons','Tactics','Marksman','Engineering']},
-  // Fixed skills auto-applied + pick 1 from options
-  'Mage':                    {fixed:['Spiritual','Binding'],pick:1,from:['Intuition','Resilience']},
-};
+const OCC_BONUS=Object.fromEntries((g.occupations||[]).filter(x=>x.occ_bonus).map(x=>[x.name,x.occ_bonus]));
 
 function ccApplyOccBonus(pi,newPicks){
   const st=ccState;
@@ -4912,7 +4832,7 @@ function ccRenderPicker(){
   else if(type==='occupation'){items=(g.occupations||[]).slice().sort((a,b)=>a.name.localeCompare(b.name));title='Occupation';bdr='var(--a2)';}
   const pickerMfrPre=st.picker&&st.picker.mfr||'Generic';
   const meleeOnlyMfr=type==='weapon'&&WPN_MFRS_MELEE_ONLY.has(pickerMfrPre);
-  const MELEE_THROW_CATS=new Set(['Melee Weapons (Martial Arts)','Ranged / Throwing Weapons (Dexterity)']);
+  const MELEE_THROW_CATS=new Set(['Melee Weapons (Melee Weapons)','Ranged / Throwing Weapons (Projectiles)']);
   const matches=items.filter(x=>{
     if(meleeOnlyMfr&&!MELEE_THROW_CATS.has(x.category))return false;
     if(pickerMfrPre!=='Generic'){
@@ -6275,12 +6195,12 @@ function egTryApplyWpnMfr(item,isMelee,state=egState){
 
 function egAutoGearWeapons(state=egState){
   const arch=EG_ARCHETYPES[state.archetype]||EG_ARCHETYPES.soldier;
-  const wpnSkills=['Marksman','Gunslinger','Heavy_Weapons','Martial_Arts','Dexterity'];
+  const wpnSkills=['Marksman','Gunslinger','Heavy Weapons','Melee Weapons','Larceny'];
   let bestSkill=null,bestVal=-1;
   wpnSkills.forEach(sk=>{const v=state.skills[sk]||0;if(v>bestVal){bestVal=v;bestSkill=sk;}});
   let cats=arch.weaponCats;
   if(bestSkill&&bestVal>=3&&EG_SKILL_WPN_CATS[bestSkill]) cats=EG_SKILL_WPN_CATS[bestSkill];
-  const meleeCats=['Melee Weapons (Martial Arts)','Powered Melee Weapons (Martial Arts)'];
+  const meleeCats=['Melee Weapons (Melee Weapons)','Powered Melee Weapons (Melee Weapons)'];
   const isMelee=cats.some(c=>meleeCats.includes(c));
   let pool=egFilterWeapons(cats,null,state);
   let primaryItem=null;
@@ -8991,7 +8911,7 @@ function render(){
       // manufacturer selector
       {
         const _wCat=w._src?w._src.category||'':'';
-        const _isMeleeWpn=['Melee Weapons (Martial Arts)','Powered Melee Weapons (Martial Arts)'].includes(_wCat);
+        const _isMeleeWpn=['Melee Weapons (Melee Weapons)','Powered Melee Weapons (Melee Weapons)'].includes(_wCat);
         const _validWMfrs=WPN_MFRS.filter(m=>!WPN_MFRS_MELEE_ONLY.has(m)||_isMeleeWpn);
         html+='<select class="eg-select" style="max-width:130px;" title="Manufacturer" onchange="const _srcW=egState.weapons['+i+']._src;if(_srcW){const _nm=this.value;const _mod=_nm===\'Generic\'?{..._srcW}:applyWpnMfr(_srcW,_nm);if(_mod){const _ns=egWpnToState(_mod);_ns.mfr=_nm;_ns._src=_srcW;egState.weapons['+i+']=_ns;render();}}">';
         _validWMfrs.forEach(m=>{const sel=(w.mfr||'Generic')===m?'selected':'';html+='<option value="'+esc(m)+'" '+sel+'>'+esc(m)+'</option>';});
@@ -9013,7 +8933,7 @@ function render(){
       html+='</div>';
     });
     if(egState.weapons.length<6){
-      html+='<button class="eg-add-btn" onclick="const _wpnSks=[\'Marksman\',\'Gunslinger\',\'Heavy_Weapons\',\'Martial_Arts\',\'Dexterity\'];let _bsk=null,_bv=-1;_wpnSks.forEach(sk=>{const v=egState.skills[sk]||0;if(v>_bv){_bv=v;_bsk=sk;}});let _cats=EG_ARCHETYPES[egState.archetype]?EG_ARCHETYPES[egState.archetype].weaponCats:[];if(_bsk&&_bv>=3&&EG_SKILL_WPN_CATS[_bsk])_cats=EG_SKILL_WPN_CATS[_bsk];const _av=EG_AVAIL_BY_TIER[egState.tier],_lg=EG_LEGAL_BY_TIER[egState.tier];let _pool=(g.weapons||[]).filter(fw=>_cats.includes(fw.category)&&_av.includes(fw.availability)&&_lg.includes(fw.legality));if(!_pool.length)_pool=(g.weapons||[]).filter(fw=>_av.includes(fw.availability)&&_lg.includes(fw.legality));if(_pool.length){egState.weapons.push(egWpnToState(egPickTiered(_pool,egState.tier)));render();}">+ Add Weapon</button>';
+      html+='<button class="eg-add-btn" onclick="const _wpnSks=[\'Marksman\',\'Gunslinger\',\'Heavy Weapons\',\'Melee Weapons\',\'Hand-to-Hand\',\'Projectiles\'];let _bsk=null,_bv=-1;_wpnSks.forEach(sk=>{const v=egState.skills[sk]||0;if(v>_bv){_bv=v;_bsk=sk;}});let _cats=EG_ARCHETYPES[egState.archetype]?EG_ARCHETYPES[egState.archetype].weaponCats:[];if(_bsk&&_bv>=3&&EG_SKILL_WPN_CATS[_bsk])_cats=EG_SKILL_WPN_CATS[_bsk];const _av=EG_AVAIL_BY_TIER[egState.tier],_lg=EG_LEGAL_BY_TIER[egState.tier];let _pool=(g.weapons||[]).filter(fw=>_cats.includes(fw.category)&&_av.includes(fw.availability)&&_lg.includes(fw.legality));if(!_pool.length)_pool=(g.weapons||[]).filter(fw=>_av.includes(fw.availability)&&_lg.includes(fw.legality));if(_pool.length){egState.weapons.push(egWpnToState(egPickTiered(_pool,egState.tier)));render();}">+ Add Weapon</button>';
     }
     html+='</div>';
     // ── Defenses ──────────────────────────────────────────────────────────────

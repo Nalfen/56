@@ -1,0 +1,171 @@
+{
+  "version": "8",
+  "metadata": {
+    "system": "56th Century TTRPG",
+    "extracted_from": "56th_century_compendium.html (line 726)",
+    "date": "2026-06-07",
+    "description": "Drone chassis: 19 drone templates"
+  },
+  "drones": [
+    {
+      "name": "Shadow Ghost",
+      "manufacturer": "Nakamura",
+      "size": "Medium",
+      "durability": 20,
+      "structure": 4,
+      "availability": "Limited",
+      "special": "System : 2"
+    },
+    {
+      "name": "Basic Camera Drone",
+      "manufacturer": "Generic",
+      "size": "Tiny",
+      "durability": 10,
+      "structure": 1,
+      "availability": "Common"
+    },
+    {
+      "name": "Advanced Camera Drone",
+      "manufacturer": "Generic",
+      "size": "Medium",
+      "durability": 10,
+      "structure": 3,
+      "availability": "Uncommon"
+    },
+    {
+      "name": "Cargo Drone",
+      "manufacturer": "Galactic Union",
+      "size": "Large",
+      "durability": 10,
+      "structure": 4,
+      "availability": "Common"
+    },
+    {
+      "name": "EGGSHELL Type 2 (EGG-2)",
+      "manufacturer": "Kintech",
+      "size": "Medium",
+      "durability": 10,
+      "structure": 3,
+      "availability": "Rare"
+    },
+    {
+      "name": "Gusto's little cutter",
+      "manufacturer": "Gusto",
+      "size": "Small",
+      "durability": 10,
+      "structure": 2,
+      "availability": "Common"
+    },
+    {
+      "name": "Assassinator Mk-1",
+      "manufacturer": "Voran",
+      "size": "Medium",
+      "durability": 10,
+      "structure": 3,
+      "availability": "Rare",
+      "special": "INV"
+    },
+    {
+      "name": "Lansing Assault Drone",
+      "manufacturer": "Lansing",
+      "size": "Large",
+      "durability": 10,
+      "structure": 5,
+      "availability": "Limited"
+    },
+    {
+      "name": "Voran A.R.S.E.N.A.L",
+      "manufacturer": "Voran",
+      "size": "Large",
+      "durability": 10,
+      "structure": 4,
+      "availability": "Rare",
+      "special": "INV"
+    },
+    {
+      "name": "Murder Ball",
+      "manufacturer": "Kintech",
+      "size": "Tiny",
+      "durability": 10,
+      "structure": 2,
+      "availability": "Rare"
+    },
+    {
+      "name": "Arms Corp Drone Buster",
+      "manufacturer": "Arms Corp",
+      "size": "Medium",
+      "durability": 15,
+      "structure": 5,
+      "availability": "Limited"
+    },
+    {
+      "name": "Hacky",
+      "manufacturer": "Kintech",
+      "size": "Tiny",
+      "durability": 10,
+      "structure": 1,
+      "availability": "Rare"
+    },
+    {
+      "name": "Lazarfeld Survey Drone",
+      "manufacturer": "Galactic Union",
+      "size": "Medium",
+      "durability": 10,
+      "structure": 3,
+      "availability": "Rare"
+    },
+    {
+      "name": "Jason \"Medivac\" Gauthier",
+      "manufacturer": "Biocom",
+      "size": "Small",
+      "durability": 10,
+      "structure": 2,
+      "availability": "Uncommon"
+    },
+    {
+      "name": "GU-22 Police Drone",
+      "manufacturer": "Galactic Union",
+      "size": "Small",
+      "durability": 10,
+      "structure": 3,
+      "availability": "Uncommon"
+    },
+    {
+      "name": "CT-HUL-HU",
+      "manufacturer": "Nakamura",
+      "size": "Medium",
+      "durability": 10,
+      "structure": 3,
+      "availability": "Classified"
+    },
+    {
+      "name": "MC-CAL IX",
+      "manufacturer": "Biocom",
+      "size": "Medium",
+      "durability": 10,
+      "structure": 3,
+      "availability": "Limited"
+    },
+    {
+      "name": "Personal Space",
+      "manufacturer": "Yamato",
+      "size": "Large",
+      "durability": 20,
+      "structure": 8,
+      "availability": "Rare",
+      "special": "All Internal Modules"
+    },
+    {
+      "name": "DEFENDER",
+      "manufacturer": "Zang'Hai",
+      "size": "Small",
+      "durability": 5,
+      "structure": 1,
+      "availability": "Common",
+      "special": "All External Modules"
+    }
+  ],
+  "notes": {
+    "total_items": 19
+  }
+}
