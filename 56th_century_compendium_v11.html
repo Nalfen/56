@@ -751,6 +751,17 @@ td.xref:hover{color:var(--teal);text-decoration:underline;text-underline-offset:
 #smap-sg-svg line{stroke:#8fd8ff;animation:sgflow 1.4s linear infinite;}
 @keyframes sgflow{to{stroke-dashoffset:-0.8;}}
 @media (prefers-reduced-motion:reduce){#smap-sg-svg line{animation:none;}}
+
+/* ── v11.3: inline xref expansion rows ── */
+tr.xref-open>td{background:var(--teal-soft)!important;}
+tr.xref-row>td{padding:10px 12px!important;background:var(--bg2);border-bottom:1px solid var(--border2);text-align:left!important;}
+.xref-wrap{max-width:780px;}
+.xref-wrap>.card{margin:0;}
+.xref-wrap>.rkv{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;}
+.xref-bar{display:flex;gap:8px;margin-top:9px;}
+.xref-close,.xref-goto{background:var(--card);border:1px solid var(--border2);color:var(--mu);font-size:11px;font-family:'JetBrains Mono',monospace;border-radius:6px;padding:4px 12px;cursor:pointer;}
+.xref-close:hover{border-color:var(--re);color:var(--re);}
+.xref-goto:hover{border-color:var(--teal);color:var(--teal);}
 </style>
 </head>
 <body>
@@ -3067,10 +3078,7 @@ function buildGalaxySVG(){
     +'<ellipse cx="1000" cy="1000" rx="850" ry="700" fill="url(#sm-cg)"/>'
     +'<ellipse cx="980" cy="1020" rx="420" ry="340" fill="url(#sm-cg2)"/>'
     // (hardcoded territory ellipses removed — data-driven influence layer instead)
-    // Nemani Rift, yellow nebula barrier (diagonal, between Haven/Mubothen and Kraven)
-    +'<line x1="870" y1="290" x2="1430" y2="1060" stroke="#ffd60a" stroke-width="170" opacity="0.055" filter="url(#sm-rift)" stroke-linecap="round"/>'
-    +'<line x1="895" y1="330" x2="1405" y2="1020" stroke="#ffcc00" stroke-width="75" opacity="0.065" filter="url(#sm-rift)" stroke-linecap="round"/>'
-    +'<line x1="920" y1="370" x2="1380" y2="980" stroke="#ffee88" stroke-width="30" opacity="0.04" filter="url(#sm-rift)" stroke-linecap="round"/>'
+    // (Nemani Rift band removed — looked like a smear over the data-driven map)
     // Stars layer (on top of territories)
     +'<g>'+stars+'</g>'
     +'</svg>';
@@ -9534,10 +9542,63 @@ function xrefDecorate(){
 }
 var _v11Render=render;
 render=function(){_v11Render();try{xrefDecorate();}catch(e){}};
+// Fetch the target item's real card by rendering its section invisibly, then restoring the view.
+function xrefFetchCard(sec,name){
+  var main=document.getElementById('main');
+  var keep={cs:cs,sq:sq,af:af,html:main.innerHTML,scroll:main.scrollTop,act:main.dataset.activeSection};
+  var html='';
+  try{
+    cs=sec;sq=String(name).toLowerCase();af='';
+    _v11Render();
+    var nl=String(name).trim().toLowerCase(),card=null;
+    var nodes=main.querySelectorAll('.card');
+    for(var i=0;i<nodes.length;i++){var cn=nodes[i].querySelector('.cn');var t=cn?cn.textContent.trim().toLowerCase():'';if(t===nl){card=nodes[i];break;}}
+    if(!card)for(var i=0;i<nodes.length;i++){var cn=nodes[i].querySelector('.cn');var t=cn?cn.textContent.trim().toLowerCase():'';if(t.indexOf(nl)>=0){card=nodes[i];break;}}
+    if(!card&&nodes.length===1)card=nodes[0];
+    if(!card){
+      var rkvs=main.querySelectorAll('.rkv');
+      for(var i=0;i<rkvs.length;i++){var rk=rkvs[i].querySelector('.rk');var t=rk?rk.textContent.trim().toLowerCase():'';if(t===nl||t.indexOf(nl)>=0){card=rkvs[i];break;}}
+    }
+    if(card){card.classList.add('x');html=card.outerHTML;}
+  }catch(e){}
+  cs=keep.cs;sq=keep.sq;af=keep.af;
+  main.innerHTML=keep.html;
+  if(keep.act!==undefined)main.dataset.activeSection=keep.act;
+  main.scrollTop=keep.scroll;
+  return html;
+}
+function xrefCloseAll(){
+  document.querySelectorAll('#main tr.xref-row').forEach(function(r){r.remove();});
+  document.querySelectorAll('#main tr.xref-open').forEach(function(r){r.classList.remove('xref-open');});
+}
 document.getElementById('main').addEventListener('click',function(e){
+  var xg=e.target.closest('.xref-goto');
+  if(xg){palJump(xg.dataset.xs,xg.dataset.xn);return;}
+  var xc=e.target.closest('.xref-close');
+  if(xc){xrefCloseAll();return;}
+  if(e.target.closest('tr.xref-row'))return; // clicks inside the expansion (card toggle etc.)
   var td=e.target.closest('td.xref');if(!td)return;
   if(e.target.closest('button,input,select,a,[data-ammo],[data-db]'))return;
-  palJump(td.dataset.xs,td.dataset.xn);
+  var sec=td.dataset.xs,name=td.dataset.xn;
+  // tool/map targets can't be embedded — jump (starmap jump focuses the pin)
+  if(sec==='starmap'||sec==='gm_tools'||sec==='char_creator'||sec==='drone_builder'){palJump(sec,name);return;}
+  var tr=td.closest('tr');
+  var wasOpen=tr&&tr.classList.contains('xref-open');
+  var tds=Array.prototype.slice.call(document.querySelectorAll('#main td.xref'));
+  var idx=tds.indexOf(td);
+  xrefCloseAll();
+  if(wasOpen)return; // second click on the same row = collapse, stay in table
+  var cardHtml=xrefFetchCard(sec,name);
+  tds=Array.prototype.slice.call(document.querySelectorAll('#main td.xref'));
+  td=tds[idx];if(!td)return;tr=td.closest('tr');if(!tr||!tr.parentNode)return;
+  if(!cardHtml){palJump(sec,name);return;}
+  tr.classList.add('xref-open');
+  var cols=tr.children.length||1;
+  var nr=document.createElement('tr');nr.className='xref-row';
+  nr.innerHTML='<td colspan="'+cols+'"><div class="xref-wrap">'+cardHtml
+    +'<div class="xref-bar"><button class="xref-close">\u2715 Close</button>'
+    +'<button class="xref-goto" data-xs="'+esc(sec)+'" data-xn="'+esc(name)+'">Open in section \u2192</button></div></div></td>';
+  tr.parentNode.insertBefore(nr,tr.nextSibling);
 });
 try{xrefDecorate();}catch(e){}
 
