@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>56th Century — Compendium v10</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ───────── tokens ───────── */
+:root{
+  --ink:#101216;--panel:#16191f;--raised:#1b1f26;--raised2:#222732;
+  --line:#262b34;--line2:#343b47;
+  --text:#e9e7e2;--dim:#a3a9b4;--faint:#6b7280;
+  --rust:#e07a4d;--rust-soft:rgba(224,122,77,.12);
+  --teal:#5fd4c4;--teal-soft:rgba(95,212,196,.10);
+  --cred:#7fd98a;--warn:#e8c468;--bad:#e8685f;--info:#6aa9f0;--psi:#bd8ef0;
+  --r:10px;
+  --font-d:'Chakra Petch',sans-serif;--font-b:'Atkinson Hyperlegible',sans-serif;--font-m:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--ink);color:var(--text);font-family:var(--font-b);font-size:15px;line-height:1.65;overflow:hidden;display:flex;flex-direction:column}
+button{font-family:inherit;color:inherit;background:none;border:none;cursor:pointer}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:4px}
+::-webkit-scrollbar{width:8px;height:8px}::-webkit-scrollbar-thumb{background:var(--line2);border-radius:4px}::-webkit-scrollbar-track{background:transparent}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+mark{background:rgba(95,212,196,.25);color:var(--teal);border-radius:2px;padding:0 1px}
+
+/* ───────── header ───────── */
+header{height:56px;flex-shrink:0;display:flex;align-items:center;gap:14px;padding:0 16px;background:var(--panel);border-bottom:1px solid var(--line)}
+#menu-btn{display:none;width:38px;height:38px;border:1px solid var(--line2);border-radius:8px;font-size:18px;align-items:center;justify-content:center}
+.logo{font-family:var(--font-d);font-weight:700;font-size:15px;letter-spacing:.18em;white-space:nowrap}
+.logo em{font-style:normal;color:var(--rust)}
+.omni-trigger{flex:0 1 480px;display:flex;align-items:center;gap:9px;height:36px;padding:0 12px;background:var(--raised);border:1px solid var(--line2);border-radius:8px;color:var(--faint);font-size:13.5px;transition:border-color .15s}
+.omni-trigger:hover{border-color:var(--teal)}
+.omni-trigger .kbd{margin-left:auto}
+.kbd{font-family:var(--font-m);font-size:10.5px;color:var(--dim);background:var(--ink);border:1px solid var(--line2);border-bottom-width:2px;border-radius:5px;padding:1px 6px;white-space:nowrap}
+.status{margin-left:auto;display:flex;align-items:center;gap:10px;font-family:var(--font-m);font-size:11px;color:var(--faint);white-space:nowrap}
+.status .led{width:7px;height:7px;border-radius:50%;background:var(--cred);box-shadow:0 0 6px var(--cred)}
+.status b{color:var(--dim);font-weight:500}
+
+/* ───────── layout / nav ───────── */
+.layout{display:flex;flex:1;min-height:0}
+nav.rail{width:240px;flex-shrink:0;background:var(--panel);border-right:1px solid var(--line);overflow-y:auto;padding:10px 8px 24px}
+.gum{margin-bottom:2px}
+.gum>summary{list-style:none;display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;font-family:var(--font-d);font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);cursor:pointer;user-select:none}
+.gum>summary::-webkit-details-marker{display:none}
+.gum>summary:hover{background:var(--raised);color:var(--text)}
+.gum>summary .car{margin-left:auto;font-size:9px;color:var(--faint);transition:transform .15s}
+.gum[open]>summary .car{transform:rotate(90deg)}
+.nav-it{display:flex;align-items:center;gap:9px;width:100%;padding:7px 10px 7px 16px;border-radius:8px;font-size:14px;color:var(--dim);text-align:left;border-left:2px solid transparent}
+.nav-it:hover{background:var(--raised);color:var(--text)}
+.nav-it.active{background:var(--rust-soft);color:var(--rust);border-left-color:var(--rust);font-weight:700}
+.nav-it .ct{margin-left:auto;font-family:var(--font-m);font-size:10.5px;color:var(--faint)}
+.nav-it.active .ct{color:var(--rust)}
+#overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:90}
+main{flex:1;min-width:0;overflow-y:auto}
+.page{max-width:1100px;margin:0 auto;padding:24px 32px 80px}
+
+/* ───────── section header / chips ───────── */
+.shead{position:sticky;top:0;z-index:20;background:linear-gradient(var(--ink) 82%,transparent);padding:4px 0 12px;margin-bottom:4px}
+.shead-row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;border-left:3px solid var(--rust);padding-left:14px}
+.crumb{font-family:var(--font-m);font-size:11px;color:var(--faint);letter-spacing:.06em}
+.crumb b{color:var(--rust);font-weight:500}
+h1{font-family:var(--font-d);font-size:22px;font-weight:700;letter-spacing:.04em}
+.count-badge{font-family:var(--font-m);font-size:11.5px;color:var(--dim);background:var(--raised);border:1px solid var(--line2);border-radius:6px;padding:2px 9px;vertical-align:2px}
+.shead-tools{margin-left:auto;display:flex;gap:8px;align-items:center}
+.tool-btn{font-family:var(--font-m);font-size:11px;color:var(--dim);border:1px solid var(--line2);border-radius:7px;padding:5px 11px;letter-spacing:.04em}
+.tool-btn:hover{color:var(--teal);border-color:var(--teal)}
+.tool-btn.on{color:var(--teal);border-color:var(--teal);background:var(--teal-soft)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 18px;padding-left:17px;align-items:center}
+.chip{font-size:13px;padding:5px 13px;border-radius:99px;border:1px solid var(--line2);color:var(--dim);transition:all .12s}
+.chip:hover{border-color:var(--dim);color:var(--text)}
+.chip.on{background:var(--rust-soft);border-color:var(--rust);color:var(--rust);font-weight:700}
+.scoped{margin-left:auto;display:flex;align-items:center;gap:7px;background:var(--raised);border:1px solid var(--line2);border-radius:99px;padding:4px 12px}
+.scoped input{background:none;border:none;outline:none;color:var(--text);font-family:var(--font-b);font-size:13px;width:160px}
+.scoped svg{width:13px;height:13px;stroke:var(--faint);fill:none;stroke-width:2;flex-shrink:0}
+
+/* ───────── cards ───────── */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:10px}
+.cards.compact{grid-template-columns:1fr;gap:0}
+.cards.wide{grid-template-columns:repeat(auto-fill,minmax(420px,1fr))}
+.cards.wide.compact{grid-template-columns:1fr}
+.icard{background:var(--raised);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;cursor:pointer;transition:border-color .12s,background .12s;position:relative;overflow:hidden}
+.icard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--rar,var(--line2))}
+.icard:hover{border-color:var(--line2);background:var(--raised2)}
+.icard[aria-expanded="true"]{border-color:var(--rar,var(--line2));background:var(--raised2)}
+.cards.compact .icard{border-radius:0;border-left:none;border-right:none;border-top:none;padding:10px 16px}
+.ic-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.ic-name{font-weight:700;font-size:15.5px;letter-spacing:.01em}
+.ic-cat{font-family:var(--font-m);font-size:11px;color:var(--faint)}
+.ic-cost{margin-left:auto;font-family:var(--font-m);font-size:13px;color:var(--cred);white-space:nowrap}
+.ic-stats{display:flex;gap:14px;flex-wrap:wrap;margin-top:9px}
+.stat{display:flex;flex-direction:column;gap:1px;min-width:52px}
+.stat .k{font-family:var(--font-m);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.stat .v{font-family:var(--font-m);font-size:13.5px;color:var(--text);white-space:nowrap}
+.v.pw-Low{color:var(--cred)}.v.pw-Medium{color:var(--warn)}.v.pw-High{color:var(--rust)}.v.pw-Extreme,.v.pw-EXTREME{color:var(--bad)}
+.ic-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}
+.t{font-family:var(--font-m);font-size:11px;padding:2px 9px;border-radius:5px;border:1px solid var(--line2);color:var(--dim);white-space:nowrap}
+.t.spec{border-color:rgba(224,122,77,.4);color:var(--rust);background:var(--rust-soft);cursor:help}
+.ic-body{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:14px;color:var(--dim);line-height:1.7}
+.icard[aria-expanded="true"] .ic-body{display:block}
+.ic-body p{margin-bottom:8px}
+.ic-body .row{display:flex;gap:10px;padding:3px 0}
+.ic-body .row .k{font-family:var(--font-m);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--rust);min-width:110px;padding-top:3px;flex-shrink:0}
+.ic-body .row .v{flex:1;color:var(--text)}
+.rar-COMMON{--rar:#4a5160}.rar-UNCOMMON{--rar:#5fae6e}.rar-RARE{--rar:#6aa9f0}.rar-LIMITED{--rar:#bd8ef0}.rar-UNIQUE{--rar:#e8c468}.rar-CLASSIFIED{--rar:#e8685f}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin:16px 0 4px;padding-left:17px;font-family:var(--font-m);font-size:10.5px;color:var(--faint)}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:-1px;font-style:normal}
+/* defense pills */
+.defs{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}
+.def{display:flex;align-items:center;gap:4px;font-family:var(--font-m);font-size:11px;padding:2px 8px;border-radius:5px;border:1px solid var(--line2)}
+.def b{font-weight:600;color:var(--faint)}
+.dt-NONE{color:#6b7280}.dt-LOW{color:#8fbf7f}.dt-MEDIUM{color:#7fd98a}.dt-HIGH{color:#e8c468}.dt-EXTREME{color:#e8685f}
+/* simple definition rows (skills, glossary, keywords) */
+.dlist{max-width:78ch}
+.term{margin:0 0 14px}
+.term dt{font-weight:700;font-size:14.5px;letter-spacing:.02em}
+.term dt .t{margin-left:8px;vertical-align:2px}
+.term dd{color:var(--dim);font-size:14.5px;line-height:1.75;margin-top:2px}
+.term dd b{color:var(--text)}
+/* rules */
+.prose{max-width:74ch}
+.rgroup{margin-bottom:10px;border:1px solid var(--line);border-radius:var(--r);background:var(--raised);overflow:hidden}
+.rgroup>summary{list-style:none;display:flex;align-items:center;gap:10px;padding:13px 18px;font-family:var(--font-d);font-size:13.5px;font-weight:600;letter-spacing:.08em;cursor:pointer;user-select:none}
+.rgroup>summary::-webkit-details-marker{display:none}
+.rgroup>summary:hover{background:var(--raised2)}
+.rgroup>summary .car{margin-left:auto;font-size:10px;color:var(--faint);transition:transform .15s}
+.rgroup[open]>summary .car{transform:rotate(90deg)}
+.rsec{padding:4px 20px 18px;border-top:1px solid var(--line)}
+.rsec h3{font-family:var(--font-m);font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--rust);margin:16px 0 10px}
+.re{color:var(--dim);font-size:14.5px;line-height:1.78;margin:0 0 11px}
+.re b{color:var(--text)}
+.rk{font-weight:700;font-size:14.5px;letter-spacing:.02em;margin-top:2px}
+.rex{margin:6px 0 12px;padding:8px 12px;background:var(--ink);border-left:2px solid var(--teal);border-radius:0 6px 6px 0}
+.rex .lbl{font-family:var(--font-m);font-size:9.5px;letter-spacing:.12em;color:var(--teal);text-transform:uppercase;margin-bottom:3px}
+.rex li{font-family:var(--font-m);font-size:12.5px;color:var(--dim);list-style:none;padding:2px 0}
+.rsub{font-style:italic;color:var(--faint);font-size:13.5px;margin:-6px 0 12px}
+.note{margin-top:22px;padding:14px 18px;background:var(--raised);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:0 var(--r) var(--r) 0;font-size:13.5px;color:var(--dim);max-width:74ch}
+.note b{color:var(--teal)}
+.empty{padding:50px 20px;text-align:center;color:var(--faint)}
+/* loading / error */
+#boot{position:fixed;inset:0;z-index:300;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+#boot .logo{font-size:18px}
+#boot .bar{width:240px;height:4px;border-radius:2px;background:var(--raised2);overflow:hidden}
+#boot .fill{height:100%;width:0;background:var(--rust);transition:width .2s}
+#boot .msg{font-family:var(--font-m);font-size:11px;color:var(--faint);max-width:480px;text-align:center;line-height:1.7;padding:0 20px;white-space:pre-line}
+#boot.err .fill{background:var(--bad)}
+
+/* ───────── palette ───────── */
+#palette{display:none;position:fixed;inset:0;z-index:200;background:rgba(8,9,12,.7);backdrop-filter:blur(3px);padding:9vh 16px 0;justify-content:center;align-items:flex-start}
+#palette.open{display:flex}
+.pal{width:100%;max-width:640px;background:var(--panel);border:1px solid var(--line2);border-radius:14px;box-shadow:0 24px 70px rgba(0,0,0,.6);overflow:hidden}
+.pal-in{display:flex;align-items:center;gap:11px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.pal-in svg{width:16px;height:16px;stroke:var(--rust);fill:none;stroke-width:2;flex-shrink:0}
+.pal-in input{flex:1;background:none;border:none;outline:none;color:var(--text);font-family:var(--font-b);font-size:16px}
+.pal-list{max-height:48vh;overflow-y:auto;padding:6px}
+.pal-grp{font-family:var(--font-m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:10px 14px 4px}
+.pal-it{display:flex;align-items:center;gap:11px;width:100%;padding:8px 14px;border-radius:8px;text-align:left;font-size:14.5px}
+.pal-it .meta{font-family:var(--font-m);font-size:11px;color:var(--faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:46%}
+.pal-it .sec{margin-left:auto;font-family:var(--font-m);font-size:10.5px;color:var(--faint);white-space:nowrap}
+.pal-it.sel{background:var(--rust-soft)}
+.pal-it.sel .nm{color:var(--rust);font-weight:700}
+.pal-foot{display:flex;gap:16px;padding:9px 18px;border-top:1px solid var(--line);font-family:var(--font-m);font-size:10.5px;color:var(--faint)}
+
+/* ───────── mobile ───────── */
+@media(max-width:820px){
+  #menu-btn{display:flex}
+  .omni-trigger span.ph{display:none}
+  .status{display:none}
+  nav.rail{position:fixed;top:56px;left:0;bottom:0;z-index:95;transform:translateX(-105%);transition:transform .22s ease;width:266px;box-shadow:8px 0 30px rgba(0,0,0,.4)}
+  nav.rail.open{transform:none}
+  #overlay.show{display:block}
+  .page{padding:18px 14px 90px}
+  .cards,.cards.wide{grid-template-columns:1fr}
+  .scoped{width:100%;margin:6px 0 0}
+  .scoped input{flex:1;width:auto}
+  h1{font-size:19px}
+  .ic-body .row{flex-wrap:wrap}.ic-body .row .k{min-width:0}
+}
+</style>
+</head>
+<body>
+
+<div id="boot">
+  <div class="logo">56TH <em>CENTURY</em></div>
+  <div class="bar"><div class="fill" id="boot-fill"></div></div>
+  <div class="msg" id="boot-msg">Loading game data…</div>
+</div>
+
+<header>
+  <button id="menu-btn" aria-label="Open navigation" onclick="toggleRail()">☰</button>
+  <div class="logo">56TH <em>CENTURY</em></div>
+  <button class="omni-trigger" onclick="openPal()" aria-label="Search the whole compendium">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    <span class="ph">Search everything…</span>
+    <span class="kbd">Ctrl K</span>
+  </button>
+  <div class="status"><span class="led"></span><span>DATASET <b>v8</b></span><span>·</span><span id="st-domains"><b>—</b> DOMAINS</span><span>·</span><span id="st-entries"><b>—</b> ENTRIES</span></div>
+</header>
+
+<div class="layout">
+<div id="overlay" onclick="toggleRail(false)"></div>
+<nav class="rail" id="rail" aria-label="Compendium sections"></nav>
+<main id="main"><div class="page" id="page"></div></main>
+</div>
+
+<div id="palette" role="dialog" aria-modal="true" aria-label="Search the compendium" onclick="if(event.target===this)closePal()">
+  <div class="pal">
+    <div class="pal-in">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input id="pal-q" type="text" placeholder="Search rules, gear, talents, spells, glossary…" autocomplete="off">
+      <span class="kbd">ESC</span>
+    </div>
+    <div class="pal-list" id="pal-list"></div>
+    <div class="pal-foot"><span>↑↓ navigate</span><span>↵ open</span><span>esc close</span><span style="margin-left:auto" id="pal-count"></span></div>
+  </div>
+</div>
+
+<script>
+"use strict";
+/* ═════════ helpers ═════════ */
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function fmtCost(c){const n=parseInt(String(c).replace(/[^\d-]/g,""),10);return isNaN(n)?esc(c||"—"):n.toLocaleString("en-US")+" cr"}
+function hlq(t,q){t=String(t==null?"":t);if(!q)return esc(t);const i=t.toLowerCase().indexOf(q);if(i<0)return esc(t);return esc(t.slice(0,i))+"<mark>"+esc(t.slice(i,i+q.length))+"</mark>"+esc(t.slice(i+q.length))}
+function stat(k,v,cls){if(v==null||v===""||v==="0 round(s)")return"";return `<div class="stat"><span class="k">${esc(k)}</span><span class="v ${cls||""}">${v}</span></div>`}
+function row(k,v){if(!v)return"";return `<div class="row"><span class="k">${esc(k)}</span><span class="v">${v}</span></div>`}
+function rar(av){return "rar-"+String(av||"COMMON").toUpperCase().split(" ")[0]}
+function defPill(lbl,tier){if(!tier)return"";const t=String(tier).toUpperCase();return `<span class="def"><b>${lbl}</b><span class="dt-${t}">${esc(t)}</span></span>`}
+function specTags(s,q){if(!s)return"";return String(s).split(/\s+/).filter(Boolean).map(tok=>{
+  const d=(g.specials&&(g.specials[tok]||g.specials[tok.toUpperCase()]))||"";
+  return `<span class="t spec" title="${esc(typeof d==="string"?d:(d.desc||""))}">${hlq(tok,q)}</span>`}).join("")}
+function lc(o,fields){return fields.map(f=>o[f]==null?"":String(o[f])).join(" ").toLowerCase()}
+
+/* ═════════ data load ═════════ */
+let g={};
+(async function boot(){
+  const fill=document.getElementById("boot-fill"),msg=document.getElementById("boot-msg");
+  const bases=["data/v8/","data/",""];
+  let base=null,man=null;
+  for(const b of bases){
+    try{const r=await fetch(b+"manifest.json");if(r.ok){man=await r.json();base=b;break}}catch(e){}
+  }
+  if(!man){
+    document.getElementById("boot").classList.add("err");
+    msg.textContent="Could not load game data (data/v8/manifest.json).\nThis page must be served over HTTP — not opened by double-clicking.\nLocal test: run  python -m http.server  in this folder,\nthen open http://localhost:8000/";
+    return;
+  }
+  let done=0;
+  await Promise.all(man.files.map(async fn=>{
+    try{const d=await (await fetch(base+fn)).json();Object.assign(g,d)}
+    catch(e){console.error("Failed:",fn,e)}
+    done++;fill.style.width=Math.round(done/man.files.length*100)+"%";
+    msg.textContent="Loading "+fn+"…";
+  }));
+  init();
+  document.getElementById("boot").remove();
+})();
+
+/* ═════════ sections ═════════ */
+const WCAT_SHORT={"Pistols and Handguns (Gunslinger)":"Pistols","Auto pistols and S.M.G (Gunslinger)":"SMGs","Shotguns (Gunslinger)":"Shotguns","Rifles (Marksman)":"Rifles","Sniper Rifles and Tactical Weapons (Marksman)":"Snipers","Machine Guns (Heavy weapons)":"MGs","Launchers and AT Weapons (Heavy weapons)":"Launchers","Explosives (Heavy Weapons, Engineering or Projectiles)":"Explosives","Vehicle weapons(Heavy weapons)":"Vehicle","Melee Weapons (Melee Weapons)":"Melee","Powered Melee Weapons (Melee Weapons)":"Powered Melee","Ranged / Throwing Weapons (Projectiles)":"Thrown"};
+const MELEE=new Set(["Melee Weapons (Melee Weapons)","Powered Melee Weapons (Melee Weapons)"]);
+function wshort(c){return WCAT_SHORT[c]||String(c||"").split("(")[0].trim()}
+function spellDomain(s){const t=String(s.type||"").split(/\s+/)[0]||"OTHER";return {PRIMAL:"PRIMALIST",UNCOMMON:"OTHER"}[t]||t}
+
+const SECTIONS=[
+/* ── Reference ── */
+{id:"rules",group:"Reference",label:"Rules",custom:renderRules,
+ index:()=>{const out=[];(g.rules_grouped||[]).forEach(grp=>grp.sections.forEach(sec=>sec.entries.forEach(e=>{if(e.key)out.push({n:e.key,meta:grp.group,hay:(e.key+" "+e.text).toLowerCase(),q:e.key})})));return out}},
+{id:"codex",group:"Reference",label:"Action Codex",src:()=>g.code||[],wide:true,defaultCompact:true,
+ cats:()=>[],hay:o=>lc(o,["name","action","desc"]),
+ card:(o,q)=>itemCard({name:o.name,cat:o.action,tags:"",stats:"",body:`<p>${hlq(o.desc,q)}</p>`,q,nameQ:q})},
+{id:"glossary",group:"Reference",label:"Glossary",src:()=>g.glossary_clean||[],custom:renderGlossary,
+ hay:o=>lc(o,["name","desc"])},
+{id:"hacking",group:"Reference",label:"Hacking",custom:renderHacking,
+ index:()=>((g.hacking_keywords||[]).map(k=>({n:k.term,meta:"hacking keyword",hay:(k.term+" "+k.desc).toLowerCase(),q:k.term})))},
+/* ── Characters ── */
+{id:"skills",group:"Characters",label:"Skills",custom:renderSkills,
+ index:()=>((g.skills||[]).map(s=>({n:s.name,meta:s.category+" skill",hay:lc(s,["name","category","desc"]),q:s.name})))},
+{id:"races",group:"Characters",label:"Races",src:()=>g.races||[],cats:()=>[],hay:o=>lc(o,["name","racial","evolution","environment"]),
+ card:(o,q)=>itemCard({name:o.name,cat:"",rail:"",q,nameQ:q,
+   stats:(o.mods||[]).map(m=>{const sp=String(m).split(/\s+/);return stat(sp.slice(1).join(" "),esc(sp[0]))}).join(""),
+   body:row("Racial",hlq(o.racial,q))+row("Evolution",hlq(o.evolution,q))+row("Environment",hlq(o.environment,q))})},
+{id:"backgrounds",group:"Characters",label:"Backgrounds",src:()=>g.backgrounds||[],
+ cats:()=>[...new Set((g.backgrounds||[]).map(b=>b.race).filter(Boolean))],cat:o=>o.race,
+ hay:o=>lc(o,["name","race","desc","traits"]),
+ card:(o,q)=>itemCard({name:o.name,cat:o.race,q,nameQ:q,
+   body:`<p>${hlq(o.desc,q)}</p>`+row("Traits",hlq(Array.isArray(o.traits)?o.traits.join(", "):o.traits,q))+row("Grants",esc(typeof o.grants==="object"?JSON.stringify(o.grants):o.grants))})},
+{id:"occupations",group:"Characters",label:"Occupations",src:()=>g.occupations||[],cats:()=>[],
+ hay:o=>lc(o,["name","desc","details"]),
+ card:(o,q)=>itemCard({name:o.name,q,nameQ:q,
+   body:`<p>${hlq(o.desc,q)}</p>`+row("Details",hlq(o.details,q))+row("Bonus",esc(typeof o.occ_bonus==="object"?Object.entries(o.occ_bonus||{}).map(([k,v])=>k+": "+v).join(" · "):o.occ_bonus))})},
+{id:"talents",group:"Characters",label:"Talents",src:()=>g.talents||[],wide:true,defaultCompact:true,
+ cats:()=>["PHYSICAL","MENTAL","SOCIAL","ACUITY"],cat:o=>o.category,
+ hay:o=>lc(o,["name","category","skill","effect"]),
+ card:(o,q)=>itemCard({name:o.name,cat:o.skill,q,nameQ:q,
+   stats:stat("Req",esc(o.req))+stat("Cost",esc(o.cost)+" xp"),
+   tags:`<span class="t">${esc(o.category)}</span>`,
+   body:`<p>${hlq(o.effect,q)}</p>`})},
+/* ── Arsenal ── */
+{id:"weapons",group:"Arsenal",label:"Weapons",src:()=>g.weapons||[],legend:true,
+ cats:()=>[...new Set((g.weapons||[]).map(w=>w.category))].filter(Boolean),catLbl:wshort,cat:o=>o.category,
+ hay:o=>lc(o,["name","category","type","special","damage","legality","notes","desc"]),
+ card:(w,q)=>{const melee=MELEE.has(w.category);
+   return itemCard({name:w.name,cat:wshort(w.category),cost:fmtCost(w.cost),rail:rar(w.availability),q,nameQ:q,
+     stats:stat("Dmg",esc(w.damage))+stat("Power",esc(w.power),"pw-"+w.power)+stat("Type",melee?"MELEE":esc(w.type))
+       +(melee?"":stat("Range",[w.range_short,w.range_med,w.range_long].map(r=>r||"—").join("|")))
+       +stat("Ammo",esc(w.ammo))+stat("Exp",esc(w.expertise)),
+     tags:specTags(w.special,q)+`<span class="t">${esc(w.legality)}</span>`,
+     body:(w.desc?`<p>${hlq(w.desc,q)}</p>`:"")+row("Notes",hlq(w.notes,q))+row("Reload",esc(w.reload))+row("RoF",esc(w.rof))+row("Size / Handed",esc([w.size,w.handed].filter(Boolean).join(" / ")))})}},
+{id:"armor",group:"Arsenal",label:"Armor & Shields",src:()=>g.armor||[],legend:true,
+ cats:()=>[...new Set((g.armor||[]).map(a=>a.type))].filter(Boolean),cat:o=>o.type,
+ hay:o=>lc(o,["name","type","special","special_desc","desc"]),
+ card:(a,q)=>itemCard({name:a.name,cat:a.type,cost:fmtCost(a.cost),rail:rar(a.availability),q,nameQ:q,
+   stats:stat("Soak",esc(a.soak))+(a.charges&&a.charges!=="0"?stat("Charges",esc(a.charges)):"")+(a.regen&&a.regen!=="0"?stat("Regen",esc(a.regen)):""),
+   extra:`<div class="defs">${defPill("P",a.def_physical)+defPill("E",a.def_energy)+defPill("T",a.def_tech)+defPill("S",a.def_spiritual)}</div>`,
+   tags:specTags(a.special,q),
+   body:(a.special_desc?`<p>${hlq(a.special_desc,q)}</p>`:"")+(a.desc&&!/^PLACEHOLDER/.test(a.desc)?`<p>${hlq(a.desc,q)}</p>`:"")})},
+{id:"medical",group:"Arsenal",label:"Medical & Drugs",src:()=>g.medical||[],legend:true,
+ cats:()=>[...new Set((g.medical||[]).map(m=>m.application))].filter(Boolean),cat:o=>o.application,
+ hay:o=>lc(o,["name","application","legality","effect"]),
+ card:(m,q)=>itemCard({name:m.name,cat:m.application,cost:fmtCost(m.cost),rail:rar(m.availability),q,nameQ:q,
+   stats:stat("Toxicity",esc(m.toxicity))+stat("Duration",esc(m.duration))+stat("Action",esc(m.action))+stat("Size",esc(m.size)),
+   tags:`<span class="t">${esc(m.legality)}</span>`,
+   body:`<p>${hlq(m.effect,q)}</p>`})},
+/* ── Tech & Gear ── */
+{id:"equipment",group:"Tech & Gear",label:"Equipment",src:()=>g.equipment||[],wide:true,defaultCompact:true,
+ cats:()=>[...new Set((g.equipment||[]).map(e=>e.category))].filter(Boolean),cat:o=>o.category,
+ hay:o=>lc(o,["name","category","effect"]),
+ card:(e,q)=>itemCard({name:e.name,cat:e.category,cost:fmtCost(e.cost),rail:rar(e.availability),q,nameQ:q,
+   stats:stat("Size",esc(e.size)),tags:e.legality?`<span class="t">${esc(e.legality)}</span>`:"",
+   body:`<p>${hlq(e.effect,q)}</p>`})},
+{id:"datacoms",group:"Tech & Gear",label:"Datacoms",src:()=>g.datacoms||[],legend:true,
+ cats:()=>[...new Set((g.datacoms||[]).map(d=>d.type))].filter(Boolean),cat:o=>o.type,
+ hay:o=>lc(o,["name","type","special","desc"]),
+ card:(d,q)=>itemCard({name:d.name,cat:d.type,cost:fmtCost(d.cost),rail:rar(d.availability),q,nameQ:q,
+   stats:stat("CPU",esc(d.cpu))+stat("Mem",esc(d.memory))+stat("Nanites",esc(d.nanites))+stat("Soak",esc(d.soak))+stat("System",esc(d.system))+stat("Exp",esc(d.expertise)),
+   extra:`<div class="defs">${defPill("P",d.def_physical)+defPill("E",d.def_energy)+defPill("T",d.def_tech)+defPill("S",d.def_spiritual)}</div>`,
+   tags:specTags(d.special,q)+`<span class="t">${esc(d.legality)}</span>`,
+   body:d.desc?`<p>${hlq(d.desc,q)}</p>`:""})},
+/* ── Magic ── */
+{id:"spells",group:"Magic",label:"Spells",src:()=>g.spells||[],legend:true,
+ cats:()=>[...new Set((g.spells||[]).map(spellDomain))].sort(),cat:spellDomain,
+ hay:o=>lc(o,["name","type","skill","effect","minor","intermediate","major","mastery"]),
+ card:(s,q)=>itemCard({name:s.name,cat:spellDomain(s),rail:rar(s.rarity),q,nameQ:q,
+   stats:stat("Range",esc(s.range))+stat("Action",esc(s.action))+stat("Sustain",esc(s.sustain)),
+   tags:`<span class="t">${esc(s.rarity)}</span>`+(s.legality?`<span class="t">${esc(s.legality)}</span>`:""),
+   body:row("Roll",hlq(s.skill,q))+`<p>${hlq(s.effect,q)}</p>`
+     +row("Minor",hlq(s.minor,q))+row("Intermediate",hlq(s.intermediate,q))+row("Major",hlq(s.major,q))+row("Mastery",hlq(s.mastery,q))+row("Backlash",hlq(s.backlash,q))})},
+/* ── Galaxy ── */
+{id:"factions",group:"Galaxy",label:"Factions",src:()=>g.factions||[],wide:true,
+ cats:()=>[...new Set((g.factions||[]).map(f=>f.category))].filter(Boolean),cat:o=>o.category,
+ hay:o=>lc(o,["name","short","category","subcategory","alignment","desc","known_for"]),
+ card:(f,q)=>itemCard({name:f.name,cat:f.short,q,nameQ:q,
+   tags:[f.category,f.subcategory,f.alignment,f.status].filter(Boolean).map(x=>`<span class="t">${esc(x)}</span>`).join(""),
+   body:`<p>${hlq(f.desc,q)}</p>`+row("Known for",hlq(f.known_for,q))+row("HQ",esc(f.hq))+row("Presence",esc(f.presence))+row("Legal standing",esc(f.legal_standing))})},
+];
+const SEC_BY_ID=Object.fromEntries(SECTIONS.map(s=>[s.id,s]));
+const GROUPS=["Reference","Characters","Arsenal","Tech & Gear","Magic","Galaxy"];
+
+/* ═════════ state ═════════ */
+const state={sec:null,cat:"",q:"",compact:{}};
+function save(){try{localStorage.setItem("c10",JSON.stringify({sec:state.sec,compact:state.compact}))}catch(e){}}
+function load(){try{return JSON.parse(localStorage.getItem("c10"))||{}}catch(e){return{}}}
+
+/* ═════════ generic card ═════════ */
+function itemCard(o){
+  const open=state._auto?' aria-expanded="true"':' aria-expanded="false"';
+  return `<article class="icard ${o.rail||""}" tabindex="0" role="button"${o.body?open:' aria-expanded="false"'}>
+    <div class="ic-top"><span class="ic-name">${hlq(o.name,o.nameQ)}</span>${o.cat?`<span class="ic-cat">${esc(o.cat)}</span>`:""}${o.cost?`<span class="ic-cost">${o.cost}</span>`:""}</div>
+    ${o.stats?`<div class="ic-stats">${o.stats}</div>`:""}${o.extra||""}
+    ${o.tags?`<div class="ic-tags">${o.tags}</div>`:""}
+    ${o.body?`<div class="ic-body">${o.body}</div>`:""}
+  </article>`;
+}
+
+/* ═════════ rendering ═════════ */
+function shead(sec,count){
+  return `<div class="shead"><div class="shead-row">
+    <div><div class="crumb">${esc(sec.group.toUpperCase())} / <b>${esc(sec.label.toUpperCase())}</b></div>
+    <h1>${esc(sec.label)} ${count!=null?`<span class="count-badge">${count}</span>`:""}</h1></div>
+    ${sec.src?`<div class="shead-tools"><button class="tool-btn ${state.compact[sec.id]?"on":""}" id="density-btn" aria-pressed="${!!state.compact[sec.id]}">⊟ COMPACT</button></div>`:""}
+  </div></div>`;
+}
+function chipsBar(sec){
+  const cats=sec.cats?sec.cats():[];
+  let h='<div class="chips">';
+  if(cats.length){h+=`<button class="chip ${!state.cat?"on":""}" data-cat="">All</button>`;
+    cats.forEach(c=>{h+=`<button class="chip ${state.cat===c?"on":""}" data-cat="${esc(c)}">${esc(sec.catLbl?sec.catLbl(c):c)}</button>`})}
+  h+=`<label class="scoped"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input id="scoped-q" type="text" placeholder="Filter this list…" value="${esc(state.q)}" aria-label="Filter list"></label></div>`;
+  return h;
+}
+const LEGEND='<div class="legend"><span><i style="background:#4a5160"></i>COMMON</span><span><i style="background:#5fae6e"></i>UNCOMMON</span><span><i style="background:#6aa9f0"></i>RARE</span><span><i style="background:#bd8ef0"></i>LIMITED</span><span><i style="background:#e8c468"></i>UNIQUE</span><span><i style="background:#e8685f"></i>CLASSIFIED</span></div>';
+
+function renderCatalog(sec){
+  const q=state.q.trim().toLowerCase();
+  const all=sec.src();
+  const F=all.filter(o=>(!state.cat||(sec.cat&&sec.cat(o)===state.cat))&&(!q||sec.hay(o).includes(q)));
+  const cap=sec.id==="codex"&&!q?60:1200;
+  const shown=F.slice(0,cap);
+  state._auto=!!q&&F.length<=3;
+  let h=shead(sec,F.length)+chipsBar(sec);
+  if(!F.length)h+=`<div class="empty">No matches. Try fewer letters, or search everything with <span class="kbd">Ctrl K</span>.</div>`;
+  else{
+    h+=`<div class="cards ${sec.wide?"wide":""} ${state.compact[sec.id]?"compact":""}" id="cards">`+shown.map(o=>sec.card(o,q)).join("")+"</div>";
+    if(F.length>shown.length)h+=`<div class="empty">Showing first ${shown.length} of ${F.length} — type to narrow.</div>`;
+    if(sec.legend)h+=LEGEND;
+  }
+  document.getElementById("page").innerHTML=h;
+}
+
+function renderRules(sec){
+  const q=state.q.trim().toLowerCase();
+  let h=shead(sec)+chipsBar({cats:()=>[]});
+  h+='<div class="prose">';
+  (g.rules_grouped||[]).forEach((grp,gi)=>{
+    const secs=grp.sections.map(s=>({...s,entries:s.entries.filter(e=>!q||((e.key||"")+" "+(e.text||"")).toLowerCase().includes(q))})).filter(s=>s.entries.length);
+    if(!secs.length)return;
+    h+=`<details class="rgroup" ${gi===0||q?"open":""}><summary>${esc(grp.group)}<span class="car">▶</span></summary>`;
+    secs.forEach(s=>{
+      h+='<div class="rsec">';
+      if(s.title&&s.title!==grp.group)h+=`<h3>${esc(s.title)}</h3>`;
+      s.entries.forEach(e=>{
+        if(e.key)h+=`<div class="rk">${hlq(e.key,q)}</div>`;
+        h+=`<div class="re">${hlq(e.text,q)}</div>`;
+        if(e.examples&&e.examples.length)h+=`<div class="rex"><div class="lbl">Examples</div>${e.examples.map(x=>`<li>${hlq(x,q)}</li>`).join("")}</div>`;
+        if(e.sub)h+=`<div class="rsub">${hlq(e.sub,q)}</div>`;
+      });
+      h+='</div>';
+    });
+    h+='</details>';
+  });
+  h+='</div>';
+  document.getElementById("page").innerHTML=h;
+}
+
+function renderGlossary(sec){
+  const q=state.q.trim().toLowerCase();
+  const F=(g.glossary_clean||[]).filter(o=>!q||sec.hay(o).includes(q));
+  let h=shead(sec,F.length)+chipsBar({cats:()=>[]});
+  h+='<div class="dlist">'+F.map(o=>`<dl class="term"><dt>${hlq(o.name,q)}</dt><dd>${hlq(o.desc,q)}</dd></dl>`).join("")+"</div>";
+  if(!F.length)h+='<div class="empty">No matching terms.</div>';
+  document.getElementById("page").innerHTML=h;
+}
+
+function renderSkills(sec){
+  const q=state.q.trim().toLowerCase();
+  let h=shead(sec)+chipsBar({cats:()=>[]});
+  h+='<div class="prose">';
+  if(g.skill_rules&&g.skill_rules.length&&!q){
+    h+='<details class="rgroup"><summary>How skills work<span class="car">▶</span></summary><div class="rsec">'+
+      g.skill_rules.map(r=>`<div class="re">${esc(typeof r==="string"?r:(r.text||""))}</div>`).join("")+'</div></details>';
+  }
+  ["Physical","Mental","Social","Acuity"].forEach(cat=>{
+    const sk=(g.skills||[]).filter(s=>s.category===cat&&(!q||lc(s,["name","desc"]).includes(q)));
+    if(!sk.length)return;
+    h+=`<details class="rgroup" open><summary>${cat} skills<span class="car">▶</span></summary><div class="rsec">`+
+      sk.map(s=>`<dl class="term"><dt>${hlq(s.name,q)}</dt><dd>${hlq(s.desc,q)}</dd></dl>`).join("")+'</div></details>';
+  });
+  h+='</div>';
+  document.getElementById("page").innerHTML=h;
+}
+
+function renderHacking(sec){
+  const q=state.q.trim().toLowerCase();
+  let h=shead(sec)+chipsBar({cats:()=>[]});
+  h+='<div class="prose">';
+  const rules=(g.hacking_rules||[]).filter(r=>!q||r.toLowerCase().includes(q));
+  if(rules.length){
+    h+='<details class="rgroup" open><summary>How hacking works<span class="car">▶</span></summary><div class="rsec">';
+    rules.forEach(r=>{
+      const m=String(r).match(/^([A-Z][A-Z &']+),\s*([\s\S]*)$/);
+      if(m){h+=`<div class="rk">${hlq(m[1],q)}</div><div class="re">${hlq(m[2],q)}</div>`}
+      else h+=`<div class="re">${hlq(r,q)}</div>`;
+    });
+    h+='</div></details>';
+  }
+  const kw=(g.hacking_keywords||[]).filter(k=>!q||(k.term+" "+k.desc).toLowerCase().includes(q));
+  if(kw.length){
+    h+='<details class="rgroup" '+(q?"open":"")+'><summary>Keywords<span class="car">▶</span></summary><div class="rsec">'+
+      kw.map(k=>`<dl class="term"><dt>${hlq(k.term,q)}</dt><dd>${hlq(k.desc,q)}</dd></dl>`).join("")+'</div></details>';
+  }
+  h+='</div>';
+  document.getElementById("page").innerHTML=h;
+}
+
+function render(){
+  const sec=SEC_BY_ID[state.sec]||SECTIONS[0];
+  if(sec.custom)sec.custom(sec);else renderCatalog(sec);
+  document.getElementById("main").scrollTop=0;
+}
+
+/* ═════════ nav ═════════ */
+function buildNav(){
+  const rail=document.getElementById("rail");
+  rail.innerHTML=GROUPS.map(grp=>{
+    const items=SECTIONS.filter(s=>s.group===grp);
+    return `<details class="gum" open><summary>${esc(grp)}<span class="car">▶</span></summary><div class="items">`+
+      items.map(s=>{
+        const n=s.src?s.src().length:(s.id==="glossary"?(g.glossary_clean||[]).length:null);
+        return `<button class="nav-it" data-go="${s.id}">${esc(s.label)}${n?`<span class="ct">${n}</span>`:""}</button>`}).join("")+
+      `</div></details>`;
+  }).join("")+`<div class="note" style="margin:14px 8px 0;font-size:12px">GM tools (Enemy Generator, Character Creator, Drone Builder, Star Map) stay in the v9 build until restyled — <b>Milestone 11.2</b>.</div>`;
+  rail.addEventListener("click",e=>{const b=e.target.closest(".nav-it");if(!b)return;go(b.dataset.go)});
+}
+function go(id,q){
+  if(!SEC_BY_ID[id])id=SECTIONS[0].id;
+  state.sec=id;state.cat="";state.q=q||"";
+  document.querySelectorAll(".nav-it").forEach(b=>b.classList.toggle("active",b.dataset.go===id));
+  if(location.hash!=="#"+id)history.replaceState(null,"","#"+id);
+  save();render();toggleRail(false);
+  if(q){const inp=document.getElementById("scoped-q");if(inp)inp.focus()}
+}
+function toggleRail(force){
+  const r=document.getElementById("rail"),o=document.getElementById("overlay");
+  const open=force!==undefined?force:!r.classList.contains("open");
+  r.classList.toggle("open",open);o.classList.toggle("show",open);
+}
+
+/* ═════════ palette ═════════ */
+let PAL=[],palSel=0,palFlat=[];
+function buildIndex(){
+  PAL=[];
+  SECTIONS.forEach(sec=>{
+    let items=[];
+    if(sec.index)items=sec.index().map(it=>({...it,go:sec.id,sec:sec.label}));
+    else if(sec.src)items=sec.src().map(o=>({n:o.name||o.term||"",meta:(sec.cat?String(sec.cat(o)||""):""),hay:sec.hay(o),q:o.name,go:sec.id,sec:sec.label}));
+    if(sec.id==="glossary")items=(g.glossary_clean||[]).map(o=>({n:o.name,meta:"glossary",hay:lc(o,["name","desc"]),q:o.name,go:"glossary",sec:"Glossary"}));
+    if(items.length)PAL.push({g:sec.label,items});
+  });
+  const total=PAL.reduce((a,b)=>a+b.items.length,0);
+  document.getElementById("st-domains").innerHTML="<b>"+Object.keys(g).length+"</b> DOMAINS";
+  document.getElementById("st-entries").innerHTML="<b>"+total.toLocaleString("en-US")+"</b> ENTRIES";
+  document.getElementById("pal-count").textContent="searches "+total.toLocaleString("en-US")+" entries";
+}
+function openPal(){document.getElementById("palette").classList.add("open");const q=document.getElementById("pal-q");q.value="";renderPal("");q.focus()}
+function closePal(){document.getElementById("palette").classList.remove("open")}
+function renderPal(q){
+  palSel=0;palFlat=[];let html="";
+  PAL.forEach(grp=>{
+    const hits=q?grp.items.filter(it=>it.hay.includes(q)):grp.items.slice(0,3);
+    if(!hits.length)return;
+    html+=`<div class="pal-grp">${esc(grp.g)}</div>`;
+    hits.slice(0,6).forEach(it=>{const idx=palFlat.length;palFlat.push(it);
+      html+=`<button class="pal-it${idx===0?" sel":""}" data-pi="${idx}"><span class="nm">${hlq(it.n,q)}</span><span class="meta">${esc(it.meta||"")}</span><span class="sec">${esc(it.sec)} →</span></button>`});
+  });
+  document.getElementById("pal-list").innerHTML=html||'<div class="pal-grp" style="padding:18px 14px">No matches — try an item name, rule keyword, or skill.</div>';
+}
+function palGo(it){closePal();go(it.go,it.q||it.n)}
+
+/* ═════════ init ═════════ */
+function init(){
+  window.C10={state,go,render,openPal,renderPal,data:g};
+  buildNav();buildIndex();
+  const saved=load();state.compact=saved.compact||{};
+  SECTIONS.forEach(s=>{if(s.defaultCompact&&state.compact[s.id]===undefined)state.compact[s.id]=true});
+  const h=location.hash.slice(1);
+  go(SEC_BY_ID[h]?h:(SEC_BY_ID[saved.sec]?saved.sec:"rules"));
+
+  window.addEventListener("hashchange",()=>{const id=location.hash.slice(1);if(SEC_BY_ID[id]&&id!==state.sec)go(id)});
+
+  const page=document.getElementById("page");
+  page.addEventListener("click",e=>{
+    const chip=e.target.closest(".chip");
+    if(chip){state.cat=chip.dataset.cat;render();return}
+    const db=e.target.closest("#density-btn");
+    if(db){state.compact[state.sec]=!state.compact[state.sec];save();render();return}
+    const card=e.target.closest(".icard");
+    if(card&&card.querySelector(".ic-body")&&!e.target.closest("a"))
+      card.setAttribute("aria-expanded",card.getAttribute("aria-expanded")!=="true");
+  });
+  page.addEventListener("keydown",e=>{
+    if((e.key==="Enter"||e.key===" ")&&e.target.classList.contains("icard")){e.preventDefault();e.target.click()}
+  });
+  let t;page.addEventListener("input",e=>{
+    if(e.target.id!=="scoped-q")return;
+    clearTimeout(t);const v=e.target.value;
+    t=setTimeout(()=>{state.q=v;render();
+      const inp=document.getElementById("scoped-q");
+      if(inp){inp.focus();inp.setSelectionRange(inp.value.length,inp.value.length)}},120);
+  });
+
+  document.getElementById("pal-list").addEventListener("click",e=>{const b=e.target.closest(".pal-it");if(b)palGo(palFlat[+b.dataset.pi])});
+  document.getElementById("pal-q").addEventListener("input",e=>renderPal(e.target.value.trim().toLowerCase()));
+  document.addEventListener("keydown",e=>{
+    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();openPal();return}
+    if(e.key==="/"&&!e.target.matches("input,textarea")){e.preventDefault();openPal();return}
+    const pal=document.getElementById("palette");
+    if(!pal.classList.contains("open"))return;
+    if(e.key==="Escape"){closePal();return}
+    if(e.key==="ArrowDown"||e.key==="ArrowUp"){
+      e.preventDefault();
+      palSel=Math.max(0,Math.min(palFlat.length-1,palSel+(e.key==="ArrowDown"?1:-1)));
+      document.querySelectorAll(".pal-it").forEach((b,i)=>b.classList.toggle("sel",i===palSel));
+      const s=document.querySelector(".pal-it.sel");if(s)s.scrollIntoView({block:"nearest"});
+    }
+    if(e.key==="Enter"&&palFlat[palSel])palGo(palFlat[palSel]);
+  });
+}
+</script>
+</body>
+</html>
