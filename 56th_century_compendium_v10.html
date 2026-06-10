@@ -56,7 +56,16 @@ nav.rail{width:240px;flex-shrink:0;background:var(--panel);border-right:1px soli
 .nav-it.active .ct{color:var(--rust)}
 #overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:90}
 main{flex:1;min-width:0;overflow-y:auto}
-.page{max-width:1100px;margin:0 auto;padding:24px 32px 80px}
+.page{max-width:1720px;margin:0 auto;padding:24px 40px 80px}
+/* rules page uses the width: prose + sticky group TOC */
+.rules-layout{display:grid;grid-template-columns:minmax(0,88ch) 230px;gap:48px;align-items:start}
+.toc{position:sticky;top:96px;font-size:13px}
+.toc .lbl{font-family:var(--font-m);font-size:10px;letter-spacing:.12em;color:var(--faint);text-transform:uppercase;margin-bottom:8px}
+.toc button{display:block;width:100%;text-align:left;padding:5px 0 5px 12px;color:var(--dim);border-left:2px solid var(--line);font-size:13px}
+.toc button:hover{color:var(--rust);border-left-color:var(--rust)}
+@media(max-width:1280px){.rules-layout{grid-template-columns:1fr}.toc{display:none}}
+/* glossary fills wide screens with columns */
+@media(min-width:1400px){.dlist.cols{columns:2;column-gap:56px;max-width:none}.dlist.cols .term{break-inside:avoid}}
 
 /* ───────── section header / chips ───────── */
 .shead{position:sticky;top:0;z-index:20;background:linear-gradient(var(--ink) 82%,transparent);padding:4px 0 12px;margin-bottom:4px}
@@ -74,6 +83,7 @@ h1{font-family:var(--font-d);font-size:22px;font-weight:700;letter-spacing:.04em
 .chip:hover{border-color:var(--dim);color:var(--text)}
 .chip.on{background:var(--rust-soft);border-color:var(--rust);color:var(--rust);font-weight:700}
 .scoped{margin-left:auto;display:flex;align-items:center;gap:7px;background:var(--raised);border:1px solid var(--line2);border-radius:99px;padding:4px 12px}
+.scoped.solo{margin-left:0}
 .scoped input{background:none;border:none;outline:none;color:var(--text);font-family:var(--font-b);font-size:13px;width:160px}
 .scoped svg{width:13px;height:13px;stroke:var(--faint);fill:none;stroke-width:2;flex-shrink:0}
 
@@ -121,7 +131,7 @@ h1{font-family:var(--font-d);font-size:22px;font-weight:700;letter-spacing:.04em
 .term dd{color:var(--dim);font-size:14.5px;line-height:1.75;margin-top:2px}
 .term dd b{color:var(--text)}
 /* rules */
-.prose{max-width:74ch}
+.prose{max-width:88ch}
 .rgroup{margin-bottom:10px;border:1px solid var(--line);border-radius:var(--r);background:var(--raised);overflow:hidden}
 .rgroup>summary{list-style:none;display:flex;align-items:center;gap:10px;padding:13px 18px;font-family:var(--font-d);font-size:13.5px;font-weight:600;letter-spacing:.08em;cursor:pointer;user-select:none}
 .rgroup>summary::-webkit-details-marker{display:none}
@@ -140,6 +150,15 @@ h1{font-family:var(--font-d);font-size:22px;font-weight:700;letter-spacing:.04em
 .note{margin-top:22px;padding:14px 18px;background:var(--raised);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:0 var(--r) var(--r) 0;font-size:13.5px;color:var(--dim);max-width:74ch}
 .note b{color:var(--teal)}
 .empty{padding:50px 20px;text-align:center;color:var(--faint)}
+/* manufacturer bar */
+.mfr-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 6px;padding-left:17px}
+.mfr-row label{font-family:var(--font-m);font-size:10px;letter-spacing:.1em;color:var(--faint);text-transform:uppercase}
+.mfr-sel{background:var(--raised);border:1px solid var(--line2);border-radius:7px;color:var(--text);font-family:var(--font-m);font-size:12px;padding:5px 10px;outline:none;cursor:pointer}
+.mfr-sel:focus{border-color:var(--teal)}
+.mfr-info{font-family:var(--font-m);font-size:11px;color:var(--dim)}
+.defchoice{display:flex;gap:5px;align-items:center}
+.dcc{font-family:var(--font-m);font-size:10.5px;padding:3px 9px;border-radius:5px;border:1px solid var(--line2);color:var(--dim)}
+.dcc.on{border-color:var(--teal);color:var(--teal);background:var(--teal-soft)}
 /* loading / error */
 #boot{position:fixed;inset:0;z-index:300;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
 #boot .logo{font-size:18px}
@@ -232,6 +251,9 @@ function specTags(s,q){if(!s)return"";return String(s).split(/\s+/).filter(Boole
   const d=(g.specials&&(g.specials[tok]||g.specials[tok.toUpperCase()]))||"";
   return `<span class="t spec" title="${esc(typeof d==="string"?d:(d.desc||""))}">${hlq(tok,q)}</span>`}).join("")}
 function lc(o,fields){return fields.map(f=>o[f]==null?"":String(o[f])).join(" ").toLowerCase()}
+function optMult(c){const v=parseFloat(c||1);return "×"+(v===Math.floor(v)?v.toFixed(0):v.toFixed(2))+" cost"}
+function optFlags(o){const f=(on,lbl)=>`<span class="t" style="${on==="1"?"":"opacity:.3"}">${lbl}</span>`;
+  return f(o.armors,"AR")+f(o.forcefield,"FF")+f(o.datacom,"DC")+f(o.wpn_ranged,"RNG")+f(o.wpn_melee,"MLE")}
 
 /* ═════════ data load ═════════ */
 let g={};
@@ -258,6 +280,127 @@ let g={};
   document.getElementById("boot").remove();
 })();
 
+/* ═════════ manufacturer engine (ported from v9) ═════════ */
+const AVAIL=['COMMON','UNCOMMON','RARE','LIMITED','UNIQUE','CLASSIFIED'];
+const POWER_STR={3:'Low',6:'Medium',9:'High',10:'High',11:'High',12:'High',13:'High',14:'High',15:'EXTREME',66:'LOC',77:'LOC+1'};
+const DEF_TIER_MAP={0:'NONE',3:'LOW',6:'MEDIUM',9:'HIGH',12:'EXTREME'};
+const DEF_NAME_TO_NUM={None:0,Low:3,Medium:6,High:9,Extreme:12,EXTREME:12,NONE:0,LOW:3,MEDIUM:6,HIGH:9};
+function defShift(cur,mod){if(!mod)return cur;const b=DEF_NAME_TO_NUM[cur]||DEF_NAME_TO_NUM[String(cur)]||0;
+  const c=Math.max(0,Math.min(12,b+mod));const s=[0,3,6,9,12].reduce((a,x)=>Math.abs(x-c)<Math.abs(a-c)?x:a);return DEF_TIER_MAP[s]||cur}
+function shiftAvail(w,mod){if(!mod)return true;const i=AVAIL.indexOf(String(w.availability||'COMMON').toUpperCase().trim());
+  const n=i+mod;if(n>=AVAIL.length)return false;w.availability=AVAIL[Math.max(0,n)];return true}
+const WPN_MFRS=['Generic','Malivaux','Kintech','Nakamura','Arms Corp',"Zang'Hai",'TORC','Voran','Dilithium','Monomolecular'];
+const WPN_MFRS_MELEE_ONLY=new Set(['Dilithium','Monomolecular']);
+const ARMOR_MFRS=['Generic','Kintech','Harsh','Santech','BMS','Acer'];
+const DATACOM_MFRS=['Generic','Securicorp','Orionworks','Biocom','Carnifex','Saiko','Yotoma',"Zang'Hai"];
+const MEDICAL_MFRS=['Generic','Altair Biomed','RX Generic','Goodman Holistic','Diva Solutions','Mono-Med Customs'];
+const mfrState={weapons:'Generic',armor:'Generic',datacoms:'Generic',medical:'Generic',kintechDef:'physical',dcDef:'physical'};
+
+function applyWpnMfr(item,name){
+  if(!name||name==='Generic')return item;
+  if(WPN_MFRS_MELEE_ONLY.has(name)&&!MELEE.has(item.category))return item; // melee-only mfrs leave ranged untouched
+  const m=(g.manufacturers||{})[name];if(!m)return item;
+  const w={...item};
+  if(!shiftAvail(w,parseInt(m.avail_mod||0)))return null;
+  const pMod=parseInt(m.power_mod||0);
+  if(pMod&&w.power_num){const nP=w.power_num+pMod;w.power=POWER_STR[nP]||w.power;w.power_num=nP}
+  const maxMod=parseInt(m.max_dmg_mod||0),minMod=parseInt(m.min_dmg_mod||0);
+  if((maxMod||minMod)&&w.max_dice!==undefined){
+    const dice=w.max_dice+maxMod-w.min_dice-minMod,flat=w.min_dice+minMod;
+    if(dice>=0&&flat>=0)w.damage=dice+'D + '+flat}
+  const rM=parseFloat(m.range_mult||1);
+  if(rM&&rM!==1)['range_short','range_med','range_long'].forEach(k=>{if(w[k])w[k]=String(Math.round(parseFloat(w[k])*rM))});
+  const eM=parseInt(m.expertise_mod||0);
+  if(eM&&w.expertise)w.expertise=String(Math.max(0,parseInt(w.expertise)+eM));
+  const SZ=['Tiny','Small','Medium','Large'],szM=parseInt(m.size_mod||0);
+  if(szM&&w.size){const si=SZ.findIndex(s=>s.toLowerCase()===String(w.size).toLowerCase());if(si>=0)w.size=SZ[Math.max(0,Math.min(SZ.length-1,si+szM))]}
+  const pm=parseFloat(m.price_mult||1);if(pm&&pm!==1&&w.cost)w.cost=String(Math.round(parseFloat(w.cost)*pm));
+  if(m.special)w.special=(w.special?w.special+' ':'')+m.special;
+  if(m.abbr)w.name=w.name+' '+m.abbr;
+  return w;
+}
+function applyArmorMfr(item,name){
+  if(!name||name==='Generic')return item;
+  const m=(g.manufacturers||{})[name];if(!m)return item;
+  const w={...item};
+  const pm=parseFloat(m.armor_price_mult||m.price_mult||1);
+  if(pm&&pm!==1&&w.cost)w.cost=String(Math.round(parseFloat(w.cost)*pm));
+  if(!shiftAvail(w,parseInt(m.avail_mod||0)))return null;
+  [['pdef_mod','def_physical'],['edef_mod','def_energy'],['tdef_mod','def_tech'],['sdef_mod','def_spiritual']]
+    .forEach(([mk,fk])=>{const v=parseInt(m[mk]||0);if(v)w[fk]=defShift(w[fk]||'NONE',v)});
+  const smx=parseInt(m.soak_max_mod||0),smn=parseInt(m.soak_min_mod||0);
+  if((smx||smn)&&w.soak_max!==undefined){const d=w.soak_max+smx-w.soak_min-smn,f=w.soak_min+smn;if(d>=0&&f>=0)w.soak=d+'D + '+f}
+  if(m.armor_def_choice){
+    const map={physical:'def_physical',energy:'def_energy',tech:'def_tech',spiritual:'def_spiritual'};
+    const k=map[mfrState.kintechDef]||'def_physical';
+    let b=defShift(w[k]||'NONE',3);if(b==='EXTREME')b='HIGH';w[k]=b;
+    const ex=w.special||'';w.special=/\bOPT\b/.test(ex)?ex.replace(/\bOPT\b/,'OPT+'):(ex?ex+' OPT':'OPT');
+  }else if(m.special)w.special=(w.special?w.special+' ':'')+m.special;
+  if(m.abbr)w.name=w.name+' '+m.abbr;
+  return w;
+}
+function applyDatacomMfr(item,name){
+  if(!name||name==='Generic')return item;
+  const m=(g.manufacturers||{})[name];if(!m)return item;
+  const w={...item};
+  const pm=parseFloat(m.price_mult||1);if(pm&&pm!==1&&w.cost)w.cost=String(Math.round(parseFloat(w.cost)*pm));
+  if(!shiftAvail(w,parseInt(m.avail_mod||0)))return null;
+  if(parseInt(m.cpu_mod||0)&&w.cpu_num!==undefined)w.cpu=String(w.cpu_num+parseInt(m.cpu_mod));
+  if(parseInt(m.mem_mod||0)&&w.mem_num!==undefined)w.memory=String(w.mem_num+parseInt(m.mem_mod));
+  if(parseInt(m.nan_mod||0)&&w.nan_num!==undefined)w.nanites=String(w.nan_num+parseInt(m.nan_mod));
+  if(parseInt(m.sys_mod||0)&&w.system!=null)w.system=String((parseInt(w.system)||0)+parseInt(m.sys_mod));
+  if(m.dc_def_choice){
+    const map={physical:'def_physical',energy:'def_energy',tech:'def_tech',spiritual:'def_spiritual'};
+    const k=map[mfrState.dcDef]||'def_physical';
+    let b=defShift(w[k]||'NONE',3);if(b==='EXTREME')b='HIGH';w[k]=b;
+  }
+  if(parseInt(m.expertise_mod||0)&&w.exp_num!==undefined)w.expertise=String(w.exp_num+parseInt(m.expertise_mod));
+  const SZ=['Tiny','Small','Medium','Large','Ex.Large'],szM=parseInt(m.size_mod||0);
+  if(szM){const si=SZ.findIndex(s=>s.toLowerCase()===String(w.size||'').toLowerCase());if(si>=0)w.size=SZ[Math.max(0,Math.min(SZ.length-1,si+szM))]}
+  const smx=parseInt(m.soak_max_mod||0),smn=parseInt(m.soak_min_mod||0);
+  if((smx||smn)&&w.soak_max!==undefined){const d=w.soak_max+smx-w.soak_min-smn,f=w.soak_min+smn;if(d>=0&&f>=0)w.soak=d+'D + '+f}
+  if(m.special)w.special=(w.special?w.special+' ':'')+m.special;
+  if(m.abbr)w.name=w.name+' '+m.abbr;
+  return w;
+}
+function applyMedMfr(item,name){
+  if(!name||name==='Generic')return item;
+  const m=(g.medical_manufacturers||{})[name];if(!m)return item;
+  const w={...item};
+  const SZ=['TINY','SMALL','MEDIUM','LARGE','EX.LARGE'],sM=parseInt(m.size_mod||0);
+  if(sM){const si=SZ.indexOf(String(w.size||'TINY').toUpperCase());w.size=SZ[Math.max(0,Math.min(SZ.length-1,si+sM))]}
+  if(name==='Mono-Med Customs')w.availability='UNIQUE';
+  else if(!shiftAvail(w,parseInt(m.avail_mod||0)))return null;
+  const tM=parseInt(m.tox_mod||0);if(tM&&w.toxicity!==undefined)w.toxicity=Math.max(0,(+w.toxicity||0)+tM);
+  const pm=parseFloat(m.price_mult||1);if(pm&&pm!==1&&w.cost)w.cost=String(Math.round(parseFloat(w.cost)*pm));
+  if(m.abbr)w.name=w.name+' '+m.abbr;
+  return w;
+}
+function mfrDesc(name,kind){
+  const m=kind==='medical'?(g.medical_manufacturers||{})[name]:(g.manufacturers||{})[name];
+  if(!m)return'Standard generic stats';
+  if(m.desc)return m.desc;
+  const p=[];const add=(v,txt)=>{const n=parseFloat(v||0);if(n)p.push((n>0?'+':'')+n+' '+txt)};
+  if(kind==='weapon'){
+    add(m.power_mod,'power tier');add(m.max_dmg_mod,'max dmg');add(m.min_dmg_mod,'min dmg');add(m.expertise_mod,'expertise');
+    const rM=parseFloat(m.range_mult||1);if(rM!==1)p.push('×'+rM+' range');
+  }
+  if(kind==='armor'){
+    add(m.pdef_mod/3||0,'phys def');add(m.edef_mod/3||0,'energy def');add(m.tdef_mod/3||0,'tech def');add(m.sdef_mod/3||0,'spirit def');
+    add(m.soak_max_mod,'max soak');add(m.soak_min_mod,'min soak');
+    if(m.armor_def_choice)p.push('+1 chosen defense (max HIGH), adds OPT/OPT+');
+  }
+  if(kind==='datacom'){
+    add(m.cpu_mod,'CPU');add(m.mem_mod,'MEM');add(m.nan_mod,'nanites');add(m.sys_mod,'system');add(m.expertise_mod,'expertise');
+    add(m.soak_max_mod,'max soak');add(m.soak_min_mod,'min soak');
+    if(m.dc_def_choice)p.push('+1 chosen defense (max HIGH)');
+  }
+  add(m.avail_mod,'avail tier');
+  const pm=parseFloat((kind==='armor'&&m.armor_price_mult)?m.armor_price_mult:(m.price_mult||1));if(pm!==1)p.push('×'+pm+' cost');
+  if(m.special&&!(kind==='armor'&&m.armor_def_choice))p.push('adds '+m.special);
+  return p.length?p.join(' · '):'No stat modifications';
+}
+
 /* ═════════ sections ═════════ */
 const WCAT_SHORT={"Pistols and Handguns (Gunslinger)":"Pistols","Auto pistols and S.M.G (Gunslinger)":"SMGs","Shotguns (Gunslinger)":"Shotguns","Rifles (Marksman)":"Rifles","Sniper Rifles and Tactical Weapons (Marksman)":"Snipers","Machine Guns (Heavy weapons)":"MGs","Launchers and AT Weapons (Heavy weapons)":"Launchers","Explosives (Heavy Weapons, Engineering or Projectiles)":"Explosives","Vehicle weapons(Heavy weapons)":"Vehicle","Melee Weapons (Melee Weapons)":"Melee","Powered Melee Weapons (Melee Weapons)":"Powered Melee","Ranged / Throwing Weapons (Projectiles)":"Thrown"};
 const MELEE=new Set(["Melee Weapons (Melee Weapons)","Powered Melee Weapons (Melee Weapons)"]);
@@ -267,14 +410,15 @@ function spellDomain(s){const t=String(s.type||"").split(/\s+/)[0]||"OTHER";retu
 const SECTIONS=[
 /* ── Reference ── */
 {id:"rules",group:"Reference",label:"Rules",custom:renderRules,
- index:()=>{const out=[];(g.rules_grouped||[]).forEach(grp=>grp.sections.forEach(sec=>sec.entries.forEach(e=>{if(e.key)out.push({n:e.key,meta:grp.group,hay:(e.key+" "+e.text).toLowerCase(),q:e.key})})));return out}},
+ index:()=>{const out=[];(g.rules_grouped||[]).forEach(grp=>grp.sections.forEach(sec=>sec.entries.forEach(e=>{if(e.key)out.push({n:e.key,meta:grp.group,hay:(e.key+" "+e.text).toLowerCase(),q:e.key})})));
+   (g.hacking_rules||[]).forEach(r=>{const m=String(r).match(/^([A-Z][A-Z &']+),/);if(m)out.push({n:m[1],meta:"HACKING",hay:String(r).toLowerCase(),q:m[1]})});
+   (g.hacking_keywords||[]).forEach(k=>out.push({n:k.term,meta:"HACKING keyword",hay:(k.term+" "+k.desc).toLowerCase(),q:k.term}));
+   return out}},
 {id:"codex",group:"Reference",label:"Action Codex",src:()=>g.code||[],wide:true,defaultCompact:true,
  cats:()=>[],hay:o=>lc(o,["name","action","desc"]),
  card:(o,q)=>itemCard({name:o.name,cat:o.action,tags:"",stats:"",body:`<p>${hlq(o.desc,q)}</p>`,q,nameQ:q})},
 {id:"glossary",group:"Reference",label:"Glossary",src:()=>g.glossary_clean||[],custom:renderGlossary,
  hay:o=>lc(o,["name","desc"])},
-{id:"hacking",group:"Reference",label:"Hacking",custom:renderHacking,
- index:()=>((g.hacking_keywords||[]).map(k=>({n:k.term,meta:"hacking keyword",hay:(k.term+" "+k.desc).toLowerCase(),q:k.term})))},
 /* ── Characters ── */
 {id:"skills",group:"Characters",label:"Skills",custom:renderSkills,
  index:()=>((g.skills||[]).map(s=>({n:s.name,meta:s.category+" skill",hay:lc(s,["name","category","desc"]),q:s.name})))},
@@ -298,8 +442,11 @@ const SECTIONS=[
    stats:stat("Req",esc(o.req))+stat("Cost",esc(o.cost)+" xp"),
    tags:`<span class="t">${esc(o.category)}</span>`,
    body:`<p>${hlq(o.effect,q)}</p>`})},
+{id:"evolutions",group:"Characters",label:"Evolutions",custom:renderEvolutions,
+ index:()=>{const ev=g.evolutions||{};return (ev.grouped||[]).map(e=>({n:e.name,meta:e.evo_type+" evolution",hay:(e.name+" "+e.evo_type+" "+Object.values(e.tiers||{}).map(t=>t.effect).join(" ")).toLowerCase(),q:e.name}))}},
 /* ── Arsenal ── */
 {id:"weapons",group:"Arsenal",label:"Weapons",src:()=>g.weapons||[],legend:true,
+ mfr:{list:()=>WPN_MFRS,key:"weapons",apply:applyWpnMfr,kind:"weapon"},
  cats:()=>[...new Set((g.weapons||[]).map(w=>w.category))].filter(Boolean),catLbl:wshort,cat:o=>o.category,
  hay:o=>lc(o,["name","category","type","special","damage","legality","notes","desc"]),
  card:(w,q)=>{const melee=MELEE.has(w.category);
@@ -309,7 +456,19 @@ const SECTIONS=[
        +stat("Ammo",esc(w.ammo))+stat("Exp",esc(w.expertise)),
      tags:specTags(w.special,q)+`<span class="t">${esc(w.legality)}</span>`,
      body:(w.desc?`<p>${hlq(w.desc,q)}</p>`:"")+row("Notes",hlq(w.notes,q))+row("Reload",esc(w.reload))+row("RoF",esc(w.rof))+row("Size / Handed",esc([w.size,w.handed].filter(Boolean).join(" / ")))})}},
+{id:"weapon_options",group:"Arsenal",label:"Weapon Options",legend:true,wide:true,
+ src:()=>(g.options||[]).filter(o=>o.wpn_ranged==="1"||o.wpn_melee==="1"),
+ cats:()=>["RANGED","MELEE"],cat:o=>null,
+ catTest:(o,c)=>(c==="RANGED"&&o.wpn_ranged==="1")||(c==="MELEE"&&o.wpn_melee==="1"),
+ hay:o=>lc(o,["name","desc","availability","legality"]),
+ card:(o,q)=>itemCard({name:o.name,cost:optMult(o.cost),rail:rar(o.availability),q,nameQ:q,
+   tags:optFlags(o)+`<span class="t">${esc(o.legality)}</span>`,
+   body:`<p>${hlq(o.desc,q)}</p>`})},
+{id:"ammo",group:"Arsenal",label:"Ammunition",custom:renderAmmo,
+ index:()=>((g.ammo_types||[]).map(a=>({n:a.name,meta:"ammo · "+(a.typical||""),hay:lc(a,["name","typical","options","legality"]),q:a.name})))
+   .concat((g.ammo_opts||[]).map(o=>({n:o.code+" — "+o.name,meta:"ammo option",hay:lc(o,["code","name","effect"]),q:o.name})))},
 {id:"armor",group:"Arsenal",label:"Armor & Shields",src:()=>g.armor||[],legend:true,
+ mfr:{list:()=>ARMOR_MFRS,key:"armor",apply:applyArmorMfr,kind:"armor",defChoice:"kintechDef",defChoiceWhen:n=>!!((g.manufacturers||{})[n]||{}).armor_def_choice},
  cats:()=>[...new Set((g.armor||[]).map(a=>a.type))].filter(Boolean),cat:o=>o.type,
  hay:o=>lc(o,["name","type","special","special_desc","desc"]),
  card:(a,q)=>itemCard({name:a.name,cat:a.type,cost:fmtCost(a.cost),rail:rar(a.availability),q,nameQ:q,
@@ -317,7 +476,16 @@ const SECTIONS=[
    extra:`<div class="defs">${defPill("P",a.def_physical)+defPill("E",a.def_energy)+defPill("T",a.def_tech)+defPill("S",a.def_spiritual)}</div>`,
    tags:specTags(a.special,q),
    body:(a.special_desc?`<p>${hlq(a.special_desc,q)}</p>`:"")+(a.desc&&!/^PLACEHOLDER/.test(a.desc)?`<p>${hlq(a.desc,q)}</p>`:"")})},
+{id:"armor_options",group:"Arsenal",label:"Armor Options",legend:true,wide:true,
+ src:()=>(g.options||[]).filter(o=>o.armors==="1"||o.forcefield==="1"||o.datacom==="1"),
+ cats:()=>["ARMOR","FORCEFIELD","DATACOM"],cat:o=>null,
+ catTest:(o,c)=>(c==="ARMOR"&&o.armors==="1")||(c==="FORCEFIELD"&&o.forcefield==="1")||(c==="DATACOM"&&o.datacom==="1"),
+ hay:o=>lc(o,["name","desc","availability","legality"]),
+ card:(o,q)=>itemCard({name:o.name,cost:optMult(o.cost),rail:rar(o.availability),q,nameQ:q,
+   tags:optFlags(o)+`<span class="t">${esc(o.legality)}</span>`,
+   body:`<p>${hlq(o.desc,q)}</p>`})},
 {id:"medical",group:"Arsenal",label:"Medical & Drugs",src:()=>g.medical||[],legend:true,
+ mfr:{list:()=>MEDICAL_MFRS,key:"medical",apply:applyMedMfr,kind:"medical"},
  cats:()=>[...new Set((g.medical||[]).map(m=>m.application))].filter(Boolean),cat:o=>o.application,
  hay:o=>lc(o,["name","application","legality","effect"]),
  card:(m,q)=>itemCard({name:m.name,cat:m.application,cost:fmtCost(m.cost),rail:rar(m.availability),q,nameQ:q,
@@ -332,6 +500,7 @@ const SECTIONS=[
    stats:stat("Size",esc(e.size)),tags:e.legality?`<span class="t">${esc(e.legality)}</span>`:"",
    body:`<p>${hlq(e.effect,q)}</p>`})},
 {id:"datacoms",group:"Tech & Gear",label:"Datacoms",src:()=>g.datacoms||[],legend:true,
+ mfr:{list:()=>DATACOM_MFRS,key:"datacoms",apply:applyDatacomMfr,kind:"datacom",defChoice:"dcDef",defChoiceWhen:n=>!!((g.manufacturers||{})[n]||{}).dc_def_choice},
  cats:()=>[...new Set((g.datacoms||[]).map(d=>d.type))].filter(Boolean),cat:o=>o.type,
  hay:o=>lc(o,["name","type","special","desc"]),
  card:(d,q)=>itemCard({name:d.name,cat:d.type,cost:fmtCost(d.cost),rail:rar(d.availability),q,nameQ:q,
@@ -339,6 +508,18 @@ const SECTIONS=[
    extra:`<div class="defs">${defPill("P",d.def_physical)+defPill("E",d.def_energy)+defPill("T",d.def_tech)+defPill("S",d.def_spiritual)}</div>`,
    tags:specTags(d.special,q)+`<span class="t">${esc(d.legality)}</span>`,
    body:d.desc?`<p>${hlq(d.desc,q)}</p>`:""})},
+{id:"software",group:"Tech & Gear",label:"Hacking Software",src:()=>{
+   const sw=g.software||{};const out=[];
+   [["actions","ACTION"],["routines","ROUTINE"],["programs","PROGRAM"],["gadgets","GADGET"]].forEach(([k,lbl])=>(sw[k]||[]).forEach(o=>out.push({...o,_kind:lbl})));
+   return out},legend:true,wide:true,
+ cats:()=>{const sw=g.software||{};return [["actions","ACTION"],["routines","ROUTINE"],["programs","PROGRAM"],["gadgets","GADGET"]].filter(([k])=>(sw[k]||[]).length).map(([,l])=>l)},
+ cat:o=>o._kind,
+ hay:o=>lc(o,["name","type","skill","passive","active","effect","desc","damage_type"]),
+ card:(o,q)=>itemCard({name:o.name,cat:o._kind+(o.skill?" · "+o.skill:""),cost:fmtCost(o.cost),rail:rar(o.availability),q,nameQ:q,
+   stats:stat("Action",esc(o.action))+stat("Mem",esc(o.memory))+(o.cpu!=null?stat("CPU",esc(o.cpu)):"")+(o.nanite!=null?stat("Nanites",esc(o.nanite)):"")
+     +(o.power?stat("Power",esc(o.power),"pw-"+String(o.power).charAt(0)+String(o.power).slice(1).toLowerCase()):"")+(o.damage?stat("Dmg",esc(o.damage)):"")+(o.damage_type?stat("Type",esc(o.damage_type)):""),
+   tags:(o.legality?`<span class="t">${esc(o.legality)}</span>`:""),
+   body:(o.effect?`<p>${hlq(o.effect,q)}</p>`:"")+row("Passive",hlq(o.passive,q))+row("Active (control)",hlq(o.active,q))+row("Notes",hlq(o.desc,q))})},
 /* ── Magic ── */
 {id:"spells",group:"Magic",label:"Spells",src:()=>g.spells||[],legend:true,
  cats:()=>[...new Set((g.spells||[]).map(spellDomain))].sort(),cat:spellDomain,
@@ -388,20 +569,35 @@ function chipsBar(sec){
   let h='<div class="chips">';
   if(cats.length){h+=`<button class="chip ${!state.cat?"on":""}" data-cat="">All</button>`;
     cats.forEach(c=>{h+=`<button class="chip ${state.cat===c?"on":""}" data-cat="${esc(c)}">${esc(sec.catLbl?sec.catLbl(c):c)}</button>`})}
-  h+=`<label class="scoped"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+  h+=`<label class="scoped ${cats.length?"":"solo"}"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
       <input id="scoped-q" type="text" placeholder="Filter this list…" value="${esc(state.q)}" aria-label="Filter list"></label></div>`;
   return h;
 }
 const LEGEND='<div class="legend"><span><i style="background:#4a5160"></i>COMMON</span><span><i style="background:#5fae6e"></i>UNCOMMON</span><span><i style="background:#6aa9f0"></i>RARE</span><span><i style="background:#bd8ef0"></i>LIMITED</span><span><i style="background:#e8c468"></i>UNIQUE</span><span><i style="background:#e8685f"></i>CLASSIFIED</span></div>';
 
+function mfrBar(sec){
+  if(!sec.mfr)return"";
+  const cur=mfrState[sec.mfr.key];
+  let h=`<div class="mfr-row"><label>Manufacturer</label><select class="mfr-sel" data-mfrkey="${sec.mfr.key}">`+
+    sec.mfr.list().map(m=>`<option value="${esc(m)}"${m===cur?" selected":""}>${esc(m)}</option>`).join("")+`</select>`;
+  if(sec.mfr.defChoice&&sec.mfr.defChoiceWhen&&sec.mfr.defChoiceWhen(cur)){
+    const curDef=mfrState[sec.mfr.defChoice];
+    h+=`<span class="defchoice"><label>Boost</label>`+["physical","energy","tech","spiritual"].map(d=>
+      `<button class="dcc ${curDef===d?"on":""}" data-defkey="${sec.mfr.defChoice}" data-def="${d}">${d.toUpperCase()}</button>`).join("")+`</span>`;
+  }
+  h+=`<span class="mfr-info">${esc(mfrDesc(cur,sec.mfr.kind))}</span></div>`;
+  return h;
+}
 function renderCatalog(sec){
   const q=state.q.trim().toLowerCase();
-  const all=sec.src();
-  const F=all.filter(o=>(!state.cat||(sec.cat&&sec.cat(o)===state.cat))&&(!q||sec.hay(o).includes(q)));
+  let all=sec.src();
+  if(sec.mfr){const cur=mfrState[sec.mfr.key];if(cur&&cur!=="Generic")all=all.map(o=>sec.mfr.apply(o,cur)).filter(Boolean)}
+  const inCat=o=>!state.cat||(sec.catTest?sec.catTest(o,state.cat):(sec.cat&&sec.cat(o)===state.cat));
+  const F=all.filter(o=>inCat(o)&&(!q||sec.hay(o).includes(q)));
   const cap=sec.id==="codex"&&!q?60:1200;
   const shown=F.slice(0,cap);
   state._auto=!!q&&F.length<=3;
-  let h=shead(sec,F.length)+chipsBar(sec);
+  let h=shead(sec,F.length)+mfrBar(sec)+chipsBar(sec);
   if(!F.length)h+=`<div class="empty">No matches. Try fewer letters, or search everything with <span class="kbd">Ctrl K</span>.</div>`;
   else{
     h+=`<div class="cards ${sec.wide?"wide":""} ${state.compact[sec.id]?"compact":""}" id="cards">`+shown.map(o=>sec.card(o,q)).join("")+"</div>";
@@ -414,11 +610,13 @@ function renderCatalog(sec){
 function renderRules(sec){
   const q=state.q.trim().toLowerCase();
   let h=shead(sec)+chipsBar({cats:()=>[]});
-  h+='<div class="prose">';
+  const tocItems=[];
+  h+='<div class="rules-layout"><div class="prose">';
   (g.rules_grouped||[]).forEach((grp,gi)=>{
     const secs=grp.sections.map(s=>({...s,entries:s.entries.filter(e=>!q||((e.key||"")+" "+(e.text||"")).toLowerCase().includes(q))})).filter(s=>s.entries.length);
     if(!secs.length)return;
-    h+=`<details class="rgroup" ${gi===0||q?"open":""}><summary>${esc(grp.group)}<span class="car">▶</span></summary>`;
+    tocItems.push(["rg"+gi,grp.group]);
+    h+=`<details class="rgroup" id="rg${gi}" ${gi===0||q?"open":""}><summary>${esc(grp.group)}<span class="car">▶</span></summary>`;
     secs.forEach(s=>{
       h+='<div class="rsec">';
       if(s.title&&s.title!==grp.group)h+=`<h3>${esc(s.title)}</h3>`;
@@ -432,7 +630,75 @@ function renderRules(sec){
     });
     h+='</details>';
   });
-  h+='</div>';
+  // ── Hacking: full system + keywords live inside Rules ──
+  const hrules=(g.hacking_rules||[]).filter(r=>!q||String(r).toLowerCase().includes(q));
+  if(hrules.length){
+    tocItems.push(["rg-hack","HACKING — FULL SYSTEM"]);
+    h+=`<details class="rgroup" id="rg-hack" ${q?"open":""}><summary>HACKING — FULL SYSTEM<span class="car">▶</span></summary><div class="rsec">`;
+    hrules.forEach(r=>{
+      const m=String(r).match(/^([A-Z][A-Z &']+),\s*([\s\S]*)$/);
+      if(m)h+=`<div class="rk">${hlq(m[1],q)}</div><div class="re">${hlq(m[2],q)}</div>`;
+      else h+=`<div class="re">${hlq(r,q)}</div>`;
+    });
+    h+='</div></details>';
+  }
+  const hkw=(g.hacking_keywords||[]).filter(k=>!q||(k.term+" "+k.desc).toLowerCase().includes(q));
+  if(hkw.length){
+    tocItems.push(["rg-hkw","HACKING — KEYWORDS"]);
+    h+=`<details class="rgroup" id="rg-hkw" ${q?"open":""}><summary>HACKING — KEYWORDS<span class="car">▶</span></summary><div class="rsec">`+
+      hkw.map(k=>`<dl class="term"><dt>${hlq(k.term,q)}</dt><dd>${hlq(k.desc,q)}</dd></dl>`).join("")+'</div></details>';
+  }
+  h+='</div>';/* /prose */
+  h+='<aside class="toc" aria-label="Rule groups"><div class="lbl">Rule groups</div>'+
+    tocItems.map(([id,lbl])=>`<button data-jump="${id}">${esc(lbl)}</button>`).join("")+'</aside>';
+  h+='</div>';/* /rules-layout */
+  document.getElementById("page").innerHTML=h;
+}
+
+function renderAmmo(sec){
+  const q=state.q.trim().toLowerCase();
+  const types=(g.ammo_types||[]).filter(a=>!q||lc(a,["name","typical","options","legality"]).includes(q));
+  const opts=(g.ammo_opts||[]).filter(o=>!q||lc(o,["code","name","effect","legality"]).includes(q));
+  state._auto=!!q&&types.length<=3;
+  let h=shead(sec,types.length)+chipsBar({cats:()=>[]});
+  h+=`<div class="cards wide">`+types.map(a=>itemCard({name:a.name,cat:"CAT "+esc(a.cat||"—"),cost:fmtCost(a.cost),q,nameQ:q,
+    stats:stat("Qty",esc(a.qty))+stat("Size",esc(a.size)),
+    tags:String(a.options||"").split(/\s+/).filter(Boolean).map(c=>`<span class="t spec" title="${esc(((g.ammo_opts||[]).find(o=>o.code===c)||{}).effect||"")}">${esc(c)}</span>`).join("")+`<span class="t">${esc(a.legality)}</span>`,
+    body:row("Typical",hlq(a.typical,q))})).join("")+"</div>";
+  if(opts.length){
+    h+=`<div class="prose" style="margin-top:18px"><details class="rgroup" open><summary>Ammo options<span class="car">▶</span></summary><div class="rsec">`+
+      opts.map(o=>`<dl class="term"><dt>${hlq(o.code,q)} — ${hlq(o.name,q)}<span class="t" style="margin-left:8px">${esc(o.legality||"")}</span><span class="t" style="margin-left:4px">×${esc(o.cost_mult)} cost</span></dt><dd>${hlq(o.effect,q)}</dd></dl>`).join("")+
+      `</div></details></div>`;
+  }
+  document.getElementById("page").innerHTML=h;
+}
+
+function renderEvolutions(sec){
+  const q=state.q.trim().toLowerCase();
+  const ev=g.evolutions||{};
+  const F=(ev.grouped||[]).filter(e=>(!state.cat||e.evo_type===state.cat)&&
+    (!q||(e.name+" "+e.evo_type+" "+Object.values(e.tiers||{}).map(t=>t.effect||"").join(" ")).toLowerCase().includes(q)));
+  state._auto=!!q&&F.length<=3;
+  let h=shead(sec,F.length)+chipsBar({cats:()=>["CYBERNETICS","GENETICS","MAGIC"]});
+  if(!q){
+    h+='<div class="prose" style="margin-bottom:16px">';
+    if((ev.rules||[]).length)h+='<details class="rgroup"><summary>How evolution works<span class="car">▶</span></summary><div class="rsec">'+
+      ev.rules.map(r=>`<div class="re">${esc(r)}</div>`).join("")+'</div></details>';
+    if((ev.tier_notes||[]).length)h+='<details class="rgroup"><summary>Tier benefits &amp; drawbacks<span class="car">▶</span></summary><div class="rsec">'+
+      ev.tier_notes.map(r=>`<div class="re">${esc(r)}</div>`).join("")+'</div></details>';
+    if((ev.afflictions||[]).length)h+='<details class="rgroup"><summary>Afflictions (critical failure table)<span class="car">▶</span></summary><div class="rsec">'+
+      ev.afflictions.map(a=>`<dl class="term"><dt><span class="t" style="margin-right:8px">${esc(a.roll)}</span>${esc(a.name)}</dt><dd>${esc(a.effect)}</dd></dl>`).join("")+'</div></details>';
+    h+='</div>';
+  }
+  h+=`<div class="cards wide ${state.compact[sec.id]?"compact":""}" id="cards">`+F.map(e=>{
+    const tiers=["TIER I","TIER II","TIER III"].filter(t=>e.tiers&&e.tiers[t]);
+    const t1=e.tiers&&(e.tiers["TIER I"]||e.tiers[tiers[0]])||{};
+    return itemCard({name:e.name,cat:e.evo_type,rail:rar(t1.availability),q,nameQ:q,
+      tags:tiers.map(t=>`<span class="t">${esc(t)}</span>`).join(""),
+      body:tiers.map(t=>{const x=e.tiers[t];
+        return row(t,`<span class="ic-cost" style="margin:0 8px 0 0">${fmtCost(x.cost)}</span> <span class="t">${esc(x.availability||"")}</span> <span class="t">${esc(x.legality||"")}</span><br>${hlq(x.effect,q)}`)}).join("")});
+  }).join("")+"</div>";
+  if(!F.length)h+='<div class="empty">No matching evolutions.</div>';
   document.getElementById("page").innerHTML=h;
 }
 
@@ -440,7 +706,7 @@ function renderGlossary(sec){
   const q=state.q.trim().toLowerCase();
   const F=(g.glossary_clean||[]).filter(o=>!q||sec.hay(o).includes(q));
   let h=shead(sec,F.length)+chipsBar({cats:()=>[]});
-  h+='<div class="dlist">'+F.map(o=>`<dl class="term"><dt>${hlq(o.name,q)}</dt><dd>${hlq(o.desc,q)}</dd></dl>`).join("")+"</div>";
+  h+='<div class="dlist cols">'+F.map(o=>`<dl class="term"><dt>${hlq(o.name,q)}</dt><dd>${hlq(o.desc,q)}</dd></dl>`).join("")+"</div>";
   if(!F.length)h+='<div class="empty">No matching terms.</div>';
   document.getElementById("page").innerHTML=h;
 }
@@ -463,28 +729,6 @@ function renderSkills(sec){
   document.getElementById("page").innerHTML=h;
 }
 
-function renderHacking(sec){
-  const q=state.q.trim().toLowerCase();
-  let h=shead(sec)+chipsBar({cats:()=>[]});
-  h+='<div class="prose">';
-  const rules=(g.hacking_rules||[]).filter(r=>!q||r.toLowerCase().includes(q));
-  if(rules.length){
-    h+='<details class="rgroup" open><summary>How hacking works<span class="car">▶</span></summary><div class="rsec">';
-    rules.forEach(r=>{
-      const m=String(r).match(/^([A-Z][A-Z &']+),\s*([\s\S]*)$/);
-      if(m){h+=`<div class="rk">${hlq(m[1],q)}</div><div class="re">${hlq(m[2],q)}</div>`}
-      else h+=`<div class="re">${hlq(r,q)}</div>`;
-    });
-    h+='</div></details>';
-  }
-  const kw=(g.hacking_keywords||[]).filter(k=>!q||(k.term+" "+k.desc).toLowerCase().includes(q));
-  if(kw.length){
-    h+='<details class="rgroup" '+(q?"open":"")+'><summary>Keywords<span class="car">▶</span></summary><div class="rsec">'+
-      kw.map(k=>`<dl class="term"><dt>${hlq(k.term,q)}</dt><dd>${hlq(k.desc,q)}</dd></dl>`).join("")+'</div></details>';
-  }
-  h+='</div>';
-  document.getElementById("page").innerHTML=h;
-}
 
 function render(){
   const sec=SEC_BY_ID[state.sec]||SECTIONS[0];
@@ -528,8 +772,9 @@ function buildIndex(){
     if(sec.index)items=sec.index().map(it=>({...it,go:sec.id,sec:sec.label}));
     else if(sec.src)items=sec.src().map(o=>({n:o.name||o.term||"",meta:(sec.cat?String(sec.cat(o)||""):""),hay:sec.hay(o),q:o.name,go:sec.id,sec:sec.label}));
     if(sec.id==="glossary")items=(g.glossary_clean||[]).map(o=>({n:o.name,meta:"glossary",hay:lc(o,["name","desc"]),q:o.name,go:"glossary",sec:"Glossary"}));
-    if(items.length)PAL.push({g:sec.label,items});
+    if(items.length)PAL.push({g:sec.label,items,last:sec.id==="codex"});
   });
+  PAL.sort((a,b)=>(a.last?1:0)-(b.last?1:0));
   const total=PAL.reduce((a,b)=>a+b.items.length,0);
   document.getElementById("st-domains").innerHTML="<b>"+Object.keys(g).length+"</b> DOMAINS";
   document.getElementById("st-entries").innerHTML="<b>"+total.toLocaleString("en-US")+"</b> ENTRIES";
@@ -552,7 +797,7 @@ function palGo(it){closePal();go(it.go,it.q||it.n)}
 
 /* ═════════ init ═════════ */
 function init(){
-  window.C10={state,go,render,openPal,renderPal,data:g};
+  window.C10={state,go,render,openPal,renderPal,data:g,mfrState};
   buildNav();buildIndex();
   const saved=load();state.compact=saved.compact||{};
   SECTIONS.forEach(s=>{if(s.defaultCompact&&state.compact[s.id]===undefined)state.compact[s.id]=true});
@@ -563,6 +808,11 @@ function init(){
 
   const page=document.getElementById("page");
   page.addEventListener("click",e=>{
+    const jump=e.target.closest("[data-jump]");
+    if(jump){const el=document.getElementById(jump.dataset.jump);
+      if(el){el.open=true;el.scrollIntoView({behavior:"smooth",block:"start"})}return}
+    const dcc=e.target.closest(".dcc[data-defkey]");
+    if(dcc){mfrState[dcc.dataset.defkey]=dcc.dataset.def;render();return}
     const chip=e.target.closest(".chip");
     if(chip){state.cat=chip.dataset.cat;render();return}
     const db=e.target.closest("#density-btn");
@@ -574,9 +824,12 @@ function init(){
   page.addEventListener("keydown",e=>{
     if((e.key==="Enter"||e.key===" ")&&e.target.classList.contains("icard")){e.preventDefault();e.target.click()}
   });
+  page.addEventListener("change",e=>{
+    const sel=e.target.closest(".mfr-sel");
+    if(sel){mfrState[sel.dataset.mfrkey]=sel.value;render()}
+  });
   let t;page.addEventListener("input",e=>{
-    if(e.target.id!=="scoped-q")return;
-    clearTimeout(t);const v=e.target.value;
+    if(e.target.id!=="scoped-q")return;    clearTimeout(t);const v=e.target.value;
     t=setTimeout(()=>{state.q=v;render();
       const inp=document.getElementById("scoped-q");
       if(inp){inp.focus();inp.setSelectionRange(inp.value.length,inp.value.length)}},120);
