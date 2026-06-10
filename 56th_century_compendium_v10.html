@@ -167,6 +167,50 @@ h1{font-family:var(--font-d);font-size:22px;font-weight:700;letter-spacing:.04em
 #boot .msg{font-family:var(--font-m);font-size:11px;color:var(--faint);max-width:480px;text-align:center;line-height:1.7;padding:0 20px;white-space:pre-line}
 #boot.err .fill{background:var(--bad)}
 
+
+/* ───────── star map ───────── */
+.page.fullbleed{max-width:none;padding:0}
+.smap{position:relative;height:calc(100dvh - 56px);background:#07080d;overflow:hidden;user-select:none}
+.smap svg{width:100%;height:100%;display:block;cursor:grab;touch-action:none}
+.smap svg.panning{cursor:grabbing}
+.smap-pin{cursor:pointer}
+.smap-pin.dim{opacity:.14}
+.smap-pin.sel .halo{opacity:.55}
+.smap-pin.gate-sel .core{stroke:#fff;stroke-width:2}
+.smap-lbl{font-family:var(--font-m);paint-order:stroke;stroke:#07080d;stroke-width:3px;fill:#cdd3dc;pointer-events:none}
+.smap-gate{stroke:#9fb6c9;stroke-width:1.1;stroke-dasharray:5 6;opacity:.45;fill:none}
+@media (prefers-reduced-motion:no-preference){.smap-gate{animation:gateflow 30s linear infinite}@keyframes gateflow{to{stroke-dashoffset:-660}}}
+.smap-hud{position:absolute;display:flex;gap:8px;align-items:center;z-index:30}
+.smap-hud.tr{top:12px;right:12px;background:rgba(22,25,31,.85);border:1px solid var(--line2);border-radius:9px;padding:6px 10px;backdrop-filter:blur(8px)}
+.smap-hud.tl{top:12px;left:12px;flex-wrap:wrap;max-width:46%}
+.smap-btn{font-family:var(--font-m);font-size:11px;color:var(--dim);border:1px solid var(--line2);border-radius:7px;padding:5px 11px;letter-spacing:.04em;background:rgba(22,25,31,.85);backdrop-filter:blur(8px)}
+.smap-btn:hover{color:var(--teal);border-color:var(--teal)}
+.smap-btn.on{color:var(--rust);border-color:var(--rust);background:var(--rust-soft)}
+.smap-btn.gate-on{color:var(--teal);border-color:var(--teal);background:var(--teal-soft)}
+.smap-zoom{font-size:15px;padding:3px 9px;background:none;border:none;color:var(--text)}
+.smap-pct{font-family:var(--font-m);font-size:11px;color:var(--faint);min-width:44px;text-align:right}
+.smap-find{display:flex;align-items:center;gap:6px;background:rgba(22,25,31,.85);border:1px solid var(--line2);border-radius:99px;padding:4px 12px;backdrop-filter:blur(8px)}
+.smap-find input{background:none;border:none;outline:none;color:var(--text);font-family:var(--font-b);font-size:13px;width:150px}
+.smap-panel{position:absolute;top:12px;right:12px;bottom:12px;width:340px;max-width:calc(100% - 24px);background:rgba(22,25,31,.94);border:1px solid var(--line2);border-radius:12px;z-index:40;overflow-y:auto;padding:16px 18px;backdrop-filter:blur(10px);box-shadow:0 14px 50px rgba(0,0,0,.5)}
+.smap-panel h2{font-family:var(--font-d);font-size:17px;letter-spacing:.04em;padding-right:26px}
+.smap-panel .sub{font-family:var(--font-m);font-size:11px;color:var(--dim);margin:2px 0 10px}
+.smap-panel p{font-size:13.5px;color:var(--dim);line-height:1.7;margin:8px 0}
+.smap-close{position:absolute;top:10px;right:10px;width:26px;height:26px;border:1px solid var(--line2);border-radius:7px;color:var(--dim);font-size:13px}
+.smap-close:hover{color:var(--bad);border-color:var(--bad)}
+.smap-planet-row{display:flex;gap:8px;align-items:baseline;padding:5px 0;border-bottom:1px solid var(--line);font-size:13px}
+.smap-planet-row b{color:var(--text)}
+.smap-planet-row .mt{font-family:var(--font-m);font-size:10.5px;color:var(--faint);margin-left:auto;white-space:nowrap}
+.smap-unplaced{position:absolute;left:12px;top:58px;bottom:12px;width:230px;background:rgba(22,25,31,.94);border:1px solid var(--line2);border-radius:12px;z-index:35;overflow-y:auto;padding:10px;backdrop-filter:blur(8px)}
+.smap-unp-hd{font-family:var(--font-m);font-size:10px;letter-spacing:.12em;color:var(--faint);text-transform:uppercase;padding:6px 4px 4px}
+.smap-unp-it{display:flex;justify-content:space-between;align-items:center;gap:6px;width:100%;text-align:left;font-size:12.5px;color:var(--dim);padding:4px 6px;border-radius:6px}
+.smap-unp-it:hover{background:var(--raised2);color:var(--text)}
+.smap-unp-it.placing{color:var(--rust);background:var(--rust-soft)}
+.smap-unp-it .rm{color:var(--faint);font-size:11px;padding:0 4px}
+.smap-unp-it .rm:hover{color:var(--bad)}
+.smap-export{width:100%;height:200px;background:var(--ink);border:1px solid var(--line2);border-radius:8px;color:var(--dim);font-family:var(--font-m);font-size:10.5px;padding:8px;margin-top:8px}
+.smap-hint{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-family:var(--font-m);font-size:10.5px;color:var(--faint);background:rgba(22,25,31,.85);border:1px solid var(--line2);border-radius:99px;padding:5px 14px;z-index:30;white-space:nowrap}
+@media(max-width:820px){.smap{height:calc(100dvh - 56px)}.smap-panel{width:calc(100% - 24px)}.smap-hud.tl{max-width:70%}}
+
 /* ───────── palette ───────── */
 #palette{display:none;position:fixed;inset:0;z-index:200;background:rgba(8,9,12,.7);backdrop-filter:blur(3px);padding:9vh 16px 0;justify-content:center;align-items:flex-start}
 #palette.open{display:flex}
@@ -401,6 +445,219 @@ function mfrDesc(name,kind){
   return p.length?p.join(' · '):'No stat modifications';
 }
 
+
+/* ═════════ star map (v10 vector port of the v9 pin map) ═════════ */
+const SMAP_LAYOUT={"pos":{"Aderan":{"x":53,"y":57},"Aderan System":{"x":59.15,"y":49.24,"color":"#00c8ff","planet_img":24,"label_size":"s","label_pos":"above-right"},"Agua":{"x":77,"y":56},"Agua System":{"x":31.88,"y":37.77,"color":"#ff453a","planet_img":25},"Alliance Space":{"x":55.62,"y":55.94,"shape":"star","label_size":"m"},"Alsa":{"x":50,"y":63},"Alsa System":{"x":39.88,"y":50.1,"color":"#00c8ff","planet_img":11,"label_pos":"above-left"},"Andromede":{"x":38,"y":44},"Andromede System":{"x":55.73,"y":50.96,"color":"#00c8ff","planet_img":28,"planet_scale":1.25,"label_size":"s"},"Asar":{"x":15,"y":81},"Asar System":{"x":54.29,"y":39.44,"color":"#14b8a6","planet_img":13,"planet_scale":0.75},"Ash":{"x":55,"y":33},"Ash System":{"x":44.27,"y":42.24,"color":"#00c8ff","planet_img":25,"label_size":"s","label_pos":"above-right"},"Astea":{"x":68,"y":12},"Astea System":{"x":70.33,"y":28.25,"color":"#a855f7","planet_img":6},"Asteroid Eater":{"x":49.11,"y":64.17,"color":"#f2f2f7","planet_img":27,"planet_scale":0.75},"B.I.G. (Beningen Ingratias Garlan)":{"x":47.89,"y":52.1,"color":"#f2f2f7","shape":"star","planet_img":27,"planet_scale":0.75,"label_hidden":true,"label_pos":"above"},"Bah":{"x":76,"y":44},"Bah System":{"x":40.65,"y":29.64,"color":"#ff453a","planet_img":29,"planet_scale":0.75,"label_pos":"above"},"Basagoth Station":{"x":66.69,"y":50.99,"color":"#ff9f0a","planet_img":28,"planet_scale":1.25},"Berilia":{"x":53,"y":40},"Berilia System":{"x":60,"y":53.57,"color":"#00c8ff","planet_img":1},"Bet":{"x":82,"y":57},"Bet System":{"x":35.68,"y":37.57,"color":"#ff453a","planet_img":18},"Betravir":{"x":56,"y":85},"Betravir System":{"x":66.34,"y":87.33,"color":"#64d2ff","planet_img":20,"planet_scale":1.5},"Bother":{"x":59,"y":65},"Bother System":{"x":90.33,"y":42.97,"color":"#ff9f0a","planet_img":16,"planet_scale":0.75},"Briea":{"x":79,"y":79},"Briea System":{"x":17.24,"y":70.26,"color":"#6366f1","planet_img":2},"Capio":{"x":80,"y":51},"Capio System":{"x":37.38,"y":34.31,"color":"#ff453a","planet_img":29,"label_pos":"above"},"Carach System":{"x":61.12,"y":56.77,"color":"#00c8ff","planet_img":13},"Carth":{"x":86,"y":78},"Carth System":{"x":21.05,"y":66.98,"color":"#6366f1","planet_img":25,"planet_scale":0.5},"Cassidir":{"x":35,"y":78},"Cassidir System":{"x":66.76,"y":66.58,"color":"#a855f7","planet_img":10},"Cetune":{"x":14,"y":55},"Cetune System":{"x":13.1,"y":38.75,"color":"#f2f2f7","planet_img":11},"Cish":{"x":26,"y":62},"Cish System":{"x":63.63,"y":65.53,"color":"#a855f7","planet_img":14,"label_pos":"above"},"Conso":{"x":19,"y":47},"Conso System":{"x":36.52,"y":57.8,"color":"#f2f2f7","planet_img":30,"planet_scale":0.75},"DR345-0":{"x":21,"y":40},"DR345-0 System":{"x":33.93,"y":52.93,"color":"#f2f2f7","planet_img":30,"label_pos":"above"},"Damph":{"x":57,"y":44},"Damph System":{"x":42.86,"y":46.99,"color":"#00c8ff","planet_img":14,"planet_scale":1.25,"label_pos":"above-left"},"Dicamia":{"x":65,"y":17},"Dicamia System":{"x":65.58,"y":26.56,"color":"#a855f7","planet_img":4},"Dragon Tail's Expanse":{"x":19.75,"y":73.12,"color":"#6366f1","shape":"diamond","label_size":"m"},"Erbrother Nebula":{"x":86.75,"y":29.69,"color":"#f2f2f7","shape":"diamond","label_size":"m"},"Ethone":{"x":71,"y":24},"Ethone System":{"x":62.32,"y":30.19,"color":"#a855f7","planet_img":5},"Freeland":{"x":6.45,"y":53.9,"color":"#ffd60a","shape":"diamond","label_size":"m"},"Garson Black Hole":{"x":52.46,"y":50.02,"color":"#f2f2f7","shape":"star","planet_img":27,"planet_scale":0.75,"label_hidden":true,"label_pos":"above"},"Ghash":{"x":86,"y":53},"Ghash System":{"x":39.77,"y":37.17,"color":"#ff453a","planet_img":21},"Gnoth Q714":{"x":31,"y":38},"Gnoth Q714 System":{"x":6.26,"y":50.88,"color":"#ffd60a","planet_img":21},"Gravemist Nebula":{"x":74,"y":46.69,"color":"#ff9f0a","shape":"diamond"},"Grulania":{"x":27,"y":4},"Grulania System":{"x":42.48,"y":7.7,"color":"#ffd60a","planet_img":11},"Hanov":{"x":27,"y":59},"Hanov System":{"x":22.16,"y":48.84,"color":"#f2f2f7","planet_img":24},"Haran":{"x":17,"y":58},"Haran System":{"x":62.44,"y":67.36,"color":"#a855f7","planet_img":24},"Heaven System":{"x":56.54,"y":41.56,"color":"#14b8a6","planet_img":1,"planet_scale":0.75},"Illora":{"x":64,"y":64},"Illora System":{"x":81.25,"y":51.9,"color":"#ff9f0a","planet_img":10},"Ishtar":{"x":50,"y":54},"Ishtar System":{"x":47.87,"y":45.35,"color":"#00c8ff","planet_img":24,"label_size":"s","label_pos":"above-right"},"Ithov":{"x":70,"y":71},"Ithov System":{"x":86.14,"y":64.07,"color":"#ff2d9f","planet_img":2,"planet_scale":0.75},"Kraven Space":{"x":35.33,"y":30.37,"color":"#ff453a","shape":"diamond","label_size":"m"},"L.I.F.T.N":{"x":17,"y":43},"L.I.F.T.N System":{"x":33.71,"y":56.64,"color":"#f2f2f7","planet_img":30,"label_pos":"above"},"Lides H45":{"x":27,"y":44},"Lides H45 System":{"x":13.42,"y":53.38,"color":"#ffd60a","planet_img":20,"planet_scale":0.75},"Lumia":{"x":47,"y":85},"Lumia System":{"x":87.85,"y":71.29,"color":"#64d2ff","planet_img":1,"planet_scale":1.25},"Mangara":{"x":34,"y":69},"Mangara System":{"x":45.6,"y":57.27,"color":"#00c8ff","planet_img":26,"planet_scale":1.25},"Manola":{"x":62,"y":71},"Manola System":{"x":58.25,"y":62.73,"color":"#a855f7","planet_img":1},"Mivenia":{"x":33,"y":34},"Mivenia System":{"x":13.2,"y":49.92,"color":"#ffd60a","planet_img":10},"Monda":{"x":26,"y":33},"Monda System":{"x":34.1,"y":60.09,"color":"#f2f2f7","planet_img":10,"planet_scale":0.75},"Mubothen Empire":{"x":67.62,"y":32.01,"color":"#a855f7","shape":"diamond","label_size":"m"},"Mulbaring":{"x":22,"y":63},"Mulbaring System":{"x":22.45,"y":43.4,"color":"#f2f2f7","planet_img":26,"label_size":"s"},"Nausica":{"x":36,"y":9},"Nausica System":{"x":78.19,"y":22.98,"color":"#ffd60a","planet_img":3,"planet_scale":1.25},"Nemani Rift":{"x":38.48,"y":40.87,"color":"#f2f2f7","shape":"diamond","label_size":"m"},"New Earth":{"x":17,"y":78},"New Earth System":{"x":61.71,"y":38.8,"color":"#14b8a6","planet_img":11,"label_pos":"above-left"},"New Oshana":{"x":28,"y":74},"New Oshana System":{"x":52.87,"y":68.77,"color":"#a855f7","planet_img":19},"Niezh":{"x":23,"y":36},"Niezh System":{"x":31.1,"y":56.72,"color":"#f2f2f7","planet_img":30,"planet_scale":0.75},"Nopenop":{"x":23,"y":55},"Nopenop System":{"x":14.54,"y":32.9,"color":"#64d2ff","planet_img":23,"label_size":"s"},"Nulneon":{"x":77,"y":62},"Nulneon System":{"x":95.12,"y":64.6,"color":"#4ade80","planet_img":7},"Nuzonia's Dream":{"x":39.22,"y":87.86,"color":"#64d2ff","shape":"diamond","label_size":"m"},"Nypsos F47":{"x":43,"y":78},"Nypsos F47 System":{"x":50.64,"y":73.61,"color":"#64d2ff","planet_img":2,"planet_scale":0.75},"Ongora":{"x":32,"y":11},"Ongora System":{"x":48.82,"y":21.86,"color":"#ffd60a","planet_img":15},"Orion":{"x":47,"y":47},"Orion System":{"x":44.05,"y":49.41,"color":"#00c8ff","planet_img":30,"planet_scale":1.25,"label_size":"s"},"Palentium":{"x":44,"y":43},"Palentium System":{"x":55.75,"y":46.73,"color":"#00c8ff","planet_img":1,"label_size":"s","label_pos":"above-right"},"Peavis":{"x":75,"y":72},"Peavis System":{"x":77.58,"y":37.33,"color":"#f2f2f7","planet_img":20,"planet_scale":0.75},"Pholla":{"x":30,"y":7},"Pholla System":{"x":89.97,"y":20.31,"color":"#ffd60a","planet_img":26},"Phoxitis":{"x":72,"y":68},"Phoxitis System":{"x":81.35,"y":33.07,"color":"#f2f2f7","planet_img":2},"Proxima Sector":{"x":62.53,"y":42.88,"color":"#14b8a6","shape":"diamond","label_size":"m"},"Puthea":{"x":52,"y":80},"Puthea System":{"x":24.89,"y":88.31,"color":"#64d2ff","planet_img":17,"planet_scale":1.25},"Rautis":{"x":46,"y":8},"Rautis System":{"x":29.6,"y":17.25,"color":"#ffd60a","planet_img":10},"Realmsingers Empire":{"x":93.43,"y":61.79,"color":"#4ade80","shape":"diamond","label_size":"m","label_pos":"above"},"San Tien":{"x":68,"y":66},"San Tien System":{"x":45.09,"y":67.06,"color":"#a855f7","planet_img":26},"Sarag":{"x":85,"y":49},"Sarag System":{"x":41.53,"y":34.61,"color":"#ff453a","planet_img":2},"Seigh System":{"x":65.92,"y":57.79,"color":"#00c8ff","planet_img":21},"Shev":{"x":83,"y":44},"Shev System":{"x":33.68,"y":34.45,"color":"#ff453a","planet_img":29},"Sicon":{"x":80,"y":38},"Sicon System":{"x":42.38,"y":30.13,"color":"#ff453a","planet_img":29,"planet_scale":0.75},"Sirius":{"x":40,"y":51},"Sirius System":{"x":52.65,"y":59.19,"color":"#00c8ff","planet_img":6},"Solar System":{"x":67.92,"y":42.15,"color":"#14b8a6","planet_img":19,"planet_scale":0.75},"Soth L4":{"x":89,"y":74},"Soth L4 System":{"x":10.73,"y":74.37,"color":"#6366f1","planet_img":18,"planet_scale":1.25},"Strides":{"x":39,"y":13},"Strides System":{"x":25.44,"y":21.65,"color":"#ffd60a","planet_img":25,"label_size":"s"},"Sunstrope":{"x":82,"y":73},"Sunstrope System":{"x":14.47,"y":66.77,"color":"#6366f1","planet_img":24},"System 5":{"x":41.56,"y":56.11,"color":"#00c8ff","planet_img":28,"planet_scale":1.25,"label_size":"s"},"Thars":{"x":49,"y":10},"Thars System":{"x":61.62,"y":20.32,"color":"#ffd60a","planet_img":2},"The Dark Space":{"x":54.81,"y":65.72,"color":"#a855f7","shape":"diamond","label_size":"m"},"The Endless Darkness":{"x":86.85,"y":48.05,"color":"#f2f2f7","shape":"diamond","label_size":"m"},"The Solar Expanse":{"x":37.03,"y":12.65,"color":"#ffd60a","shape":"diamond","label_size":"m"},"Titania":{"x":44,"y":60},"Titania System":{"x":49.67,"y":54.26,"color":"#00c8ff","planet_img":10},"Torc Federation":{"x":77.89,"y":67.98,"color":"#ff2d9f","shape":"diamond","label_size":"m"},"Tronik Network":{"x":26.31,"y":53.48,"color":"#f2f2f7","shape":"star","label_size":"m"},"Uether":{"x":73,"y":67},"Uether System":{"x":84.75,"y":61.36,"color":"#4ade80","planet_img":23},"Valtis":{"x":18,"y":50},"Valtis System":{"x":10.89,"y":31.14,"color":"#00c8ff","planet_img":26,"label_size":"s","label_pos":"above"},"Vasophus":{"x":64,"y":73},"Vasophus System":{"x":81.97,"y":65.48,"color":"#ff2d9f","planet_img":16,"planet_scale":1.25},"Yaevis":{"x":43,"y":11},"Yaevis System":{"x":18.98,"y":19.06,"color":"#ffd60a","planet_img":14},"Yagmir":{"x":61,"y":35},"Yagmir System":{"x":31.87,"y":73.51,"color":"#00c8ff","planet_img":9},"Zegitor Trade Guild":{"x":16.42,"y":29.8,"shape":"diamond","label_size":"l","label_pos":"above"},"Zelmolla":{"x":58,"y":79},"Zelmolla System":{"x":53.41,"y":76.6,"color":"#64d2ff","planet_img":25,"planet_scale":1.25},"Zoana":{"x":13,"y":67},"Zoana System":{"x":58.02,"y":39.51,"color":"#14b8a6","planet_img":8,"planet_scale":0.75,"label_pos":"below-right"},"Zunide":{"x":24,"y":40},"Zunide System":{"x":8.28,"y":48.02,"color":"#ffd60a","planet_img":1}},"gates":[["Yagmir System","System 5"],["System 5","Mangara System"],["System 5","Alsa System"],["Alsa System","Orion System"],["Orion System","Palentium System"],["Palentium System","Ishtar System"],["Palentium System","Aderan System"],["Palentium System","Andromede System"],["Ishtar System","Ash System"],["Ishtar System","Damph System"],["Andromede System","Titania System"],["Titania System","Sirius System"],["Titania System","Berilia System"],["Berilia System","Basagoth Station"],["Berilia System","Carach System"],["Carach System","Seigh System"]]};
+const FACTION_COLOR={"Alliance Space":"#00c8ff","Torc Federation":"#30d158","Mubothen Empire":"#ff9f0a","Zegitor Trade Guild":"#64d2ff","Freeland":"#bf5af2","The Dark Space":"#8e8e93","Nemani Rift":"#ffd60a","Kraven Space":"#ff2d55","The Endless Darkness":"#6e40c9","Nuzonia's Dream":"#ffd60a"};
+function regionColor(reg){reg=String(reg||"").toLowerCase();
+  if(/alliance/.test(reg))return"#00c8ff";if(/dark space/.test(reg))return"#8e8e93";
+  if(/mubothen/.test(reg))return"#ff9f0a";if(/kraven/.test(reg))return"#ff2d55";
+  if(/freeland/.test(reg))return"#bf5af2";if(/zegitor/.test(reg))return"#64d2ff";
+  if(/torc/.test(reg))return"#30d158";if(/nuzonia/.test(reg))return"#ffd60a";
+  if(/endless darkness/.test(reg))return"#6e40c9";if(/proxima/.test(reg))return"#ff6961";
+  return"#a0c8e0"}
+const SMW=1600,SMH=1000;
+const smap={pos:null,gates:null,v:{s:1,x:0,y:0},edit:false,gateMode:false,gateFirst:null,placing:null,labels:true,sel:null,exporting:false};
+function smapPosLoad(){
+  if(smap.pos)return smap.pos;
+  const def=JSON.parse(JSON.stringify(SMAP_LAYOUT.pos));
+  try{const st=localStorage.getItem("smap_pin_pos");if(st){const p=JSON.parse(st);Object.keys(p).forEach(k=>def[k]=p[k])}}catch(e){}
+  smap.pos=def;return def}
+function smapGatesLoad(){
+  if(smap.gates)return smap.gates;
+  try{const st=localStorage.getItem("smap_gates_v3");if(st){smap.gates=JSON.parse(st);return smap.gates}}catch(e){}
+  smap.gates=SMAP_LAYOUT.gates.map(g=>[g[0],g[1]]);return smap.gates}
+function smapSave(){try{localStorage.setItem("smap_pin_pos",JSON.stringify(smap.pos))}catch(e){}}
+function smapGatesSave(){try{localStorage.setItem("smap_gates_v3",JSON.stringify(smap.gates))}catch(e){}}
+function smapAllPins(){
+  const out=[];
+  (g.catalogue_systems||[]).forEach(sy=>out.push({name:sy.name,entry:sy,type:"sys"}));
+  (g.galaxy||[]).filter(e=>e.entry_type==="faction").forEach(f=>out.push({name:f.name,entry:f,type:"fac"}));
+  return out}
+function smapColor(p){const pos=smapPosLoad()[p.name]||{};if(pos.color)return pos.color;
+  if(p.type==="fac")return FACTION_COLOR[p.name]||"#a0c8e0";return regionColor(p.entry.region)}
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function starPath(cx,cy,r){const pts=[];for(let i=0;i<8;i++){const a=-Math.PI/2+i*Math.PI/4,rr=i%2?r*.42:r;pts.push((cx+Math.cos(a)*rr).toFixed(1)+","+(cy+Math.sin(a)*rr).toFixed(1))}return"M"+pts.join("L")+"Z"}
+
+function renderStarmap(sec){
+  const pos=smapPosLoad(),gates=smapGatesLoad();
+  const pins=smapAllPins();
+  const placed=pins.filter(p=>pos[p.name]),unplaced=pins.filter(p=>!pos[p.name]);
+  const byName=Object.fromEntries(pins.map(p=>[p.name,p]));
+  // palette jump: exact name in state.q selects the pin
+  if(state.q){const hit=placed.find(p=>p.name.toLowerCase()===state.q.trim().toLowerCase());if(hit){smap.sel=hit.name;state.q=""}}
+  const rnd=mulberry(937);let stars="";
+  for(let i=0;i<420;i++){const x=(rnd()*SMW).toFixed(1),y=(rnd()*SMH).toFixed(1),r=(.3+rnd()*1.1).toFixed(2),o=(.25+rnd()*.6).toFixed(2);
+    const c=rnd()<.08?"#9fd8ff":rnd()<.05?"#ffd9a0":"#cfd6e4";
+    stars+=`<circle cx="${x}" cy="${y}" r="${r}" fill="${c}" opacity="${o}"/>`}
+  let auras="";
+  placed.filter(p=>p.type==="fac").forEach(p=>{const e=pos[p.name],c=smapColor(p);
+    auras+=`<circle cx="${e.x/100*SMW}" cy="${e.y/100*SMH}" r="150" fill="${c}" opacity=".07"/><circle cx="${e.x/100*SMW}" cy="${e.y/100*SMH}" r="80" fill="${c}" opacity=".06"/>`});
+  let gatesH="";
+  gates.forEach(pr=>{const a=pos[pr[0]],b=pos[pr[1]];if(!a||!b)return;
+    gatesH+=`<line class="smap-gate" x1="${a.x/100*SMW}" y1="${a.y/100*SMH}" x2="${b.x/100*SMW}" y2="${b.y/100*SMH}"/>`});
+  const fsMap={xs:8,s:10,m:13,l:17};
+  let pinsH="";
+  placed.forEach(p=>{
+    const e=pos[p.name],c=smapColor(p),x=e.x/100*SMW,y=e.y/100*SMH;
+    const isFac=p.type==="fac",big=!!e.planet_img;
+    const r=isFac?11:big?8:4.5;
+    let core;
+    if(e.shape==="star"||isFac)core=`<path class="core" d="${starPath(x,y,r)}" fill="${c}"/>`;
+    else if(big)core=`<circle class="core" cx="${x}" cy="${y}" r="${r}" fill="url(#pg-${encodeURIComponent(p.name).replace(/%/g,"")})" stroke="${c}" stroke-width="1"/><defs><radialGradient id="pg-${encodeURIComponent(p.name).replace(/%/g,"")}" cx=".35" cy=".35"><stop offset="0%" stop-color="#fff" stop-opacity=".85"/><stop offset="45%" stop-color="${c}"/><stop offset="100%" stop-color="#0a0c12"/></radialGradient></defs>`;
+    else core=`<circle class="core" cx="${x}" cy="${y}" r="${r}" fill="${c}"/>`;
+    const hideLbl=(e.label_hidden&&!smap.edit)||!smap.labels;
+    const fs=fsMap[e.label_size]||11;
+    let lx=x,ly=y+r+fs+2,anchor="middle";
+    if(/above/.test(e.label_pos||"")){ly=y-r-5}
+    if(/right/.test(e.label_pos||"")){lx=x+r+4;anchor="start"}
+    if(/left/.test(e.label_pos||"")){lx=x-r-4;anchor="end"}
+    const selCls=smap.sel===p.name?" sel":"";
+    const gselCls=smap.gateFirst===p.name?" gate-sel":"";
+    pinsH+=`<g class="smap-pin${selCls}${gselCls}" data-pin="${esc(p.name)}">
+      <circle class="halo" cx="${x}" cy="${y}" r="${r*2.4}" fill="${c}" opacity="${smap.sel===p.name?.45:.16}"/>
+      ${core}
+      ${hideLbl?"":`<text class="smap-lbl" x="${lx}" y="${ly}" font-size="${fs}" text-anchor="${anchor}" ${isFac?`fill="${c}" font-weight="600"`:""}>${esc(p.name.replace(/ System$/,""))}</text>`}
+      <circle cx="${x}" cy="${y}" r="${Math.max(r*2.2,10)}" fill="transparent"/>
+    </g>`});
+  let h=`<div class="smap" id="smap">
+    <svg id="smap-svg" viewBox="0 0 ${SMW} ${SMH}" preserveAspectRatio="xMidYMid meet">
+      <rect width="${SMW}" height="${SMH}" fill="#07080d"/>
+      <g id="smap-world"><g opacity=".9">${stars}</g><g>${auras}</g><g>${gatesH}</g><g id="smap-pins">${pinsH}</g></g>
+    </svg>
+    <div class="smap-hud tl">
+      <button class="smap-btn ${smap.edit?"on":""}" data-sm="edit">✎ ${smap.edit?"Editing":"Edit pins"}</button>
+      ${smap.edit?`<button class="smap-btn ${smap.gateMode?"gate-on":""}" data-sm="gate">⛓ Gate mode</button>
+      <button class="smap-btn" data-sm="export">⤓ Export</button>`:""}
+      <button class="smap-btn ${smap.labels?"":"on"}" data-sm="lbl">Labels</button>
+      <label class="smap-find"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input id="smap-q" placeholder="Find a system…" autocomplete="off"></label>
+    </div>
+    <div class="smap-hud tr">
+      <button class="smap-zoom" data-sm="zin" aria-label="Zoom in">+</button>
+      <button class="smap-zoom" data-sm="zout" aria-label="Zoom out">−</button>
+      <button class="smap-btn" data-sm="fit" style="background:none;border:none">Fit</button>
+      <span class="smap-pct" id="smap-pct">100%</span>
+    </div>
+    ${smap.edit?`<div class="smap-unplaced">
+      <div class="smap-unp-hd">Unplaced — ${unplaced.length}</div>
+      ${unplaced.length?unplaced.map(p=>`<button class="smap-unp-it ${smap.placing===p.name?"placing":""}" data-sm="place" data-pin="${esc(p.name)}">${p.type==="sys"?"●":"★"} ${esc(p.name)}</button>`).join(""):'<div class="smap-unp-hd" style="color:var(--cred)">All pins placed ✓</div>'}
+      <div class="smap-unp-hd" style="margin-top:8px">Gates — ${gates.length}</div>
+      ${gates.map(pr=>`<div class="smap-unp-it"><span style="font-size:10.5px;font-family:var(--font-m)">${esc(pr[0].replace(/ System$/,""))} ↔ ${esc(pr[1].replace(/ System$/,""))}</span><button class="rm" data-sm="gate-del" data-gate="${esc(pr[0])}|||${esc(pr[1])}">✕</button></div>`).join("")}
+    </div>`:""}
+    <div id="smap-panel-holder"></div>
+    <div class="smap-hint">${smap.edit?(smap.gateMode?"Gate mode: click two pins to link / unlink":smap.placing?"Click the map to place "+esc(smap.placing):"Drag pins to move · click a name to place"):"Drag to pan · scroll to zoom · click a system"}</div>
+  </div>`;
+  document.getElementById("page").innerHTML=h;
+  smapWire();
+  if(smap.sel)smapPanel(smap.sel,byName);
+  if(smap.exporting)smapExport();
+  smapApplyView(smap.sel&&pos[smap.sel]?pos[smap.sel]:null);
+}
+function smapApplyView(center){
+  const w=document.getElementById("smap-world");if(!w)return;
+  if(center&&smap.v.s===1&&smap.v.x===0&&smap.v.y===0){
+    smap.v.s=2.2;smap.v.x=SMW/2-center.x/100*SMW*2.2;smap.v.y=SMH/2-center.y/100*SMH*2.2}
+  w.setAttribute("transform",`translate(${smap.v.x} ${smap.v.y}) scale(${smap.v.s})`);
+  const pct=document.getElementById("smap-pct");if(pct)pct.textContent=Math.round(smap.v.s*100)+"%";
+}
+function smapZoom(k,cx,cy){
+  const svg=document.getElementById("smap-svg");if(!svg)return;
+  let r=svg.getBoundingClientRect();if(!r.width)r={width:SMW,height:SMH,left:0,top:0};
+  const sx=SMW/r.width,sy=SMH/r.height,sc=Math.max(sx,sy);
+  cx=((cx??r.width/2))*sc;cy=((cy??r.height/2))*sc;
+  const wx=(cx-smap.v.x)/smap.v.s,wy=(cy-smap.v.y)/smap.v.s;
+  smap.v.s=Math.max(.5,Math.min(7,smap.v.s*k));
+  smap.v.x=cx-wx*smap.v.s;smap.v.y=cy-wy*smap.v.s;
+  smapApplyView();
+}
+function smapEvtWorld(ev){
+  const svg=document.getElementById("smap-svg");
+  let r=svg.getBoundingClientRect();if(!r.width)r={width:SMW,height:SMH,left:0,top:0};
+  const sc=Math.max(SMW/r.width,SMH/r.height);
+  const cx=(ev.clientX-r.left)*sc,cy=(ev.clientY-r.top)*sc;
+  return{x:(cx-smap.v.x)/smap.v.s,y:(cy-smap.v.y)/smap.v.s}}
+function smapWire(){
+  const svg=document.getElementById("smap-svg");if(!svg)return;
+  let pan=null,dragPin=null,moved=false;
+  svg.addEventListener("pointerdown",ev=>{
+    const pinEl=ev.target.closest(".smap-pin");moved=false;
+    if(pinEl&&smap.edit&&!smap.gateMode&&!smap.placing){
+      const nm=pinEl.dataset.pin,e=smap.pos[nm];
+      dragPin={name:nm,el:pinEl,x0:e.x/100*SMW,y0:e.y/100*SMH};
+      if(svg.setPointerCapture)svg.setPointerCapture(ev.pointerId);return}
+    pan={x:ev.clientX,y:ev.clientY,vx:smap.v.x,vy:smap.v.y};svg.classList.add("panning");if(svg.setPointerCapture)svg.setPointerCapture(ev.pointerId);
+  });
+  svg.addEventListener("pointermove",ev=>{
+    if(dragPin){moved=true;const w=smapEvtWorld(ev);const e=smap.pos[dragPin.name];
+      e.x=Math.max(0,Math.min(100,w.x/SMW*100));e.y=Math.max(0,Math.min(100,w.y/SMH*100));
+      dragPin.el.setAttribute("transform",`translate(${e.x/100*SMW-dragPin.x0} ${e.y/100*SMH-dragPin.y0})`);
+      return}
+    if(pan){moved=true;
+      let r=svg.getBoundingClientRect();if(!r.width)r={width:SMW,height:SMH};
+      const sc=Math.max(SMW/r.width,SMH/r.height);
+      smap.v.x=pan.vx+(ev.clientX-pan.x)*sc;smap.v.y=pan.vy+(ev.clientY-pan.y)*sc;smapApplyView()}
+  });
+  svg.addEventListener("pointerup",ev=>{
+    svg.classList.remove("panning");
+    if(dragPin){if(moved){smapSave();render()}dragPin=null;return}
+    pan=null;
+    if(moved)return;
+    const pinEl=ev.target.closest(".smap-pin");
+    if(smap.placing&&!pinEl){const w=smapEvtWorld(ev);
+      smap.pos[smap.placing]={x:+(w.x/SMW*100).toFixed(2),y:+(w.y/SMH*100).toFixed(2)};
+      smap.placing=null;smapSave();render();return}
+    if(!pinEl){if(smap.sel){smap.sel=null;render()}return}
+    const name=pinEl.dataset.pin;
+    if(smap.gateMode){
+      if(!smap.gateFirst){smap.gateFirst=name;render();return}
+      if(smap.gateFirst!==name){
+        const i=smap.gates.findIndex(g=>(g[0]===smap.gateFirst&&g[1]===name)||(g[1]===smap.gateFirst&&g[0]===name));
+        if(i>=0)smap.gates.splice(i,1);else smap.gates.push([smap.gateFirst,name]);
+        smapGatesSave()}
+      smap.gateFirst=null;render();return}
+    smap.sel=name;smap.exporting=false;render();
+  });
+  svg.addEventListener("wheel",ev=>{ev.preventDefault();
+    let r=svg.getBoundingClientRect();if(!r.width)r={left:0,top:0,width:SMW,height:SMH};
+    smapZoom(ev.deltaY<0?1.18:1/1.18,ev.clientX-r.left,ev.clientY-r.top)},{passive:false});
+}
+function smapPanel(name,byName){
+  const holder=document.getElementById("smap-panel-holder");if(!holder)return;
+  const p=(byName||Object.fromEntries(smapAllPins().map(x=>[x.name,x])))[name];if(!p){holder.innerHTML="";return}
+  const e=p.entry,c=smapColor(p);
+  const conns=smapGatesLoad().filter(g=>g[0]===name||g[1]===name).map(g=>g[0]===name?g[1]:g[0]);
+  let h=`<div class="smap-panel"><button class="smap-close" data-sm="close">✕</button>
+    <h2 style="color:${c}">${esc(p.name)}</h2>
+    <div class="sub">${esc(p.type==="fac"?(e.status||"Region"):[e.region,e.classification].filter(Boolean).join(" · "))}</div>
+    <div class="ic-tags">${(e.tags||[]).slice(0,5).map(t=>`<span class="t">${esc(t)}</span>`).join("")}</div>
+    <p>${esc(e.desc||"")}</p>`;
+  if(p.type==="sys"&&(e.planets||[]).length){
+    h+=`<div class="smap-unp-hd">Worlds — ${e.planets.length}</div>`;
+    e.planets.forEach(pl=>{h+=`<div class="smap-planet-row"><b>${esc(pl.name)}</b><span style="color:var(--dim)">${esc(pl.type||"")}</span><span class="mt">${esc(pl.statusLabel||pl.status||"")}</span></div>`});
+  }
+  if(p.type==="fac"){
+    h+=[["Territory",e.territory],["Span",e.span],["Population",e.population_est],["Government",e.government]].filter(x=>x[1])
+      .map(([k,v])=>`<div class="smap-unp-hd" style="margin-top:6px">${k}</div><p style="margin-top:0">${esc(v)}</p>`).join("");
+  }
+  if(conns.length)h+=`<div class="smap-unp-hd">Stargate links</div><div class="ic-tags">${conns.map(n=>`<button class="t" data-sm="jump" data-pin="${esc(n)}" style="cursor:pointer">${esc(n.replace(/ System$/,""))}</button>`).join("")}</div>`;
+  h+=`<div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+    ${p.type==="sys"?`<button class="tool-btn on" data-sm="opensys" data-pin="${esc(p.name)}">Open in Star Systems →</button>`:`<button class="tool-btn on" data-sm="opencat" data-pin="${esc(p.name)}">Open in Catalogue →</button>`}
+    ${smap.edit?`<button class="tool-btn" data-sm="unpin" data-pin="${esc(p.name)}" style="color:var(--bad);border-color:var(--bad)">Unpin</button>`:""}
+  </div></div>`;
+  holder.innerHTML=h;
+}
+function smapExport(){
+  const holder=document.getElementById("smap-panel-holder");if(!holder)return;
+  const pos=smapPosLoad(),gates=smapGatesLoad();
+  const lines=Object.keys(pos).sort().map(k=>'  "'+k.replace(/"/g,'\\"')+'":'+JSON.stringify(pos[k]).replace(/"([a-z_]+)":/g,"$1:"));
+  const txt="const GALAXY_MAP_POS={\n"+lines.join(",\n")+"\n};\n\nconst STARGATE_LINKS=[\n"+gates.map(g=>"  ['"+g[0].replace(/'/g,"\\'")+"','"+g[1].replace(/'/g,"\\'")+"']").join(",\n")+"\n];";
+  holder.innerHTML=`<div class="smap-panel"><button class="smap-close" data-sm="close">✕</button>
+    <h2>Export layout</h2><div class="sub">v9-compatible — paste over GALAXY_MAP_POS / STARGATE_LINKS</div>
+    <textarea class="smap-export" readonly>${esc(txt)}</textarea>
+    <button class="tool-btn on" style="margin-top:8px" data-sm="copyexp">Copy to clipboard</button></div>`;
+  smap._exp=txt;
+}
+
 /* ═════════ sections ═════════ */
 const WCAT_SHORT={"Pistols and Handguns (Gunslinger)":"Pistols","Auto pistols and S.M.G (Gunslinger)":"SMGs","Shotguns (Gunslinger)":"Shotguns","Rifles (Marksman)":"Rifles","Sniper Rifles and Tactical Weapons (Marksman)":"Snipers","Machine Guns (Heavy weapons)":"MGs","Launchers and AT Weapons (Heavy weapons)":"Launchers","Explosives (Heavy Weapons, Engineering or Projectiles)":"Explosives","Vehicle weapons(Heavy weapons)":"Vehicle","Melee Weapons (Melee Weapons)":"Melee","Powered Melee Weapons (Melee Weapons)":"Powered Melee","Ranged / Throwing Weapons (Projectiles)":"Thrown"};
 const MELEE=new Set(["Melee Weapons (Melee Weapons)","Powered Melee Weapons (Melee Weapons)"]);
@@ -530,6 +787,23 @@ const SECTIONS=[
    body:row("Roll",hlq(s.skill,q))+`<p>${hlq(s.effect,q)}</p>`
      +row("Minor",hlq(s.minor,q))+row("Intermediate",hlq(s.intermediate,q))+row("Major",hlq(s.major,q))+row("Mastery",hlq(s.mastery,q))+row("Backlash",hlq(s.backlash,q))})},
 /* ── Galaxy ── */
+{id:"galaxy",group:"Galaxy",label:"Galactic Catalogue",src:()=>g.galaxy||[],wide:true,
+ cats:()=>["faction","system"],cat:o=>o.entry_type,catLbl:c=>c.toUpperCase()+"S",
+ hay:o=>lc(o,["name","status","territory","desc","known_for","history","government"])+" "+(o.tags||[]).join(" ").toLowerCase(),
+ card:(o,q)=>itemCard({name:o.name,cat:o.entry_type.toUpperCase(),railC:o.entry_type==="faction"?(FACTION_COLOR[o.name]||"#a0c8e0"):regionColor(o.name),q,nameQ:q,
+   tags:(o.tags||[]).map(t=>`<span class="t">${esc(t)}</span>`).join(""),
+   body:`<p>${hlq(o.desc,q)}</p>`+row("Status",hlq(o.status,q))+row("Territory",hlq(o.territory,q))+row("Span",esc(o.span))+row("Population",esc(o.population_est))+row("Government",hlq(o.government,q))+row("History",hlq(o.history,q))+row("Known for",hlq(o.known_for,q))+row("Notable systems",esc(Array.isArray(o.notable_systems)?o.notable_systems.join(", "):o.notable_systems))+row("Lore",hlq(o.lore_notes,q))})},
+{id:"starmap",group:"Galaxy",label:"Star Map",custom:renderStarmap,
+ index:()=>smapAllPins().map(p=>({n:p.name,meta:p.type==="fac"?"region":(p.entry.region||"system"),hay:(p.name+" "+(p.entry.region||"")+" "+(p.entry.classification||"")).toLowerCase(),q:p.name}))},
+{id:"systems",group:"Galaxy",label:"Star Systems",src:()=>g.catalogue_systems||[],wide:true,
+ cats:()=>["Alliance Space","Torc Federation","Mubothen Empire","Freeland","Kraven Space","Zegitor Trade Guild","Dark Space","Nuzonia's Dream"],cat:o=>null,
+ catTest:(o,c)=>String(o.region||"").includes(c),
+ hay:o=>lc(o,["name","region","classification","faction","desc"])+" "+(o.tags||[]).join(" ").toLowerCase()+" "+(o.planets||[]).map(p=>p.name).join(" ").toLowerCase(),
+ card:(o,q)=>itemCard({name:o.name,cat:o.classification,railC:regionColor(o.region),q,nameQ:q,
+   tags:`<span class="t">${esc(o.region)}</span>`+(o.tags||[]).slice(0,3).map(t=>`<span class="t">${esc(t)}</span>`).join(""),
+   body:`<p>${hlq(o.desc,q)}</p>`+row("Faction",hlq(o.faction,q))+row("Status",esc(o.status))
+     +((o.planets||[]).length?`<div class="row"><span class="k">Worlds</span><span class="v">${o.planets.map(p=>`<b>${hlq(p.name,q)}</b> — ${esc(p.type||"")}${p.statusLabel||p.status?` <span style="color:var(--faint)">(${esc(p.statusLabel||p.status)})</span>`:""}`).join("<br>")}</span></div>`:"")
+     +`<div style="margin-top:10px"><button class="tool-btn on" data-locate="${esc(o.name)}">⌖ Locate on Star Map</button></div>`})},
 {id:"factions",group:"Galaxy",label:"Factions",src:()=>g.factions||[],wide:true,
  cats:()=>[...new Set((g.factions||[]).map(f=>f.category))].filter(Boolean),cat:o=>o.category,
  hay:o=>lc(o,["name","short","category","subcategory","alignment","desc","known_for"]),
@@ -548,7 +822,7 @@ function load(){try{return JSON.parse(localStorage.getItem("c10"))||{}}catch(e){
 /* ═════════ generic card ═════════ */
 function itemCard(o){
   const open=state._auto?' aria-expanded="true"':' aria-expanded="false"';
-  return `<article class="icard ${o.rail||""}" tabindex="0" role="button"${o.body?open:' aria-expanded="false"'}>
+  return `<article class="icard ${o.rail||""}" ${o.railC?`style="--rar:${o.railC}"`:""} tabindex="0" role="button"${o.body?open:' aria-expanded="false"'}>
     <div class="ic-top"><span class="ic-name">${hlq(o.name,o.nameQ)}</span>${o.cat?`<span class="ic-cat">${esc(o.cat)}</span>`:""}${o.cost?`<span class="ic-cost">${o.cost}</span>`:""}</div>
     ${o.stats?`<div class="ic-stats">${o.stats}</div>`:""}${o.extra||""}
     ${o.tags?`<div class="ic-tags">${o.tags}</div>`:""}
@@ -732,8 +1006,9 @@ function renderSkills(sec){
 
 function render(){
   const sec=SEC_BY_ID[state.sec]||SECTIONS[0];
+  document.getElementById("page").classList.toggle("fullbleed",sec.id==="starmap");
   if(sec.custom)sec.custom(sec);else renderCatalog(sec);
-  document.getElementById("main").scrollTop=0;
+  if(sec.id!=="starmap")document.getElementById("main").scrollTop=0;
 }
 
 /* ═════════ nav ═════════ */
@@ -808,6 +1083,27 @@ function init(){
 
   const page=document.getElementById("page");
   page.addEventListener("click",e=>{
+    const loc=e.target.closest("[data-locate]");
+    if(loc){smap.sel=loc.dataset.locate;smap.v={s:1,x:0,y:0};go("starmap");return}
+    const sm=e.target.closest("[data-sm]");
+    if(sm){const a=sm.dataset.sm;
+      if(a==="edit"){smap.edit=!smap.edit;smap.gateMode=false;smap.placing=null;smap.exporting=false;render()}
+      else if(a==="gate"){smap.gateMode=!smap.gateMode;smap.gateFirst=null;smap.placing=null;render()}
+      else if(a==="lbl"){smap.labels=!smap.labels;render()}
+      else if(a==="zin")smapZoom(1.25);
+      else if(a==="zout")smapZoom(1/1.25);
+      else if(a==="fit"){smap.v={s:1,x:0,y:0};smapApplyView()}
+      else if(a==="place"){smap.placing=smap.placing===sm.dataset.pin?null:sm.dataset.pin;render()}
+      else if(a==="gate-del"){const[x,y]=sm.dataset.gate.split("|||");
+        smap.gates=smapGatesLoad().filter(g=>!((g[0]===x&&g[1]===y)||(g[0]===y&&g[1]===x)));smapGatesSave();render()}
+      else if(a==="close"){smap.sel=null;smap.exporting=false;render()}
+      else if(a==="jump"){smap.sel=sm.dataset.pin;smap.v={s:1,x:0,y:0};render()}
+      else if(a==="opensys")go("systems",sm.dataset.pin);
+      else if(a==="opencat")go("galaxy",sm.dataset.pin);
+      else if(a==="unpin"){delete smap.pos[sm.dataset.pin];smap.sel=null;smapSave();render()}
+      else if(a==="export"){smap.exporting=true;smap.sel=null;render()}
+      else if(a==="copyexp"){try{navigator.clipboard.writeText(smap._exp||"")}catch(err){}}
+      return}
     const jump=e.target.closest("[data-jump]");
     if(jump){const el=document.getElementById(jump.dataset.jump);
       if(el){el.open=true;el.scrollIntoView({behavior:"smooth",block:"start"})}return}
@@ -829,6 +1125,8 @@ function init(){
     if(sel){mfrState[sel.dataset.mfrkey]=sel.value;render()}
   });
   let t;page.addEventListener("input",e=>{
+    if(e.target.id==="smap-q"){const v=e.target.value.trim().toLowerCase();
+      document.querySelectorAll(".smap-pin").forEach(p=>p.classList.toggle("dim",!!v&&!p.dataset.pin.toLowerCase().includes(v)));return}
     if(e.target.id!=="scoped-q")return;    clearTimeout(t);const v=e.target.value;
     t=setTimeout(()=>{state.q=v;render();
       const inp=document.getElementById("scoped-q");
