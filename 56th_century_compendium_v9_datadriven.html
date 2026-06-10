@@ -144,14 +144,14 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 .rgb{display:none;}.rule-group.open .rgb{display:block;}
 .rgh .arr{transition:transform .2s;font-size:9px;opacity:.6;}
 .rule-group.open .rgh .arr{transform:rotate(180deg);}
-.rsec{border-top:1px solid rgba(255,255,255,.04);padding:10px 16px;}
+.rsec{border-top:1px solid rgba(255,255,255,.04);padding:18px 24px;}
 .rsec:first-child{border-top:none;}
-.rst{font-size:10px;font-family:'IBM Plex Mono',monospace;font-weight:500;color:var(--or);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
-.re{font-size:14px;line-height:1.8;color:var(--tx2);padding:2px 0;font-family:'IBM Plex Sans',sans-serif;}
-.re b,.re strong{font-weight:600;color:var(--tx);}
-.rkv{display:flex;gap:10px;padding:3px 0;}
-.rk{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--mu);min-width:90px;flex-shrink:0;padding-top:3px;text-transform:uppercase;letter-spacing:.8px;}
-.rv{font-size:14px;line-height:1.8;color:var(--tx2);flex:1;min-width:0;word-break:break-word;font-family:'IBM Plex Sans',sans-serif;}
+.rst{font-size:11px;font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--or);letter-spacing:1.5px;text-transform:uppercase;margin:2px 0 16px;padding-bottom:7px;border-bottom:1px solid var(--border);max-width:820px;}
+.re{font-size:14.5px;line-height:1.72;color:var(--tx2);padding:0 0 13px;max-width:820px;font-family:'IBM Plex Sans',sans-serif;}
+.re b,.re strong,.rv b,.rv strong{font-weight:700;color:var(--tx);}.rex{margin:10px 0 0;max-width:820px;}.rex-l{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;}.rex-u{margin:0;padding:0;list-style:none;}.rex-u li{font-size:13.5px;line-height:1.55;color:var(--tx2);padding:2px 0 2px 16px;position:relative;}.rex-u li:before{content:'\203A';position:absolute;left:2px;color:var(--or);font-weight:700;}.rsub{font-size:14.5px;font-style:italic;color:var(--mu);margin:11px 0 0;max-width:820px;line-height:1.65;}.rsub-t{font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--mu2);margin-right:7px;}
+.rkv{display:block;max-width:820px;padding:0 0 17px;}
+.rk{font-family:'IBM Plex Sans',sans-serif;font-size:13px;font-weight:700;color:var(--tx);min-width:0;padding:0;margin:0 0 4px;text-transform:uppercase;letter-spacing:.5px;}
+.rv{font-size:14.5px;line-height:1.72;color:var(--tx2);max-width:820px;word-break:break-word;font-family:'IBM Plex Sans',sans-serif;}
 .rv b,.rv strong{font-weight:600;color:var(--tx);}
 .stab{width:100%;border-collapse:collapse;font-size:10px;font-family:'IBM Plex Mono',monospace;margin:6px 0 12px;}
 .stab th{color:var(--mu);font-weight:400;padding:4px 8px;border-bottom:1px solid var(--border);text-align:center;text-transform:uppercase;letter-spacing:.8px;}
@@ -4227,6 +4227,9 @@ const BG_GRANTS=Object.fromEntries((g.backgrounds||[]).filter(x=>x.grants).map(x
 
 // Occupation skill-bonus pairs — player picks one pair at character creation (SMALL passive bonus)
 const OCC_BONUS=Object.fromEntries((g.occupations||[]).filter(x=>x.occ_bonus).map(x=>[x.name,x.occ_bonus]));
+const BG_GRANT_KEYS=['skills','all_skills','attrs','attr_max_mods','health','morale','chi','chi_lock','no_racial_max','talents','evos','choice_skills','choice_talents'];
+const OCC_GRANT_KEYS=['fixed','pick','from','label'];
+function ccWarnUnknownGrants(name,grant,known,kind){if(!grant||Array.isArray(grant))return;Object.keys(grant).forEach(function(k){if(known.indexOf(k)<0)console.warn('[GRANT] '+kind+' "'+name+'": unhandled grant key "'+k+'" — add a handler or fix the JSON.');});};
 
 function ccApplyOccBonus(pi,newPicks){
   const st=ccState;
@@ -4686,7 +4689,7 @@ function ccRandName(){ccState.name=CC_NAMES_FIRST[Math.floor(Math.random()*CC_NA
 function ccPickFromCache(pidx){
   const item=ccPickerCache[pidx];if(!item||!ccState.picker)return;
   const {type,slot}=ccState.picker;
-  if(type==='talent'){const t=item;ccState.talents[slot]={name:t.name||'',skill:t.skill||'',category:t.category||'',xp_cost:+(t.cost)||0,effect:t.effect||'',credited:false};}
+  if(type==='talent'){const t=item;ccState.talents[slot]={name:t.name||'',skill:t.skill||'',category:(Array.isArray(t.categories)&&ccState.pickerCat&&ccState.pickerCat!=='ALL')?ccState.pickerCat:(t.category||''),xp_cost:+(t.cost)||0,effect:t.effect||'',credited:false};}
   else if(type==='evolution'){const e=item;ccState.evolutions[slot]={name:e.name||'',type:e.evo_type||'',tier:e.tier||'',effect:e.effect||'',credited:false};}
   else if(type==='weapon'){
     const w=item;const wp=ccState.weapons[slot];
@@ -4728,7 +4731,7 @@ function ccPickFromCache(pidx){
     if(b.traits&&b.traits[2])lines.push('\nDRAWBACK:\n'+b.traits[2]);
     ccState.background_desc=lines.join('\n');
     // Apply background grants
-    const bg=BG_GRANTS[b.name]||{};
+    const bg=BG_GRANTS[b.name]||{};ccWarnUnknownGrants(b.name,bg,BG_GRANT_KEYS,'background');
     if(bg.skills)Object.entries(bg.skills).forEach(([sk,r])=>{ccState[sk]=Math.max(ccState[sk]||0,r);});
     if(bg.all_skills){const r=bg.all_skills;CC_ALL_SKILLS.forEach(sk=>{ccState[sk]=Math.max(ccState[sk]||0,r);});}
     // Set pending choices
@@ -4746,7 +4749,7 @@ function ccPickFromCache(pidx){
     ccUpdateBgGrantedXP();
     ccRecalcHealthMorale();
   }
-  else if(type==='occupation'){const o=item;ccState.occupation=o.name||'';const lines=[o.desc||'',...(o.details||[])].filter(Boolean);ccState.occupation_desc=lines.join('\n');const startCr=ccParseOccCredits(o.name||'');if(startCr>0)ccState.credits=startCr;ccApplyOccBonus(null);}
+  else if(type==='occupation'){const o=item;ccState.occupation=o.name||'';ccWarnUnknownGrants(o.name,OCC_BONUS[o.name],OCC_GRANT_KEYS,'occupation');const lines=[o.desc||'',...(o.details||[])].filter(Boolean);ccState.occupation_desc=lines.join('\n');const startCr=ccParseOccCredits(o.name||'');if(startCr>0)ccState.credits=startCr;ccApplyOccBonus(null);}
   ccState.picker=null;ccState.pickerSearch='';render();
 }
 function ccExportRoll20(){
@@ -4856,7 +4859,7 @@ function ccRenderPicker(){
   let pickerCat=st.pickerCat;
   if(facetOpts&&pickerCat!=='ALL'&&facetOpts.indexOf(pickerCat)<0)pickerCat=facetOpts[0];
   let fmatches=matches;
-  if(facetOpts&&pickerCat&&pickerCat!=='ALL')fmatches=fmatches.filter(x=>getFacet(x)===pickerCat);
+  if(facetOpts&&pickerCat&&pickerCat!=='ALL')fmatches=fmatches.filter(x=>getFacet(x)===pickerCat||(Array.isArray(x.categories)&&x.categories.map(c=>(''+c).toUpperCase()).indexOf(pickerCat)>=0));
   if(type==='talent'&&st.pickerAvailOnly)fmatches=fmatches.filter(x=>{const c=(x.category||'').toUpperCase();const rem=ccTalentPoints(c)-ccTalentUsed(c);return (+(x.cost)||0)<=rem;});
   ccPickerCache=fmatches.slice(0,150);
   let h='<div style="background:rgba(0,0,0,.7);border:1px solid '+bdr+';border-radius:6px;padding:12px;margin-bottom:14px;">';
@@ -6896,7 +6899,7 @@ function render(){
         html+='<div class="rsec">';
         if(sec.title&&sec.title!==grp.group)html+='<div class="rst">'+esc(sec.title)+'</div>';
         entries.forEach(e=>{
-          if(e.key)html+='<div class="rkv"><div class="rk">'+hl(e.key,sq)+'</div><div class="rv">'+hl(e.text,sq)+'</div></div>';
+          if(e.key){var _v='<div class="rv">'+hl(e.text,sq)+'</div>';if(e.examples&&e.examples.length)_v+='<div class="rex"><div class="rex-l">Examples</div><ul class="rex-u">'+e.examples.map(function(x){return '<li>'+hl(x,sq)+'</li>';}).join('')+'</ul></div>';if(e.sub)_v+='<div class="rsub"><span class="rsub-t">subsystems</span>'+hl(e.sub,sq)+'</div>';html+='<div class="rkv"><div class="rk">'+hl(e.key,sq)+'</div>'+_v+'</div>';}
           else html+='<div class="re">'+hl(e.text,sq)+'</div>';
         });
         html+='</div>';
@@ -7610,7 +7613,7 @@ function render(){
     const source=g.datacoms.map(item=>{
       return applyDatacomMfr({...item},curMfr);
     }).filter(Boolean);
-    const F=source.filter(d=>ms([d.name,d.type,d.info,d.special])).filter(d=>!af||d.type===af);
+    const F=source.filter(d=>ms([d.name,d.type,d.desc,d.info,d.special])).filter(d=>!af||d.type===af);
     cnt=F.length;
     html='<div class="stitle">📡 DATACOMS <span class="badge">'+g.datacoms.length+'</span></div>';
     html+=mfrBar('datacoms',DATACOM_MFRS,curMfr);
@@ -7653,7 +7656,7 @@ function render(){
       html+='<div class="cr3"><div class="cr3l">'+bst(dc.special||'')+'</div><div class="cr3r">'+fmt(dc.cost)+' Cr</div></div>';
       // Expanded
       html+='<div class="cb">';
-      if(dc.info) html+='<div class="desc" style="margin-bottom:8px;">'+hl(dc.info,sq)+'</div>';
+      if(dc.desc||dc.info) html+='<div class="desc" style="margin-bottom:8px;">'+hl(dc.desc||dc.info,sq)+'</div>';
       html+='<div class="def-row">';
       html+='<span class="def-pill '+defCls(dc.def_physical)+'">PHYS '+esc(dc.def_physical||'—')+'</span>';
       html+='<span class="def-pill '+defCls(dc.def_energy)+'">ENRG '+esc(dc.def_energy||'—')+'</span>';
