@@ -1290,7 +1290,12 @@
     "Medical Anomaly : Your body is completely unpredictable. No standard medicine seems to find a solution. At the start of every SCENE, roll 1d10. On a 1, you have the SICK AILMENT for the duration of the SCENE."
    ],
    "grants": {
-    "no_racial_max": true
+    "no_racial_max": true,
+    "talents": [
+     {
+      "name": "Advanced Potential"
+     }
+    ]
    }
   },
   {

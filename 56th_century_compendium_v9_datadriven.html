@@ -149,7 +149,7 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 .rst{font-size:11px;font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--or);letter-spacing:1.5px;text-transform:uppercase;margin:2px 0 16px;padding-bottom:7px;border-bottom:1px solid var(--border);max-width:820px;}
 .re{font-size:14.5px;line-height:1.72;color:var(--tx2);padding:0 0 13px;max-width:820px;font-family:'IBM Plex Sans',sans-serif;}
 .re b,.re strong,.rv b,.rv strong{font-weight:700;color:var(--tx);}.rex{margin:10px 0 0;max-width:820px;}.rex-l{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;}.rex-u{margin:0;padding:0;list-style:none;}.rex-u li{font-size:13.5px;line-height:1.55;color:var(--tx2);padding:2px 0 2px 16px;position:relative;}.rex-u li:before{content:'\203A';position:absolute;left:2px;color:var(--or);font-weight:700;}.rsub{font-size:14.5px;font-style:italic;color:var(--mu);margin:11px 0 0;max-width:820px;line-height:1.65;}.rsub-t{font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--mu2);margin-right:7px;}
-.rkv{display:block;max-width:820px;padding:0 0 17px;}
+.rkv{display:block;max-width:820px;padding:0 0 19px;}
 .rk{font-family:'IBM Plex Sans',sans-serif;font-size:13px;font-weight:700;color:var(--tx);min-width:0;padding:0;margin:0 0 4px;text-transform:uppercase;letter-spacing:.5px;}
 .rv{font-size:14.5px;line-height:1.72;color:var(--tx2);max-width:820px;word-break:break-word;font-family:'IBM Plex Sans',sans-serif;}
 .rv b,.rv strong{font-weight:600;color:var(--tx);}
@@ -724,7 +724,8 @@ aside.open{transform:translateX(0);}
 <div id="tt" style="display:none;position:fixed;z-index:9999;background:#0d1520;border:1px solid var(--a);border-radius:3px;padding:8px 11px;font-size:11px;line-height:1.55;max-width:320px;color:var(--tx);box-shadow:0 4px 20px rgba(0,0,0,.7);pointer-events:none;"></div>
 <script>
 const g=(function(){
-  function L(p){var x=new XMLHttpRequest();x.open('GET',p,false);x.send(null);
+  var CB='?_cb='+Date.now();
+  function L(p){var x=new XMLHttpRequest();x.open('GET',p+CB,false);x.send(null);
     if(x.status&&(x.status<200||x.status>=400))throw new Error('HTTP '+x.status+' for '+p);
     return JSON.parse(x.responseText);}
   try{

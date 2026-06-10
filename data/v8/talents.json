@@ -550,7 +550,13 @@
    "skill": "GENERAL",
    "req": "0",
    "cost": "15",
-   "effect": "Choose one EVO. All tiers of that EVO carries over to your body after cloning."
+   "effect": "Choose one EVO. All tiers of that EVO carries over to your body after cloning.",
+   "categories": [
+    "PHYSICAL",
+    "MENTAL",
+    "SOCIAL",
+    "ACUITY"
+   ]
   },
   {
    "category": "PHYSICAL",
@@ -1327,14 +1333,6 @@
    "req": "0",
    "cost": "10",
    "effect": "When using a CYBER ATTACK against a LOCK on target, you gain a LARGE bonus to SYSTEM damage."
-  },
-  {
-   "category": "MENTAL",
-   "name": "Advanced Potential",
-   "skill": "GENERAL",
-   "req": "0",
-   "cost": "15",
-   "effect": "Choose one EVO. All tiers of that EVO carries over to your body after cloning."
   },
   {
    "category": "MENTAL",
@@ -2146,14 +2144,6 @@
   },
   {
    "category": "SOCIAL",
-   "name": "Advanced Potential",
-   "skill": "GENERAL",
-   "req": "0",
-   "cost": "15",
-   "effect": "Choose one EVO. All tiers of that EVO carries over to your body after cloning."
-  },
-  {
-   "category": "SOCIAL",
    "name": "Best Friend",
    "skill": "CHARM",
    "req": "0",
@@ -2855,14 +2845,6 @@
    "req": "SKALANDER",
    "cost": "10",
    "effect": "Any target within your VEIL range has a LARGE penalty to CONCEALMENT, SUBTERFUGE and any skills check used to lie or pass as someone they are not."
-  },
-  {
-   "category": "ACUITY",
-   "name": "Advanced Potential",
-   "skill": "GENERAL",
-   "req": "0",
-   "cost": "15",
-   "effect": "Choose one EVO. All tiers of that EVO carries over to your body after cloning."
   },
   {
    "category": "ACUITY",

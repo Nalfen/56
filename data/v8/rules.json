@@ -287,43 +287,132 @@
           "entries": [
             {
               "key": "Athletics",
-              "text": "Raw physical power and gross-motor exertion — making your body overcome a problem through strength and stamina. Covers climbing, swimming, running and sprinting, sustained endurance movement (forced marches, long hauls), and pulling yourself or others up and over obstacles. It also owns raw force (the old Might): lifting and shifting heavy loads, forcing stuck doors, bent gates and jammed hatches, bracing or holding against pressure, breaking objects by sheer strength, restraining a struggling target by power, and the performance ceiling inside powered exosuits and heavy augmentation rigs. If the question is 'can your body's power or stamina overcome this?', it's Athletics. (Finesse and balance are Acrobatics; striking a person is Hand-to-Hand.) Examples: scaling a sheer hull to a hatch; swimming a flooded corridor against the current; prying a blast door open enough to slip through; bracing a collapsing beam while the team passes; carrying a wounded ally at a dead run; maxing a loader exosuit to lift a fallen girder."
+              "text": "Raw physical power and gross-motor exertion — making your body overcome a problem through strength and stamina. Covers climbing, swimming, running and sprinting, sustained endurance movement (forced marches, long hauls), and pulling yourself or others up and over obstacles. It also owns raw force (the old Might): lifting and shifting heavy loads, forcing stuck doors, bent gates and jammed hatches, bracing or holding against pressure, breaking objects by sheer strength, restraining a struggling target by power, and the performance ceiling inside powered exosuits and heavy augmentation rigs. If the question is 'can your body's power or stamina overcome this?', it's Athletics. (Finesse and balance are Acrobatics; striking a person is Hand-to-Hand.)",
+              "examples": [
+                "scaling a sheer hull to a hatch",
+                "swimming a flooded corridor against the current",
+                "prying a blast door open enough to slip through",
+                "bracing a collapsing beam while the team passes",
+                "carrying a wounded ally at a dead run",
+                "maxing a loader exosuit to lift a fallen girder"
+              ],
+              "sub": "encumbrance and lift limits; exosuit and augmentation output ceiling; sustained exertion"
             },
             {
               "key": "Acrobatics",
-              "text": "Finesse, agility, and total body control — movement problems solved by precision rather than power. Covers balance on narrow, slick, or unstable surfaces, tumbling and rolling, diving for cover, contortion through tight gaps, breaking falls and landing safely from height, tightrope and ledge work, vaulting cleanly, and evasive traversal through moving hazards or an active firefight. Where Athletics muscles through, Acrobatics threads the needle. Sub-systems: fall-damage mitigation, moving through difficult/contested terrain. Examples: walking a girder across a chasm in a crosswind; tumbling under a closing blast door; contorting through a vent shaft; rolling with a two-story fall to halve the damage; vaulting a railing into cover mid-gunfight; keeping your feet as a ship pulls hard evasive maneuvers."
+              "text": "Finesse, agility, and total body control — movement problems solved by precision rather than power. Covers balance on narrow, slick, or unstable surfaces, tumbling and rolling, diving for cover, contortion through tight gaps, breaking falls and landing safely from height, tightrope and ledge work, vaulting cleanly, and evasive traversal through moving hazards or an active firefight. Where Athletics muscles through, Acrobatics threads the needle.",
+              "sub": "fall-damage mitigation, moving through difficult/contested terrain",
+              "examples": [
+                "walking a girder across a chasm in a crosswind",
+                "tumbling under a closing blast door",
+                "contorting through a vent shaft",
+                "rolling with a two-story fall to halve the damage",
+                "vaulting a railing into cover mid-gunfight",
+                "keeping your feet as a ship pulls hard evasive maneuvers"
+              ]
             },
             {
               "key": "Hand-to-Hand",
-              "text": "Unarmed close combat and the body as a weapon. Covers strikes (punches, kicks, knees, elbows, headbutts), grapples, throws, takedowns, holds, chokes, and hand disarms, plus natural and body-mounted weapons — claws, fangs, spurs, augmented body-blades. Includes choosing to subdue non-lethally and fighting in restrictive conditions (zero-g, tight corridors, while grappled). Armed melee is Melee Weapons. Sub-systems: grapple/restrain states, subdual vs lethal. Examples: choking out a sentry silently from behind; pinning a panicking civilian without hurting them; trading blows in a bar brawl; grappling a knife-arm to control the blade; fighting in zero-g where footing is meaningless; using retractable claw augments as your main attack."
+              "text": "Unarmed close combat and the body as a weapon. Covers strikes (punches, kicks, knees, elbows, headbutts), grapples, throws, takedowns, holds, chokes, and hand disarms, plus natural and body-mounted weapons — claws, fangs, spurs, augmented body-blades. Includes choosing to subdue non-lethally and fighting in restrictive conditions (zero-g, tight corridors, while grappled). Armed melee is Melee Weapons.",
+              "sub": "grapple/restrain states, subdual vs lethal",
+              "examples": [
+                "choking out a sentry silently from behind",
+                "pinning a panicking civilian without hurting them",
+                "trading blows in a bar brawl",
+                "grappling a knife-arm to control the blade",
+                "fighting in zero-g where footing is meaningless",
+                "using retractable claw augments as your main attack"
+              ]
             },
             {
               "key": "Melee Weapons",
-              "text": "Armed close combat with anything in hand: blades, axes, clubs and blunt weapons, polearms and spears, energy and powered melee, shock batons, and improvised weapons (pipe, bottle, tool). Covers attacking, parrying and riposting, disarming, binding a weapon, and weapon-specific maneuvers and reach. Unarmed is Hand-to-Hand; thrown blades are Projectiles. Sub-systems: parry/riposte, reach and engagement. Examples: dueling with a powered longsword; parrying a boarding pike and riposting; beating a guard down with a shock baton on stun; a console-side brawl with a length of pipe; using a polearm's reach to keep a bigger foe off you; disarming a knife-fighter with a blade bind."
+              "text": "Armed close combat with anything in hand: blades, axes, clubs and blunt weapons, polearms and spears, energy and powered melee, shock batons, and improvised weapons (pipe, bottle, tool). Covers attacking, parrying and riposting, disarming, binding a weapon, and weapon-specific maneuvers and reach. Unarmed is Hand-to-Hand; thrown blades are Projectiles.",
+              "sub": "parry/riposte, reach and engagement",
+              "examples": [
+                "dueling with a powered longsword",
+                "parrying a boarding pike and riposting",
+                "beating a guard down with a shock baton on stun",
+                "a console-side brawl with a length of pipe",
+                "using a polearm's reach to keep a bigger foe off you",
+                "disarming a knife-fighter with a blade bind"
+              ]
             },
             {
               "key": "Heavy Weapons",
-              "text": "Crew-served and heavy ordnance: machine guns and autocannons, rocket and missile launchers, mounted and vehicle turrets, artillery, man-portable heavy energy weapons, and the truly oversized. Covers setup and teardown, sustained and suppressing fire, heat and ammo management, and area/splash effects. It also owns destructive demolition — explosives or ordnance when the goal is simply to destroy, breach by force, or bring a structure down (the 'just make a hole' use). Surgical or render-safe explosive work is Engineering; personal firearms are Gunslinger/Marksman. Sub-systems: suppression, area/splash, breaching by force. Examples: laying suppressing fire to pin a squad; punching a missile through vehicle armor; setting a tripod autocannon to cover a hall; blowing a new doorway straight through a wall; managing barrel heat on a sustained burst; dropping a mortar on a fixed position."
+              "text": "Crew-served and heavy ordnance: machine guns and autocannons, rocket and missile launchers, mounted and vehicle turrets, artillery, man-portable heavy energy weapons, and the truly oversized. Covers setup and teardown, sustained and suppressing fire, heat and ammo management, and area/splash effects. It also owns destructive demolition — explosives or ordnance when the goal is simply to destroy, breach by force, or bring a structure down (the 'just make a hole' use). Surgical or render-safe explosive work is Engineering; personal firearms are Gunslinger/Marksman.",
+              "sub": "suppression, area/splash, breaching by force",
+              "examples": [
+                "laying suppressing fire to pin a squad",
+                "punching a missile through vehicle armor",
+                "setting a tripod autocannon to cover a hall",
+                "blowing a new doorway straight through a wall",
+                "managing barrel heat on a sustained burst",
+                "dropping a mortar on a fixed position"
+              ]
             },
             {
               "key": "Fabrication",
-              "text": "Hands-on making, repairing, and modifying physical objects — mechanical work and the physical assembly of electronic gear. Covers field repair of weapons, armor, and vehicles, fashioning tools and parts from raw materials or scrap, building and assembling devices (including wiring up hardware someone designed), customizing and retrofitting, and patching pressure suits and hull breaches. The maker's hands: Engineering designs it, Fabrication builds and fixes it, Technology gets the electronics running. Sub-systems: repair (restore condition/function), crafting (time + materials + a design). Examples: clearing a jam and re-machining a worn firing pin in the field; welding a patch over a hull breach; building a custom weapon mount from scrap; fabricating a part no vendor stocks; reinforcing armor plating; jury-rigging a dead engine back to life."
+              "text": "Hands-on making, repairing, and modifying physical objects — mechanical work and the physical assembly of electronic gear. Covers field repair of weapons, armor, and vehicles, fashioning tools and parts from raw materials or scrap, building and assembling devices (including wiring up hardware someone designed), customizing and retrofitting, and patching pressure suits and hull breaches. The maker's hands: Engineering designs it, Fabrication builds and fixes it, Technology gets the electronics running.",
+              "sub": "repair (restore condition/function), crafting (time + materials + a design)",
+              "examples": [
+                "clearing a jam and re-machining a worn firing pin in the field",
+                "welding a patch over a hull breach",
+                "building a custom weapon mount from scrap",
+                "fabricating a part no vendor stocks",
+                "reinforcing armor plating",
+                "jury-rigging a dead engine back to life"
+              ]
             },
             {
               "key": "Piloting",
-              "text": "Operating craft that fly: atmospheric flyers, shuttles, fighters, gunships, personal spacecraft, and the helm of small starships. Covers flight in atmosphere and vacuum, evasive maneuvers and dogfighting, docking, hard and emergency landings, and reentry. Plotting the actual course is Navigation; surface vehicles are Driving; a capital ship is a crew effort. Sub-systems: vehicle combat as pilot, stunt/maneuver checks. Examples: threading a shuttle through a debris field; shaking a pursuing fighter with a hard break; docking manually after the autopilot dies; bringing a burning craft down in a survivable crash; flying nap-of-the-earth through a canyon to dodge sensors; a controlled reentry on a damaged heat shield."
+              "text": "Operating craft that fly: atmospheric flyers, shuttles, fighters, gunships, personal spacecraft, and the helm of small starships. Covers flight in atmosphere and vacuum, evasive maneuvers and dogfighting, docking, hard and emergency landings, and reentry. Plotting the actual course is Navigation; surface vehicles are Driving; a capital ship is a crew effort.",
+              "sub": "vehicle combat as pilot, stunt/maneuver checks",
+              "examples": [
+                "threading a shuttle through a debris field",
+                "shaking a pursuing fighter with a hard break",
+                "docking manually after the autopilot dies",
+                "bringing a burning craft down in a survivable crash",
+                "flying nap-of-the-earth through a canyon to dodge sensors",
+                "a controlled reentry on a damaged heat shield"
+              ]
             },
             {
               "key": "Driving",
-              "text": "Operating surface and ground vehicles: rovers, cars and trucks, hover-bikes and speeders, walkers and mechs, tracked vehicles, and watercraft. Covers handling at speed, ground chases, off-road and hazardous-terrain driving, ramming, evasive driving, and recovering from skids and rollovers. Flying craft are Piloting; planning the route is Navigation. Sub-systems: vehicle combat as driver, pursuit/chase. Examples: outrunning a gang on hover-bikes through a packed market; ramming a roadblock at speed; walking a mech over unstable rubble; controlling a four-wheel slide on a wet ramp; running a skiff through rapids; using a truck as both cover and weapon in a running fight."
+              "text": "Operating surface and ground vehicles: rovers, cars and trucks, hover-bikes and speeders, walkers and mechs, tracked vehicles, and watercraft. Covers handling at speed, ground chases, off-road and hazardous-terrain driving, ramming, evasive driving, and recovering from skids and rollovers. Flying craft are Piloting; planning the route is Navigation.",
+              "sub": "vehicle combat as driver, pursuit/chase",
+              "examples": [
+                "outrunning a gang on hover-bikes through a packed market",
+                "ramming a roadblock at speed",
+                "walking a mech over unstable rubble",
+                "controlling a four-wheel slide on a wet ramp",
+                "running a skiff through rapids",
+                "using a truck as both cover and weapon in a running fight"
+              ]
             },
             {
               "key": "Scavenge",
-              "text": "Finding and recovering value from the environment and the fallen. Covers identifying what's salvageable in wreckage and ruins, stripping useful components fast and under pressure, harvesting raw materials, looting gear and resources from defeated foes and abandoned sites, and spotting worth others walked past. Making new things is Fabrication; living off the land is Survival. Sub-systems: salvage yields, loot/component identification. Examples: stripping a downed gunship's still-charged cells before rivals arrive; spotting which corpse carries the keycard and the credits; pulling intact boards from a burned-out console; recognizing a 'worthless' crate as military salvage; field-stripping a wrecked rover for parts to fix yours."
+              "text": "Finding and recovering value from the environment and the fallen. Covers identifying what's salvageable in wreckage and ruins, stripping useful components fast and under pressure, harvesting raw materials, looting gear and resources from defeated foes and abandoned sites, and spotting worth others walked past. Making new things is Fabrication; living off the land is Survival.",
+              "sub": "salvage yields, loot/component identification",
+              "examples": [
+                "stripping a downed gunship's still-charged cells before rivals arrive",
+                "spotting which corpse carries the keycard and the credits",
+                "pulling intact boards from a burned-out console",
+                "recognizing a 'worthless' crate as military salvage",
+                "field-stripping a wrecked rover for parts to fix yours"
+              ]
             },
             {
               "key": "Survival",
-              "text": "Staying alive in any hostile environment — wild or built. Covers finding safe food, water, and shelter; reading weather and environmental hazards before they turn lethal; firecraft; tracking creatures and people; enduring hostile climates; and avoiding or handling dangerous wildlife. It equally covers urban survival: getting by in wastelands, ruins, sewers, dead zones, and on the street — scrounging shelter, reading the dangers of a derelict city, surviving rough. Survival keeps you alive in a place; Streetwise works that place's people. Sub-systems: foraging, tracking, exposure/environment hazards. Examples: finding potable water on a parched moon; reading a coming dust storm in time to shelter; tracking a wounded beast to its den; surviving a week in a flooded sewer network; knowing which ruins flood at night and which collapse; treating exposure in the field."
+              "text": "Staying alive in any hostile environment — wild or built. Covers finding safe food, water, and shelter; reading weather and environmental hazards before they turn lethal; firecraft; tracking creatures and people; enduring hostile climates; and avoiding or handling dangerous wildlife. It equally covers urban survival: getting by in wastelands, ruins, sewers, dead zones, and on the street — scrounging shelter, reading the dangers of a derelict city, surviving rough. Survival keeps you alive in a place; Streetwise works that place's people.",
+              "sub": "foraging, tracking, exposure/environment hazards",
+              "examples": [
+                "finding potable water on a parched moon",
+                "reading a coming dust storm in time to shelter",
+                "tracking a wounded beast to its den",
+                "surviving a week in a flooded sewer network",
+                "knowing which ruins flood at night and which collapse",
+                "treating exposure in the field"
+              ]
             }
           ]
         },
@@ -333,43 +422,133 @@
           "entries": [
             {
               "key": "Social Science",
-              "text": "The academic, theoretical knowledge of how civilized systems and people work: law and jurisprudence, economics and finance, politics and governance, and the behavioral sciences (psychology, sociology, anthropology). Covers knowing which laws apply and how serious a violation is, how bureaucracies, courts, and markets actually function, what an authority or institution would know or do, reading political and economic motives, and profiling behavior. Knowing a law exists and how bad breaking it is = Social Science; knowing who'll break it for you = Streetwise; current who's-who = Galactic Knowledge. Sub-systems: research, legal/bureaucratic procedure. Examples: spotting the loophole that voids a corp's claim; predicting how a market reacts to a leaked report; knowing which agency has jurisdiction and how to stall it; profiling a suspect from their background; arguing a felony down to a misdemeanor; reading the real power behind a puppet governor."
+              "text": "The academic, theoretical knowledge of how civilized systems and people work: law and jurisprudence, economics and finance, politics and governance, and the behavioral sciences (psychology, sociology, anthropology). Covers knowing which laws apply and how serious a violation is, how bureaucracies, courts, and markets actually function, what an authority or institution would know or do, reading political and economic motives, and profiling behavior. Knowing a law exists and how bad breaking it is = Social Science; knowing who'll break it for you = Streetwise; current who's-who = Galactic Knowledge.",
+              "sub": "research, legal/bureaucratic procedure",
+              "examples": [
+                "spotting the loophole that voids a corp's claim",
+                "predicting how a market reacts to a leaked report",
+                "knowing which agency has jurisdiction and how to stall it",
+                "profiling a suspect from their background",
+                "arguing a felony down to a misdemeanor",
+                "reading the real power behind a puppet governor"
+              ]
             },
             {
               "key": "Cyberintel",
-              "text": "Investigation within and of digital and virtual environments — the digital detective. Covers tracing data trails, forensic reconstruction of logs and deleted files, profiling a target's digital behavior, following money through accounts, correlating metadata, and operating inside virtual/VR spaces, where Cyberintel can substitute for many non-physical checks. Breaking in is Hacking; the physical hardware is Technology. Sub-systems: the virtual-space substitution rule, digital forensics. Examples: reconstructing who accessed a file from fragmented logs; following laundered credits through shell accounts; spotting a deepfake by its metadata; profiling an anonymous user from behavioral tells; investigating a crime scene inside a VR construct; proving a 'deleted' message still exists."
+              "text": "Investigation within and of digital and virtual environments — the digital detective. Covers tracing data trails, forensic reconstruction of logs and deleted files, profiling a target's digital behavior, following money through accounts, correlating metadata, and operating inside virtual/VR spaces, where Cyberintel can substitute for many non-physical checks. Breaking in is Hacking; the physical hardware is Technology.",
+              "sub": "the virtual-space substitution rule, digital forensics",
+              "examples": [
+                "reconstructing who accessed a file from fragmented logs",
+                "following laundered credits through shell accounts",
+                "spotting a deepfake by its metadata",
+                "profiling an anonymous user from behavioral tells",
+                "investigating a crime scene inside a VR construct",
+                "proving a 'deleted' message still exists"
+              ]
             },
             {
               "key": "Engineering",
-              "text": "The design and conceptual side of building and breaking. Covers reading and producing structural and mechanical blueprints, calculating loads, stresses, and tolerances, identifying weak points, designing machines and systems, and reverse-engineering how something was made. It also owns controlled-outcome demolition: shaped charges, surgical breaching, dropping a structure precisely, and defusing or rendering ordnance safe — anywhere predicting the result matters. The hands-on build is Fabrication; raw 'just destroy it' explosives are Heavy Weapons; electronics are Technology. Sub-systems: design (a precondition for Fabrication), structural analysis, explosive calculation. Examples: finding the one column whose loss drops a bridge and nothing else; designing the rig before the team builds it; sizing a charge to breach a vault without collapsing the room; defusing a pressure-triggered mine; spotting that a 'safe' catwalk won't hold the team; reverse-engineering a captured device."
+              "text": "The design and conceptual side of building and breaking. Covers reading and producing structural and mechanical blueprints, calculating loads, stresses, and tolerances, identifying weak points, designing machines and systems, and reverse-engineering how something was made. It also owns controlled-outcome demolition: shaped charges, surgical breaching, dropping a structure precisely, and defusing or rendering ordnance safe — anywhere predicting the result matters. The hands-on build is Fabrication; raw 'just destroy it' explosives are Heavy Weapons; electronics are Technology.",
+              "sub": "design (a precondition for Fabrication), structural analysis, explosive calculation",
+              "examples": [
+                "finding the one column whose loss drops a bridge and nothing else",
+                "designing the rig before the team builds it",
+                "sizing a charge to breach a vault without collapsing the room",
+                "defusing a pressure-triggered mine",
+                "spotting that a 'safe' catwalk won't hold the team",
+                "reverse-engineering a captured device"
+              ]
             },
             {
               "key": "Galactic Knowledge",
-              "text": "Living, current knowledge of the galaxy as it is now — current events and worldly awareness at galactic scale. Covers who controls which sector, the active factions, corporations, and syndicates and their relationships, ongoing conflicts and recent events, prominent figures, and regional reputations: whether a planet has a bad rep, what it's known for, whether it's a war zone, and who nominally runs it. It tells you a station is mob-run and which cartel; it does not by itself find the specific fixer once you're there — that's Streetwise on arrival (or Social Science to reach the right official). Deep institutional theory is Social Science. Sub-systems: faction/figure recall, regional-reputation and recent-events recall. Examples: knowing the two corps fighting over this sector and why; recognizing a faction insignia and what it implies; recalling a moon's black-market reputation; placing a notorious figure; knowing which border is a live shooting war; knowing a world's customs well enough not to arrive offensively."
+              "text": "Living, current knowledge of the galaxy as it is now — current events and worldly awareness at galactic scale. Covers who controls which sector, the active factions, corporations, and syndicates and their relationships, ongoing conflicts and recent events, prominent figures, and regional reputations: whether a planet has a bad rep, what it's known for, whether it's a war zone, and who nominally runs it. It tells you a station is mob-run and which cartel; it does not by itself find the specific fixer once you're there — that's Streetwise on arrival (or Social Science to reach the right official). Deep institutional theory is Social Science.",
+              "sub": "faction/figure recall, regional-reputation and recent-events recall",
+              "examples": [
+                "knowing the two corps fighting over this sector and why",
+                "recognizing a faction insignia and what it implies",
+                "recalling a moon's black-market reputation",
+                "placing a notorious figure",
+                "knowing which border is a live shooting war",
+                "knowing a world's customs well enough not to arrive offensively"
+              ]
             },
             {
               "key": "Hacking",
-              "text": "Intrusion into protected digital systems — the active offense in cyberspace. Covers breaking encryption, defeating digital security, remote code execution, privilege escalation, planting and countering malware, hijacking networked devices and weapons mid-operation, spoofing credentials, and jamming signals. Investigating what's inside a system is Cyberintel; the physical electronics are Technology. Sub-systems: the hacking/datacom subsystem (nodes, programs, defenses). Examples: cracking a maglock tied to the building network; seizing a hostile sentry turret in a firefight; spoofing a guard's credentials to open a door remotely; planting a timed logic bomb to wipe evidence; jamming an enemy squad's comms; brute-forcing an encrypted drive."
+              "text": "Intrusion into protected digital systems — the active offense in cyberspace. Covers breaking encryption, defeating digital security, remote code execution, privilege escalation, planting and countering malware, hijacking networked devices and weapons mid-operation, spoofing credentials, and jamming signals. Investigating what's inside a system is Cyberintel; the physical electronics are Technology.",
+              "sub": "the hacking/datacom subsystem (nodes, programs, defenses)",
+              "examples": [
+                "cracking a maglock tied to the building network",
+                "seizing a hostile sentry turret in a firefight",
+                "spoofing a guard's credentials to open a door remotely",
+                "planting a timed logic bomb to wipe evidence",
+                "jamming an enemy squad's comms",
+                "brute-forcing an encrypted drive"
+              ]
             },
             {
               "key": "Medicine",
-              "text": "Keeping bodies alive and functioning, from battlefield first aid to full surgery. Covers stabilizing the dying, treating wounds and trauma, surgery and extraction, diagnosis, pharmacology and drug administration, countering poisons and managing toxic shock, sedation, and long-term care. Sub-systems: healing/stabilization, the consumables/drug subsystem, toxic-shock checks. Examples: stopping a teammate bleeding out before the next round; extracting shrapnel and closing the wound; diagnosing an unknown illness from its symptoms; mixing the counter-agent for a poison; safely dosing combat stims without triggering toxic shock; field surgery by torchlight."
+              "text": "Keeping bodies alive and functioning, from battlefield first aid to full surgery. Covers stabilizing the dying, treating wounds and trauma, surgery and extraction, diagnosis, pharmacology and drug administration, countering poisons and managing toxic shock, sedation, and long-term care.",
+              "sub": "healing/stabilization, the consumables/drug subsystem, toxic-shock checks",
+              "examples": [
+                "stopping a teammate bleeding out before the next round",
+                "extracting shrapnel and closing the wound",
+                "diagnosing an unknown illness from its symptoms",
+                "mixing the counter-agent for a poison",
+                "safely dosing combat stims without triggering toxic shock",
+                "field surgery by torchlight"
+              ]
             },
             {
               "key": "Navigation",
-              "text": "Finding your way and getting there — by any means and in any medium. Covers reading maps and charts; plotting and planning routes overland, by sea, through air, and across space (astrogation is one part of this skill, not the whole); orienteering and fixing position with or without instruments; estimating travel time and managing a journey's logistics; and routing around hazards so you arrive on time and intact. It is not only space travel — it's also not getting lost in trackless wilderness, a maze of streets, or a sprawling station. Operating the vehicle is Piloting/Driving; surviving the terrain is Survival. Sub-systems: route planning, ETA/logistics, position-fixing, jump/trajectory calculation. Examples: plotting a fuel-efficient jump that avoids a patrolled lane; finding the fastest safe route across a hostile city; fixing position by the stars after instruments fail; timing a journey to arrive under cover of dark; reading a centuries-old tunnel map; picking the pass the storm won't close."
+              "text": "Finding your way and getting there — by any means and in any medium. Covers reading maps and charts; plotting and planning routes overland, by sea, through air, and across space (astrogation is one part of this skill, not the whole); orienteering and fixing position with or without instruments; estimating travel time and managing a journey's logistics; and routing around hazards so you arrive on time and intact. It is not only space travel — it's also not getting lost in trackless wilderness, a maze of streets, or a sprawling station. Operating the vehicle is Piloting/Driving; surviving the terrain is Survival.",
+              "sub": "route planning, ETA/logistics, position-fixing, jump/trajectory calculation",
+              "examples": [
+                "plotting a fuel-efficient jump that avoids a patrolled lane",
+                "finding the fastest safe route across a hostile city",
+                "fixing position by the stars after instruments fail",
+                "timing a journey to arrive under cover of dark",
+                "reading a centuries-old tunnel map",
+                "picking the pass the storm won't close"
+              ]
             },
             {
               "key": "Occultism",
-              "text": "Scholarly knowledge of the supernatural — the study of magic rather than its use. Covers chi phenomena, spirit behavior, binding theory, spell mechanics, curses, and magical artifacts: an Occultist understands and can explain how magic works at a systemic level, whether or not they can cast a single spell themselves. Used to identify magical effects, research arcana, relics, and rituals, analyze bound spirits, recognize chi-based technology, and advise on or counter magical threats. The two who actually wield magic are the Spiritual caster (who commands it) and the Binder (who packages it into items). Sub-systems: magic identification, artifact research. Examples: identifying what a glowing sigil will do before anyone touches it; recognizing a 'haunted' ship as a bound spirit and explaining how to free it; researching how to safely contain a cursed relic; advising the team on a chi-caster's likely capabilities; spotting chi-tech disguised as machinery; knowing — without necessarily performing — the ritual that breaks a ward."
+              "text": "Scholarly knowledge of the supernatural — the study of magic rather than its use. Covers chi phenomena, spirit behavior, binding theory, spell mechanics, curses, and magical artifacts: an Occultist understands and can explain how magic works at a systemic level, whether or not they can cast a single spell themselves. Used to identify magical effects, research arcana, relics, and rituals, analyze bound spirits, recognize chi-based technology, and advise on or counter magical threats. The two who actually wield magic are the Spiritual caster (who commands it) and the Binder (who packages it into items).",
+              "sub": "magic identification, artifact research",
+              "examples": [
+                "identifying what a glowing sigil will do before anyone touches it",
+                "recognizing a 'haunted' ship as a bound spirit and explaining how to free it",
+                "researching how to safely contain a cursed relic",
+                "advising the team on a chi-caster's likely capabilities",
+                "spotting chi-tech disguised as machinery",
+                "knowing — without necessarily performing — the ritual that breaks a ward"
+              ]
             },
             {
               "key": "Science",
-              "text": "The hard and natural sciences: chemistry, biology, botany, ecology, genetics, zoology, and physics. Covers analyzing unknown substances, developing antidotes, compounds, and reagents, identifying organisms and pathogens, studying ecosystems and toxins, explaining natural phenomena, and designing experiments. The soft/social sciences are Social Science; treating patients is Medicine; built machines and structures are Engineering. Sub-systems: analysis, synthesis/compound creation. Examples: identifying an unknown powder and what it does; synthesizing an antidote from local flora; judging whether an alien organism is hostile or edible; analyzing why a reactor's coolant is degrading; sequencing a pathogen to design a countermeasure; predicting a reaction before mixing two volatile agents."
+              "text": "The hard and natural sciences: chemistry, biology, botany, ecology, genetics, zoology, and physics. Covers analyzing unknown substances, developing antidotes, compounds, and reagents, identifying organisms and pathogens, studying ecosystems and toxins, explaining natural phenomena, and designing experiments. The soft/social sciences are Social Science; treating patients is Medicine; built machines and structures are Engineering.",
+              "sub": "analysis, synthesis/compound creation",
+              "examples": [
+                "identifying an unknown powder and what it does",
+                "synthesizing an antidote from local flora",
+                "judging whether an alien organism is hostile or edible",
+                "analyzing why a reactor's coolant is degrading",
+                "sequencing a pathogen to design a countermeasure",
+                "predicting a reaction before mixing two volatile agents"
+              ]
             },
             {
               "key": "Technology",
-              "text": "Working with electronic and computing hardware. Covers installing, configuring, modifying, repairing, and operating electronic devices and systems; security hardware and electronic countermeasures; sensors and scanners; the physical side of networked infrastructure; and safely installing and activating cybernetics. This is the electronics expertise — building or crafting a device from scratch is Fabrication, software intrusion is Hacking, digital investigation is Cyberintel. Sub-systems: device repair/modification, electronic (hardware) security, cybernetics activation. Examples: defeating an electronic lock at the panel instead of over the network; installing a cyber-arm without rejection or shock; tuning a sensor suite to catch a cloaked signature; setting up jammers and countermeasures around a camp; modifying a scanner to detect a specific material; safely powering up salvaged tech that might be trapped."
+              "text": "Working with electronic and computing hardware. Covers installing, configuring, modifying, repairing, and operating electronic devices and systems; security hardware and electronic countermeasures; sensors and scanners; the physical side of networked infrastructure; and safely installing and activating cybernetics. This is the electronics expertise — building or crafting a device from scratch is Fabrication, software intrusion is Hacking, digital investigation is Cyberintel.",
+              "sub": "device repair/modification, electronic (hardware) security, cybernetics activation",
+              "examples": [
+                "defeating an electronic lock at the panel instead of over the network",
+                "installing a cyber-arm without rejection or shock",
+                "tuning a sensor suite to catch a cloaked signature",
+                "setting up jammers and countermeasures around a camp",
+                "modifying a scanner to detect a specific material",
+                "safely powering up salvaged tech that might be trapped"
+              ]
             }
           ]
         },
@@ -379,43 +558,133 @@
           "entries": [
             {
               "key": "Performance",
-              "text": "Presenting a crafted version of yourself to an audience — being someone or something you're not, convincingly. Covers acting and sustained impersonation, assuming and holding a false identity under scrutiny, disguise (altering appearance to look like someone or something else), projecting or faking emotion, and the performing arts: singing, dancing, instruments, oratory, showmanship. Staying unseen entirely is Stealth; lying in the moment in conversation is Subterfuge. Sub-systems: disguise vs scrutiny, sustained-cover checks. Examples: passing as a uniformed officer at a checkpoint; holding a cover identity through a long dinner with people who knew the real person; disguising as maintenance to walk past security; weeping on cue to sell a story; playing a set well enough to be welcomed backstage; impersonating a noble's voice and manner."
+              "text": "Presenting a crafted version of yourself to an audience — being someone or something you're not, convincingly. Covers acting and sustained impersonation, assuming and holding a false identity under scrutiny, disguise (altering appearance to look like someone or something else), projecting or faking emotion, and the performing arts: singing, dancing, instruments, oratory, showmanship. Staying unseen entirely is Stealth; lying in the moment in conversation is Subterfuge.",
+              "sub": "disguise vs scrutiny, sustained-cover checks",
+              "examples": [
+                "passing as a uniformed officer at a checkpoint",
+                "holding a cover identity through a long dinner with people who knew the real person",
+                "disguising as maintenance to walk past security",
+                "weeping on cue to sell a story",
+                "playing a set well enough to be welcomed backstage",
+                "impersonating a noble's voice and manner"
+              ]
             },
             {
               "key": "Charm",
-              "text": "Positive interpersonal influence — getting people to like and trust you. Covers building rapport and strong first impressions, warmth and likeability, flirtation to gain access, putting anxious or angry people at ease, smoothing over friction and insults, and cultivating personal contacts and goodwill. One-on-one or small groups. Coercion by fear is Intimidation; bargaining is Negotiation; swaying crowds is Leadership. Sub-systems: disposition/attitude shift, personal contact network. Examples: talking a wary guard into a friendly chat; making a great impression on a potential patron; calming a panicking witness enough to help; flirting past a velvet rope; defusing a bar argument before it turns to blows; turning a one-time contact into a reliable friend."
+              "text": "Positive interpersonal influence — getting people to like and trust you. Covers building rapport and strong first impressions, warmth and likeability, flirtation to gain access, putting anxious or angry people at ease, smoothing over friction and insults, and cultivating personal contacts and goodwill. One-on-one or small groups. Coercion by fear is Intimidation; bargaining is Negotiation; swaying crowds is Leadership.",
+              "sub": "disposition/attitude shift, personal contact network",
+              "examples": [
+                "talking a wary guard into a friendly chat",
+                "making a great impression on a potential patron",
+                "calming a panicking witness enough to help",
+                "flirting past a velvet rope",
+                "defusing a bar argument before it turns to blows",
+                "turning a one-time contact into a reliable friend"
+              ]
             },
             {
               "key": "Intimidation",
-              "text": "Coercion through fear and force of presence — compliance because the alternative frightens. Covers explicit and implicit threats, menace, interrogation by pressure, ultimatums, extortion, staring someone down, and demoralizing enemies in combat (morale damage). The friendly counterpart is Charm; bargaining is Negotiation. Sub-systems: morale/fear effects, interrogation. Examples: making a witness talk by implying the cost of silence; staring down a thug until he backs off; shaking down a vendor for protection; breaking a prisoner's resolve in interrogation; barking orders that scatter a panicked crowd; demoralizing an enemy line until it breaks."
+              "text": "Coercion through fear and force of presence — compliance because the alternative frightens. Covers explicit and implicit threats, menace, interrogation by pressure, ultimatums, extortion, staring someone down, and demoralizing enemies in combat (morale damage). The friendly counterpart is Charm; bargaining is Negotiation.",
+              "sub": "morale/fear effects, interrogation",
+              "examples": [
+                "making a witness talk by implying the cost of silence",
+                "staring down a thug until he backs off",
+                "shaking down a vendor for protection",
+                "breaking a prisoner's resolve in interrogation",
+                "barking orders that scatter a panicked crowd",
+                "demoralizing an enemy line until it breaks"
+              ]
             },
             {
               "key": "Negotiation",
-              "text": "The transactional, deal-making social skill. Covers haggling over price, brokering deals and contracts, structuring terms and partnerships, trade and pricing, mediation between parties, and securing surrenders or hostage releases. Where Charm makes people like you and Intimidation makes them afraid, Negotiation makes a deal both sides will keep. Sub-systems: deal terms, economy/trade. Examples: haggling a fence down to a fair cut; structuring a contract the corp can't wriggle out of; mediating a truce between two gangs; talking a cornered enemy into surrender on terms; arranging passage in exchange for a favor; brokering a salvage sale without getting fleeced."
+              "text": "The transactional, deal-making social skill. Covers haggling over price, brokering deals and contracts, structuring terms and partnerships, trade and pricing, mediation between parties, and securing surrenders or hostage releases. Where Charm makes people like you and Intimidation makes them afraid, Negotiation makes a deal both sides will keep.",
+              "sub": "deal terms, economy/trade",
+              "examples": [
+                "haggling a fence down to a fair cut",
+                "structuring a contract the corp can't wriggle out of",
+                "mediating a truce between two gangs",
+                "talking a cornered enemy into surrender on terms",
+                "arranging passage in exchange for a favor",
+                "brokering a salvage sale without getting fleeced"
+              ]
             },
             {
               "key": "Protocol",
-              "text": "Knowledge and correct execution of formal customs across cultures and species. Covers etiquette, ceremony, diplomatic ritual, court and corporate hierarchy, religious observance, and the thousand ways an outsider can give (or avoid) offense in formal and multicultural settings — moving through formal spaces without triggering the wrong response. Raw likeability is Charm; current who's-who is Galactic Knowledge. Sub-systems: etiquette checks, formal standing. Examples: greeting an alien dignitary correctly; knowing which gesture is a grave insult to a Skalander elder; navigating a gala's seating and precedence; presenting credentials properly to win an audience; observing a religious rite without blasphemy; dressing and behaving correctly at a noble court."
+              "text": "Knowledge and correct execution of formal customs across cultures and species. Covers etiquette, ceremony, diplomatic ritual, court and corporate hierarchy, religious observance, and the thousand ways an outsider can give (or avoid) offense in formal and multicultural settings — moving through formal spaces without triggering the wrong response. Raw likeability is Charm; current who's-who is Galactic Knowledge.",
+              "sub": "etiquette checks, formal standing",
+              "examples": [
+                "greeting an alien dignitary correctly",
+                "knowing which gesture is a grave insult to a Skalander elder",
+                "navigating a gala's seating and precedence",
+                "presenting credentials properly to win an audience",
+                "observing a religious rite without blasphemy",
+                "dressing and behaving correctly at a noble court"
+              ]
             },
             {
               "key": "Spiritual",
-              "text": "Interacting with and commanding magic directly — the innate caster's path. Spirits and paranormal phenomena are raw emotion given form; the Spiritualist taps their own CHI or the CHI of the environment and the spirits within it, merging with that force and bending it to their will. For casters: casting chi spells, channeling and managing chi pools, and sustaining active effects. For non-casters: sensing chi in living beings and places, detecting active magical effects, reading the spiritual and emotional states of beings with strong chi, and resisting chi-based compulsion. This is the path that becomes one with magic and commands it — the Binder instead exploits magic as a resource, and the Occultist only studies it. Sub-systems: the chi/magic subsystem, the chi pool. Examples: channeling chi to mend a wound or strike at range; calming a raw-emotion spirit by meeting it with your own chi; sensing the chi signature of someone hiding nearby; detecting that a room is under an active spell; reading whether calm is genuine or chi-masked; meditating to recover spent chi."
+              "text": "Interacting with and commanding magic directly — the innate caster's path. Spirits and paranormal phenomena are raw emotion given form; the Spiritualist taps their own CHI or the CHI of the environment and the spirits within it, merging with that force and bending it to their will. For casters: casting chi spells, channeling and managing chi pools, and sustaining active effects. For non-casters: sensing chi in living beings and places, detecting active magical effects, reading the spiritual and emotional states of beings with strong chi, and resisting chi-based compulsion. This is the path that becomes one with magic and commands it — the Binder instead exploits magic as a resource, and the Occultist only studies it.",
+              "sub": "the chi/magic subsystem, the chi pool",
+              "examples": [
+                "channeling chi to mend a wound or strike at range",
+                "calming a raw-emotion spirit by meeting it with your own chi",
+                "sensing the chi signature of someone hiding nearby",
+                "detecting that a room is under an active spell",
+                "reading whether calm is genuine or chi-masked",
+                "meditating to recover spent chi"
+              ]
             },
             {
               "key": "Streetwise",
-              "text": "Working the urban underworld and street ecosystem. Covers finding the fixers, fences, dealers, and off-books services willing to help; knowing who to talk to and who to avoid; gathering rumors and black-market intel; reading gang and criminal territory; spotting a setup before it springs; and blending into and moving through cities and undercities. Knowing someone will do the deal = Streetwise; knowing how illegal and serious it is = Social Science; surviving the physical place = Survival. Sub-systems: contacts/rumor, black-market access. Examples: finding a back-alley surgeon who won't report a gunshot; knowing which blocks belong to which crew; catching the rumor that a shipment is about to move; sensing a 'too good' deal is a trap; locating a fence for hot goods; passing through a slum without being marked an outsider."
+              "text": "Working the urban underworld and street ecosystem. Covers finding the fixers, fences, dealers, and off-books services willing to help; knowing who to talk to and who to avoid; gathering rumors and black-market intel; reading gang and criminal territory; spotting a setup before it springs; and blending into and moving through cities and undercities. Knowing someone will do the deal = Streetwise; knowing how illegal and serious it is = Social Science; surviving the physical place = Survival.",
+              "sub": "contacts/rumor, black-market access",
+              "examples": [
+                "finding a back-alley surgeon who won't report a gunshot",
+                "knowing which blocks belong to which crew",
+                "catching the rumor that a shipment is about to move",
+                "sensing a 'too good' deal is a trap",
+                "locating a fence for hot goods",
+                "passing through a slum without being marked an outsider"
+              ]
             },
             {
               "key": "Subterfuge",
-              "text": "Active deception — the telling of convincing falsehoods. Covers lying convincingly, bluffing, conning, spinning cover stories, misdirection, deflecting accusations, and working a mark. This is purely the offense of deceit; catching someone else's lie and reading their intent is Insight, and sustained identity or disguise is Performance. Sub-systems: opposed against the target's Insight/composure. Examples: bluffing past a checkpoint with a confident lie; running a long con on a greedy mark; spinning a cover story on the spot when challenged; misdirecting a guard with a fabricated emergency; deflecting a pointed accusation without flinching; planting a believable false lead for an investigator."
+              "text": "Active deception — the telling of convincing falsehoods. Covers lying convincingly, bluffing, conning, spinning cover stories, misdirection, deflecting accusations, and working a mark. This is purely the offense of deceit; catching someone else's lie and reading their intent is Insight, and sustained identity or disguise is Performance.",
+              "sub": "opposed against the target's Insight/composure",
+              "examples": [
+                "bluffing past a checkpoint with a confident lie",
+                "running a long con on a greedy mark",
+                "spinning a cover story on the spot when challenged",
+                "misdirecting a guard with a fabricated emergency",
+                "deflecting a pointed accusation without flinching",
+                "planting a believable false lead for an investigator"
+              ]
             },
             {
               "key": "Leadership",
-              "text": "Moving groups of people — command and mass influence. Covers commanding and rallying allies and followers, giving orders under fire, restoring and bolstering morale (including the in-combat morale heal), and inspiring coordinated action; and at scale, swaying crowds, building or wrecking reputations, and running propaganda and influence campaigns. One-on-one warmth is Charm. Sub-systems: morale support, the Clout/Reputation track (per-faction standing this skill moves), crowd effects. Examples: rallying a wavering squad to hold the line; steadying a panicking group so they act instead of freeze; giving crisp orders that coordinate a complex assault; swaying a crowd to your side at a rally; running a rumor campaign to turn a district against a rival; building a reputation that opens doors before you arrive."
+              "text": "Moving groups of people — command and mass influence. Covers commanding and rallying allies and followers, giving orders under fire, restoring and bolstering morale (including the in-combat morale heal), and inspiring coordinated action; and at scale, swaying crowds, building or wrecking reputations, and running propaganda and influence campaigns. One-on-one warmth is Charm.",
+              "sub": "morale support, the Clout/Reputation track (per-faction standing this skill moves), crowd effects",
+              "examples": [
+                "rallying a wavering squad to hold the line",
+                "steadying a panicking group so they act instead of freeze",
+                "giving crisp orders that coordinate a complex assault",
+                "swaying a crowd to your side at a rally",
+                "running a rumor campaign to turn a district against a rival",
+                "building a reputation that opens doors before you arrive"
+              ]
             },
             {
               "key": "Insight",
-              "text": "Reading people — the defensive mirror of Subterfuge. Covers discerning emotional state, sincerity, motive, and intent; sensing when someone is lying to or conning you; gauging reactions and disposition; and sensing when someone is dangerous or about to act. Where Subterfuge tells the lie, Insight catches it; where Awareness reads the physical room, Insight reads the people in it. Sub-systems: opposed against the deceiver's Subterfuge; the GM-read hook (once per rank, ask the GM a straight read on a person or whether a scene is a trap). Examples: catching the micro-tell that a contact is lying; reading that a calm negotiator is about to walk; sensing which stranger in the room is the real threat; gauging whether an NPC can be trusted with the plan; noticing someone is being coerced behind their words; feeling that a friendly offer is bait."
+              "text": "Reading people — the defensive mirror of Subterfuge. Covers discerning emotional state, sincerity, motive, and intent; sensing when someone is lying to or conning you; gauging reactions and disposition; and sensing when someone is dangerous or about to act. Where Subterfuge tells the lie, Insight catches it; where Awareness reads the physical room, Insight reads the people in it.",
+              "sub": "opposed against the deceiver's Subterfuge; the GM-read hook (once per rank, ask the GM a straight read on a person or whether a scene is a trap)",
+              "examples": [
+                "catching the micro-tell that a contact is lying",
+                "reading that a calm negotiator is about to walk",
+                "sensing which stranger in the room is the real threat",
+                "gauging whether an NPC can be trusted with the plan",
+                "noticing someone is being coerced behind their words",
+                "feeling that a friendly offer is bait"
+              ]
             }
           ]
         },
@@ -425,43 +694,133 @@
           "entries": [
             {
               "key": "Awareness",
-              "text": "Passive, defensive perception — not getting caught out. Covers noticing without actively searching: sensing an ambush before it springs, catching that you're being watched, tailed, or scouted, registering that something in a space has changed or is 'off,' and spotting a hidden watcher in passing. It is the counter to someone else's Stealth and to Tactics-style scouting. Deliberately searching for hidden things is Search; reading people is Insight; doing the scouting yourself is Tactics. Sub-systems: passive notice/anti-ambush, opposed vs Stealth. Examples: feeling the wrong kind of quiet before stepping into a trap; catching the glint of a sniper's scope; noticing the guard rotation is off tonight; sensing you've picked up a tail in the market; registering that a crate wasn't there an hour ago; waking at the faint sound that shouldn't be there."
+              "text": "Passive, defensive perception — not getting caught out. Covers noticing without actively searching: sensing an ambush before it springs, catching that you're being watched, tailed, or scouted, registering that something in a space has changed or is 'off,' and spotting a hidden watcher in passing. It is the counter to someone else's Stealth and to Tactics-style scouting. Deliberately searching for hidden things is Search; reading people is Insight; doing the scouting yourself is Tactics.",
+              "sub": "passive notice/anti-ambush, opposed vs Stealth",
+              "examples": [
+                "feeling the wrong kind of quiet before stepping into a trap",
+                "catching the glint of a sniper's scope",
+                "noticing the guard rotation is off tonight",
+                "sensing you've picked up a tail in the market",
+                "registering that a crate wasn't there an hour ago",
+                "waking at the faint sound that shouldn't be there"
+              ]
             },
             {
               "key": "Search",
-              "text": "Active, deliberate looking — what you find when you decide to look. Covers methodically searching a room, person, or object for what's hidden: concealed doors and compartments, planted items, contraband, and clues; and forensic, careful examination. The passive 'something's wrong' sense is Awareness. Sub-systems: search vs concealment, physical investigation. Examples: finding the wall safe behind the painting; tossing a suspect's quarters for a data chip; locating the pressure plate before stepping on it; recovering a clue others walked past; finding the seam of a concealed hatch; discovering what's sewn into a coat's lining."
+              "text": "Active, deliberate looking — what you find when you decide to look. Covers methodically searching a room, person, or object for what's hidden: concealed doors and compartments, planted items, contraband, and clues; and forensic, careful examination. The passive 'something's wrong' sense is Awareness.",
+              "sub": "search vs concealment, physical investigation",
+              "examples": [
+                "finding the wall safe behind the painting",
+                "tossing a suspect's quarters for a data chip",
+                "locating the pressure plate before stepping on it",
+                "recovering a clue others walked past",
+                "finding the seam of a concealed hatch",
+                "discovering what's sewn into a coat's lining"
+              ]
             },
             {
               "key": "Stealth",
-              "text": "Avoiding detection entirely. Covers moving silently, hiding yourself and objects, camouflage, masking signatures (heat, EM, sound), activating and using cloaking tech, breaking line of sight, and setting up ambushes or staying unseen while tailing a mark. Looking like you belong (disguise) is Performance; this is about not being seen at all. Sub-systems: stealth vs Awareness/Search, ambush setup. Examples: crossing a guarded yard without tripping a sensor or an eye; hiding a body before the patrol returns; tailing a target through a crowd unseen; masking your heat from a drone's thermal sweep; setting an ambush and holding dead still; slipping a weapon past a pat-down."
+              "text": "Avoiding detection entirely. Covers moving silently, hiding yourself and objects, camouflage, masking signatures (heat, EM, sound), activating and using cloaking tech, breaking line of sight, and setting up ambushes or staying unseen while tailing a mark. Looking like you belong (disguise) is Performance; this is about not being seen at all.",
+              "sub": "stealth vs Awareness/Search, ambush setup",
+              "examples": [
+                "crossing a guarded yard without tripping a sensor or an eye",
+                "hiding a body before the patrol returns",
+                "tailing a target through a crowd unseen",
+                "masking your heat from a drone's thermal sweep",
+                "setting an ambush and holding dead still",
+                "slipping a weapon past a pat-down"
+              ]
             },
             {
               "key": "Larceny",
-              "text": "Precise hands and physical security — the thief's and infiltrator's manual craft. Covers sleight of hand, pickpocketing, palming and planting objects, and defeating physical security: picking locks, cracking safes, mechanical bypass, and disabling manual traps and alarms, plus fine-motor work under pressure. Digital locks and network security are Hacking/Technology; thrown weapons are Projectiles. Sub-systems: lock/physical-security DCs, sleight vs perception. Examples: picking a mechanical lock in the dark before the patrol turns; lifting a keycard from a mark's pocket; planting a tracking bug unnoticed; cracking an old wall safe by feel; disarming a tripwire by hand; palming the real chip and leaving a fake."
+              "text": "Precise hands and physical security — the thief's and infiltrator's manual craft. Covers sleight of hand, pickpocketing, palming and planting objects, and defeating physical security: picking locks, cracking safes, mechanical bypass, and disabling manual traps and alarms, plus fine-motor work under pressure. Digital locks and network security are Hacking/Technology; thrown weapons are Projectiles.",
+              "sub": "lock/physical-security DCs, sleight vs perception",
+              "examples": [
+                "picking a mechanical lock in the dark before the patrol turns",
+                "lifting a keycard from a mark's pocket",
+                "planting a tracking bug unnoticed",
+                "cracking an old wall safe by feel",
+                "disarming a tripwire by hand",
+                "palming the real chip and leaving a fake"
+              ]
             },
             {
               "key": "Projectiles",
-              "text": "Precision thrown and muscle-powered ranged weapons. Covers throwing knives, grenades, and thrown gadgets, plus bows, crossbows, and slings — everything about accuracy, arc, lead, and timing for ranged weapons that aren't firearms. Firearms are Gunslinger (sidearms) and Marksman (long guns); heavy ordnance is Heavy Weapons. Sub-systems: throwing arc, grenade scatter. Examples: landing a grenade through a moving vehicle's window; pinning a guard with a thrown knife; arcing a frag over cover onto a clustered squad; a silent crossbow bolt to drop a sentry; bouncing a thrown charge around a corner; leading a running target with a bow."
+              "text": "Precision thrown and muscle-powered ranged weapons. Covers throwing knives, grenades, and thrown gadgets, plus bows, crossbows, and slings — everything about accuracy, arc, lead, and timing for ranged weapons that aren't firearms. Firearms are Gunslinger (sidearms) and Marksman (long guns); heavy ordnance is Heavy Weapons.",
+              "sub": "throwing arc, grenade scatter",
+              "examples": [
+                "landing a grenade through a moving vehicle's window",
+                "pinning a guard with a thrown knife",
+                "arcing a frag over cover onto a clustered squad",
+                "a silent crossbow bolt to drop a sentry",
+                "bouncing a thrown charge around a corner",
+                "leading a running target with a bow"
+              ]
             },
             {
               "key": "Gunslinger",
-              "text": "Personal short-arms: pistols, SMGs, and shotguns. Covers quick-draw, close-quarters gunplay, snap and reflex shots, hip-fire, dual-wielding sidearms, and clearing jams fast. Long-range rifle work is Marksman; thrown weapons are Projectiles. Sub-systems: draw/initiative, close-range handling. Examples: out-drawing an opponent in a standoff; clearing a room with a shotgun; snap-firing at a target that breaks cover; dual-wielding pistols in a close melee; hip-firing an SMG while moving; clearing a jam and getting back in the fight without missing a beat."
+              "text": "Personal short-arms: pistols, SMGs, and shotguns. Covers quick-draw, close-quarters gunplay, snap and reflex shots, hip-fire, dual-wielding sidearms, and clearing jams fast. Long-range rifle work is Marksman; thrown weapons are Projectiles.",
+              "sub": "draw/initiative, close-range handling",
+              "examples": [
+                "out-drawing an opponent in a standoff",
+                "clearing a room with a shotgun",
+                "snap-firing at a target that breaks cover",
+                "dual-wielding pistols in a close melee",
+                "hip-firing an SMG while moving",
+                "clearing a jam and getting back in the fight without missing a beat"
+              ]
             },
             {
               "key": "Marksman",
-              "text": "Long-range firearms: rifles and sniper systems. Covers precision fire, range and wind estimation, sustained accuracy at distance, called shots to specific parts or equipment, building and holding a shooting position, and breath control. Sidearms are Gunslinger; thrown weapons are Projectiles. Sub-systems: range/optics, aimed shot. Examples: a one-shot kill on a sentry from a rooftop nest; estimating wind and drop across a valley; placing a round through a target's weapon to disarm without killing; holding a sight picture while waiting for the signal; covering the team's advance from overwatch; timing a breath-held shot between heartbeats."
+              "text": "Long-range firearms: rifles and sniper systems. Covers precision fire, range and wind estimation, sustained accuracy at distance, called shots to specific parts or equipment, building and holding a shooting position, and breath control. Sidearms are Gunslinger; thrown weapons are Projectiles.",
+              "sub": "range/optics, aimed shot",
+              "examples": [
+                "a one-shot kill on a sentry from a rooftop nest",
+                "estimating wind and drop across a valley",
+                "placing a round through a target's weapon to disarm without killing",
+                "holding a sight picture while waiting for the signal",
+                "covering the team's advance from overwatch",
+                "timing a breath-held shot between heartbeats"
+              ]
             },
             {
               "key": "Operator",
-              "text": "Remote operation of devices as an extension of yourself: drones, robots, remote turrets, manipulator arms, and nanotech swarms. While operating, the device performs as though you were aboard it — for reconnaissance, combat, or task work. Hacking into someone else's device is Hacking; your own body's installed tech is Technology. Sub-systems: drone/remote control, the drone subsystem. Examples: flying a recon drone ahead to map a compound; piloting a combat drone into a fight you stay clear of; using a remote arm to defuse a hazard from a safe distance; running a swarm of micro-drones to search a building; taking over a fixed turret you control; sending a bot through a gap too small for a person."
+              "text": "Remote operation of devices as an extension of yourself: drones, robots, remote turrets, manipulator arms, and nanotech swarms. While operating, the device performs as though you were aboard it — for reconnaissance, combat, or task work. Hacking into someone else's device is Hacking; your own body's installed tech is Technology.",
+              "sub": "drone/remote control, the drone subsystem",
+              "examples": [
+                "flying a recon drone ahead to map a compound",
+                "piloting a combat drone into a fight you stay clear of",
+                "using a remote arm to defuse a hazard from a safe distance",
+                "running a swarm of micro-drones to search a building",
+                "taking over a fixed turret you control",
+                "sending a bot through a gap too small for a person"
+              ]
             },
             {
               "key": "Tactics",
-              "text": "Understanding and winning engagements, before and during — the active, offensive side of the engagement game. Before contact: scouting and surveilling a target, mapping patrols and security layouts, observing routines, setting up an ambush, and turning it into an approach plan. In contact: reading the flow of a fight, identifying enemy weaknesses, positioning, setting kill zones, prioritizing targets, and exploiting openings. Noticing that you're the one being scouted or ambushed is the defensive mirror, Awareness. Sub-systems: the scout-plan-exploit chain, ambush setup, tactical bonuses. Examples: watching a compound for a day and mapping the guard rotation; choosing the approach that avoids the strongest defenses; setting an ambush where numbers don't help the enemy; calling the shot that collapses their formation; spotting which foe to drop first to break their plan; adapting on the fly when contact goes loud."
+              "text": "Understanding and winning engagements, before and during — the active, offensive side of the engagement game. Before contact: scouting and surveilling a target, mapping patrols and security layouts, observing routines, setting up an ambush, and turning it into an approach plan. In contact: reading the flow of a fight, identifying enemy weaknesses, positioning, setting kill zones, prioritizing targets, and exploiting openings. Noticing that you're the one being scouted or ambushed is the defensive mirror, Awareness.",
+              "sub": "the scout-plan-exploit chain, ambush setup, tactical bonuses",
+              "examples": [
+                "watching a compound for a day and mapping the guard rotation",
+                "choosing the approach that avoids the strongest defenses",
+                "setting an ambush where numbers don't help the enemy",
+                "calling the shot that collapses their formation",
+                "spotting which foe to drop first to break their plan",
+                "adapting on the fly when contact goes loud"
+              ]
             },
             {
               "key": "Binding",
-              "text": "Artificer magic — magic treated as a refined, exploitable resource rather than an innate gift. Where the Spiritualist merges with and commands magic, the Binder packages it: capturing and binding spirits and chi into objects to make spell shards, charged relics, and bound-spirit devices — in effect, disposable magic that even a mundane person with no power of their own can pick up and use. Covers the know-how to design and craft such items, charge and use them, bind spirits into objects or places, and reverse or disrupt existing bindings and wards. For non-casters: detecting bound spirits and arcane signatures, identifying cursed or bound objects, and resisting possession and arcane compulsion. Knowledge of how it all works is Occultism; the innate-caster path is Spiritual. Sub-systems: the arcane/binding subsystem, spirit-binding contests, item creation and charges. Examples: crafting single-use spell shards the whole squad can throw; binding a troublesome spirit into a containment vessel; charging a ward-stone anyone can plant; handing a mundane ally a relic that lets them cast once; disrupting an enemy's bound device; identifying a cursed item before someone triggers it."
+              "text": "Artificer magic — magic treated as a refined, exploitable resource rather than an innate gift. Where the Spiritualist merges with and commands magic, the Binder packages it: capturing and binding spirits and chi into objects to make spell shards, charged relics, and bound-spirit devices — in effect, disposable magic that even a mundane person with no power of their own can pick up and use. Covers the know-how to design and craft such items, charge and use them, bind spirits into objects or places, and reverse or disrupt existing bindings and wards. For non-casters: detecting bound spirits and arcane signatures, identifying cursed or bound objects, and resisting possession and arcane compulsion. Knowledge of how it all works is Occultism; the innate-caster path is Spiritual.",
+              "sub": "the arcane/binding subsystem, spirit-binding contests, item creation and charges",
+              "examples": [
+                "crafting single-use spell shards the whole squad can throw",
+                "binding a troublesome spirit into a containment vessel",
+                "charging a ward-stone anyone can plant",
+                "handing a mundane ally a relic that lets them cast once",
+                "disrupting an enemy's bound device",
+                "identifying a cursed item before someone triggers it"
+              ]
             }
           ]
         },
