@@ -14,7 +14,19 @@ The project is released under **CC0 1.0 Universal** (public domain).
 
 ```
 /
-├── 56th_century_compendium_v8.html   # CANONICAL — single file, mobile + desktop compatible
+├── 56th_century_compendium_v11.html  # CANONICAL — data-driven, requires HTTP hosting
+├── 56th_century_compendium.html      # Embedded-data build (v8 promoted) — file:// works
+├── 56th_century_compendium_v9_datadriven.html  # First data-driven prototype (historical)
+├── 56th_century_compendium_v10.html  # Abandoned intermediate — do not use
+├── data/
+│   ├── v8/                           # Game content JSON (single source of truth for v11)
+│   │   ├── manifest.json             # Load order
+│   │   ├── weapons.json, armor.json, equipment.json, medical.json
+│   │   ├── characters.json, talents.json, magic.json, hacking.json
+│   │   ├── rules.json, glossary.json, galaxy.json
+│   │   ├── README.md                 # Editing guide
+│   │   └── _archive_partial/         # Unused early extraction — deletable
+│   └── v8_pre_skillmigration/        # Pre-skill-migration snapshot
 ├── ship_components.csv               # Exported flat ship component catalog (generated)
 ├── drone_components.csv              # Exported flat drone component catalog (generated)
 ├── inject_engines.py                 # Dev helper: injects ENGINE codes into ship data
@@ -23,16 +35,13 @@ The project is released under **CC0 1.0 Universal** (public domain).
 ├── gen_db_comp.py                    # Dev helper: generates DB_COMP constant data
 ├── db_comp_new.js                    # Dev helper: JS snippet for drone component data
 ├── LICENSE                           # CC0 1.0 Universal
+├── docs/                             # Project documentation
 └── archive/                          # Retired versions — do not edit
-    ├── 56th_century_compendium_v3.html
-    ├── 56th_century_compendium_v5.html
-    ├── 56th_century_compendium_v8.html         # Old desktop-only build (superseded)
-    ├── 56th_century_compendium_v8.backup.html  # Backup snapshots
-    ├── 56th_century_compendium_v8.backup2.html
-    └── 56th_century_compendium_v8.backup4.html
 ```
 
-**`56th_century_compendium_v8.html` is the one and only active file.** All development goes here. It is designed to work on both mobile and desktop. The `archive/` folder is read-only history — never edit files there.
+**`56th_century_compendium_v11.html` + `data/v8/` is the canonical active build.** Edit game content in the JSON files under `data/v8/`. The HTML is the renderer shell. The `archive/` folder is read-only history — never edit files there.
+
+To run locally: `python -m http.server` in the repo root, then open `http://localhost:8000/56th_century_compendium_v11.html`.
 
 ---
 
@@ -42,8 +51,8 @@ Each compendium file is a single self-contained HTML file with three parts:
 
 ### 1. CSS (inside `<style>`)
 - Uses CSS custom properties (`:root` variables) for the entire color palette
-- Dark sci-fi theme with cyan (`--a: #00c8ff`), orange (`--a2: #ff6b35`), and purple (`--a3: #a855f7`) accents
-- Fonts: `Orbitron` (headings/labels), `Share Tech Mono` (data/code), `Exo 2` (body) — loaded from Google Fonts
+- Dark sci-fi theme; v11 accents: teal (`--a: #5fd4c4`), rust (`--a2: #e07a4d`), purple (`--a3: #bd8ef0`)
+- Fonts (v11): `Chakra Petch` (headings), `Atkinson Hyperlegible` (body), `JetBrains Mono` (code/data) — loaded from Google Fonts
 - Fully responsive grid via `auto-fill`/`minmax` — no media queries needed
 - No external CSS frameworks
 
@@ -895,7 +904,7 @@ Expands `DB_COMP` into the flat `g.catalog.drone_parts` array at startup. Each e
 New versions are created as new files: `56th_century_compendium_vN.html`. When creating a new version:
 - Copy the latest version file and rename it
 - Do not modify old version files
-- v8 is the current latest
+- v11 is the current latest (data-driven); `56th_century_compendium.html` is the embedded-data equivalent
 
 ---
 

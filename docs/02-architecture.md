@@ -1,9 +1,18 @@
 # 02 — Architecture
 
-## System diagram
+## Delivery modes
+
+There are two builds. Both share the same JS renderer and `g` data object interface:
+
+| Mode | Canonical file | Data source | Hosting |
+|---|---|---|---|
+| **Embedded** | `56th_century_compendium.html` | `const g = {...}` inline in `<script>` | `file://` or HTTP |
+| **Data-driven** | `56th_century_compendium_v11.html` | `data/v8/*.json` fetched on load | HTTP only |
+
+### Embedded-data diagram
 
 ```
-56th_century_compendium_v8.html
+56th_century_compendium.html
 │
 ├── <style>          CSS custom properties (:root palette) + all layout rules
 ├── <body>
@@ -11,8 +20,8 @@
 │   ├── <aside>      Sidebar nav — <button data-s="section_id"> per section
 │   ├── <div id="main">  Dynamic content area — rewritten by render() on every interaction
 │   └── <div id="tt">   Tooltip overlay (absolutely positioned)
-└── <script>
-    ├── const g = {...}          Master data object (all RPG content — ~2 MB)
+└── <script id="main-src">
+    ├── const g = {...}          Master data object (all RPG content — ~2 MB inline)
     ├── Manufacturer constants   WPN_MFRS, ARMOR_MFRS, DATACOM_MFRS, MEDICAL_MFRS
     ├── Ship/drone constants     SCOMP_DEF, DB_COMP, SCOMP_CLASSES, etc.
     ├── Render pipeline          render() → section-specific renderers
@@ -20,6 +29,24 @@
     ├── Enemy Generator          egState, egAuto*, egExportVTT
     └── Event delegation         Single click listener on #main (data-tog, data-s, data-cat)
 ```
+
+### Data-driven load path (v11, canonical)
+
+```
+Browser opens 56th_century_compendium_v11.html
+  → Boot script shown (loading spinner / progress bar)
+  → fetch('data/v8/manifest.json')
+     → reads man.files array (11 filenames)
+  → Promise.all(files.map(fn => fetch('data/v8/' + fn)))
+     → each JSON merged into window.__DATA via Object.assign-style loop
+  → <script id="main-src"> text is injected as a new <script> element
+     → const g = window.__DATA          ← single line; g is the merged payload
+     → Manufacturer constants, SCOMP_DEF, DB_COMP, etc. (still inline)
+     → render pipeline, CC, EG, event delegation (identical to embedded build)
+  → Boot overlay fades out; render() called to show default section
+```
+
+Key difference: the data-driven build keeps all generator constants (`SCOMP_DEF`, `DB_COMP`, `EG_ARCHETYPES`, etc.) inline in the HTML because they are code parameters, not content. Only flat content arrays live in JSON.
 
 ## Request flow (user interaction)
 
@@ -187,4 +214,4 @@ Base `.def-pill` + modifier from `defCls(tier)`:
 - CSS is written minified/compact inline — maintain that style.
 
 ### Versioning convention
-New versions are new files: `56th_century_compendium_vN.html`. Copy the latest, rename it, never modify old versions. v8 is the current active version. `archive/` is read-only.
+New versions are new files: `56th_century_compendium_vN.html`. Copy the latest, rename it, never modify old versions. v11 is the current active version. `archive/` is read-only. `v10` was an abandoned intermediate and is not used.

@@ -105,6 +105,25 @@
 
 ---
 
+---
+
+## Milestone 8.0 — Data-Driven Architecture
+**Goal**: Extract all game content from the embedded HTML into external JSON files; ship a data-driven compendium served over HTTP.
+**Status**: done
+
+| Feature | Status |
+|---|---|
+| Extract all `g.*` content to `data/v8/*.json` (11 files) | done |
+| `manifest.json` load order + Promise.all fetch boot sequence | done |
+| Boot overlay (progress bar, error panel with instructions) | done |
+| `const g = window.__DATA` shell in renderer script | done |
+| v9 data-driven prototype | done |
+| v11 canonical data-driven build (refined CSS, fonts) | done |
+| GitHub Pages hosting path documented | done |
+| Skill migration (5 files updated between `data/v8_pre_skillmigration/` and `data/v8/`) | done |
+
+---
+
 ## Backlog (unscheduled)
 
 - Rename "armor" references throughout the character creator to "defense" for clarity → see drafts if created
@@ -118,7 +137,7 @@
 
 ## Milestone 6.0 — Character Creator Coverage Gap
 **Goal**: Surface the 112 mechanical effects in backgrounds, occupations, talents, and evolutions that the character creator currently ignores.
-**Status**: in progress — see `work/6.0/`
+**Status**: done — see `work/6.0/`
 
 Full audit conducted 2026-05-12. Gaps categorised into 5 implementation tiers.
 
