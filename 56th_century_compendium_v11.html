@@ -762,6 +762,13 @@ tr.xref-row>td{padding:10px 12px!important;background:var(--bg2);border-bottom:1
 .xref-close,.xref-goto{background:var(--card);border:1px solid var(--border2);color:var(--mu);font-size:11px;font-family:'JetBrains Mono',monospace;border-radius:6px;padding:4px 12px;cursor:pointer;}
 .xref-close:hover{border-color:var(--re);color:var(--re);}
 .xref-goto:hover{border-color:var(--teal);color:var(--teal);}
+
+/* ── v11.4: card-less xref rows + back chip ── */
+.xref-mini{margin:0;}
+.xref-mini td:first-child{color:var(--teal);}
+#backchip{position:fixed;bottom:20px;left:246px;z-index:600;background:var(--bg2);border:1px solid var(--teal);color:var(--teal);font-family:'JetBrains Mono',monospace;font-size:11.5px;border-radius:18px;padding:7px 16px;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,.5);}
+#backchip:hover{background:var(--teal-soft);}
+@media (max-width:760px){#backchip{left:16px;}}
 </style>
 </head>
 <body>
@@ -1048,7 +1055,7 @@ function paraHtml(str){
 }
 
 // ─── Manufacturer logic ───────────────────────────────────────────────────────
-const AVAIL=['COMMON','UNCOMMON','RARE','LIMITED','UNIQUE','CLASSIFIED'];
+const AVAIL=['COMMON','UNCOMMON','RARE','LIMITED','UNIQUE'];
 const MED_LEGAL=['no permit','restricted','illegal','classified'];
 const POWER_STR={3:'Low',6:'Medium',9:'High',10:'High',11:'High',12:'High',13:'High',14:'High',15:'EXTREME',66:'LOC',77:'LOC+1'};
 
@@ -6432,7 +6439,7 @@ function egPickRace(){
 }
 
 // Weighted pick biased toward higher availability for higher tiers
-const EG_AVAIL_WEIGHT={COMMON:1,UNCOMMON:3,RARE:6,LIMITED:10,UNIQUE:12,CLASSIFIED:15};
+const EG_AVAIL_WEIGHT={COMMON:1,UNCOMMON:3,RARE:6,LIMITED:10,UNIQUE:12};
 function egPickTiered(pool,tier){
   if(!pool||!pool.length) return null;
   // For henchmen/regular: flat random. For elite/boss: weight toward higher avail.
@@ -6603,7 +6610,7 @@ function egAutoTalentsEvos(state=egState){
     const t1=grp.tiers['TIER I'];
     const av=(t1.availability||'COMMON').toUpperCase();
     if(diff<=3){return ['COMMON','UNCOMMON'].includes(av);}
-    if(diff<=6){return !['UNIQUE','CLASSIFIED'].includes(av);}
+    if(diff<=6){return !['UNIQUE'].includes(av);}
     return true;
   });
   if(eligibleEvos.length>0){
@@ -7620,7 +7627,7 @@ function render(){
       let totalCost=baseAT.cost;
       let costBreakdown=fmt(baseAT.cost)+' Cr (base)';
       let highestAvailIdx=0;
-      const AVAIL_ORD=['COMMON','UNCOMMON','RARE','LIMITED','CLASSIFIED'];
+      const AVAIL_ORD=['COMMON','UNCOMMON','RARE','LIMITED','UNIQUE'];
       ammoCalc.opts.forEach(code=>{
         const opt=AO.find(o=>o.code===code);if(!opt)return;
         totalCost*=opt.cost_mult;
@@ -7766,42 +7773,7 @@ function render(){
       html+='</div></div>';
     });
     html+='</div>';
-    // ── Programs & Gadgets reference ──────────────────────────────────────────
-    {
-      const sw=g.software||{};
-      const allSw=[...(sw.programs||[]).map(x=>({...x,cat:'PROGRAMS'})),...(sw.gadgets||[]).map(x=>({...x,cat:'GADGETS'}))];
-      const swF=allSw.filter(x=>ms([x.name,x.type,x.action,x.skill,x.passive,x.active,x.desc,x.effect]));
-      if(swF.length){
-        html+='<div class="ssub" style="margin-top:18px;">Programs &amp; Gadgets</div>';
-        html+='<table class="stab" style="margin-bottom:14px;"><thead><tr><th>Name</th><th>Category</th><th>Type / Action</th><th>CPU / Nanite</th><th>MEM</th><th>Cost</th><th>Avail</th><th>Legality</th></tr></thead><tbody>';
-        swF.forEach(x=>{
-          const cpuOrNan=x.nanite?'◆'+x.nanite:(x.cpu||'—');
-          html+='<tr><td>'+hl(x.name,sq)+'</td><td class="avg">'+hl(x.cat,sq)+'</td><td class="minmax">'+hl(x.type||x.action||'—',sq)+'</td><td>'+hl(cpuOrNan,sq)+'</td><td>'+hl(x.memory||'—',sq)+'</td><td style="color:var(--gr);">'+(x.cost&&x.cost!='0'?fmt(x.cost):'—')+'</td><td>'+hl(x.availability||'—',sq)+'</td><td>'+hl(x.legality||'—',sq)+'</td></tr>';
-        });
-        html+='</tbody></table>';
-        html+='<div class="grid">';
-        swF.forEach((x,i)=>{
-          const id='dcsw'+i;
-          html+='<div class="card" id="'+id+'" data-tog="'+id+'"><div class="ch"><div><div class="cn">'+hl(x.name,sq)+'</div><div class="cs">'+hl(x.type||x.action||'',sq)+'</div></div>';
-          html+='<div style="display:flex;align-items:center;gap:4px;"><span class="tag '+(x.cat==='GADGETS'?'tp':'tb')+'">'+esc(x.cat)+'</span><span class="xi">▼</span></div></div>';
-          html+='<div class="tags">'+(x.memory?'<span class="tag tgr">MEM: '+hl(x.memory,sq)+'</span>':'')+(x.nanite?'<span class="tag tp">◆ NANITE: '+hl(x.nanite,sq)+'</span>':'')+(x.cpu?'<span class="tag to">CPU: '+hl(x.cpu,sq)+'</span>':'')+(x.cost&&x.cost!='0'?'<span class="tag tg">⊕ '+hl(x.cost,sq)+'</span>':'')+(x.availability?'<span class="tag '+tc(x.availability)+'">'+hl(x.availability,sq)+'</span>':'')+(x.legality?'<span class="tag '+tc(x.legality)+'">'+hl(x.legality,sq)+'</span>':'')+'</div>';
-          if(x.power||x.damage){
-            html+='<div class="cr2">';
-            if(x.damage)      html+='<span class="wpn-pill wpill-dmg">⚔ '+hl(x.damage,sq)+'</span>';
-            if(x.power)       html+='<span class="wpn-pill wpill-pwr">⚡ '+hl(x.power,sq)+'</span>';
-            if(x.damage_type) html+='<span class="wpn-pill" style="opacity:.7;">'+hl(x.damage_type,sq)+'</span>';
-            html+='</div>';
-          }
-          html+='<div class="cb">';
-          if(x.passive) html+='<div style="margin-bottom:6px;"><div class="fl" style="color:var(--gr);margin-bottom:3px;">WITHOUT CONTROL</div><div class="desc">'+hl(x.passive,sq)+'</div></div>';
-          if(x.active)  html+='<div><div class="fl" style="color:var(--a2);margin-bottom:3px;">WITH CONTROL</div><div class="desc">'+hl(x.active,sq)+'</div></div>';
-          if(!x.passive&&!x.active&&(x.desc||x.effect)) html+='<div class="desc">'+hl(x.effect||x.desc||'',sq)+'</div>';
-          if(x.desc&&(x.passive||x.active)) html+='<div class="desc" style="margin-top:6px;color:var(--mu);font-style:italic;">'+hl(x.desc,sq)+'</div>';
-          html+='</div></div>';
-        });
-        html+='</div>';
-      }
-    }
+    // (Programs & Gadgets reference removed — hacking software lives in its own "hacking" section)
   }
 
   else if(cs==='hacking'){
@@ -9396,7 +9368,7 @@ document.addEventListener('DOMContentLoaded',function(){
 
 // ═══════════════ v11: nav persistence + count badges + omnisearch ═══════════════
 function saveNavState(){try{var grp={};document.querySelectorAll('details.ngrp').forEach(function(d){grp[d.dataset.grp]=d.open;});localStorage.setItem('c11',JSON.stringify({sec:cs,grp:grp}));}catch(e){}}
-document.querySelectorAll('.nb').forEach(function(b){b.addEventListener('click',function(){saveNavState();});});
+document.querySelectorAll('.nb').forEach(function(b){b.addEventListener('click',function(){__backState=null;backChipRemove();saveNavState();});});
 document.querySelectorAll('details.ngrp').forEach(function(d){d.addEventListener('toggle',saveNavState);});
 (function(){ // nav count badges
   function len(a){return (a||[]).length;}
@@ -9489,16 +9461,44 @@ function renderPal(q){
   res.innerHTML=out;document.getElementById('pal-cnt').textContent=palHits.length+' shown';
   var sel=res.querySelector('.pal-it.sel');if(sel&&sel.scrollIntoView)sel.scrollIntoView({block:'nearest'});
 }
+var __backState=null;
+function backChipRemove(){var c=document.getElementById('backchip');if(c)c.remove();}
+function backChipShow(){
+  backChipRemove();
+  if(!__backState)return;
+  var c=document.createElement('button');
+  c.id='backchip';c.innerHTML='\u2190 Back to '+esc(__backState.label||'previous view');
+  c.addEventListener('click',function(){
+    var b=__backState;__backState=null;backChipRemove();
+    if(!b)return;
+    var nb=document.querySelector('.nb[data-s="'+b.sec+'"]');
+    if(nb){document.querySelectorAll('.nb').forEach(function(x){x.classList.remove('active')});nb.classList.add('active');var dd=nb.closest('details.ngrp');if(dd)dd.open=true;}
+    cs=b.sec;sq=b.sq;af=b.af;gcSection=null;
+    var si=document.getElementById('search');if(si)si.value=b.raw||'';
+    render();saveNavState();
+    var m=document.getElementById('main');if(m)m.scrollTop=b.scroll||0;
+  });
+  document.body.appendChild(c);
+}
+function navLabel(sec){
+  var b=document.querySelector('.nb[data-s="'+sec+'"]');
+  if(!b)return sec;
+  var t='';b.childNodes.forEach(function(n){if(n.nodeType===3)t+=n.textContent;});
+  return (t.trim()||sec);
+}
 function palJump(sec,name){
   closePal();
+  var m0=document.getElementById('main');
+  var si=document.getElementById('search');
+  __backState={sec:cs,sq:sq,af:af,raw:si?si.value:'',scroll:m0?m0.scrollTop:0,label:navLabel(cs)};
   var b=document.querySelector('.nb[data-s="'+sec+'"]');
   if(b){document.querySelectorAll('.nb').forEach(function(x){x.classList.remove('active')});b.classList.add('active');var dd=b.closest('details.ngrp');if(dd)dd.open=true;}
   cs=sec;af='';gcSection=null;
-  var si=document.getElementById('search');
   if(sec==='starmap'){sq='';if(si)si.value='';window.__smapFocus=name||null;}
   else{sq=String(name||'').toLowerCase();if(si)si.value=name||'';}
   render();saveNavState();closeNav();
   var m=document.getElementById('main');if(m)m.scrollTop=0;
+  backChipShow();
 }
 (function(){
   var p=document.getElementById('pal'),inp=document.getElementById('pal-in');
@@ -9560,6 +9560,20 @@ function xrefFetchCard(sec,name){
       for(var i=0;i<rkvs.length;i++){var rk=rkvs[i].querySelector('.rk');var t=rk?rk.textContent.trim().toLowerCase():'';if(t===nl||t.indexOf(nl)>=0){card=rkvs[i];break;}}
     }
     if(card){card.classList.add('x');html=card.outerHTML;}
+    else{
+      // card-less targets (ammo types/options, weapon/armor options, ...): extract the table row
+      var exact=null,loose=null;
+      var cells=main.querySelectorAll('table td');
+      for(var i=0;i<cells.length;i++){var t=(cells[i].textContent||'').trim().toLowerCase();if(t===nl){exact=cells[i];break;}if(!loose&&t.indexOf(nl)>=0)loose=cells[i];}
+      var hit=exact||loose;
+      if(hit){
+        var row=hit.closest('tr'),tb=hit.closest('table');
+        if(row&&tb){
+          var head=tb.querySelector('thead');
+          html='<div class="tbl-wrap"><table class="'+(tb.className||'stab')+' xref-mini">'+(head?'<thead>'+head.innerHTML+'</thead>':'')+'<tbody>'+row.outerHTML+'</tbody></table></div>';
+        }
+      }
+    }
   }catch(e){}
   cs=keep.cs;sq=keep.sq;af=keep.af;
   main.innerHTML=keep.html;
