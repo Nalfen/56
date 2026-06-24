@@ -4852,7 +4852,7 @@ function ccExportRoll20(){
   const spent=ccCalcSpentXP();
   const available=(+(st.total_xp)||0)-spent+(+(st.credited_xp)||0);
   const attribs=[];
-  const a=(n,c,m)=>{const o={name:n,current:c,id:'cc_'+n.replace(/[^a-zA-Z0-9_]/g,'_')};if(m!==undefined)o.max=m;attribs.push(o);};
+  const a=(n,c,m)=>{attribs.push({name:n,current:c,max:(m!==undefined?m:''),id:'cc_'+n.replace(/[^a-zA-Z0-9_]/g,'_')});};
   a('name',st.name||'');a('race',st.race||'');a('occupation',st.occupation||'');
   a('background',st.background||'');a('sex',st.sex||'');a('age',st.age||0);a('appararent_age',st.apparent_age||0);
   a('background_desc',st.background_desc||'');a('occupation_desc',st.occupation_desc||'');
@@ -4866,10 +4866,10 @@ function ccExportRoll20(){
   a('spent_xp',spent);a('available_xp',available);
   a('init_move',st.init_move||'');a('init_standard',st.init_standard||'');a('init_quick',st.init_quick||'');a('init_complex',st.init_complex||'');
   a('armorsoak',st.armorsoak||'');a('armorsoak_bonus',st.armorsoak_bonus||0);
-  CC_ALL_SKILLS.forEach(s=>{a(s,st[s]||0);a(s+'_bonus',st[s+'_bonus']||0);a(s+'_crit',st[s+'_crit']||'10');});
+  CC_ALL_SKILLS.forEach(s=>{const _k=s.replace(/[ -]/g,'_');a(_k,st[s]||0);a(_k+'_bonus',st[s+'_bonus']||0);a(_k+'_crit',st[s+'_crit']||'10');});
   for(let i=1;i<=10;i++){const t=st.talents[i-1]||{};a('talent'+i+'_name',t.name||'');a('talent'+i+'_skill',t.skill||'');a('talent'+i+'_category',t.category||'');a('talent'+i+'_xp_cost',t.xp_cost||0);a('talent'+i+'_effect',t.effect||'');}
   for(let i=1;i<=5;i++){const e=st.evolutions[i-1]||{};a('evo'+i+'_name',e.name||'');a('evo'+i+'_type',e.type||'');a('evo'+i+'_tier',e.tier||'');a('evo'+i+'_effect',e.effect||'');}
-  for(let i=1;i<=6;i++){const w=st.weapons[i-1]||{};const wOpts=(w.options||[]).join(', ');a('weapon'+i+'_name',w.name||'');a('weapon'+i+'_mfr',w.mfr||'Generic');a('weapon'+i+'_skill',w.skill||'');a('weapon'+i+'_dmg',w.dmg||'');a('weapon'+i+'_dmgtype',w.dmgtype||'');a('weapon'+i+'_power',w.power||0);a('weapon'+i+'_expertise',w.expertise||0);a('weapon'+i+'_special',(w.special||'')+(wOpts?' ['+wOpts+']':''));a('weapon'+i+'_options',wOpts);a('weapon'+i+'_close_range',w.close_range||'');a('weapon'+i+'_medium_range',w.medium_range||'');a('weapon'+i+'_long_range',w.long_range||'');a('weapon'+i+'_rof',w.rof||'');a('weapon'+i+'_ammo',w.ammo||0);a('weapon'+i+'_currentammo',w.currentammo||0);a('weapon'+i+'_reload',w.reload||'');a('weapon'+i+'_dmgtarget',w.dmgtarget||'');}
+  for(let i=1;i<=6;i++){const w=st.weapons[i-1]||{};const wOpts=(w.options||[]).join(', ');a('weapon'+i+'_name',w.name||'');a('weapon'+i+'_mfr',w.mfr||'Generic');a('weapon'+i+'_skill',String(w.skill||'').replace(/[ -]/g,'_'));a('weapon'+i+'_dmg',w.dmg||'');a('weapon'+i+'_dmgtype',w.dmgtype||'');a('weapon'+i+'_power',w.power||0);a('weapon'+i+'_expertise',w.expertise||0);a('weapon'+i+'_special',(w.special||'')+(wOpts?' ['+wOpts+']':''));a('weapon'+i+'_options',wOpts);a('weapon'+i+'_close_range',w.close_range||'');a('weapon'+i+'_medium_range',w.medium_range||'');a('weapon'+i+'_long_range',w.long_range||'');a('weapon'+i+'_rof',w.rof||'');a('weapon'+i+'_ammo',w.ammo||0);a('weapon'+i+'_currentammo',w.currentammo||0);a('weapon'+i+'_reload',w.reload||'');a('weapon'+i+'_dmgtarget',w.dmgtarget||'');}
   for(let i=1;i<=2;i++){const ar=st.armor[i-1]||{};const arOpts=(ar.options||[]).join(', ');a('armor'+i+'_name',ar.name||'');a('armor'+i+'_mfr',ar.mfr||'Generic');a('armor'+i+'_type',ar.type||'');a('armor'+i+'_def_phys',ar.def_phys||'None');a('armor'+i+'_def_energy',ar.def_energy||'None');a('armor'+i+'_def_tech',ar.def_tech||'None');a('armor'+i+'_def_spirit',ar.def_spirit||'None');a('armor'+i+'_special',(ar.special||'')+(arOpts?' ['+arOpts+']':''));a('armor'+i+'_options',arOpts);a('armor'+i+'_soak_expr',ar.soak_expr||'');a('armor'+i+'_charges',ar.charges||0);a('armor'+i+'_regen',ar.regen||'');}
   for(let i=1;i<=3;i++){const d=st.datacoms[i-1]||{};const dcOpts=(d.options||[]).join(', ');a('datacom'+i+'_name',d.name||'');a('datacom'+i+'_mfr',d.mfr||'Generic');a('datacom'+i+'_cpu',d.cpu||0);a('datacom'+i+'_mem',d.mem||0);a('datacom'+i+'_nanite',d.nanite||0);a('datacom'+i+'_def_phys',d.def_phys||'None');a('datacom'+i+'_def_energy',d.def_energy||'None');a('datacom'+i+'_def_tech',d.def_tech||'None');a('datacom'+i+'_def_spirit',d.def_spirit||'None');a('datacom'+i+'_def_dmg',d.def_dmg||'');a('datacom'+i+'_int_ext',d.int_ext||0);a('datacom'+i+'_int_int',d.int_int||0);a('datacom'+i+'_int_main',d.int_main||0);a('datacom'+i+'_expertise',d.expertise||0);a('datacom'+i+'_special',(d.special||'')+(dcOpts?' ['+dcOpts+']':''));a('datacom'+i+'_options',dcOpts);}
   for(let i=1;i<=10;i++){const p=st.programs[i-1]||{};a('program'+i+'_name',p.name||'');a('program'+i+'_type',p.type||'');a('program'+i+'_cpu',p.cpu||0);a('program'+i+'_mem',p.mem||0);a('program'+i+'_passive',p.passive||'');a('program'+i+'_active',p.active||'');}
@@ -6849,7 +6849,7 @@ function egExportStateVTTES(state){
   const firstArmor=state.armors[0];
   att('armorsoak',firstArmor?firstArmor.soak:'0D+0','');
   att('armorsoak_bonus','','');
-  EG_SKILLS_ALL.forEach(s=>{att(s.key,state.skills[s.key]||0,'');});
+  EG_SKILLS_ALL.forEach(s=>{att(s.key.replace(/[ -]/g,'_'),state.skills[s.key]||0,'');});
   state.weapons.forEach((w,i)=>{
     const n=i+1;
     att('weapon'+n+'_name',w.name,'');att('weapon'+n+'_type',w.type,'');att('weapon'+n+'_dmgtype',w.dmgtype,'');
@@ -6857,7 +6857,7 @@ function egExportStateVTTES(state){
     att('weapon'+n+'_special',egSpecialDesc(w.special),'');att('weapon'+n+'_close_range',w.close_range,'');
     att('weapon'+n+'_medium_range',w.medium_range,'');att('weapon'+n+'_long_range',w.long_range,'');
     att('weapon'+n+'_rof',w.rof,'');att('weapon'+n+'_currentammo',w.ammo,'');att('weapon'+n+'_ammo',w.ammo,'');
-    att('weapon'+n+'_reload',w.reload,'');att('weapon'+n+'_skill',w.skill,'');att('weapon'+n+'_dmgtarget',w.dmgtarget,'');
+    att('weapon'+n+'_reload',w.reload,'');att('weapon'+n+'_skill',String(w.skill||'').replace(/[ -]/g,'_'),'');att('weapon'+n+'_dmgtarget',w.dmgtarget,'');
   });
   state.armors.forEach((ar,i)=>{
     const n=i+1;
