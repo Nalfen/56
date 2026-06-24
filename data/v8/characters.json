@@ -2720,7 +2720,7 @@
     "tier": "TIER III",
     "name": "Hyper immunity",
     "cost": "3125000",
-    "availability": "CLASSIFIED",
+    "availability": "UNIQUE",
     "legality": "Restricted",
     "effect": "You are immune to AILMENTS. All ailments fail to apply on you."
    },
@@ -5476,7 +5476,7 @@
       "tier": "TIER III",
       "name": "Hyper immunity",
       "cost": "3125000",
-      "availability": "CLASSIFIED",
+      "availability": "UNIQUE",
       "legality": "Restricted",
       "effect": "You are immune to AILMENTS. All ailments fail to apply on you."
      }

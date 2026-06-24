@@ -3882,16 +3882,16 @@
     "desc": "Allows rapid movement of data of your network devices MEMORY."
    },
    {
-    "name": "Dr Tavish personal assistant",
+    "name": "Patch-Me",
     "type": "Program",
     "memory": "1",
     "cpu": "1",
     "availability": "COMMON",
     "legality": "No Permit",
     "cost": "10000",
-    "passive": "Provides real time translation of any language, including some obscure darkspace dialects. [TEMPORARY - Under revision]",
-    "active": "Same as base effect with enhanced results when taking control of this program. [TEMPORARY - Under revision]",
-    "desc": "Popular commercial grade universal translator"
+    "passive": "Allows remote MEDICAL or LEADERSHIP skill checks to one target currently connected to the network within DATACOM range",
+    "active": "Allows remote MEDICAL or LEADERSHIP skills checks to all targets currently connected to the network within DATACOM range",
+    "desc": "Battlefield medical assistant"
    },
    {
     "name": "McTavish Pro",
@@ -3901,9 +3901,9 @@
     "availability": "COMMON",
     "legality": "No Permit",
     "cost": "10000",
-    "passive": "When your network takes any amount of SYSTEM damage, all NODE owners on the network gain a LARGE bonus to TECH SOAK until next maintenance [TEMPORARY - Under revision]",
-    "active": "Same as base effect with enhanced results when taking control of this program. [TEMPORARY - Under revision]",
-    "desc": "Corporate grade of the McTavish routines"
+    "passive": "When anyone on your network takes damage, all NODE owners on the network gain a SMALL bonus to that same damage type SOAK until next maintenance",
+    "active": "When anyone on your network takes damage, all NODE owners on the network gain a LARGE bonus to that same damage type SOAK until next maintenance",
+    "desc": "McTavish routines designed to provide adaptive protection on the field"
    },
    {
     "name": "Honey Pot",
@@ -3913,8 +3913,8 @@
     "availability": "UNCOMMON",
     "legality": "Restricted",
     "cost": "10000",
-    "passive": "While Honey Pot is active, you can destroy it to steal one PROGRAM used against your network in the last turn. [TEMPORARY - Under revision]",
-    "active": "Same as base effect with enhanced results when taking control of this program. [TEMPORARY - Under revision]",
+    "passive": "While Honey Pot is active, you can, as an IMMEDIATE REACTION to a PROGRAM usage against your network, sacrifice honeypot to steal the PROGRAM that was just used against your network. You must have the MEMORY capacity for this new program or the action fails.",
+    "active": "Same as the base effect but no longer limited to only the program used against you, it can be any program the attacker has on their DATACOM",
     "desc": "Allows the capture of PROGRAM used against your network."
    },
    {
@@ -3925,9 +3925,9 @@
     "availability": "UNCOMMON",
     "legality": "Restricted",
     "cost": "10000",
-    "passive": "Grants a LARGE bonus to defenses against all CYBERINTEL attacks while your EXTERNAL NETWORK is still standing. Lose the effect if attacker has reached your INTERNAL NETWORK. [TEMPORARY - Under revision]",
-    "active": "Same as base effect with enhanced results when taking control of this program. [TEMPORARY - Under revision]",
-    "desc": "Defense against remote connections"
+    "passive": "Grants a LARGE bonus to WITS DEFENSE against any non Melee range attacks, anyone benefiting from this program also suffers this as a penalty to their WITS attacks",
+    "active": "Grants a LARGE bonus to WITS DEFENSE.",
+    "desc": "Provides heavy scrambling of wireless signals to protect against against remote connections"
    },
    {
     "name": "Misdirection",
@@ -3937,9 +3937,9 @@
     "availability": "RARE",
     "legality": "Restricted",
     "cost": "30000",
-    "passive": "While active any effect that is not SYSTEM damage that would target the HOST NODE can be redirected to an allied CLIENT NODE of the defenders choice. [TEMPORARY - Under revision]",
-    "active": "Same as base effect with enhanced results when taking control of this program. [TEMPORARY - Under revision]",
-    "desc": "Provides the ability to setup cyber decoys"
+    "passive": "While active any AILMENT that would affect the HOST NODE can be redirected to an allied NODE of the defenders choice that is also running Misdirection.",
+    "active": "While you have control any AILMENTS received can instead be transfered to the attacker the caused it. No effect on existing AILMENTS received before you got control",
+    "desc": "Provides the ability to setup cyber decoys and redirrect hamrful effects"
    },
    {
     "name": "Encryption",
@@ -3949,8 +3949,8 @@
     "availability": "UNCOMMON",
     "legality": "Restricted",
     "cost": "10000",
-    "passive": "All PROGRAMS, GADGETS, ROUTINES and any data on the networks MEMORY are now considered CORE data and cannot be accessed by attackers until they reach the CORE NETWORK layer. [TEMPORARY - Under revision]",
-    "active": "Same as base effect with enhanced results when taking control of this program. [TEMPORARY - Under revision]",
+    "passive": "All PROGRAMS, GADGETS and any data on the networks MEMORY are now protected and cannot be accessed, stolen or identified by attackers. No PROGRAMS or GADGETS can be activated while this is in effect.",
+    "active": "Lifts the restrictions and allows deployment of PROGRAMS and GADGETS as normal",
     "desc": "Encrypt all network data with a key that is only accesible from the CORE network."
    },
    {
@@ -3958,24 +3958,24 @@
     "type": "Program",
     "memory": "1",
     "cpu": "1",
-    "availability": "UNCOMMON",
-    "legality": "Restricted",
-    "cost": "10000",
-    "passive": "All TECH attacks gain the DP modifier (Target Breached but -1 DMG) [TEMPORARY - Under revision]",
-    "active": "Same as base effect with enhanced results when taking control of this program. [TEMPORARY - Under revision]",
-    "desc": "A black market tool designed to increase your hacking capabilities."
+    "availability": "RARE",
+    "legality": "Illegal",
+    "cost": "80000",
+    "passive": "MEDIUM power tech attack that Deals 4D+2 TECH MORALE damage. If target is suffering from an AILMENT the crit range of this attack increases by 3",
+    "active": "HIGH power tech attack that Deals 4D+3 TECH MORALE damage. If target is suffering from an AILMENT this attack is an automatic critical hit",
+    "desc": "A black market ice breaker that claimed the lives of many a hacker."
    },
    {
-    "name": "Cyberwall II",
+    "name": "Cybershell",
     "type": "Program",
     "memory": "2",
     "cpu": "1",
     "availability": "UNCOMMON",
     "legality": "No Permit",
     "cost": "20000",
-    "passive": "Grants a LARGE bonus to SOAK against TECH damage [TEMPORARY - Under revision]",
-    "active": "Same as base effect with enhanced results when taking control of this program. [TEMPORARY - Under revision]",
-    "desc": "An improved version of the Cyberwall software."
+    "passive": "As a STANDARD action grants one target within DATACOM range your choice of either HACKPROOF, INSULATING, HARDENED or SPIRITPROOF for X turns (HACKING result)",
+    "active": "Same as base effect but you grant all 4 effects at once",
+    "desc": "An defensive tactical program designed to protect frontline fighters."
    },
    {
     "name": "Pink Slip",
@@ -3985,9 +3985,9 @@
     "availability": "UNCOMMON",
     "legality": "No Permit",
     "cost": "10000",
-    "passive": "You can SACRIFICE this program to remove any NODE (including the HOST NODE) in your network as QUICK action. Removing the HOST NODE removes the entire NETWORK. [TEMPORARY - Under revision]",
-    "active": "Same as base effect with enhanced results when taking control of this program. [TEMPORARY - Under revision]",
-    "desc": "Provides the NETWORK CONTROLLER with a quick way to boot NODES from their network."
+    "passive": "While this program is active, you can remove any NODE (including the HOST NODE) in your network as QUICK action. Removing the HOST NODE removes the entire NETWORK.",
+    "active": "Same as the base effect but you can also rejoin the NODE to the NETWORK as a QUICK action.",
+    "desc": "Provides the NETWORK CONTROLLER with a quick way to isolate critical NODES from their network."
    },
    {
     "name": "Smoke bomb 3.8",
@@ -4014,16 +4014,16 @@
     "desc": "Advanced pilot AI with combat driving assistance."
    },
    {
-    "name": "Yotoma Dragon Hoard",
-    "type": "Program",
+    "name": "EZ-Cash",
+    "type": "Program, HACKING vs WITS",
     "memory": "1",
     "cpu": "1",
     "availability": "RARE",
-    "legality": "Restricted",
+    "legality": "Illegal",
     "cost": "30000",
-    "passive": "Pick one ROUTINE running on your NETWORK. That routine can never be the target of any hostile action, including SCAN until Dragon Hoard ends or your NETWORK is DESTROYED. [TEMPORARY - Under revision]",
-    "active": "Same as base effect with enhanced results when taking control of this program. [TEMPORARY - Under revision]",
-    "desc": "Advanced backup routine to ensure complete data INTEGRITY"
+    "passive": "Roll HACKING Vs WITS, all unmitigated success steal 10% per success of the target's total carried credits.",
+    "active": "Same as the base effect but gain a LARGE bonus to the final roll result.",
+    "desc": "A black market program designed to skim credits from unsuspecting victims."
    },
    {
     "name": "Second Sight",
