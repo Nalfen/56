@@ -7037,13 +7037,22 @@ function render(){
       html+='<div class="rgb">';
       grp.sections.forEach(sec=>{
         const entries=sec.entries.filter(e=>!sq||ms([e.text,e.key]));
-        if(!entries.length)return;
+        const tblRows=(sec.table&&sec.table.rows)?sec.table.rows.filter(r=>!sq||ms(r)):[];
+        if(!entries.length&&!tblRows.length)return;
         html+='<div class="rsec">';
         if(sec.title&&sec.title!==grp.group)html+='<div class="rst">'+esc(sec.title)+'</div>';
         entries.forEach(e=>{
           if(e.key){var _v='<div class="rv">'+hl(e.text,sq)+'</div>';if(e.examples&&e.examples.length)_v+='<div class="rex"><div class="rex-l">Examples</div><ul class="rex-u">'+e.examples.map(function(x){return '<li>'+hl(x,sq)+'</li>';}).join('')+'</ul></div>';if(e.sub)_v+='<div class="rsub"><span class="rsub-t">subsystems</span>'+hl(e.sub,sq)+'</div>';html+='<div class="rkv"><div class="rk">'+hl(e.key,sq)+'</div>'+_v+'</div>';}
           else html+='<div class="re">'+hl(e.text,sq)+'</div>';
         });
+        if(sec.table&&tblRows.length){
+          var T=sec.table;
+          if(T.title)html+='<div class="rk" style="margin-top:8px;">'+esc(T.title)+'</div>';
+          if(T.note)html+='<div class="re" style="margin:4px 0 2px;">'+hl(T.note,sq)+'</div>';
+          html+='<div style="overflow-x:auto;"><table class="evo-aff-table"><thead><tr>'+(T.headers||[]).map(function(h){return '<th>'+esc(h)+'</th>';}).join('')+'</tr></thead><tbody>';
+          tblRows.forEach(function(r){html+='<tr>'+r.map(function(c){return '<td>'+hl(String(c),sq)+'</td>';}).join('')+'</tr>';});
+          html+='</tbody></table></div>';
+        }
         html+='</div>';
       });
       html+='</div></div>';
