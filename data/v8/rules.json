@@ -1199,7 +1199,7 @@
       },
       {
        "key": "YOUR DEFENSIVE LAYER",
-       "text": "You carry exactly ONE layer of defence: armour, a forcefield, a datacom, or a (spiritual) barrier. Whatever it is, it gives you a DEFENSE RATING - Low (3), Medium (6), High (9) or Extreme (12) - rated separately against Physical, Energy, Tech and Spiritual damage, plus a SOAK pool. You no longer stack a forcefield on top of armour; you pick your one layer and live with its strengths and gaps."
+       "text": "You carry exactly ONE layer of defence: armour, a forcefield, a datacom, or a (spiritual) barrier. Whatever it is, it gives you a DEFENSE RATING - Low, Medium, High or Extreme - rated separately against Physical, Energy, Tech and Spiritual damage, plus a SOAK pool. You no longer stack a forcefield on top of armour; you pick your one layer and live with its strengths and gaps."
       },
       {
        "key": "SOAK",
@@ -1224,6 +1224,13 @@
       {
        "key": "",
        "text": "4) Whatever damage is left comes off the targeted pool - HEALTH or MORALE."
+      },
+      {
+       "key": "EXPERTISE - SKILL BECOMES DAMAGE",
+       "text": "Hitting is not all-or-nothing. Count the hit-successes you score BEYOND your target's DEFENSE - the number you actually needed to land the blow. Each surplus success adds +1 damage, capped by your weapon's EXPERTISE rating, and this payoff applies chiefly on COMPLEX actions. Expertise is the system's standing reward for skill: roll well past what you needed and you unlock more of the weapon; scrape a bare hit and you get none of it.",
+       "examples": [
+        "Needed 3 successes to hit, scored 6. The 3 surplus successes add +3 damage - but only up to the weapon's EXPERTISE; a weapon with EXPERTISE 2 caps that bonus at +2."
+       ]
       },
       {
        "key": "TRAUMA - WHEN ONE HIT OVERWHELMS YOU",
@@ -1651,770 +1658,287 @@
    ]
   },
   {
-   "group": "ARMORS",
+   "group": "GEAR",
    "sections": [
     {
-     "id": "Armor_Basic",
-     "title": "ARMOR Basic",
+     "id": "Gear_Intro",
+     "title": "Reading Your Gear",
      "entries": [
       {
-       "key": "",
-       "text": "Armors provide protection against all forms of attacks. The type of armor determines a few factors."
+       "key": "READING YOUR GEAR",
+       "text": "Every item in the compendium - a pistol, a vest, a vial, a starship - is presented as a stat card. Most of the card is shared vocabulary you only need to learn once; the rest is specific to what the thing does. This section walks the stat lines for each kind of gear so you can read any card at a glance."
+      },
+      {
+       "key": "THE SHARED STATS",
+       "text": "Four lines show up on almost everything. COST is the price in credits. SIZE is how much room it takes and how easily it hides. AVAILABILITY is how hard it is to find, and LEGALITY is how much trouble it is to own. Size, availability and legality are all covered under the Basic Rules (Carrying Capacity & Item Size, and Availability) - learn them once and they read the same on a knife or a frigate."
+      },
+      {
+       "key": "EXPERTISE - A SHARED STAT, AND A DESIGN PHILOSOPHY",
+       "text": "One line recurs across most usable gear: EXPERTISE, the measure of how much skill an item rewards. It is no longer a melee-only trait - weapons, datacoms and other active gear all carry it. Mechanically, successes you roll beyond a task's DC convert into a better result (on a weapon, bonus damage up to the item's expertise), so the better you roll, the more of the item you unlock."
+      },
+      {
+       "key": "WHY SOME ITEMS HAVE LOW STATS AND HIGH EXPERTISE",
+       "text": "Expertise is also a deliberate design lever, so read it as a clue to who an item is for. Some gear is built with intentionally modest base stats but high expertise: these are specialists' tools, clumsy and underwhelming in untrained hands and exceptional in trained ones. A novice barely clears the DC and unlocks none of the ceiling, while an expert rolls successes to spare and turns them into real power. When you see a low-stat, high-expertise item, read it as 'only worth carrying if you are good with it' - and when you build a character, let your best skills point you toward the gear that rewards them."
+      },
+      {
+       "key": "SPECIAL PROPERTIES LIVE IN THE GLOSSARY",
+       "text": "Many items carry a SPECIAL line - short tags like DP, AEGIS, DISCRETE, EMP, HARDENED. These are named properties shared across the catalogue, not rules unique to one item, and every one has a full definition in the Glossary. When a card shows a tag you don't recognise, look it up there rather than expecting it spelled out on the card."
       }
      ]
     },
     {
-     "id": "Forcefield",
-     "title": "Forcefield",
+     "id": "Gear_Weapons",
+     "title": "Weapons",
      "entries": [
       {
-       "key": "",
-       "text": "FORCEFIELDS"
-      },
-      {
-       "key": "",
-       "text": "Forcefields are invisible barriers designed to negate ranged attacks. They have no effect in melee range (except shields, see below)."
-      },
-      {
-       "key": "",
-       "text": "Unlike armors forcefields only have SOAK and no Deflect but that SOAK is guaranteed (reduce damage by forcefield value before you check for armor)."
-      },
-      {
-       "key": "",
-       "text": "When damage exceeds the value of a shield or forcefield you ignore the rest of the hit no matter how much damage is left. (ie: shield gating)."
-      },
-      {
-       "key": "",
-       "text": "Shields :       Provide frontal protection (no effect vs flank and back hits) against various ranged attacks and also in melee range against one opponent of your choice."
-      },
-      {
-       "key": "",
-       "text": "Combat :       Forcefield designed for combat situations, provides some protection with a quick recharge time."
-      },
-      {
-       "key": "",
-       "text": "Guardian :     Very high deflection forcefields designed to negate surprise and initial attacks. They lack any staying power for long term engagements."
-      },
-      {
-       "key": "",
-       "text": "Generators : Stationary generators designed to protect valuable positions and everyone inside."
-      }
-     ]
-    },
-    {
-     "id": "Armor-Special",
-     "title": "ARMOR Special",
-     "entries": [
-      {
-       "key": "",
-       "text": "SPECIAL"
-      },
-      {
-       "key": "",
-       "text": "Special is a section that lists any special property the armor, weapon, forcefield or device might have."
-      },
-      {
-       "key": "",
-       "text": "Name"
-      },
-      {
-       "key": "AEGIS",
-       "text": "Special modifiers to damage or power (DEADLY, DP, AS, AR and EMP etc) have no effect Vs this armor. Treat all damage at its base value."
-      },
-      {
-       "key": "REMOVED AGILE",
-       "text": "REMOVED: Armor is flexible and designed to not impair user's mobility. Remove all armor penalty from this armor."
-      },
-      {
-       "key": "LIVING",
-       "text": "Device automatically recovers 1 SYSTEM or NANITE per MAINTENANCE (players choice)."
-      },
-      {
-       "key": "BUNKER",
-       "text": "Always get maximum SOAK rolls when not moving. (Bonus applies during maintenance phase after a full round of no movement)."
-      },
-      {
-       "key": "CARRY",
-       "text": "Replaced by lightweight"
-      },
-      {
-       "key": "EFFICIENT",
-       "text": "Weapon only consumes 1 AMMO per attack regardless of actions (FULL AUTO, BURST etc.)"
-      },
-      {
-       "key": "CLOAK",
-       "text": "Provides passive CONCEALMENT 3 type I and II. Passive concealment is 6 when not moving for a round."
-      },
-      {
-       "key": "DEFLECTOR",
-       "text": "Forcefield can only be used when you succeed a PARRY against ranged or melee attacks. This FORCEFIELD never needs to RECHARGE and only counts as your DEFENSE option if you succeed your PARRY."
-      },
-      {
-       "key": "HACKPROOF",
-       "text": "Always get maximum SOAK rolls when defending against TECH attacks."
-      },
-      {
-       "key": "DISCRETE",
-       "text": "You hardly register on electronic surveillance. You now always have passive concealment of 5 vs AI and Electronics."
-      },
-      {
-       "key": "DUELIST",
-       "text": "Always get maximum SOAK rolls when defending against MELEE attacks."
-      },
-      {
-       "key": "EMERGENCY",
-       "text": "Once per SCENE you can instantly recharge this FORCEFIELD as a FREE action."
-      },
-      {
-       "key": "REMOVED: ENERGETIC",
-       "text": "Energy weapons fired from within this forcefield gain a SMALL bonus to DAMAGE."
-      },
-      {
-       "key": "HARDENED",
-       "text": "Always get maximum SOAK rolls when defending against PHYSICAL attacks."
-      },
-      {
-       "key": "REMOVED:HARDENED",
-       "text": "REMOVED As a Quick action you can double the remaining SOAK of this shield for 1 round (returns to normal value in the next maintenance phase). This action can only be performed once per scene."
-      },
-      {
-       "key": "HEALING",
-       "text": "During MAINTENANCE you can spend any number of NANITES, or personal CHI to recover an equal amount of HEALTH or MORALE"
-      },
-      {
-       "key": "INSULATING",
-       "text": "Always get maximum SOAK rolls when defending against ENERGY attacks."
-      },
-      {
-       "key": "INDESTRUCTIBLE",
-       "text": "This defense cannot be BREACHED."
-      },
-      {
-       "key": "INNOCULATION",
-       "text": "Device protects against non lethal environmental hazards. Gain a LARGE bonus to skills rolls against lethal environmental hazards and ailments."
-      },
-      {
-       "key": "SPIRITPROOF",
-       "text": "Always get maximum SOAK rolls when defending against SPIRITUAL attacks."
-      },
-      {
-       "key": "MASTERWORK",
-       "text": "Critical hits have no additional effects. Masterwork has no effect if the wearer is BREACHED."
-      },
-      {
-       "key": "ABSOLUTION",
-       "text": "You get maximum SOAK when a critical faillure results in a SOAK roll. (From a DEFENSE check or other checks)"
-      },
-      {
-       "key": "NANOBOTS",
-       "text": "During maintenance phase you can spend any number of NANITES to reroll failed AILMENTS saves."
-      },
-      {
-       "key": "NOVA",
-       "text": "Once per SCENE as a FREE action, when this forcefield breaks you can chose to deal 2D + 4 [HIGH] STUN PHYSICAL damage to everyone in a 2m radius. Targets hit by this attack are pushed back 2m."
-      },
-      {
-       "key": "PHASE",
-       "text": "Phase you out of reality when attacked. Gain a 1 in 10 chance of negating any attack."
-      },
-      {
-       "key": "SMUGGLER",
-       "text": "Can hide up to a small object. Provides passive concealment of 5 or a LARGE bonus to an active Concealment roll."
-      },
-      {
-       "key": "SERVOS",
-       "text": "Your PHYSICAL attribute for MIGHT checks is 10. Device now counts as ELECTRONIC Vs EMP."
-      },
-      {
-       "key": "SPACE",
-       "text": "Device is rated for space and provides up to 8 hours of life support as well as magnetic boots. Treat character as having GRAVITY TRAINING when walking on compatible surfaces."
-      },
-      {
-       "key": "STEALTH",
-       "text": "Device is designed for covert ops and provides a SMALL bonus to CONCEALMENT rolls."
-      },
-      {
-       "key": "SYMBIOTE",
-       "text": "REMOVED : Change to consumable item (armor in a bottle)"
-      },
-      {
-       "key": "UNIVERSAL",
-       "text": "Device can fit any of the alliance races, in the case of ARMOR, it can be put on or removed as a COMPLEX action"
-      }
-     ]
-    },
-    {
-     "id": "Armor-Options",
-     "title": "ARMOR Options",
-     "entries": [
-      {
-       "key": "",
-       "text": "OPTIONS"
-      },
-      {
-       "key": "",
-       "text": "Options are the number of option slots that you can add to your armor or forcefield, see the table Armor options for details."
-      },
-      {
-       "key": "",
-       "text": "Options come in 3 category, FUNCTION, FORM and OPERATION. You can only have one mod for each category."
-      },
-      {
-       "key": "OPERATION",
-       "text": "Modifies existing function of an item."
-      },
-      {
-       "key": "",
-       "text": "FITS INTO"
-      },
-      {
-       "key": "",
-       "text": "This will let you know if the option fits your armor type."
-      }
-     ]
-    },
-    {
-     "id": "Armor-Weight",
-     "title": "ARMOR Weight",
-     "entries": [
-      {
-       "key": "",
-       "text": "Armor Weights by Type and Race**"
-      },
-      {
-       "key": "",
-       "text": "Type"
-      },
-      {
-       "key": "",
-       "text": "Light"
-      },
-      {
-       "key": "",
-       "text": "Heavy"
-      },
-      {
-       "key": "",
-       "text": "Powered*"
-      },
-      {
-       "key": "",
-       "text": "* Powered Armors carry their own Weight"
-      },
-      {
-       "key": "",
-       "text": "** Nonborn pick based on their template race."
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "group": "WEAPONS",
-   "sections": [
-    {
-     "id": "Weapon_Rules",
-     "title": "WEAPON Rules",
-     "entries": [
-      {
-       "key": "",
-       "text": "All weapons have a DMG and POWER value."
-      },
-      {
-       "key": "POWER",
-       "text": "Power determines the relative strength of the weapon and is a direct counter to DEFENSE. Every point of power above DEFENSE will deny SOAK and under will reduce damage by the same amount."
+       "key": "WEAPONS",
+       "text": "A weapon's card tells you how hard it hits, what kind of hit it is, how far, how fast, and how reliably. Here is every line."
       },
       {
        "key": "DAMAGE",
-       "text": "Damage determines the amount of damage a weapon does once a hit has passed defenses."
+       "text": "How much damage the weapon deals once a hit clears defenses - the size of the wound before SOAK. (See Damage & Defense.)"
+      },
+      {
+       "key": "POWER",
+       "text": "The attack's penetrating force, measured against the target's defence rating for this weapon's damage type: each point above the rating cancels a point of SOAK, each point below softens the hit."
+      },
+      {
+       "key": "DAMAGE TYPE",
+       "text": "Physical, Energy, Tech or Spiritual. It decides which of a defence's four ratings applies and whether the hit lands on HEALTH (soak with ENDURANCE) or MORALE (soak with WILLPOWER)."
+      },
+      {
+       "key": "RANGE - Short / Medium / Long",
+       "text": "Three range bands. Most weapons are at their best in one band and take penalties reaching past it, and for melee weapons 'range' is your reach. Some weapons - shotguns above all - instead adjust their POWER by range bracket, hitting hardest up close and weakening with distance."
+      },
+      {
+       "key": "RATE OF FIRE (RoF)",
+       "text": "Whether the weapon can fire single shots, BURST, or FULL AUTO. What each does depends on the action you spend to fire - burst and full auto trade extra ammo for extra dice or extra targets."
+      },
+      {
+       "key": "AMMO",
+       "text": "How many shots sit in the magazine - or the charge an energy weapon's power cell holds - before you must reload or let it cool."
+      },
+      {
+       "key": "RELOAD / COOLDOWN",
+       "text": "The action you must spend to reload, or the time an energy weapon needs to recharge its ammo (usually rounds, sometimes whole scenes)."
+      },
+      {
+       "key": "EXPERTISE",
+       "text": "How much skill the weapon rewards. Hit-successes beyond the DC convert into bonus damage, up to this rating, chiefly on COMPLEX actions. A low-damage, high-expertise weapon is a specialist's piece - poor in untrained hands, lethal in skilled ones (see Reading Your Gear)."
+      },
+      {
+       "key": "HANDED - 1H / 2H",
+       "text": "Whether the weapon is one- or two-handed. Two-handers convert more of your PHYSICAL into damage (see Melee)."
+      },
+      {
+       "key": "MELEE WEAPONS",
+       "text": "Melee weapons work like firearms with extras: you add dice from your PHYSICAL (up to your own PHYSICAL value), two-handers add even more, and reach stands in for range. A character too weak for the weapon instead loses power and damage."
+      },
+      {
+       "key": "FOR THE GM",
+       "text": "Read a weapon by its job, not its damage number - a low-POWER, high-RoF needler and a single-shot, high-POWER slug do very different things to the same target. Let damage type and reliability add texture: a junk-grade pistol that might jam is a story waiting to happen."
       }
      ]
     },
     {
-     "id": "Weapon-RoF",
-     "title": "WEAPON RoF",
+     "id": "Gear_Defenses",
+     "title": "Defenses",
      "entries": [
       {
-       "key": "",
-       "text": "R.o.F"
+       "key": "DEFENSES",
+       "text": "Your defensive layer is whatever stands between an incoming hit and your HEALTH or MORALE. You run exactly one: body armour, a forcefield, a datacom, or a (spiritual) barrier - and they all speak the same stat language."
       },
       {
-       "key": "",
-       "text": "Burst / Full Auto : Rate of fire that the weapon has. Effect depends on the action taken to fire, single/burst/full auto and cost 1,3 or 9 ammo."
+       "key": "DEFENSE RATINGS - Physical / Energy / Tech / Spiritual",
+       "text": "Four separate ratings, one per damage type: Low, Medium, High or Extreme. They are what an attack's POWER is measured against, so a single layer can be superb against bullets and useless against a hack."
       },
       {
-       "key": "",
-       "text": "N/A :"
+       "key": "SOAK",
+       "text": "A dice pool (written like 4D + 0) you roll - with ENDURANCE against HEALTH attacks, WILLPOWER against MORALE attacks - to absorb damage. Each success removes a point; reduce a hit to 0 and it is fully absorbed."
       },
       {
-       "key": "",
-       "text": "BURST FIRE"
+       "key": "CHARGES & REGEN (forcefields)",
+       "text": "Forcefields track CHARGES (how much they can soak before dropping) and REGEN (how fast that recovers). A field that breaks still stops the hit that broke it, then has to rebuild."
       },
       {
-       "key": "",
-       "text": "FULL AUTO"
+       "key": "WEIGHT & PENALTY",
+       "text": "Heavier defences protect more but can impair movement and certain skills; some are powered and carry their own weight. The AGILE property removes that penalty (a Glossary tag)."
+      },
+      {
+       "key": "THE FOUR LAYER TYPES",
+       "text": "ARMOUR is worn protection. FORCEFIELDS are projected fields, strong against ranged fire. DATACOMS can double as a defensive layer while running your software. A BARRIER is a spiritual defence. You pick one - they do not stack."
+      },
+      {
+       "key": "SPECIAL",
+       "text": "A defence's SPECIAL line (HARDENED, INSULATING, MASTERWORK, and the like) names properties defined in the Glossary - look them up there."
+      },
+      {
+       "key": "FOR THE GM",
+       "text": "Because everyone runs a single layer, the interesting question is always 'what's the gap?' Telegraph a foe's layer type and let players hunt the damage type it is weak against."
       }
      ]
     },
     {
-     "id": "Weapon_-Ammo",
-     "title": "WEAPON -Ammo",
+     "id": "Gear_Datacoms",
+     "title": "Datacoms",
      "entries": [
       {
-       "key": "",
-       "text": "AMMO"
+       "key": "DATACOMS",
+       "text": "A datacom is your computer, your hacking deck, and - if you choose it as your layer - your defence, all in one device. Its card carries both computing stats and defensive stats."
       },
       {
-       "key": "",
-       "text": "The quantity and type of ammo the weapon has in its magazine. Energy weapons tend to have a power cell giving X shots before it is depleted and automatically begins recharging (cooldown period). Ammunition is universal and comes in 3 sizes small S, medium M and large L."
+       "key": "CPU & MEMORY",
+       "text": "CPU is your processing headroom - how much you can run at once. MEMORY is how many programs and routines you can store. Together they bound the software you can field."
+      },
+      {
+       "key": "SYSTEM",
+       "text": "The datacom's integrity as a device - what TECH damage and system attacks chew through."
+      },
+      {
+       "key": "NANITES",
+       "text": "A pool of utility nanomachines that some gear and effects spend for repairs, healing, or special tricks."
+      },
+      {
+       "key": "DEFENSE RATINGS & SOAK",
+       "text": "When a datacom is your defensive layer it carries the same four defense ratings and a SOAK pool as any other defence."
+      },
+      {
+       "key": "EXPERTISE",
+       "text": "How smoothly the datacom runs its work, turning extra successes into a better result on the actions it supports."
+      },
+      {
+       "key": "SOFTWARE LIVES IN HACKING",
+       "text": "Programs and gadgets - what you actually run on a datacom, with their own CPU/memory costs, governing skill, action, and passive/active effects - are covered in the Hacking section."
+      },
+      {
+       "key": "FOR THE GM",
+       "text": "A datacom is a build choice with teeth: a player who runs it as their defensive layer is trading armour for a hacking platform. Let that trade matter in the fiction."
       }
      ]
     },
     {
-     "id": "Weapon-Failure",
-     "title": "WEAPON Failure",
+     "id": "Gear_Medical",
+     "title": "Medical Supplies",
      "entries": [
       {
-       "key": "",
-       "text": "WEAPON FAILURE (FAIL)"
+       "key": "MEDICAL SUPPLIES",
+       "text": "Drugs, stims and treatments. Their cards focus on what they do to a body and what that costs the body."
       },
       {
-       "key": "",
-       "text": "Failure rate determines the reliability of the weapon. Failure is determined by your luck dice."
+       "key": "EFFECT",
+       "text": "What the item actually does - heal, boost, cure, sedate, counter a hazard."
       },
       {
-       "key": "",
-       "text": "A = Exquisite  This item is of the highest quality with the best materials, while it provides no real advantage it does increase the value of said item."
+       "key": "TOXICITY",
+       "text": "The strain the substance puts on the body. Toxicity accumulates, and pushed too far it risks TOXIC SHOCK - the reason stims are never simply free power."
       },
       {
-       "key": "",
-       "text": "B =  Fine  This item is of a high quality. When rolling a 1 on luck dice, you can reroll it to try and avoid the penality, rerolling a second 1 will still be a crtitical faillure.."
+       "key": "DURATION",
+       "text": "How long the effect lasts once it takes hold."
       },
       {
-       "key": "",
-       "text": "C = Regular  This item is of an average quality."
+       "key": "ACTION & APPLICATION",
+       "text": "ACTION is what it costs to use (often a quick or standard action). APPLICATION is how it is administered - injected, ingested, applied, inhaled."
       },
       {
-       "key": "",
-       "text": "D = Poor  This item is not well made at all, when rolling a natural 10 on your luck dice you have to reroll to confirm if it's really a critical success."
-      },
-      {
-       "key": "",
-       "text": "E = Junk  This item is trash, if you roll a 1 on a luck dice the item breaks."
+       "key": "FOR THE GM",
+       "text": "Toxicity is the dial that keeps medicine honest: a party can stim through one bad fight, but stacking it invites the crash. Let a desperate over-dose be a real, tense choice."
       }
      ]
     },
     {
-     "id": "Weapon_-Reload",
-     "title": "WEAPON -Reload",
+     "id": "Gear_Vehicles",
+     "title": "Vehicles & Drones",
      "entries": [
       {
-       "key": "",
-       "text": "RELOAD / COOLDOWN"
+       "key": "VEHICLES & DRONES",
+       "text": "Ground and air craft and their unmanned cousins share one stat frame - rated for how much they can take and how big they are."
       },
       {
-       "key": "",
-       "text": "What type of actions must be spent to reload the weapon or how long the weapon needs to recharge it's ammo."
+       "key": "SIZE",
+       "text": "The vehicle or drone's scale, which sets what fits it and what it can carry or mount."
       },
       {
-       "key": "",
-       "text": "Time an energy weapon needs before it has a ammo again. (usually measured in rounds, sometimes in scenes)."
+       "key": "DURABILITY & STRUCTURE",
+       "text": "DURABILITY is how much damage it can absorb. STRUCTURE is the threshold a single hit must beat to start crippling it - the vehicle-scale echo of a character's trauma."
+      },
+      {
+       "key": "MANUFACTURER & SPECIAL",
+       "text": "Like personal gear, vehicles and drones list a manufacturer (their catalogue maker) and a SPECIAL line of Glossary-defined properties."
+      },
+      {
+       "key": "FOR THE GM",
+       "text": "Treat vehicles as movable terrain and tools as much as targets - a drone scouting ahead or a truck used as cover changes a scene more than its stat line suggests."
       }
      ]
     },
     {
-     "id": "Weapon-Legality",
-     "title": "WEAPON Legality",
+     "id": "Gear_Ships",
+     "title": "Spaceships",
      "entries": [
       {
-       "key": "",
-       "text": "LEGALITY"
+       "key": "SPACESHIPS",
+       "text": "A starship is the largest piece of gear in the game - effectively a character the whole crew operates (see Space Combat for running one in a fight). Its card describes a hull built from parts."
       },
       {
-       "key": "",
-       "text": "Legality class determines whether it is legal or not to carry such an item under the alliance law. Outside of the alliance, laws are usually localized."
+       "key": "CLASS & ROLE",
+       "text": "CLASS is the hull's weight category; ROLE is what it is built to do - fighter, freighter, gunship, and so on."
       },
       {
-       "key": "",
-       "text": "No Permit : Anyone can acquire and carry that item in most environments. High security environments might restrict its use."
+       "key": "SIZE BUDGET - Core / Internal / External",
+       "text": "A ship is a chassis with three kinds of slot: CORE, INTERNAL and EXTERNAL, each with a capacity. Every component you install spends slot space, so a loadout is a budgeting exercise - you cannot have everything."
       },
       {
-       "key": "",
-       "text": "Restricted : Item requires a permit to carry around. You can store restricted items inside personal property legally without a permit. (Black Market contact or permit required, prices on black market is around 2x)"
+       "key": "POWER",
+       "text": "How much power the ship generates to run its systems each round - the resource the engineer manages in combat."
       },
       {
-       "key": "",
-       "text": "Illegal : Item is not allowed for any reason anywhere in the alliance. Possession, sale or association with such an item is a serious crime. (Black Market contact required, expect to pay 5x the normal rate)"
+       "key": "COST & MODULES",
+       "text": "A ship's total cost is its chassis plus every module bolted into it. MODULES are the installable parts - weapons, drives, systems - each with its own size, cost and availability."
+      },
+      {
+       "key": "FOR THE GM",
+       "text": "Build (or let players build) ships as expressions of a crew: where they spent their slots says what they value. For running one in anger, hand straight to Space Combat."
       }
      ]
     },
     {
-     "id": "Weapon-Shotgun",
-     "title": "WEAPON Shotgun",
+     "id": "Gear_Equipment",
+     "title": "Misc Equipment",
      "entries": [
       {
-       "key": "",
-       "text": "SHOTGUNS"
+       "key": "MISC EQUIPMENT",
+       "text": "Everything else - tools, kit, survival gear, odd gadgets. These cards are deliberately simple."
       },
       {
-       "key": "",
-       "text": "Can hit additional locations based on range due to the spread of the shots."
+       "key": "EFFECT",
+       "text": "The one line that matters: what the item lets you do. Most misc gear has no combat stats, just a capability plus the shared cost, size, availability and legality."
       },
       {
-       "key": "LOC.",
-       "text": "Short Range"
-      },
-      {
-       "key": "",
-       "text": "LOC."
-      },
-      {
-       "key": "",
-       "text": "LOC."
+       "key": "FOR THE GM",
+       "text": "Misc gear is where you say yes. A cheap tool that unlocks an approach is worth far more to the game than its price tag - use it to reward players who prepare."
       }
      ]
     },
     {
-     "id": "Weapon-Grenades",
-     "title": "WEAPON Grenades",
+     "id": "Gear_Custom",
+     "title": "Customising & Sourcing Gear",
      "entries": [
       {
-       "key": "",
-       "text": "GRENADES"
+       "key": "CUSTOMISING & SOURCING GEAR",
+       "text": "Three systems let you push a base item past its printed card."
       },
       {
-       "key": "",
-       "text": "When throwing a grenade you designate where you want your throw to land. If you hit the grenade lands where you wanted, otherwise it deviates (see deviation below)"
+       "key": "OPTIONS",
+       "text": "Weapons, defenses and datacoms have OPTION slots. Options come in three categories - FUNCTION, FORM and OPERATION - and you may fit one of each. Every option lists what it fits and what it costs; see the weapon-option and armor-option references."
       },
       {
-       "key": "",
-       "text": "Grenades can be thrown as a STANDARD action but if they are not on your belt or in hand you must spend a QUICK action to get them first."
+       "key": "AMMO TYPES",
+       "text": "Many ranged weapons can load different AMMO TYPES, each with its own quantity, cost, legality and special properties. Swapping ammo is the cheapest way to change what a gun does."
       },
       {
-       "key": "No Target :",
-       "text": "If you throw a grenade at an area instead of a target your base DC is 3 (+range modifiers). Deviation happens as if you had a target."
-      },
-      {
-       "key": "INSTANT DETONATION",
-       "text": "You can take a SMALL penality to your DEXTERITY roll to prevents targets from performing any actions before detonation."
-      },
-      {
-       "key": "",
-       "text": "Deviation: travels 1m, per difference in the required success."
-      },
-      {
-       "key": "",
-       "text": "Roll 1D and deviate grenade 1 square (1m) in that direction per missed DC"
-      },
-      {
-       "key": "",
-       "text": "10"
-      },
-      {
-       "key": "",
-       "text": "9"
-      },
-      {
-       "key": "",
-       "text": "8"
-      }
-     ]
-    },
-    {
-     "id": "Weapon-Melee",
-     "title": "WEAPON Melee",
-     "entries": [
-      {
-       "key": "",
-       "text": "MELEE WEAPONS"
-      },
-      {
-       "key": "",
-       "text": "Melee weapons are treated just like firearms but with the addition of the following rules:"
-      },
-      {
-       "key": "",
-       "text": "PHYSICAL"
-      },
-      {
-       "key": "",
-       "text": "Modifies POWER or DAMAGE of your melee attack based on the weapon and your PHYSICAL attribute."
-      },
-      {
-       "key": "",
-       "text": "When attacking with a melee weapon, in addition to your normal attack you roll one additional Dice per PHYSICAL attribute you have (up to the weapon PHYSICAL value).  Every success adds 1 power. In the case of a negative PHYSICAL attribute value you reduce your power and damage instead of increasing it."
-      },
-      {
-       "key": "",
-       "text": "Two handed weapons also gain damage dices in addition to the power. (or reduces power and damage if PHYSIQUE is negative)"
-      },
-      {
-       "key": "",
-       "text": "Bonus from PHYSICAL on a weapon cannot exceed your own PHYSICAL and if you exceed the value you gain no additional benefits."
-      },
-      {
-       "key": "",
-       "text": "H"
-      },
-      {
-       "key": "",
-       "text": "1H"
-      },
-      {
-       "key": "",
-       "text": "2H"
-      },
-      {
-       "key": "",
-       "text": "1-2H"
-      },
-      {
-       "key": "",
-       "text": "EXPERTISE"
-      },
-      {
-       "key": "",
-       "text": "Expertise represents the ease of use of an item. Expertise only applies when making COMPLEX actions unless the value is negative, then it applies on all actions. EXPERTISE adds 1 DAMAGE per extra success over your DIFFICULTY to hit up to the maximum EXPERTISE rating of the weapon. Negative expertise increases the DC of all skill rolls by X."
-      }
-     ]
-    },
-    {
-     "id": "Weapon-Options",
-     "title": "WEAPON Options",
-     "entries": [
-      {
-       "key": "",
-       "text": "OPTIONS"
-      },
-      {
-       "key": "",
-       "text": "Options are the number of option slots that you can add to your armor or forcefield, see the table Armor options for details."
-      },
-      {
-       "key": "",
-       "text": "Options come in 3 category, FUNCTION, FORM and OPERATION. You can only have one mod for each category."
-      },
-      {
-       "key": "OPERATION",
-       "text": "Modifies existing function of an item."
-      },
-      {
-       "key": "",
-       "text": "RESTRICTIONS:"
-      },
-      {
-       "key": "",
-       "text": "Weapon options can be restricted on where they fit. This section in the weapon option table will let you know if it fits the weapon you plan to put it on."
-      },
-      {
-       "key": "",
-       "text": "All Weapons"
-      },
-      {
-       "key": "",
-       "text": "Ranged Weapons"
-      },
-      {
-       "key": "",
-       "text": "Physical Weapons"
-      },
-      {
-       "key": "",
-       "text": "Energy Weapons"
-      },
-      {
-       "key": "",
-       "text": "Melee Weapons"
-      },
-      {
-       "key": "",
-       "text": "Large+"
-      },
-      {
-       "key": "",
-       "text": "Explosive"
-      },
-      {
-       "key": "",
-       "text": "Needler"
-      }
-     ]
-    },
-    {
-     "id": "Weapon-Special",
-     "title": "WEAPON Special",
-     "entries": [
-      {
-       "key": "",
-       "text": "SPECIAL"
-      },
-      {
-       "key": "",
-       "text": "Special is a section that lists any special property the armor, weapon, forcefield or device might have."
-      },
-      {
-       "key": "",
-       "text": "Abreviation"
-      },
-      {
-       "key": "DP",
-       "text": "Defense Piercing"
-      },
-      {
-       "key": "AR",
-       "text": "Armor Rending"
-      },
-      {
-       "key": "",
-       "text": "MELT"
-      },
-      {
-       "key": "CRIT",
-       "text": "High Critical"
-      },
-      {
-       "key": "",
-       "text": "BLIND"
-      },
-      {
-       "key": "",
-       "text": "DUR+"
-      },
-      {
-       "key": "EMP",
-       "text": "Electromagnetic Pulse"
-      },
-      {
-       "key": "",
-       "text": "EX"
-      },
-      {
-       "key": "",
-       "text": "EXPLOSIVE"
-      },
-      {
-       "key": "",
-       "text": "FIRE"
-      },
-      {
-       "key": "",
-       "text": "GAS"
-      },
-      {
-       "key": "",
-       "text": "GRENADE"
-      },
-      {
-       "key": "GTF",
-       "text": "Glitter field"
-      },
-      {
-       "key": "BREAKER",
-       "text": "Improves hit resistance vs multi attacks"
-      },
-      {
-       "key": "HE",
-       "text": "High Explosive"
-      },
-      {
-       "key": "HOT",
-       "text": "Weapon can overheat"
-      },
-      {
-       "key": "DEADLY",
-       "text": "Hollow Points"
-      },
-      {
-       "key": "",
-       "text": "INV"
-      },
-      {
-       "key": "INV+",
-       "text": "Invisible +"
-      },
-      {
-       "key": "",
-       "text": "LB"
-      },
-      {
-       "key": "",
-       "text": "FALLOFF"
-      },
-      {
-       "key": "MULTI",
-       "text": "Multi Attack"
-      },
-      {
-       "key": "",
-       "text": "NEEDLER"
-      },
-      {
-       "key": "",
-       "text": "OLD"
-      },
-      {
-       "key": "ONG",
-       "text": "Ongoing Damage"
-      },
-      {
-       "key": "OPT+",
-       "text": "More options"
-      },
-      {
-       "key": "QUICK",
-       "text": "Quick Attack"
-      },
-      {
-       "key": "REACH",
-       "text": "Increased Melee Reach"
-      },
-      {
-       "key": "RECOIL",
-       "text": "Weapon has heavy recoil"
-      },
-      {
-       "key": "",
-       "text": "RELIC"
-      },
-      {
-       "key": "",
-       "text": "S"
-      },
-      {
-       "key": "",
-       "text": "SB"
-      },
-      {
-       "key": "BULKY",
-       "text": "Weapon weights a lot"
-      },
-      {
-       "key": "",
-       "text": "SMART"
-      },
-      {
-       "key": "FRAGILE",
-       "text": "This item is easy to break or damage"
-      },
-      {
-       "key": "",
-       "text": "SPIRITBANE"
-      },
-      {
-       "key": "STUN",
-       "text": "Temporary Damage"
-      },
-      {
-       "key": "THROW",
-       "text": "Throwing weapon"
-      },
-      {
-       "key": "XAR",
-       "text": "Ignore high armor defense"
-      },
-      {
-       "key": "XFF",
-       "text": "Ignore high force fields defense"
+       "key": "MANUFACTURERS",
+       "text": "Any base item can be upgraded to a named manufacturer's catalogue version, which modifies its stats - and its price and rarity. Remember the base item is a generic knockoff; a manufacturer is the branded original. See Manufacturers."
       }
      ]
     }
