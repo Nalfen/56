@@ -4962,16 +4962,21 @@
     "desc": "a SCAN that allows you to intercept and filter the actions of an enemy NETWORK."
    },
    {
-    "name": "Doom",
+    "name": "Extinction",
     "type": "Tronik Program, HACKING vs WITS",
+    "skill": "HACKING",
+    "action": "Standard",
     "memory": "3",
     "cpu": "2",
     "availability": "LIMITED",
     "legality": "Classified",
     "cost": "1200000",
-    "passive": "The HOST NODE owner loses 1 MORALE for each SYSTEM lost on his network. [TEMPORARY - Under revision]",
-    "active": "All NODE owners lose 1 MORALE for each SYSTEM lost on the network. If the target network is reduced to 0 SYSTEM, every NODE owner DIES. [TEMPORARY - Under revision]",
-    "desc": "A demoralizing Tronik program that drains the host's MORALE for every point of SYSTEM their network loses."
+    "power": "HIGH",
+    "damage": "4D+3",
+    "damage_type": "TECH",
+    "passive": "Make a HACKING roll vs the target's WITS. On a hit, deal POWER HIGH, 4D+3 TECH SYSTEM damage to the target's datacom. Any SYSTEM damage left unsoaked by this attack also strips an equal amount of MORALE from the datacom's owner.",
+    "active": "Same as the normal effect, but the unsoaked SYSTEM damage strips that MORALE from every user on the network, not just the owner.",
+    "desc": "Extinction does not crash a system - it teaches the mind wired into it to despair. A Tronik black-program of disputed origin, it pours corrosive feedback down the link until the hardware fails and the operator feels every byte of it die. Veterans claim you can tell a machine that was merely hacked from one that met Extinction: the second kind goes quiet, and so does whoever was wearing it."
    }
   ],
   "gadgets": [
