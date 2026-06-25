@@ -4857,6 +4857,34 @@ function ccPickFromCache(pidx){
    discarded (see docs/specs/roll20-export-discards.md). Regenerate from a fresh
    Roll20 export if the sheet schema changes. */
 const CC_SHEET_ATTRS=new Set(['ACUITY','ACUITY_base','ACUITY_perm','Academics','Acrobatics','Acrobatics_bonus','Acting','Athletics','Athletics_bonus','Awareness','Awareness_bonus','Binding','Binding_bonus','CHI','Charm','Charm_bonus','Concealment','Craft','Cyberintel','Cyberintel_bonus','Dexterity','Driving','Driving_bonus','ENDURANCE','ENDURANCE_base','ENDURANCE_perm','Engineering','Engineering_bonus','Etiquette','Fabrication','Fabrication_bonus','Flair','Galactic_Knowledge','Galactic_Knowledge_bonus','Gunslinger','Gunslinger_bonus','HEALTH','Hacking','Hacking_bonus','Hand_to_Hand','Hand_to_Hand_bonus','Heavy_Weapons','Heavy_Weapons_bonus','Insight','Insight_bonus','Intimidation','Intimidation_bonus','Intuition','Larceny','Larceny_bonus','Leadership','Leadership_bonus','MENTAL','MENTAL_base','MENTAL_perm','MORALE','Marksman','Marksman_bonus','Martial_Arts','Medicine','Medicine_bonus','Melee_Weapons','Melee_Weapons_bonus','Might','Navigation','Navigation_bonus','Negotiation','Negotiation_bonus','Occultism','Occultism_bonus','Operator','Operator_bonus','PHYSICAL','PHYSICAL_base','PHYSICAL_perm','Parascience','Performance','Performance_bonus','Piloting','Piloting_bonus','Projectiles','Projectiles_bonus','Protocol','Protocol_bonus','Repair','Resilience','SOCIAL','SOCIAL_base','SOCIAL_perm','SPEED','SPEED_base','SPEED_perm','Scavenge','Scavenge_bonus','Scavenging','Science','Science_bonus','Search','Search_bonus','Social_Science','Social_Science_bonus','Spiritual','Spiritual_bonus','Stealth','Stealth_bonus','Streetwise','Streetwise_bonus','Subterfuge','Subterfuge_bonus','Survival','Survival_bonus','Tactics','Tactics_bonus','Technology','Technology_bonus','WILLPOWER','WILLPOWER_base','WILLPOWER_perm','WITS','WITS_base','WITS_perm','age','appararent_age','armor1_def_energy','armor1_def_phys','armor1_def_spirit','armor1_def_tech','armor1_name','armor1_soak_expr','armor1_special','armor1_type','armor2_charges','armor2_def_energy','armor2_def_phys','armor2_def_spirit','armor2_def_tech','armor2_name','armor2_regen','armor2_soak_expr','armor2_type','armorsoak','armorsoak_bonus','attribute_xp','available_xp','background','credited_xp','init_complex','init_move','init_quick','init_standard','item1_name','item1_size','item2_name','item2_size','name','notes','occupation','race','sex','spent_xp','test','total_xp','weapon1_ammo','weapon1_close_range','weapon1_currentammo','weapon1_dmg','weapon1_dmgtarget','weapon1_dmgtype','weapon1_expertise','weapon1_long_range','weapon1_medium_range','weapon1_name','weapon1_power','weapon1_reload','weapon1_rof','weapon1_skill','weapon1_special','weapon1_type','weapon2_ammo','weapon2_close_range','weapon2_currentammo','weapon2_dmg','weapon2_dmgtype','weapon2_expertise','weapon2_long_range','weapon2_medium_range','weapon2_name','weapon2_power','weapon2_reload','weapon2_rof','weapon2_skill','weapon2_special','weapon2_type','weapon3_close_range','weapon3_dmg','weapon3_dmgtype','weapon3_expertise','weapon3_long_range','weapon3_medium_range','weapon3_name','weapon3_skill','weapon3_special','weapon4_ammo','weapon4_close_range','weapon4_currentammo','weapon4_dmg','weapon4_dmgtype','weapon4_expertise','weapon4_long_range','weapon4_medium_range','weapon4_name','weapon4_power','weapon4_reload','weapon4_rof','weapon4_skill','weapon4_special','weapon5_ammo','weapon5_close_range','weapon5_currentammo','weapon5_dmg','weapon5_dmgtype','weapon5_expertise','weapon5_name','weapon5_skill','weapon5_special','weapon6_ammo','weapon6_close_range','weapon6_currentammo','weapon6_dmg','weapon6_dmgtype','weapon6_expertise','weapon6_long_range','weapon6_medium_range','weapon6_name','weapon6_power','weapon6_reload','weapon6_skill','weapon6_special']);
+function ccExportBuildBio(st){
+  const esc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  let h='';
+  const sec=t=>{h+='<p><b>== '+t+' ==</b></p>';};
+  const ln=s=>{h+='<p>'+s+'</p>';};
+  const tals=(st.talents||[]).filter(t=>t&&t.name);
+  if(tals.length){sec('TALENTS');tals.forEach(t=>ln('<b>'+esc(t.name)+'</b>'+(t.category?' ['+esc(t.category)+']':'')+(t.skill?' &middot; '+esc(t.skill):'')+(t.xp_cost?' &middot; '+esc(t.xp_cost)+'xp':'')+(t.effect?'<br>'+esc(t.effect):'')));}
+  const evos=(st.evolutions||[]).filter(e=>e&&e.name);
+  if(evos.length){sec('EVOLUTIONS');evos.forEach(e=>ln('<b>'+esc(e.name)+'</b>'+(e.type?' ['+esc(e.type)+']':'')+(e.tier?' T'+esc(e.tier):'')+(e.effect?'<br>'+esc(e.effect):'')));}
+  const dcs=(st.datacoms||[]).filter(d=>d&&d.name);
+  if(dcs.length){sec('DATACOMS');dcs.forEach(d=>ln('<b>'+esc(d.name)+'</b>'+(d.mfr&&d.mfr!=='Generic'?' ('+esc(d.mfr)+')':'')+' &middot; CPU '+esc(d.cpu||0)+' / MEM '+esc(d.mem||0)+' / NAN '+esc(d.nanite||0)+(d.special?'<br>'+esc(d.special):'')));}
+  const progs=(st.programs||[]).filter(p=>p&&p.name);
+  if(progs.length){sec('PROGRAMS');progs.forEach(p=>ln('<b>'+esc(p.name)+'</b>'+(p.type?' ['+esc(p.type)+']':'')+' &middot; CPU '+esc(p.cpu||0)+'/MEM '+esc(p.mem||0)+(p.passive?'<br>Passive: '+esc(p.passive):'')+(p.active?'<br>Active: '+esc(p.active):'')));}
+  const spells=(st.spells||[]).filter(s=>s&&s.name);
+  if(spells.length){sec('SPELLS');spells.forEach(s=>ln('<b>'+esc(s.name)+'</b>'+(s.domain?' &middot; '+esc(s.domain):'')));}
+  const gads=(st.gadgets||[]).filter(g=>g&&g.name);
+  if(gads.length){sec('GADGETS');gads.forEach(g=>ln('<b>'+esc(g.name)+'</b>'+(g.nanite?' &middot; '+esc(g.nanite)+' nanite':'')+(g.effect?'<br>'+esc(g.effect):'')));}
+  const items=[...(st.items||[]),...(st.items2||[])].filter(it=>it&&it.name);
+  if(items.length){sec('INVENTORY (full)');items.forEach(it=>ln('&bull; '+esc(it.name)+((it.qty&&+it.qty!==1)?' x'+esc(it.qty):'')+(it.size?' (size '+esc(it.size)+')':'')));}
+  const wmods=(st.weapons||[]).map((w,i)=>({w,i})).filter(o=>o.w&&o.w.name&&((o.w.mfr&&o.w.mfr!=='Generic')||(o.w.options&&o.w.options.length)));
+  const amods=(st.armor||[]).map((a,i)=>({a,i})).filter(o=>o.a&&o.a.name&&((o.a.mfr&&o.a.mfr!=='Generic')||(o.a.options&&o.a.options.length)));
+  if(wmods.length||amods.length){sec('GEAR MODS (mfr / options)');
+    wmods.forEach(o=>ln('Weapon '+(o.i+1)+' '+esc(o.w.name)+': '+((o.w.mfr&&o.w.mfr!=='Generic')?'mfr '+esc(o.w.mfr):'')+((o.w.options&&o.w.options.length)?' &middot; '+esc(o.w.options.join(', ')):'')));
+    amods.forEach(o=>ln('Armor '+(o.i+1)+' '+esc(o.a.name)+': '+((o.a.mfr&&o.a.mfr!=='Generic')?'mfr '+esc(o.a.mfr):'')+((o.a.options&&o.a.options.length)?' &middot; '+esc(o.a.options.join(', ')):'')));}
+  if((+(st.credits)||0)||(+(st.credits_spent)||0)){sec('CREDITS');ln('Credits: '+(+(st.credits)||0)+' &middot; Spent: '+(+(st.credits_spent)||0));}
+  if(!h)return '';
+  return '<p><b>=== CHARACTER BUILD DATA (compendium export &mdash; not stored as sheet fields) ===</b></p>'+h;
+}
 function ccExportRoll20(){
   const st=ccState;
   const spent=ccCalcSpentXP();
@@ -4892,7 +4920,7 @@ function ccExportRoll20(){
   a('charloadmax',st.charloadmax||'');a('notes',st.notes||'');
   const _drop=attribs.filter(o=>!CC_SHEET_ATTRS.has(o.name)).map(o=>o.name);
   if(_drop.length)try{console.warn('[export] dropped '+_drop.length+' attr(s) not on Roll20 sheet:',_drop.join(', '));}catch(e){}
-  const json=JSON.stringify({schema_version:3,type:'character',character:{oldId:egGenId(),name:st.name||'Character',avatar:'',bio:'',gmnotes:'',defaulttoken:'',tags:'[]',controlledby:'',inplayerjournals:'',attribs:attribs.filter(o=>CC_SHEET_ATTRS.has(o.name)),abilities:[]}},null,4);
+  const json=JSON.stringify({schema_version:3,type:'character',character:{oldId:egGenId(),name:st.name||'Character',avatar:'',bio:encodeURIComponent(ccExportBuildBio(st)),gmnotes:'',defaulttoken:'',tags:'[]',controlledby:'',inplayerjournals:'',attribs:attribs.filter(o=>CC_SHEET_ATTRS.has(o.name)),abilities:[]}},null,4);
   const blob=new Blob([json],{type:'application/json'});
   const url=URL.createObjectURL(blob);
   const lnk=document.createElement('a');
