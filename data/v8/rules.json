@@ -179,7 +179,7 @@
       },
       {
        "key": "INSTALLING AN EVO",
-       "text": "Installing an EVO is a skill check: Medical for Genetics, Technology for Cybernetics, Binding for Magic, at DC 2 / 4 / 6 by tier. Successes beyond the DC make the installation safer, subtracting from the chance of an affliction if your EVO score is over the safe softcap."
+       "text": "Installing an EVO is a skill check: Medical for Genetics, Technology for Cybernetics, Binding for Magic, at DC 2 / 4 / 6 by tier. A strong result matters twice over - if the install would push you past your EVO capacity, that same skill result is what resists the overflow check below."
       }
      ]
     },
@@ -188,45 +188,48 @@
      "title": "EVO Overflow & Afflictions",
      "entries": [
       {
-       "key": "",
-       "text": "There is no hard limit to the number of EVOs a character can have, but past a certain point there is a significant chance of consequences ranging from minor annoyances to full psychosis."
+       "key": "YOUR EVO CAPACITY (THE SOFT CAP)",
+       "text": "Every character has an EVO capacity equal to ENDURANCE + WILLPOWER. As long as your total EVO points stay at or under that number, your body carries the modifications cleanly - no rolls, no risk. Raising your ENDURANCE or WILLPOWER raises your capacity too, so a tougher or more strong-willed character can safely hold more."
       },
       {
-       "key": "",
-       "text": "When installing EVOs, compare the total EVO ranks (including the new EVO) against the sum of ENDURANCE + WILLPOWER. If the result is 0 or negative, the body accepts the EVO without complications."
+       "key": "GOING OVER THE CAP",
+       "text": "There is no hard limit - you can keep installing EVOs well past your capacity - but the moment a new EVO would push your total EVO points above the soft cap, that installation becomes a gamble. EVOs you add while still under the cap never trigger this; only the one that tips you over (and any installed while already over) does."
       },
       {
-       "key": "",
-       "text": "When Attributes Vs EVO is 1 or more, the GM secretly rolls a D10 and subtracts any additional successes the installer got over the install DC. If the GM's total is 1 or more, the recipient gains an EVO affliction."
+       "key": "THE OVERFLOW CHECK",
+       "text": "When the EVO being installed would leave you over capacity, the GM secretly rolls a D10 while the installer makes their install check (Medical / Technology / Binding). Compare the installer's skill result against the GM's hidden roll. If the installer's result is equal to or higher than the GM's D10, the EVO seats cleanly and nothing goes wrong. If the installer falls short, the body rejects part of the change and an affliction takes root."
       },
       {
-       "key": "",
-       "text": "Afflictions do not manifest right away — a player will never know how bad it is until it is too late."
+       "key": "WHICH AFFLICTION? READING THE TABLE",
+       "text": "On a failed overflow check, find the row on the EVO Affliction Table by adding two numbers: how many EVO points you are OVER your soft cap (counting the new EVO), plus how far the installer fell short (the GM's D10 minus the installer's skill result). The higher the total, the nastier the result - so being deep over your cap AND botching the install is what lands you at the bottom of the table.",
+       "examples": [
+        "Tom has WILLPOWER 3 + ENDURANCE 3 = 6 EVO capacity. He already holds a full Tier 1-2-3 EVO (1+2+3 = 6 points) and a Tier 1-2 EVO (1+2 = 3 points) = 9 points total, so he is already 3 over his cap. He now installs Tier 3 of that second EVO (+3 points), reaching 12 points - 6 over the cap. The GM secretly rolls 8; the installer's skill result is 5. Since 5 is under 8, it's an affliction: 6 (points over cap) + 3 (the 8 minus 5 shortfall) = 9 -> row 9, Traumatic Activation. From now on, whenever Tom uses that new EVO he gains a trauma."
+       ]
       },
       {
-       "key": "",
-       "text": "Triggered when a player makes a critical failure during a SCENE from a roll that could have been influenced by their EVO."
+       "key": "AFFLICTIONS LIE IN WAIT",
+       "text": "An affliction does not manifest the moment it is installed - you won't know how bad it is until it is too late. It lurks dormant until something sets it off."
       },
       {
-       "key": "",
-       "text": "EVO afflictions will never trigger more than once per SCENE."
+       "key": "WHEN AN AFFLICTION TRIGGERS",
+       "text": "An installed affliction goes off when you roll a CRITICAL FAILURE during a SCENE on any roll that could have been influenced by the EVO - for instance, a crit-fail while casting with an EVO that grants CHI. An affliction fires at most once per SCENE: once one triggers, no other can trigger until the next scene."
       },
       {
-       "key": "",
-       "text": "EVO afflictions are cumulative. When multiple are possible the GM rolls which activates randomly."
+       "key": "AFFLICTIONS STACK",
+       "text": "EVO afflictions are cumulative - a heavily-modified character can be carrying several at once. When more than one could fire from the same critical failure, the GM rolls randomly to decide which one does."
       },
       {
-       "key": "",
-       "text": "Getting cloned resets all of a character's EVOs and any afflictions acquired. Permanent EVOs remain forever."
+       "key": "CLEARING AFFLICTIONS",
+       "text": "Getting cloned wipes the slate: it resets all of a character's EVOs and every affliction they have picked up. The exception is Permanent EVOs, which (along with anything riding on them) stay with a character forever."
       },
       {
-       "key": "",
-       "text": "An EVO can never negate the drawback from one of the afflictions. If an EVO would normally render you immune, you ignore that EVO."
+       "key": "NO EVO ESCAPES ITS OWN AFFLICTION",
+       "text": "An EVO can never negate the drawback of an affliction. If one of your EVOs would normally make you immune to an affliction's effect, you ignore that EVO for as long as the affliction is active."
       }
      ],
      "table": {
       "title": "EVO Affliction Table",
-      "note": "When an installation goes wrong (see above), the recipient gains an affliction from this table - rolled secretly by the GM and revealed only when it triggers.",
+      "note": "On a failed overflow check the row is calculated, not rolled: add your EVO points over the cap to the installer's shortfall (see above). The affliction then stays hidden until it triggers.",
       "headers": [
        "Roll",
        "Affliction",
@@ -1040,8 +1043,8 @@
        "key": "STEP 2 - ROLL INITIATIVE",
        "text": "Initiative is the one roll in the entire game that is NOT success-based. Instead of counting 5s, you roll a number of D10 equal to your WITS and add up the pips on the dice. Highest total acts first, then down the line. So WITS 3 means 3D10 totalled - a range of 3 to 30.",
        "examples": [
-        "WITS 3 -> roll 3D10 and sum them (3-30). WITS 5 -> 5D10 (5-50).",
-        "Ties: the higher WITS goes first; still tied, higher ACUITY, then a coin flip."
+        "WITS 3 -> roll 3D10 and total them (3-30). WITS 5 -> 5D10 (5-50).",
+        "Ties: tied characters act at the same time. If it genuinely matters who goes first, the tied parties roll a fresh initiative just to settle that single moment, re-rolling until the tie breaks."
        ],
        "sub": "GM: this flat-total initiative is a deliberately provisional system - swingy by design and still being tuned. For a big mob, feel free to roll once for the whole group or assign a fixed order to keep things moving."
       },
@@ -1067,7 +1070,7 @@
       },
       {
        "key": "COMPLEX ACTIONS",
-       "text": "Actions demanding real focus or setup. When two complex actions would clash, initiative order decides who resolves first."
+       "text": "A COMPLEX action is not a separate slot - it is your STANDARD action turned all the way up. To take one, sacrifice either your QUICK action or your MOVE action; that sacrifice is what upgrades your standard action into a complex action."
       },
       {
        "key": "BONUS ACTIONS",
@@ -1176,55 +1179,55 @@
     },
     {
      "id": "DMG/ARMOR",
-     "title": "DMG/ARMOR",
+     "title": "Damage & Defense",
      "entries": [
       {
-       "key": "DAMAGE & ARMOR - RESOLVING A HIT",
-       "text": "Once an attack connects (its hit successes met your DEFENSE), you work out how much actually gets through. Every weapon carries two numbers - DAMAGE and POWER - and every suit of armor carries a DEFENSE RATING and a SOAK. Those four values, plus your own ENDURANCE, decide what lands."
+       "key": "DAMAGE & DEFENSE - RESOLVING A HIT",
+       "text": "When an attack connects - its hit successes cleared your DEFENSE - you work out how much actually gets through. Defence comes in two stages: first the attack has to HIT, then it has to beat your one defensive layer. What gets past is shaped by the attack's two numbers (DAMAGE and POWER), its DAMAGE TYPE, your defensive layer, and your own ENDURANCE or WILLPOWER."
+      },
+      {
+       "key": "DAMAGE TYPE - IT DECIDES EVERYTHING ELSE",
+       "text": "Every attack has a damage type: PHYSICAL, ENERGY, TECH, or SPIRITUAL. The type does two jobs. First, it picks which of your defence's four ratings applies - the same layer can be tough against bullets (Physical) and feeble against a hacker's feedback (Tech). Second, it decides whether the attack wounds your HEALTH or your MORALE - which in turn sets whether you soak with ENDURANCE (health) or WILLPOWER (morale)."
       },
       {
        "key": "DAMAGE (weapon)",
-       "text": "The raw damage a weapon does once a hit has cleared defenses - the size of the wound before armour and SOAK get their say."
+       "text": "The raw damage dealt once a hit clears defenses - the size of the wound before the defence rating and SOAK get their say."
       },
       {
        "key": "POWER (weapon)",
-       "text": "The attack's penetrating force, measured against the armour's DEFENSE RATING. For every point POWER sits ABOVE the rating, one point of SOAK is cancelled - that damage gets through automatically. For every point POWER sits BELOW the rating, the incoming damage is reduced by one."
+       "text": "The attack's penetrating force, measured against your defence's rating for that damage type. Each point POWER sits ABOVE the rating cancels a point of SOAK - that damage gets through automatically; each point BELOW reduces the incoming damage by one."
       },
       {
-       "key": "DEFENSE RATING (armor)",
-       "text": "How well armour stands up to an attack's POWER, rated Low (3), Medium (6), High (9) or Extreme (12), and tracked separately for Physical, Energy, Tech and Spiritual damage. The same suit can shrug off bullets and still fold against a hacker's feedback. This single rating is the whole story now - DEFLECT no longer exists."
+       "key": "YOUR DEFENSIVE LAYER",
+       "text": "You carry exactly ONE layer of defence: armour, a forcefield, a datacom, or a (spiritual) barrier. Whatever it is, it gives you a DEFENSE RATING - Low (3), Medium (6), High (9) or Extreme (12) - rated separately against Physical, Energy, Tech and Spiritual damage, plus a SOAK pool. You no longer stack a forcefield on top of armour; you pick your one layer and live with its strengths and gaps."
       },
       {
-       "key": "SOAK (armor)",
-       "text": "Armour and forcefields soak up damage with a dice pool (written like 4D + 0) rolled together with your ENDURANCE. Each success removes one point of incoming damage; reduce the damage to 0 and the hit is fully absorbed, and no further effects are checked."
+       "key": "SOAK",
+       "text": "Your layer's SOAK is a dice pool (written like 4D + 0) you roll to shrug off damage - rolled together with ENDURANCE against HEALTH attacks, or with WILLPOWER against MORALE attacks. Each success removes one point of incoming damage; reduce the damage to 0 and the hit is fully absorbed, with no further effects checked."
       },
       {
        "key": "RESOLVING IT, STEP BY STEP",
-       "text": "Work through the hit in this order:"
+       "text": "Work the hit through in order:"
       },
       {
        "key": "",
-       "text": "1) Roll the weapon's DAMAGE."
+       "text": "1) Note the attack's DAMAGE TYPE and whether it targets HEALTH or MORALE, then roll the weapon's DAMAGE."
       },
       {
        "key": "",
-       "text": "2) Forcefield first. If the target has an active forcefield, compare your DAMAGE to its SOAK. If your DAMAGE does not beat the field's SOAK, the field absorbs the hit and loses SOAK equal to your damage. If your DAMAGE beats it, the field breaks - and still stops this attack."
+       "text": "2) Compare POWER to your defence rating for that damage type. Each point of POWER above the rating cancels a point of SOAK (automatic damage); each point below reduces the damage."
       },
       {
        "key": "",
-       "text": "3) No forcefield? Compare your POWER to the armour's DEFENSE RATING for that damage type. Each point of POWER above the rating cancels a point of SOAK (automatic damage); each point below reduces the damage."
+       "text": "3) Roll SOAK + ENDURANCE (for HEALTH attacks) or SOAK + WILLPOWER (for MORALE attacks) and remove that many points from the remaining damage."
       },
       {
        "key": "",
-       "text": "4) Roll SOAK + ENDURANCE and remove that many points from the damage that remains."
-      },
-      {
-       "key": "",
-       "text": "5) Whatever damage is left comes off the target's HEALTH (body attacks) or MORALE (mind and social attacks). Damage always lands on one pool or the other."
+       "text": "4) Whatever damage is left comes off the targeted pool - HEALTH or MORALE."
       },
       {
        "key": "TRAUMA - WHEN ONE HIT OVERWHELMS YOU",
-       "text": "If a single hit's final damage exceeds the target's ENDURANCE (for HEALTH damage) or WILLPOWER (for MORALE damage), it inflicts a TRAUMA - a lasting wound that escalates GRAVE -> MORTAL -> DYING. Note the trigger: trauma comes from one big hit beating your attribute in a single blow, not from your pool grinding down to zero.",
+       "text": "If a single hit's final damage exceeds the target's ENDURANCE (for HEALTH damage) or WILLPOWER (for MORALE damage), it inflicts a TRAUMA - a lasting wound that escalates GRAVE -> MORTAL -> DYING. The trigger is one big hit beating your attribute in a single blow, not your pool grinding down to zero.",
        "examples": [
         "ENDURANCE 4, a hit deals 6 HEALTH damage after mitigation -> 6 > 4, so it inflicts a trauma."
        ]
@@ -1235,7 +1238,7 @@
       },
       {
        "key": "FOR THE GM",
-       "text": "POWER vs DEFENSE RATING is your main dial for making enemies feel different: a high-POWER slug-thrower chews through light armour, while a low-POWER weapon plinks off Extreme plating. Telegraph what a foe is wearing so players can switch weapons or damage types rather than guessing."
+       "text": "Damage type is your richest dial: lead enemies with the type a party is weak against, and reward players who switch weapons or layers to cover a gap. Because everyone now runs a single defensive layer, telegraph what a foe is wearing (or projecting) so the choice of how to punch through it is an interesting one, not a guess."
       }
      ]
     },
@@ -1480,6 +1483,10 @@
        "text": "On every skill check and every defense, single out one die as your LUCK die - by convention, the first one you rolled. It works no matter how the rest of the pool lands: a natural 1 is a CRIT FAILURE, and a natural 10 is a CRIT SUCCESS."
       },
       {
+       "key": "SUCCESS AND FAILURE ARE GRADED",
+       "text": "A roll here is rarely a flat pass or fail - how far you clear the DC, or fall short of it, usually matters. Beat the DC handily and you tend to do more (extra successes can mean extra effect, like more damage); scrape a miss and it costs you far less than a total whiff. The luck die marks the two outer extremes of that scale - a natural 1 or a natural 10 - while everything between them is the realm of GRADED success and failure. The clearest worked version of this idea sits just below in Graded Saves, where the size of your shortfall sets the severity band."
+      },
+      {
        "key": "WHAT THE CRITS DO",
        "text": "A crit success can lift a near-miss into a clean win or stamp a Critical Ailment onto a foe; a crit failure complicates even an otherwise successful roll. Luck reaches past combat, too - it steers a missed throw's DEVIATION and the swing on a failed SAVE."
       },
@@ -1632,8 +1639,8 @@
        "text": "Days and months carry no official names; most people just use the numbers. A date reads day-month-year, so 'day 8, month 8, year 5734' is written 08-08-5734."
       },
       {
-       "key": "A WORKING LIFE",
-       "text": "Standard full-time employment runs 10 hours on, then 10 hours off - one day working, one day resting. Over a week that works out to 50 hours, half your waking time on the clock."
+       "key": "A WORKING LIFE - FOR THE LUCKY FEW",
+       "text": "On paper, standard full-time work runs 10 hours on, then 10 hours off - one day working, one day resting, about 50 hours a week, half your waking time on the clock. That tidy arrangement is for the lucky few, which is to say the very few. Most corporations squeeze their people until they drop: sleep replicators, stim-cocktails, and wakefulness drugs to keep a body productive almost around the clock are common tools, not scandals, and a worker's contract rarely protects them from any of it. In the 56th Century, real rest is a perk you earn or buy - not a right you are owed."
       },
       {
        "key": "FOR THE GM",
@@ -3365,7 +3372,7 @@
       },
       {
        "key": "ENGINEER",
-       "text": "Rolls ENGINEERING vs the ship's Engineering rating. Success: generate Resource Units (RU) equal to the Engineering rating. Failure: 0 RU. Critical Failure: also sets Available Power to 0 for the round. Critical Success: generate the maximum skill result in RU. Engineers spend RU using TECHNOLOGY for system repairs or CRAFT for hull repairs - they are the ship's lifeblood."
+       "text": "Rolls ENGINEERING vs the ship's Engineering rating. Success: generate Resource Units (RU) equal to the Engineering rating. Failure: 0 RU. Critical Failure: also sets Available Power to 0 for the round. Critical Success: generate the maximum skill result in RU. Engineers spend RU using TECHNOLOGY for system repairs or FABRICATION for hull repairs - they are the ship's lifeblood."
       },
       {
        "key": "NAVIGATOR",
@@ -3466,7 +3473,7 @@
       },
       {
        "key": "REPAIRS",
-       "text": "1 RU restores 1 point of Shield, Hull, or System. Shields need no skill check; Hull repairs require CRAFT; System repairs require TECHNOLOGY. This is where the engineer's RU and the right skill keep the ship in the fight."
+       "text": "1 RU restores 1 point of Shield, Hull, or System. Shields need no skill check; Hull repairs require FABRICATION; System repairs require TECHNOLOGY. This is where the engineer's RU and the right skill keep the ship in the fight."
       },
       {
        "key": "FOR THE GM",
