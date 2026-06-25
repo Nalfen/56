@@ -4862,7 +4862,7 @@ function ccExportRoll20(){
   const spent=ccCalcSpentXP();
   const available=(+(st.total_xp)||0)-spent+(+(st.credited_xp)||0);
   const attribs=[];
-  const a=(n,c,m)=>{attribs.push({name:n,current:c,max:(m!==undefined?m:''),id:'cc_'+n.replace(/[^a-zA-Z0-9_]/g,'_')});};
+  const a=(n,c,m)=>{attribs.push({name:n,current:String(c),max:(m!==undefined?String(m):''),id:egGenId()});};
   a('name',st.name||'');a('race',st.race||'');a('occupation',st.occupation||'');
   a('background',st.background||'');a('sex',st.sex||'');a('age',st.age||0);a('appararent_age',st.apparent_age||0);
   a('background_desc',st.background_desc||'');a('occupation_desc',st.occupation_desc||'');
@@ -4892,7 +4892,7 @@ function ccExportRoll20(){
   a('charloadmax',st.charloadmax||'');a('notes',st.notes||'');
   const _drop=attribs.filter(o=>!CC_SHEET_ATTRS.has(o.name)).map(o=>o.name);
   if(_drop.length)try{console.warn('[export] dropped '+_drop.length+' attr(s) not on Roll20 sheet:',_drop.join(', '));}catch(e){}
-  const json=JSON.stringify({schema_version:3,type:'character',character:{name:st.name||'Character',attribs:attribs.filter(o=>CC_SHEET_ATTRS.has(o.name)),abilities:[]}},null,2);
+  const json=JSON.stringify({schema_version:3,type:'character',character:{oldId:egGenId(),name:st.name||'Character',avatar:'',bio:'',gmnotes:'',defaulttoken:'',tags:'[]',controlledby:'',inplayerjournals:'',attribs:attribs.filter(o=>CC_SHEET_ATTRS.has(o.name)),abilities:[]}},null,4);
   const blob=new Blob([json],{type:'application/json'});
   const url=URL.createObjectURL(blob);
   const lnk=document.createElement('a');
