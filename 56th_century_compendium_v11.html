@@ -4888,7 +4888,12 @@ function ccExportBuildBio(st){
 function ccExportRoll20(){
   const st=ccState;
   const spent=ccCalcSpentXP();
-  const available=(+(st.total_xp)||0)-spent+(+(st.credited_xp)||0);
+  const _bgGrant=+(st.bg_granted_xp)||0;
+  // Fold the background-grant credit into credited_xp so the Roll20 sheet's available_xp
+  // auto-calc (total_xp - spent_xp + credited_xp) offsets bg-granted skills (sheet has no
+  // bg_granted_xp field). spent_xp on the sheet sums all skills incl. granted ones.
+  const _creditedExp=(+(st.credited_xp)||0)+_bgGrant;
+  const available=(+(st.total_xp)||0)-spent+_creditedExp;
   const attribs=[];
   const a=(n,c,m)=>{attribs.push({name:n,current:String(c),max:(m!==undefined?String(m):''),id:egGenId()});};
   a('name',st.name||'');a('race',st.race||'');a('occupation',st.occupation||'');
@@ -4900,7 +4905,7 @@ function ccExportRoll20(){
   });
   ccRecalcHealthMorale();
   a('HEALTH',st.HEALTH||0,st.HEALTH_max||0);a('MORALE',st.MORALE||0,st.MORALE_max||0);a('CHI',st.CHI||0,st.CHI_max||0);
-  a('total_xp',st.total_xp||0);a('credited_xp',st.credited_xp||0);a('bg_granted_xp',st.bg_granted_xp||0);a('attribute_xp',ccCalcAttrXP());
+  a('total_xp',st.total_xp||0);a('credited_xp',_creditedExp);a('bg_granted_xp',st.bg_granted_xp||0);a('attribute_xp',ccCalcAttrXP());
   a('spent_xp',spent);a('available_xp',available);
   a('init_move',st.init_move||'');a('init_standard',st.init_standard||'');a('init_quick',st.init_quick||'');a('init_complex',st.init_complex||'');
   a('armorsoak',st.armorsoak||'');a('armorsoak_bonus',st.armorsoak_bonus||0);
@@ -7205,7 +7210,7 @@ function render(){
   }
 
   else if(cs==='races'){
-    const F=g.races.filter(r=>ms([r.name,r.racial,r.evolution,r.environment]));cnt=F.length;
+    const F=g.races.filter(r=>ms([r.name,r.racial,r.evolution,r.environment,r.subtitle,r.quote,r.origins,r.physical,r.society,r.disposition]));cnt=F.length;
     html='<div class="stitle">👁 RACES <span class="badge">'+g.races.length+'</span></div>';
     html+='<div class="ssub">Attribute Ranges (min/avg/max)</div><div style="overflow-x:auto;margin-bottom:14px;"><table class="stab"><thead><tr><th>Race</th><th>PHYS</th><th>ACUITY</th><th>MENTAL</th><th>SOCIAL</th><th>ENDUR</th><th>SPEED</th><th>WITS</th><th>WILL</th></tr></thead><tbody>';
     g.races.filter(r=>r.stats).forEach(r=>{
@@ -7215,12 +7220,14 @@ function render(){
     html+='</tbody></table></div><div class="grid2">';
     F.forEach((r,i)=>{
       const id='rc'+i;
-      html+='<div class="card" id="'+id+'" data-tog="'+id+'"><div class="ch"><div><div class="cn">'+hl(r.name,sq)+'</div></div><span class="xi">▼</span></div>';
+      html+='<div class="card" id="'+id+'" data-tog="'+id+'"><div class="ch"><div><div class="cn">'+hl(r.name,sq)+'</div>'+(r.subtitle?'<div style="font-style:italic;color:var(--a2);font-size:11.5px;margin-top:2px;">'+esc(r.subtitle)+'</div>':'')+'</div><span class="xi">▼</span></div>';
       if(r.mods&&r.mods.length)html+='<div class="tags">'+r.mods.slice(0,8).map(m=>'<span class="tag tgr">'+esc(m)+'</span>').join('')+'</div>';
       html+='<div class="cb">';
+      if(r.quote)html+='<div style="border-left:3px solid var(--a3);padding:2px 0 2px 9px;margin:0 0 9px;font-style:italic;opacity:.88;">'+hl(r.quote,sq)+'</div>';
       if(r.racial)html+='<div class="trait-row"><div class="trait-lbl" style="color:var(--a2);">Racial</div><div class="trait-val">'+hl(r.racial,sq)+'</div></div>';
       if(r.evolution)html+='<div class="trait-row"><div class="trait-lbl" style="color:var(--a3);">Evolution</div><div class="trait-val">'+hl(r.evolution,sq)+'</div></div>';
       if(r.environment)html+='<div class="trait-row"><div class="trait-lbl" style="color:var(--gr);">Environment</div><div class="trait-val">'+hl(r.environment,sq)+'</div></div>';
+      [['Origins & Homeworld','origins'],['Physiology','physical'],['Society & Culture','society'],['Disposition in the Galaxy','disposition']].forEach(function(s){var lbl=s[0],key=s[1];if(r[key])html+='<div style="margin-top:9px;"><div style="font-weight:600;letter-spacing:.04em;font-size:11px;text-transform:uppercase;color:var(--gr);margin-bottom:3px;">'+lbl+'</div>'+r[key].split('\n').map(function(t){return '<p style="margin:0 0 6px;line-height:1.5;">'+hl(t,sq)+'</p>';}).join('')+'</div>';});
       html+='</div></div>';
     });
     html+='</div>';
