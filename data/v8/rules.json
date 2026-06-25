@@ -13,7 +13,7 @@
       },
       {
        "key": "START WITH A CONCEPT, NOT A STAT LINE",
-       "text": "Before you touch a single number, picture the person. Who are they when the shooting stops? What do they want, what do they refuse to do, and what got them to District 937? A one-sentence pitch - 'an exiled Hakari clan-scout selling her tracking to the highest bidder' - will steer every mechanical choice that follows and keep them coherent. The rules reward a clear idea far more than an optimal spreadsheet."
+       "text": "Before you touch a single number, picture the person. Who are they when the shooting stops? What do they want, what do they refuse to do, and what got them where they are now? A one-sentence pitch - 'an exiled Hakari clan-scout selling her tracking to the highest bidder' - will steer every mechanical choice that follows and keep them coherent. The rules reward a clear idea far more than an optimal spreadsheet."
       },
       {
        "key": "1) Pick a Race",
@@ -37,15 +37,15 @@
       },
       {
        "key": "6) Distribute 50 XP",
-       "text": "New characters get 50 XP to spend across SKILLS, ATTRIBUTES, and DEFENSES. No skill may start above level 5. Use the XP-Tool (checkbox on the CS-Main sheet) to budget it, and see Character Advancement for the full cost model and spending tips. Remember the core truth of this system: there are no levels. These 50 XP ARE your starting power, and every XP you earn for the rest of the character's life works exactly the same way - so spend them as the opening statement of who this person is."
+       "text": "New characters get 50 XP to spend across SKILLS, ATTRIBUTES, and DEFENSES. No skill may start above level 5. The character creator built into this compendium can track the spend for you. See Character Advancement for the full cost model and spending tips. Remember the core truth of this system: there are no levels. These 50 XP ARE your starting power, and every XP you earn for the rest of the character's life works exactly the same way - so spend them as the opening statement of who this person is."
       },
       {
        "key": "7) Contacts & starting credits",
-       "text": "Finally, choose your contacts - the people who owe you, fear you, or answer your calls - and decide how to handle your starting credits. Spend them on gear that fits the concept, or bank some for the inevitable bad night. A character is the sum of who they know and what they carry as much as what they can roll."
+       "text": "Your occupation sets your starting contacts and your starting credits - the people who owe you, fear you, or answer your calls, and the money in your account - though the GM can adjust either to fit the campaign. Spend your credits on gear that fits the concept, or bank some for the inevitable bad night. A character is the sum of who they know and what they carry as much as what they can roll."
       },
       {
        "key": "FOR THE GM - RUN A SESSION ZERO AND SAY YES TO CONCEPTS",
-       "text": "Character creation is the first scene of the campaign, so play it that way. Sit the table down together, let people pitch concepts out loud, and look for the hooks and frictions between them before anyone finalises a number. Your default to a plausible race/background/occupation combination should be 'yes, and here's how that shows up in the Ghetto.' Steer away from the rules only when a choice would wreck the tone or the party's ability to function - and when you do, offer a reflavoured version that keeps the player's idea intact."
+       "text": "Character creation is the first scene of the campaign, so play it that way. Sit the table down together, let people pitch concepts out loud, and look for the hooks and frictions between them before anyone finalises a number. Your default to a plausible race/background/occupation combination should be 'yes, and here's how that shows up in the world.' Steer away from the rules only when a choice would wreck the tone or the party's ability to function - and when you do, offer a reflavoured version that keeps the player's idea intact."
       }
      ]
     }
@@ -118,10 +118,6 @@
        "examples": [
         "Raising a skill from 3 to 6 costs 15 XP and 150,000 cr, and takes 15 days of training - or 45 days if you never take time off."
        ]
-      },
-      {
-       "key": "Skill chips (the Cybernetic EVO shortcut)",
-       "text": "Skill chips sidestep training entirely. A chip costs 50,000 cr per skill level and does NOT require you to own the lower levels of that skill - you can jack straight to the rank you paid for. A chip's availability equals the skill level it grants. (See Evolution -> Cybernetics.)"
       }
      ]
     },
@@ -159,12 +155,12 @@
      "title": "Evolution",
      "entries": [
       {
-       "key": "EVOLUTION (See the Evolution tab for full rules)",
-       "text": "Evolution is an OPTIONAL system - no character is ever forced to spend resources in it. It is the framework for players who want to modify their body, install cybernetics, or dabble in magic, progressing a character by investing resources into one or more of three paths: GENETICS, CYBERNETICS, or MAGIC."
+       "key": "EVOLUTION",
+       "text": "Evolution is an OPTIONAL system - no character is ever forced to spend resources in it. It is the framework for players who want to modify their body, install cybernetics, or dabble in magic, progressing a character by investing resources into one or more of three paths: GENETICS, CYBERNETICS, or MAGIC. The full rules - overflow, afflictions, and the per-path effects - follow below."
       },
       {
        "key": "EVO POINTS & THE SAFE SOFTCAP",
-       "text": "There is no hard limit on how many EVOs a character can have. Each EVO tier you own adds its rank to your total EVO score. Your SAFE softcap is your ENDURANCE + WILLPOWER: as long as your EVO score stays at or below that sum, your body integrates the modifications cleanly. You CAN push past the cap, but every point over it is a mounting risk that an installation goes wrong and saddles you with an EVO affliction. (See Evolution -> EVO Overflow & Afflictions.)"
+       "text": "There is no hard limit on how many EVOs a character can have. Each EVO tier you own adds its rank to your total EVO score. Your SAFE softcap is your ENDURANCE + WILLPOWER: as long as your EVO score stays at or below that sum, your body integrates the modifications cleanly. You CAN push past the cap, but every point over it is a mounting risk that an installation goes wrong and saddles you with an EVO affliction."
       },
       {
        "key": "TIERS & PREREQUISITES",
@@ -184,6 +180,226 @@
       {
        "key": "INSTALLING AN EVO",
        "text": "Installing an EVO is a skill check: Medical for Genetics, Technology for Cybernetics, Binding for Magic, at DC 2 / 4 / 6 by tier. Successes beyond the DC make the installation safer, subtracting from the chance of an affliction if your EVO score is over the safe softcap."
+      }
+     ]
+    },
+    {
+     "id": "Evo_Overflow",
+     "title": "EVO Overflow & Afflictions",
+     "entries": [
+      {
+       "key": "",
+       "text": "There is no hard limit to the number of EVOs a character can have, but past a certain point there is a significant chance of consequences ranging from minor annoyances to full psychosis."
+      },
+      {
+       "key": "",
+       "text": "When installing EVOs, compare the total EVO ranks (including the new EVO) against the sum of ENDURANCE + WILLPOWER. If the result is 0 or negative, the body accepts the EVO without complications."
+      },
+      {
+       "key": "",
+       "text": "When Attributes Vs EVO is 1 or more, the GM secretly rolls a D10 and subtracts any additional successes the installer got over the install DC. If the GM's total is 1 or more, the recipient gains an EVO affliction."
+      },
+      {
+       "key": "",
+       "text": "Afflictions do not manifest right away — a player will never know how bad it is until it is too late."
+      },
+      {
+       "key": "",
+       "text": "Triggered when a player makes a critical failure during a SCENE from a roll that could have been influenced by their EVO."
+      },
+      {
+       "key": "",
+       "text": "EVO afflictions will never trigger more than once per SCENE."
+      },
+      {
+       "key": "",
+       "text": "EVO afflictions are cumulative. When multiple are possible the GM rolls which activates randomly."
+      },
+      {
+       "key": "",
+       "text": "Getting cloned resets all of a character's EVOs and any afflictions acquired. Permanent EVOs remain forever."
+      },
+      {
+       "key": "",
+       "text": "An EVO can never negate the drawback from one of the afflictions. If an EVO would normally render you immune, you ignore that EVO."
+      }
+     ],
+     "table": {
+      "title": "EVO Affliction Table",
+      "note": "When an installation goes wrong (see above), the recipient gains an affliction from this table - rolled secretly by the GM and revealed only when it triggers.",
+      "headers": [
+       "Roll",
+       "Affliction",
+       "Effect"
+      ],
+      "rows": [
+       [
+        "0",
+        "All clear",
+        "Somehow you are still ok, you're sure something is wrong but just can't say what exactly. No effect this time around"
+       ],
+       [
+        "1",
+        "Achromatopsia",
+        "You just lost the ability to see all but 1 color, that color is random. Effect last until the end of the SCENE."
+       ],
+       [
+        "2",
+        "Pain",
+        "Lose 1 HEALTH. Your EVO is painful to use. Until the end of the SCENE, whenever you make a skill check influenced by your EVO you also lose 1 HEALTH. This loss cannot be prevented."
+       ],
+       [
+        "3",
+        "The shakes",
+        "For the rest of the SCENE the character will experiencing random nervous shakes. SMALL penalty to all SKILL rolls."
+       ],
+       [
+        "4",
+        "Vivid dreams",
+        "Your EVO DAZES you, you are dazed until you recover."
+       ],
+       [
+        "5",
+        "Cellular atrophy",
+        "One of your MAXIMUM RACIAL ATTRIBUTE is permanently reduced by 1"
+       ],
+       [
+        "6",
+        "The Yipps",
+        "Until the end of the SCENE whenever you fail a skill check or defense roll you lose 1 MORALE. This morale loss cannot be mitigated."
+       ],
+       [
+        "7",
+        "Disoriented",
+        "When triggered your next action must be a full move, if you have no move remaining you must move next round. When performing that movement check the deviation table, you move in that direction regardless of the danger to yourself."
+       ],
+       [
+        "8",
+        "Malfunction",
+        "Your EVO stuns you, you can recover from this ailment normally."
+       ],
+       [
+        "9",
+        "Traumatic activation",
+        "Your EVO causes you a TRAUMA. Gain a HEALTH trauma if ENDURANCE is lower than WILLPOWER, otherwise gain a MORALE TRAUMA. Players choice of which if both attributes are equal."
+       ],
+       [
+        "10",
+        "Minor Hallucinations",
+        "You see things that are not there. Until the end of the SCENE you have additional targets or additional actions to use to deal with those phantom targets."
+       ],
+       [
+        "11",
+        "Overdrive",
+        "Your EVOs go berserk and double their effects until the end of the SCENE. All rolls that are not influenced by your EVO's have a LARGE penalty."
+       ],
+       [
+        "12",
+        "Catastrophic activation",
+        "Your EVO causes you a MAJOR TRAUMA. Gain a HEALTH trauma if ENDURANCE is lower than WILLPOWER, otherwise gain a MORALE TRAUMA. Players choice of which if both attributes are equal."
+       ],
+       [
+        "13",
+        "Psychosis",
+        "Gain PSYCHOSIS until the end of the SCENE; while under psychosis, you will violently attack the closest target regardless of who it is. During maintenance if you recover from this ailment you can act normally for one round."
+       ],
+       [
+        "14",
+        "Spontaneous combustion",
+        "You burst into flames, at least that how it feels like; gain ONGOING TRUE MORALE and HEALTH damage equal to your EVO score. You can recover from this normally and damage can be mitigated by ENDURANCE or WILLPOWER."
+       ],
+       [
+        "15",
+        "Cellular degeneration",
+        "Your EVO attacks your whole body. Until the end of the SCENE, every maintenance you lose 1 HEALTH and MORALE. This loss cannot be mitigated but can be recovered."
+       ],
+       [
+        "16",
+        "The End",
+        "You drop instantly. Puts character into the DYING state."
+       ],
+       [
+        "17",
+        "DNA corruption",
+        "Every time you trigger this EVO malfunction you lower one random PRIMARY ATTRIBUTE by 1. This loss is permanent."
+       ],
+       [
+        "18",
+        "Major Hallucinations",
+        "Until the end of the SCENE, You will move and attack anyone within MELEE range of you, if no one is in MELEE range you will attack yourself until death."
+       ],
+       [
+        "19",
+        "Becoming God",
+        "When triggered, you will now dedicate every waking moment to acquiring new EVO's or credits for new EVO's and installing them. Every one of your actions must be towards acquiring more EVO and getting it installed."
+       ],
+       [
+        "20+",
+        "Death",
+        "You instantly die; its official, you have been killed by your EVO's. Skip the DYING phase you are dead as a doornail."
+       ]
+      ]
+     }
+    },
+    {
+     "id": "Evo_Genetics",
+     "title": "Genetics Rules",
+     "entries": [
+      {
+       "key": "",
+       "text": "Tier 1 — Your new genetic code has had some cosmetic changes on your appearance; pick one or more features (color, shape, hair, horns etc.) and mutate them."
+      },
+      {
+       "key": "",
+       "text": "Tier 2 — Lifebane critical effect will disable one of your GENETIC EVOs (player's choice, all 3 tiers) until a recovery roll is made."
+      },
+      {
+       "key": "",
+       "text": "Tier 3 — Extensive modifications can impact drugs and medical treatment. Any drug/medical item used on you has a 50% chance of no TOXICITY or double TOXICITY. Custom drugs can avoid this."
+      }
+     ]
+    },
+    {
+     "id": "Evo_Cybernetics",
+     "title": "Cybernetics Rules",
+     "entries": [
+      {
+       "key": "",
+       "text": "Tier 1 — Replacing body parts with machinery leaves traces. You now have visible implants on your body — pick one or more appearance features representing your Cybernetic EVO."
+      },
+      {
+       "key": "",
+       "text": "Tier 2 — EMP critical effect will disable one of your CYBERNETIC EVOs (player's choice, all 3 tiers) until a recovery roll is made."
+      },
+      {
+       "key": "",
+       "text": "Tier 3 — You count as a MACHINE and no longer count as a LIVING BEING. On SEVERE TRAUMA there is a 50% chance it strikes one of your Cybernetic EVOs instead, negating the TRAUMA but disabling that EVO until repaired."
+      },
+      {
+       "key": "",
+       "text": "Passive EVOs: Always on, generate no CYBER SHOCK."
+      },
+      {
+       "key": "",
+       "text": "Active EVOs: Free action to gain benefits. Roll TECHNOLOGY vs current MORALE to avoid CYBER SHOCK. On failure the augment works but you lose 1 MORALE per TIER. If MORALE drops to 0 you lose control of your character."
+      }
+     ]
+    },
+    {
+     "id": "Evo_Magic",
+     "title": "Magic (EVO) Rules",
+     "entries": [
+      {
+       "key": "",
+       "text": "Tier 1 — EVO magic is done via spirit fusion as tattoos or grafting relics into your flesh. Pick the design and modify one or more of your character's features."
+      },
+      {
+       "key": "",
+       "text": "Tier 2 — Spiritbane critical effect will disable one of your MAGIC EVOs (player's choice, all 3 tiers) until a recovery roll is made."
+      },
+      {
+       "key": "",
+       "text": "Tier 3 — You no longer count as a LIVING being while your SPIRIT is active; you count as a SPIRIT instead. You leak CHI in your environment — every SCENE you start in has at least 1 RAW CHI in the area."
       }
      ]
     }
@@ -813,56 +1029,61 @@
      "title": "Turn Order",
      "entries": [
       {
-       "key": "",
-       "text": "CHALLENGE / TURN ORDER"
+       "key": "CHALLENGE / TURN ORDER",
+       "text": "When a scene tips into a challenge - a firefight, a chase, a frantic race against a closing door - you resolve it in ROUNDS. Before the first round, two things happen in order: you check for SURPRISE, then you roll INITIATIVE."
+      },
+      {
+       "key": "STEP 1 - CHECK FOR SURPRISE",
+       "text": "Decide whether either side is caught unaware. If one side springs an ambush or is simply oblivious, the aware side has surprise. The surprised side is limited to a single STANDARD or MOVE action (no complex actions, no reactions) for the first round only; from the second round on, everyone acts normally. If nobody is surprised, go straight to initiative."
+      },
+      {
+       "key": "STEP 2 - ROLL INITIATIVE",
+       "text": "Initiative is the one roll in the entire game that is NOT success-based. Instead of counting 5s, you roll a number of D10 equal to your WITS and add up the pips on the dice. Highest total acts first, then down the line. So WITS 3 means 3D10 totalled - a range of 3 to 30.",
+       "examples": [
+        "WITS 3 -> roll 3D10 and sum them (3-30). WITS 5 -> 5D10 (5-50).",
+        "Ties: the higher WITS goes first; still tied, higher ACUITY, then a coin flip."
+       ],
+       "sub": "GM: this flat-total initiative is a deliberately provisional system - swingy by design and still being tuned. For a big mob, feel free to roll once for the whole group or assign a fixed order to keep things moving."
+      },
+      {
+       "key": "THE MAINTENANCE PHASE (start of every round)",
+       "text": "Each round opens with maintenance, resolved by everyone before turns begin: attempt a RECOVER against each AILMENT affecting you, and pay the upkeep on - or end - any effect you are sustaining."
       },
       {
        "key": "",
-       "text": "At the start of a challenge determine if either side is surprised, if no side has surprise challenge order normally (players first)."
+       "text": "After maintenance, combatants take their turns in initiative order (highest WITS total first). On your turn you draw from the following action types, in whatever sensible order the moment calls for:"
       },
       {
-       "key": "",
-       "text": "In the case of surprise, turn order is inverted, enemies will go first for the entire scene."
+       "key": "QUICK ACTIONS",
+       "text": "Fast, reflexive things. They can be taken at almost any point on your turn, but never before the maintenance phase has resolved."
       },
       {
-       "key": "",
-       "text": "When surprised, during the first round, the defending party is limited to a STANDARD or MOVE action only."
+       "key": "MOVEMENT",
+       "text": "Your move for the round. You may delay it - if you do, it resolves at the very end of the round (see Delayed Movement below)."
       },
       {
-       "key": "",
-       "text": "Initiative is only rolled when an action would opposed another action. See INTERRUPT and REACTION"
+       "key": "STANDARD ACTIONS",
+       "text": "Your bread-and-butter action: most attacks, a skill use, working a device. Most turns are built around one standard action."
       },
       {
-       "key": "",
-       "text": "1 - MAINTENANCE PHASE Perform RECOVER against all AILMENTS affecting you and maintain/sustain or end any effects requiring you to do so."
+       "key": "COMPLEX ACTIONS",
+       "text": "Actions demanding real focus or setup. When two complex actions would clash, initiative order decides who resolves first."
       },
       {
-       "key": "",
-       "text": "2 - QUICK ACTIONS *Can be performed at any point in the round but always after maintenance phase."
+       "key": "BONUS ACTIONS",
+       "text": "Extra actions granted by SURGES, talents, or powers, when applicable - spent on top of your normal turn."
       },
       {
-       "key": "",
-       "text": "3 - MOVEMENT ACTIONS Can be delayed; when delayed you move in Phase 8 at the end of the round."
+       "key": "DELAYED / ADDITIONAL MOVEMENT (end of round)",
+       "text": "If you held your move, or you are RUNNING, take that movement now, after everyone has acted."
       },
       {
-       "key": "",
-       "text": "4 - STANDARD ACTIONS"
+       "key": "INTERRUPTS & REACTIONS",
+       "text": "Initiative also settles split-second clashes: when one action would interrupt or react to another, the higher initiative total resolves first. This is the only time mid-round order is contested."
       },
       {
-       "key": "",
-       "text": "5 - ENEMY TURN (or players' turn if turn order is reversed due to surprise)"
-      },
-      {
-       "key": "",
-       "text": "6 - COMPLEX ACTIONS players are first unless turn order is reversed due to surprise."
-      },
-      {
-       "key": "",
-       "text": "7 - BONUS ACTIONS (if applicable). I.e.: SURGES or powers granting additional actions"
-      },
-      {
-       "key": "",
-       "text": "8 - ADDITIONAL MOVEMENT If you have not yet used your MOVE or if your are RUNNING you can now use it."
+       "key": "FOR THE GM",
+       "text": "Make surprise worth chasing - reward players who scout, ambush, or talk their way into the first move, and let a blown approach hand surprise to the other side. Treat the initiative total as a quick gate, not a sacred number: it is intentionally rough, so don't let the math stall the table, and house-rule ties however keeps the fight flowing."
       }
      ]
     },
@@ -871,12 +1092,19 @@
      "title": "Dice Success",
      "entries": [
       {
-       "key": "",
-       "text": "DICE SUCCESS"
+       "key": "DICE SUCCESS - THE CORE OF EVERY ROLL",
+       "text": "Almost everything resolves the same way: you build a pool of D10s, roll it, and count SUCCESSES. Unless a rule says otherwise, every die showing 5 or higher (5, 6, 7, 8, 9, 10) is one success; 1 through 4 are failures. You succeed when your successes meet or beat the task's DC."
       },
       {
-       "key": "",
-       "text": "Unless specified, a success on a D10 dice, is always on a 5+  (failures are on 1,2,3,4)"
+       "key": "WHY POOLS INSTEAD OF TOTALS",
+       "text": "Counting 5s rather than adding numbers keeps results readable at a glance and makes a bigger, more skilled pool reliably better without runaway math. The single exception is INITIATIVE, which totals the dice - every other roll in the game counts successes.",
+       "examples": [
+        "Skill 4 vs DC 2: roll 4D10, you need any 2 dice to land on 5+."
+       ]
+      },
+      {
+       "key": "FOR THE GM",
+       "text": "When you call for a roll, say the pool and the DC out loud ('roll your Larceny, DC 5') so the player knows the stakes before the dice hit the table. If a task has no real chance of meaningful failure, don't call for a roll at all."
       }
      ]
     },
@@ -885,102 +1113,129 @@
      "title": "Skill DC",
      "entries": [
       {
-       "key": "",
-       "text": "SKILL DC"
+       "key": "SKILL DC - HOW HARD CAN IT BE?",
+       "text": "A task's DC is the number of successes it takes to pull off. The harder the thing, the more 5s you need. DCs run from 1 (trivial) to 10 (the ceiling) - and 10 is a hard cap: nothing is ever rated higher, and no roll can ever need more than 10 successes."
       },
       {
-       "key": "DC",
-       "text": "How hard can it be ?"
+       "key": "THE PRACTICAL SHORTHAND",
+       "text": "At the table you rarely need the full ladder. Most checks fall into three bands: DC 3 trivial, DC 5 standard, DC 7 hard. Reach for those first and only fine-tune when a task is clearly easier or nastier than usual."
       },
       {
-       "key": "1",
-       "text": "Anyone can do this"
-      },
-      {
-       "key": "2",
-       "text": "Novice crap"
-      },
-      {
-       "key": "5",
-       "text": "Challenging"
-      },
-      {
-       "key": "6",
-       "text": "Rather complex"
-      },
-      {
-       "key": "8",
-       "text": "really hard stuff"
-      },
-      {
-       "key": "9",
-       "text": "Nobel prize stuff"
-      },
-      {
-       "key": "10",
-       "text": "Insanely hard"
-      },
-      {
-       "key": ">10",
-       "text": "Impossible, max difficulty is always 10 and no success roll can exceed 10"
+       "key": "WHEN IN DOUBT, OFFER MORE THAN ONE ROAD",
+       "text": "A locked door, a hostile crowd, a sealed vault - most obstacles can be cracked by several skills at a fair DC. Set the number by what the player wants to achieve, not by the obstacle alone, and let any plausible approach roll. (See the Skills section.)"
       }
-     ]
+     ],
+     "table": {
+      "headers": [
+       "DC",
+       "How hard is it?"
+      ],
+      "rows": [
+       [
+        "1",
+        "Anyone can do this without thinking."
+       ],
+       [
+        "2",
+        "Basic stuff - a novice manages it."
+       ],
+       [
+        "3",
+        "Trivial for a trained hand (the practical \"easy\")."
+       ],
+       [
+        "5",
+        "Challenging - the standard call for a real test."
+       ],
+       [
+        "6",
+        "Rather complex; takes genuine skill."
+       ],
+       [
+        "7",
+        "Hard - the practical \"hard\" band."
+       ],
+       [
+        "8",
+        "Really difficult; few people manage it."
+       ],
+       [
+        "9",
+        "Nobel-prize stuff; the best in the field."
+       ],
+       [
+        "10",
+        "Insanely hard - the absolute ceiling."
+       ],
+       [
+        ">10",
+        "Impossible. The cap is always 10; no roll can need more than 10 successes."
+       ]
+      ]
+     }
     },
     {
      "id": "DMG/ARMOR",
      "title": "DMG/ARMOR",
      "entries": [
       {
-       "key": "",
-       "text": "All weapons have a DMG and POWER value."
+       "key": "DAMAGE & ARMOR - RESOLVING A HIT",
+       "text": "Once an attack connects (its hit successes met your DEFENSE), you work out how much actually gets through. Every weapon carries two numbers - DAMAGE and POWER - and every suit of armor carries a DEFENSE RATING and a SOAK. Those four values, plus your own ENDURANCE, decide what lands."
       },
       {
-       "key": "DAMAGE",
-       "text": "Damage determines the amount of damage a weapon does once a hit has passed defenses."
+       "key": "DAMAGE (weapon)",
+       "text": "The raw damage a weapon does once a hit has cleared defenses - the size of the wound before armour and SOAK get their say."
       },
       {
-       "key": "POWER",
-       "text": "Power determines the relative strength of the weapon and is a direct counter to DEFENSE. Every point of power above DEFENSE will deny SOAK and under will reduce damage by the same amount."
+       "key": "POWER (weapon)",
+       "text": "The attack's penetrating force, measured against the armour's DEFENSE RATING. For every point POWER sits ABOVE the rating, one point of SOAK is cancelled - that damage gets through automatically. For every point POWER sits BELOW the rating, the incoming damage is reduced by one."
       },
       {
-       "key": "",
-       "text": "All armors have a SOAK and DEFLECT value."
+       "key": "DEFENSE RATING (armor)",
+       "text": "How well armour stands up to an attack's POWER, rated Low (3), Medium (6), High (9) or Extreme (12), and tracked separately for Physical, Energy, Tech and Spiritual damage. The same suit can shrug off bullets and still fold against a hacker's feedback. This single rating is the whole story now - DEFLECT no longer exists."
       },
       {
-       "key": "SOAK",
-       "text": "SOAK is the ability of a forcefield or Armor to reduce the damage of an attack. If the damage is reduced to 0 the attack is considered fully absorbed and no other effects are checked."
+       "key": "SOAK (armor)",
+       "text": "Armour and forcefields soak up damage with a dice pool (written like 4D + 0) rolled together with your ENDURANCE. Each success removes one point of incoming damage; reduce the damage to 0 and the hit is fully absorbed, and no further effects are checked."
       },
       {
-       "key": "DEFLECT",
-       "text": "Deflect gets added to your DEFENSE (along cover and other modifiers) to counter POWER and determine how much damage penetrates or is negated by the armor. A higher value will reduce damage while a lower value will hinder your ability to SOAK damage properly."
-      },
-      {
-       "key": "",
-       "text": "Roll DAMAGE"
+       "key": "RESOLVING IT, STEP BY STEP",
+       "text": "Work through the hit in this order:"
       },
       {
        "key": "",
-       "text": "Does the enemy have a forcefield active ? If yes, is your DAMAGE above the Forcefield's SOAK value ?   No : the forcefield prevents your attack and has it's soak value reduced by your damage.   Yes :  The forcefield breaks and prevents your attack."
+       "text": "1) Roll the weapon's DAMAGE."
       },
       {
        "key": "",
-       "text": "There is no forcefield active ?"
+       "text": "2) Forcefield first. If the target has an active forcefield, compare your DAMAGE to its SOAK. If your DAMAGE does not beat the field's SOAK, the field absorbs the hit and loses SOAK equal to your damage. If your DAMAGE beats it, the field breaks - and still stops this attack."
       },
       {
        "key": "",
-       "text": "Compare the POWER value against the DEFLECT value.  If POWER is above DEFLECT, the difference is automatic damage dealt. If DEFLECT is above POWER, the difference is automatic damage reduction."
+       "text": "3) No forcefield? Compare your POWER to the armour's DEFENSE RATING for that damage type. Each point of POWER above the rating cancels a point of SOAK (automatic damage); each point below reduces the damage."
       },
       {
        "key": "",
-       "text": "Roll SOAK + Endurance"
+       "text": "4) Roll SOAK + ENDURANCE and remove that many points from the damage that remains."
       },
       {
        "key": "",
-       "text": "Compare the remaining damage to the soak+endurance value and the unmitigated damage is removed from HEALTH."
+       "text": "5) Whatever damage is left comes off the target's HEALTH (body attacks) or MORALE (mind and social attacks). Damage always lands on one pool or the other."
       },
       {
-       "key": "",
-       "text": "Any damage exceeding a target's Endurance (after mitigation) will trigger Critical Ailments and apply TRAUMA."
+       "key": "TRAUMA - WHEN ONE HIT OVERWHELMS YOU",
+       "text": "If a single hit's final damage exceeds the target's ENDURANCE (for HEALTH damage) or WILLPOWER (for MORALE damage), it inflicts a TRAUMA - a lasting wound that escalates GRAVE -> MORTAL -> DYING. Note the trigger: trauma comes from one big hit beating your attribute in a single blow, not from your pool grinding down to zero.",
+       "examples": [
+        "ENDURANCE 4, a hit deals 6 HEALTH damage after mitigation -> 6 > 4, so it inflicts a trauma."
+       ]
+      },
+      {
+       "key": "CRITICAL AILMENTS COME FROM CRITICAL HITS, NOT TRAUMA",
+       "text": "A common mix-up worth nailing down: Critical Ailments (Bleed, Exposed, Knockdown, Sick, Dazed) are NOT caused by trauma. They are inflicted only by a CRITICAL HIT - a natural 10 on the luck die. Trauma wounds you; the crit is what stamps an ailment on top. (See Critical Ailments.)"
+      },
+      {
+       "key": "FOR THE GM",
+       "text": "POWER vs DEFENSE RATING is your main dial for making enemies feel different: a high-POWER slug-thrower chews through light armour, while a low-POWER weapon plinks off Extreme plating. Telegraph what a foe is wearing so players can switch weapons or damage types rather than guessing."
       }
      ]
     },
@@ -989,152 +1244,248 @@
      "title": "Deviation",
      "entries": [
       {
-       "key": "",
-       "text": "DEVIATION"
+       "key": "DEVIATION - WHEN A THROW MISSES",
+       "text": "Thrown and arced attacks - grenades, satchel charges, anything you lob - never simply vanish on a miss. They land somewhere. If your roll falls short of the DC, the LUCK die (your first die) tells you which way the throw drifts, and it scatters 1 metre (one square) for every point you missed the DC by.",
+       "examples": [
+        "Thrown at DC 5, you score 2 successes -> missed by 3 -> it lands 3 metres away, in the luck-die direction."
+       ]
       },
       {
        "key": "",
-       "text": "Roll 1D and deviate grenade 1 square in that direction per missed DC"
+       "text": "Picture the target dead ahead of you, at the centre of a clock face. Your luck die points the drift:"
       },
       {
-       "key": "",
-       "text": "10"
-      },
-      {
-       "key": "",
-       "text": "9"
-      },
-      {
-       "key": "",
-       "text": "8"
+       "key": "FOR THE GM",
+       "text": "Deviation keeps thrown weapons thrilling and a little dangerous - a botched grenade (a 6-7) can roll back toward the thrower's own feet. Measure the drift, drop the blast where it actually lands, and resolve whatever it catches."
       }
-     ]
+     ],
+     "table": {
+      "headers": [
+       "Luck die",
+       "Where it drifts"
+      ],
+      "rows": [
+       [
+        "1-2",
+        "Long - overshoots straight past the target."
+       ],
+       [
+        "3",
+        "Forward and to the right."
+       ],
+       [
+        "4",
+        "Directly right."
+       ],
+       [
+        "5",
+        "Back and to the right."
+       ],
+       [
+        "6-7",
+        "Short - falls back toward you."
+       ],
+       [
+        "8",
+        "Forward and to the left."
+       ],
+       [
+        "9",
+        "Directly left."
+       ],
+       [
+        "10",
+        "Back and to the left."
+       ]
+      ]
+     }
     },
     {
      "id": "Enemies",
      "title": "Enemies",
      "entries": [
       {
-       "key": "",
-       "text": "ENEMY TYPES"
+       "key": "ENEMY TYPES - HOW TOUGH IS IT?",
+       "text": "Not every foe is built like a player character. To keep fights fast, most NPCs are graded by how much punishment it takes to drop them. The four tiers below tell you, at a glance, how lethal a given enemy is and how much spotlight it deserves."
       },
       {
-       "key": "Henchmen's",
-       "text": "1 hit = kill"
+       "key": "TIERS ARE GUIDELINES, NOT LAWS",
+       "text": "These tiers gauge relative toughness, nothing more - an enemy can break tier when it makes sense (a brilliant street doc with a high Medicine skill but no fight in them). Anchor the numbers with the compendium's Enemy Generator, then bend them to fit the character."
       },
       {
-       "key": "Regular",
-       "text": "Grave wound = kill"
-      },
-      {
-       "key": "Elite",
-       "text": "Mortal Wound = kill, can use Quick actions"
-      },
-      {
-       "key": "Boss",
-       "text": "Treat like players, full talents, evo, actions and surges"
+       "key": "FOR THE GM",
+       "text": "Mix tiers to control a fight's rhythm: a wall of Henchmen makes players feel powerful, a single Elite or Boss makes them sweat. Henchmen are meant to fall fast - don't slow the table rolling their soak when one clean hit should end them."
       }
-     ]
+     ],
+     "table": {
+      "headers": [
+       "Tier",
+       "Drops when...",
+       "Notes"
+      ],
+      "rows": [
+       [
+        "Henchmen",
+        "One solid hit kills.",
+        "Cannon fodder; meant to fall fast and in numbers."
+       ],
+       [
+        "Regular",
+        "A GRAVE wound kills.",
+        "The standard rank-and-file threat."
+       ],
+       [
+        "Elite",
+        "A MORTAL wound kills.",
+        "Also gets QUICK actions - faster and deadlier."
+       ],
+       [
+        "Boss",
+        "Treat like a player.",
+        "Full talents, EVO, actions and surges. Run them as a PC."
+       ]
+      ]
+     }
     },
     {
      "id": "Item_Size",
      "title": "Item Size",
      "entries": [
       {
-       "key": "",
-       "text": "CARRYING CAPACITY / ITEM SIZE"
+       "key": "CARRYING CAPACITY",
+       "text": "A typical character comfortably carries about 10 units of gear - roughly 50 kg - and your PHYSIQUE shifts that by 5 kg per point (so each unit is about 5 kg). Above your carry you can still heave things for a moment: you can LIFT up to 5 times your carry off the ground, and PUSH or DRAG up to 10 times your carry along it.",
+       "examples": [
+        "Physique +2 -> 50 + 10 = 60 kg carry; lift ~300 kg, push or drag ~600 kg."
+       ]
       },
       {
-       "key": "",
-       "text": "Carrying capacity of a normal character is 10 units. Carrying capacity = 50 KG Modified by Physique times 5KG |  Lift = 5 time your total carry | Push or drag =  10 times your carry"
+       "key": "ITEM SIZE",
+       "text": "Every item also has a SIZE, which tells you how much room it eats, how easily it hides, and whether you can carry it by hand at all. Sizes climb a fixed ladder; the bigger the item, the more of your capacity it swallows and the harder it is to conceal or move."
       },
       {
-       "key": "",
-       "text": "Size"
-      },
-      {
-       "key": "",
-       "text": "Tiny"
-      },
-      {
-       "key": "",
-       "text": "Small"
-      },
-      {
-       "key": "",
-       "text": "Medium"
-      },
-      {
-       "key": "",
-       "text": "Large"
-      },
-      {
-       "key": "",
-       "text": "Ex. Large"
-      },
-      {
-       "key": "",
-       "text": "Huge"
-      },
-      {
-       "key": "",
-       "text": "Massive"
-      },
-      {
-       "key": "",
-       "text": "Colossal"
+       "key": "FOR THE GM",
+       "text": "Lead with the fiction: a Colossal weapon simply does not fit through a maintenance hatch, and a Huge crate needs a cart or a second pair of hands no matter what the math says. Use size as a soft pressure on what the party can haul out, not a spreadsheet to audit every pocket."
       }
-     ]
+     ],
+     "table": {
+      "headers": [
+       "Size",
+       "What it is like"
+      ],
+      "rows": [
+       [
+        "Tiny",
+        "Palmed and pocketed - a chip, a vial, a holdout blade."
+       ],
+       [
+        "Small",
+        "One-handed and easily stowed - a pistol, a datapad."
+       ],
+       [
+        "Medium",
+        "Two hands or a backpack - a rifle, a toolkit."
+       ],
+       [
+        "Large",
+        "Bulky, often two-handed - a heavy weapon, a sealed case."
+       ],
+       [
+        "Extra-Large",
+        "Awkward to carry alone; wants a strap, a rig, or help."
+       ],
+       [
+        "Huge",
+        "Needs a cart, a mount, or several people to move."
+       ],
+       [
+        "Massive",
+        "Vehicle-scale; not carried by hand at all."
+       ],
+       [
+        "Colossal",
+        "Structure- or ship-scale; moved only by machinery."
+       ]
+      ]
+     }
     },
     {
      "id": "Availability",
      "title": "Availability",
      "entries": [
       {
-       "key": "",
-       "text": "ITEM AVAILABILITY / DIFFICULTY TO PROCURE"
+       "key": "AVAILABILITY - HOW HARD IS IT TO FIND?",
+       "text": "Availability is about scarcity: how hard a thing is to track down at all. To get hold of something, players search for vendors, lean on contacts, or just ask around the right circles - the GM sets a DC by how rare the item is."
       },
       {
-       "key": "",
-       "text": "Availability governs the rarity / scarcity of items. Players can search for vendors, ask contacts or just ask around to see if they can find the required item."
+       "key": "COMMON",
+       "text": "On any shelf. No real effort to find."
       },
       {
-       "key": "",
-       "text": "AVAILABILITY"
+       "key": "UNCOMMON",
+       "text": "A little looking - the right shop or a quick ask around."
       },
       {
-       "key": "",
-       "text": "COMMON :"
+       "key": "RARE",
+       "text": "Specialist vendors and the right contacts only."
       },
       {
-       "key": "",
-       "text": "UNCOMMON :"
+       "key": "LIMITED",
+       "text": "Tight supply: waitlists, permits, or the right connections."
       },
       {
-       "key": "",
-       "text": "RARE :"
+       "key": "UNIQUE",
+       "text": "One of a kind. You don't buy it - you find it, win it, or take it."
       },
       {
-       "key": "",
-       "text": "LIMITED :"
+       "key": "LEGALITY - HOW MUCH TROUBLE IS IT TO HOLD?",
+       "text": "Separate from how rare a thing is, is whether you are allowed to have it. Legality decides who comes knocking when you are caught with it - and a Common item can still be wildly Illegal. Read both numbers before you flash something around."
       },
       {
-       "key": "",
-       "text": "UNIQUE :"
+       "key": "FOR THE GM",
+       "text": "Availability and legality stack into texture: a Common-but-Illegal weapon floods the gutters but gets you arrested; a Rare-but-Legal tool is simply hard to source. Let contacts, black markets, and permits be the playground where the two interact."
       }
-     ]
+     ],
+     "table": {
+      "title": "Legality",
+      "headers": [
+       "Legality",
+       "What it means"
+      ],
+      "rows": [
+       [
+        "Legal",
+        "Owned and carried freely, no questions asked. (Item cards label these \"No Permit\".)"
+       ],
+       [
+        "Restricted",
+        "Legal only with the right permit or licence; carrying it without one invites fines or confiscation."
+       ],
+       [
+        "Illegal",
+        "Outlawed for civilians - possession alone is a crime."
+       ],
+       [
+        "Classified",
+        "Beyond illegal: military, corporate, or state-secret hardware. Being caught with it draws the worst kind of attention."
+       ]
+      ]
+     }
     },
     {
      "id": "Luck",
      "title": "Luck",
      "entries": [
       {
-       "key": "",
-       "text": "LUCK"
+       "key": "LUCK - THE FIRST DIE",
+       "text": "On every skill check and every defense, single out one die as your LUCK die - by convention, the first one you rolled. It works no matter how the rest of the pool lands: a natural 1 is a CRIT FAILURE, and a natural 10 is a CRIT SUCCESS."
       },
       {
-       "key": "",
-       "text": "Every time you roll a skill or a defense, identify a luck dice (usually the first dice rolled).  On a roll of 1, your have a CRIT FAILURE, on a roll of 10 you have a CRIT SUCCESS."
+       "key": "WHAT THE CRITS DO",
+       "text": "A crit success can lift a near-miss into a clean win or stamp a Critical Ailment onto a foe; a crit failure complicates even an otherwise successful roll. Luck reaches past combat, too - it steers a missed throw's DEVIATION and the swing on a failed SAVE."
+      },
+      {
+       "key": "FOR THE GM",
+       "text": "Crits are your licence to make a moment memorable. On a crit success, give the player a little extra; on a crit failure, introduce a complication rather than just 'nothing happens' - a jam, a noise, an opening for the enemy."
       }
      ]
     },
@@ -1143,28 +1494,30 @@
      "title": "Surge",
      "entries": [
       {
-       "key": "",
-       "text": "SURGE"
+       "key": "SURGE - YOUR EDGE WHEN IT COUNTS",
+       "text": "Surge is a small pool of momentum you spend to bend a moment your way. You begin every game with 1 surge point."
       },
       {
-       "key": "",
-       "text": "At the start of every game you have 1 surge point."
+       "key": "EARNING SURGE",
+       "text": "Beyond your starting point, surge is a reward: the GM hands it out for outstanding roleplay or for simply doing something awesome at the table - think of it as the game paying you back for the moments that make a session. Your cap is the higher of your ENDURANCE or WILLPOWER; any surge earned past that cap is lost."
       },
       {
-       "key": "",
-       "text": "Additionnal Surges are gained when players accept a bad consequence or can be given up to cancel that consequence."
+       "key": "SPENDING LIMITS",
+       "text": "You cannot pour your whole pool into one scene: you may spend at most your choice of SPEED or WITS surges per SCENE."
       },
       {
-       "key": "",
-       "text": "The maximum amount of surges you can hold at once is equal to the highest between ENDURANCE or WILLPOWER. Additional surges gained over that value are lost."
+       "key": "WHAT A SURGE BUYS",
+       "text": "Spend a surge for exactly ONE of the following:",
+       "examples": [
+        "An additional STANDARD, MOVE, or QUICK action on your current turn (one extra action only).",
+        "Roll a skill twice and keep whichever of the two results you prefer.",
+        "Nudge your luck die to remove a CRITICAL FAILURE."
+       ],
+       "sub": "Some talents change how your surges work - watch for them when building a character."
       },
       {
-       "key": "",
-       "text": "Players cannot spend more than their (pick either SPEED or WITS) surges per SCENE."
-      },
-      {
-       "key": "",
-       "text": "Grants on of the following :"
+       "key": "FOR THE GM",
+       "text": "Surge is your reward currency, so spend it freely: hand a point to the player who leaned hard into their character or pulled off something memorable, and the whole table will start chasing those moments. It is a feedback loop that pays players for exactly the play you want to see."
       }
      ]
     },
@@ -1219,70 +1572,72 @@
      "title": "Critical Ailments",
      "entries": [
       {
-       "key": "",
-       "text": "CRITICAL AILMENTS"
-      },
-      {
        "key": "CRITICAL AILMENTS",
-       "text": "Effect on critical hits or trauma"
+       "text": "A Critical Ailment is a nasty status rider inflicted by a CRITICAL HIT (a natural 10 on the luck die) - not by trauma. Which ailment lands depends on the damage type that scored the crit, so the same crit feels different from a flamethrower, a railgun, or a psychic lash."
       },
       {
-       "key": "ENERGY",
-       "text": "EXPOSED : Gain damage vulnerability 1 to all (Cumulative if reapplied)"
-      },
-      {
-       "key": "PHYSICAL",
-       "text": "BLEED : 1 damage per maintenance phase. (Cummulative if reapplied)"
-      },
-      {
-       "key": "FORCE",
-       "text": "KNOCKDOWN : Knocks target down, cancels COMPLEX actions. Target counts as PRONE."
-      },
-      {
-       "key": "BIO",
-       "text": "SICK :  SMALL penality to all rolls. (Not cummulative if reapplied)"
-      },
-      {
-       "key": "PSY",
-       "text": "DAZED : You cannot perform quick actions. (STUNNED if reapplied while dazed)"
+       "key": "FOR THE GM",
+       "text": "Because ailments ride on crits, they should feel like punctuation - sudden and vivid. Call them out by name and describe them ('the round punches through and she's BLEEDING'), and remember most stack or escalate if re-applied, so a drawn-out fight gets nastier on its own."
       }
-     ]
+     ],
+     "table": {
+      "headers": [
+       "Damage type",
+       "Ailment",
+       "Effect"
+      ],
+      "rows": [
+       [
+        "ENERGY",
+        "EXPOSED",
+        "Gain damage vulnerability 1 to all (cumulative if re-applied)."
+       ],
+       [
+        "PHYSICAL",
+        "BLEED",
+        "1 damage per maintenance phase (cumulative if re-applied)."
+       ],
+       [
+        "FORCE",
+        "KNOCKDOWN",
+        "Knocked down, cancels COMPLEX actions; the target counts as PRONE."
+       ],
+       [
+        "BIO",
+        "SICK",
+        "SMALL penalty to all rolls (not cumulative if re-applied)."
+       ],
+       [
+        "PSY",
+        "DAZED",
+        "Cannot perform quick actions (becomes STUNNED if re-applied while dazed)."
+       ]
+      ]
+     }
     },
     {
      "id": "Time/Dates",
      "title": "Time/Dates",
      "entries": [
       {
-       "key": "",
-       "text": "Time and dates around the Galaxy"
+       "key": "GALACTIC STANDARD TIME",
+       "text": "Worlds spin at wildly different rates, so trade and travel run on a single base-10 standard rather than any one planet's clock. Everything counts in tens, which makes the calendar easy to do in your head."
       },
       {
-       "key": "",
-       "text": "In 56 due to Galactic time differences, planet sizes etc. a standard measuring system was adopted"
+       "key": "THE BASE-10 CALENDAR",
+       "text": "A day is 10 hours. A week is 10 days. A month is 10 weeks, or 100 days. A year is 10 months - 100 weeks, or 1,000 days."
       },
       {
-       "key": "",
-       "text": "a day is 10 hours"
+       "key": "HOW DATES ARE WRITTEN",
+       "text": "Days and months carry no official names; most people just use the numbers. A date reads day-month-year, so 'day 8, month 8, year 5734' is written 08-08-5734."
       },
       {
-       "key": "",
-       "text": "a week is 10 days"
+       "key": "A WORKING LIFE",
+       "text": "Standard full-time employment runs 10 hours on, then 10 hours off - one day working, one day resting. Over a week that works out to 50 hours, half your waking time on the clock."
       },
       {
-       "key": "",
-       "text": "a month is 10 weeks or 100 days"
-      },
-      {
-       "key": "",
-       "text": "a year is 10 months or 100 weeks or 1000 days"
-      },
-      {
-       "key": "",
-       "text": "Days and months have no official names, most call them by their numbers i.e.: day 8 month 8 year 5734 (08-08-5734)"
-      },
-      {
-       "key": "",
-       "text": "Full time employment is 10 hours of work (a day) then 10 hours off (a day) you end up working 50% of the time or 50 hours a week."
+       "key": "FOR THE GM",
+       "text": "Lean on the tens when you narrate downtime and travel - 'three days out, a hundred hours of jump' lands cleanly and reinforces that this is not Earth. Tie deadlines and shifts to the calendar to make the setting feel lived-in."
       }
      ]
     }
@@ -2968,1170 +3323,6 @@
    ]
   },
   {
-   "group": "EVOLUTION",
-   "sections": [
-    {
-     "id": "Evo_Overview",
-     "title": "How Evolution Works",
-     "entries": [
-      {
-       "key": "",
-       "text": "Evolution is an optional system. No character is forced to spend resources in this system. It serves as a way to guide players wishing to modify their body, add cybernetics, or dabble in magic."
-      },
-      {
-       "key": "",
-       "text": "Every character can have as many EVOs as they can take. Each tier adds its rank to the total EVO points a character has. Those points dictate the severity of consequences tied to having too many EVOs."
-      },
-      {
-       "key": "",
-       "text": "Evolution has 3 tiers per category. Before buying a higher tier you must first buy the previous tier in that category. (e.g. To get Alpha Specimen TIER II you also need TIER I — total EVO point increase would be 3.)"
-      },
-      {
-       "key": "",
-       "text": "Tier 1 evolutions grant some benefits but usually have a small impact on actual gameplay."
-      },
-      {
-       "key": "",
-       "text": "Tier 2 evolutions are substantial and grant significant changes to a character."
-      },
-      {
-       "key": "",
-       "text": "Tier 3 evolutions provide major benefits but come with a significant cost to credits and EVO total."
-      },
-      {
-       "key": "",
-       "text": "Evolution traits add 1 point per tier to your EVO score. If a player acquires a Tier 3 trait (which requires Tiers 1 and 2), the total increase will be 6 points."
-      },
-      {
-       "key": "",
-       "text": "Skills required to install an EVO: Medical for Genetics, Technology for Cybernetics, Binding for Magic. Install DC is 2, 4, or 6 depending on EVO tier."
-      }
-     ]
-    },
-    {
-     "id": "Evo_Overflow",
-     "title": "EVO Overflow & Afflictions",
-     "entries": [
-      {
-       "key": "",
-       "text": "There is no hard limit to the number of EVOs a character can have, but past a certain point there is a significant chance of consequences ranging from minor annoyances to full psychosis."
-      },
-      {
-       "key": "",
-       "text": "When installing EVOs, compare the total EVO ranks (including the new EVO) against the sum of ENDURANCE + WILLPOWER. If the result is 0 or negative, the body accepts the EVO without complications."
-      },
-      {
-       "key": "",
-       "text": "When Attributes Vs EVO is 1 or more, the GM secretly rolls a D10 and subtracts any additional successes the installer got over the install DC. If the GM's total is 1 or more, the recipient gains an EVO affliction."
-      },
-      {
-       "key": "",
-       "text": "Afflictions do not manifest right away — a player will never know how bad it is until it is too late."
-      },
-      {
-       "key": "",
-       "text": "Triggered when a player makes a critical failure during a SCENE from a roll that could have been influenced by their EVO."
-      },
-      {
-       "key": "",
-       "text": "EVO afflictions will never trigger more than once per SCENE."
-      },
-      {
-       "key": "",
-       "text": "EVO afflictions are cumulative. When multiple are possible the GM rolls which activates randomly."
-      },
-      {
-       "key": "",
-       "text": "Getting cloned resets all of a character's EVOs and any afflictions acquired. Permanent EVOs remain forever."
-      },
-      {
-       "key": "",
-       "text": "An EVO can never negate the drawback from one of the afflictions. If an EVO would normally render you immune, you ignore that EVO."
-      }
-     ]
-    },
-    {
-     "id": "Evo_Genetics",
-     "title": "Genetics Rules",
-     "entries": [
-      {
-       "key": "",
-       "text": "Tier 1 — Your new genetic code has had some cosmetic changes on your appearance; pick one or more features (color, shape, hair, horns etc.) and mutate them."
-      },
-      {
-       "key": "",
-       "text": "Tier 2 — Lifebane critical effect will disable one of your GENETIC EVOs (player's choice, all 3 tiers) until a recovery roll is made."
-      },
-      {
-       "key": "",
-       "text": "Tier 3 — Extensive modifications can impact drugs and medical treatment. Any drug/medical item used on you has a 50% chance of no TOXICITY or double TOXICITY. Custom drugs can avoid this."
-      }
-     ]
-    },
-    {
-     "id": "Evo_Cybernetics",
-     "title": "Cybernetics Rules",
-     "entries": [
-      {
-       "key": "",
-       "text": "Tier 1 — Replacing body parts with machinery leaves traces. You now have visible implants on your body — pick one or more appearance features representing your Cybernetic EVO."
-      },
-      {
-       "key": "",
-       "text": "Tier 2 — EMP critical effect will disable one of your CYBERNETIC EVOs (player's choice, all 3 tiers) until a recovery roll is made."
-      },
-      {
-       "key": "",
-       "text": "Tier 3 — You count as a MACHINE and no longer count as a LIVING BEING. On SEVERE TRAUMA there is a 50% chance it strikes one of your Cybernetic EVOs instead, negating the TRAUMA but disabling that EVO until repaired."
-      },
-      {
-       "key": "",
-       "text": "Passive EVOs: Always on, generate no CYBER SHOCK."
-      },
-      {
-       "key": "",
-       "text": "Active EVOs: Free action to gain benefits. Roll TECHNOLOGY vs current MORALE to avoid CYBER SHOCK. On failure the augment works but you lose 1 MORALE per TIER. If MORALE drops to 0 you lose control of your character."
-      }
-     ]
-    },
-    {
-     "id": "Evo_Magic",
-     "title": "Magic (EVO) Rules",
-     "entries": [
-      {
-       "key": "",
-       "text": "Tier 1 — EVO magic is done via spirit fusion as tattoos or grafting relics into your flesh. Pick the design and modify one or more of your character's features."
-      },
-      {
-       "key": "",
-       "text": "Tier 2 — Spiritbane critical effect will disable one of your MAGIC EVOs (player's choice, all 3 tiers) until a recovery roll is made."
-      },
-      {
-       "key": "",
-       "text": "Tier 3 — You no longer count as a LIVING being while your SPIRIT is active; you count as a SPIRIT instead. You leak CHI in your environment — every SCENE you start in has at least 1 RAW CHI in the area."
-      }
-     ]
-    },
-    {
-     "id": "Evo_Afflictions",
-     "title": "EVO Affliction Table",
-     "entries": [
-      {
-       "key": "",
-       "text": "All clear: Somehow you are still ok, you're sure something is wrong but just can't say what exactly. No effect this time around"
-      },
-      {
-       "key": "",
-       "text": "Achromatopsia: You just lost the ability to see all but 1 color, that color is random. Effect last until the end of the SCENE."
-      },
-      {
-       "key": "",
-       "text": "Pain: Lose 1 HEALTH. Your EVO is painful to use. Until the end of the SCENE, whenever you make a skill check influenced by your EVO you also lose 1 HEALTH. This loss cannot be prevented."
-      },
-      {
-       "key": "",
-       "text": "The shakes: For the rest of the SCENE the character will experiencing random nervous shakes. SMALL penalty to all SKILL rolls."
-      },
-      {
-       "key": "",
-       "text": "Vivid dreams: Your EVO DAZES you, you are dazed until you recover."
-      },
-      {
-       "key": "",
-       "text": "Cellular atrophy: One of your MAXIMUM RACIAL ATTRIBUTE is permanently reduced by 1"
-      },
-      {
-       "key": "",
-       "text": "The Yipps: Until the end of the SCENE whenever you fail a skill check or defense roll you lose 1 MORALE. This morale loss cannot be mitigated."
-      },
-      {
-       "key": "",
-       "text": "Disoriented: When triggered your next action must be a full move, if you have no move remaining you must move next round. When performing that movement check the deviation table, you move in that direction regardless of the danger to yourself."
-      },
-      {
-       "key": "",
-       "text": "Malfunction: Your EVO stuns you, you can recover from this ailment normally."
-      },
-      {
-       "key": "",
-       "text": "Traumatic activation: Your EVO causes you a TRAUMA. Gain a HEALTH trauma if ENDURANCE is lower than WILLPOWER, otherwise gain a MORALE TRAUMA. Players choice of which if both attributes are equal."
-      },
-      {
-       "key": "",
-       "text": "Minor Hallucinations: You see things that are not there. Until the end of the SCENE you have additional targets or additional actions to use to deal with those phantom targets."
-      },
-      {
-       "key": "",
-       "text": "Overdrive: Your EVOs go berserk and double their effects until the end of the SCENE. All rolls that are not influenced by your EVO's have a LARGE penalty."
-      },
-      {
-       "key": "",
-       "text": "Catastrophic activation: Your EVO causes you a MAJOR TRAUMA. Gain a HEALTH trauma if ENDURANCE is lower than WILLPOWER, otherwise gain a MORALE TRAUMA. Players choice of which if both attributes are equal."
-      },
-      {
-       "key": "",
-       "text": "Psychosis: Gain PSYCHOSIS until the end of the SCENE; while under psychosis, you will violently attack the closest target regardless of who it is. During maintenance if you recover from this ailment you can act normally for one round."
-      },
-      {
-       "key": "",
-       "text": "Spontaneous combustion: You burst into flames, at least that how it feels like; gain ONGOING TRUE MORALE and HEALTH damage equal to your EVO score. You can recover from this normally and damage can be mitigated by ENDURANCE or WILLPOWER."
-      },
-      {
-       "key": "",
-       "text": "Cellular degeneration: Your EVO attacks your whole body. Until the end of the SCENE, every maintenance you lose 1 HEALTH and MORALE. This loss cannot be mitigated but can be recovered."
-      },
-      {
-       "key": "",
-       "text": "The End: You drop instantly. Puts character into the DYING state."
-      },
-      {
-       "key": "",
-       "text": "DNA corruption: Every time you trigger this EVO malfunction you lower one random PRIMARY ATTRIBUTE by 1. This loss is permanent."
-      },
-      {
-       "key": "",
-       "text": "Major Hallucinations: Until the end of the SCENE, You will move and attack anyone within MELEE range of you, if no one is in MELEE range you will attack yourself until death."
-      },
-      {
-       "key": "",
-       "text": "Becoming God: When triggered, you will now dedicate every waking moment to acquiring new EVO's or credits for new EVO's and installing them. Every one of your actions must be towards acquiring more EVO and getting it installed."
-      },
-      {
-       "key": "",
-       "text": "Death: You instantly die; its official, you have been killed by your EVO's. Skip the DYING phase you are dead as a doornail."
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "group": "GLOSSARY",
-   "sections": [
-    {
-     "id": "Glossary",
-     "title": "Glossary",
-     "entries": [
-      {
-       "key": "ALLIANCE SPACE",
-       "text": "Represents every quadrant of the galaxy under alliance control. Systems in the alliance control all have similar laws and citizen rights. This is what most people would call the civilized world."
-      },
-      {
-       "key": "AMMO",
-       "text": "The quantity and type of ammo the weapon has in its magazine. Energy weapons tend to have a power cell giving X shots before it is depleted and automatically begins recharging (cooldown period). Ammunition is universal and comes in 3 sizes small S, medium M and large L."
-      },
-      {
-       "key": "DP",
-       "text": "Target is considered BREACHED but comes with a SMALL penality to your damage."
-      },
-      {
-       "key": "AR",
-       "text": "Gain a SMALL bonus to PHYSICAL DAMAGE when hitting MEDIUM PHYSICAL DEFENSE. Bonus increases to LARGE against HIGH or EXTREME DEFENSE or against structures and objects."
-      },
-      {
-       "key": "LIVING",
-       "text": "Device automatically recovers 1 SYSTEM or NANITE per MAINTENANCE (players choice)."
-      },
-      {
-       "key": "MELT",
-       "text": "Successful hits have 60% chance (5+ on luck DICE) to apply the BREACHED AILMENT to your target."
-      },
-      {
-       "key": "ATTRIBUTE BONUS",
-       "text": "When rolling a skill with an associated positive attribute you can reroll a number of failures equal to that attribute. In the case of a negative attribute you must reroll a number of successes."
-      },
-      {
-       "key": "AVAILABILITY",
-       "text": "Availability governs the rarity of certain items. Players can search for vendors, ask contacts or just ask around to see if they can find the required item."
-      },
-      {
-       "key": "BASIC ATTACK",
-       "text": "A basic attack is an attack that cannot be modified with talents, modifiers or outside help. You perform a skill check and apply the unmodified results."
-      },
-      {
-       "key": "BASIC DATACOMS",
-       "text": "Your basic multi use communication device. Basic datacoms can be part of a network but cannot create one."
-      },
-      {
-       "key": "BATTLECRUISERS",
-       "text": "A battlecruiser is designed to be fast like a cruiser but with multiple turrets or giant guns. Battlecruisers are the main ships on the frontline of a war and often serve as bases of operations in a sector. Typical sizes is around 400m min with a crew of around 25. Max passengers is around 500."
-      },
-      {
-       "key": "LOC",
-       "text": "Power is determined by target's range. HIGH at short range, MEDIUM at medium range and LOW at long range."
-      },
-      {
-       "key": "BLEEDING",
-       "text": "Bleeding causes a character to lose 1 HEALTH every maintenance phase. (Recover or Medicine DC 1 to recover)"
-      },
-      {
-       "key": "BLIND",
-       "text": "When you try to perform a ranged action while suffering from BLIND you incur a LARGE penality. Touch and Melee actions have a SMALL penality."
-      },
-      {
-       "key": "BREACHED",
-       "text": "When BREACHED your DEFENSE is reduced by a one category (No effect if [NONE]) until the next maintenance phase."
-      },
-      {
-       "key": "BROKEN",
-       "text": "Broken cause a LARGE penalty to the following attributes: MENTAL, WITS, SOCIAL and WILLPOWER"
-      },
-      {
-       "key": "BULKY",
-       "text": "After every attack with this weapon you must spend a standard action doing anything else before you can attack with this weapon again."
-      },
-      {
-       "key": "BUNKER",
-       "text": "Always get maximum SOAK rolls when not moving. (Bonus applies during maintenance phase after a full round of no movement)."
-      },
-      {
-       "key": "BURST FIRE",
-       "text": "Weapons with a B in the R.O.F category can perform a BURST FIRE action. This is a STANDARD attack but the roll and damage is now lucky at the cost of 3 ammo"
-      },
-      {
-       "key": "CARRIERS",
-       "text": "A carrier is a nova cruiser that is missing the main gun battery and most of the armor. If a carrier is getting close enough to need armor, the captain and/or admiral needs to be fired. They are designed to carry and deliver payloads be it cargo, passengers, fighters, missiles etc.  Typical size starts at  1400m+ length with a crew of 75 and around 2000 passengers."
-      },
-      {
-       "key": "CARRY",
-       "text": "Replaced by lightweight"
-      },
-      {
-       "key": "EFFICIENT",
-       "text": "Weapon only consumes 1 AMMO per attack regardless of actions (FULL AUTO, BURST etc.)"
-      },
-      {
-       "key": "CLOAK",
-       "text": "Provides passive CONCEALMENT 3 type I and II. Passive concealment is 6 when not moving for a round."
-      },
-      {
-       "key": "CLONE SICKNESS",
-       "text": "Anyone that has been cloned will suffer from the SICK ailment. This ailment cannot be removed by a RECOVER, instead it lasts until you gain 25 exp (or 2 weeks for anyone that cannot gain XP)."
-      },
-      {
-       "key": "COMPLEX ACTION",
-       "text": "A COMPLEX action is achieved by sacrificing either a QUICK action or MOVE action to enhance your STANDARD action, turning it into a COMPLEX action."
-      },
-      {
-       "key": "COMPROMISED",
-       "text": "COMPROMISED is a LIGHT TRAUMA for objects and machines. An ITEM that is COMPROMISED loses access to EXTERNAL components"
-      },
-      {
-       "key": "CORONTHIA",
-       "text": "Super dense fuel that has restricted use in all alliance atmospheres. It has an amazing power potential but an equal instability potential rending it very dangerous for use. Fusion cores have replaced more coronthia engines but some remain."
-      },
-      {
-       "key": "CORVETTES",
-       "text": "Corvettes are a patrol craft, designed to be lethal to civilian shipping and most pirates, but really more policeoriented than military. Average size is around 50m with typical crews of around 5 and can carry up to 25 passengers."
-      },
-      {
-       "key": "DEFLECTOR",
-       "text": "Forcefield can only be used when you succeed a PARRY against ranged or melee attacks. This FORCEFIELD never needs to RECHARGE and only counts as your DEFENSE option if you succeed your PARRY."
-      },
-      {
-       "key": "COVER",
-       "text": "When next to object and structures, targets are considered to be using them as cover (unless stated otherwise). Attackers get the option to try to avoid hitting the cover, giving the attacker a skill check penalty or try to go through the cover which gives the defender bonus defense."
-      },
-      {
-       "key": "COVER FIRE",
-       "text": "As a COMPLEX action you can perform a COVER FIRE action. Designate 3 (burst fire) or 9 (full auto) squares meters in weapon range as cover fire area (must be contiguous). Then roll your attack as normal; anyone you hit gains the SUPPRESSED AILMENT. If you perform any other actions others than cover fire of if the target leaves the area the SUPPRESSED ailment is removed."
-      },
-      {
-       "key": "CPU",
-       "text": "How many ROUTINES, PROGRAMS, GADGETS or ACTIONS can this device handle every round. ROUTINES only consume CPU when active."
-      },
-      {
-       "key": "CRIPPLED",
-       "text": "CRIPPLED is a SEVERE TRAUMA for objects and machines. An ITEM that is CRIPPLED loses access to EXTERNAL and INTERNAL components."
-      },
-      {
-       "key": "CRIT",
-       "text": "Weapon will crit on an unmodified 910 instead of a natural 10 on your luck dice."
-      },
-      {
-       "key": "CRITICAL AILMENTS",
-       "text": "When a target loses HEALTH or MORALE from an attack that was either a CRITICAL HIT or has caused a TRAUMA, the target also suffers from a CRITICAL AILMENT. Effect is the critical ailment depends on the damage type that caused it (see critical ailment table below)"
-      },
-      {
-       "key": "CRITICAL DAMAGE",
-       "text": "Deal maximum damage (No dmg roll required), if the target suffers any damage from the attack that caused the hit they also gain a CRITICAL AILMENT. To score a critical hit a player must roll a natural 10 on their luck dice. To qualify as a critical hit the hit must have been a valid hit in the first place."
-      },
-      {
-       "key": "CRITICAL SUCCESS",
-       "text": "Grants the maximum number of success possible (replace the result of your skill roll). To achieve a critical success roll a player must roll a natural/modified 10 on their luck dice."
-      },
-      {
-       "key": "CROUCHED",
-       "text": "Grants LIGHT COVER Vs ranged attacks. All movement is treated as being in difficult terrain. Your DEFENSE Vs MELEE has a SMALL penalty"
-      },
-      {
-       "key": "CRUISERS",
-       "text": "Cruisers are designed to run away from whatever it can’t kill and kill anything it can’t run away from. They are large enough to operate independently in or out of deep space. Some can also have small ship bays. Typical size is around 200m length with crews ranging from 8 to 20. Specifically designed cruisers can carry up to 200 passengers."
-      },
-      {
-       "key": "DAMAGE",
-       "text": "Damage determines the amount of damage a weapon does once a hit has passed defenses."
-      },
-      {
-       "key": "HACKPROOF",
-       "text": "Always get maximum SOAK rolls when defending against TECH attacks."
-      },
-      {
-       "key": "DARK SPACE",
-       "text": "Represents every mapped quadrant outside the reach of the alliance. Every system in the dark space has their own laws and customs. This is also what people call the frontier worlds."
-      },
-      {
-       "key": "DAZE",
-       "text": "Daze = can only perform one action this round and cannot use quick action"
-      },
-      {
-       "key": "DC",
-       "text": "Difficulty is the target number of successes required to succeed at a task."
-      },
-      {
-       "key": "DEEP SPACE",
-       "text": "Unexplored area of space, very few venture in those areas, few even return. What is truly out there no one really knows."
-      },
-      {
-       "key": "DEFEND",
-       "text": "If you win initiative, you can actively defend against an attack or event. The skill or method used to defend is up to the player as long as it is relevant(GM approval). On success you add the result of the skill to your DEFENSE roll. If you fail initiative, you were too slow."
-      },
-      {
-       "key": "DEFLECT",
-       "text": "Deflect gets added to your DEFENSE (along cover and other modifiers) to counter POWER and determine how much damage penetrates or is negated by the armor. A higher value will reduce damage while a lower value will hinder your ability to SOAK damage properly."
-      },
-      {
-       "key": "DESTROYED",
-       "text": "Destroyed happens when you lose more than 2x your HEALTH, HULL, MORALE or SYSTEM. Anything suffering a destroyed result is obliterated beyond any recovery."
-      },
-      {
-       "key": "DEVICE",
-       "text": "A device is a single function tool that can connect to a node (Forcefield,  most drones, guns, etc.). Unless specified devices have an INTEGRITY of 1. You do not hack devices directly, you hack their NODE"
-      },
-      {
-       "key": "DIFFICULT TERRAIN",
-       "text": "Environment not suitable for proper movement cost double movement per square (1m) special movement like stealth, climbing, swimming, no gravity have the same effect. Special movement through difficult terrain cost triple movement."
-      },
-      {
-       "key": "DISCRETE",
-       "text": "You hardly register on electronic surveillance. You now always have passive concealment of 5 vs AI and Electronics."
-      },
-      {
-       "key": "DOMAIN",
-       "text": "Magic is divised in DOMAINS, each of them regroups SPIRITS, SPELLS, BARRIERS and is associated with it's appropriate SKILL."
-      },
-      {
-       "key": "BLIND",
-       "text": "BLIND applies a LARGE penalty to any ranged action or skill. Touch and Melee skills only have a SMALL penalty."
-      },
-      {
-       "key": "DUAL WEAPONS",
-       "text": "Need one handed weapons, when attacking you repeat your action with a secondary weapon and a SMALL penalty. Actions done through DW require the same target and actions. Reloading is per weapon still."
-      },
-      {
-       "key": "DUELIST",
-       "text": "Always get maximum SOAK rolls when defending against MELEE attacks."
-      },
-      {
-       "key": "DUR+",
-       "text": "Item has double durability"
-      },
-      {
-       "key": "DURABILITY",
-       "text": "Replaces HEALTH for nonliving things like vehicles, ships, drones, buildings, etc"
-      },
-      {
-       "key": "DYING",
-       "text": "If you lose all your health, morale or suffer too many traumas you gain the DYING status. Dying characters lose consciousness and will die in 3 rounds unless someone stabilizes you  (Medicine DC 5 or Leadership DC5)."
-      },
-      {
-       "key": "EMERGENCY",
-       "text": "Once per SCENE you can instantly recharge this FORCEFIELD as a FREE action."
-      },
-      {
-       "key": "EMP",
-       "text": "Gain a LARGE damage bonus Vs ELECTRONICS. Applying a critical ailment with EMP effect stop an ELECTRONIC device from functionning or STUN it if it's an android or robot. If the AILMENT is already present for the android or robot, deal a TRAUMA instead."
-      },
-      {
-       "key": "ENERGY",
-       "text": "EXPOSURE : Gain damage vulnerability 1 to all (Cumulative if reapplied). Extreme heat, cold or electric discharges causing burns or tissue damage."
-      },
-      {
-       "key": "EX",
-       "text": "Weapon deals area damage, use FULL AUTO rules  (action type does not change)  against targets that are larger than playable characters."
-      },
-      {
-       "key": "EXPERTISE",
-       "text": "Expertise represents the ease of use of an item. Expertise only applies when making COMPLEX actions unless the value is negative, then it applies on all actions. EXPERTISE adds 1 DAMAGE per extra success over your DIFFICULTY to hit up to the maximum EXPERTISE rating of the weapon. Negative expertise increases the DC of all skill rolls by X."
-      },
-      {
-       "key": "EXPLOSIVE",
-       "text": "Weapon deals area damage, use FULL AUTO rules  (action type does not change)  against targets that are larger than playable characters."
-      },
-      {
-       "key": "FIGHTERS",
-       "text": "Fighters are short range small fixed weapon spaceships usually used in warfare. They range from 1525m and have a small crews of 13 people."
-      },
-      {
-       "key": "FIRE",
-       "text": "Successful hits have 60% chance (5+ on luck DICE) to ignite targets. Damage gains the ONG tag on successful ignite."
-      },
-      {
-       "key": "FIXED WEAPONS",
-       "text": "Weapons that are fixed are always facing where the ship is facing and thus cannot hit a target if the GUNNER has a ROLE DISADVANTAGE (ship is facing the wrong way)."
-      },
-      {
-       "key": "FLANKED",
-       "text": "When you have two or more enemies at opposite sides of you are considered FLANKED. While FLANKED you are consided BREACHED."
-      },
-      {
-       "key": "FOCUS",
-       "text": "In a challenge round, you can use your QUICK action to FOCUS. While focussed you gain a SMALL bonus to your next action."
-      },
-      {
-       "key": "FORCE",
-       "text": "DAZED : You cannot perform quick actions. (STUNNED if reapplied). Explosives, concussive force and area crushing damage falls under this category"
-      },
-      {
-       "key": "FORCEFIELD / SHIELDS",
-       "text": "When damage exceeds the value of a shield or forcefield you ignore the rest of the hit no matter how much damage is left. (ie: shield gating)."
-      },
-      {
-       "key": "FRIGATES",
-       "text": "Frigates are a corvette with cruiserclass weapons. A frigate is a ship designed to be tougher than any pirate, and faster than any cruiser. They can handle short range missions but remain limited in operational range. Average size is around 100m with typical crews of around 10 people and can carry up to 50 passengers."
-      },
-      {
-       "key": "FULL AUTO",
-       "text": "Weapons with a F in the R.O.F category can perform a FULL AUTO action. Full auto is always COMPLEX action. On a FULL AUTO action your EXPERTISE result counts as additional hits instead of additional damage. You can distribute the hits among any targets within X (EXPERTISE) meters of the initial target."
-      },
-      {
-       "key": "FULL DATACOMS",
-       "text": "An advanced datacom that functions like a basic datacom but more powerful and can act as a HOST NODE to form a NETWORK"
-      },
-      {
-       "key": "GADGET",
-       "text": "A set of instructions for your DATACOM to build temporary constructs that have various effects. Unless specified using a GADGET is a standard action and last a SCENE unless specified."
-      },
-      {
-       "key": "GALACTIC QUADRANT",
-       "text": "The standard unit of measurement for a sector of the known universe. A star system is usually a single quadrant."
-      },
-      {
-       "key": "GAS",
-       "text": "Forcefield and Armor does not protect against this attack. If you are inside the cloud the effects apply. GAS duration is 1 Scene."
-      },
-      {
-       "key": "GOOD COVER",
-       "text": "LARGE PENALTY or HIGH to EXTREME DEFENSE | Reinforced items, metal plates, heavy concrete, large stone items, Large appliances, solid furniture, a car, brick or concrete walls, large trees etc."
-      },
-      {
-       "key": "GRAVE WOUND",
-       "text": "Grave wounds cause a SMALL penalty to the following attributes: PHYSICAL, ENDURANCE, ACUITY and SPEED."
-      },
-      {
-       "key": "GRENADE",
-       "text": "Allows weapon to be thrown as a QUICK action if already in hand, and weapon deals AOE EX DAMAGE. (See EXPLOSIVE for details)"
-      },
-      {
-       "key": "GTF",
-       "text": "Any ENERGY attack that comes in contact with a Glitter field has its POWER reduced by one category and deals MINIMUM DAMAGE. Glitter field lasts 1 scene."
-      },
-      {
-       "key": "BREAKER",
-       "text": "Forcefield can only lose 1 charge per attack even when an attack cause multiple hits."
-      },
-      {
-       "key": "HARDENED",
-       "text": "Always get maximum SOAK rolls when defending against PHYSICAL attacks."
-      },
-      {
-       "key": "HE",
-       "text": "Reduce explosion radius by 50% and but deals double the damage. (requires EX base mod)"
-      },
-      {
-       "key": "HEALING",
-       "text": "During MAINTENANCE you can spend any number of NANITES, or personal CHI to recover an equal amount of HEALTH or MORALE"
-      },
-      {
-       "key": "INSULATING",
-       "text": "Always get maximum SOAK rolls when defending against ENERGY attacks."
-      },
-      {
-       "key": "MEDIUM ARMOR",
-       "text": "Provide good protection and counts as a MEDIUM item for encumbrance. Requires 2 rounds to put on or remove."
-      },
-      {
-       "key": "HOT",
-       "text": "After using this weapon, gain the HOT AILMENT. Weapon will explode and deal its dmg to you if you roll a 1 on your LUCK dice shooting this weapon while the HOT AILMENT is active ."
-      },
-      {
-       "key": "DEADLY",
-       "text": "On critical hits gain a LARGE damage bonus."
-      },
-      {
-       "key": "INDESTRUCTIBLE",
-       "text": "This defense cannot be BREACHED."
-      },
-      {
-       "key": "INNOCULATION",
-       "text": "Device protects against non lethal environmental hazards. Gain a LARGE bonus to skills rolls against lethal environmental hazards and ailments."
-      },
-      {
-       "key": "INSTANT DETONATION",
-       "text": "You can take a SMALL penality to your DEXTERITY roll to prevents targets from performing any actions before detonation."
-      },
-      {
-       "key": "INTEGRITY",
-       "text": "How much MORALE damage you can SOAK. Stacks with user's WILLPOWER defensive attribute"
-      },
-      {
-       "key": "INV",
-       "text": "Weapon can be used without breaking concealment when at 10+ meter range or above. LARGE penalty to concealment when used in closer range."
-      },
-      {
-       "key": "INV+",
-       "text": "Same as INV but has no minimum range and also leaves 0 traces on any detection systems."
-      },
-      {
-       "key": "JUMP DRIVE",
-       "text": "A jump drive is a device for ships designed for long distance travel. Jumping takes time and is in no way instant but cuts down travel times massively."
-      },
-      {
-       "key": "KRAVEN",
-       "text": "Giant insect like race that first appeared in the ancient nerulian empire. Within days of their appearance the nerulian empire was obliterated and has remained since. No living being has ever been able to communicate with the Kravens."
-      },
-      {
-       "key": "KRAVEN SPACE",
-       "text": "A giant area of the galaxy that used to be the nerulian empire is now just known as Kraven space. No nerulian has any claims left in the area."
-      },
-      {
-       "key": "LARGE BONUS",
-       "text": "Increase total successes of a roll by 3"
-      },
-      {
-       "key": "LARGE PENALTY",
-       "text": "Decrease total successes of a roll by 3 (min 0)"
-      },
-      {
-       "key": "LB",
-       "text": "Gain a LARGE damage bonus Vs LIVING targets. Critical ailment with LIFEBANE apply the SICK ailment, if the ailment is already present, deal a TRAUMA instead."
-      },
-      {
-       "key": "LEADERSHIP",
-       "text": "Leadership can heal one point of morale. DC of the check is equal to the target's missing MORALE"
-      },
-      {
-       "key": "LEGALITY",
-       "text": "Legality class determines whether it is legal or not to carry such an item under the alliance law. Outside of the alliance, laws are usually localized."
-      },
-      {
-       "key": "LIGHT ARMOR",
-       "text": "Provide basic protection and counts as a SMALL item for encumbrance. Requires 1 rounds to put on or remove."
-      },
-      {
-       "key": "BAD COVER",
-       "text": "SMALL PENALTY or LOW to MEDIUM DEFENSE | Small appliances, a trashcan, small trees, lamppost, a car door, coffee table, plaster walls etc."
-      },
-      {
-       "key": "FALLOFF",
-       "text": "Weapon behaves differently depending on range. See Shotguns rules for details."
-      },
-      {
-       "key": "LOCAL NODE",
-       "text": "A datacom, server or device which you are directly using by being physically connected to. Being physically connected automatically bypass the NETWORK and you instead deals with the local device defenses."
-      },
-      {
-       "key": "LOCKON",
-       "text": "While under the effect of lockon a target cannot stealth and will always grant line of sight (cover still applies)."
-      },
-      {
-       "key": "SPIRITPROOF",
-       "text": "Always get maximum SOAK rolls when defending against SPIRITUAL attacks."
-      },
-      {
-       "key": "MASTERWORK",
-       "text": "Critical hits have no additional effects. Masterwork has no effect if the wearer is BREACHED."
-      },
-      {
-       "key": "MAX WEIGHT",
-       "text": "Players can carry a limited number of objects but they are also limited by WEIGHT. MAX WEIGHT is = 50 KG Modified by Physique times 5KG |  Lift = 5 time your total carry | Push or drag =  10 times your carry"
-      },
-      {
-       "key": "MEMORY",
-       "text": "Total data capacity your device can hold. Your ROUTINES, PROGRAMS and TOOLS reduce this capacity."
-      },
-      {
-       "key": "ABSOLUTION",
-       "text": "You get maximum SOAK when a critical faillure results in a SOAK roll. (From a DEFENSE check or other checks)"
-      },
-      {
-       "key": "MORTAL WOUND",
-       "text": "Mortal wounds cause a LARGE penalty to the following attributes: PHYSICAL, ENDURANCE, ACUITY and SPEED."
-      },
-      {
-       "key": "MOVEMENT",
-       "text": "Move up to 5m in a round. You can also use a STANDARD action to move allowing for an additional movement action. If your previous action was a move you can instead RUN (see description). You can also change stance (prone, crouch) this counts as moving 1 meter."
-      },
-      {
-       "key": "MOVEMENT (in combat)",
-       "text": "During a round where you have moved, you gain a SMALL BONUS to your defense VS any attacks performed against you. Because you moved you also have a SMALL penalty to all skill checks."
-      },
-      {
-       "key": "MULTI",
-       "text": "Weapon counts as Dual Wielding (Can perform double attacks)."
-      },
-      {
-       "key": "NANITES",
-       "text": "NANITES are a special ressources that powers nanomachines and enable and enables your DATACOM to form or interact with physical objects in the real world. NANITES recharge after a SCENE."
-      },
-      {
-       "key": "NANOBOTS",
-       "text": "During maintenance phase you can spend any number of NANITES to reroll failed AILMENTS saves."
-      },
-      {
-       "key": "NEBULA",
-       "text": "Sectors within a NEBULA experience all sorts of anomalies. Any captain should steer well away from those areas as you never know which system will stop working on your ship."
-      },
-      {
-       "key": "NEEDLER",
-       "text": "Weapon fires high velocity needles; crits automatically on a 9 or 10 and and has a SMALL bonus to damage on critical hits."
-      },
-      {
-       "key": "NEMANI RIFT",
-       "text": "A giant nebula that spans from the ASH system all the way into Kraven space. For some reason Kravens cannot seems to traverse that area. Any exploration of the area is forbidden due to the lethal nature of the area."
-      },
-      {
-       "key": "NETWORK",
-       "text": "Allows private sharing of anything in memory to any connected NODES within range. Any REMOTE NODE attacks against a NETWORK is done against the NETWORK CONTROLLER."
-      },
-      {
-       "key": "NODE",
-       "text": "A node is a intelligentdevice that exists within a network or by itself and that has a FIREWALL and can run ROUTINES or have devices connect to it. (Datacom, intelligent devices, advanced drones, etc.)"
-      },
-      {
-       "key": "NOVA",
-       "text": "Once per SCENE as a FREE action, when this forcefield breaks you can chose to deal 2D + 4 [HIGH] STUN PHYSICAL damage to everyone in a 2m radius. Targets hit by this attack are pushed back 2m."
-      },
-      {
-       "key": "NOVA CRUISERS",
-       "text": "A nova cruiser is a battlecruiser with enough armor to survive being hit by another battlecruiser. They are gigantic structures that resemble ships but who's main function is to provide the anchor for a fleet. Typical size is 5km length with a crew of 100+ and up to 10k passengers."
-      },
-      {
-       "key": "OLD",
-       "text": "Weapon has almost no technology on board. EMP has no effect and negative or positive effect from HACKING, VIRUS and ROUTINES can not apply."
-      },
-      {
-       "key": "ONG",
-       "text": "Reapply damage during maintenance phase. (No effect if damage was reduced to 0 prior to next maintenance phase)"
-      },
-      {
-       "key": "OPERATION",
-       "text": "Modifies existing function of an item."
-      },
-      {
-       "key": "OPT+",
-       "text": "Item can have 1 compatible option of any kind"
-      },
-      {
-       "key": "ORDONNANCE",
-       "text": "Ordonnance weapons are ship weapons that also require ammunition. If not paired with an ammo bay the weapon has enough munitions to fire until it needs to reload."
-      },
-      {
-       "key": "PHASE",
-       "text": "Phase you out of reality when attacked. Gain a 1 in 10 chance of negating any attack."
-      },
-      {
-       "key": "PHYSICAL",
-       "text": "BLEED : Lose 1 HEALTH per maintenance phase. (Cummulative if reapplied). Damage caused by physicaly hitting a target with another material object (bullets, melee weapons, fists). Bullets, Needles and Melee damage generally falls into this category"
-      },
-      {
-       "key": "POWER",
-       "text": "Power determines the relative strength of the weapon and is a direct counter to DEFENSE. Every point of power above DEFENSE will deny SOAK and under will reduce damage by the same amount."
-      },
-      {
-       "key": "HEAVY ARMOR",
-       "text": "Provide excellent protection and counts as a LARGE item for encumbrance. Requires 3 rounds to put on or remove."
-      },
-      {
-       "key": "PRECISION HIT",
-       "text": "You can take a SMALL penalty to a COMPLEX attack to target a specific location or object. (Can be used to hit armor weak spots, armor is treated as BREACHED for that hit but requires you to identify the armor type first via tactics)"
-      },
-      {
-       "key": "PROGRAM",
-       "text": "A program is something you can use as a standard action to replace basic hacking action. Programs only cost MEMORY."
-      },
-      {
-       "key": "PRONE",
-       "text": "Grants GOOD COVER vs ranged attacks. Your maximum movement is 2. Your DEFENSE Vs MELEE has a LARGE penalty."
-      },
-      {
-       "key": "QUICK",
-       "text": "Allows the weapons to perform a SIMPLE ATTACK as a QUICK action."
-      },
-      {
-       "key": "QUICK ACTION",
-       "text": "Quick actions can be performed at any point during the round (including enemy turn). If you call a QUICK action during someone else's turn you must win initiative. (See INTERUPTS and REACTIONS)"
-      },
-      {
-       "key": "QUICK ATTACK",
-       "text": "Any power, weapon or item that has the QUICK keyword can be used to perform a BASIC ATTACK as a QUICK ACTION."
-      },
-      {
-       "key": "RANGE",
-       "text": "Datacoms have a default range of melee, 100m, 1000m (Skill penalties are  0/1/3). In Melee range you are considered connected directly."
-      },
-      {
-       "key": "REACH",
-       "text": "Weapon has double base reach"
-      },
-      {
-       "key": "RECOIL",
-       "text": "Weapon incurs a cummulative penalty of +1 DC to all shots after the first. This penalty resets if you AIM or perform a STANDARD action that isin't shooting that weapon."
-      },
-      {
-       "key": "RECOVER",
-       "text": "During maintenance you can roll 1D for every ailment you are suffering from. On a 6+ you recover, on a failure the ailment continues."
-      },
-      {
-       "key": "REGEN",
-       "text": "When SOAK run out a forcefield is rendered innactive. To recharge a forcefield, you must spend the time under \"Regen\" not being shot at. When that condition is true your forcefield returns during the next maintenance phase."
-      },
-      {
-       "key": "RELIC",
-       "text": "Item is a MINOR relic pick one MINOR RELIC effect on item acquisition."
-      },
-      {
-       "key": "REMOTE NODE",
-       "text": "A datacom, server or network in range of your datacom which you have no physical connection to. Defense is always set by network and HACKING actions when on a remote NODE can suffer a penalty based on the range."
-      },
-      {
-       "key": "RESISTANT",
-       "text": "Reduce damage by X of the type specified."
-      },
-      {
-       "key": "RESSOURCE UNITS",
-       "text": "Standardized measure of the resources required to repair things aboard a ship. One resource unit can repair one point of shield, hull or system."
-      },
-      {
-       "key": "REST",
-       "text": "Resting for a period of 10 hours in a non threatening safe area will recover your ENDURANCE in HEALTH and WILLPOWER in MORALE."
-      },
-      {
-       "key": "SMUGGLER",
-       "text": "Can hide up to a small object. Provides passive concealment of 5 or a LARGE bonus to an active Concealment roll."
-      },
-      {
-       "key": "ROLE ADVANTAGE",
-       "text": "You grant your skill roll result as a bonus to the next person's job in the job order."
-      },
-      {
-       "key": "ROLE DISAVANTAGE",
-       "text": "You add your skill roll result as a penalty to the next person's job in the job order."
-      },
-      {
-       "key": "ROUTINE",
-       "text": "A set of instructions that can run on a datacom. ROUTINES consume CPU to stay active and provides passive benefits to anyone connected to the network."
-      },
-      {
-       "key": "RUN",
-       "text": "If your last action was a move action you can replace your MOVE with a RUN action. RUN double your movement speed. If you stop at any point, you must MOVE again before running again."
-      },
-      {
-       "key": "RUN (in combat)",
-       "text": "When running, increase the move DEFENSE bonus to LARGE and the move SKILL check penalty to LARGE."
-      },
-      {
-       "key": "S",
-       "text": "You gain a SMALL bonus to HIT. If you have LOCKON you this bonus is LARGE instead."
-      },
-      {
-       "key": "SANITY TRESHOLD",
-       "text": "When you suffer morale damage from an attack that exceeds your willpower modifier, you gain the shaken status ailment or broken status if you were already shaken."
-      },
-      {
-       "key": "SB",
-       "text": "Gain a LARGE damage bonus Vs MAGICAL targets. Applying a critical ailment with a SPIRITBANE will reduce its MANIFESTATION level to the following depending on level :   Manifested or Awakened > Passive ,  Passive > Suppresed,  if the spirit MANIFESTATION level is already suppresed the  effect will cause a TRAUMA instead."
-      },
-      {
-       "key": "SCRAPPED",
-       "text": "Scrapped indicates that an object or item stops functioning completely. Nothing works anymore, item will have to be repaired before it can be used again."
-      },
-      {
-       "key": "SERVOS",
-       "text": "Your PHYSICAL attribute for MIGHT checks is 10. Device now counts as ELECTRONIC Vs EMP."
-      },
-      {
-       "key": "SHAKEN",
-       "text": "Shaken cause a SMALL penalty to the following attributes: MENTAL, WITS, SOCIAL and WILLPOWER."
-      },
-      {
-       "key": "SHIFT",
-       "text": "You can use a QUICK action to move up to 1m, change your stance (crouch, stand, prone). A SHIFT does not cause opportunity attacks when used to move out of the reach of a target."
-      },
-      {
-       "key": "SHIP AVAILABLE POWER",
-       "text": "Spaceships need power for their various components, if there's a surplus it will be listed as available power. This can be used for various things like weapons, shields or various systems."
-      },
-      {
-       "key": "SHIP CARGO",
-       "text": "The value on your ship's cargo indicates how many units of cargo you can fit in that area. One unit of ship cargo is equal to one HUGE item."
-      },
-      {
-       "key": "SHIP CLASS",
-       "text": "The class of a ship determines which category it belongs to: Ship classes from smallest to largest are Drones, Fighters, Corvettes, Frigates, Cruisers, Battlecruisers, Carriers and Nova Cruisers."
-      },
-      {
-       "key": "SHIP COMBAT RANGE",
-       "text": "The combat range is your ship's weapon range, weapons that exceed this range will have to shoot blind."
-      },
-      {
-       "key": "SHIP COMMAND",
-       "text": "The command rating of a ship indicates how well designed it is for a leader to direct its crew. See COMMAND section under SPACE rules for details"
-      },
-      {
-       "key": "SHIP COMPONENTS",
-       "text": "The ship component count indicate how much space you have on a given design to add new areas and components."
-      },
-      {
-       "key": "SHIP CORE COMPONENTS",
-       "text": "The core of a ship is the most protected area of the ship and any components housed in that area will keep functioning until the ship is SCRAPPED."
-      },
-      {
-       "key": "SHIP DRONES",
-       "text": "Drones are short range crewless single task spaceships. They range from 510 meters and while some can handle cargo none of them can handle living things."
-      },
-      {
-       "key": "SHIP ECM",
-       "text": "ECM stands for electronic counter measures and the value indicates your ship's SYSTEM damage threshold. Any system damage exceeding this value in a single hit will cause a TRAUMA."
-      },
-      {
-       "key": "SHIP ENGINEERING",
-       "text": "The engineering rating of a ship indicates how much RESSOURCE UNITS it can generate and how skilled an engineer must be to operate it. See ENGINEERING section under SPACE rules for details."
-      },
-      {
-       "key": "SHIP FUEL",
-       "text": "Most ships operate using fusion drives which have a lifetime supply of fuel, some ships however, run on CORONTHIA a super dense fuel that produce an immense amount of power but requires refuelling."
-      },
-      {
-       "key": "SHIP GRAVITY",
-       "text": "Ships have artificial gravity as long as they have power movement inside is normal. Gravity is part of the life support component. If life support is gone then the ship is now difficult terrain (Vacuum)."
-      },
-      {
-       "key": "SHIP HANDLING",
-       "text": "The handling of a ship indicates how maneuverable it is and how difficult is it to pilot. See HANDLING section under SPACE rules for details"
-      },
-      {
-       "key": "SHIP HULL",
-       "text": "Hull is your ship's durability. Taking damage will lower this value. It can be repaired using resources but does not recover naturally. If your HULL reaches 0 your ship is SCRAPPED."
-      },
-      {
-       "key": "SHIP INSTRUMENTS",
-       "text": "The instrument rating on a ship indicates how precise it can navigate its electronic warfare capabilities. See INSTRUMENTS section under SPACE rules for details"
-      },
-      {
-       "key": "SHIP JUMP MAX RANGE",
-       "text": "Indicates how many galactic quadrants your ship can calculate a trajectory to."
-      },
-      {
-       "key": "SHIP JUMP SPEED",
-       "text": "Indicates how fast you travel when at jump speed. Standard speed is a week (100 hrs) per quadrant."
-      },
-      {
-       "key": "SHIP LIFE SUPPORT",
-       "text": "This value lets you know how long your life support can handle a full load of passengers on board in optimal conditions. Having more people than life support will lead to death."
-      },
-      {
-       "key": "SHIP MAX PASSENGERS",
-       "text": "Indicates how many passengers this ship can carry. Crew and passengers count separately on a ship and will more than likely have different accommodations. Life support will also match the maximum passenger count."
-      },
-      {
-       "key": "SHIP MAXIMUM CREW",
-       "text": "The maximum crew is the amount of personal required to fully staff a ship. Anyone operating on a ship under maximum crew has a SMALL penalty to all their skill checks."
-      },
-      {
-       "key": "SHIP MINIMUM CREW",
-       "text": "The minimum amount of personnel required on a ship to operate it. Anyone operating on a ship under minimum crew has a LARGE penalty to all their skill checks."
-      },
-      {
-       "key": "SHIP REPAIRS",
-       "text": "When repairing a ship you need to have the available resource units and perform a skill check (TECHNOLOGY for SYSTEM or JOURNEYMAN for HULL) to restore one point. Shields do not require skill checks and can instead convert X resources units to shield see SHIP SHIELD RECHARGE."
-      },
-      {
-       "key": "SHIP SCAN RANGE",
-       "text": "This is how far away you can detect other ships and objects. Anything beyond that range is impossible to detect."
-      },
-      {
-       "key": "SHIP SHIELD",
-       "text": "Shields on spaceships function as damage buffer. Any damage done will impact shields first. If no shields are available then the damage goes directly into HULL or SYSTEM."
-      },
-      {
-       "key": "SHIP SHIELD RECHARGE",
-       "text": "Shield recharge on a spaceship indicates how many units of power you can send to the shield to recharge an equal amount."
-      },
-      {
-       "key": "SHIP SPEED",
-       "text": "The speed of ships is normalized to 3 distinct values: LOW, MEDIUM and HIGH. (you can always lower your speed). Ship speed has no effect on jump range. See SHIP speed section of SPACE rules for more details."
-      },
-      {
-       "key": "SHIP STRUCTURE",
-       "text": "Structure is the damage threshold that your HULL can take before you are COMPROMISED or CRIPPLED. Any hull damage exceeding this value in a single hit will cause one of those TRAUMA."
-      },
-      {
-       "key": "SHIP SYSTEM",
-       "text": "System is your ship's electronics' durability, taking system damage will lower this value. It can be repaired using resources but does not recover naturally. If your SYSTEM reaches 0 your ship is SCRAPPED."
-      },
-      {
-       "key": "SHIP TYPE",
-       "text": "The type of a ship determines which subclass the ship belongs to and will determine it's internal configurations, role and components."
-      },
-      {
-       "key": "SHIP WARFARE",
-       "text": "The warfare rating on a ship indicates how advanced the weapon systems are and how difficult they are to operate. See WARFARE section under SPACE rules for details."
-      },
-      {
-       "key": "SICK",
-       "text": "The sick ailment causes anyone to have a SMALL penalty to all ATTRIBUTES and DEFENSES. SICK cannot be removed through RECOVER, see the condition that applied SICK to find out how to remove it."
-      },
-      {
-       "key": "SIZE",
-       "text": "Indicate how big and bulky an item is"
-      },
-      {
-       "key": "SKILL CHECK",
-       "text": "Roll a number of D10 equal to your skill rank, then add any bonus or penalty to the result. Compare result to the DC of the skill check"
-      },
-      {
-       "key": "SLEEP",
-       "text": "Not sleeping will cause the SICK ailment if you go over 30 hours without rest. A 10 hour REST or a sleep replicator (COST 1 morale) will cure this ailment."
-      },
-      {
-       "key": "SLOW",
-       "text": "Maximum movement is 2, always lose initiative"
-      },
-      {
-       "key": "SMALL BONUS",
-       "text": "Increase total successes of a roll by 1"
-      },
-      {
-       "key": "SMALL PENALTY",
-       "text": "Decrease total successes of a roll by 1 (min 0)"
-      },
-      {
-       "key": "SMART",
-       "text": "You gain a SMALL bonus to HIT. If you have LOCKON you this bonus is LARGE instead."
-      },
-      {
-       "key": "FRAGILE",
-       "text": "On a critical faillure, the item is damaged; LARGE penalty to atk/dmg rolls made with the item. SCENE +50% of item value to repair. If damaged again before repairs, the item is destroyed."
-      },
-      {
-       "key": "SOAK",
-       "text": "SOAK is the ability of a forcefield or Armor to reduce the damage of an attack. If the damage is reduced to 0 the attack is considered fully absorbed and no other effects are checked."
-      },
-      {
-       "key": "SPACE",
-       "text": "Device is rated for space and provides up to 8 hours of life support as well as magnetic boots. Treat character as having GRAVITY TRAINING when walking on compatible surfaces."
-      },
-      {
-       "key": "SPECIAL",
-       "text": "Special is a section that lists any special property the armor, weapon, forcefield or device might have."
-      },
-      {
-       "key": "SPIRITBANE",
-       "text": "Gain a LARGE damage bonus Vs MAGICAL targets. Applying a critical ailment with a SPIRITBANE will reduce its MANIFESTATION level to the following depending on level :   Manifested or Awakened > Passive ,  Passive > Suppresed,  if the spirit MANIFESTATION level is already suppresed the  effect will cause a TRAUMA instead."
-      },
-      {
-       "key": "STANDARD ATTACK",
-       "text": "Normal attack, can be modified by various talents and circumstances."
-      },
-      {
-       "key": "STEALTH",
-       "text": "Device is designed for covert ops and provides a SMALL bonus to CONCEALMENT rolls."
-      },
-      {
-       "key": "STRUCTURE",
-       "text": "STRUCTURE is the damage threshold for DURABILITY TRAUMA."
-      },
-      {
-       "key": "STUN",
-       "text": "Temporary Damage (Recovery of STUN damage is per SCENE instead of per DAY)"
-      },
-      {
-       "key": "STUN DAMAGE",
-       "text": "Stun damage is temporary unless you take more stun damage than you have DEADLY left, when that happens overwrite the existing stun damage into normal damage. Stun damage is healed at the end of a scene."
-      },
-      {
-       "key": "STUNNED",
-       "text": "While STUNNED you cannot act until you RECOVER from that ailment."
-      },
-      {
-       "key": "SUFFOCATING",
-       "text": "An absence of air will lead to suffocation. When a character is deprived of air roll a RESILIENCE check every round at DC1, increase DC by 1 for every round thereafter until death or a source of air is found. On a failed check you lose the DC of the resilience check as health (stun dmg). DMG will not sop if you enter DYING state."
-      },
-      {
-       "key": "SUPPRESSED",
-       "text": "While SUPPRESSED, any actions you perform first require a Willpower check (DC = shooters accuracy). On success you can act normally. On failure lose 1 morale and you are forced to use the next action to either move out of the cover fire area or move into better cover within the area. If either option is unavailable you must go PRONE on your location and cannot move."
-      },
-      {
-       "key": "SYMBIOTE",
-       "text": "REMOVED : Change to consumable item (armor in a bottle)"
-      },
-      {
-       "key": "SYSTEM",
-       "text": "How many HACKS it takes to render this device innactive. Any devices with no SYSTEM stat goes down in 1 HACK. Devices with 0 SYSTEM can be repaired (takes 1 scene)"
-      },
-      {
-       "key": "THROW",
-       "text": "Melee weapon can be thrown with a DEXTERITY skill check."
-      },
-      {
-       "key": "TOOLS",
-       "text": "Tools and options which help can provide a small or large bonus, some actions might require tools and instead of granting a bonus, tools will negate a penalty. GM's discretion."
-      },
-      {
-       "key": "TOTAL COVER",
-       "text": "Total cover means that the target is fully hidden from view. You cannot try to shoot around total cover but you can still shoot through; see BAD or GOOD cover for effects."
-      },
-      {
-       "key": "TRANSPONDER",
-       "text": "Your ship identification and classification to other ships that can scan you. Also contains your ship name. (Registration and ship name should match... but then there's pirates)."
-      },
-      {
-       "key": "TRAUMA",
-       "text": "Trauma is a keyword to indicate that the subject is suffering from an effect caused by high HEALTH or MORALE loss. LIGHT TRAUMA are GRAVE and SHAKEN. SEVERE TRAUMA is MORTAL and BROKEN"
-      },
-      {
-       "key": "TURRET WEAPONS",
-       "text": "Weapons labelled as turret weapons are gimballed and can face any direction they need. Weapons that are TURRET tagged can fire even when the GUNNER is at a DISADVANTAGE. As a drawback turret weapons use up more component space and use additional power."
-      },
-      {
-       "key": "UNIVERSAL",
-       "text": "Device can fit any of the alliance races, in the case of ARMOR, it can be put on or removed as a COMPLEX action"
-      },
-      {
-       "key": "VULNERABLE",
-       "text": "Increase any damage taken (including ongoing damage) damage by the value of the vulnerability."
-      },
-      {
-       "key": "WALL",
-       "text": "How much defense against MORALE attacks your device grants."
-      },
-      {
-       "key": "WOUND TRESHOLD",
-       "text": "When you suffer health damage in excess of your  endurance, you gain the grave wound status ailment; if you were already suffering from a grave wound you replace it to a mortal wound status. If you were already suffering from a mortal wound you go strait to the DYING status."
-      },
-      {
-       "key": "XAR",
-       "text": "Armor defense against this weapon cannot be better than MEDIUM."
-      },
-      {
-       "key": "XFF",
-       "text": "Forcefield defense against this weapon cannot be better than MEDIUM."
-      }
-     ]
-    }
-   ]
-  },
-  {
    "group": "SPACE COMBAT",
    "sections": [
     {
@@ -4139,20 +3330,24 @@
      "title": "Ship Combat Overview",
      "entries": [
       {
-       "key": "",
-       "text": "Ship combat follows a fixed job order, regardless of character initiative:"
+       "key": "SHIP COMBAT - A DIFFERENT KIND OF FIGHT",
+       "text": "Ship combat is not a brawl of individuals; it is a crew working one machine under pressure. Each round the ship resolves its jobs in a FIXED order regardless of anyone's personal initiative, and each crew member's roll feeds the next station down the line. The fantasy here is teamwork - the commander's call sets up the engineer, who powers the pilot, who lines up the gunner."
       },
       {
-       "key": "Job Order",
-       "text": "MAINTENANCE → COMMANDER → ENGINEER → NAVIGATOR → PILOT → GUNNER"
+       "key": "THE JOB ORDER",
+       "text": "Every round runs through the stations in the same sequence: MAINTENANCE -> COMMANDER -> ENGINEER -> NAVIGATOR -> PILOT -> GUNNER. Each station's result can hand the next one an advantage or a problem, so the order is the whole point."
       },
       {
-       "key": "",
-       "text": "Characters not assigned to a ship role act after ENGINEER and before NAVIGATOR using normal initiative."
+       "key": "CREW WITHOUT A STATION",
+       "text": "Characters not assigned to a ship role (boarding parties, passengers, a medic patching the wounded) act after the ENGINEER and before the NAVIGATOR, using normal personal initiative."
       },
       {
-       "key": "Role Rating Rule",
-       "text": "Roles add +1 to +10 to all ship ratings they use. Do not assign natural 10s to ship ratings, 10 is only reachable through talents, manufacturer bonuses, and optional upgrades."
+       "key": "ROLE RATINGS",
+       "text": "A crew member adds +1 to +10 to whatever ship rating their station uses, representing how well they coax performance out of the hull. Don't assign a natural 10 to a ship rating - a 10 is reachable only through talents, manufacturer bonuses, and optional upgrades."
+      },
+      {
+       "key": "FOR THE GM",
+       "text": "Spotlight the chain: narrate how a great Engineering roll visibly hands the pilot more to work with, so even the player whose station is quiet this round feels the team move as one. Keep the job order on the table where everyone can see whose turn is coming."
       }
      ]
     },
@@ -4161,24 +3356,36 @@
      "title": "Ship Roles",
      "entries": [
       {
+       "key": "SHIP ROLES",
+       "text": "Each station rolls one governing skill against one of the ship's ratings, then passes the result down the job order. Here is what each seat does on its turn."
+      },
+      {
        "key": "COMMANDER",
-       "text": "Uses LEADERSHIP vs the ship's Command rating. Success: Add the ship's Command rating as a bonus to any one job this round. Failure: That job suffers Disadvantage. Critical Failure: All jobs suffer Disadvantage this round."
+       "text": "Rolls LEADERSHIP vs the ship's Command rating. Success: add the ship's Command rating as a bonus to any one job this round. Failure: that job suffers Disadvantage. Critical Failure: every job suffers Disadvantage this round. The commander sets the tempo - their call decides where the crew's effort lands."
       },
       {
        "key": "ENGINEER",
-       "text": "Uses ENGINEERING vs the ship's Engineering rating. Success: Generate Resource Units (RU) equal to the ship's Engineering rating. Failure: Generate 0 RU. Critical Failure: Also sets Available Power = 0 for the round. Critical Success: Generate maximum skill result in RU. Engineers spend RU using TECHNOLOGY (system repairs) or CRAFT (hull repairs)."
+       "text": "Rolls ENGINEERING vs the ship's Engineering rating. Success: generate Resource Units (RU) equal to the Engineering rating. Failure: 0 RU. Critical Failure: also sets Available Power to 0 for the round. Critical Success: generate the maximum skill result in RU. Engineers spend RU using TECHNOLOGY for system repairs or CRAFT for hull repairs - they are the ship's lifeblood."
       },
       {
        "key": "NAVIGATOR",
-       "text": "Uses NAVIGATION vs the ship's Instruments rating. On success, add the ship's Instruments rating and compare to the enemy ship. Below enemy base rating: give Disadvantage to HACKING, CYBERINTEL, OPERATOR, and PILOT. Between enemy base and total: no effect. Above enemy total: grant Advantage to those roles."
+       "text": "Rolls NAVIGATION vs the ship's Instruments rating. On a success, add the Instruments rating and compare to the enemy ship: below their base rating gives Disadvantage to HACKING, CYBERINTEL, OPERATOR and PILOT; between their base and total, no effect; above their total grants Advantage to those roles. The navigator wins the information war before a shot is fired."
       },
       {
        "key": "PILOT",
-       "text": "Uses PILOTING vs the ship's Handling rating. On success, add the ship's Handling rating and compare to the enemy ship. Below enemy base rating: Gunners suffer Disadvantage. Between enemy base and total: no effect. Above enemy total: Gunners gain Advantage."
+       "text": "Rolls PILOTING vs the ship's Handling rating. On a success, add the Handling rating and compare to the enemy ship: below their base rating, the Gunners suffer Disadvantage; between base and total, no effect; above their total, the Gunners gain Advantage. Good flying is what gives the guns a clean shot."
       },
       {
        "key": "GUNNER",
-       "text": "Uses HEAVY WEAPONS vs the ship's Warfare rating. On success, add the ship's Warfare rating and compare to the enemy ship.\n\nBelow enemy base rating: all shots miss. Between enemy base and total: normal attack. Above enemy total: Critical Hit possible.\n\nWith Disadvantage, Fixed Weapons cannot fire. Turret Weapons can still fire but apply the penalty. Gunners act last and do not pass advantage/disadvantage to anyone."
+       "text": "Rolls HEAVY WEAPONS vs the ship's Warfare rating. On a success, add the Warfare rating and compare to the enemy ship: below their base rating, every shot misses; between base and total, a normal attack; above their total, a Critical Hit is possible. Gunners act last and pass advantage or disadvantage to no one - they are where the whole round's work finally pays off."
+      },
+      {
+       "key": "FIRING UNDER DISADVANTAGE",
+       "text": "With Disadvantage, Fixed Weapons cannot fire at all; Turret Weapons can still fire but take the penalty. It pays to have the pilot and navigator set the table before the guns speak."
+      },
+      {
+       "key": "FOR THE GM",
+       "text": "Let the comparison-to-enemy results breathe in the fiction - 'you've out-flown them, the gunner's got a clean line' tells the table the pilot's success just bought the kill shot. The job order makes each seat matter; reward crews that play the chain rather than every gun blazing at once."
       }
      ]
     },
@@ -4187,16 +3394,20 @@
      "title": "Role Advantage & Disadvantage",
      "entries": [
       {
-       "key": "Advantage",
+       "key": "PASSING ADVANTAGE DOWN THE LINE",
+       "text": "The job order is a relay. When a station earns Advantage or Disadvantage, it doesn't keep it - it hands it to the NEXT job in the order, which is what makes a good early roll snowball into a kill or a bad one cascade into disaster."
+      },
+      {
+       "key": "ADVANTAGE",
        "text": "Add your skill roll result as a bonus to the next job in the job order."
       },
       {
-       "key": "Disadvantage",
+       "key": "DISADVANTAGE",
        "text": "Add your skill roll result as a penalty to the next job in the job order."
       },
       {
-       "key": "Job Order",
-       "text": "Commander → Engineer → Navigator → Pilot → Gunner"
+       "key": "THE ORDER",
+       "text": "Commander -> Engineer -> Navigator -> Pilot -> Gunner. Advantage flows downhill; the gunner, acting last, has nowhere to pass it."
       }
      ]
     },
@@ -4205,36 +3416,31 @@
      "title": "Space Movement & Radar Ranges",
      "entries": [
       {
-       "key": "Speed Categories",
-       "text": "LOW, MEDIUM, HIGH. Speed affects range transitions, not jump distance."
+       "key": "SPACE MOVEMENT & RADAR RANGES",
+       "text": "Space fights are won by managing distance. Ships sit in range bands, and your SPEED category governs how fast you can close, open, or break a band - not how far you can leap in a single jump. Match an enemy's speed and you can neither catch nor flee them: your only way out is to JUMP."
       },
       {
-       "key": "Combat Range",
-       "text": "Weapon and targeting range."
+       "key": "SPEED CATEGORIES",
+       "text": "LOW, MEDIUM, HIGH. Speed affects how quickly you cross range bands, not jump distance."
       },
       {
-       "key": "Sensor Range",
-       "text": "Ship identification, planets, debris."
+       "key": "THE RANGE BANDS",
+       "text": "Three bands matter. COMBAT RANGE is where weapons and targeting reach. SENSOR RANGE is where you identify ships, planets and debris. JUMP RANGE gives only minimal data, used to plot a jump."
       },
       {
-       "key": "Jump Range",
-       "text": "Minimal data, used only to plot jumps."
+       "key": "CLOSING & OPENING DISTANCE",
+       "text": "Same speed: you cannot catch or escape - you must JUMP. One category of difference: 10 rounds to enter or exit a range band. Two categories of difference: 5 rounds to enter or exit a band.",
+       "examples": [
+        "A HIGH-speed ship chasing a LOW-speed one (two categories) shifts a band in 5 rounds; against a MEDIUM ship (one category), 10 rounds."
+       ]
       },
       {
-       "key": "Same speed",
-       "text": "Cannot catch or escape; must JUMP."
+       "key": "JUMPING OUT",
+       "text": "A jump takes 10 rounds to charge (ship options can modify this). Jump range is measured in Galactic Quadrants, and travel runs 10 days - 100 hours - per quadrant."
       },
       {
-       "key": "1 category difference",
-       "text": "10 rounds to enter/exit a range band."
-      },
-      {
-       "key": "2 category difference",
-       "text": "5 rounds to enter/exit a range band."
-      },
-      {
-       "key": "Jumping",
-       "text": "Requires 10 rounds to charge (modifiable by ship options). Jump range measured in Galactic Quadrants. Travel time: 10 days / 100 hours per quadrant."
+       "key": "FOR THE GM",
+       "text": "Make speed mismatch tell a story: a faster raider dictates whether there's even a fight, while an even match turns the scene into a tense scramble to charge a jump before the hull gives out. Count down the band-transition and jump-charge rounds out loud to build pressure."
       }
      ]
     },
@@ -4243,40 +3449,28 @@
      "title": "Damage, Trauma & Repairs",
      "entries": [
       {
-       "key": "Hull Damage",
-       "text": "Reduces Hull. At 0 → Scrapped."
+       "key": "DAMAGE, TRAUMA & REPAIRS",
+       "text": "Ships take damage to two tracks - HULL and SYSTEM - and a single overwhelming hit can do more than chip them down: it can compromise, cripple, or outright destroy the vessel. Keeping both tracks alive is the engineer's running battle."
       },
       {
-       "key": "System Damage",
-       "text": "Reduces System. At 0 → Scrapped."
+       "key": "HULL & SYSTEM",
+       "text": "Hull damage reduces Hull; System damage reduces System. Either track hitting 0 leaves the ship Scrapped."
       },
       {
-       "key": "Structure Threshold",
-       "text": "Exceeding in one hit causes Compromised or Crippled."
+       "key": "BIG HITS - THRESHOLDS",
+       "text": "Exceeding the Structure Threshold in one hit causes Compromised or Crippled. Exceeding the ECM Threshold in one hit causes a System Trauma. These are the ship-scale equivalent of a character's trauma: one hard blow, not slow attrition."
       },
       {
-       "key": "ECM Threshold",
-       "text": "Exceeding in one hit causes System Trauma."
+       "key": "DAMAGE STATES",
+       "text": "Compromised: external components disabled. Crippled: external and internal components disabled. Scrapped: the ship is nonfunctional. Destroyed: more than twice the Hull or System lost in a single hit - unrecoverable."
       },
       {
-       "key": "Compromised",
-       "text": "External components disabled."
+       "key": "REPAIRS",
+       "text": "1 RU restores 1 point of Shield, Hull, or System. Shields need no skill check; Hull repairs require CRAFT; System repairs require TECHNOLOGY. This is where the engineer's RU and the right skill keep the ship in the fight."
       },
       {
-       "key": "Crippled",
-       "text": "External + internal components disabled."
-      },
-      {
-       "key": "Scrapped",
-       "text": "Ship nonfunctional."
-      },
-      {
-       "key": "Destroyed",
-       "text": "More than 2× Hull or System lost in one hit; unrecoverable."
-      },
-      {
-       "key": "Repairs",
-       "text": "1 RU = 1 point of Shield, Hull, or System. Shields: no skill check. Hull: requires CRAFT. System: requires TECHNOLOGY."
+       "key": "FOR THE GM",
+       "text": "Telegraph thresholds so a crew can feel a fight tipping - a Compromised ship losing its guns or thrusters changes the tactical picture immediately. Save 'Destroyed' for genuinely massive hits; most fights should end with a ship Scrapped and boardable, not vaporised."
       }
      ]
     },
@@ -4285,12 +3479,20 @@
      "title": "Environmental Rules",
      "entries": [
       {
-       "key": "Gravity",
-       "text": "Active as long as Life Support has power. If Life Support fails → Zero-G (Difficult Terrain)."
+       "key": "ENVIRONMENTAL RULES",
+       "text": "A ship is a bubble of survivable conditions in a place that wants you dead. When systems fail, the ship itself becomes the hazard."
       },
       {
-       "key": "Suffocation",
-       "text": "Each round without air: roll RESILIENCE vs DC 1, increasing by +1 each round. On failure: take stun damage equal to DC. Damage continues even if DYING."
+       "key": "GRAVITY",
+       "text": "Gravity holds as long as Life Support has power. If Life Support fails, the interior drops to Zero-G and counts as Difficult Terrain - movement, footing, and aim all suffer."
+      },
+      {
+       "key": "SUFFOCATION",
+       "text": "Each round without air, roll RESILIENCE vs DC 1, the DC rising by +1 every round. On a failure, take stun damage equal to the DC. The damage keeps coming even while DYING - vacuum does not wait for you to recover."
+      },
+      {
+       "key": "FOR THE GM",
+       "text": "Cutting a foe's life support or breaching a hull turns the clock into your antagonist. Let players feel the escalating DC; a boarding action in a venting compartment is far tenser than one in a lit corridor."
       }
      ]
     },
@@ -4299,16 +3501,24 @@
      "title": "Sensors, Transponders & Fuel",
      "entries": [
       {
-       "key": "Transponder",
-       "text": "Broadcasts ship identity, class, and name."
+       "key": "SENSORS, TRANSPONDERS & FUEL",
+       "text": "What a ship broadcasts, and what it runs on, shapes how it moves through the galaxy - whether it travels openly, hides its identity, or has to plan around refuelling."
       },
       {
-       "key": "Fusion Drive",
-       "text": "Most ships use fusion drives, effectively infinite fuel."
+       "key": "TRANSPONDER",
+       "text": "Broadcasts a ship's identity, class, and name. Running dark - or spoofing one - is its own kind of statement."
       },
       {
-       "key": "Coronthia",
-       "text": "Volatile high-power fuel used by some ships; requires refueling."
+       "key": "FUSION DRIVE",
+       "text": "Most ships run fusion drives with effectively infinite fuel; range is rarely the question for them."
+      },
+      {
+       "key": "CORONTHIA",
+       "text": "A volatile, high-power fuel used by some ships; it demands refuelling, which turns fuel stops into plot."
+      },
+      {
+       "key": "FOR THE GM",
+       "text": "Transponders and fuel are quiet hooks: a forged transponder gets the party past a checkpoint, and a Coronthia-burning ship needs a friendly port - both are reasons for the galaxy to come to them."
       }
      ]
     },
@@ -4317,32 +3527,40 @@
      "title": "Galactic Regions",
      "entries": [
       {
-       "key": "Alliance Space",
-       "text": "Unified laws, civilized worlds."
+       "key": "GALACTIC REGIONS",
+       "text": "Where a fight happens matters as much as how. The galaxy's regions set the law, the danger, and who might answer a distress call - or hear a scream."
       },
       {
-       "key": "Dark Space",
-       "text": "Frontier, independent systems."
+       "key": "ALLIANCE SPACE",
+       "text": "Unified laws and civilized worlds - the safest lanes, and the most watched."
       },
       {
-       "key": "Deep Space",
-       "text": "Unmapped, dangerous."
+       "key": "DARK SPACE",
+       "text": "The frontier: independent systems, thin law, room to disappear."
       },
       {
-       "key": "Nebula",
-       "text": "Unpredictable anomalies."
+       "key": "DEEP SPACE",
+       "text": "Unmapped and dangerous; you are truly on your own out here."
       },
       {
-       "key": "Nemani Rift",
-       "text": "Lethal nebula; forbidden."
+       "key": "NEBULA",
+       "text": "Unpredictable anomalies that scramble sensors and tactics alike."
       },
       {
-       "key": "Kraven Space",
-       "text": "Former Nerulian empire."
+       "key": "NEMANI RIFT",
+       "text": "A lethal nebula, forbidden to enter - the kind of place legends warn about."
       },
       {
-       "key": "Kraven",
-       "text": "Insectoid species; no communication possible."
+       "key": "KRAVEN SPACE",
+       "text": "The former Nerulian empire, now Kraven territory."
+      },
+      {
+       "key": "KRAVEN",
+       "text": "An insectoid species with whom no communication is possible - a hard wall of a threat."
+      },
+      {
+       "key": "FOR THE GM",
+       "text": "Use region as shorthand for tone: a firefight in Alliance Space invites patrols and consequences, while the same fight in Deep Space means no one is coming. Let the map's danger set how loud the players can afford to be."
       }
      ]
     }
