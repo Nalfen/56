@@ -1949,607 +1949,568 @@
    "sections": [
     {
      "id": "Magic-Domain",
-     "title": "MAGIC Domain",
+     "title": "Magic, Domains & Skills",
      "entries": [
       {
-       "key": "",
-       "text": "DOMAIN"
+       "key": "HOW MAGIC WORKS",
+       "text": "Magic in the 56th Century is the art of bending CHI - the raw spiritual charge that soaks the galaxy - through a bound SPIRIT. Your spirit is the engine, CHI is the fuel, and your skills are the hands on the controls. Without a spirit you cannot manifest spells, powers or barriers at all; you can still use relics, which carry their own bound spirit."
+      },
+      {
+       "key": "THE THREE SKILLS OF MAGIC",
+       "text": "Three skills do all the work, and it pays to know which is which. SPIRITUAL channels spiritual energy: casting spells, control checks, counter-spelling and calling spirits. BINDING works magic through objects: making, using and binding spirits into relics. OCCULTISM is the knowledge of the unknown, spiritual and occult lore: identifying spirits, domains, relics and effects."
+      },
+      {
+       "key": "THE FOUR DOMAINS",
+       "text": "Every spirit, and therefore every spell, belongs to a magic domain. A spirit has a primary and a secondary domain; a God spirit has only its one."
       },
       {
        "key": "",
-       "text": "Magic is divised in DOMAINS, each of them regroups SPIRITS, SPELLS, BARRIERS and is associated with it's appropriate SKILL."
+       "text": "",
+       "table": {
+        "headers": [
+         "Domain",
+         "Description"
+        ],
+        "rows": [
+         [
+          "PRIMAL",
+          "Create, alter or destroy life and matter."
+         ],
+         [
+          "ELEMENTAL",
+          "Elemental forces - fire, lightning, and the like."
+         ],
+         [
+          "SOOTHSAYING",
+          "Alter destiny and befuddle the mind."
+         ],
+         [
+          "CHRONOMANCY",
+          "Alter time and space itself."
+         ]
+        ]
+       }
       },
       {
-       "key": "",
-       "text": "PRIMAL"
-      },
-      {
-       "key": "ELEMENTAL",
-       "text": "Elementalist"
-      },
-      {
-       "key": "",
-       "text": "SOOTHSAYING"
-      },
-      {
-       "key": "CHRONOMANCY",
-       "text": "Chronomancy"
-      }
-     ]
-    },
-    {
-     "id": "Magic-Penality",
-     "title": "MAGIC Penality",
-     "entries": [
-      {
-       "key": "",
-       "text": "PENALITY FOR ITEMS"
-      },
-      {
-       "key": "",
-       "text": "The SPELL penalty is calculated every scene, if you start a scene with a LARGE or Extra large item and then drop it the penalty stays for the entire scene, same goes for picking items during a SCENE, the penalty will not apply until the end of the SCENE."
-      },
-      {
-       "key": "",
-       "text": "SPELL and COUNTERPSPELL penalty for items (apply highest penalty)"
-      },
-      {
-       "key": "",
-       "text": "Clothing and tiny gear (total)"
-      },
-      {
-       "key": "",
-       "text": "Light armor"
-      },
-      {
-       "key": "",
-       "text": "Heavy Armors and Powered Armors"
-      },
-      {
-       "key": "",
-       "text": "Items, up to medium size (largest item you have on you)"
-      },
-      {
-       "key": "",
-       "text": "Large and Extra large items (largest item you have on you)"
+       "key": "FOR THE GM",
+       "text": "Treat a caster's domain as identity, not just a spell list - a Chronomancer and a Primalist solve the same problem in completely different ways. Lean on OCCULTISM checks to let knowledgeable characters read the magic in a scene - whose spirit, which domain, how strong - before it goes off."
       }
      ]
     },
     {
      "id": "Magic-Spirits",
-     "title": "MAGIC Spirits",
+     "title": "Spirits",
      "entries": [
       {
-       "key": "",
-       "text": "SPIRITS"
+       "key": "YOUR SPIRIT IS EVERYTHING",
+       "text": "Your bound SPIRIT sets your FREE BARRIER, your SPIRIT POWER(S), and the maximum number of spells you can know. A freshly acquired spirit starts with just one spell, plus its barrier and spirit power."
+      },
+      {
+       "key": "SPIRIT TIERS",
+       "text": "Spirits come in four tiers. A primary-domain spirit holds more spells than a secondary one, and the stronger tiers demand a PACT before they can be bound."
       },
       {
        "key": "",
-       "text": "Your SPIRIT determines your BARRIER, SPIRIT POWER and Maximum spells."
+       "text": "",
+       "table": {
+        "headers": [
+         "Tier",
+         "Max spells (Primary / Secondary)",
+         "Spirit Power",
+         "Pact required?"
+        ],
+        "rows": [
+         [
+          "Minor",
+          "3 / 1",
+          "1",
+          "No"
+         ],
+         [
+          "Intermediate",
+          "6 / 2",
+          "1",
+          "No"
+         ],
+         [
+          "Major",
+          "9 / 3",
+          "1",
+          "Yes"
+         ],
+         [
+          "God",
+          "All in the primary domain*",
+          "1",
+          "Yes"
+         ]
+        ],
+        "note": "* A God spirit cannot use any spell, power or barrier from another domain. \"9 / 3\" means up to 9 spells, of which up to 3 may come from your secondary domain."
+       }
+      },
+      {
+       "key": "WHERE SPIRITS COME FROM",
+       "text": "Minor and Intermediate spirits are unconscious forces found anywhere RAW CHI pools. Major and God spirits are life-forms born from RAW CHI, sometimes with a simple - or alarmingly complex - mind of their own."
+      },
+      {
+       "key": "ACQUIRING A SPIRIT - 1) BIND A SPELLCASTER",
+       "text": "Make a BINDING check; the DC is set by the target's current CHI, and their spirit must not be suppressed. Once bound, their spirit becomes available to you the moment its owner dies - then you may take it (replacing your own) or let it disappear. A spirit taken this way is ENSLAVED and loses 1 random spell, but keeps its domain, tier, barrier, power and pact. You can spend a STANDARD action to undo a bind (DC equals your original bind result). You may instead bind the spirit into a prepared relic rather than into yourself."
+      },
+      {
+       "key": "ACQUIRING A SPIRIT - 2) CALL ONE FROM RAW CHI",
+       "text": "Make a SPIRITUAL check versus the RAW CHI pool's value (use BINDING if binding it into a relic). The domain is random; the tier and DC come from the pool size (1-3 Minor, 4-6 Intermediate, 7-9 Major, 10 God); the barrier and power are rolled once the domain is set. Calling from RAW CHI always triggers a control check - succeed and the spirit is yours, fail and consult the Backlash table."
+      },
+      {
+       "key": "ACQUIRING A SPIRIT - 3) DESTROY A RELIC",
+       "text": "Make a BINDING check (DC equals the DC to make that relic) to shatter a true relic and claim the spirit inside. Spirits gained this way arrive with a set domain, barrier and power but no spells. Relic shards hold no spirit. Fail and the relic is destroyed with nothing gained."
+      },
+      {
+       "key": "UPGRADING A SPIRIT",
+       "text": "A spirit can be upgraded to the next tier, but only once it already knows the maximum spells for its current tier, and only via RAW CHI - the pool's minimum must meet the new tier (Minor to Intermediate needs a pool of at least 4). Follow the same steps as calling a spirit: succeed and it gains the rank (then max its new spell slots before upgrading again); fail and it loses a spell. Intermediate to Major awakens the spirit, which takes on a form shaped by where and how it was raised. Major to God cannot be done by normal means - every god ascended in its own unique way."
+      },
+      {
+       "key": "PACTS (Major & God spirits)",
+       "text": "A pact is forged one of two ways. A VOLUNTARY DEAL has you accomplish a task to keep the spirit happy; it comes with rules but also rewards - extra power, altered effects, body modifications, an EVO, and the like - and acting against the spirit's moral code can force control checks to cast. An ENSLAVED spirit is used against its will, with consequences that take many forms; enslaved spirits never trigger involuntary control checks."
+      },
+      {
+       "key": "SPIRIT MANIFESTATION STATES",
+       "text": "Your spirit sits at one of four states. Raising or lowering it is free, but you may move it only one step per MAINTENANCE (Suppressed - Passive - Awakened - Manifested), and each turn you must raise, lower or maintain it. A suppressed spirit grants no barrier."
       },
       {
        "key": "",
-       "text": "If you do not have a spirit you can't manifest spells or powers but you can use relics. Relics do not require SPIRIT"
+       "text": "",
+       "table": {
+        "headers": [
+         "State",
+         "What it means"
+        ],
+        "rows": [
+         [
+          "Suppressed",
+          "Hidden. No spells, powers, or barriers - and no barrier protection."
+         ],
+         [
+          "Passive",
+          "Present; detectable by anyone with spiritual skills."
+         ],
+         [
+          "Awakened",
+          "Active and beginning to manifest; detectable with no check needed."
+         ],
+         [
+          "Manifested",
+          "Fully present; no check required to sense it."
+         ]
+        ]
+       }
       },
       {
-       "key": "",
-       "text": "Each SPIRIT has a maximum number of SPELLS, BARRIERS and SPIRIT POWER."
+       "key": "BARRIERS",
+       "text": "Every spirit projects a BARRIER - a spiritual ward that is your defensive layer in the same way armour or a forcefield is. While your spirit is anything but SUPPRESSED the barrier is simply on: it requires no roll and no action, and it firms up as your spirit climbs toward Manifested. Suppress your spirit to hide and the barrier drops with it. Some barriers also carry minor, intermediate or major powers; those act as BUFFs and are not free - each requires a SPIRITUAL check to raise and must be SUSTAINED to keep going."
       },
       {
-       "key": "",
-       "text": "Only GOD spirits can old all powers from a DOMAIN but cannot use any SPELLS, POWER or BARRIERS from a different DOMAIN."
+       "key": "SPIRIT POWERS",
+       "text": "A SPIRIT POWER is an active ability granted by your spirit and specific to its type - your signature trick, the thing your domain lets you do that no spell slot is spent on. Spirit powers cost no CHI, but they do cost actions to use, and what you get is dictated entirely by the spirit you carry. Raising a spirit's tier or pact can grant additional or stronger powers."
       },
       {
-       "key": "Spirit Type",
-       "text": "Maximum spells known (Primary/Secondary)"
-      },
-      {
-       "key": "",
-       "text": "Minor"
-      },
-      {
-       "key": "",
-       "text": "Intermediate"
-      },
-      {
-       "key": "",
-       "text": "Major"
-      },
-      {
-       "key": "God",
-       "text": "All in primary category"
-      },
-      {
-       "key": "",
-       "text": "A SPIRIT can be SUPPRESSED."
-      },
-      {
-       "key": "",
-       "text": "While SUPPRESSED, any actions you perform first require a Willpower check (DC = shooters accuracy). On success you can act normally. On failure lose 1 morale and you are forced to use the next action to either move out of the cover fire area or move into better cover within the area. If either option is unavailable you must go PRONE on your location and cannot move."
-      },
-      {
-       "key": "",
-       "text": "Manifesting or supressing your SPIRIT is a STANDARD action."
-      },
-      {
-       "key": "",
-       "text": "GAINING A NEW SPIRIT OR UPGRADING A SPIRIT."
-      },
-      {
-       "key": "",
-       "text": "In order to acquire a spirit a player must either bind another spellcaster and kill him, try to call one using raw CHI or destroy a relic to manifest its spirit."
-      },
-      {
-       "key": "",
-       "text": "New spirits always come with a single spell, it is up to you to acquire new ones."
-      },
-      {
-       "key": "",
-       "text": "Binding another spellcaster's spirit"
-      },
-      {
-       "key": "",
-       "text": "To bind a spirit you must succeed at a BINDING DC is set by the current CHI of the opponent."
-      },
-      {
-       "key": "",
-       "text": "Once bound. your target's spirit will be available to you once it's owner is dead; if you already have a spirit when that happens you can chose to replace yours or change your mind and let the spirit disappear."
-      },
-      {
-       "key": "",
-       "text": "Gaining a spirit by binding someone else's strips the new spirit of most of its spells, the new spirit only comes with 1 spell (from it's owners repertoire) but the spirit domain, tier, barrier and spirit power remain the same."
-      },
-      {
-       "key": "",
-       "text": "You can spend a standard action to undo a bind, the DC is the result of the initial BIND check."
-      },
-      {
-       "key": "",
-       "text": "You can also bind the spirit to a relic that has been prepared in advance instead of yourself. Spirit will then power the relic on the death of its owner, rules are otherwise the same."
-      },
-      {
-       "key": "",
-       "text": "Calling a spirit with RAW CHI"
-      },
-      {
-       "key": "",
-       "text": "To manifest a spirit from RAW chi and bind it to yourself, you must perform a SPIRITUAL skill check Vs DC value of the RAW CHI pool."
-      },
-      {
-       "key": "",
-       "text": "If you would rather bind the spirit to a RELIC replace the SPIRITUAL skill checks with BINDING ones. (Requires an appropriate relic to store the spirit)."
-      },
-      {
-       "key": "",
-       "text": "The domain of the spirit being called is random, its tier and DC is based on the RAW chi pool (1-3 = Minor, 4-6 = Intermediate, 7-9 = Major and 10 = god), the barrier and spirit power are randomly rolled once the domain has been established."
-      },
-      {
-       "key": "",
-       "text": "Bringing a spirit from RAW chi always trigger a SPIRITUAL control check (or BINDING if binding it to a relic), if you succeed you gain the spirit, if you fail check the BACKLASH table"
-      },
-      {
-       "key": "",
-       "text": "If you succeed you manifest the spirit and can take it as your own replacing any existing ones you have."
-      },
-      {
-       "key": "",
-       "text": "Destroying a relic"
-      },
-      {
-       "key": "",
-       "text": "You can perform a BINDING skill check to destroy a relic and acquire the spirit inside. Spirits acquired this way have their domain, barrier and spirit power predetermined but they come with no spells"
-      },
-      {
-       "key": "",
-       "text": "DC of the binding check is the same as the one to make that relic. Only try relics can be used, relic shards do not contain a spirit."
-      },
-      {
-       "key": "",
-       "text": "If you fail the Binding, the relic is destroyed but you do not acquire the spirit."
-      },
-      {
-       "key": "",
-       "text": "Upgrading a SPIRIT to a higher tier"
-      },
-      {
-       "key": "",
-       "text": "A spirit you own can be upgraded to a higher tier once it knows the maximum amount of spells it can."
-      },
-      {
-       "key": "",
-       "text": "To upgrade you perform the same steps as when calling a spirit with RAW chi however the minimum RAW CHI of the pool must meet the tier of the new spirit rank."
-      },
-      {
-       "key": "",
-       "text": "For example when upgrading from a Minor spirit to and Intermediate, you would need a minimum RAW chi pool of 4 (Minimum required to summon Intermediate spirits)."
-      },
-      {
-       "key": "",
-       "text": "If you succeed your spirit gains the new rank, you will have to max out his new spells before you can attempt another upgrade. Should you fail, your spirit loses one of its spells"
-      },
-      {
-       "key": "",
-       "text": "Upgrading spirits can only be done with RAW CHI. Otherwise you muse acquire a new spirit via Relic or be Binding someone else's spirit."
+       "key": "FOR THE GM",
+       "text": "Manifestation state is the magic system's tell, and the barrier is what makes hiding cost something: a Suppressed caster blends into a crowd but stands defenceless, while a Manifested one is a lit beacon with their ward at full strength. Make that trade a real tactical choice, and let characters with spiritual senses read the room."
       }
      ]
     },
     {
      "id": "Magic-CHI",
-     "title": "MAGIC CHI",
+     "title": "CHI",
      "entries": [
       {
-       "key": "",
-       "text": "CHI"
+       "key": "TWO KINDS OF CHI",
+       "text": "Everyone has 5 personal CHI by default (maximum 10; race, background, EVO and talents can modify this, and any overflow past your maximum is lost). Separately, the environment provides a RAW CHI pool that the whole scene shares."
       },
       {
-       "key": "",
-       "text": "Players by default have 5 personnal CHI unless stated otherwise or modified by RACE / Backgrounds / EVO or Talents. Maximum CHI for anyone is 10, any CHI increase past that point are lost unless specified/temporary."
+       "key": "HOW RAW CHI BEHAVES",
+       "text": "Whenever a spell is cast using your personal CHI, that spent CHI is immediately added to the RAW CHI pool - even if the spell fails. The RAW pool persists for the scene and caps at 10 (overflow lost). Casting from the RAW pool lowers it by the amount spent. Relics use neither pool."
       },
       {
-       "key": "",
-       "text": "Raw CHI is the accumulated CHI in your immediate environment."
+       "key": "RESTORING CHI",
+       "text": "Personal CHI returns on a short rest - typically about five minutes."
       },
       {
-       "key": "",
-       "text": "Personnal CHI is restored when you take a short rest (typically 5 minutes of rest)"
-      },
-      {
-       "key": "",
-       "text": "SPELLS cost an equivalent amount of CHI to the level they invoked (Minor = 1 , Intermediate = 2 , Major = 3)"
-      },
-      {
-       "key": "",
-       "text": "When any spell is cast using your own personnal CHI, immediately add the personal CHI spent to the RAW CHI pool (this CHI is added even if the spells fails). This raw CHI pool persists for the duration of the scene or up to normally around 5 minutes (can be more, DM's choice)."
-      },
-      {
-       "key": "",
-       "text": "Multiple people casting spells all add up in the same RAW CHI pool."
-      },
-      {
-       "key": "",
-       "text": "Spells cast using relics do not contribute CHI in the RAW pool. Critical failures using spell shards still triggers a control check."
-      },
-      {
-       "key": "",
-       "text": "The RAW CHI pool can never exceed 10 CHI, any CHI added past that point is lost."
-      },
-      {
-       "key": "",
-       "text": "Casting spells from RAW CHI lowers the value of the raw CHI pool by that same amount."
-      },
-      {
-       "key": "",
-       "text": "When casting with RAW CHI you automatically trigger a control check; see control check for details"
+       "key": "FOR THE GM",
+       "text": "RAW CHI is a rising tide: every spell feeds it, and a high pool makes control checks brutal because the DC is the pool total. It rewards restraint and punishes a table that nukes spells every round - let the players feel the pool climbing."
       }
      ]
     },
     {
      "id": "Magic-Spells",
-     "title": "MAGIC Spells",
+     "title": "Casting Spells",
      "entries": [
       {
-       "key": "",
-       "text": "SPELLS"
+       "key": "THE BASIC RULE",
+       "text": "Casting or maintaining a spell with your own CHI follows the normal rules and only triggers a control check on a critical failure. Casting from RAW CHI always triggers a control check (see Control Checks & Backlash)."
+      },
+      {
+       "key": "SPELL LEVELS & CHI COST",
+       "text": "Spells have three levels of effect, each with a base CHI cost and each tied to a spirit state. Casting a level while in the wrong state changes its cost."
       },
       {
        "key": "",
-       "text": "To cast a spell you can use your personal CHI or Raw CHI. Relics do not use CHI."
+       "text": "",
+       "table": {
+        "headers": [
+         "Spell level",
+         "Base cost",
+         "Tied state"
+        ],
+        "rows": [
+         [
+          "Minor",
+          "1 CHI",
+          "Passive"
+         ],
+         [
+          "Intermediate",
+          "2 CHI",
+          "Awakened"
+         ],
+         [
+          "Major",
+          "3 CHI",
+          "Manifested"
+         ]
+        ]
+       }
       },
       {
-       "key": "",
-       "text": "To cast a SPELL, choose the level of the SPELL to be cast and then roll the associated SKILL.  Each spell has their own conditions for SUCCESS."
+       "key": "STATE & COST",
+       "text": "Being in a higher state never raises the cost of a lower-level spell; being too low does. Casting from RAW CHI always costs the normal 1 / 2 / 3.",
+       "examples": [
+        "A Major spell cast while only Passive costs 5 CHI.",
+        "A Minor spell cast while Manifested still costs just 1 CHI."
+       ]
       },
       {
-       "key": "",
-       "text": "Casting or maintaining spells with your own CHI follows normal rules. You only trigger a control check on a critical failure."
+       "key": "SUSTAINING",
+       "text": "Any spell with a BUFF or SUSTAIN component can be maintained. Each round at maintenance you declare whether you sustain it - sustaining costs no CHI, but you may hold only one SUSTAIN effect at a time."
       },
       {
-       "key": "",
-       "text": "Casting or maintaining spells with a relic's follows the same rules as above but also drains the relic rendering it inactive for a time period depending on the relic type, setting it on cooldown."
+       "key": "SPIRIT DECAY",
+       "text": "During any maintenance after a round in which you spent no personal CHI, your spirit drops one manifestation stage. You may spend 1 CHI as a free action at maintenance to prevent this."
       },
       {
-       "key": "",
-       "text": "Any SPELL with a BUFF component or a SUSTAIN effect can be maintained. Every round during maintenance you announce if you SUSTAIN the effect or not. Players cannot have more than 1 SUSTAIN effect at a time. SUSTAINING an effect does not cost CHI."
-      },
-      {
-       "key": "",
-       "text": "SPIRIT POWERS"
-      },
-      {
-       "key": "",
-       "text": "Spirit powers do not cost CHI, they do however require actions and are specific to your Spirit type."
-      },
-      {
-       "key": "",
-       "text": "BARRIERS"
-      },
-      {
-       "key": "",
-       "text": "Barriers are always active when your SPIRIT is not SUPRESSED. NO roll is required  however Barriers minor, intermediate and major powers are a BUFF and require a SKILL check and to be SUSTAINED."
-      },
-      {
-       "key": "",
-       "text": "COUNTER SPELL"
-      },
-      {
-       "key": "",
-       "text": "Counter spell: To counter a spell a player must use a QUICK action to perform an immediate interrupt and win the INITIATIVE, followed by a SPIRITUAL skill check Vs other caster's result. Should either the initiative or spiritual check fail then they were either too slow or too weak to counter the effect."
-      },
-      {
-       "key": "",
-       "text": "Counter spell: Players can also counter spell using the same magic type as the caster (PRIMALIST,CHRONOMANCY, SOOTHSAYER, ELEMENTALIST), this grants a SMALL bonus or the exact same spell, this grants a LARGE bonus."
-      },
-      {
-       "key": "",
-       "text": "LEARNING/REPLACING SPELLS"
-      },
-      {
-       "key": "",
-       "text": "To acquire new spells you can do the following 3 things: Absorb a counter spell, create a new one from RAW CHI or consume a relic shard."
-      },
-      {
-       "key": "",
-       "text": "In all 3 cases you must have a spirit with a free spell slot open or a relic shard before you can try to acquire any spells."
-      },
-      {
-       "key": "",
-       "text": "As a complex action you can sacrifice a spell to free up a spell slot."
-      },
-      {
-       "key": "",
-       "text": "If you successfully counter spell you gain the exact spell you countered."
-      },
-      {
-       "key": "",
-       "text": "Consuming a relic shards grant the exact same spell inside the shard with a successful BINDING check"
-      },
-      {
-       "key": "",
-       "text": "Making a spell with RAW chi requires a SPIRITUAL control check. The value of the RAW chi pool determines what type of spell you can create. On success you acquire the spell, barrier or power, on failure nothing happens."
-      },
-      {
-       "key": "",
-       "text": "The RAW CHI pool determines the rarity of the spells, barriers and spirit powers you can acquire."
-      },
-      {
-       "key": "",
-       "text": "RAW CHI pool 1-2 : Random domain, COMMON powers only"
-      },
-      {
-       "key": "",
-       "text": "RAW CHI pool 3-4 : Random domain COMMON and UNCOMMON powers only."
-      },
-      {
-       "key": "",
-       "text": "RAW CHI pool 5-6 : Random domain powers of up to RARE rarity or Specific Domain powers of up to UNCOMMON rarity"
-      },
-      {
-       "key": "",
-       "text": "RAW CHI pool 7-8 : Random domain powers of up to LIMITED rarity or Specific Domain powers of up to RARE rarity"
-      },
-      {
-       "key": "",
-       "text": "RAW CHI pool 9-10 : Random domain powers of up to CLASSIFIED rarity or Specific Domain powers of up to LIMITED rarity"
-      },
-      {
-       "key": "",
-       "text": "Unique spells, barriers and powers cannot be acquired via raw CHI, they can be acquired by consuming a relic or counter spelling the effect."
-      },
-      {
-       "key": "",
-       "text": "If you have an empty relic shard that is ready to accept a spell you can store your newly acquired spell in there, in that case replace any SPIRITUAL skill checks with BINDING ones."
+       "key": "COUNTER-SPELL",
+       "text": "To counter a spell, spend a QUICK action as an immediate interrupt and win INITIATIVE, then make a SPIRITUAL check versus the other caster's result. Miss the initiative or the check and you were too slow or too weak. A caster whose spirit shares the same domain gets a SMALL bonus, or a LARGE one if it knows the exact same spell. You may instead use BINDING to counter a spell and trap it in an empty relic or shard. A successful counter-spell teaches you the exact spell you countered."
       }
      ]
     },
     {
      "id": "Magic-Control",
-     "title": "MAGIC Control",
+     "title": "Control Checks & Backlash",
      "entries": [
       {
-       "key": "",
-       "text": "CONTROL CHECKS AND BACKLASH:"
+       "key": "WHEN A CONTROL CHECK HAPPENS",
+       "text": "There are two triggers: whenever you draw on RAW CHI, and whenever you roll a critical failure while invoking a spell."
+      },
+      {
+       "key": "THE CHECK",
+       "text": "Roll SPIRITUAL for spells, or BINDING for relics, with a DC equal to the RAW CHI pool total (maximum 10), measured before the action raises or lowers it. Fail and you apply the backlash listed in the spell's description - or, if there is no spell description, consult the table below."
       },
       {
        "key": "",
-       "text": "When you roll a critical failure while invoking a spell or when using RAW CHI, you must make a control check that could lead to various side effects."
+       "text": "",
+       "table": {
+        "headers": [
+         "Roll",
+         "Result",
+         "Effect"
+        ],
+        "rows": [
+         [
+          "10",
+          "Lucky?",
+          "No adverse effect - you got away with it. This time."
+         ],
+         [
+          "9",
+          "Echo",
+          "The power works, but next round it repeats on a target you cannot choose: a random enemy if it was beneficial, a random ally if it was not."
+         ],
+         [
+          "8",
+          "CHI Surge",
+          "The effect works as normal but costs double - and that extra CHI is added to the RAW pool."
+         ],
+         [
+          "4-7",
+          "Backlash",
+          "Apply the spell's own backlash. (If the trigger was not a spell, treat as no effect.)"
+         ],
+         [
+          "3",
+          "Bane",
+          "A random item you carry becomes permanently SPIRITBANE - it SUPPRESSES your spirit while on you."
+         ],
+         [
+          "2",
+          "Explosion",
+          "The CHI pool detonates: everyone within 50 m takes XD ENERGY [5] damage, where X equals the RAW pool. Reset the RAW pool to 0."
+         ],
+         [
+          "1",
+          "Zero Sum",
+          "Everyone within 50 m loses all personal CHI; all of it is added to the RAW pool."
+         ]
+        ],
+        "title": "Backlash table (failed control check)"
+       }
+      },
+      {
+       "key": "FOR THE GM",
+       "text": "Backlash is the price of greed. Telegraph the rising RAW pool so a failed control check feels earned rather than arbitrary, and save the low rolls - Explosion, Zero Sum - for the moments players reach too far."
+      }
+     ]
+    },
+    {
+     "id": "Magic-Learning",
+     "title": "Learning & Replacing Spells",
+     "entries": [
+      {
+       "key": "THREE WAYS TO GAIN A SPELL",
+       "text": "Absorb a counter-spelled effect, create one from RAW CHI, or consume a relic shard. In every case you first need a spirit with a free spell slot (or an empty relic shard). As a COMPLEX action you can sacrifice a known spell to free a slot. A successful counter-spell grants the exact spell you countered; a relic shard grants the exact spell inside on a successful BINDING check; creating one from RAW CHI requires a SPIRITUAL control check."
+      },
+      {
+       "key": "WHAT RAW CHI CAN PULL",
+       "text": "Making a spell from RAW CHI succeeds or fails on a SPIRITUAL control check, and the pool's size caps the rarity you can reach - a random domain is cheaper, a specific domain dearer."
       },
       {
        "key": "",
-       "text": "A Control check requires a roll of SPIRITUAL (for spells) or BINDING (for relics) with the DC being equal to the total of the RAW CHI pool (Max 10)."
+       "text": "",
+       "table": {
+        "headers": [
+         "RAW CHI pool",
+         "You can acquire"
+        ],
+        "rows": [
+         [
+          "1-2",
+          "Random domain, COMMON only."
+         ],
+         [
+          "3-4",
+          "Random domain, COMMON and UNCOMMON."
+         ],
+         [
+          "5-6",
+          "Random domain up to RARE, or specific domain up to UNCOMMON."
+         ],
+         [
+          "7-8",
+          "Random domain up to LIMITED, or specific domain up to RARE."
+         ],
+         [
+          "9-10",
+          "Random domain up to CLASSIFIED, or specific domain up to LIMITED."
+         ]
+        ]
+       }
+      },
+      {
+       "key": "UNIQUE EFFECTS & STORING SPELLS",
+       "text": "UNIQUE spells, barriers and powers can never be pulled from RAW CHI - only by consuming a relic or counter-spelling the effect. If you have a primed empty shard you may store a freshly acquired spell, or one of your spirit's existing spells, into it: replace the SPIRITUAL checks with BINDING. Failure breaks the shard, and if you were storing an existing spell the spirit loses it."
+      }
+     ]
+    },
+    {
+     "id": "Magic-Penality",
+     "title": "Item & Relic Spell Penalty",
+     "entries": [
+      {
+       "key": "GEAR INTERFERES WITH MAGIC",
+       "text": "What you carry can penalise your SPELL and COUNTER-SPELL rolls. Apply only the single highest penalty that applies. A relic version of the offending item softens or removes its penalty."
       },
       {
        "key": "",
-       "text": "If you fail your control check compare your LUCK dice result on the control table below and apply the result. (see spell descriptions for backlash effects)."
+       "text": "",
+       "table": {
+        "headers": [
+         "Carried item",
+         "Normal penalty",
+         "As a Relic"
+        ],
+        "rows": [
+         [
+          "Clothing & tiny gear (total)",
+          "None",
+          "-"
+         ],
+         [
+          "Items up to Medium size (largest on you)",
+          "None",
+          "-"
+         ],
+         [
+          "Light armour",
+          "SMALL",
+          "None"
+         ],
+         [
+          "Large / Extra-Large items (largest on you)",
+          "LARGE",
+          "SMALL"
+         ],
+         [
+          "Heavy & Powered armour",
+          "LARGE",
+          "SMALL"
+         ],
+         [
+          "Cybernetics",
+          "LARGE",
+          "N/A"
+         ]
+        ]
+       }
       },
       {
-       "key": "",
-       "text": "BACKLASH table (failed control checks)"
-      },
-      {
-       "key": "",
-       "text": "Check DC"
-      },
-      {
-       "key": "",
-       "text": "10"
-      },
-      {
-       "key": "",
-       "text": "9"
-      },
-      {
-       "key": "",
-       "text": "8"
-      },
-      {
-       "key": "",
-       "text": "4-5-6-7"
-      },
-      {
-       "key": "",
-       "text": "3"
-      },
-      {
-       "key": "",
-       "text": "2"
-      },
-      {
-       "key": "",
-       "text": "1"
+       "key": "TIMING",
+       "text": "The spell penalty is locked in per scene. Start a scene holding a Large or Extra-Large item and drop it, and the penalty stays the whole scene; pick one up mid-scene and the penalty will not apply until the scene ends."
       }
      ]
     },
     {
      "id": "Magic-Relic",
-     "title": "MAGIC Relic",
+     "title": "Relics",
      "entries": [
       {
-       "key": "",
-       "text": "RELICS"
+       "key": "TWO KINDS OF RELIC",
+       "text": "Relic shards are single-use items holding one spell: anyone can use that spell with a successful BINDING check, after which the shard is destroyed (shards hold no spirit). True relics are permanent items, usable once per day, that grant powers or benefits for a time."
+      },
+      {
+       "key": "THE ONE-USE-A-DAY LIMIT",
+       "text": "A passive true-relic benefit counts as always on and silently eats your daily use. The limit is personal, not per relic: with several true relics you still get one use a day, and you pick which relic is active. That choice can only change on a full rest - and if you forget to set it, use the strongest."
+      },
+      {
+       "key": "MAKING A RELIC",
+       "text": "Prepare an item to receive CHI. First anoint it - spend the credits to make it genuinely spectacular - and roll BINDING; then carry it while it earns XP at the same rate you do. A relic can be any item, but the base item's cost is on top of the anointment cost. When the XP is complete the relic is primed and you recover the 1 CHI you spent (you also get it back if the relic is destroyed before completion). A primed, anointed true relic is then ready to receive a SPIRIT - fail that BINDING and the relic is destroyed and you start over. Shops sometimes carry blanks at around twice the preparation cost, and a filled True Relic starts around ten times it."
       },
       {
        "key": "",
-       "text": "Relics come in two category, True relics and Relic shards."
+       "text": "",
+       "table": {
+        "headers": [
+         "Relic",
+         "XP",
+         "Credits"
+        ],
+        "rows": [
+         [
+          "Shard",
+          "10",
+          "5,000"
+         ],
+         [
+          "Minor",
+          "25",
+          "20,000"
+         ],
+         [
+          "Intermediate",
+          "100",
+          "100,000"
+         ],
+         [
+          "Major",
+          "200",
+          "2,000,000"
+         ],
+         [
+          "God",
+          "-",
+          "Cannot be made by normal means"
+         ]
+        ],
+        "title": "Relic preparation cost"
+       }
+      },
+      {
+       "key": "RELIC POWERS",
+       "text": "When you bind an item you find a source of CHI - a spirit, a magical site, a spellcaster - and choose one of that spirit's powers as the relic's power. The effect scales with the spirit's tier."
       },
       {
        "key": "",
-       "text": "Relic shards are single use items that contain a spell, that spell can be used by anyone with a successful BINDING check and it is destroyed after usage."
+       "text": "",
+       "table": {
+        "headers": [
+         "Power type",
+         "Effect",
+         "Minor",
+         "Intermediate",
+         "Major",
+         "God"
+        ],
+        "rows": [
+         [
+          "Relic Item (permanent)",
+          "Reduce the item's own SKILL penalty (tier = minimum rank to apply).",
+          "N/A",
+          "SMALL",
+          "LARGE",
+          "Custom"
+         ],
+         [
+          "Item Function (passive)",
+          "Change one item variable by X, or shift a category by X.",
+          "+1",
+          "+2",
+          "+3",
+          "Custom"
+         ],
+         [
+          "Damage Type (at will)",
+          "Change the owner's damage type.",
+          "Pick one",
+          "All",
+          "All + any special",
+          "Custom"
+         ],
+         [
+          "Skill (scene)",
+          "Bonus to a skill (made at a check equal to the relic value on creation).",
+          "SMALL",
+          "LARGE",
+          "Set to 10",
+          "Custom"
+         ],
+         [
+          "Attribute (scene)",
+          "Bonus to an attribute (pick one; check equal to the relic value on creation).",
+          "SMALL",
+          "LARGE",
+          "Exceed racial max",
+          "Custom"
+         ],
+         [
+          "Defense (scene)",
+          "Defensive bonus (check equal to the relic value on creation).",
+          "N/A",
+          "SMALL",
+          "LARGE",
+          "Custom"
+         ],
+         [
+          "Vitality (scene)",
+          "Raise max Health, Morale and CHI by X.",
+          "1",
+          "3",
+          "5",
+          "Custom"
+         ]
+        ],
+        "title": "Relic powers by spirit tier"
+       }
       },
       {
-       "key": "",
-       "text": "True Relics are permanent items that can be used once a day, granting various powers and benefits for a time."
-      },
-      {
-       "key": "",
-       "text": "If your true relic grants a passive benefits it is considered always active and automatically consumes your one use a day."
-      },
-      {
-       "key": "",
-       "text": "Should you have more than one true relic, you remain limited to one use a day as this is a personal limit and not a per relic limit."
-      },
-      {
-       "key": "",
-       "text": "When owning multiple true relics the player must chose which one is active, this cannot be changed outside of a full rest. In the case the player forgets to set it, pick the strongest relic."
-      },
-      {
-       "key": "",
-       "text": "All relics must be created by preparing an item to receive CHI."
-      },
-      {
-       "key": "",
-       "text": "Before creating a relic, you must first anoint it (spend the credits on making it truly spectacular) and roll your BINDING check. You must then carry that item and earn experience with it. Item earns experience at the same rate you do."
-      },
-      {
-       "key": "",
-       "text": "A relic can be any item you want but the cost of the base item is in addition to the relic's anointment cost"
-      },
-      {
-       "key": "",
-       "text": "Relic shards are the easiest ones make but they cannot hold spirits. (see acquiring spells for other options)"
-      },
-      {
-       "key": "",
-       "text": "Once the XP is fully gained, the relic is now fully primed and you recover the 1 CHI you spent for that relic. If the relic is destroyed before being completed, the player gains the CHI back."
-      },
-      {
-       "key": "",
-       "text": "Some specialty shops might carry relics, prices for a blank relic will be around two times the preparation cost. The price will vary but start at around 10 times the prepartion cost for a filled relic (True Relic)."
-      },
-      {
-       "key": "Relic Type",
-       "text": "Création Cost"
-      },
-      {
-       "key": "Shard",
-       "text": "10 XP and 5 000 Credits"
-      },
-      {
-       "key": "Minor",
-       "text": "25 XP and 20 000 Credits."
-      },
-      {
-       "key": "Intermediate",
-       "text": "100 XP and 100 000  Credits."
-      },
-      {
-       "key": "Major",
-       "text": "250 XP and 250 000 Credits."
-      },
-      {
-       "key": "God",
-       "text": "cannot be gained by normal means"
-      },
-      {
-       "key": "",
-       "text": "True relics that have the required XP and have been anointed are ready to receive a SPIRIT. See the spirit section for details. Should the BINDING check fail, the relic is DESTROYED and you must start over."
-      },
-      {
-       "key": "",
-       "text": "Once the item has enough experience you need to decide which type of relic you are creating (see table below)."
-      },
-      {
-       "key": "",
-       "text": "When binding an item you find a source of CHI (spirits, magical sites, spells casters) to bind into it and then pick one of the powers that spirit grants as a item power"
-      },
-      {
-       "key": "",
-       "text": "Type"
-      },
-      {
-       "key": "",
-       "text": "Relic Item (permanent)"
-      },
-      {
-       "key": "",
-       "text": "Item function (passive)"
-      },
-      {
-       "key": "",
-       "text": "Damage Type (at will)"
-      },
-      {
-       "key": "",
-       "text": "Skill (scene)"
-      },
-      {
-       "key": "",
-       "text": "Attribute (scene)"
-      },
-      {
-       "key": "",
-       "text": "Defense (scene)"
-      },
-      {
-       "key": "",
-       "text": "Vitality (scene)"
-      },
-      {
-       "key": "Relic item",
-       "text": "Imbue an item so it no longer applies a penalty to your spells. The tier is the minimum rank required for it to apply."
-      },
-      {
-       "key": "Item Function",
-       "text": "Improves an item variables by increasing them by X or changing the variable category by X. For example a major Pistols relic could improve range by 3 categories or its maximum damage by 3 or 1 point in three different categories."
-      },
-      {
-       "key": "Damage Type",
-       "text": "Allows the user to change their damage type to one the relic provides."
-      },
-      {
-       "key": "Skill",
-       "text": "Provides improvement to a Skill, to create such a relic the user must succeed a relevant skill check at a value equal to the relic on creation."
-      },
-      {
-       "key": "Attribute",
-       "text": "Provides improvement to a user's Attribute (pick one when creating the relic). User must succeed an attribute check at a value equal to the relic on creation."
-      },
-      {
-       "key": "Defense",
-       "text": "Provides improvement to a user's Attribute (pick one when creating the relic). User must succeed a defensive check at an value equal to the relic on creation."
-      },
-      {
-       "key": "Vitality",
-       "text": "Provides temporary improvement to a user's Health, CHI and Morale."
+       "key": "FOR THE GM",
+       "text": "Relics are how a non-caster touches magic and how a caster cheats their gear penalty - so price them in story as much as credits. The long XP-bonding makes a relic feel earned; let a half-finished relic, or a stolen one mid-bond, be a hook of its own."
       }
      ]
     }
