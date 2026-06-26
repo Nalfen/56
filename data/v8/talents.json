@@ -158,7 +158,7 @@
    "skill": "GENERAL",
    "req": "0",
    "cost": "5",
-   "effect": "Gain a SMALL bonus to your RESILIENCE checks."
+   "effect": "Gain a SMALL bonus to your ENDURANCE saves."
   },
   {
    "category": "PHYSICAL",
@@ -166,7 +166,7 @@
    "skill": "MEDICINE",
    "req": "0",
    "cost": "5",
-   "effect": "When rolling a TOXIC SHOCK, you can reduce the final result by making a RESILIENCE skill check to reduce the TOXIC SHOCK result."
+   "effect": "When rolling a TOXIC SHOCK, you can reduce the final result by making an ENDURANCE save to reduce the TOXIC SHOCK result."
   },
   {
    "category": "PHYSICAL",

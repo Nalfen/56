@@ -745,7 +745,7 @@
    "availability": "COMMON",
    "legality": "No Permit",
    "cost": "0",
-   "effect": "Not REST. DC 3 RESILIENCE, pass: recover as Capsule Pod. Fail: nothing."
+   "effect": "Not REST. DC 3 ENDURANCE save, pass: recover as Capsule Pod. Fail: nothing."
   },
   {
    "name": "Capsule Pod (per night)",

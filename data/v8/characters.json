@@ -1079,7 +1079,7 @@
    "desc": "You spent a large amount of time serving in the red wastelands of titania.",
    "traits": [
     "Unbreakable : Surving for so long in the wasteland has gifted you with supernatural resilience. You can now spend 1 or 3 points of morale to gain a SMALL / LARGE bonus to any DEFENSIVE rolls as long as you are not suffering from any MORALE TRAUMAs.",
-    "Elite soldier : You served in the vanguard of one of the most violent wars ever recorded. Gain a permanent 1 Endurance and a LARGE bonus to resilience but your racial maximum SOCIAL is reduced by 1.",
+    "Elite soldier : You served in the vanguard of one of the most violent wars ever recorded. Gain a permanent 1 Endurance and a LARGE bonus to ENDURANCE saves but your racial maximum SOCIAL is reduced by 1.",
     "Toxic Exposure : Long term exposure to the harsh environment of titania changed your body, reduce your CHI by 2 and medicine used on you now require twice as much dosage to be effective."
    ],
    "grants": {
@@ -3591,7 +3591,7 @@
     "cost": "30000",
     "availability": "COMMON",
     "legality": "No Permit",
-    "effect": "Passive: You have highly optimised metabolic functions. Grants a LARGE bonus to resilience checks.\nActive: You can activate this augment to automatically succeed a Resilience check."
+    "effect": "Passive: You have highly optimised metabolic functions. Grants a LARGE bonus to ENDURANCE saves.\nActive: You can activate this augment to automatically succeed an ENDURANCE save."
    },
    {
     "evo_type": "CYBERNETICS",
@@ -6527,7 +6527,7 @@
       "cost": "30000",
       "availability": "COMMON",
       "legality": "No Permit",
-      "effect": "Passive: You have highly optimised metabolic functions. Grants a LARGE bonus to resilience checks.\nActive: You can activate this augment to automatically succeed a Resilience check."
+      "effect": "Passive: You have highly optimised metabolic functions. Grants a LARGE bonus to ENDURANCE saves.\nActive: You can activate this augment to automatically succeed an ENDURANCE save."
      },
      "TIER II": {
       "evo_type": "CYBERNETICS",

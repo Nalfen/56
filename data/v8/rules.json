@@ -1728,11 +1728,11 @@
       },
       {
        "key": "HANDED - 1H / 2H",
-       "text": "Whether the weapon is one- or two-handed. Two-handers convert more of your PHYSICAL into damage (see Melee)."
+       "text": "Whether the weapon is wielded in one hand or needs both. This tells you what your off-hand is free to do - hold a shield, a second weapon, a datapad - and how easily the weapon is carried or hidden. It is not a damage modifier."
       },
       {
        "key": "MELEE WEAPONS",
-       "text": "Melee weapons work like firearms with extras: you add dice from your PHYSICAL (up to your own PHYSICAL value), two-handers add even more, and reach stands in for range. A character too weak for the weapon instead loses power and damage."
+       "text": "Melee weapons work just like firearms, with a single swap: REACH stands in for range. Everything else resolves the same way - POWER against the target's defence rating, DAMAGE, and EXPERTISE turning surplus hit-successes into bonus damage. There is no separate PHYSICAL-to-damage bonus and two-handers do not hit harder for being two-handed: EXPERTISE is the one variable damage lever, on purpose, so the system never runs two at once."
       },
       {
        "key": "FOR THE GM",
@@ -1916,7 +1916,7 @@
       },
       {
        "key": "FOR THE GM",
-       "text": "Misc gear is where you say yes. A cheap tool that unlocks an approach is worth far more to the game than its price tag - use it to reward players who prepare."
+       "text": "Misc gear is where you say yes. A cheap tool that unlocks an approach is worth far more to the game than its price tag - use it to reward players who prepare. And don't dismiss the 'useless' stuff: a memento, a cheap trinket, a daft novelty item that does nothing mechanical still earns its place if it brings roleplay, character, or a laugh to the table. Encourage players to pick those up - flavour is its own kind of utility."
       }
      ]
     },
@@ -1930,7 +1930,7 @@
       },
       {
        "key": "OPTIONS",
-       "text": "Weapons, defenses and datacoms have OPTION slots. Options come in three categories - FUNCTION, FORM and OPERATION - and you may fit one of each. Every option lists what it fits and what it costs; see the weapon-option and armor-option references."
+       "text": "An item can only take OPTIONS if it carries the special tag OPT, which grants one option slot - or OPT+, which grants two. Most generic gear has neither; some manufacturers (Kintech, for instance) build the OPT tag in. Each option lists what kind of item it fits and what it costs; see the weapon-option and armor-option references."
       },
       {
        "key": "AMMO TYPES",
@@ -3019,7 +3019,7 @@
       },
       {
        "key": "SUFFOCATION",
-       "text": "Each round without air, roll RESILIENCE vs DC 1, the DC rising by +1 every round. On a failure, take stun damage equal to the DC. The damage keeps coming even while DYING - vacuum does not wait for you to recover."
+       "text": "Each round without air, make an ENDURANCE save vs DC 1, the DC rising by +1 every round. On a failure, take stun damage equal to the DC. The damage keeps coming even while DYING - vacuum does not wait for you to recover."
       },
       {
        "key": "FOR THE GM",
@@ -3480,11 +3480,6 @@
    "desc": "Legality class determines whether it is legal or not to carry such an item under the alliance law. Outside of the alliance, laws are usually localized."
   },
   {
-   "name": "OPERATION",
-   "action": "",
-   "desc": "Modifies existing function of an item."
-  },
-  {
    "name": "DC",
    "action": "",
    "desc": "Difficulty is the target number of successes required to succeed at a task."
@@ -3862,7 +3857,7 @@
   {
    "name": "SUFFOCATING",
    "action": "",
-   "desc": "An absence of air will lead to suffocation. When a character is deprived of air roll a RESILIENCE check every round at DC1, increase DC by 1 for every round thereafter until death or a source of air is found. On a failed check you lose the DC of the resilience check as health (stun dmg). DMG will not sop if you enter DYING state."
+   "desc": "An absence of air will lead to suffocation. When a character is deprived of air make an ENDURANCE save every round at DC1, increase DC by 1 for every round thereafter until death or a source of air is found. On a failed check you lose the DC of the save as health (stun dmg). DMG will not sop if you enter DYING state."
   },
   {
    "name": "RESSOURCE UNITS",
@@ -15574,7 +15569,7 @@
     "result": "18",
     "name": "Stroke",
     "duration": "PERMANENT",
-    "effect": "Roll a RESILIENCE DC5 or die, if you survive the player now has to use a random word every 3 words."
+    "effect": "Make an ENDURANCE save DC5 or die, if you survive the player now has to use a random word every 3 words."
    },
    {
     "result": "19",

@@ -1417,7 +1417,7 @@
       "sustain": "No",
       "effect": "Allows the user to weaponize his pain or mitigate its effects.",
       "minor": "Share your pain in an area dealing 3D + 1 [X] MORALE damage to all enemies in range. Power of this attack is equal to the amount of health you are missing.",
-      "intermediate": "One willing ALLY within range can make a resilience skill check DC = total health or morale you are missing; a success lets you ignore attribute penalties caused by those wounds for the entire scene.",
+      "intermediate": "One willing ALLY within range can make an ENDURANCE save DC = total health or morale you are missing; a success lets you ignore attribute penalties caused by those wounds for the entire scene.",
       "major": "If anyone within range has a WOUND or MORALE based ailment you can touch them to inflict the same effect on all enemies in range that fail their defense check.",
       "mastery": "This power has a SMALL bonus to your skill check if you are suffering from a GRAVE wound or SHAKEN and a LARGE bonus if you are MORTALY wounded or BROKEN.",
       "backlash": "Power shares everyone's pain in the area with you; you take an amount of wounds and morale damage to put you at the same level of the lowest entity within range."
