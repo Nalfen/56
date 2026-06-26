@@ -9589,8 +9589,16 @@ var XREF=null;
 function xrefMap(){
   if(XREF)return XREF;
   XREF=new Map();
-  omniIndex().forEach(function(e){var k=e.n.toLowerCase();if(!XREF.has(k))XREF.set(k,e);});
+  omniIndex().forEach(function(e){var k=e.n.toLowerCase();var a=XREF.get(k);if(a){a.push(e);}else{XREF.set(k,[e]);}});
   return XREF;
+}
+// Resolve a name to ONE xref target, preferring an entry in the preferred section.
+// Fixes cross-domain name collisions (e.g. the "Unity"/"Doom" hacking program vs the
+// same-named spell): a cell in the hacking section now resolves to the hacking entry.
+function xrefResolve(k,preferSec){
+  var a=xrefMap().get(k);if(!a||!a.length)return null;
+  if(preferSec){for(var i=0;i<a.length;i++){if(a[i].s===preferSec)return a[i];}}
+  return a[0];
 }
 function xrefDecorate(){
   var main=document.getElementById('main');if(!main)return;
@@ -9599,8 +9607,8 @@ function xrefDecorate(){
     if(td.classList.contains('xref')||td.querySelector('button,input,select,a'))return;
     var t=(td.textContent||'').trim();
     if(!t||t.length<3||/^[\d\s.,%xX+\u00d7-]+$/.test(t))return;
-    var e=xrefMap().get(t.toLowerCase());
-    if(!e){var t2=t.replace(/\s*\([^)]*\)\s*$/,'');if(t2!==t){e=xrefMap().get(t2.toLowerCase());}}
+    var e=xrefResolve(t.toLowerCase(),cs);
+    if(!e){var t2=t.replace(/\s*\([^)]*\)\s*$/,'');if(t2!==t){e=xrefResolve(t2.toLowerCase(),cs);}}
     if(!e)return;
     if(e.s===cs&&sq===e.n.toLowerCase())return;
     td.classList.add('xref');td.dataset.xs=e.s;td.dataset.xn=e.n;td.title='Open: '+e.n;
