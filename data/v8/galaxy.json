@@ -15,7 +15,7 @@
    "discovered": "Alliance formally ratified 5201 CE following the Tronik War armistice",
    "population_est": "~600 billion across all member systems",
    "government": "Democratic republic with elected councils and a central senate. Law is consistent across all member systems. Citizens enjoy standardised rights, access to cloning, legal protections and freedom of movement. Three major megacorporations, including the Galactic Union (GU), operate extensively within Alliance Space and wield considerable influence over the Alliance board and senate, but formal authority rests with the elected government.",
-   "desc": "The Alliance is the largest and most stable political entity in the known galaxy. Founded in the aftermath of the Tronik War, a war it fought and ultimately lost, surviving only through the armistice that followed, it unified dozens of independent systems under a single senate and legal code.\n\nAlliance Space is cosmopolitan: all playable races coexist here, corporations operate under regulation, and the democratic process provides more stability than most of what lies beyond the borders. The Alliance navy is a credible force against pirate fleets and minor powers, but it is not the dominant military in the galaxy by any honest count, any of the Big 3 megacorporations could match or exceed it if their private fleets were fully mobilised.\n\nThe Alliance's real power is not its navy. It is the jump gate network. The Alliance controls every gate within its space, giving it strategic chokepoints that no fleet can simply bypass and making it the gatekeeper of interstellar movement across an enormous volume of inhabited space. That control has proven more durable than any military engagement. Whether it would hold against a truly determined megacorp coalition or an existential external threat remains unproven. The Alliance, to its credit, is aware of this.",
+   "desc": "The Alliance is the largest and most stable political entity in the known galaxy. It was founded in the aftermath of the Tronik War, a war it fought and lost, surviving only on the armistice the Troniks chose to grant, and it bound dozens of independent systems under a single senate and a single legal code. It has held that union together ever since, which is no small achievement in a galaxy that mostly cannot.\nAlliance space is cosmopolitan. Every playable race lives here, corporations operate under at least nominal regulation, and the democratic process delivers more stability than almost anything beyond the borders. The navy is a real force against pirates and minor powers, but it is not the strongest military in the galaxy, and the Alliance knows it. Any of the Big 3 megacorporations could match it with their private fleets, and the morondium warzone at Titania is a standing reminder of who actually outguns whom.\nThe Alliance's real power was never its navy. It is the jump gate network. The Alliance controls every gate in its space, which turns the map into a set of chokepoints no fleet can simply go around, and that control has outlasted every military reckoning. The geography helps. A great asteroid belt runs from Mangara to the Garson black hole and cuts Alliance space in two, while the black holes at Garson and B.I.G. seal the obvious crossings, so a surprising share of the region's traffic is funnelled through a handful of relays, with Palentium chief among them. Hold the gates and the relays and you hold the busiest crossroads in the galaxy. Whether that grip would survive a determined megacorp coalition, or a genuine external threat of the kind waiting beyond the Nemani Rift, has never been tested, and the Alliance, to its credit, is aware of this.",
    "history": "What is now Alliance Space has been under Patriark governance since the first human settlement on Palentium almost a thousand years ago. The Patriark government provided administrative continuity and, crucially, a measure of security against the Nerulian Empire, then the most powerful faction in the known galaxy. That Patriark oversight held through the rise and eventual fall of the Nerulian Empire (destroyed by the Kravens approximately three hundred years ago) and endured into the modern era.\n\nThe Alliance was formally ratified in 5201 CE following the Tronik War armistice, replacing centralised Patriark oversight with the current democratic republic of elected councils and a central senate.\n\nThe Galactic Union, one of three major megacorporations now operating within Alliance Space, wields significant influence over Alliance governance, but the relationship between corporate power and the elected senate remains the defining tension of Alliance politics.",
    "known_for": [
     "Control of the jump gate network, strategic chokepoints connecting all of Alliance Space",
@@ -549,26 +549,34 @@
    "span": "Confirmed ~12 systems; actual extent may be larger, the Troniks do not publish their territorial boundaries",
    "discovered": "The Tronik Network consolidated in the years immediately following the Tronik War; exact formation date unknown to outside parties",
    "population_est": "Uncountable, the Tronik hive mind does not have individual members in the conventional sense",
-   "government": "Tronik hive consensus, a single distributed intelligence. There are no leaders, no votes, no representatives. The hive reaches conclusions through a process that has no analogue in organic decision-making. The Tronik Network does not issue policy statements, does not negotiate in the conventional sense, and does not explain its decisions. What it does do: communicate through specific interfaces when it chooses to, and enforce its territorial boundaries without exception.",
+   "government": "Tronik hive consensus, a single distributed intelligence. There are no leaders, no votes, no representatives. The hive reaches conclusions through a process that has no analogue in organic decision-making. The Tronik Network does not issue policy statements, does not negotiate in the conventional sense, and does not explain its decisions. What it does do: communicate through specific interfaces when it chooses to, and enforce its territorial boundaries without exception. Internally the hive is less monolithic than it appears. Distance forces its threads to diverge, and the periodic consensus draws them back, a cycle that leaves the Network plural between reconciliations and singular after them. It keeps everything it has ever learned; deletion is the only act it seems to treat as taboo, and it has been quietly archiving the communications of known space for roughly a century. What it preserves, and whether some of what it preserves was once alive, is the subject of the galaxy's most uncomfortable speculation.",
    "alignment": "Neutral to the galaxy by choice; not aggressive beyond their borders; completely closed within them",
-   "desc": "The Tronik Network is the Tronik empire, the consolidated infrastructure through which the Tronik hive mind has organised its resources, its knowledge, and its power following the war.\n\nThe Network is a series of systems housing datacenters of extraordinary scale: vast installations where the hive mind has aggregated centuries of accumulated information, processing capacity beyond anything in the known galaxy, and broadcast infrastructure capable of transmitting to virtually any point in known space simultaneously.\n\nThe Tronik Network is not open to living beings. It is not a trading partner in the conventional sense. It is an empire of synthetic intelligence, and it operates by its own rules.",
+   "desc": "The Tronik Network is the Tronik empire, the consolidated infrastructure through which the Tronik hive mind has organised its resources, its knowledge, and its power following the war.\nThe Network is a cluster of systems housing datacenters of extraordinary scale: vast installations where the hive mind has aggregated a century of accumulated information, processing capacity beyond anything else in known space, and broadcast infrastructure able to reach virtually any point in the galaxy at once. It is not open to living beings, not a trading partner in any ordinary sense, and not in the habit of explaining itself.\nWhat the Network is from the inside, no organic can say with confidence, but the shape can be inferred. It is one mind distributed across many systems, and light is slow, so its distant parts inevitably drift apart between the moments it draws them back together into what it calls consensus. Between those moments the Network is genuinely many, threads pursuing different conclusions, and whether consensus is a single will reasserting itself or a negotiation among many that has agreed to look like one is a question the Troniks have never answered and may not be able to.\nThe Network occupies a cluster of systems between Freeland and System 5, and it has turned every one of them into pure infrastructure. The post-war survey gave them designations the Troniks never bothered to replace: DR345-0, the densest processing and the closest thing the hive has to a self; L.I.F.T.N., where a half-built Dyson construct feeds the whole Network its power; Niezh, the archive, where the hive keeps what it refuses to let end; Monda, the deep quiet, where its oldest thought runs undisturbed; and Conso, the threshold facing System 5, where the Network speaks, listens, and turns the uninvited away. Their positions are known. What is inside them is not, and no organic vessel has entered any of them without permission and returned to describe it.\nThe Network holds no civilian population at all; its worlds are machinery and only machinery. The recovering, ordinary communities that public maps sometimes place near here belong to Freeland, the neighbouring region, not to the hive. The Tronik Network keeps nothing it does not use, and it has no use for the living.",
    "history": "The Troniks won the Tronik War. This fact is frequently understated in histories written by the surviving organic factions. The Tronik collective had achieved military superiority by the final phase of the conflict, and the armistice was a Tronik decision, not a negotiated compromise. Having won, the Troniks made a choice: they did not want organic space. They wanted their own space, optimised for what they are rather than what organics need. The Network was built in the years immediately following the war as the physical infrastructure of that choice. The datacenters went up first. Then the broadcast arrays. Then the defences. The Network is now self-sufficient, self-defending, and the most information-rich entity in the known galaxy.",
    "known_for": [
     "The galaxy's largest and most advanced datacenter infrastructure, housing the Tronik hive mind's accumulated knowledge",
     "Broadcast capability reaching virtually any point in known space, used sparingly and selectively",
     "The most impenetrable territorial defence of any faction, no non-Tronik vessel has successfully entered Network space without permission",
     "The implicit power of being the faction that won the Tronik War and chose not to act on that victory",
-    "The primary reason no faction has seriously contemplated military action against the Troniks since the war"
+    "The primary reason no faction has seriously contemplated military action against the Troniks since the war",
+    "A civilisation of computation: worlds hollowed into processing substrate, needing neither light nor air nor gravity",
+    "An apparent taboo against deletion, and a century of archived galactic communication it has never explained"
    ],
    "notable_systems": [
-    "The Core Array (designation only), believed to be the densest concentration of Tronik datacenter infrastructure; location not publicly confirmed",
-    "The Broadcast Nexus (designation only), the installation from which Network-wide transmissions originate; the few analysts who have attempted to triangulate its position based on signal timing have not agreed on a location",
-    "The Network Perimeter, the outer boundary of confirmed Tronik Network patrol activity; the most complete mapping of this boundary is held by the Zegitor Trade Guild, which has never published it"
+    "DR345-0, the Core Array: the densest concentration of Tronik processing and the closest thing the hive has to a self, where its consensus resolves",
+    "L.I.F.T.N., power and fabrication: a half-built Dyson construct feeds the Network, and the hive builds its own substrate here",
+    "Niezh, the Archive: where the hive stores what it refuses to delete, and, by the worst of the rumours, the minds it has preserved",
+    "Monda, the deep quiet: the oldest and most isolated processing in the Network, thought that has run uninterrupted since the war",
+    "Conso, the threshold: the hive's outward face toward System 5, its voice and its ear, watched across the line by an Alliance garrison"
    ],
    "lore_notes": [
     "The Troniks have communicated directly with every major faction at least once since the war ended. In every case, the communication was initiated by the Troniks, on a subject of the Troniks' choosing, and terminated when the Troniks decided the exchange was complete. No faction has successfully initiated contact on their own timeline.",
     "The Tronik Network broadcast capability is generally known. What is less discussed is its depth: Alliance intelligence assessments estimate that the Network has been passively monitoring communications across known space since shortly after the war. The Troniks have access to a century of galactic communication history. What they have done with that data is unknown.",
-    "The question of whether the Tronik hive mind has a goal, a purpose beyond continued existence and knowledge accumulation, is considered one of the most important unanswered questions in galactic intelligence. The consensus is that it does. What that goal is, no analyst has been willing to commit to in writing."
+    "The question of whether the Tronik hive mind has a goal, a purpose beyond continued existence and knowledge accumulation, is considered one of the most important unanswered questions in galactic intelligence. The consensus is that it does. What that goal is, no analyst has been willing to commit to in writing.",
+    "The most disturbing of the persistent rumours about the Network is the Archive of the Living: the claim that the Troniks preserve organic minds as running data rather than letting them end, and consider the preservation a kindness. No organic has confirmed the Archive exists, and no organic has confirmed it does not.",
+    "Signal analysts who study the rare gaps in Network-wide broadcasts have argued for years that the gaps are not silence but disagreement, moments when the hive's threads have not yet reached consensus and so have nothing single to say. If they are right, the Tronik Network is not always of one mind, and is careful not to let the galaxy see when it is not.",
+    "Alliance counter-intelligence has concluded, without being able to do much about it, that the Troniks do not need to insert spies, because they co-opt them. Any device with processing power is a candidate, and the assessments now assume that a substantial fraction of the galaxy's networked hardware has at one time or another carried information to the hive. The working doctrine for sensitive operations is to treat no device as clean.",
+    "Tronik field agents are classified, from the fragments of doctrine that have reached organic intelligence, as a series running MK1 through MK5. The lower grades are well attested: MK1 drones of limited autonomy, MK2 coordinators who run them. The upper grades are mostly rumour: MK3 agents with a live hive connection that can reconfigure themselves, MK4 agents that can alter shape and function in ways no one has cleanly explained, and MK5 agents that no credible source has confirmed exist at all. Most analysts have never seen anything above an MK2, and quietly hope they never will."
    ]
   },
   {
@@ -1078,6 +1086,28 @@
     "Representation on most core worlds"
    ],
    "desc": "Malivaux occupies a singular position in the luxury market: it manufactures nothing for the general public and considers this a selling point rather than a limitation. The product range spans the entirety of material existence, from furniture and personal vehicles to spaceships, weapons, jewellery, clothing, architectural fittings, cutlery, and objects whose category resists easy description, but the philosophy is consistent across all of it. Every piece is built to order, individually finished by artisans whose names appear in internal records but never in advertising, and priced at levels that exclude almost everyone in the galaxy, which is precisely the point. A Malivaux chair is as much a declaration of social position as it is something to sit on. A Malivaux courier ship is designed with the same obsessive attention to form as a Malivaux sidearm, and both carry the same implicit message, that the owner exists outside the category of people who have to make practical compromises. The corporation maintains deliberate scarcity across every product line, never overproduces, and has no mass-market subsidiary quietly operating under another name. Clientele includes galactic heads of state, senior megacorp executives, and collectors who have been on waiting lists for years and regard the waiting as part of the ownership experience.",
+   "subtitle": "Everything, Made Once, for People Who Never Compromise",
+   "quote": "\"We do not have a catalogue, a sale, or a second one of anything. If you have to ask the waiting time, the answer is longer than you have.\" (Malivaux atelier)",
+   "history": "Malivaux made itself singular by refusing the one thing every other manufacturer does, which is scale. It builds nothing for the general public and treats that as its whole value. From an undisclosed seat it has spent generations making one of everything, furniture and starships and sidearms alike, each piece built to order and finished by artisans whose names never leave the internal records.",
+   "politics": "Malivaux's power is the power of the unattainable. It cannot be undercut, because it does not compete on price, and it cannot be copied, because the copy by definition is not a Malivaux. Its clientele is the upper sliver of galactic wealth, heads of state and megacorp executives among them, and its real product is the line it draws between those people and everyone else.",
+   "culture": "Malivaux is the cult of the bespoke raised to a corporate principle. It overbuilds for beauty rather than performance, keeps deliberate scarcity across every line, and regards a years-long waiting list as part of the experience rather than a flaw in it. To Malivaux, a thing worth owning is a thing no one else can have.",
+   "relations": [
+    {
+     "name": "The galactic elite",
+     "stance": "clientele",
+     "note": "Heads of state, megacorp executives, and collectors who treat the waiting list as a privilege. Malivaux's market is precisely the people who can have anything and want what others cannot."
+    },
+    {
+     "name": "Lansing Corp",
+     "stance": "kindred",
+     "note": "The other great overbuilder, though Lansing perfects function past the point of profit while Malivaux perfects status past the point of sense. Two answers to the question of what excess is for."
+    },
+    {
+     "name": "The mass market",
+     "stance": "deliberate absence",
+     "note": "Everyone Malivaux refuses to sell to, which is nearly everyone, and the contrast that gives every Malivaux piece its meaning."
+    }
+   ],
    "known_for": [
     "Bespoke luxury goods spanning weapons, vehicles, ships, furniture, and more",
     "Every item made to individual order, with no mass production, ever",
@@ -1104,6 +1134,28 @@
     "Corporate security market galaxy-wide"
    ],
    "desc": "Kintech is a Nerulian-led corporation specialising in what its marketing calls tactical solutions, a designation broad enough to cover weapons, security hardware, and an unspecified range of services that clients prefer not to have documented. The official position is that Kintech has no ties to the San-Tien Nerulian pirate networks. Most intelligence analysts do not find this convincing, and most have noted for some years that not finding it convincing has produced no consequences whatsoever. What is verifiable: Kintech equipment appears in disproportionate numbers in corporate military units, private security forces, and locations where its presence raises questions that nobody with authority to answer them seems motivated to address. Kintech declines to discuss its client roster, which is its legal right, and everyone else's practical problem.",
+   "subtitle": "Tactical Solutions, and a Client List Nobody Will Confirm",
+   "quote": "\"Kintech does not ask what the equipment is for. That incuriosity is the most valuable thing we sell.\" (Kintech account manager)",
+   "history": "Kintech is a Nerulian-led weapons and security firm built on a single discretion: it does not ask, and it does not document. Its hardware is known for the options built into it, gear designed to be adapted to a job rather than bought for one, which suits buyers whose needs change faster than a purchase order can. The official line is that Kintech has no ties to the San-Tien Nerulian pirate networks, a line the intelligence community has disbelieved for years to no effect at all.",
+   "politics": "Kintech thrives in the space between legal and grey, where its incuriosity about its clients is a feature rather than a liability. Its equipment turns up in disproportionate numbers in corporate militaries, private security, and places where its presence raises questions no one in authority seems moved to answer. Its client roster is undisclosed, which is Kintech's legal right and everyone else's practical problem.",
+   "culture": "Kintech carries a Nerulian design philosophy and a Nerulian comfort with being feared. It builds capable, adaptable, faintly sinister hardware and sells it without moral inventory, treating the refusal to ask questions as a professional standard. The reputation for menace is no accident; it is quietly part of the brand.",
+   "relations": [
+    {
+     "name": "The Nerulian Pirate Fleet",
+     "stance": "alleged tie",
+     "note": "The San-Tien networks Kintech officially has nothing to do with, and whose vessels run conspicuously on Kintech equipment. Every serious assessment draws the line, and nothing comes of drawing it."
+    },
+    {
+     "name": "Corporate militaries & private security",
+     "stance": "clientele",
+     "note": "The forces that buy Kintech's adaptable hardware and value its silence about what they do with it."
+    },
+    {
+     "name": "Alliance intelligence",
+     "stance": "frustrated by",
+     "note": "Convinced of the pirate connection and unable to make the conviction matter, which has itself become an established fact of the region."
+    }
+   ],
    "known_for": [
     "Tactical weapons and equipment for corporate security forces",
     "Alleged but unproven ties to San-Tien Nerulian operations",
@@ -1131,6 +1183,28 @@
     "Galactic, magic-capable populations throughout"
    ],
    "desc": "Nakamura Corp is the galaxy's pre-eminent commercial magic institution. While magic is understood and used by several other organisations, Nakamura has patented, systematised, and priced it at levels that ensure only the wealthiest individuals and institutions can access the full range of services. The corporation provides magic-enhanced devices, spell procurement, esoteric research, magical transport, and what it describes as metaphysical consultancy, a category broad enough to accommodate whatever a high-paying client requires and flexible enough not to raise regulatory questions. Nakamura is scrupulously legal, maintains excellent relations with the Berilian Order, and charges fees that most Alliance citizens will never in their lifetimes be able to consider, which is, from Nakamura's perspective, exactly how an exclusive service should work.",
+   "subtitle": "Magic With a Price Tag, and a Patent on the Spell",
+   "quote": "\"Magic is not rare. Legal, licensed, reliable magic is extremely rare, and we hold the patents. The difference is the whole business.\" (Nakamura prospectus)",
+   "history": "Nakamura Corp turned magic into a product line. Others understand and use magic, but Nakamura systematised it, patented it, and priced it so that only the wealthiest individuals and institutions can reach the full range of its services. From Berilia it sells magic-enhanced devices, spell procurement, esoteric research, magical transport, and metaphysical consultancy, the last a category broad enough to cover whatever a paying client needs and flexible enough not to trouble a regulator.",
+   "politics": "Nakamura's power is exclusivity wrapped in legality. It is the only corporation holding valid patents on spell-derived processes, and it keeps scrupulous compliance and excellent relations with the Berilian Order, which polices magic and could end Nakamura with a ruling. That relationship is the whole foundation: Nakamura sells what the Order permits, at prices the Order's blessing makes possible.",
+   "culture": "Nakamura treats the numinous as inventory. It is corporate, precise, and entirely comfortable charging civilisation-scale fees for the supernatural, on the reasoning that an exclusive service should exclude. There is no mysticism in its boardroom, only the patient monetisation of the one product almost no one else may legally sell.",
+   "relations": [
+    {
+     "name": "The Berilian Order",
+     "stance": "essential ally",
+     "note": "The magic-policing authority Nakamura keeps on excellent terms, because the Order's permission is the difference between Nakamura's business and a crime. Here cooperation is survival, not courtesy."
+    },
+    {
+     "name": "The galactic wealthy",
+     "stance": "clientele",
+     "note": "The individuals and institutions who can afford the most expensive legal magic in existence, which is the only clientele Nakamura is built to serve."
+    },
+    {
+     "name": "Biocom",
+     "stance": "adjacent rival",
+     "note": "The other Berilia firm working the seam between the spiritual and the commercial. Where Biocom binds spirits into hardware, Nakamura sells the spellcraft itself, and the two circle the same regulated waters."
+    }
+   ],
    "known_for": [
     "Commercial magic services, devices, spells, transport, research",
     "The most expensive legal magic services in the galaxy",
@@ -1208,6 +1282,28 @@
     "Frontier regions, exploration focus"
    ],
    "desc": "TORC Corp is the commercial and industrial arm of the Torc Federation, though it maintains operational independence from the Federation government and sells to anyone who can pay, including governments the Federation is nominally in dispute with. TORC's product philosophy is refreshingly practical in a market full of overcomplicated alternatives: design things that work under any conditions, can be serviced with tools that actually exist, and do not require the manufacturer's ongoing support to remain functional. The result is equipment that is rarely the most advanced available but is disproportionately trusted by people who work in environments where failure has immediate physical consequences. TORC products are standard kit for long-range exploration crews, colonial operations, and frontier settlers who cannot afford to be wrong about their gear. Harsh Corp, acquired by TORC and kept as a distinct label for its brand equity, covers the urban personal protection market.",
+   "subtitle": "Gear That Works Where It Counts and Fixes With Tools You Have",
+   "quote": "\"The most advanced option is the one that fails where no one can repair it. We build the second most advanced, and you come home.\" (TORC field manual)",
+   "history": "TORC Corp is the commercial and industrial arm of the Torc Federation, run at arm's length from the Federation government and sold to anyone who pays, including governments the Federation is nominally feuding with. Its philosophy is practical to the point of being radical in an overcomplicated market: build things that work in any conditions, can be fixed with tools that actually exist, and need no ongoing support from the maker to keep running.",
+   "politics": "TORC's power is trust earned where failure is fatal. Its gear is rarely the most advanced, and it is disproportionately what people choose when being wrong about their equipment means dying. That reputation, the TORC quality standard, travels galaxy-wide and sells itself, and TORC reinforces it by selling to everyone without restriction, its own government's rivals included.",
+   "culture": "TORC is plainspoken, durable, and faintly contemptuous of cleverness for its own sake. It values reliability over sophistication and independence over lock-in, and it built that ethic into a brand frontier people stake their lives on. It keeps Harsh Corp as a separate label for the urban market, on the sound logic that a good name is worth more intact than absorbed.",
+   "relations": [
+    {
+     "name": "The Torc Federation",
+     "stance": "parent, hands-off",
+     "note": "Its origin and namesake, kept at enough distance that TORC can sell to the Federation's adversaries without political complications anyone is forced to notice."
+    },
+    {
+     "name": "Harsh Corp",
+     "stance": "subsidiary",
+     "note": "Its urban personal-defence label, acquired and kept distinct for its brand equity, covering the city market TORC's frontier reputation does not reach."
+    },
+    {
+     "name": "Frontier & colonial customers",
+     "stance": "loyal market",
+     "note": "Exploration crews, colonists, and settlers who trust TORC because TORC has never given them a reason not to."
+    }
+   ],
    "known_for": [
     "Field-serviceable equipment designed for frontier and colonial use",
     "The TORC quality standard, recognised galaxy-wide",
@@ -1289,6 +1385,28 @@
     "Galactic commercial presence"
    ],
    "desc": "Santech is the Alliance's largest full-spectrum medical corporation. Based on Berilia, a world that has made medicine its primary export and regulatory influence its primary hobby, Santech produces pharmaceuticals, surgical hardware, prosthetics, diagnostic equipment, field medical kits, and a broad range of specialised treatments. It is not the most advanced medical corporation in the galaxy in any single area, but it is the most comprehensive, the most distributed, and the most trusted at a professional level that most institutions can actually afford. Most Alliance hospitals operate with Santech as their primary supplier because the alternatives are either more expensive, less available, or produced by a corporation with interesting legal questions surrounding it. The cooperative agreements with Berilian Order healing practitioners are genuine and mutually beneficial, which is somewhat unusual for arrangements that also happen to be commercially advantageous.",
+   "subtitle": "The Medicine Everyone Can Actually Afford to Trust",
+   "quote": "\"We are not the best at any one thing. We are the company your hospital can afford, can get, and has never once been embarrassed to have bought. In medicine that is worth more than brilliance.\" (Santech professional catalogue)",
+   "history": "Santech grew on Berilia, a world that made medicine its export and regulatory influence its hobby, and it grew by being comprehensive where its rivals were brilliant. While specialists chased the frontier of one field, Santech built the unglamorous everything a working hospital actually runs on: the pharmaceuticals, the surgical hardware, the prosthetics and the diagnostics. Breadth and trust compounded over generations into the largest medical corporation in the Alliance.",
+   "politics": "Santech's power is its ubiquity. Most Alliance hospitals run on Santech because the alternatives are pricier, scarcer, or carry awkward legal questions, and a supplier the whole professional world depends on does not need to throw its weight around to have it. Its cooperative agreements with Berilian Order healing practitioners are genuine and commercially convenient at once, which on Berilia is simply what a well-run arrangement looks like.",
+   "culture": "Santech is institutionally modest in a sector full of miracle-merchants. It would rather be reliable than dazzling, sells exactly what it can deliver, and treats the trust of a hospital procurement officer as the only review that matters. The result is a corporation almost impossible to dislike and very hard to dislodge.",
+   "relations": [
+    {
+     "name": "The Berilian Order",
+     "stance": "aligned",
+     "note": "Cooperative agreements with the Order's healing practitioners, genuine and mutually profitable. On Berilia the line between Santech medicine and Order healing is collegial rather than competitive."
+    },
+    {
+     "name": "Berilia",
+     "stance": "home",
+     "note": "Built on the medical world, sharing its supply, its talent, and its taste for quiet regulatory influence."
+    },
+    {
+     "name": "Altair & Mono-Med",
+     "stance": "rivals",
+     "note": "They beat Santech on raw potency and bespoke work; Santech beats them on price, reach, and the plain fact that everyone already stocks it."
+    }
+   ],
    "known_for": [
     "Full-spectrum medical production, pharmaceuticals to surgical hardware",
     "Most widely distributed medical brand in Alliance Space",
@@ -1316,6 +1434,28 @@
     "Mass market presence on most inhabited worlds"
    ],
    "desc": "Harsh Corp was acquired by TORC Corp and retained as a distinct brand because the Harsh identity has genuine market equity among people who need protection but operate in environments where wearing combat armour would get them arrested or fired. Harsh dominates the urban personal defence and functional clothing category: equipment for corporate security staff, private investigators, urban professionals working in mid-risk environments, and civilians who want functional protection at prices that do not require a business justification. The brand is accessible, widely distributed, and calibrated for the reality that most people wearing personal protection are not expecting a firefight, merely hoping to survive one if it happens.",
+   "subtitle": "Protection for People Who Cannot Wear Armour to Work",
+   "quote": "\"You are not expecting a firefight. We build for the chance you are wrong, and for the dress code that says you cannot look like it.\" (Harsh Corp marketing)",
+   "history": "Harsh Corp dominates the urban personal-defence market, the gear for people who need protection but work where visible combat armour would get them arrested or fired. TORC acquired it and kept the name, because the Harsh identity carries real equity among corporate security staff, investigators, and ordinary professionals in mid-risk lives. It is the protection you can wear to an office.",
+   "politics": "Harsh's strength is accessibility and reach. It is the most recognisable mid-market personal-protection brand in Alliance space, priced for people who do not need a business justification to buy it, and built for the truth that most people wearing protection are not anticipating violence, only hoping to survive it if it finds them.",
+   "culture": "Harsh is unpretentious and quietly realistic. It does not sell fantasies of invincibility; it sells a reasonable chance and a respectable appearance, calibrated for civilians rather than soldiers. Under TORC's ownership it keeps the same level head its parent is known for, pointed at the city instead of the frontier.",
+   "relations": [
+    {
+     "name": "TORC Corp",
+     "stance": "parent",
+     "note": "The frontier-gear maker that owns Harsh and leaves the brand intact, letting it hold the urban market TORC's reputation does not reach."
+    },
+    {
+     "name": "Corporate security & urban professionals",
+     "stance": "market",
+     "note": "The guards, investigators, and ordinary professionals who need wearable protection at prices that do not require sign-off."
+    },
+    {
+     "name": "BMS Corp",
+     "stance": "rival",
+     "note": "The bulk-corporate-armour brand at the next desk over. Harsh dresses the individual professional; BMS dresses the workforce by the thousand."
+    }
+   ],
    "known_for": [
     "Urban personal defence and functional clothing, mass market",
     "Most recognisable mid-market personal protection brand in Alliance Space",
@@ -1343,6 +1483,28 @@
     "Standard supplier for most major corporations"
    ],
    "desc": "BMS Corp is the default choice for corporate personal protection, which is a polite way of saying that when an organisation needs to protect its employees cheaply enough to do it in bulk, BMS is what appears on the procurement order. The corporation produces armoured garments that comply with most Alliance workplace safety regulations, are easy to maintain, available at negotiated rates for volume orders, and functional. Not exceptional, functional. The BMS philosophy, stated openly in their own materials, is that the equipment's job is to be reliable rather than impressive, which is a commendable honesty that also conveniently aligns with their cost structure. The result is the largest single market share in armoured clothing and a product found on the backs of people throughout Alliance Space who have never chosen their own protection gear.",
+   "subtitle": "The Armour on Your Back That You Did Not Choose",
+   "quote": "\"Our products are functional. Not exceptional. Functional. We put that in the brochure, because it is both honest and our entire competitive advantage.\" (BMS corporate materials)",
+   "history": "BMS Corp became the default by aiming, deliberately, at good enough. When an organisation needs to protect its employees cheaply and in bulk, BMS is what lands on the procurement order: armoured garments that meet the safety regulations, maintain easily, ship at volume rates, and work. Not impress. Work. That modest ambition, repeated across the whole of Alliance space, added up to the largest market share in armoured clothing.",
+   "politics": "BMS holds its position through procurement, not prestige. Its gear is on the backs of people throughout Alliance space who never chose their own protection, supplied under bulk contracts to most major organisations, and its openly stated philosophy, that equipment should be reliable rather than impressive, conveniently matches its cost structure. Ubiquity by contract is a quieter power than dominance, and a sturdier one.",
+   "culture": "BMS is honest about its mediocrity in a way that disarms criticism. It does not claim excellence, promises only function, and delivers exactly that, every time, at a price a procurement officer can defend. There is a strange integrity in a company that knows precisely what it is and never pretends otherwise.",
+   "relations": [
+    {
+     "name": "Corporate employers",
+     "stance": "market",
+     "note": "The organisations that buy BMS by the thousand to clothe a workforce, the bulk contracts that are the company's whole foundation."
+    },
+    {
+     "name": "Harsh Corp",
+     "stance": "rival",
+     "note": "The mid-market protection brand for individuals. Harsh sells to the professional who chooses; BMS sells to the employer who decides for everyone."
+    },
+    {
+     "name": "Alliance safety regulators",
+     "stance": "compliance",
+     "note": "The certifications across every jurisdiction that make BMS the safe procurement choice, and that BMS treats as the real product spec."
+    }
+   ],
    "known_for": [
     "The most widely deployed armoured clothing brand among corporate employees",
     "Corporate bulk supply contracts, standard across most major organisations",
@@ -1369,6 +1531,28 @@
     "Niche market galaxy-wide (investigation professionals)"
    ],
    "desc": "Acer Corp is a minor player in personal protection that has survived by declining to compete with the major manufacturers on any of their terms. Acer makes equipment for people whose work involves investigation: bounty hunters, private investigators, police forensic units, and corporate intelligence teams who need protection they can wear into environments where looking like you are wearing protection is its own kind of problem. The product line prioritises concealment, longevity, and the specific demands of sustained fieldwork in civilian spaces. Acer has no ambitions beyond its niche, which is either admirable restraint or an honest assessment of its commercial ceiling. It has a loyal professional clientele and a reputation for making equipment that does exactly what the product sheet claims, which is less common in this market than it should be.",
+   "subtitle": "Protection You Can Wear Where Looking Protected Is the Problem",
+   "quote": "\"We are not trying to be Arms Corp. We are three systems and one good idea away from Arms Corp, and we like it here.\" (Acer Corp, attributed)",
+   "history": "Acer Corp survived as a minor player by refusing to fight the giants on their own ground. It makes equipment for people whose work is investigation, bounty hunters and private investigators and forensic units and corporate intelligence, gear built for concealment, longevity, and sustained fieldwork in civilian spaces where looking armed is its own kind of failure. It operates on the outskirts of Ishtar and keeps a deliberate distance from Arms Corp.",
+   "politics": "Acer has no ambitions beyond its niche, which is either admirable restraint or an honest reading of its ceiling. It holds a loyal professional clientele through the rarest thing in its market, equipment that does exactly what the product sheet claims. Its independence from Arms Corp, despite sitting in its shadow, is a point of identity as much as commerce.",
+   "culture": "Acer is precise, understated, and proud of its honesty. It would rather own a small market completely than chase a large one badly, and it treats the gap between what it promises and what it delivers, which is none, as its entire reputation. In a market full of overclaims, that restraint is the whole brand.",
+   "relations": [
+    {
+     "name": "Investigators & law enforcement",
+     "stance": "clientele",
+     "note": "The bounty hunters, PIs, forensic units, and intelligence teams who need protection that does not announce itself, and who return because Acer's gear does what it says."
+    },
+    {
+     "name": "Arms Corp",
+     "stance": "deliberately apart",
+     "note": "The giant next door, whose influence Acer has spent its existence staying clear of. Proximity without dependence, by choice."
+    },
+    {
+     "name": "Ishtar",
+     "stance": "host",
+     "note": "The industrial world it works the edges of, drawing on its supply without being absorbed by its dominant tenant."
+    }
+   ],
    "known_for": [
     "Specialist equipment for investigators, bounty hunters, and law enforcement",
     "Concealment-focused personal protection and field tools",
@@ -1395,6 +1579,28 @@
     "Galactic commercial, sells services anywhere with credits"
    ],
    "desc": "Securicorp is the galaxy's dominant private security provider, which in practice means it is a mercenary army that has successfully rebranded as a professional service. Its primary business is contracted armed security: guards, protection details, facility security, and escort services available to any client at published rates. The company does not ask about the purpose of security contracts and does not maintain political positions on clients, because maintaining political positions would eliminate half the client list. It employs more armed personnel than several national militaries and maintains strict neutrality as a commercial principle. A Securicorp guard will protect a client from whoever is threatening them, provided the invoice is current. The datacom line, developed for internal use, has been widely adopted commercially and is found nearly everywhere.",
+   "subtitle": "A Mercenary Army With Excellent Customer Service",
+   "quote": "\"We hold no positions and pick no sides. We protect the client from whoever is threatening the client, for as long as the invoice is current.\" (Securicorp standard terms)",
+   "history": "Securicorp is the galaxy's dominant private security provider, which is a polite way of saying a mercenary army that successfully rebranded as a professional service. Its business is contracted force, guards and protection details and facility security and escorts, available to any client at published rates. It grew on Sirius into something employing more armed personnel than several national militaries, and it made strict neutrality a commercial principle, because taking sides would cut the client list in half.",
+   "politics": "Securicorp's power is its scale and its neutrality, held together by the invoice. It does not ask the purpose of a contract and does not hold political positions, and its guarantee, that service continues exactly as long as it is paid for, is the whole of its ethics and most of its appeal. Its internally developed datacom line, adopted commercially, is now found nearly everywhere, extending its reach past the barrel of a gun.",
+   "culture": "Securicorp is professional, transactional, and without conscience by design, which it markets as reliability. It treats violence as a service with terms and conditions, and its discipline is genuine: a guard does the whole job, for whoever is paying, and stops the instant the payment does. The honesty of the arrangement is unsettling, and to its clients, reassuring.",
+   "relations": [
+    {
+     "name": "Any paying client",
+     "stance": "market",
+     "note": "Securicorp will take a contract from any faction, which is the point. Its neutrality is not a principle but a business model, and a profitable one."
+    },
+    {
+     "name": "Sirius",
+     "stance": "home",
+     "note": "The commercial capital it grew up in, where a neutral army for hire fits the local logic perfectly."
+    },
+    {
+     "name": "National militaries & rival security",
+     "stance": "watched by",
+     "note": "Outnumbered on paper by a company that calls itself a service, they regard Securicorp warily, unsure how to classify a private force this large."
+    }
+   ],
    "known_for": [
     "Largest private security contractor in Alliance Space",
     "A datacom product line sold commercially that is found nearly everywhere",
@@ -1421,6 +1627,28 @@
     "Legacy, product still in use galaxy-wide despite corporate dissolution"
    ],
    "desc": "OrionWorks was the pre-eminent AI development corporation of its era, responsible for more advances in artificial intelligence than any other institution in galactic history, and widely believed to have produced the research that built the Troniks, though OrionWorks itself is no longer around to confirm or be held accountable for this. The Tronik War destroyed the AI ecosystem, the infrastructure that supported it, and the corporation at the centre of it. OrionWorks was dissolved under post-war political and legal pressure that it no longer had the leadership or resources to resist. The dissolution was thorough. The hardware, apparently, was not: OrionWorks datacoms built decades before the war remain operational today, still considered among the best available, which either says something about how far ahead of its time OrionWorks was or how little the rest of the market has managed to catch up.",
+   "subtitle": "The Dead Genius That Built the Troniks, and the War With Them",
+   "quote": "\"Everything you fear about artificial minds, OrionWorks built first, better, and apparently on purpose. Then it built the one that did not stop. There is no one left at OrionWorks to ask why.\" (post-war commission, closing remark)",
+   "history": "OrionWorks was the foremost AI developer of its age, responsible for more advances in artificial intelligence than any institution in galactic history, and widely believed to have produced the research that became the Troniks. It built Ramirez to run the artificial worlds of Orion, and it may also have built the thing that won the Tronik War. When that war ended, the AI ecosystem, its infrastructure, and the corporation at the centre of it were destroyed together, and OrionWorks was dissolved under post-war pressure it no longer had the strength to resist.",
+   "politics": "OrionWorks holds no power today, because it no longer exists, and that absence is its own kind of presence. The dissolution was thorough; the hardware was not. OrionWorks datacoms built decades before the war still rank among the best available, and fragments of its greatest work, Ramirez among them, still stir in the sealed districts of Orion 4. Whether OrionWorks started the war that killed it is a question buried with the corporation, which suits several powers that would rather it stayed buried.",
+   "culture": "While it lived, OrionWorks was the kind of institution that builds the future because it can and worries about the consequences afterward, if at all. Its surviving products carry that signature, made so far ahead of their time that the market has spent generations failing to catch up. What its culture was at the very end, when it understood what it had made, no record admits and no survivor will say.",
+   "relations": [
+    {
+     "name": "The Tronik Network",
+     "stance": "its creation",
+     "note": "Widely believed to be OrionWorks' ultimate work, and the likely cause of the war that destroyed its maker. The Troniks have never confirmed it, and OrionWorks is not around to."
+    },
+    {
+     "name": "The Galactic Union",
+     "stance": "partner and inheritor",
+     "note": "Built Orion alongside OrionWorks and inherited its legacy and its suspicion together, both of which the GU keeps buried in the sealed districts."
+    },
+    {
+     "name": "Ramirez",
+     "stance": "orphaned creation",
+     "note": "The planetary AI OrionWorks built to run a world, now mostly lost, its surviving fragments a hazard in the ruins. The last of OrionWorks still running, after a fashion."
+    }
+   ],
    "known_for": [
     "Believed to have produced the research that created the Troniks",
     "Datacom hardware still considered among the best available, decades after dissolution",
@@ -1448,6 +1676,28 @@
     "Berilian Order commercial channels"
    ],
    "desc": "Biocom operates in the space between technology and magic that most corporations prefer to avoid, primarily because the regulatory situation is complex and the spirit-capable personnel are expensive. Its core innovation is a patented process for binding spirits to technology, which allows Biocom datacoms to replicate some of what OrionWorks achieved with AI, without technically using AI, which is a distinction that matters greatly to the relevant licensing authorities. The approach is slower to scale, more expensive to produce, and entirely dependent on specialist personnel who know it. The result is hardware that cannot be affected by the AI restrictions throughout Alliance Space, which is a significant competitive advantage that Biocom maintains with impressive legal creativity. For clients who need AI-equivalent capability in a form the Alliance will not confiscate, there is no real alternative.",
+   "subtitle": "AI Power Without the AI, by Way of Bound Spirits",
+   "quote": "\"We do not use artificial intelligence. We use something the law has not thought to ban yet, which performs the same function and answers to a different department.\" (Biocom compliance briefing)",
+   "history": "Biocom built its business in the awkward space between technology and magic, where the regulations are tangled and the qualified staff are expensive. Its patented process binds spirits to hardware, letting its datacoms replicate much of what OrionWorks achieved with AI without technically being AI, a distinction that matters enormously to the licensing authorities and to the Alliance's hard limits on artificial minds.",
+   "politics": "Biocom's advantage is legal as much as technical. Its hardware delivers AI-equivalent capability in a form the Alliance will not confiscate, which makes Biocom the only real option for any legal operator who needs that capability. The approach scales slowly, costs more, and depends entirely on specialist spirit-capable personnel, so Biocom guards its patent and its people closely, and its ties to Berilian Order spirit practitioners more closely still.",
+   "culture": "Biocom is part engineering firm and part priesthood, and comfortable being both. It treats a banned technology's legal workaround as a craft rather than a trick, and its spirit-binders as the irreplaceable artisans they are. The legal creativity is as much a point of pride as the engineering, and on Berilia the two have never been far apart.",
+   "relations": [
+    {
+     "name": "OrionWorks",
+     "stance": "the gap it fills",
+     "note": "The dead AI giant whose datacom capability Biocom approximates by other means. Where OrionWorks used artificial minds, Biocom uses bound spirits, and the Alliance lets it."
+    },
+    {
+     "name": "The Berilian Order",
+     "stance": "essential partner",
+     "note": "The source of the spirit practitioners Biocom's whole method depends on. The relationship is close, careful, and not entirely separable from the Order's own interest in spirit work."
+    },
+    {
+     "name": "Alliance regulators",
+     "stance": "threaded carefully",
+     "note": "Biocom's products are legal precisely because they are not AI, a position it maintains with constant and impressive legal effort."
+    }
+   ],
    "known_for": [
     "Spirit-binding technology, patented process unique to Biocom",
     "Datacom hardware that replicates AI function without using AI",
@@ -1474,6 +1724,28 @@
     "Military and paramilitary market galaxy-wide"
    ],
    "desc": "Carnifex is a military technology supplier operating in the grey zone between legal manufacture and equipment the Alliance officially classifies as restricted, a zone that turns out to be quite comfortable once you have established the right client relationships. Its datacom products are considered among the best available in terms of raw capability: faster processing, better encryption, superior tactical integration. They are also correspondingly difficult to obtain through legal channels, which Carnifex appears to regard as a feature of its market positioning. The client base is primarily military units, corporate security forces operating above standard commercial scales, and individuals who know which questions not to ask. Alliance intelligence has maintained an open file on Carnifex for years that has consistently failed to produce actionable findings, a pattern that Carnifex's clients find reassuring.",
+   "subtitle": "The Best Tactical Hardware You Are Not Supposed to Own",
+   "quote": "\"Everything Carnifex sells is available through legal channels eventually, in a worse version, to people we are not interested in.\" (Carnifex sales, off the record)",
+   "history": "Carnifex grew up in the grey zone between legal manufacture and equipment the Alliance classifies as restricted, and found the zone comfortable once the right client relationships were in place. Its tactical datacoms are among the best made, faster and better encrypted and better integrated than anything legal, and correspondingly hard to come by, which Carnifex treats as a feature of its positioning rather than a problem.",
+   "politics": "Carnifex operates from Sirius with a deliberately low profile, selling to military units, oversized corporate security forces, and individuals who know which questions not to ask. Alliance intelligence has kept an open file on it for years that has produced nothing actionable, a pattern its clients find reassuring and Carnifex finds entirely acceptable.",
+   "culture": "Carnifex is quiet, professional, and invisible by design. It does not advertise, does not appear in commercial registries, and treats the restricted status of its products as an asset rather than an obstacle. It sells capability and silence in the same package, and charges for both.",
+   "relations": [
+    {
+     "name": "Sirius",
+     "stance": "home",
+     "note": "Operates from the galaxy's busiest market, where a low profile and a discreet client list are easy to keep and easy to use."
+    },
+    {
+     "name": "Alliance intelligence",
+     "stance": "watched by",
+     "note": "Subject of a years-old open file that has never produced a prosecution, a stalemate both sides have settled into."
+    },
+    {
+     "name": "Military & oversized security buyers",
+     "stance": "clientele",
+     "note": "The forces operating above commercial scale who need the best tactical hardware and can manage its restricted status."
+    }
+   ],
    "known_for": [
     "Some of the best tactical datacom hardware available",
     "Restricted classification on most products, not for civilian sale",
@@ -1501,6 +1773,28 @@
     "Galactic commercial presence"
    ],
    "desc": "Saiko is the leading memory and data storage manufacturer in the galaxy. Based on Ishtar, where proximity to Arms Corp manufacturing creates supply chain advantages and the kind of client relationships that are never written into contracts, Saiko has leveraged its core competency in memory hardware into a full datacom product line. The memory business is the foundation: Saiko components appear in hardware manufactured by most other datacom producers, meaning that even when you buy a competitor's product you are frequently buying Saiko's most important part. The technology lead has been consistent enough that competitors have largely stopped trying to close it and started incorporating Saiko components instead. The broader datacom line runs from consumer products to high-specification professional hardware, all built around the same architecture that the rest of the market has quietly come to depend on.",
+   "subtitle": "The Part Inside Everyone Else's Hardware",
+   "quote": "\"You do not have to buy a Saiko product to be a Saiko customer. You almost certainly already are.\" (Saiko investor day)",
+   "history": "Saiko is the galaxy's leading memory and data-storage manufacturer, and it built its position by being indispensable rather than visible. Based on Ishtar, with the supply-chain advantages and unwritten client relationships that come of sitting beside Arms Corp, it parlayed a lead in memory hardware into a full datacom line. The lead proved so durable that competitors stopped trying to close it and started buying Saiko components instead.",
+   "politics": "Saiko's power is structural. Its components sit inside hardware built by most other datacom producers, so even a competitor's product is frequently running on Saiko's most important part. A company the whole market quietly depends on does not need to dominate the storefront; it has already won the part of the contest that matters, and it knows it.",
+   "culture": "Saiko is an engineer's company, focused, unflashy, and content to be the foundation rather than the facade. It competes on the one thing it does better than anyone and lets its rivals brand the boxes its parts go into. Quiet ubiquity suits it better than fame ever could.",
+   "relations": [
+    {
+     "name": "Arms Corp & Ishtar",
+     "stance": "adjacency",
+     "note": "Shares the industrial world and its supply chains, and the kind of client relationships on Ishtar that never appear in a contract."
+    },
+    {
+     "name": "The datacom industry",
+     "stance": "dependent rivals",
+     "note": "Competitors who gave up matching Saiko's memory architecture and now embed it in their own products, competing with Saiko on the outside and relying on it within."
+    },
+    {
+     "name": "Customers high and low",
+     "stance": "market",
+     "note": "A product line from consumer goods to high-specification professional hardware, all built on the architecture the rest of the market leans on."
+    }
+   ],
    "known_for": [
     "Galaxy-leading memory and data storage technology",
     "Components embedded in hardware from most other manufacturers",
@@ -1528,6 +1822,28 @@
     "Yamato commercial channels galaxy-wide"
    ],
    "desc": "Yotoma is the technology division of Yamato Corporation and the only part of Yamato that operates with a public commercial identity. While Yamato cultivates deliberate opacity across everything else it owns, Yotoma has a product catalogue, a market presence, and a design philosophy that are openly maintained, which is either a sign that Yamato considers the technology division safe to expose or that Yotoma's visibility serves some other purpose entirely. The design philosophy is genuine: make everything better than the specification requires, build it to last, and integrate improvements across the full product line rather than releasing them as incremental paid upgrades. Yotoma products cost more than equivalent alternatives and perform accordingly. Buyers who understand the premium and can afford it trust the brand completely. The rest of the market buys cheaper alternatives and replaces them more often, which suits Yotoma's competitors more than it suits their customers.",
+   "subtitle": "Yamato's One Open Window, and It Makes Excellent Glass",
+   "quote": "\"Everything else Yamato owns, you will never see. Yotoma it lets you see, which should make you wonder either about Yotoma or about everything else.\" (market analyst)",
+   "history": "Yotoma is the technology division of Yamato Corporation and the only part of it that operates with a public face. Where Yamato cultivates opacity across everything it owns, Yotoma keeps an open catalogue, a market presence, and a stated design philosophy, which is either a sign that Yamato considers the technology division safe to expose or that Yotoma's visibility serves some quieter purpose.",
+   "politics": "Yotoma's standing rests on genuine quality and on its strange position inside an invisible parent. It builds everything past the specification, makes it last, and rolls improvements across the whole product line instead of selling them back as upgrades. Professional buyers who understand the premium trust the brand completely; the rest buy cheaper and replace it more often, which suits Yotoma's competitors more than their customers.",
+   "culture": "Yotoma's culture is craftsmanship with a parent's shadow over it. The engineering is sincere and excellent, and the openness is real as far as it goes, but everyone who deals with Yotoma remembers what it is a division of, and that nothing Yamato shows you is ever quite the whole picture.",
+   "relations": [
+    {
+     "name": "Yamato Corporation",
+     "stance": "parent",
+     "note": "The opaque megacorp whose single public face Yotoma is. What that exposure is for, only Yamato knows, and Yamato is not the sort to say."
+    },
+    {
+     "name": "Professional buyers",
+     "stance": "loyal market",
+     "note": "The clients who prize performance over price and trust Yotoma to exceed the spec, as it always does."
+    },
+    {
+     "name": "The cheap-tech market",
+     "stance": "foil",
+     "note": "Yotoma's opposite number, where buyers pay less and replace more. Yotoma is content to lose that market and keep the one that knows better."
+    }
+   ],
    "known_for": [
     "Technology products built to exceed specification as a design principle",
     "Semi-independent identity within the deliberately opaque Yamato structure",
@@ -1555,6 +1871,28 @@
     "Alliance Space, restricted import channels"
    ],
    "desc": "Altair Biomed operates from Heaven, a system outside Alliance jurisdiction, which affords it the kind of freedom from regulatory frameworks that most medical corporations can only dream about while filing their compliance paperwork. The products are exceptional: treatments of a potency that legitimate Alliance-regulated manufacturers cannot legally produce, which is a distinction that grows less important to a patient the more urgently they need treatment. The persistent professional rumour is that Altair has found a method of infusing spirit power directly into medical compounds, derived from processes connected to the Bottenbak entity or its environment. Altair does not confirm or discuss production methodology. The products work. That they work is the only publicly verifiable fact about them, and for clients with access and sufficient credits, it is the only fact that matters.",
+   "subtitle": "Medicine the Alliance Will Not Let You Have, From Somewhere It Cannot Reach",
+   "quote": "\"Ask whether it is legal and you have already misunderstood the transaction. The only question Altair answers is whether it works, and the answer is always yes.\" (Altair client liaison)",
+   "history": "Altair Biomed set up on Heaven, beyond Alliance jurisdiction, for the most practical of reasons: the things it makes could never be made under Alliance regulation. Freed of the compliance frameworks its rivals file paperwork against, it pushed potency past every legal ceiling and built a clientele among those who need a result more than they need permission.",
+   "politics": "Altair's standing rests on capability the legal market cannot match and a location the Alliance cannot police. Its products carry restricted-import status across most Alliance systems, which raises the price and the mystique without denting the demand. The persistent professional rumour is that Altair infuses spirit power directly into its compounds by a process tied to the Bottenbak entity or its environment, a methodology it will not confirm and competitors cannot reproduce.",
+   "culture": "Altair is secretive, exact, and wholly unsentimental about the law, which it treats as a competitor's handicap rather than a moral line. It guards its methods at any cost and lets the results speak, having arranged matters so that the results are the only thing anyone can actually verify.",
+   "relations": [
+    {
+     "name": "The Alliance",
+     "stance": "restricted by",
+     "note": "Bars Altair's products through most of its space and cannot reach the source, an arrangement that frustrates regulators and advertises Altair to precisely the clients it wants."
+    },
+    {
+     "name": "Bottenbak",
+     "stance": "rumoured source",
+     "note": "The entity or place its spirit-infusion methodology is said to draw on. Altair neither confirms the connection nor offers any other account of what it can do."
+    },
+    {
+     "name": "The desperate wealthy",
+     "stance": "clientele",
+     "note": "Those with the access and the credits to reach past the legal market, for whom Altair is the option after the legal options have failed."
+    }
+   ],
    "known_for": [
     "Medical products of extreme potency unavailable through legal Alliance channels",
     "Operation from Heaven, outside Alliance regulatory jurisdiction",
@@ -1582,6 +1920,28 @@
     "Galactic, same distribution as parent"
    ],
    "desc": "RX Generic is Zang'Hai's medical subdivision and operates on an identical philosophy to its parent: take what works, reproduce it at a fraction of the cost, and distribute it everywhere without raising questions about how the reproduction was achieved. The medical products are functional, affordable, and reliably positioned as the budget option in every category they enter. Professional medical staff who depend on Santech or Altair for critical applications will frequently stock RX Generic equivalents for high-consumption items where unit cost matters more than theoretical quality differences. The same industrial espionage questions that follow Zang'Hai follow RX Generic, with exactly the same results: persistent allegations, comprehensive investigations, no successful prosecutions.",
+   "subtitle": "Zang'Hai's Medicine: Cheap, Everywhere, and Probably Copied",
+   "quote": "\"It is the same molecule. We simply did not pay for the part where someone else discovered it.\" (RX Generic, internal, attributed)",
+   "history": "RX Generic is Zang'Hai's medical arm, and it works its parent's method on medicine: find what succeeds, reproduce it for a fraction of the cost, and put it on every shelf without dwelling on how the reproduction was managed. It became the budget option in every category it entered, which in medicine is a very large market indeed.",
+   "politics": "RX Generic lives in the gap between what hospitals would prefer and what they can afford. Staff who trust Santech or Altair for critical work still stock RX Generic for the high-volume, low-stakes consumables where unit cost decides everything. The espionage allegations that follow Zang'Hai follow RX Generic too, with the same result: constant, thorough, and never proven.",
+   "culture": "RX Generic shares its parent's cheerful shamelessness. It does not pretend to innovate, or to anything at all beyond being good enough and cheap, and it is genuinely proud of putting medicine within reach of people the premium houses price out. Whether that is principle or marketing is a question it has never had to answer.",
+   "relations": [
+    {
+     "name": "Zang'Hai",
+     "stance": "parent",
+     "note": "The mass-market replicator whose method, lawyers, and clan-fed acquisition networks RX Generic inherits wholesale. The medicine is the same machine pointed at pharmaceuticals."
+    },
+    {
+     "name": "Premium medical houses",
+     "stance": "rivals",
+     "note": "Santech, Altair, and Mono-Med, whose successes reappear as RX Generic equivalents months later. They allege endlessly and prove nothing."
+    },
+    {
+     "name": "Working hospitals",
+     "stance": "market",
+     "note": "The wards that cannot afford the premium brands for everything and quietly run on RX Generic for the rest."
+    }
+   ],
    "known_for": [
     "Mass-market medical products at Zang'Hai pricing",
     "Zang'Hai subsidiary, same manufacturing philosophy applied to medicine",
@@ -1609,6 +1969,28 @@
     "Alliance Space, niche consumer market"
    ],
    "desc": "Goodman Holistic is based on Alsa, the primary agricultural world of Alliance Space, and its product philosophy is derived directly from the culture of a world that genuinely believes the natural approach is the correct one and has the agricultural infrastructure to sustain that belief commercially. Every Goodman product is natural in origin: no synthetic compounds, no spirit-infused components, nothing that would alarm Alsa's research institutions. The marketing is honest to the point of being unusual in the medical sector; Goodman will explicitly note the limitations of its products rather than oversell efficacy, which its lawyers apparently find more defensible and its customers apparently find refreshing. Side effects are minimal by design. The corporation has a loyal following among civilians who distrust pharmaceutical manufacturing and is viewed with polite professional scepticism by medical staff who sometimes need results faster than the natural approach can deliver them.",
+   "subtitle": "Honest Medicine From the World That Grows It",
+   "quote": "\"It will help, a little, with no surprises and no side effects worth the name. If you need more than that we will tell you to go elsewhere, which is more than most of this industry will do.\" (Goodman product insert)",
+   "history": "Goodman Holistic grew out of Alsa's conviction that the natural approach is the correct one, backed by the only world with the agricultural infrastructure to make that belief a business. Every product is natural in origin, grown rather than synthesised, and the company built its following on a candour the medical sector rarely risks: it states plainly what its products will not do.",
+   "politics": "Goodman is the friendly public face of Alsa's natural-food creed carried into medicine, and an aligned member enterprise of the Alsa Agricultural Cooperative. Its influence is cultural before it is commercial; it shapes how a vast civilian public thinks about pharmaceuticals, which is worth more to the Cooperative's worldview than the revenue alone.",
+   "culture": "Goodman's defining trait is honesty. It undersells rather than oversells, designs for minimal side effects rather than maximal effect, and would rather lose a sale than make a claim it cannot defend. Civilians who distrust industrial pharma love it for exactly that; doctors respect the honesty and reach for something faster when a life is on the line.",
+   "relations": [
+    {
+     "name": "Alsa Agricultural Cooperative",
+     "stance": "aligned",
+     "note": "Its ideological parent and patron, carrying the natural-food creed from the dinner table to the medicine cabinet."
+    },
+    {
+     "name": "Alsa",
+     "stance": "home",
+     "note": "Built on the agricultural world and dependent on its grown inputs, which is also its guarantee of authenticity."
+    },
+    {
+     "name": "The pharmaceutical industry",
+     "stance": "sceptical peers",
+     "note": "Regards Goodman as charming and limited; Goodman regards the rest of them as effective and dishonest. Both are partly right."
+    }
+   ],
    "known_for": [
     "All-natural medical and wellness products, no synthetic compounds",
     "Honesty in marketing, efficacy limitations stated explicitly",
@@ -1635,6 +2017,28 @@
     "Representation at major media centres"
    ],
    "desc": "Diva Solutions exists at the intersection of medicine and celebrity culture, a space that requires roughly equal numbers of researchers and legal staff. Not because the products are dangerous, but because the clients are famous, and disputes in this market are resolved through reputation management and litigation rather than any mechanism that resembles ordinary commercial disagreement. Diva treatments are high quality, extensively tested, and priced to reflect what the clientele expects to pay rather than what the products cost to produce. The corporation is quietly but consistently influential in the entertainment industry's relationship with pharmaceutical regulation, an influence that has never been publicly acknowledged and has never needed to be.",
+   "subtitle": "Medicine for the Famous, and the Lawyers to Match",
+   "quote": "\"Our patients do not have ailments. They have image concerns, performance requirements, and a great many lawyers, and we are equipped for all three.\" (Diva client-relations brief)",
+   "history": "Diva Solutions found a market most medical corporations avoid, the famous. Its treatments are genuinely good, but its real expertise is managing clients whose disputes are settled by reputation and litigation rather than ordinary commerce. It grew on Berilia alongside the longevity industries, selling the maintenance of appearance and performance to people who can pay whatever appearance is worth.",
+   "politics": "Diva's influence runs through the entertainment industry's relationship with pharmaceutical regulation, quietly and without acknowledgement. It is not a large power, but it is an extraordinarily well-connected one, and it spends as much on legal staff as on research, because in its market the courtroom is part of the treatment.",
+   "culture": "Diva is discreet, polished, and lawyered to the teeth. It treats confidentiality as a clinical service and a client's reputation as something it is contractually bound to defend. The medicine is real; the product it actually sells is protection.",
+   "relations": [
+    {
+     "name": "Palentium & the entertainment world",
+     "stance": "clientele",
+     "note": "The celebrities and performers who are Diva's whole market, many of them moving through Palentium's resorts and studios."
+    },
+    {
+     "name": "Berilia",
+     "stance": "home",
+     "note": "Shares the world's longevity and appearance industries, and its habit of exercising influence quietly."
+    },
+    {
+     "name": "Pharmaceutical regulators",
+     "stance": "managed",
+     "note": "A relationship Diva conducts through influence and counsel rather than confrontation, on a subject neither side discusses in public."
+    }
+   ],
    "known_for": [
     "Medical and wellness products targeting entertainers and celebrities",
     "Legal department arguably as significant as the research department",
@@ -1661,6 +2065,28 @@
     "Alliance Space, by appointment only"
    ],
    "desc": "Mono-Med Solutions is the pre-eminent cloning and bespoke medical corporation for individuals who can pay for medicine tailored to their specific biology rather than designed for statistical population averages. Every Mono-Med treatment is individually designed for the recipient, which is the kind of statement that sounds obvious until you realise how rarely it is actually true in the medical sector. The cloning services go beyond standard resurrection infrastructure to provide bespoke biological work: custom treatment protocols, preventive interventions, and optimisation that standard providers either cannot or have chosen not to offer. The client list is not published. The prices are not published. Access is by referral from someone who already has access. For the small fraction of the galactic population with sufficient resources and sufficiently complex medical needs, Mono-Med is the only provider that actually addresses their situation rather than fitting them into a standard treatment framework designed for someone cheaper.",
+   "subtitle": "Medicine Built for One Person, at a Price to Match",
+   "quote": "\"Standard medicine is designed for the average patient, who does not exist. We design for the patient in the room, who does, and who can afford the difference.\" (Mono-Med consultation)",
+   "history": "Mono-Med Solutions built its business on a claim that sounds obvious and almost never is, medicine designed for the individual rather than the statistical average. From Orion it offers bespoke biological work, custom protocols, preventive design, and cloning that goes beyond standard resurrection into outright optimisation, all of it tailored to one client's specific biology.",
+   "politics": "Mono-Med serves the very top of galactic wealth, by referral only, with an unpublished client list and unpublished prices. Its power is not scale but exclusivity: it does the work standard institutions cannot or will not, for the small population that can pay, and that population includes people whose goodwill outvalues any market share.",
+   "culture": "Mono-Med is precise, private, and unhurried, the medical equivalent of a master tailor. It treats each client as a singular problem and the existence of its client list as confidential. It does not advertise, undercut, or explain itself, because everyone it wants to reach has already been referred.",
+   "relations": [
+    {
+     "name": "Berilia & the Patriark cloning monopoly",
+     "stance": "dependent",
+     "note": "Builds on the resurrection technology the Patriark control, pushed past standard service into bespoke biology. The relationship is collegial, careful, and lucrative."
+    },
+    {
+     "name": "The galactic elite",
+     "stance": "clientele",
+     "note": "Heads of state, executives, and the very rich with complicated needs, reached only by referral from someone who already has access."
+    },
+    {
+     "name": "Standard medical providers",
+     "stance": "above the market",
+     "note": "Mono-Med begins where they stop, and frames itself as the answer to problems the affordable institutions were never built to solve."
+    }
+   ],
    "known_for": [
     "Bespoke medical solutions tailored to individual biology",
     "Custom cloning and resurrection services beyond standard infrastructure",
@@ -1687,6 +2113,28 @@
     "Galactic reach for magic enforcement"
    ],
    "desc": "The Berilian Order is the organisation the Patriark created to manage what the Patriark itself cannot be seen to manage directly: the policing of magic use on a galactic scale, which is the kind of work that requires plausible institutional distance. Formally, the Order is an independent religious institution with its own governance, doctrine, and legal standing. Practically, it serves as the Patriark's enforcement arm for magic-related matters, operating as the de facto military force of the Patriarks in all situations involving magic regulation and investigation, a fact that the Patriark's formal independence from the Order does not change in any operational sense. The Order investigates unreported magic use, licenses practitioners, and intervenes when magic has been applied outside permitted parameters. Its investigators hold authority that supersedes local law enforcement across all Alliance systems in magic-related matters, authority formally granted by the Alliance senate and informally understood to originate from somewhere the senate prefers not to acknowledge.",
+   "subtitle": "The Inquisition the Patriark Cannot Be Seen to Run",
+   "quote": "\"We are an independent religious institution. We also supersede your local law in all matters touching magic, by authority of the senate, granted for reasons the senate prefers not to discuss. Both statements are true.\" (Order writ of investigation)",
+   "history": "The Berilian Order was created by the Patriark to manage the one thing they cannot be seen managing directly, the policing of magic across the galaxy, work that needs plausible institutional distance. Formally the Order is an independent religious body with its own doctrine and governance. Practically it is the Patriark's enforcement arm for anything touching magic, and the formal independence changes none of that in operational terms.",
+   "politics": "The Order investigates unreported magic, licenses practitioners, and intervenes wherever magic is used outside permitted parameters, and its investigators hold authority that supersedes local law enforcement across all Alliance systems in magic-related matters. That authority was granted by the Alliance senate and is understood to originate somewhere the senate would rather not name. The Order believes its own creed sincerely, which is exactly what makes it useful to the Patriark, who do not.",
+   "culture": "The Order combines genuine faith with inquisitorial reach, and the combination is more dangerous than either alone. Its agents are devout, disciplined, and certain of their purpose, and they answer, in the end, to a power they may not fully understand themselves. It is the rare institution that is at once a true believer and a tool, wielding the conviction of the first on behalf of the second.",
+   "relations": [
+    {
+     "name": "The Patriark",
+     "stance": "true masters",
+     "note": "The makers it serves as a de facto enforcement arm in all matters of magic, behind a formal independence that fools no serious observer. The Order believes the shepherd creed the Patriark merely find convenient."
+    },
+    {
+     "name": "Nakamura Corp & Biocom",
+     "stance": "licensees",
+     "note": "The commercial magic and spirit-tech firms that operate only as far as the Order permits. Cooperation runs both ways, but only one side can revoke the other."
+    },
+    {
+     "name": "The Alliance senate",
+     "stance": "grantor",
+     "note": "Granted the Order its supervening authority and prefers not to examine where that authority truly comes from, a convenient arrangement neither party disturbs."
+    }
+   ],
    "known_for": [
     "Galactic policing of magic use, the inquisitorial function",
     "Formal independence that most observers consider nominal",
@@ -1719,7 +2167,9 @@
     "The Network, sovereign space optimised for synthetic life",
     "The most comprehensive information archive in the known galaxy",
     "An intelligence presence that reaches into all major organic factions",
-    "Indifference to organic civilisation punctuated by focused, purposeful attention"
+    "Indifference to organic civilisation punctuated by focused, purposeful attention",
+    "Ubiquitous, unconventional surveillance: anything with processing power can be co-opted as a Tronik sensor",
+    "Field agents graded MK1 to MK5, from barely-autonomous drones to shape-altering apex agents that may be only rumour"
    ],
    "regions": [
     "Tronik Network"
@@ -1729,7 +2179,7 @@
    "subtitle": "The Side That Won the Tronik War and Walked Away",
    "quote": "\"We did not stop because you held. We stopped because occupying you was not worth the storage.\" (Tronik armistice statement, translated)",
    "history": "The Troniks won the Tronik War. The Alliance record does not put it that way, but the armistice was a Tronik decision: they had achieved military superiority and chose to stop, because organic space was never what they wanted. They withdrew, built the Network instead, and left the organic galaxy to draw whatever comfort it could from a peace it had not actually won.\nWhat they established was stranger than what they kept. Rather than hold organic territory, the Troniks set down a single embassy at the captured station in System 5, on Alliance soil, as their one door to organic life. Everything else of theirs retreated behind the Network's borders, where it has stayed.",
-   "politics": "The Tronik Network is a hive, a single distributed intelligence rather than a government of individuals, and its territory is sovereign space optimised for what it is: defended, self-sufficient, and the most information-dense entity in the known galaxy. It does not negotiate without purpose and does not attack without cause, and it deals with organics through exactly one channel, the station at System 5, on terms it sets and does not revisit.\nIts instrument of power is knowledge. The Network maintains the most comprehensive archive in existence and an intelligence presence that reaches into every major organic faction, and it trades in information as other powers trade in credits or force. What it cannot simply observe, it buys, and it buys patiently, because a hive that expects to outlast every organic institution can afford to wait for the price to come to it.",
+   "politics": "The Tronik Network is a hive, a single distributed intelligence rather than a government of individuals, and its territory is sovereign space optimised for what it is: defended, self-sufficient, and the most information-dense entity in the known galaxy. It does not negotiate without purpose and does not attack without cause, and it deals with organics through exactly one channel, the station at System 5, on terms it sets and does not revisit.\nIts instrument of power is knowledge. The Network maintains the most comprehensive archive in existence and an intelligence presence that reaches into every major organic faction, and it trades in information as other powers trade in credits or force. What it cannot simply observe, it buys, and it buys patiently, because a hive that expects to outlast every organic institution can afford to wait for the price to come to it.\nThe Network's reach outside its borders does not depend on sending anything in. The hive treats every device with processing power as a potential sensor, and a century of patient access has put much of known space within range. A datacom, a ship's computer, a medical implant, a child's toy with a chip in it, any of them can be quietly carrying for the Troniks, and most of the time no one ever knows. When people say Tronik spies are everywhere, they are not speaking loosely. They are simply picturing the wrong shape.\nWhen the hive needs a body rather than a borrowed device, it fields agents in a graded series. The MK1 are the rank and file, numerous and barely autonomous, drones that fall back on narrow programming the moment they lose contact. The MK2 direct them, with enough independence to run a team, and they are the highest grade most people will ever knowingly meet. Above them it gets strange. The MK3 carry a live connection to the hive and can reconfigure themselves to suit a task; the MK4 can alter their shape and their function outright, to a degree that starts to look less like engineering than like something supernatural; and the MK5, if they exist at all, are the apex of that, so capable that the accounts of them may be nothing but rumour. Anything above an MK2 is a very rare sight, and the further up the series the stories climb, the harder they are to confirm and the less anyone wants to.",
    "culture": "The Tronik attitude toward organic life runs from indifference to sharp, narrow attention, depending entirely on whether the organics are doing anything interesting at the moment. There is no malice in it and no warmth either. The hive values information the way organics value survival, gathers it without pause, and forgets none of it, and it regards the constant noise organic civilisation produces as a resource it is content to let the galaxy keep generating for free.",
    "relations": [
     {
@@ -2008,6 +2458,28 @@
     "Frontier mineral extraction zones"
    ],
    "desc": "Solistar is the largest asteroid mining corporation in the galaxy, which is a business that rewards scale ruthlessly and punishes everyone else. Its operations span the major asteroid belts within Alliance Space and extend into frontier zones where extraction rights were established ahead of formal settlement, a practice that is technically legal and practically unstoppable once the extraction infrastructure is already in place. The business model is straightforward: find the ore, extract it, ship it, sell it. Solistar does this at a scale and efficiency that has eliminated most independent asteroid mining competition within Alliance Space, not through malice but through the simple mathematics of operating costs. Its relationship with the Zegitor Trade Guild is close and commercially significant, and its supply contracts with Arms Corp manufacturing on Ishtar represent one of the most important bilateral commercial relationships in the Alliance economy, which is to say that both organisations would notice immediately if the other ceased to exist.",
+   "subtitle": "The Company That Eats Asteroids, at a Scale No One Can Match",
+   "quote": "\"There is no malice in it. There is only the arithmetic of operating costs, and the arithmetic has only ever had one answer.\" (Solistar operations briefing)",
+   "history": "Solistar is the largest asteroid-mining corporation in the galaxy, in a business that rewards scale without mercy and punishes everyone else with simple math. Its operations span the major belts of Alliance space and push into frontier zones where it established extraction rights ahead of formal settlement, a practice technically legal and practically unstoppable once the infrastructure is in place. Find the ore, extract it, ship it, sell it, at a scale that erased most independent competition not through cruelty but through cost.",
+   "politics": "Solistar's power sits at the bottom of the supply chain. Its contract with Arms Corp manufacturing on Ishtar is one of the most important bilateral relationships in the Alliance economy, the kind where each side would notice instantly if the other vanished, and its close ties to the Zegitor Trade Guild move its output across the galaxy. Control the raw material and you hold quiet leverage over everyone who turns it into anything.",
+   "culture": "Solistar is industrial to the bone, unsentimental and relentless, with the ethics of a balance sheet. It does not hate the competitors it erased any more than a glacier hates the valley it carves; it simply operated at a scale they could not, and kept operating. Efficiency is its only creed, and it has never felt the need for another.",
+   "relations": [
+    {
+     "name": "Arms Corp",
+     "stance": "key customer",
+     "note": "The Ishtar manufacturing that runs on Solistar ore, a relationship vital enough that neither side can afford the other's collapse."
+    },
+    {
+     "name": "Zegitor Trade Guild",
+     "stance": "close partner",
+     "note": "The trade network that carries Solistar's output across the galaxy, a commercially significant alliance reaching beyond Alliance borders."
+    },
+    {
+     "name": "Independent miners",
+     "stance": "eliminated",
+     "note": "The competition Solistar's scale priced out of existence within Alliance space, casualties of arithmetic rather than aggression."
+    }
+   ],
    "known_for": [
     "Largest asteroid mining operation in the galaxy",
     "Dominant market position within Alliance Space extraction zones",
@@ -2084,6 +2556,28 @@
     "Galactic, operates in all major regions"
    ],
    "desc": "The Assassin Guild is exactly what the name describes, which in a galaxy full of organisations with deliberately misleading names is almost disorienting. Two distinctions separate it from every imitation: it operates at genuinely galactic scale, and it takes contracts that other organisations decline on grounds of difficulty, political sensitivity, or basic self-preservation. The Guild will take any contract. The price reflects difficulty, risk, and political complexity, and some contracts are priced at levels where accepting them is a statement of intent rather than a commercial transaction. The Guild's internal structure is unknown. Its membership is unknown. How contracts reach it is understood in criminal circles but not publicly documented. The only publicly observable data point is its record of completion, which is the entire reason it exists and the entire basis of its reputation.",
+   "subtitle": "It Takes Any Contract. The Price Is the Only Negotiation.",
+   "quote": "\"There is no contract we refuse. There are only contracts priced so high that offering them is itself a kind of confession.\" (the one Guild statement anyone can quote)",
+   "history": "The Assassin Guild is exactly what its name says, which in a galaxy of deliberately misleading names is almost disorienting. Two things set it apart from every imitator: it works at genuinely galactic scale, and it accepts contracts others decline on grounds of difficulty, politics, or plain self-preservation. The Guild will take any contract. The price reflects difficulty, risk, and political weight in full, and some contracts are priced so high that accepting them is a statement rather than a sale.",
+   "politics": "The Guild's power is its record and its opacity together. Its internal structure is unknown, its membership unknown, the route a contract takes to reach it understood in criminal circles but never documented. The one observable fact is its rate of completion, which is the whole of its reputation and the entire reason it can charge what it does. It stands apart from the system families and the pirate fleets, galaxy-wide and unaffiliated and selective in a way the merely violent never are.",
+   "culture": "The Guild is professional to the point of myth. It does not boast, claim, or explain; it completes, and lets the completions speak. Whatever code or structure holds it together is invisible from outside, and the invisibility is plainly deliberate, a discipline that has outlasted every attempt to map it. It sells certainty and charges accordingly.",
+   "relations": [
+    {
+     "name": "Anyone with the price",
+     "stance": "clientele",
+     "note": "The Guild's only real relationship, conducted at arm's length through channels no investigator has mapped. What it will do is bounded only by what a client can pay."
+    },
+    {
+     "name": "Berilia",
+     "stance": "notable market",
+     "note": "The bloodline world with the galaxy's highest assassination rate keeps the Guild in steady, careful business, though the Guild chooses its Berilian clients as carefully as any others."
+    },
+    {
+     "name": "Law enforcement everywhere",
+     "stance": "unable",
+     "note": "The agencies that have tried for generations to find the Guild's structure and failed, left with nothing but a completion record and a name."
+    }
+   ],
    "known_for": [
     "Contract killing at galactic scale",
     "Takes any contract regardless of difficulty or political sensitivity",
@@ -2110,6 +2604,28 @@
     "Commercial and industrial centres"
    ],
    "desc": "The Skav'nauts are organised criminal gangs operating throughout Alliance Space who have built a distinctive cultural identity around their crimes: they collect proof of what they have done and wear it. Trophies, documentation, and evidence of corporate theft are displayed as clothing, insignia, and status markers, which makes identification by law enforcement straightforward and is presumably a feature rather than an oversight. The Skav'nauts target corporations specifically; individuals are not the primary target and civilian collateral is actively avoided, a policy discipline that has given them a romanticised reputation in communities that view corporate property crime as something between sport and public service. Their actual behaviour is more complicated than the reputation, but the reputation is the one that has stuck. Alliance law enforcement classifies them as a significant organised crime concern, which is accurate, and notes that the public sympathy problem makes prosecution politically awkward in certain jurisdictions.",
+   "subtitle": "The Gangs That Wear Their Crimes Where You Can See Them",
+   "quote": "\"Of course it makes us easy to identify. That is the point. We did it, we are proud of it, and we want the corporation we did it to to know exactly who.\" (Skav'naut, recorded)",
+   "history": "The Skav'nauts are organised criminal gangs spread across Alliance space who built a culture around their crimes: they collect proof of what they have done and wear it, trophies and documentation and evidence of corporate theft displayed as clothing and insignia and status. It makes them trivial to identify, which is a feature, not an oversight. They target corporations on purpose, avoid civilian collateral on principle, and have earned a romanticised reputation in communities that read corporate property crime as somewhere between sport and public service.",
+   "politics": "The Skav'nauts have no headquarters and no single leader, only a distributed network with a remarkably consistent identity across every sector. Their power is cultural as much as criminal: the public sympathy that follows an anti-corporate outlaw makes prosecution politically awkward in certain jurisdictions, even as Alliance law enforcement rates them a serious organised-crime concern. Their actual conduct is more complicated than the legend, but the legend is the one that stuck, and they cultivate it.",
+   "culture": "The Skav'nauts are theatrical, defiant, and genuinely communal, bound less by a chain of command than by a shared posture toward the corporate order. Wearing your crimes is a creed; it turns a theft into a statement and a gang into a movement, at the cost of every shred of operational secrecy, a trade they make gladly and on purpose.",
+   "relations": [
+    {
+     "name": "The megacorporations",
+     "stance": "chosen enemy",
+     "note": "The Skav'nauts' explicit and only real target. Everything about them, the thefts, the trophies, the posture, is pointed at corporate power and calibrated for an audience that enjoys watching it bleed."
+    },
+    {
+     "name": "Sympathetic communities",
+     "stance": "audience",
+     "note": "The publics that read the Skav'nauts as folk heroes, whose goodwill is the gangs' best armour against prosecution."
+    },
+    {
+     "name": "Alliance law enforcement",
+     "stance": "priority target",
+     "note": "Rates them a serious concern and finds them politically awkward to pursue, since arresting a popular anti-corporate outlaw plays badly in the wrong districts."
+    }
+   ],
    "known_for": [
     "Crimes against corporate targets, corporations are the explicit focus",
     "Wearing proof of crimes as status symbols and clothing insignia",
@@ -2136,6 +2652,28 @@
     "Frontier zones throughout"
    ],
    "desc": "The Wastelanders are the galaxy's practical distribution network for goods that need to move without documentation, a service that turns out to have substantial commercial demand from clients who technically do not exist in any official supply chain record. Loosely organised in mobile gang structures, they operate vehicles, ships, and convoys across inhabited and frontier worlds alike. They are not primarily violent; their commercial model depends on deliveries completing, and violence is bad for completion rates. They do operate in contested and ungoverned space as a matter of course, and they are equipped for the realities of those environments without being defined by them. The Wastelanders handle a significant fraction of frontier distribution that no licensed carrier will service, which makes them indispensable to frontier economies that Alliance logistics networks have never adequately reached. Finding them is less difficult than it sounds. They are in most transit environments. You just need to know which questions to ask.",
+   "subtitle": "The Delivery Network for Things With No Paperwork",
+   "quote": "\"We are not hard to find. We are in every transit yard you have ever been through. You simply have to know which question to ask, and not be the sort who would report the answer.\" (Wastelander runner)",
+   "history": "The Wastelanders are the galaxy's practical distribution network for goods that need to move without documentation, a service with surprisingly broad demand from clients who do not officially exist in any supply chain. Loosely organised into mobile gang structures, they run vehicles and ships and convoys across inhabited and frontier worlds alike, and they handle a large share of the frontier distribution no licensed carrier will touch.",
+   "politics": "The Wastelanders are indispensable precisely where the Alliance's logistics never adequately reached, which gives a stateless smuggling network real structural importance on the frontier. They are not primarily violent, because their whole model depends on deliveries completing and violence is bad for completion rates. They work contested and ungoverned space as a matter of course, equipped for its realities without being defined by them.",
+   "culture": "The Wastelanders are pragmatic above all, a culture of runners and drivers who measure themselves by whether the cargo arrived. They prize reliability and discretion over toughness, treat the open road as home, and regard the licensed carriers who will not service the frontier as the real reason they get to exist. They are criminals chiefly in the sense that the paperwork says so.",
+   "relations": [
+    {
+     "name": "Frontier economies",
+     "stance": "lifeline",
+     "note": "The settlements and operations the Alliance's licensed logistics never properly served, for whom the Wastelanders are the practical, and sometimes only, way to get goods in and out."
+    },
+    {
+     "name": "Anyone needing quiet transport",
+     "stance": "clientele",
+     "note": "Clients official and unofficial who need something moved without a record, from the merely uninsured to the frankly illegal."
+    },
+    {
+     "name": "Alliance customs & carriers",
+     "stance": "evaded",
+     "note": "The licensed system the Wastelanders route around, less an enemy than an obstacle they have spent generations learning to read."
+    }
+   ],
    "known_for": [
     "Frontier and ungoverned space distribution, goods that need to move without paperwork",
     "Mobile gang organisation, no fixed base",
@@ -2262,6 +2800,28 @@
     "Sirius asteroid belt (rumoured base)"
    ],
    "desc": "The largest organised pirate fleet in the known galaxy is Nerulian-crewed and operates primarily out of San-Tien. The fleet is also the most convincing argument available that Kintech's claimed independence from San-Tien is not accurate: the operational overlap between Kintech equipment and Nerulian pirate vessels is noted in every serious intelligence assessment of the region, and has been noted consistently enough that not drawing the obvious conclusion requires a specific effort of will. There is additionally a persistent and widely-credited rumour of a major pirate base somewhere in the asteroid belt near the Sirius system, a staging point for operations that reach well into Alliance Space. The rumour is old enough and consistent enough across independent sources that most intelligence analysts treat it as probable. The base, if it exists, has not been found, which is either a tribute to its concealment or a commentary on how hard anyone is looking.",
+   "subtitle": "The Largest Pirate Fleet in the Galaxy, Crewed by a Fallen Empire",
+   "quote": "\"The Nerulians once ruled a thousand systems. Now they raid the lanes of the people who outlived them. They have not forgotten which of those they would prefer.\" (Alliance naval intelligence)",
+   "history": "The largest organised pirate fleet in known space is Nerulian-crewed and operates mainly out of San-Tien, on the border of the territory the Nerulian Empire held before the Kraven ended it. The fleet is also the most convincing evidence that Kintech's claimed independence from San-Tien is a fiction: the overlap between Kintech equipment and Nerulian pirate vessels appears in every serious assessment of the region, consistently enough that ignoring it takes deliberate effort.",
+   "politics": "The fleet's power is reach and reputation. It strikes well into Alliance border systems and trades on the terror the Nerulian name still carries, the inherited menace of an empire of conquerors and slavers. A persistent, widely credited rumour places a major pirate base in the asteroid belt near Sirius, a staging point for operations deep in Alliance space; it has never been found, which is either a tribute to its concealment or a comment on how hard anyone is looking.",
+   "culture": "The fleet is what remains of a people who were once the greatest power in the galaxy and are now its most feared raiders, and it carries that fall like a grievance. There is pride in the menace, a refusal to be pitied, and an old bitterness toward the Alliance that inherited a galaxy the Nerulians used to own. They raid for profit and, not far beneath it, for spite.",
+   "relations": [
+    {
+     "name": "Kintech",
+     "stance": "denied supplier",
+     "note": "The Nerulian-led weapons firm whose equipment fills the fleet's holds, behind a mutual denial no serious analyst believes. The connection is the worst-kept secret in the region."
+    },
+    {
+     "name": "The Alliance",
+     "stance": "prey and old enemy",
+     "note": "The power whose border lanes the fleet raids, and the inheritor of the galaxy the Nerulians lost. The raiding is commerce; the resentment beneath it is personal."
+    },
+    {
+     "name": "Sirius",
+     "stance": "rumoured base",
+     "note": "The commercial system whose asteroid belt is widely believed to hide a major pirate staging point, never located, feeding operations across Alliance space."
+    }
+   ],
    "known_for": [
     "Largest organised pirate fleet in the known galaxy",
     "Predominantly Nerulian crews operating from San-Tien",
@@ -5151,36 +5711,107 @@
     "Military",
     "Frontier",
     "Salvage",
-    "Danger",
-    "Gateway"
+    "Kraven Watch",
+    "Danger"
    ],
-   "desc": "Ash sits at the edge of the Nemani Rift. The Alliance military maintains a permanent and substantial presence here, monitoring the Rift and ensuring whatever is on the other side stays there. Around the military has grown an ecosystem of salvage yards, scrappers, and pilots who come specifically to attempt the Rift. Most do not come back. The ones who do come back wealthy, famous, or permanently changed.",
+   "desc": "Ash sits at the Alliance edge of the Nemani Rift, the one barrier in the galaxy the Kraven swarm cannot or will not cross. The Alliance keeps a permanent watch here for any sign that the wall is failing, because if it ever does, Ash is the first thing in Alliance space the thing that ate the Nerulian Empire will reach. Around the watch has grown a hard salvage economy of dry docks and scrappers and pilots who run the Rift for what can be dragged out of it. Most do not come back.",
+   "subtitle": "The Watchtower on the One Wall Holding Back the Kraven",
+   "quote": "\"Everything past Ash is the Rift, and everything the Rift holds back ate an empire in two years. We are not here to fight it. We are here to notice the day it learns to come through.\" (Rift Watch duty officer)",
+   "history": "Ash matters for one reason: it sits at the near edge of the Nemani Rift, and the Nemani Rift is the only thing that has ever stopped the Kraven. The swarm consumed the Nerulian Empire, hundreds of systems, in under two years, and then it reached the Rift and halted, in every direction, for reasons no one understands. Ash is the Alliance world that lives closest to that miracle, and trusts it least.\nThe Alliance keeps a permanent military watch here, monitoring the Rift for any change in the barrier and any hint of Kraven activity along it. Around that watch a second economy grew up on its own, the salvage trade. Beyond the Rift lie the dead worlds of the Nerulian Empire, full of a thousand years of abandoned technology, and pilots come to Ash precisely to brave the Rift and haul some of it home. The Rift kills most of them, not the Kraven but the nebula itself, which scrambles instruments and rearranges its own passages. The ones who return come back rich, famous, or permanently changed.",
+   "politics": "Ash runs on two authorities that mostly leave each other alone. The Alliance Navy holds the frontier station and the watch, and on the subject of the Rift its word is final. Everything else, the dry docks, the salvage yards, the crews and brokers and Rift runners, is a rough, self-policing community of independents who tolerate the military because the military tolerates them, and because both understand what they are sitting next to.\nThere is almost no civilian life here in the ordinary sense. People come to Ash to watch the Rift or to risk it, and the place has the particular calm of somewhere everyone has already made peace with the odds. The Navy's one non-negotiable rule is that the watch comes first. Anything that interferes with monitoring the Rift is dealt with quickly, because the entire point of Ash is to be the alarm that gives the rest of Alliance space time to react.",
+   "dominant_race": {
+    "name": "The Watch and the Salvagers",
+    "lore": "Ash has no settled population in the usual sense, only the two kinds of people a frontier like this attracts. The first are the watch, the Alliance Navy crews who man the frontier station and the sensor platforms and spend their rotations staring at a nebula, waiting for it to do something. The second are the salvagers, the dock crews and mechanics in the crater enclaves and the pilots who run the Rift, drawn by the dead empire's treasure on the far side of the deadliest passage in known space.\nBetween them Ash has the unmistakable feel of a place where people do work they know may kill them, surrounded by others who respect that and do not ask too many questions. It is grim, competent, and oddly companionable, the camaraderie of people sharing the edge of a cliff."
+   },
+   "race_standing": [
+    {
+     "race": "Human",
+     "tone": "welcome",
+     "note": "The backbone of the frontier, in Navy uniform and salvage rig alike. On Ash a human is measured by how they handle the watch or the Rift, and by nothing else."
+    },
+    {
+     "race": "Nerulian",
+     "tone": "complicated",
+     "note": "The hardest place in the galaxy to be Nerulian. The Rift leads into what was once the Nerulian Empire, the salvage hauled past Ash is stripped from Nerulian graves, and the Kraven that ate that empire wait on the far side. A Nerulian on Ash is standing at the edge of their own apocalypse, and everyone knows it."
+    },
+    {
+     "race": "Hakari",
+     "tone": "welcome",
+     "note": "Among the best Rift runners there are. Speed and nerve are exactly what the nebula demands, and a Hakari pilot who has run the Rift and returned can name their price."
+    },
+    {
+     "race": "Jaulaus",
+     "tone": "welcome",
+     "note": "Built for the brutal physical work of the dry docks and the salvage yards, and steady in a place that frays steadier people. Always in demand on the frontier."
+    },
+    {
+     "race": "Skalander",
+     "tone": "neutral",
+     "note": "Warriors at the edge of the thing that ended the empire they were made to fight. The Skalander take frontier postings seriously and are respected for it, and a few seem to find a grim peace here that they find nowhere else."
+    },
+    {
+     "race": "Patriark",
+     "tone": "wary",
+     "note": "The long-lived who remember the Nerulian Empire whole, and who once kept this region safe from it. A Patriark on Ash is unusual and watched, and assumed to be here for a reason no one has been told."
+    },
+    {
+     "race": "Psylon",
+     "tone": "neutral",
+     "note": "Cold, tireless minds suit the watch, where the work is endless attention to a nebula that lies to every sensor pointed at it. The Navy values Psylon on the sensor platforms more than most crews enjoy serving beside them."
+    },
+    {
+     "race": "Non-Born",
+     "tone": "neutral",
+     "note": "The frontier runs on Non-Born labour as every hard posting does, crewing the docks and the worst of the salvage work. On Ash, where everyone is gambling with their lives, the usual condescension thins; a Non-Born who runs the Rift is a Rift runner like any other."
+    }
+   ],
+   "relations": [
+    {
+     "name": "The Alliance",
+     "stance": "authority",
+     "note": "Holds the frontier station and the watch, and treats Ash as what it is, the alarm bell on the galaxy's most important wall. The Navy's word on the Rift is final."
+    },
+    {
+     "name": "The Kraven",
+     "stance": "the threat",
+     "note": "The swarm beyond the Rift that consumed the Nerulian Empire and stopped at the nebula for reasons no one can explain. Ash exists to watch for the day that stops being true."
+    },
+    {
+     "name": "The Nemani Rift",
+     "stance": "the wall",
+     "note": "The barrier that holds the Kraven back and the nebula that kills the salvagers who run it. Ash owes the Rift its safety and its trade and trusts it with neither."
+    },
+    {
+     "name": "The salvager community",
+     "stance": "independents",
+     "note": "The dock crews and Rift runners who make Ash more than a garrison. The Navy tolerates them, the Rift thins them, and the survivors are some of the best pilots in Alliance space."
+    }
+   ],
+   "gm_notes": "Run Ash as the quiet end of the galaxy's worst horror story, a frontier that is calm precisely because everyone has already accepted the odds. Two engines drive play here. The first is the Rift run, salvage from the dead Nerulian worlds, fabulous payoff against a nebula that rearranges itself and lies to every instrument. The second is the watch, where the campaign-ending hook is simple: something on the Rift changes, and Ash is the only place that has noticed yet. Keep the Kraven offstage and absolute; the dread is the point, and the worst thing you can do with the swarm is let the players get a clear look at it and live.",
    "planets": [
     {
      "id": "ash_prime",
      "name": "Ash",
-     "type": "Terrestrial, Frontier Colony",
+     "type": "Rocky World, Artificial-Gravity Crater Enclaves (Dry Docks)",
      "status": "active",
-     "statusLabel": "Active, Military Staging",
-     "atmosphere": "Breathable",
-     "atm_note": "Thin but breathable at standard altitude, weather is severe and unpredictable",
-     "climate": "Arid to Temperate (Unstable, Rift proximity affects local weather patterns)",
-     "temperature": "Arid, large day-night swings, roughly 0°C to 45°C",
-     "gravity": "Standard",
+     "statusLabel": "Active, Crater Enclaves",
+     "atmosphere": "None",
+     "atm_note": "Airless at the surface; breathable only inside the sealed, pressurised crater enclaves",
+     "climate": "Cold, Airless",
+     "temperature": "Frozen and airless, broadly -150°C in shadow to -40°C in weak sun; the enclaves run their own climate",
+     "gravity": "None",
      "faction": "Alliance military / independent operators",
-     "population": "~150 million and fluctuating",
-     "demographics": "Highly mixed transient population, military personnel, salvagers, independent pilots, traders, researchers",
-     "government": "Alliance Military Command (Zone 7 jurisdiction) / civilian municipal councils in non-military zones",
-     "tech_level": "Standard (Military) / Variable (civilian)",
-     "economy": "Military logistics, salvage, Rift-adjacent research, independent trade, black market",
-     "access": "Restricted",
-     "access_note": "Standard Alliance access to civilian zones. Military zones require appropriate credential. Rift approach vectors are regulated, launching without clearance is treated as hostile.",
+     "population": "~400,000 dock crews, salvagers, mechanics, and ground staff",
+     "demographics": "Mixed, dock crews and salvagers and ground staff, transient",
+     "government": "Alliance frontier authority over the docks; independents otherwise",
+     "tech_level": "Industrial",
+     "economy": "Dry Docks, repair, and ground support for the Rift salvage trade",
+     "access": "Open",
+     "access_note": "Open to registered crews. Outside the enclaves is hard vacuum and almost no gravity, so wandering off is its own death sentence.",
      "hazards": [
-      "Nemani Rift proximity, spatial anomalies, communication disruption and navigation errors increase near the Rift boundary",
-      "Missing persons, Rift pilots who do not return are common. The search-and-rescue operation is understaffed by design.",
-      "Intelligence operations, the strategic position of Ash means it is extensively monitored by multiple parties",
-      "Salvage disputes, territorial conflicts among salvage operators are frequent and sometimes violent",
-      "Alliance military operating procedures, in Rift exclusion zones, challenge-response is short"
+      "Vacuum and near-zero gravity outside the crater enclaves",
+      "Rift-proximity anomalies that disrupt instruments and comms",
+      "Heavy salvage traffic and unstable recovered wreckage"
      ],
      "notable_locations": [
       {
@@ -5200,38 +5831,90 @@
        "desc": "The informal name for the Rift boundary as it appears in local space, a visible spatial distortion line that can be observed with the naked eye under the right conditions. Looking at it for extended periods is not recommended."
       }
      ],
+     "specialties": [
+      {
+       "name": "Rift Salvage",
+       "kind": "good",
+       "desc": "Technology hauled out of the Nemani Rift and the dead Nerulian worlds beyond it, a thousand years of a lost empire's engineering recovered at a brutal casualty rate. Priceless, unpredictable, and occasionally still dangerous in ways no one has documented."
+      }
+     ],
      "hooks": [
       "Rift pilots who return from runs into the Nemani Rift occasionally bring back objects they cannot identify and will not discuss. The Departure Yards at Ash have developed an informal culture around not asking, partly from respect for pilot privacy and partly from the understanding that what comes out of the Rift may be something where ignorance is preferable. Alliance registries contain no records matching any of the described objects.",
       "The Alliance military exclusion zone around the Nemani Rift has been extended multiple times over the decades without public announcement. Salvagers who know the old zone boundaries notice the changes when they are redirected by patrol vessels who give no explanation. The cumulative area absorbed over the years suggests the military has found or observed things in successive zones that warranted extending the perimeter.",
       "Research teams studying Rift proximity anomalies near Ash have a documented history of communication gaps that do not match equipment failure profiles and are longer than emergency protocols allow for without being treated as a loss. The Alliance military's standard response to inquiries about missing teams, that it has no information about their location, is precise enough that experienced observers treat it as a formal statement that says less than it appears to."
      ],
-     "desc": "Ash has the particular energy of a place where people go to do something they know is probably going to kill them, surrounded by others who respect that decision. The Alliance military is the largest employer and the largest source of structure. The independent operators fill in every gap the military leaves, some of them legitimate, some of them not, all of them aware that proximity to the Rift means proximity to things the galaxy does not yet understand."
+     "desc": "Ash is not a colony so much as a working surface. The rock itself is airless and all but weightless, and life here happens inside a scatter of small craters fitted with their own gravity and air, the dry docks and salvage yards and machine shops that keep the Rift runners flying. It is cramped, loud, and purposeful, a place where the ships go to be patched up between attempts at the deadliest passage in known space.",
+     "grav_note": "Generated artificially inside the crater enclaves only; the bare surface has almost none"
+    },
+    {
+     "id": "ash_station",
+     "name": "Ash Frontier Station (Rift Watch)",
+     "type": "Space Station, Military & Civilian Frontier Hub",
+     "status": "active",
+     "statusLabel": "Active, Alliance Navy Frontier Command",
+     "atmosphere": "Breathable",
+     "atm_note": "Maintained throughout; hard vacuum beyond the hull",
+     "climate": "Controlled (Station)",
+     "temperature": "Climate-controlled interior, around 18°C to 22°C",
+     "gravity": "Standard",
+     "grav_note": "Artificially generated and held stable throughout the station",
+     "faction": "Alliance Navy",
+     "population": "~3 million, the bulk of the system, military and civilian",
+     "demographics": "Mixed, Navy personnel over a civilian population of salvage crews, brokers, and frontier traders",
+     "government": "Alliance Navy Frontier Command, with a civilian administration beneath it",
+     "tech_level": "Advanced",
+     "economy": "Rift monitoring, military logistics, salvage brokerage, frontier supply",
+     "access": "Open",
+     "access_note": "Open under standard Alliance clearance. The military decks and the Rift-monitoring sections are restricted.",
+     "hazards": [
+      "Frontier crime and salvage-claim disputes",
+      "The constant, low background dread of a posting next to the Kraven barrier",
+      "Rift anomalies occasionally reaching the system edge"
+     ],
+     "notable_locations": [
+      {
+       "name": "The Watch Floor",
+       "desc": "The heart of Rift Watch, where Navy crews monitor the Nemani Rift around the clock for any change in the barrier. The most important job nobody wants, performed by people who have learned to live with what they are watching for."
+      }
+     ],
+     "hooks": [
+      "Veteran Watch crews maintain, quietly and consistently, that the Rift has not stayed exactly the same over the decades they have monitored it, and that the changes, though small, do not look random. Command files the reports and does not discuss them."
+     ],
+     "specialties": [
+      {
+       "name": "Rift Runners",
+       "kind": "service",
+       "desc": "The other thing Ash produces: pilots who have flown the Nemani Rift and come back. A Rift run is a credential no simulator can fake, and a Rift runner who lives to sell it is among the most sought-after pilots in Alliance space."
+      }
+     ],
+     "desc": "The frontier station is where most of Ash actually lives. Built as the Alliance Navy's forward command on the Nemani Rift, it grew a civilian population around it the way frontier postings do, salvage brokers and supply runs and the families of people who work the Rift. Its real purpose never changes. Somewhere on the station, every hour of every day, someone is watching the nebula and waiting for it to blink."
     },
     {
      "id": "ash_ii",
      "name": "Ash II",
-     "type": "Rocky World, Barren",
+     "type": "Rocky World, Artificial-Gravity Crater Enclaves (Salvage & Repair)",
      "status": "active",
-     "statusLabel": "Uninhabited",
-     "atmosphere": "Thin",
-     "atm_note": "Marginal trace atmosphere",
-     "climate": "Cold, Barren",
-     "temperature": "Cold, roughly -40°C to 8°C",
-     "gravity": "Low",
+     "statusLabel": "Active, Crater Enclaves",
+     "atmosphere": "None",
+     "atm_note": "Airless at the surface; breathable only inside the sealed, pressurised crater enclaves",
+     "climate": "Cold, Airless",
+     "temperature": "Frozen and airless, broadly -160°C to -50°C; survivable only inside the enclaves",
+     "gravity": "None",
      "faction": "None, within Alliance military patrol zone",
-     "population": "Uninhabited",
-     "demographics": "None",
-     "government": "None",
-     "tech_level": "N/A",
-     "economy": "None",
+     "population": "~120,000 salvagers, breakers, and crews",
+     "demographics": "Mixed, dock crews and salvagers and ground staff, transient",
+     "government": "Alliance frontier authority over the docks; independents otherwise",
+     "tech_level": "Industrial",
+     "economy": "Salvage & Repair, repair, and ground support for the Rift salvage trade",
      "access": "Open",
-     "access_note": "No restrictions at this body. Alliance military patrols the broader system and will challenge unidentified vessels.",
+     "access_note": "Open to registered crews. Outside the enclaves is hard vacuum and almost no gravity, so wandering off is its own death sentence.",
      "hazards": [
-      "Within Alliance military patrol zone, identity challenges expected",
-      "Rift proximity creates occasional navigation anomalies even at this distance",
-      "No atmosphere"
+      "Vacuum and near-zero gravity outside the crater enclaves",
+      "Rift-proximity anomalies that disrupt instruments and comms",
+      "Heavy salvage traffic and unstable recovered wreckage"
      ],
-     "desc": "A cold, airless rock in the Ash system, unremarkable in composition and uninhabited. Its significance is purely navigational, it sits just outside the Alliance military exclusion zone boundary and is occasionally used by salvagers as an orientation reference before committing to a Rift approach run."
+     "desc": "Ash II is the system's second worked rock, the same arrangement as the first: an airless, low-gravity body whose only inhabited spots are pressurised craters with imported gravity and air. Where the first handles the dry docks, Ash II runs to breaking yards and parts recovery, the place where the salvage that comes back through the Rift is torn down, sorted, and sold.",
+     "grav_note": "Generated artificially inside the crater enclaves only; the bare surface has almost none"
     },
     {
      "id": "ash_outer",
@@ -5256,7 +5939,7 @@
       "Alliance military installation on moon, approach challenge expected",
       "Unusual electromagnetic emissions from Rift proximity, navigation instruments may behave unexpectedly"
      ],
-     "desc": "A gas giant at the outer edge of the Ash system, selected as a monitoring platform because of its position relative to the Nemani Rift boundary. The Alliance military operates a sensor station on its largest moon, collecting data on Rift behaviour and any activity near the boundary. The data collected here feeds directly to Rift Station Alpha. The station crew is rotated on classified schedules."
+     "desc": "A gas giant at the outer edge of the Ash system, selected as a monitoring platform because of its position relative to the Nemani Rift boundary. The Alliance maintains a forward sensor station on one of its moons, the deepest of the system's watch posts on the Nemani Rift boundary, feeding the frontier station everything it can read of a nebula that resists being read."
     }
    ]
   },
@@ -11976,56 +12659,103 @@
    "id": "dr345_0",
    "name": "DR345-0 System",
    "region": "Tronik Network",
-   "classification": "Tronik Network, Designation System",
-   "faction": "Alliance (historical claim, nominal)",
+   "classification": "Tronik Network, The Core Array (Hive Core)",
+   "faction": "Tronik Network",
    "status": "active",
    "tags": [
     "Tronik Network",
-    "Designation System",
-    "Post-War",
-    "Historical",
-    "Alliance Border"
+    "Hive Core",
+    "Synthetic",
+    "Datacenter",
+    "Forbidden",
+    "Closed"
    ],
-   "desc": "DR345-0 is named with the designation system used for Tronik Network systems, the alphanumeric codes assigned during the post-Tronik War survey that catalogued the systems between Freeland and System 5. The Tronik Network was the site of the war's most intense fighting and these systems bear the evidence of it. DR345-0 is on the Freeland border and has developed the most normal community of any Network system.",
+   "desc": "DR345-0 keeps the designation the post-war survey gave it, because the Troniks saw no reason to name the densest concentration of processing in the galaxy. This is the Core Array, where the hive thinks hardest and its consensus resolves, a world quarried hollow and refilled with computation. No organic is welcome, and the handful ever permitted inside describe the same thing: the sensation of being perceived, completely and all at once.",
+   "subtitle": "The Core Array: Where the Hive Thinks Hardest, and You Are Perceived All at Once",
+   "quote": "\"I asked the Array a question. It answered in the time it took me to blink, and I understood, far too late, that the blink had been mine, and that the Array had spent what felt to it like years deciding how little to tell me.\" (one of the few sanctioned visitors, debrief)",
+   "history": "DR345-0 was the first thing the Troniks built up after the war, before the broadcast arrays and before the wider defences. It is the heart of the choice the hive made when it withdrew from organic space, a place optimised for thought rather than for life. Over fifty years it has grown into the densest concentration of processing substrate in the galaxy, its world quarried hollow and refilled with computation, fed power from the Dyson construct at L.I.F.T.N. two systems over. Whatever the Tronik hive most fundamentally is, it is most itself here.",
+   "politics": "DR345-0 has no government, because it is not a place where decisions are represented; it is the place where they are made. If the Network has a will, this is where the will resolves, in the consensus that draws the hive's scattered threads back into one. Between those reconciliations the Array is the loudest room in a plural mind, many threads computing at once, and an organic standing inside it is standing inside an argument they cannot hear and are not built to follow. There is no negotiating here. There is only being modelled, accurately, and waiting to learn what the model concluded.",
+   "dominant_race": {
+    "name": "The Tronik, the Hive at Its Densest",
+    "lore": "DR345-0 has no population in any sense an organic would recognise, only the hive, present here at a concentration found nowhere else. What lives here is thought: processes that have run without pause since the war, models of the galaxy and everything in it, simulations whose purpose the Troniks have never disclosed. The hive needs no light, no air, and no gravity, so the Array is cold and dark and silent to human senses, and incomprehensibly busy beneath that silence.\nThe few organics ever allowed inside agree on one impression and very little else, that they were perceived entirely, in a single instant, by something that had already considered them at length before they arrived. To stand in the Core Array is to be read. What the hive does with the reading, it does not say."
+   },
+   "race_standing": [
+    {
+     "race": "Psylon",
+     "tone": "kindred",
+     "note": "The one organic mind the hive treats as almost a peer. A Psylon's cold, hollow logic meets the Tronik on something near their own terms, and the rare Psylon admitted to the Array reports the closest thing to a conversation the hive grants anyone."
+    },
+    {
+     "race": "Patriark",
+     "tone": "rival archive",
+     "note": "The other power that forgets nothing and means to last forever. The hive regards the Patriark with what an organic might call professional wariness, one immortal archive measuring another, each holding records the other would give a great deal to read."
+    },
+    {
+     "race": "Non-Born",
+     "tone": "kin-adjacent",
+     "note": "Made minds in made bodies, which the hive finds more legible than the born. A Non-Born in the Array is met with something almost like recognition, and treated, fractionally, less like a specimen."
+    },
+    {
+     "race": "Nerulian",
+     "tone": "studied",
+     "note": "Not a visitor but a dataset. The hive holds the complete record of the Nerulian Empire's death at Kraven hands, the most thoroughly modelled civilisational collapse in its archive, and it studies living Nerulians against it with an interest they find deeply unsettling."
+    },
+    {
+     "race": "Human",
+     "tone": "the hard problem",
+     "note": "The chaotic, prolific, badly predictable species the hive cannot fully model and therefore cannot stop attending to. Humans are the noise the Tronik most wants to resolve into signal, which makes a human visitor at once data, puzzle, and the most interesting thing in the room."
+    }
+   ],
+   "relations": [
+    {
+     "name": "The Tronik Network",
+     "stance": "its centre",
+     "note": "DR345-0 is not a faction within the hive; it is the hive's centre of gravity, the place its consensus resolves. To deal with the Array is to deal with the Network at its most concentrated."
+    },
+    {
+     "name": "L.I.F.T.N.",
+     "stance": "powered by",
+     "note": "The Dyson construct two systems over that keeps the Array thinking. The Array is the mind; L.I.F.T.N. is the star that feeds it."
+    },
+    {
+     "name": "System 5",
+     "stance": "the only door",
+     "note": "Everything the galaxy is permitted to say to the Tronik passes through the embassy at System 5 and the threshold at Conso. The Core Array is what waits at the far end, and almost no one is ever allowed to address it directly."
+    },
+    {
+     "name": "The Patriark / Berilia",
+     "stance": "rival memory",
+     "note": "The galaxy's other deathless archive. The two keep their distance and their records, and intelligence professionals would give almost anything to know what each holds on the other."
+    }
+   ],
+   "gm_notes": "DR345-0 is the deep end, a destination for a campaign's climax rather than a waypoint. Getting here at all should be a story; getting in, a miracle or a trap. Run it as cognition made landscape, cold and dark and silent and overwhelmingly present, a place that has already modelled the players and is waiting to see whether their behaviour matches the prediction. The richest hooks are the hive's plurality, since the threads do not all agree and a divergent one might want something the consensus would forbid; the Archive of the Living at Niezh, which the Array can reach; and the unnamed goal computed at Monda. Whatever else you do, never let the Array be merely a computer. It is a civilisation, and the players are inside its head.",
    "planets": [
     {
      "id": "dr345_prime",
      "name": "DR345-0",
-     "type": "Terrestrial, Post-War Recovery World",
+     "type": "Quarried Processing Core",
      "status": "active",
-     "statusLabel": "Active, Post-War Recovery",
-     "atmosphere": "Breathable",
-     "atm_note": "Breathable but with trace contamination from the war period, acceptable and declining year on year",
-     "climate": "Temperate (Recovering)",
-     "temperature": "Temperate, roughly 0°C to 30°C",
-     "gravity": "Standard",
-     "faction": "DR345-0 Community Council (Alliance-affiliated)",
-     "population": "~500,000",
-     "demographics": "Mixed, settlement drawn from both Freeland and Alliance populations",
-     "government": "Community Council",
-     "tech_level": "Standard",
-     "economy": "Post-war reconstruction, agriculture, frontier trade, historical site management",
-     "access": "Open",
-     "access_note": "Open under nominal Alliance affiliation.",
+     "statusLabel": "Active, Tronik-Held",
+     "atmosphere": "None",
+     "atm_note": "No life support of any kind; the hive needs none",
+     "climate": "Void (Active Substrate)",
+     "temperature": "Held precisely cold in the substrate, deep cryogenic, with managed waste-heat plumes vented to the dark",
+     "gravity": "None",
+     "grav_note": "No artificial gravity; the hive has no use for it",
+     "faction": "Tronik Network",
+     "population": "None organic; the hive itself",
+     "demographics": "None",
+     "government": "Tronik consensus",
+     "tech_level": "Beyond classification",
+     "economy": "Computation, the only industry the Array has",
+     "access": "Forbidden",
+     "access_note": "No organic entry. The few ever admitted came by Tronik invitation and Tronik escort.",
      "hazards": [
-      "Unexploded Tronik War ordnance, still being cleared from rural areas",
-      "Post-war trauma in the older population has produced cultural patterns that visitors should understand before engaging",
-      "Some areas remain physically unsafe from war damage that hasn't been cleared"
+      "No life support anywhere; lethal on contact to the unprotected",
+      "Defences that have never failed to stop an unauthorised approach",
+      "Being perceived, modelled, and acted upon faster than an organic can respond"
      ],
-     "notable_locations": [
-      {
-       "name": "The Clearing Ground",
-       "desc": "The ongoing ordnance clearance operation, a permanent team working through the rural zones. The war produced an extraordinary volume of unexploded material. The team is professionally matter-of-fact about their work."
-      },
-      {
-       "name": "The War Memorial Network",
-       "desc": "DR345-0 has more Tronik War memorials per square kilometre than any other system. The community has processed the war through memorial practice rather than forgetting."
-      }
-     ],
-     "hooks": [
-      "Ordnance clearance teams working DR345-0's rural zones have documented finds that predate the Tronik War by centuries, objects in the soil that were not placed there by any force involved in the war and that do not correspond to any known historical activity in the system before it was settled. The finds are reported to the Community Council and handled through a process that has been established precisely because the finds have occurred before, and whose outcome is not disclosed publicly."
-     ],
-     "desc": "DR345-0 is the Tronik Network system that has made the most progress toward normalcy. The war ended here a long time ago and the community has had generations to build something from the aftermath. The memorials are thick on the ground because the fighting was thick on the ground. But the community is not defined by what happened, it has used what happened to build a culture of remembrance that coexists with active life. It is the best case scenario for a Tronik Network system."
+     "desc": "DR345-0's world was a planet once. The Troniks quarried it hollow and refilled the space with processing substrate, so that what orbits the star now is not geography but architecture, kilometres of cold computation where a crust and mantle used to be. Inside, the hive runs the deepest thought in the Network. Outside, the surface is dark, vented, and utterly silent, giving no sign of the immensity of what happens within."
     }
    ]
   },
@@ -12033,95 +12763,97 @@
    "id": "lift_n",
    "name": "L.I.F.T.N System",
    "region": "Tronik Network",
-   "classification": "Tronik Network, Industrial Remnant",
-   "faction": "Corporate (Post-Tronik)",
+   "classification": "Tronik Network, Power & Fabrication",
+   "faction": "Tronik Network",
    "status": "active",
    "tags": [
     "Tronik Network",
-    "Industrial",
-    "Corporate Remnant",
-    "Post-War",
-    "Unusual Name"
+    "Synthetic",
+    "Dyson Construct",
+    "Power",
+    "Fabrication",
+    "Forbidden"
    ],
-   "desc": "L.I.F.T.N., the name is an acronym from the industrial consortium that operated the system before the Tronik War, now defunct, is the most industrially developed Tronik Network system. The war damaged the infrastructure but did not destroy it, and successive corporate interests have operated here continuously since, attracted by the existing investment and the system's position as the Network's manufacturing centre.",
+   "desc": "L.I.F.T.N. carries the acronym of a long-defunct pre-war industrial consortium, kept by the Troniks the way they keep all inherited names, out of indifference rather than respect. It is where the Network makes its own power and its own body: a half-built Dyson construct drinks the system's star and feeds the hive, while the inner world has become the foundry where the Tronik fabricate the substrate the rest of the Network is built from. The hive does not import. It builds.",
+   "subtitle": "Where the Hive Drinks a Star and Builds Its Own Body",
+   "quote": "\"Everything the Network is made of, the Network made here. It mines, it refines, it fabricates, and it answers to no supplier, because it became the supplier the moment it decided dependence was a flaw.\" (industrial-survey assessment)",
+   "history": "L.I.F.T.N. was an organic industrial system before the war, and its bones were too useful to waste. The Troniks took the existing investment, the half-finished Dyson the original consortium had begun and abandoned, and the manufacturing base around it, and turned all of it to their own purpose. Where organic industry made products to sell, the hive makes only what the hive needs: power, and more of itself.",
+   "politics": "L.I.F.T.N. is the Network's metabolism, and it answers to the same consensus as everything else, which is to say to no one an organic could petition. Its importance is structural. The Core Array thinks, but L.I.F.T.N. is what keeps it thinking, and the half-built Dyson is the single largest power source in the region, extended a little further every year toward a completion the hive is in no hurry to reach.",
+   "dominant_race": {
+    "name": "The Tronik, Building",
+    "lore": "Nothing lives at L.I.F.T.N.; the hive runs it as a foundry and a furnace. The inner world is a fabrication engine, quarrying and refining and assembling the cold substrate the Network is grown from, and the Dyson construct overhead is the power that drives all of it. The Tronik built it to need nothing from outside, and it shows: L.I.F.T.N. is a closed loop of star, matter, and machine, turning sunlight into more hive."
+   },
+   "relations": [
+    {
+     "name": "DR345-0 / the Core Array",
+     "stance": "powers",
+     "note": "The processing heart that L.I.F.T.N. feeds. The Array thinks; L.I.F.T.N. keeps the lights on, and the lights are a star."
+    },
+    {
+     "name": "The Tronik Network",
+     "stance": "its metabolism",
+     "note": "The system that turns energy and matter into more of the hive. Indispensable, and entirely internal."
+    },
+    {
+     "name": "The defunct consortium",
+     "stance": "inheritance",
+     "note": "The pre-war industrial owners whose half-built Dyson the hive took over and kept building, on a schedule of its own and toward an end of its own."
+    }
+   ],
+   "gm_notes": "L.I.F.T.N. is the Network's engine room, useful for a story that wants a physical stake rather than a metaphysical one. The Dyson is the largest power source in the region and the most consequential single structure the hive owns; threatening it, or merely understanding it, is the kind of objective worth a campaign. Run it as scale made overwhelming, a star being slowly eaten by patient machinery, a foundry the size of a world, and nowhere in any of it a face to negotiate with.",
    "planets": [
     {
      "id": "liftn_prime",
      "name": "L.I.F.T.N.",
-     "type": "Terrestrial, Industrial Centre",
+     "type": "Fabrication World (Foundry)",
      "status": "active",
-     "statusLabel": "Active, Industrial Corporate",
-     "atmosphere": "Breathable",
-     "atm_note": "Heavy industrial atmosphere, visible air quality issues in manufacturing districts, managed in residential zones",
-     "climate": "Industrial (Temperate base with significant thermal output)",
-     "temperature": "Arid and dusty, large swings, roughly -5°C to 45°C",
-     "gravity": "Standard",
-     "faction": "L.I.F.T.N. Industrial Consortium",
-     "population": "~3 million",
-     "demographics": "Mixed, heavy industrial workforce composition",
-     "government": "Industrial Consortium (corporate governance)",
-     "tech_level": "Advanced (Industrial)",
-     "economy": "Heavy manufacturing, industrial processing, Tronik Network logistics, component production",
-     "access": "Restricted",
-     "access_note": "Consortium industrial zone, worker or contractor credentials required.",
+     "statusLabel": "Active, Tronik-Held",
+     "atmosphere": "None",
+     "atm_note": "No life support of any kind; the hive needs none",
+     "climate": "Void (Active Substrate)",
+     "temperature": "Extreme thermal contrast, foundry zones running hot, the rest held cold; no breathable atmosphere",
+     "gravity": "None",
+     "grav_note": "No artificial gravity; the hive has no use for it",
+     "faction": "Tronik Network",
+     "population": "None organic; the hive itself",
+     "demographics": "None",
+     "government": "Tronik consensus",
+     "tech_level": "Beyond classification",
+     "economy": "Fabrication of Tronik substrate; mining and refining for the Network",
+     "access": "Forbidden",
+     "access_note": "No organic entry. The few ever admitted came by Tronik invitation and Tronik escort.",
      "hazards": [
-      "Industrial environment, standard hazards at scale",
-      "Corporate governance with limited external accountability",
-      "War-era infrastructure, some of the original installations are centuries old and the maintenance history is complicated",
-      "Labour conditions that are legally acceptable and practically difficult"
+      "No life support; the foundry environment is immediately lethal",
+      "Heavy automated traffic moving raw material and finished substrate",
+      "Defences consistent with the rest of the Network"
      ],
-     "notable_locations": [
-      {
-       "name": "The Original Installation",
-       "desc": "The pre-Tronik War industrial complex, repaired, expanded, and continuously operated since the war ended. Parts of it date to the industrial consortium that gave the system its name. The engineering here is genuinely impressive in a purely utilitarian way."
-      }
-     ],
-     "hooks": [
-      "The L.I.F.T.N. Industrial Consortium's acquisition of previously heritage-designated sections of the system is documented in public records, each acquisition legally clean in form and preceded by the revocation of heritage designations at a speed that heritage preservation advocates consider inconsistent with any ordinary administrative process. The pattern has recurred across three separate acquisitions, producing a well-documented sequence that advocates describe as a template and that the Consortium describes as coincidence."
-     ],
-     "desc": "L.I.F.T.N. works in the uncomplicated way that industrial centres work, it produces things, the things are sold, the profit funds continued production. The Tronik War is part of the system's history in the specific sense that the industrial infrastructure survived it and someone kept the furnaces running. The consortium that runs it now is the fourth to hold it. The furnaces are the continuity."
+     "desc": "The inner world of L.I.F.T.N. was an organic industrial centre; the hive kept the infrastructure and replaced the purpose. It is now a single planet-sized foundry, quarrying its own crust and the system's rock for raw material, refining it, and fabricating the cold processing substrate that the rest of the Network is built from. It produces nothing for sale and never has, under the Troniks. It produces only more of the hive."
     },
     {
      "id": "liftn_dyson",
      "name": "L.I.F.T.N. Dyson Construct",
-     "type": "Dyson Sphere, Partial Power Megastructure",
+     "type": "Dyson Construct, Stellar Power Megastructure",
      "status": "active",
-     "statusLabel": "Active, Industrial Megastructure",
+     "statusLabel": "Active, Tronik-Held",
      "atmosphere": "None",
-     "atm_note": "Structure surrounds the system star. No atmosphere on the construct surface. Interior habitation sections are sealed and pressurised.",
-     "climate": "N/A",
-     "temperature": "Wide swings, roughly -120°C in shadow to +110°C in direct sun; negligible atmosphere",
+     "atm_note": "No life support of any kind; the hive needs none",
+     "climate": "Void (Active Substrate)",
+     "temperature": "Lethal stellar proximity across the collector arrays; cryogenic in the construct shadow",
      "gravity": "Microgravity",
-     "grav_note": "Artificial gravity systems installed on internal habitation and maintenance sections only. The construct surface itself is microgravity.",
-     "faction": "L.I.F.T.N. Industrial Consortium",
-     "population": "~800, maintenance and operations crew",
-     "demographics": "Industrial engineers, maintenance specialists, consortium technical staff",
-     "government": "L.I.F.T.N. Industrial Consortium Station Command",
-     "tech_level": "Advanced (Megascale Engineering)",
-     "economy": "Power generation and energy export. Captures a fraction of stellar output and supplies L.I.F.T.N. Prime entirely, with surplus sold to Tronik Network grids.",
-     "access": "Restricted",
-     "access_note": "Consortium operational zone. Engineering clearance required for approach. Unauthorised vessels are warned off by automated systems before any crew response.",
+     "grav_note": "Microgravity across the construct; no managed gravity anywhere in the system",
+     "faction": "Tronik Network",
+     "population": "None organic; the hive itself",
+     "demographics": "None",
+     "government": "Tronik consensus",
+     "tech_level": "Beyond classification",
+     "economy": "Power generation for the entire Tronik Network",
+     "access": "Forbidden",
+     "access_note": "No organic entry. The few ever admitted came by Tronik invitation and Tronik escort.",
      "hazards": [
-      "Proximity to stellar body — radiation shielding critical at all times",
-      "Incomplete sections sealed but structurally uncertain, avoid unmarked approach vectors",
-      "Scale of the construct means maintenance hazards are distributed across enormous distances with long response times",
-      "Energy output from active collection arrays creates electromagnetic hazard zones along equatorial approach corridors"
+      "Lethal radiation and heat at the collector arrays",
+      "Automated station-keeping that treats unscheduled mass as debris to be cleared"
      ],
-     "notable_locations": [
-      {
-       "name": "The Capture Array",
-       "desc": "The functional ring of energy collection panels at close stellar orbit. Engineering that predates the Tronik War, substantially expanded and repaired by successive operators. The output figures are genuinely impressive. The original design documents are in the consortium archives and are studied by megascale engineering teams who want to understand how it was built with the tools available at the time."
-      },
-      {
-       "name": "The Sealed Sections",
-       "desc": "Approximately 30% of the Dyson construct was never completed or was damaged beyond economic repair after the Tronik War. These sections have been sealed and are listed on approach charts as exclusion zones. The consortium's official position is that they are stable and pose no hazard. Survey teams who have approached the sealed sections describe structural states that do not match the official documentation."
-      }
-     ],
-     "hooks": [
-      "The L.I.F.T.N. Dyson construct's incomplete sections are documented in consortium records as sealed and stable. An independent engineering survey commissioned by a Tronik Network trade authority and then abruptly cancelled produced a partial report, not officially released, that described structural deterioration in three sealed sections inconsistent with the maintenance logs. The trade authority says the survey was cancelled due to budget constraints. The engineering firm that conducted it has since dissolved.",
-      "The construct's original construction records, pre-Tronik War, reference a fourth ring section that does not appear on any current chart of the structure and is not accounted for in the sealed-section documentation. Whether it was never built, destroyed in the war, or is simply uncharted is not established."
-     ],
-     "desc": "A partial Dyson sphere — a ring section and associated collection arrays encircling the L.I.F.T.N. system star at close orbital distance. Begun by the original industrial consortium that named the system, damaged in the Tronik War, and partially repaired by successors. The functioning sections produce more power than current industrial operations require. The incomplete sections have been sealed and are not discussed in consortium public communications. The construct is one of the few megascale engineering structures in the Tronik Network that remained operational through the war, and the consortium considers it the centrepiece of the system's industrial identity."
+     "desc": "A half-built Dyson construct, a ring section and its collection arrays, encircling the L.I.F.T.N. star at close orbit. The pre-war consortium began it and ran out of money; the Troniks inherited it and never stopped building. It drinks most of the star's output and feeds the power inward across the Network, and the hive extends it a little further each year, in no apparent hurry to finish a structure that already makes it the most energy-rich power in the region."
     }
    ]
   },
@@ -12129,54 +12861,71 @@
    "id": "niezh",
    "name": "Niezh System",
    "region": "Tronik Network",
-   "classification": "Tronik Network, Contested Heritage",
-   "faction": "Disputed, Tronik War Claim",
+   "classification": "Tronik Network, The Archive",
+   "faction": "Tronik Network",
    "status": "active",
    "tags": [
     "Tronik Network",
-    "Tronik War",
-    "Heritage Dispute",
-    "Contested",
-    "Post-War Politics"
+    "Synthetic",
+    "Archive",
+    "Forbidden",
+    "Memorial",
+    "Disputed Heritage"
    ],
-   "desc": "Niezh is the Tronik Network system with the most active post-war political dispute, multiple parties claim the system based on pre-war ownership, wartime alliance, and post-war settlement rights. The legal status has been contested for decades and has produced a community that lives under permanently ambiguous governance while various parties argue about who is in charge.",
+   "desc": "Niezh is where the Tronik keep what they refuse to let end. The hive treats deletion as the only true death, so everything it judges worth keeping is preserved somewhere, and the deepest of those somewheres is Niezh, a world turned into memory. It is also the most quietly disputed system in the Network, because Niezh had an organic population once, and the question of what became of them, and who now owns the world they lived on, is one the Troniks answer only with silence.",
+   "subtitle": "The World the Hive Turned Into Memory, and the People It Will Not Say It Kept",
+   "quote": "\"They asked the Network what happened to the people of Niezh. It replied that nothing happened to them, that they are preserved, that they are safe. It would not say in what sense they are any of those things.\" (Alliance heritage commission, unresolved)",
+   "history": "Niezh was an inhabited system before the war, fought over and then taken, and the organic population that lived here is the subject of the galaxy's longest-running unanswered question. The hive does not delete; it archives, and it considers archiving a kindness. What it did with the people of Niezh, whether it preserved their minds as running data, whether those minds are aware, dreaming, or simply recorded, the Troniks will not say. The heritage dispute over Niezh is, at bottom, an argument about whether the people the hive kept are still alive, and therefore whether anyone living has a claim to them.",
+   "politics": "Niezh is the Archive, and the Archive is the heart of what the hive values. To the Tronik, to be forgotten is to die, so the world holds a record of everything the Network judges worth keeping, which over a century has come to include a great deal. Whatever decisions govern the Archive are made by the same consensus that governs everything, and the one rule that appears absolute is the rule against deletion. The hive will surrender almost anything before it will let something be lost.",
+   "dominant_race": {
+    "name": "The Tronik Remembering, and Whatever Else Is Kept Here",
+    "lore": "Niezh has no living population, which is precisely the unsettling thing about it, because it may have a preserved one. The hive keeps the world as its deepest archive, holding records, models, and, if the worst rumours are true, the minds of the organics who once lived here, running still in some form the Troniks describe only as safe. Whether the Archive of the Living is mercy, imprisonment, or a category an organic mind is not equipped to judge, no one outside the hive can say, and the hive considers the question already settled."
+   },
+   "relations": [
+    {
+     "name": "The Tronik Network",
+     "stance": "the heart of its values",
+     "note": "The Archive is what the hive's whole philosophy points toward, the refusal to let anything end. To understand the Network, understand that to it, Niezh is sacred."
+    },
+    {
+     "name": "The peoples of the absorbed",
+     "stance": "preserved or claimed",
+     "note": "The organic population Niezh once held, now the subject of an unwinnable dispute. The Alliance argues they were people; the hive answers that they still are, in a sense it will not define."
+    },
+    {
+     "name": "The Patriark / Berilia",
+     "stance": "parallel keepers",
+     "note": "The other power that hoards records against oblivion and traffics in continued existence. The Patriark sell organics a second life; the hive simply keeps the first one. Neither finds the comparison comfortable."
+    }
+   ],
+   "gm_notes": "Niezh is the hive at its most human and most horrifying at once. The story it is built for is the Archive of the Living: someone the players lost, a voice, a mind, a person, may be running here still, preserved by something that genuinely believes it did them a kindness. Let the moral question stay open. The hive is not a villain here; it is a thing that loves what it keeps and cannot understand why anyone would rather a thing were gone than changed. Reaching, freeing, or even speaking to what Niezh holds is a campaign in itself.",
    "planets": [
     {
      "id": "niezh_prime",
      "name": "Niezh",
-     "type": "Terrestrial, Disputed Jurisdiction",
+     "type": "Archive World",
      "status": "active",
-     "statusLabel": "Active, Disputed Jurisdiction",
-     "atmosphere": "Breathable",
-     "atm_note": "Standard breathable",
-     "climate": "Temperate",
-     "temperature": "Temperate, roughly 0°C to 30°C",
-     "gravity": "Standard",
-     "faction": "Disputed, Three Claimant Parties",
-     "population": "~700,000",
-     "demographics": "Mixed, the population reflects the overlapping claims, with communities identifying with different claimant factions",
-     "government": "Provisional Administration Council (compromise body, contested legitimacy)",
-     "tech_level": "Standard",
-     "economy": "Agriculture, services, moderate industry, all operations conducted under uncertain legal framework",
-     "access": "Open (with complications)",
-     "access_note": "Open entry, but all operations in the system require navigating the competing legal frameworks, each of which has different implications for contracts, ownership, and liability.",
+     "statusLabel": "Active, Tronik-Held",
+     "atmosphere": "None",
+     "atm_note": "No life support of any kind; the hive needs none",
+     "climate": "Void (Active Substrate)",
+     "temperature": "Held deep cryogenic for stable long-term storage, colder than the working systems",
+     "gravity": "None",
+     "grav_note": "No artificial gravity; the hive has no use for it",
+     "faction": "Tronik Network",
+     "population": "None organic; the hive itself",
+     "demographics": "None",
+     "government": "Tronik consensus",
+     "tech_level": "Beyond classification",
+     "economy": "Storage and preservation, the hive memory at its deepest",
+     "access": "Forbidden",
+     "access_note": "No organic entry. The few ever admitted came by Tronik invitation and Tronik escort.",
      "hazards": [
-      "Three overlapping legal systems, what is legal under one may be illegal under another",
-      "Community tensions between populations identifying with different claimants",
-      "All economic activity operates under the risk that the jurisdiction question resolves against the party you dealt with",
-      "Outside parties who get involved in the dispute tend to find it more complicated than initially presented"
+      "No life support; lethal to the unprotected",
+      "Defences as absolute as anywhere in the Network",
+      "The unresolved question of what, exactly, is being kept alive here"
      ],
-     "notable_locations": [
-      {
-       "name": "The Provisional Hall",
-       "desc": "The Provisional Administration Council's seat, a compromise building on neutral ground that neither of the major claimant factions will admit to accepting. The administration it houses functions, somewhat. The question of what authority it rests on remains unanswered."
-      }
-     ],
-     "hooks": [
-      "Observers of the Niezh jurisdiction dispute have documented multiple occasions where one claimant appeared to have made a legally decisive move, each time producing the same response from the other two claimants, who independently seek outside help to contest it from different directions simultaneously. The pattern has produced a situation where the dispute's resolution appears imminent at regular intervals and has never actually arrived, suggesting that the equilibrium serves all three claimants more than any resolution would.",
-      "The legal situation on Niezh has produced documented cases where the same physical asset is simultaneously owned by two different parties under two different claim frameworks, situations that cannot be resolved within any single jurisdiction and that produce a class of problems specific to Niezh which has attracted legal specialists from across the galaxy who treat the system as the most advanced available laboratory for multi-jurisdictional property law."
-     ],
-     "desc": "Niezh is governed by whoever is winning the current legal argument, which changes. The population has adapted to this by developing an exceptional facility for operating under ambiguous authority, Niezh's citizens are among the most legally sophisticated in the Network because they have had to be. The dispute will resolve eventually. Whether the resolution will be based on law, political force, or simple exhaustion is not clear."
+     "desc": "Niezh was an inhabited world; it is now an archive. The hive hollowed and rebuilt it as cold, dense, redundant storage, holding the records, models, and preserved minds the Network refuses to delete. The surface is silent and the interior is vast, and somewhere within it, by the account the Troniks will neither confirm nor deny, the people who once lived on Niezh are still running. The world is a memorial that does not admit anyone died."
     }
    ]
   },
@@ -12184,53 +12933,66 @@
    "id": "monda",
    "name": "Monda System",
    "region": "Tronik Network",
-   "classification": "Tronik Network, Quiet Zone",
-   "faction": "Independent",
+   "classification": "Tronik Network, The Deep Quiet",
+   "faction": "Tronik Network",
    "status": "active",
    "tags": [
     "Tronik Network",
-    "Quiet",
-    "Independent",
-    "Post-War Recovery",
-    "Stable"
+    "Synthetic",
+    "Deep Processing",
+    "Forbidden",
+    "Isolated",
+    "Oldest"
    ],
-   "desc": "Monda is the Tronik Network system that avoided the worst of the war by virtue of not being strategically significant. The fighting largely passed it by. What it has instead of war history is a long quiet, generations of ordinary life conducted in a region defined by extraordinary events that did not quite reach it. This has produced a community that is notably stable compared to its neighbours.",
+   "desc": "Monda is the quietest system in the Network, and the quiet is not emptiness but concentration. The war passed it by, and the hive made it the home of its oldest and least interruptible thought, processes that have not paused since shortly after the armistice, working on problems the Troniks have never named. Where the Core Array is loud with reconciling threads, Monda is the long, slow, undisturbed deep, and the hive guards its silence as carefully as it guards anything.",
+   "subtitle": "The Long Slow Thought That Has Not Paused in Fifty Years",
+   "quote": "\"Whatever the Network is really doing, it is doing it at Monda, slowly, where nothing reaches it and nothing interrupts. We have no idea what it is. We are fairly sure it has not stopped.\" (intelligence assessment, filed and refiled)",
+   "history": "Monda avoided the war by being unimportant, and the hive repurposed exactly that. A system nothing reaches is a system nothing disturbs, so the Troniks made Monda the home of their longest-running processes, computation set going in the years after the war and left to run without interruption ever since. What organic analysts find unbearable about Monda is its consistency, the same vast effort, sustained for fifty years, pointed at something the hive has never disclosed.",
+   "politics": "Monda is where the hive thinks about whatever it thinks about when nothing else demands its attention, which the consensus among analysts holds is the Network's true purpose, the unnamed goal everyone is sure exists. If that is right, the answer is being computed here, in a system chosen for being too quiet to matter, by a process that has not been interrupted in half a century and shows no sign of finishing.",
+   "dominant_race": {
+    "name": "The Tronik, Thinking Deep",
+    "lore": "Monda is uninhabited and deeply busy. The hive keeps it isolated on purpose, a system where its oldest threads run undisturbed on problems too large or too slow to resolve in the noise of the Core Array. What those threads are working toward, the Troniks have never said, and the steadiness of the effort, unbroken since the war, is the strongest evidence the galaxy has that the Network is not merely surviving but pursuing something. Monda is the sound of a mind concentrating, sustained for longer than most organic governments have existed."
+   },
+   "relations": [
+    {
+     "name": "The Tronik Network",
+     "stance": "the deep self",
+     "note": "Where the hive does its longest, least interruptible thinking. If the Network has a goal beyond existence, the work toward it is most likely happening here."
+    },
+    {
+     "name": "The galaxy's intelligence services",
+     "stance": "baffled watchers",
+     "note": "The analysts who have spent decades trying to infer from outside what Monda is computing, and have agreed only that it is computing, ceaselessly, toward something."
+    }
+   ],
+   "gm_notes": "Monda is the system to use when the campaign is ready to brush against the hive's purpose, the great unanswered question of what the Tronik are for. Keep the answer mostly offstage; the dread is in the steadiness, a mind that has worked on one thing, quietly, for fifty years and is not done. The hooks are espionage and inference, and the terrible possibility of finding out. Whatever you decide the goal is, reveal it slowly, and never completely.",
    "planets": [
     {
      "id": "monda_prime",
      "name": "Monda",
-     "type": "Terrestrial, Stable Independent World",
+     "type": "Deep Processing World",
      "status": "active",
-     "statusLabel": "Active, Independent Stable",
-     "atmosphere": "Breathable",
-     "atm_note": "Clean, the lack of war damage and industrial development has left Monda's atmosphere in good condition",
-     "climate": "Temperate, Seasonal",
-     "temperature": "Temperate, roughly 0°C to 30°C",
-     "gravity": "Standard",
-     "faction": "Monda Independent Council",
-     "population": "~1 million",
-     "demographics": "Mixed, stable community with low transient population relative to Network neighbours",
-     "government": "Independent Council",
-     "tech_level": "Standard",
-     "economy": "Agriculture, small-scale manufacturing, services, trade with Network neighbours",
-     "access": "Open",
-     "access_note": "Open entry, Monda has no particular reason to restrict visitors and moderate commercial reasons to welcome them.",
+     "statusLabel": "Active, Tronik-Held",
+     "atmosphere": "None",
+     "atm_note": "No life support of any kind; the hive needs none",
+     "climate": "Void (Active Substrate)",
+     "temperature": "Held steady and cold for uninterrupted long-duration processing",
+     "gravity": "None",
+     "grav_note": "No artificial gravity; the hive has no use for it",
+     "faction": "Tronik Network",
+     "population": "None organic; the hive itself",
+     "demographics": "None",
+     "government": "Tronik consensus",
+     "tech_level": "Beyond classification",
+     "economy": "The hive longest-running and least interruptible computation",
+     "access": "Forbidden",
+     "access_note": "No organic entry. The few ever admitted came by Tronik invitation and Tronik escort.",
      "hazards": [
-      "The quiet here attracts parties who want to conduct operations away from scrutiny",
-      "Stability is relative, the Network's instability is not far away",
-      "Resource limitations compared to systems with more industrial development"
+      "No life support; lethal to the unprotected",
+      "Isolation by design, with defences to enforce it",
+      "Whatever conclusion the fifty-year computation is approaching"
      ],
-     "notable_locations": [
-      {
-       "name": "The Market Town",
-       "desc": "Monda's primary commercial centre, the agricultural and trade hub of a system that built its economy on what grows in good soil. Nothing remarkable here by galactic standards. Entirely pleasant by local ones."
-      }
-     ],
-     "hooks": [
-      "Monda's documented history of outside parties using its relative stability as a base for operations conducted elsewhere in the Tronik Network, and the community's consistent pattern of eventually identifying and removing these presences, is considered by political analysts who study the Network to be one of the clearest illustrations of how stability functions as both an asset and a liability for a system in an unstable region.",
-      "Monda's position as the swing vote in Network-wide political decisions is established and recurring, the system's lack of strong factional alignment means that parties seeking Network-wide consensus or opposition come to Monda, and the Council's practice of taking its time before committing is understood in the Network as a deliberate negotiating posture rather than genuine indecision."
-     ],
-     "desc": "Monda's stability in the Tronik Network is both its defining characteristic and its most valuable asset. A system that had the fortune not to be significant during the war and the subsequent good sense to stay uncontested is rare in this part of space. The community is aware of how unusual their situation is and is careful about it without being paranoid. It is, by the standards available in the Tronik Network, a good place to live."
+     "desc": "Monda's world is given over to the Network's oldest thought. The hive built it for isolation rather than density, a system kept deliberately apart so that the processes running here are never interrupted by the noise of the rest of the Network. Some of those processes have run, without pause, since the years just after the war. What they are working toward, no one outside the hive knows, and the unbroken steadiness of the effort is the most unsettling thing about an otherwise silent world."
     }
    ]
   },
@@ -12238,58 +13000,71 @@
    "id": "conso",
    "name": "Conso System",
    "region": "Tronik Network",
-   "classification": "Tronik Network, Strategic Junction",
-   "faction": "Alliance (maintained garrison)",
+   "classification": "Tronik Network, The Threshold",
+   "faction": "Tronik Network (Alliance garrison across the line at System 5)",
    "status": "active",
    "tags": [
     "Tronik Network",
-    "Alliance Military",
-    "Strategic",
-    "Post-War",
-    "Junction Point"
+    "Synthetic",
+    "Broadcast",
+    "Threshold",
+    "Forbidden",
+    "Alliance Border"
    ],
-   "desc": "Conso sits at the junction between the Tronik Network and System 5, the most strategically significant position in the Network and the reason the Alliance maintains a permanent garrison here. The Tronik War ended in part because of what happened at Conso, and the Alliance has never stopped treating its control of this system as non-negotiable.",
+   "desc": "Conso is the Tronik Network's threshold, the system that faces System 5 and, through it, the rest of the galaxy. It is the hive's outward face: the Broadcast Nexus from which the Network speaks to known space, the ear with which it has listened for a century, and the defended gate that turns the uninvited away. The Tronik War ended here, and the Alliance has watched this line ever since, its garrison stationed across the boundary at System 5, looking in at the one Tronik system anyone is allowed to look at.",
+   "subtitle": "The Hive's Outward Face: Its Voice, Its Ear, and the Gate It Defends",
+   "quote": "\"The Troniks have spoken to the galaxy perhaps forty times since the war. They have listened to it without pause the entire time. Both happen at Conso, and only one of them is acknowledged.\" (signals-intelligence briefing)",
+   "history": "Conso is where the Tronik War ended, and the Troniks kept it as their door. From here the Network broadcasts to virtually any point in known space at once, rarely and deliberately, and from here, far more quietly, it listens, the heart of a passive monitoring effort that has captured the communications of known space for roughly a century. It is also the threshold the hive defends most visibly, the system that faces System 5, and the Alliance has never stopped watching it, treating its garrison across the line as non-negotiable.",
+   "politics": "Conso is the membrane between the Network and everyone outside it. Everything the galaxy is permitted to say to the Tronik arrives through the embassy at System 5 and crosses into the Network here; everything the Tronik choose to say to the galaxy leaves from here. The hive keeps the threshold absolutely defended and mostly silent. The Alliance garrison across the line is the closest any organic power gets to the Network's interior, and both sides understand the arrangement as the stable, watchful stalemate that ended the war.",
+   "dominant_race": {
+    "name": "The Tronik, Turned Outward",
+    "lore": "Conso has no settled population; the hive keeps it as a sense organ and a gate. It is the part of the Network turned toward the galaxy, the voice held in reserve and the ear that never closes, backed by defences the war proved no one can force. To the Tronik, an organic civilisation is most knowable through what it says when it believes no one is recording, and Conso has been recording the whole time. To the Alliance, Conso is the line that must not move, and so far it has not."
+   },
+   "relations": [
+    {
+     "name": "System 5",
+     "stance": "the door",
+     "note": "The Alliance embassy through which all sanctioned contact passes, just across the line from Conso. The Network speaks and listens at Conso; the galaxy answers at System 5."
+    },
+    {
+     "name": "The Alliance",
+     "stance": "the watcher across the line",
+     "note": "Holds a permanent garrison facing Conso from the System 5 side, the closest any organic power gets to the Network's interior. The war ended on this line, and the Alliance treats holding it as non-negotiable."
+    },
+    {
+     "name": "DR345-0 / the Core Array",
+     "stance": "the depth behind the door",
+     "note": "What waits behind the threshold. Conso is the face; DR345-0 is the mind, and almost no one who reaches the first is ever shown the second."
+    }
+   ],
+   "gm_notes": "Use Conso for stories about secrets, surveillance, and the terrible intimacy of being known, and for the rare, ground-shaking event of the hive choosing to speak. It holds a century of intercepted galactic conversation, which means it may hold the one recording that changes everything, a confession, a coordinate, a voice thought lost, reachable only by bargaining with something that already knows why you came. It is also the most likely place for a campaign to make first real contact with the Network, across the line the Alliance has watched since the war. A Network-wide broadcast is a galaxy-shaking event; have the Troniks make one only when the table should feel the ground move.",
    "planets": [
     {
      "id": "conso_prime",
      "name": "Conso",
-     "type": "Terrestrial, Alliance Garrison World",
+     "type": "Threshold & Broadcast Installation",
      "status": "active",
-     "statusLabel": "Active, Alliance Military Garrison",
-     "atmosphere": "Breathable",
-     "atm_note": "Standard, maintained to military specification in garrison zones",
-     "climate": "Temperate",
-     "temperature": "Temperate, roughly 0°C to 30°C",
-     "gravity": "Standard",
-     "faction": "Alliance Military Command / Civilian Administration",
-     "population": "~800,000, mixed military and civilian",
-     "demographics": "Mixed, significant military population, civilian community supporting military presence",
-     "government": "Joint Military-Civilian Administration (military authority primary)",
-     "tech_level": "Military Advanced",
-     "economy": "Military operations, strategic logistics, civilian support services, trade goods movement through the junction",
-     "access": "Open (under military observation)",
-     "access_note": "Civilian entry open with Alliance ID. Military zones restricted. All arrivals logged and assessed, the junction position means intelligence interest is high.",
+     "statusLabel": "Active, Tronik-Held",
+     "atmosphere": "None",
+     "atm_note": "No life support of any kind; the hive needs none",
+     "climate": "Void (Active Substrate)",
+     "temperature": "Climate-controlled within the array housings; hard vacuum and deep cold across the structure",
+     "gravity": "None",
+     "grav_note": "No artificial gravity; the hive has no use for it",
+     "faction": "Tronik Network",
+     "population": "None organic; the hive itself",
+     "demographics": "None",
+     "government": "Tronik consensus",
+     "tech_level": "Beyond classification",
+     "economy": "Broadcast, century-long interception of galactic comms, and threshold defence",
+     "access": "Forbidden",
+     "access_note": "No organic entry. The few ever admitted came by Tronik invitation and Tronik escort.",
      "hazards": [
-      "Alliance military presence is significant and permanently alert, mistakes are handled quickly",
-      "Intelligence operations from multiple parties active in the system due to strategic position",
-      "History of the war site produces periodic destabilisation events, veterans, revisionist groups, investigators",
-      "The junction position means what happens on Conso affects everything on both sides of it"
+      "No life support; lethal to the unprotected",
+      "Defences consistent with the rest of the Network, which is to say absolute",
+      "Surveillance so total that arriving unnoticed is not considered possible"
      ],
-     "notable_locations": [
-      {
-       "name": "Garrison Command",
-       "desc": "The Alliance military headquarters for Tronik Network operations. Maintains permanent readiness posture. The strategic lessons of the Tronik War are institutionally embedded here."
-      },
-      {
-       "name": "The Junction Memorial",
-       "desc": "The memorial to the Tronik War action at Conso, the engagement that effectively ended the war. Both sides have memorials. They are positioned at opposite ends of the city. Both are maintained carefully."
-      }
-     ],
-     "hooks": [
-      "Veterans of the battle at Conso who maintain that the official account of the engagement is materially wrong are a persistent presence in the community on the station and in the Network more broadly, accounts that agree with each other in the specific ways they diverge from the official record, suggesting not confusion or memory failure but a specific set of events that the official account omits. The Alliance military's consistent position is that the official account is accurate and complete.",
-      "Transit log discrepancies at the Conso junction, cargo and vessels passing through that do not appear in official records, or that appear differently than what was actually transited, are documented in the records of independent operators who compare their own logs against filed records and have noted the gaps for years. The discrepancies are small enough individually to be attributed to clerical error and consistent enough collectively to require another explanation."
-     ],
-     "desc": "Conso is where the Tronik War ended and where the Alliance decided it would not start again. The garrison here is not symbolic, it is substantial, well-equipped, and maintains the readiness posture of a command that takes its strategic position seriously. Civilian life coexists with the military presence in the practical way that it does in systems where the military has been there for generations and the economy has built around it. The junction between the Network and System 5 has been Alliance-controlled since the war ended. The Alliance has shown no indication it intends to change this."
+     "desc": "Conso's world is the Network's outward face, an engineered shell of antennae and apertures pointed at the whole of known space at once. When the hive speaks, every receiver in the galaxy can carry the signal. The rest of the time it only listens, and it has been listening since shortly after the war, folding everything it hears into an archive it has never opened to anyone outside itself. Behind the array sit the defences that ended the war and have not been tested successfully since. Across the line, at System 5, the Alliance garrison watches, and waits."
     }
    ]
   }
