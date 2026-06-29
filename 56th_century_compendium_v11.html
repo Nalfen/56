@@ -3869,6 +3869,93 @@ function gcStat(label,value,colorClass,note){
 
 // ─── Galactic Catalogue Toggle ────────────────────────────────────────────────
 function gcToggleAcc(id){var el=document.getElementById(id);if(el)el.classList.toggle('open');}
+/* 17.0 — System lore block (Politics & Society). Additive: renders only if a system carries the
+   expanded lore fields (subtitle/quote/history/politics/dominant_race/race_standing/relations/gm_notes). */
+function gcLoreToneCls(t){t=(t||'').toLowerCase();
+  if(t==='welcome'||t==='ally'||t==='aligned')return'tg';
+  if(t==='hostile'||t==='rival'||t==='enemy'||t==='exploitative')return'tr';
+  if(t==='wary'||t==='tense')return'ty';
+  if(t==='complicated')return'to';
+  if(t==='dependent')return'tb';
+  return'tgr';}
+function gcSysLore(sys){
+  if(!sys)return'';
+  var has=sys.subtitle||sys.quote||sys.history||sys.politics||sys.dominant_race||(sys.race_standing&&sys.race_standing.length)||(sys.relations&&sys.relations.length)||sys.gm_notes;
+  if(!has)return'';
+  var accId='gc-acc-lore-'+esc(sys.id);
+  var h='<div class="gc-region-acc" id="'+accId+'" style="margin-top:10px;">';
+  h+='<div class="gc-region-acc-hd" onclick="gcToggleAcc(\''+accId+'\')">';
+  h+='<span class="gc-region-acc-title">Politics &amp; Society</span><span class="gc-region-acc-arr">▼</span></div>';
+  h+='<div class="gc-region-acc-body">';
+  if(sys.subtitle)h+='<div style="font-family:\'Chakra Petch\',sans-serif;color:var(--a);font-size:12.5px;letter-spacing:.03em;margin:2px 0 8px;">'+esc(sys.subtitle)+'</div>';
+  if(sys.quote)h+='<div style="border-left:2px solid var(--a);padding:6px 12px;margin:0 0 12px;font-style:italic;color:var(--tx2);font-size:12.5px;line-height:1.6;">'+esc(sys.quote)+'</div>';
+  if(sys.history){h+='<div class="gc-sec-div">History</div><div class="gc-desc-block" style="margin-bottom:12px;">'+descHtml(sys.history,'')+'</div>';}
+  if(sys.politics){h+='<div class="gc-sec-div">Political System</div><div class="gc-desc-block" style="margin-bottom:12px;">'+descHtml(sys.politics,'')+'</div>';}
+  if(sys.dominant_race&&(sys.dominant_race.name||sys.dominant_race.lore)){
+    h+='<div class="gc-sec-div">Dominant People'+(sys.dominant_race.name?': '+esc(sys.dominant_race.name):'')+'</div>';
+    if(sys.dominant_race.lore)h+='<div class="gc-desc-block" style="margin-bottom:12px;">'+descHtml(sys.dominant_race.lore,'')+'</div>';
+  }
+  if(sys.race_standing&&sys.race_standing.length){
+    h+='<div class="gc-sec-div">Races &amp; Standing</div><div style="margin-bottom:12px;">';
+    sys.race_standing.forEach(function(r){
+      h+='<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:7px;">';
+      h+='<span class="tag '+gcLoreToneCls(r.tone)+'" style="flex:0 0 auto;min-width:78px;text-align:center;">'+esc(r.race)+'</span>';
+      h+='<span style="font-size:12px;color:var(--tx2);line-height:1.55;">'+esc(r.note||'')+'</span></div>';
+    });
+    h+='</div>';
+  }
+  if(sys.relations&&sys.relations.length){
+    h+='<div class="gc-sec-div">Key Relations</div><div style="margin-bottom:12px;">';
+    sys.relations.forEach(function(r){
+      h+='<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:7px;">';
+      h+='<span class="tag '+gcLoreToneCls(r.stance)+'" style="flex:0 0 auto;min-width:78px;text-align:center;">'+esc(r.stance||'')+'</span>';
+      h+='<span style="font-size:12px;color:var(--tx2);line-height:1.55;"><b style="color:var(--tx);">'+esc(r.name)+':</b> '+esc(r.note||'')+'</span></div>';
+    });
+    h+='</div>';
+  }
+  if(sys.gm_notes){h+='<div class="gc-sec-div">GM Notes</div><div class="gc-desc-block" style="border-left:2px solid var(--ye);padding-left:10px;">'+descHtml(sys.gm_notes,'')+'</div>';}
+  h+='</div></div>';
+  return h;
+}
+/* 17.0 — Planet local specialties (food / drink / goods). Additive: renders only if a planet carries
+   a `specialties` array of {name, kind, desc}. Used in the planet detail panel (gcOpenPlanet). */
+function gcSpecialties(p){
+  if(!p||!p.specialties||!p.specialties.length)return'';
+  var h='<div class="gc-psec"><div class="gc-psec-title">Local Specialties</div><div class="gc-loc-list">';
+  p.specialties.forEach(function(sp){
+    h+='<div class="gc-loc"><div class="gc-loc-name">'+esc(sp.name)+(sp.kind?' <span class="tag tgr" style="font-size:9px;vertical-align:middle;">'+esc(sp.kind)+'</span>':'')+'</div><div class="gc-loc-desc">'+esc(sp.desc||'')+'</div></div>';
+  });
+  h+='</div></div>';
+  return h;
+}
+/* 17.0 — Faction lore block (Lore & Politics). Additive: renders only if a faction carries expanded
+   lore fields (subtitle/quote/history/politics/culture/relations). Mirrors gcSysLore. */
+function gcFacLore(f){
+  if(!f)return'';
+  var has=f.subtitle||f.quote||f.history||f.politics||f.culture||(f.relations&&f.relations.length);
+  if(!has)return'';
+  var accId='gc-acc-faclore-'+esc(f.id);
+  var h='<div class="gc-region-acc" id="'+accId+'" style="margin:6px 0 10px;">';
+  h+='<div class="gc-region-acc-hd" onclick="gcToggleAcc(\''+accId+'\')">';
+  h+='<span class="gc-region-acc-title">Lore &amp; Politics</span><span class="gc-region-acc-arr">▼</span></div>';
+  h+='<div class="gc-region-acc-body">';
+  if(f.subtitle)h+='<div style="font-family:\'Chakra Petch\',sans-serif;color:var(--a);font-size:12.5px;letter-spacing:.03em;margin:2px 0 8px;">'+esc(f.subtitle)+'</div>';
+  if(f.quote)h+='<div style="border-left:2px solid var(--a);padding:6px 12px;margin:0 0 12px;font-style:italic;color:var(--tx2);font-size:12.5px;line-height:1.6;">'+esc(f.quote)+'</div>';
+  if(f.history){h+='<div class="gc-sec-div">History</div><div class="gc-desc-block" style="margin-bottom:12px;">'+descHtml(f.history,'')+'</div>';}
+  if(f.politics){h+='<div class="gc-sec-div">Power Structure</div><div class="gc-desc-block" style="margin-bottom:12px;">'+descHtml(f.politics,'')+'</div>';}
+  if(f.culture){h+='<div class="gc-sec-div">Culture</div><div class="gc-desc-block" style="margin-bottom:12px;">'+descHtml(f.culture,'')+'</div>';}
+  if(f.relations&&f.relations.length){
+    h+='<div class="gc-sec-div">Key Relations</div><div style="margin-bottom:4px;">';
+    f.relations.forEach(function(r){
+      h+='<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:7px;">';
+      h+='<span class="tag '+gcLoreToneCls(r.stance)+'" style="flex:0 0 auto;min-width:78px;text-align:center;">'+esc(r.stance||'')+'</span>';
+      h+='<span style="font-size:12px;color:var(--tx2);line-height:1.55;"><b style="color:var(--tx);">'+esc(r.name)+':</b> '+esc(r.note||'')+'</span></div>';
+    });
+    h+='</div>';
+  }
+  h+='</div></div>';
+  return h;
+}
 function gcSetSection(idx){gcSection=(idx===null||idx===undefined)?null:idx;af='';sq='';render();}
 
 function gcToggleSystem(id){
@@ -3904,6 +3991,7 @@ function gcOpenPlanet(si,pi){
   h+='<div class="gc-stat-g">';
   h+=gcStat('Atmosphere',p.atmosphere,gcAtmColor(p.atmosphere),p.atm_note);
   h+=gcStat('Climate',p.climate);
+  if(p.temperature)h+=gcStat('Temperature',p.temperature);
   h+=gcStat('Gravity',p.gravity,gcGravColor(p.gravity),p.grav_note);
   h+=gcStat('Planet Type',p.type);
   h+='</div></div>';
@@ -3944,6 +4032,8 @@ function gcOpenPlanet(si,pi){
     });
     h+='</div></div>';
   }
+  // Local specialties (food / drink / goods)
+  h+=gcSpecialties(p);
   // Rumours & Observed Facts
   if(p.hooks&&p.hooks.length){
     var pHkId='gc-acc-phooks-'+si+'-'+pi;
@@ -8494,6 +8584,7 @@ function render(){
         if(sys.tags&&sys.tags.length)h+='<div class="gc-sys-tags">'+sys.tags.map(function(t){return '<span class="tag tgr">'+esc(t)+'</span>';}).join('')+'</div>';
         if(sys.desc)h+='<div class="gc-sys-excerpt">'+descHtml(sys.desc,sq)+'</div>';
         h+='<div class="gc-system-body">';
+        h+=gcSysLore(sys);
         if(wldCnt){
           h+='<div class="gc-planets-hint">🖱 Click any world to open detailed profile in the side panel</div>';
           h+='<div class="gc-planets-head"><span>World</span><span>Type</span><span style="text-align:right;">Atmosphere</span><span style="text-align:right;">Access</span></div>';
@@ -8560,9 +8651,9 @@ function render(){
       // Apply search
       if(sq){
         sectionSystems=sectionSystems.filter(function(sys){
-          if(ms([sys.name,sys.region,sys.faction,sys.classification,sys.desc,...(sys.tags||[])]))return true;
+          if(ms([sys.name,sys.region,sys.faction,sys.classification,sys.desc,sys.subtitle,sys.history,sys.politics,sys.gm_notes,(sys.dominant_race||{}).name,(sys.dominant_race||{}).lore,...(sys.tags||[]),...((sys.race_standing||[]).flatMap(function(r){return[r.race,r.note];})),...((sys.relations||[]).flatMap(function(r){return[r.name,r.note];}))]))return true;
           return (sys.planets||[]).some(function(p){
-            return ms([p.name,p.type,p.desc,p.faction,p.economy,p.demographics,p.government,p.atmosphere,p.climate,p.access,...(p.hazards||[]),...((p.notable_locations||[]).flatMap(function(l){return [l.name,l.desc];})),...(p.hooks||[])]);
+            return ms([p.name,p.type,p.desc,p.faction,p.economy,p.demographics,p.government,p.atmosphere,p.climate,p.temperature,p.access,...(p.hazards||[]),...((p.notable_locations||[]).flatMap(function(l){return [l.name,l.desc];})),...((p.specialties||[]).flatMap(function(sp){return [sp.name,sp.desc];})),...(p.hooks||[])]);
           });
         });
       }
@@ -8603,7 +8694,7 @@ function render(){
     var flist=g.factions||[];
     // Filter by search
     var fSearched=sq?flist.filter(function(f){
-      return ms([f.name,f.short,f.category,f.subcategory,f.alignment,f.hq,f.desc,f.legal_standing].concat(f.known_for||[]).concat(f.presence||[]).concat(f.regions||[]));
+      return ms([f.name,f.short,f.category,f.subcategory,f.alignment,f.hq,f.desc,f.legal_standing,f.subtitle,f.history,f.politics,f.culture].concat(f.known_for||[]).concat(f.presence||[]).concat(f.regions||[]).concat((f.relations||[]).map(function(r){return r.name+' '+r.note;})));
     }):flist;
     // Filter by category
     var fCats=['All','Megacorporation','Corporation','Political / Religious','Political / Synthetic','Trade Organization','Local Faction','Outlaw'];
@@ -8661,6 +8752,7 @@ function render(){
         html+='<div class="cb">';
         if(f.status)html+='<div class="fg" style="margin-bottom:8px;"><div class="f"><div class="fl">Status</div><div class="fv">'+esc(f.status)+'</div></div></div>';
         if(f.desc)html+='<div style="font-size:12px;line-height:1.7;color:#c0c0c0;font-family:\'Exo 2\',sans-serif;margin-bottom:10px;">'+descHtml(f.desc,sq)+'</div>';
+        html+=gcFacLore(f);
         if(f.presence&&f.presence.length){
           html+='<div style="margin-bottom:8px;"><div style="font-size:10.5px;color:var(--a);font-family:\'Chakra Petch\',sans-serif;letter-spacing:.05em;margin-bottom:4px;">PRESENCE</div>';
           html+='<div style="display:flex;flex-wrap:wrap;gap:4px;">';

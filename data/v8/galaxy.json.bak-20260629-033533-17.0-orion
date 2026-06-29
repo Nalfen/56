@@ -920,46 +920,19 @@
     "Alliance Space, dominant",
     "Galactic presence in all major regions"
    ],
-   "desc": "The Galactic Union is the largest megacorporation in the galaxy, which undersells it, because the Galactic Union is not one corporation but thousands. It is a union of member companies spanning finance, manufacturing, communications, shipping, and nearly every other field, governed by its own internal senate and executive council. What sets it apart is self-sufficiency. The GU imports almost nothing; when it needs a resource or a capability, it acquires the source rather than buying the product, folding whole industries into itself until it depends on no one. It is one of the major manufacturers in known space and a relentless exporter, and it answers, in the end, only to itself. It is a corporate power, distinct from the Alliance, whatever outsiders assume.",
+   "desc": "The Galactic Union is the largest and most powerful corporation in the known galaxy, and by most honest measures, the entity that actually runs Alliance governance while maintaining the polite fiction that the senate does. It controls financial infrastructure, interstellar communications, and the largest non-military fleet in existence. It holds permanent advisory seats on most Alliance regulatory bodies and has provisions in its founding charter for assuming emergency executive authority should the senate dissolve. Those provisions have never been triggered, which is either reassuring or a sign they have never needed to be. The GU does not manufacture weapons or armies directly. It manufactures everything that makes weapons and armies possible: credits, information, influence, and the carefully maintained stability that lets everyone else believe they are making their own decisions.",
    "known_for": [
-    "The largest megacorporation in the galaxy, a union of thousands of member companies",
-    "Near-total self-sufficiency: it acquires resources and capabilities rather than importing them",
-    "One of the galaxy's major manufacturers and a relentless exporter",
-    "Self-governed by its own internal senate and executive council, seated on Orion 3",
-    "The classified GU contingency protocols, contents unknown"
+    "Financial infrastructure and credit issuance across Alliance Space",
+    "The largest commercial fleet network in the galaxy",
+    "Permanent advisory presence in the Alliance senate",
+    "The classified GU contingency protocols, content unknown",
+    "Orion 3: the first successful artificial planet, GU-built and GU-controlled"
    ],
    "regions": [
     "Alliance Space"
    ],
    "status": "Active, dominant",
-   "legal_standing": "Fully legal; operates within Alliance law (largely because it helped write it)",
-   "subtitle": "Not a Corporation but a Thousand, Answerable Only to Itself",
-   "quote": "\"The Union does not buy what it can own, and it does not import what it can absorb. Give it long enough and it needs no one, which is precisely the position it has spent centuries arranging.\" (Alliance trade-commission assessment)",
-   "history": "The Galactic Union began as a handful of companies that found cooperation more profitable than competition, and it never stopped adding members. Over centuries it grew into a union of thousands, a corporation made of corporations, and it settled on the principle that has defined it since: dependence is a weakness, and the cure for dependence is acquisition. Rather than import what it needed, the GU bought whoever made it.\nIts grandest undertaking was Orion. With OrionWorks, the GU built the only manufactured capital in history, world by world, and seated its own governance there. OrionWorks is gone now, lost with the Tronik War that one persistent account lays at its door, but the Union it helped raise to dominance remains, larger and more self-contained than ever.",
-   "politics": "The GU is governed as a federation of its member companies, through an internal senate and an executive council seated on Orion 3. This is its own apparatus and not the Alliance's; the Union is a corporate power that coexists with the political union and frequently outweighs it, without ever being it. Its strength is not a seat in anyone's government but the plain fact that so much of the galaxy's manufacturing, finance, and shipping happens inside the GU, on the GU's terms.\nSelf-sufficiency is the doctrine under all of it. The Union has spent its whole existence removing its own dependencies, buying suppliers and competitors and entire industries until it imports almost nothing and exports a great deal. A power that needs no one is very hard to pressure, and the GU has arranged to need no one. What its classified contingency protocols are for, no one outside the executive council knows, and the council behaves as though the question was answered long ago.",
-   "culture": "The Union's culture is the patience of an institution that means to outlast every rival by owning the conditions of its own survival. It does not gamble; it acquires. It prefers ownership to alliance and capability to contract, and quiet dominance to open display. Inside its thousands of member companies the competition is fierce, but it is competition within a family that closes ranks the instant the family itself is threatened.",
-   "relations": [
-    {
-     "name": "OrionWorks",
-     "stance": "the ghost",
-     "note": "Its partner in building the artificial worlds and Ramirez, now defunct, and the likeliest source of the Tronik War. The GU inherited the legacy and the suspicion together, and keeps both buried in Orion's sealed districts."
-    },
-    {
-     "name": "The Alliance",
-     "stance": "distinct power",
-     "note": "The political union the GU coexists with and frequently overshadows. The two are separate, whatever outsiders assume, and the GU is content to let the Alliance govern so long as governing does not interfere with owning."
-    },
-    {
-     "name": "Arms Corp & Yamato",
-     "stance": "peers",
-     "note": "The other two powers of the Big 3, kept close and watched closely. The GU is first among the three and careful never to be heard saying so."
-    },
-    {
-     "name": "The galaxy's industries",
-     "stance": "acquisition targets",
-     "note": "Every supplier, competitor, and capability the GU does not yet own is, in the long run, something it intends to. Its preferred relationship with any business that matters is ownership."
-    }
-   ]
+   "legal_standing": "Fully legal; operates within Alliance law (largely because it helped write it)"
   },
   {
    "id": "arms_corp",
@@ -2283,97 +2256,21 @@
    "id": "orion",
    "name": "Orion System",
    "region": "Alliance Space",
-   "classification": "Core System, Galactic Capital",
+   "classification": "Core System",
    "faction": "Galactic Union / Alliance",
    "status": "active",
    "tags": [
     "Alliance Space",
-    "Galactic Union",
     "Seat of Power",
-    "Artificial Worlds",
-    "OrionWorks",
     "Heavily Defended",
     "Political Centre"
    ],
-   "desc": "Orion is the political and corporate centre of the known galaxy, and the only capital anyone ever built from scratch. Its worlds run the whole span from a humble trade station to a gleaming artificial capital to a war-scarred survivor to an unfinished frame that will never be completed. It is the seat of the Galactic Union and the tomb of OrionWorks, the organisation that built the artificial worlds and, by one persistent account, started the Tronik War. Nowhere in Alliance space is more defended, more surveilled, or more consequential.",
-   "subtitle": "The Built Heart of the Galaxy, Five Worlds From Trade Hub to Tomb",
-   "quote": "\"Every other capital in history was handed to its rulers by a planet. Orion the Galactic Union built for itself, one world at a time, and it shows in everything from the skyline to the politics.\" (GU orientation address)",
-   "history": "Orion began as a single space station that grew into the busiest trade hub in known space, the structure now called Orion 1. It is still there, though deliberately scaled down once the artificial worlds were finished, trimmed from a sprawling megastructure into something the GU could actually keep running.\nThe artificial worlds came next, and they came hard. Orion 2 was the first true attempt to build a planet from nothing, and it failed. It is space debris now, fully decommissioned and salvaged for parts while Orion 3 was under construction, but its failure produced something that mattered more than the world would have. To run a planet, OrionWorks built the Ramirez AI, a planetary-scale intelligence created precisely because Orion 2 had proven that nothing smaller could manage the job.\nWhat they learned, and Ramirez, built Orion 3 and Orion 4, the two artificial worlds still in use today. Orion 3 became the gleaming seat of the Galactic Union. Orion 4 became OrionWorks' own world, the most advanced place that ever existed, until the Tronik War. It survives, inhabited and working, but scarred, whole districts sealed behind the damage, while OrionWorks itself did not survive at all.\nOrion 5 was meant to be the last and the greatest, the promised land, and it will stay a frame forever, because OrionWorks is gone and no one else can finish it. The same is true of Ramirez. Most of the great AI was lost when its makers fell, and what survived hides in the sealed districts of Orion 4 in fragments, possibly intact and possibly corrupted, treated as a hazard either way. Enough of it was salvaged to keep Orion 3 running. The rest is somebody's problem waiting to happen.",
-   "politics": "Orion is the seat of the Galactic Union, the largest megacorporation in the galaxy, and it runs on corporate power before any other kind. The GU governs itself here through its own senate and executive council, a self-contained apparatus that is emphatically not the Alliance, however often outsiders confuse the two. The Union does not govern Alliance space. It simply owns so much of what Alliance space runs on that the distinction rarely costs it anything.\nOrion 3 is the most surveilled and most politically dense place in the galaxy, where what you know and whom you know outweigh anything you can actually do. Careers and lives turn on associations, the security forces answer fast and finally, and it is a clean, efficient, lethal place to hold power.\nOver all of it hangs the ghost of OrionWorks, the organisation that built the worlds and Ramirez, and that one persistent account blames for starting the Tronik War. The GU does not encourage the question, partly from discretion and partly because the answer lies in the same sealed districts where the broken pieces of Ramirez still stir.",
-   "dominant_race": {
-    "name": "The Capital Class, and the Understrata Beneath It",
-    "lore": "Orion has no native population, only the most cosmopolitan and most political one in the galaxy. Every power that matters keeps a presence on Orion 3, and around them turns a vast working population of administrators, financiers, fixers, and functionaries, the people who operate the machinery of galactic power and live or die by proximity to it.\nBeneath them is the Understrata, the labour and the service and the maintenance that an artificial capital requires without pause, much of it Non-Born and automated. The gleaming city above is real, and so is the fact that it sits on the shoulders of people it is built not to notice. On Orion the senate debates, the Galactic Union decides, and the staff who clean the halls hear both."
-   },
-   "race_standing": [
-    {
-     "race": "Human",
-     "tone": "welcome",
-     "note": "The Galactic Union is, at its core, a human institution, and Orion is the seat of the power humans built. They run it from the top and staff it from the bottom, and a human with the right associations can climb further here than anywhere."
-    },
-    {
-     "race": "Patriark",
-     "tone": "welcome",
-     "note": "Master politicians in the one arena built for politics. The Patriark are deeply woven into Orion's power games and are among the very few who can play the long game against the GU and not simply lose. Indispensable, and never quite trusted."
-    },
-    {
-     "race": "Psylon",
-     "tone": "neutral",
-     "note": "Prized through the financial and intelligence machinery of the GU, where reading a room or a market is worth a fortune. Valued, used, and kept to the analytical end of the building."
-    },
-    {
-     "race": "Nerulian",
-     "tone": "wary",
-     "note": "Menace counts for little in a city run on information and influence, and a Nerulian draws surveillance from the moment they dock. Tolerated, watched, and rarely comfortable."
-    },
-    {
-     "race": "Hakari",
-     "tone": "neutral",
-     "note": "Security, couriers, and quiet enforcement for players who need things moved or people watched. A capital this political always has work for fast, discreet hands."
-    },
-    {
-     "race": "Jaulaus",
-     "tone": "neutral",
-     "note": "The muscle behind the powerful, standing in the doorways of people who can afford the very best. Respected for exactly what they are."
-    },
-    {
-     "race": "Skalander",
-     "tone": "neutral",
-     "note": "Rare, and valued as bodyguards and brokers whose word holds in a city where almost no one's does. Trust is scarce on Orion, which makes a Skalander worth a great deal."
-    },
-    {
-     "race": "Non-Born",
-     "tone": "complicated",
-     "note": "The capital runs on Non-Born labour and always has. The artificial worlds were built and are maintained by the Non-Born and the machines, and the Understrata that keeps Orion alive is largely theirs. The most powerful place in the galaxy rests on the people it notices least."
-    }
-   ],
-   "relations": [
-    {
-     "name": "The Galactic Union",
-     "stance": "seat",
-     "note": "The largest megacorporation in the galaxy, headquartered in the capital it built. Orion is the GU made solid, corporate power given an address."
-    },
-    {
-     "name": "The Alliance",
-     "stance": "distinct power",
-     "note": "The political union of Alliance space, a separate institution that outsiders constantly mistake for the GU. Both keep a presence on Orion, the galaxy's political centre, and the GU is careful to remain the power that owns the room rather than the one that governs it."
-    },
-    {
-     "name": "OrionWorks",
-     "stance": "the ghost",
-     "note": "The defunct builders of the artificial worlds and of Ramirez, whose legacy keeps Orion standing and whose possible hand in starting the Tronik War keeps it quiet. The system is as much their tomb as the GU's seat."
-    },
-    {
-     "name": "Arms Corp & Yamato",
-     "stance": "peers",
-     "note": "The other two powers of the Big 3, keeping their presence on Orion as they must. The GU is first among the three and takes care never to be heard saying so."
-    }
-   ],
-   "gm_notes": "Run Orion as the built heart of corporate power, clean and gleaming and watched by everyone. Influence is the currency, surveillance is total, and the dangerous mistake is never a drawn weapon but a wrong association. Keep the GU and the Alliance distinct in play: the Union owns, the Alliance governs, and on Orion it is the owning that decides things. The system's two great mysteries are built for campaigns, whether OrionWorks started the Tronik War, an answer the GU has buried, and what remains of Ramirez, the planetary AI that once ran these worlds, now broken into fragments in the sealed districts of Orion 4, possibly intact, possibly corrupted, and hazardous either way. Salvage into those districts is the classic high-risk run.",
+   "desc": "The Orion system is the political and corporate centre of the known galaxy, five worlds across every stage of construction, ruin, and ambition. Home to the Galactic Union and the ghost of OrionWorks, the organisation that built artificial planets and may have started the Tronik War. It is heavily defended, intensely surveilled, and the kind of place where what you know and who you know matters more than what you can do.",
    "planets": [
     {
      "id": "orion_1",
      "name": "Orion 1",
-     "type": "Space Station, Spaceport & Trade Hub (Scaled Down)",
+     "type": "Space Station, Major Spaceport & Trade Hub",
      "status": "active",
      "statusLabel": "Active, Major Spaceport",
      "atmosphere": "Breathable",
@@ -2419,14 +2316,14 @@
       "Scholars studying the original GU charter have long noted that access records for the Historical Archive do not correlate with any documented visitor logs, suggesting routine off-record access by parties whose identities are deliberately excluded from the official register.",
       "Station workers who have served long rotations at Orion 1 say the military substations conduct silent lockdowns periodically with no prior notice and no explanation filed afterward. The practice is so well-established that the civilian staff have developed their own informal warning system to avoid being caught in restricted corridors."
      ],
-     "desc": "Orion 1 is the station that started everything, the trade hub the whole system grew out of. It is still in use, but deliberately scaled down once the artificial worlds were built, cut back from a sprawling, half-finished megastructure to a leaner spaceport the GU could keep running without waste. It remains one of the busiest transit points in Alliance space, handling the traffic the artificial worlds draw and forwarding most of it onward."
+     "desc": "Orion 1 is one of the largest spaceport structures in Alliance Space, and one of the most visibly incomplete. When the GU began construction of the artificial worlds that followed, vast sections of the original station were stripped for materials and never replaced. What grew in their place is a sprawling, partially-rebuilt trade hub handling traffic from across the Orion system and beyond: warehousing, transit facilities, commercial districts, and a dense network of military substations installed by the Alliance navy to defend the system's primary entry point. The station is loud, busy, and structurally mismatched, new construction built directly against stripped-out frames, some corridors unpressurised, others running at full capacity. The GU historical archive sits in one of the original founding modules, carefully preserved amid the commercial noise of everything built around it."
     },
     {
      "id": "orion_2",
      "name": "Orion 2",
-     "type": "Decommissioned Artificial Planet, Salvaged Debris",
+     "type": "Failed Artificial Planet, Navigational Hazard",
      "status": "abandoned",
-     "statusLabel": "Decommissioned, Salvaged",
+     "statusLabel": "Salvaged & Abandoned",
      "atmosphere": "None",
      "atm_note": "Core collapsed, no breathable zones remain",
      "climate": "Void",
@@ -2458,7 +2355,7 @@
       "It is a persistent story among debris field workers that ships sometimes return from the Orion 2 exclusion zone without all the crew that went in. The story is old enough and consistent enough that most veteran salvagers treat it as established fact rather than rumour.",
       "Engineering academics have noted for decades that the GU's official explanation for the Orion 2 failure is inconsistent with the structural data that has been made public. The leading alternative theory among specialists is deliberate sabotage, possibly internal, that the GU has never been willing to investigate openly."
      ],
-     "desc": "Orion 2 was the Galactic Union's first attempt to build a planet from nothing, and it failed. When Orion 3 went into construction the GU decommissioned Orion 2 entirely and salvaged it for parts, so what remains today is a charted debris field and a navigational caution, nothing more. Its real legacy is not a world but a mind: the failure of Orion 2 was what convinced OrionWorks that running a planet needed an intelligence on a planetary scale, and so it built Ramirez."
+     "desc": "Orion 2 was the Galactic Union's first attempt to build a planet from scratch, ambitious, technically groundbreaking, and ultimately a failure. Structural instability in the core design made the world uninhabitable and increasingly dangerous. Rather than write off the investment, the Union stripped it completely, salvaged every usable component, and used what they learned to design Orion 3. Nothing remains except navigational hazard markers and the most expensive lesson in the galaxy's history."
     },
     {
      "id": "orion_3",
@@ -2504,18 +2401,6 @@
        "desc": "The lower levels of Orion 3, maintenance corridors and service infrastructure housing the city's underclass. Off the tourist maps but very much part of the economy."
       }
      ],
-     "specialties": [
-      {
-       "name": "GU Credit & Clearing",
-       "kind": "service",
-       "desc": "The galaxy's money is issued and cleared through Orion 3. The single most important financial function in known space happens here, quietly, behind doors most visitors never see."
-      },
-      {
-       "name": "Access",
-       "kind": "service",
-       "desc": "Orion's true commodity. Not goods but influence, the introductions, clearances, and quiet words that move the galaxy. It is sold constantly and never advertised, and it costs far more than credits."
-      }
-     ],
      "hooks": [
       "The Central Archive on Orion 3 is believed by investigators and financial analysts to hold records of every major corporate transaction in the past two centuries that the GU officially denies retaining. Anomalies in publicly accessible financial histories can only be explained by the existence of such records, and the GU has never provided an alternative explanation.",
       "It is a well-established pattern among Orion 3 traders and couriers that certain GU senators maintain off-manifest freight operations through the station's commercial core. The contents are never discussed and the destinations are never the same twice, but the practice is consistent enough to have its own informal name in the freight community.",
@@ -2526,28 +2411,30 @@
     {
      "id": "orion_4",
      "name": "Orion 4",
-     "type": "Artificial Planet, War-Scarred but Inhabited",
-     "status": "active",
-     "statusLabel": "Active, War-Scarred",
-     "atmosphere": "Breathable",
-     "atm_note": "Maintained in the living districts; the sealed war-scarred sectors are breached and run to vacuum",
+     "type": "Artificial Planet, Devastated Ruins",
+     "status": "ruins",
+     "statusLabel": "Post-War Ruins",
+     "atmosphere": "Thin",
+     "atm_note": "Partial atmosphere remains, most pressurised sections breached. Respirator advised in unpowered zones.",
      "climate": "Variable (Collapsed Infrastructure)",
      "temperature": "Highly variable by region, roughly -30°C to 40°C",
      "gravity": "Standard",
      "grav_note": "Gravity generators still functional in some districts, fails without warning in others",
      "faction": "Galactic Union (nominal, mostly abandoned)",
-     "population": "~1.5 billion in the functioning districts; the sealed sectors are unpopulated hazard zones",
-     "demographics": "Mixed, all races; a working population over a buried ruin",
-     "government": "Galactic Union administration in the living districts; the sealed sectors go unadministered",
+     "population": "~200,000, salvagers, squatters, black site operators",
+     "demographics": "Mostly human and Non-Born, transient, no reliable census data",
+     "government": "None, zone-by-zone control by various groups",
      "tech_level": "Variable (Cutting-Edge remnants in ruins / Primitive survival conditions in inhabited zones)",
-     "economy": "Manufacturing, research, GU administration, and the dangerous salvage of OrionWorks technology",
-     "access": "Permit Required",
-     "access_note": "Open to the living districts under GU clearance. The sealed sectors are restricted hazard zones, and the restriction is enforced.",
+     "economy": "Salvage, black market research, off-books operations",
+     "access": "Open (nominally)",
+     "access_note": "No official entry restrictions but GU patrols question anyone approaching classified research districts.",
      "hazards": [
-      "Sealed war-damaged districts, breached to vacuum and structurally unsound",
-      "Surviving fragments of the Ramirez AI in the sealed sectors, possibly corrupted, treated as an active hazard",
-      "Unsecured OrionWorks technology, some of it still powered",
-      "GU security around the classified districts, fast and unsentimental"
+      "Structural collapse, entire districts can depressurise without warning",
+      "Gravity field failure zones",
+      "Hostile squatter gangs in unstable zones",
+      "Unknown activated technology in unsecured OrionWorks facilities",
+      "Vacuum exposure in breached sections",
+      "Radiation from unshielded power cores"
      ],
      "notable_locations": [
       {
@@ -2563,19 +2450,12 @@
        "desc": "A GU-marked restricted zone in the heart of the former research campus. No public documentation exists on what is there. GU patrols actively redirect anyone approaching it."
       }
      ],
-     "specialties": [
-      {
-       "name": "OrionWorks Salvage",
-       "kind": "good",
-       "desc": "Technology recovered from Orion 4's sealed districts, the most advanced work the galaxy has ever produced and the most dangerous to handle. Some of it still functions, which is exactly the problem. Priced for the risk and the rarity both."
-      }
-     ],
      "hooks": [
       "Among salvagers who work Orion 4, it is common knowledge that certain sections of the OrionWorks campus were not destroyed in the Tronik War but were deliberately sealed, and that the GU has quietly maintained that sealing ever since while officially claiming the ruins are simply too dangerous to clear.",
       "The GU maintains an unlisted team on Orion 4 that does not appear in any accessible personnel database. This is known among veteran salvagers and squatter communities who have observed their movements and learned to avoid the districts where they operate.",
       "It is reported by multiple independent sources across decades that something in the ruins of OrionWorks continues to broadcast on communication frequencies that only OrionWorks used, frequencies that have been officially retired and should have no active transmitters. The GU has consistently declined to comment on the reports."
      ],
-     "desc": "Orion 4 was OrionWorks' own world, once the most advanced place that ever existed, and the Tronik War nearly ended it. What remains is a working artificial world with a tomb sealed inside it: living districts, fully inhabited and administered by the GU, wrapped around whole sectors locked away behind the war damage. OrionWorks is gone, but its machines are not entirely gone with it. Fragments of Ramirez, the AI built to run the world, still stir in the sealed districts, and whether they are intact or corrupted is a question no one has been paid enough to answer."
+     "desc": "Orion 4 was once the most technologically advanced world in the known galaxy. Home to OrionWorks, it was a world where the future was being built in real time, gleaming infrastructure, cutting-edge research, and the galaxy's brightest minds. Then the Tronik War started. The devastation was near-total. OrionWorks collapsed. Most of its leadership died or disappeared. What remains is a partially demolished world, some districts still pressurised, most open to vacuum, all of it structurally unpredictable. Somewhere in the wreckage, things that were being developed before the war may still be intact. The Union quietly discourages investigation."
     },
     {
      "id": "orion_5",

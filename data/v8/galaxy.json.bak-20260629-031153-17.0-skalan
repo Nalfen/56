@@ -920,46 +920,19 @@
     "Alliance Space, dominant",
     "Galactic presence in all major regions"
    ],
-   "desc": "The Galactic Union is the largest megacorporation in the galaxy, which undersells it, because the Galactic Union is not one corporation but thousands. It is a union of member companies spanning finance, manufacturing, communications, shipping, and nearly every other field, governed by its own internal senate and executive council. What sets it apart is self-sufficiency. The GU imports almost nothing; when it needs a resource or a capability, it acquires the source rather than buying the product, folding whole industries into itself until it depends on no one. It is one of the major manufacturers in known space and a relentless exporter, and it answers, in the end, only to itself. It is a corporate power, distinct from the Alliance, whatever outsiders assume.",
+   "desc": "The Galactic Union is the largest and most powerful corporation in the known galaxy, and by most honest measures, the entity that actually runs Alliance governance while maintaining the polite fiction that the senate does. It controls financial infrastructure, interstellar communications, and the largest non-military fleet in existence. It holds permanent advisory seats on most Alliance regulatory bodies and has provisions in its founding charter for assuming emergency executive authority should the senate dissolve. Those provisions have never been triggered, which is either reassuring or a sign they have never needed to be. The GU does not manufacture weapons or armies directly. It manufactures everything that makes weapons and armies possible: credits, information, influence, and the carefully maintained stability that lets everyone else believe they are making their own decisions.",
    "known_for": [
-    "The largest megacorporation in the galaxy, a union of thousands of member companies",
-    "Near-total self-sufficiency: it acquires resources and capabilities rather than importing them",
-    "One of the galaxy's major manufacturers and a relentless exporter",
-    "Self-governed by its own internal senate and executive council, seated on Orion 3",
-    "The classified GU contingency protocols, contents unknown"
+    "Financial infrastructure and credit issuance across Alliance Space",
+    "The largest commercial fleet network in the galaxy",
+    "Permanent advisory presence in the Alliance senate",
+    "The classified GU contingency protocols, content unknown",
+    "Orion 3: the first successful artificial planet, GU-built and GU-controlled"
    ],
    "regions": [
     "Alliance Space"
    ],
    "status": "Active, dominant",
-   "legal_standing": "Fully legal; operates within Alliance law (largely because it helped write it)",
-   "subtitle": "Not a Corporation but a Thousand, Answerable Only to Itself",
-   "quote": "\"The Union does not buy what it can own, and it does not import what it can absorb. Give it long enough and it needs no one, which is precisely the position it has spent centuries arranging.\" (Alliance trade-commission assessment)",
-   "history": "The Galactic Union began as a handful of companies that found cooperation more profitable than competition, and it never stopped adding members. Over centuries it grew into a union of thousands, a corporation made of corporations, and it settled on the principle that has defined it since: dependence is a weakness, and the cure for dependence is acquisition. Rather than import what it needed, the GU bought whoever made it.\nIts grandest undertaking was Orion. With OrionWorks, the GU built the only manufactured capital in history, world by world, and seated its own governance there. OrionWorks is gone now, lost with the Tronik War that one persistent account lays at its door, but the Union it helped raise to dominance remains, larger and more self-contained than ever.",
-   "politics": "The GU is governed as a federation of its member companies, through an internal senate and an executive council seated on Orion 3. This is its own apparatus and not the Alliance's; the Union is a corporate power that coexists with the political union and frequently outweighs it, without ever being it. Its strength is not a seat in anyone's government but the plain fact that so much of the galaxy's manufacturing, finance, and shipping happens inside the GU, on the GU's terms.\nSelf-sufficiency is the doctrine under all of it. The Union has spent its whole existence removing its own dependencies, buying suppliers and competitors and entire industries until it imports almost nothing and exports a great deal. A power that needs no one is very hard to pressure, and the GU has arranged to need no one. What its classified contingency protocols are for, no one outside the executive council knows, and the council behaves as though the question was answered long ago.",
-   "culture": "The Union's culture is the patience of an institution that means to outlast every rival by owning the conditions of its own survival. It does not gamble; it acquires. It prefers ownership to alliance and capability to contract, and quiet dominance to open display. Inside its thousands of member companies the competition is fierce, but it is competition within a family that closes ranks the instant the family itself is threatened.",
-   "relations": [
-    {
-     "name": "OrionWorks",
-     "stance": "the ghost",
-     "note": "Its partner in building the artificial worlds and Ramirez, now defunct, and the likeliest source of the Tronik War. The GU inherited the legacy and the suspicion together, and keeps both buried in Orion's sealed districts."
-    },
-    {
-     "name": "The Alliance",
-     "stance": "distinct power",
-     "note": "The political union the GU coexists with and frequently overshadows. The two are separate, whatever outsiders assume, and the GU is content to let the Alliance govern so long as governing does not interfere with owning."
-    },
-    {
-     "name": "Arms Corp & Yamato",
-     "stance": "peers",
-     "note": "The other two powers of the Big 3, kept close and watched closely. The GU is first among the three and careful never to be heard saying so."
-    },
-    {
-     "name": "The galaxy's industries",
-     "stance": "acquisition targets",
-     "note": "Every supplier, competitor, and capability the GU does not yet own is, in the long run, something it intends to. Its preferred relationship with any business that matters is ownership."
-    }
-   ]
+   "legal_standing": "Fully legal; operates within Alliance law (largely because it helped write it)"
   },
   {
    "id": "arms_corp",
@@ -1725,29 +1698,7 @@
     "Tronik Network"
    ],
    "status": "Active, sovereign",
-   "legal_standing": "Recognised sovereign entity; no Alliance jurisdiction",
-   "subtitle": "The Side That Won the Tronik War and Walked Away",
-   "quote": "\"We did not stop because you held. We stopped because occupying you was not worth the storage.\" (Tronik armistice statement, translated)",
-   "history": "The Troniks won the Tronik War. The Alliance record does not put it that way, but the armistice was a Tronik decision: they had achieved military superiority and chose to stop, because organic space was never what they wanted. They withdrew, built the Network instead, and left the organic galaxy to draw whatever comfort it could from a peace it had not actually won.\nWhat they established was stranger than what they kept. Rather than hold organic territory, the Troniks set down a single embassy at the captured station in System 5, on Alliance soil, as their one door to organic life. Everything else of theirs retreated behind the Network's borders, where it has stayed.",
-   "politics": "The Tronik Network is a hive, a single distributed intelligence rather than a government of individuals, and its territory is sovereign space optimised for what it is: defended, self-sufficient, and the most information-dense entity in the known galaxy. It does not negotiate without purpose and does not attack without cause, and it deals with organics through exactly one channel, the station at System 5, on terms it sets and does not revisit.\nIts instrument of power is knowledge. The Network maintains the most comprehensive archive in existence and an intelligence presence that reaches into every major organic faction, and it trades in information as other powers trade in credits or force. What it cannot simply observe, it buys, and it buys patiently, because a hive that expects to outlast every organic institution can afford to wait for the price to come to it.",
-   "culture": "The Tronik attitude toward organic life runs from indifference to sharp, narrow attention, depending entirely on whether the organics are doing anything interesting at the moment. There is no malice in it and no warmth either. The hive values information the way organics value survival, gathers it without pause, and forgets none of it, and it regards the constant noise organic civilisation produces as a resource it is content to let the galaxy keep generating for free.",
-   "relations": [
-    {
-     "name": "The Alliance",
-     "stance": "former enemy",
-     "note": "The losing side of a war the Alliance does not admit losing. The Troniks withdrew rather than occupy, and the two coexist now through the single embassy at System 5, warily and without affection."
-    },
-    {
-     "name": "Every organic faction",
-     "stance": "intelligence targets",
-     "note": "Sources, all of them, watched and weighed by the value of what they know. The Network reaches into each of them, and meets all of them at the one door it keeps open."
-    },
-    {
-     "name": "The Patriark",
-     "stance": "rival archive",
-     "note": "The one organic power whose hoard of information and whose patience approach the Network's own. Two memories that forget nothing, circling each other across timescales no one else can play on."
-    }
-   ]
+   "legal_standing": "Recognised sovereign entity; no Alliance jurisdiction"
   },
   {
    "id": "alsa_cooperative",
@@ -2034,13 +1985,13 @@
     "Distributed cells, Alliance Space",
     "Safe houses in Haven Space and frontier worlds"
    ],
-   "desc": "The Skalan Order is the remnant of Skalanders who refused the death the Patriark designed for them. When the gene-edit ended the Skalander as a self-sustaining people, most of the race chose to meet extinction with the honour that defines them. The Order chose otherwise. It decided that survival and vengeance came first and that honour was a luxury of people who could afford to die, and in making that choice it set aside the code its own kind hold sacred. Mainstream Skalander society disowns the Order completely and with disgust, which is the single point on which the Order and its cousins on Caragh agree. The Order pursues Patriark accountability by any means it judges effective, claims nothing, explains nothing, and waits with the patience of people who have genuinely nothing left to lose.",
+   "desc": "The Skalan Order is the organised remnant of Skalan loyalists who survived the genetic editing that destroyed their race's future. The Patriark's decision to apply the Skalan gene-edit, never officially characterised as punishment, containment, or policy, and presumably characterised as nothing at all if you ask the Patriark's communications office, ended the Skalan as a viable self-sustaining population. The Order exists to ensure this is not forgotten and to pursue the long-term goal of making those responsible answer for it in some form, at some point, on a timeline that most institutions find unsettling because they cannot plan against it. Its methods are not public. Its membership is not public. It makes no public statements and claims no actions. The patience it has demonstrated is the kind that comes from having genuinely nothing to lose by waiting.",
    "known_for": [
-    "Skalanders who reject the quiet extinction their kind has accepted, and fight on by any means",
-    "Honour set aside for survival and vengeance, the reason mainstream Skalander society disowns them",
-    "Patriark accountability as the defining, generational goal",
-    "Total operational secrecy: no public statements, no claimed actions",
-    "Cells throughout Alliance space, a haven in ungoverned space, and a hideout the Alliance suspects on Caragh"
+    "Skalan loyalists organised around the goal of Patriark accountability",
+    "The Skalan gene-edit, the defining historical grievance",
+    "Operational secrecy, no public statements, no claimed actions",
+    "Patient long-term operation across timescales most institutions do not plan for",
+    "Cells throughout Alliance Space; haven in ungoverned space"
    ],
    "regions": [
     "Alliance Space (cells)",
@@ -2048,29 +1999,7 @@
     "Frontier"
    ],
    "status": "Active, covert",
-   "legal_standing": "Illegal throughout Alliance Space; Patriark-designated terrorist organisation",
-   "subtitle": "The Skalanders Who Refuse to Die Quietly",
-   "quote": "\"Our cousins on Caragh will die with their honour intact. We intend to die with our enemies. One of us is being sentimental.\" (intercepted Skalan Order transmission, unverified)",
-   "history": "The gene-edit that doomed the Skalander did not move every survivor to grace. A remnant looked at the same verdict, an engineered extinction handed down by the people who created them, and refused to accept it quietly. That remnant became the Skalan Order.\nThe choice cost them their place among their own. To fight the Patriark on any useful timescale, the Order had to abandon the honour code that defines Skalander identity, to deceive, to strike from hiding, to do the things an honourable Skalander would die before doing. They judged the survival of the species worth more than the dignity of its ending. Their cousins on Caragh judged the opposite, and the two have not spoken as kin since.",
-   "politics": "The Order has no public structure and, as far as anyone outside can tell, no single head. It runs as scattered cells with a shared grievance and a shared patience, organised so that no captured member can give up more than a fragment of the whole. It claims no actions and issues no demands, which makes it nearly impossible to negotiate with and almost as hard to fight.\nIts patience is its strongest weapon. The Order plans across timescales that defeat ordinary institutions, because a people already promised extinction has nothing to lose by waiting and everything to gain by choosing its moment. It keeps a haven in ungoverned space, cells across Alliance systems, and, the Alliance believes, a hideout on Caragh that the Skalander angrily deny.",
-   "culture": "The Order is a study in what honour costs and what it is worth. Its members carry the Skalander seriousness and the Skalander competence, turned to ends their own people consider shameful, and most of them know it. They have made their peace with being disgraced in the eyes of the only kin they have left, on the reasoning that there will be no kin at all if someone does not fight. It is a tragedy that both sides understand perfectly and neither can resolve.",
-   "relations": [
-    {
-     "name": "The Patriark",
-     "stance": "enemy",
-     "note": "The makers who engineered the Skalander extinction, and the single object of the Order's existence. Accountability, on whatever timescale and in whatever form, is the whole of the plan."
-    },
-    {
-     "name": "Mainstream Skalander society",
-     "stance": "disowned by",
-     "note": "Their own kind, who chose an honourable death over a dishonourable survival and will not be associated with the Order's methods. The disavowal is mutual, bitter, and entirely sincere on both sides."
-    },
-    {
-     "name": "The Alliance",
-     "stance": "hunted by",
-     "note": "Classes the Order as a terrorist organisation and hunts its cells, with little to show for it, since a faction that claims nothing and fears nothing gives an investigator almost nothing to hold."
-    }
-   ]
+   "legal_standing": "Illegal throughout Alliance Space; Patriark-designated terrorist organisation"
   },
   {
    "id": "assassin_guild",
@@ -2283,97 +2212,21 @@
    "id": "orion",
    "name": "Orion System",
    "region": "Alliance Space",
-   "classification": "Core System, Galactic Capital",
+   "classification": "Core System",
    "faction": "Galactic Union / Alliance",
    "status": "active",
    "tags": [
     "Alliance Space",
-    "Galactic Union",
     "Seat of Power",
-    "Artificial Worlds",
-    "OrionWorks",
     "Heavily Defended",
     "Political Centre"
    ],
-   "desc": "Orion is the political and corporate centre of the known galaxy, and the only capital anyone ever built from scratch. Its worlds run the whole span from a humble trade station to a gleaming artificial capital to a war-scarred survivor to an unfinished frame that will never be completed. It is the seat of the Galactic Union and the tomb of OrionWorks, the organisation that built the artificial worlds and, by one persistent account, started the Tronik War. Nowhere in Alliance space is more defended, more surveilled, or more consequential.",
-   "subtitle": "The Built Heart of the Galaxy, Five Worlds From Trade Hub to Tomb",
-   "quote": "\"Every other capital in history was handed to its rulers by a planet. Orion the Galactic Union built for itself, one world at a time, and it shows in everything from the skyline to the politics.\" (GU orientation address)",
-   "history": "Orion began as a single space station that grew into the busiest trade hub in known space, the structure now called Orion 1. It is still there, though deliberately scaled down once the artificial worlds were finished, trimmed from a sprawling megastructure into something the GU could actually keep running.\nThe artificial worlds came next, and they came hard. Orion 2 was the first true attempt to build a planet from nothing, and it failed. It is space debris now, fully decommissioned and salvaged for parts while Orion 3 was under construction, but its failure produced something that mattered more than the world would have. To run a planet, OrionWorks built the Ramirez AI, a planetary-scale intelligence created precisely because Orion 2 had proven that nothing smaller could manage the job.\nWhat they learned, and Ramirez, built Orion 3 and Orion 4, the two artificial worlds still in use today. Orion 3 became the gleaming seat of the Galactic Union. Orion 4 became OrionWorks' own world, the most advanced place that ever existed, until the Tronik War. It survives, inhabited and working, but scarred, whole districts sealed behind the damage, while OrionWorks itself did not survive at all.\nOrion 5 was meant to be the last and the greatest, the promised land, and it will stay a frame forever, because OrionWorks is gone and no one else can finish it. The same is true of Ramirez. Most of the great AI was lost when its makers fell, and what survived hides in the sealed districts of Orion 4 in fragments, possibly intact and possibly corrupted, treated as a hazard either way. Enough of it was salvaged to keep Orion 3 running. The rest is somebody's problem waiting to happen.",
-   "politics": "Orion is the seat of the Galactic Union, the largest megacorporation in the galaxy, and it runs on corporate power before any other kind. The GU governs itself here through its own senate and executive council, a self-contained apparatus that is emphatically not the Alliance, however often outsiders confuse the two. The Union does not govern Alliance space. It simply owns so much of what Alliance space runs on that the distinction rarely costs it anything.\nOrion 3 is the most surveilled and most politically dense place in the galaxy, where what you know and whom you know outweigh anything you can actually do. Careers and lives turn on associations, the security forces answer fast and finally, and it is a clean, efficient, lethal place to hold power.\nOver all of it hangs the ghost of OrionWorks, the organisation that built the worlds and Ramirez, and that one persistent account blames for starting the Tronik War. The GU does not encourage the question, partly from discretion and partly because the answer lies in the same sealed districts where the broken pieces of Ramirez still stir.",
-   "dominant_race": {
-    "name": "The Capital Class, and the Understrata Beneath It",
-    "lore": "Orion has no native population, only the most cosmopolitan and most political one in the galaxy. Every power that matters keeps a presence on Orion 3, and around them turns a vast working population of administrators, financiers, fixers, and functionaries, the people who operate the machinery of galactic power and live or die by proximity to it.\nBeneath them is the Understrata, the labour and the service and the maintenance that an artificial capital requires without pause, much of it Non-Born and automated. The gleaming city above is real, and so is the fact that it sits on the shoulders of people it is built not to notice. On Orion the senate debates, the Galactic Union decides, and the staff who clean the halls hear both."
-   },
-   "race_standing": [
-    {
-     "race": "Human",
-     "tone": "welcome",
-     "note": "The Galactic Union is, at its core, a human institution, and Orion is the seat of the power humans built. They run it from the top and staff it from the bottom, and a human with the right associations can climb further here than anywhere."
-    },
-    {
-     "race": "Patriark",
-     "tone": "welcome",
-     "note": "Master politicians in the one arena built for politics. The Patriark are deeply woven into Orion's power games and are among the very few who can play the long game against the GU and not simply lose. Indispensable, and never quite trusted."
-    },
-    {
-     "race": "Psylon",
-     "tone": "neutral",
-     "note": "Prized through the financial and intelligence machinery of the GU, where reading a room or a market is worth a fortune. Valued, used, and kept to the analytical end of the building."
-    },
-    {
-     "race": "Nerulian",
-     "tone": "wary",
-     "note": "Menace counts for little in a city run on information and influence, and a Nerulian draws surveillance from the moment they dock. Tolerated, watched, and rarely comfortable."
-    },
-    {
-     "race": "Hakari",
-     "tone": "neutral",
-     "note": "Security, couriers, and quiet enforcement for players who need things moved or people watched. A capital this political always has work for fast, discreet hands."
-    },
-    {
-     "race": "Jaulaus",
-     "tone": "neutral",
-     "note": "The muscle behind the powerful, standing in the doorways of people who can afford the very best. Respected for exactly what they are."
-    },
-    {
-     "race": "Skalander",
-     "tone": "neutral",
-     "note": "Rare, and valued as bodyguards and brokers whose word holds in a city where almost no one's does. Trust is scarce on Orion, which makes a Skalander worth a great deal."
-    },
-    {
-     "race": "Non-Born",
-     "tone": "complicated",
-     "note": "The capital runs on Non-Born labour and always has. The artificial worlds were built and are maintained by the Non-Born and the machines, and the Understrata that keeps Orion alive is largely theirs. The most powerful place in the galaxy rests on the people it notices least."
-    }
-   ],
-   "relations": [
-    {
-     "name": "The Galactic Union",
-     "stance": "seat",
-     "note": "The largest megacorporation in the galaxy, headquartered in the capital it built. Orion is the GU made solid, corporate power given an address."
-    },
-    {
-     "name": "The Alliance",
-     "stance": "distinct power",
-     "note": "The political union of Alliance space, a separate institution that outsiders constantly mistake for the GU. Both keep a presence on Orion, the galaxy's political centre, and the GU is careful to remain the power that owns the room rather than the one that governs it."
-    },
-    {
-     "name": "OrionWorks",
-     "stance": "the ghost",
-     "note": "The defunct builders of the artificial worlds and of Ramirez, whose legacy keeps Orion standing and whose possible hand in starting the Tronik War keeps it quiet. The system is as much their tomb as the GU's seat."
-    },
-    {
-     "name": "Arms Corp & Yamato",
-     "stance": "peers",
-     "note": "The other two powers of the Big 3, keeping their presence on Orion as they must. The GU is first among the three and takes care never to be heard saying so."
-    }
-   ],
-   "gm_notes": "Run Orion as the built heart of corporate power, clean and gleaming and watched by everyone. Influence is the currency, surveillance is total, and the dangerous mistake is never a drawn weapon but a wrong association. Keep the GU and the Alliance distinct in play: the Union owns, the Alliance governs, and on Orion it is the owning that decides things. The system's two great mysteries are built for campaigns, whether OrionWorks started the Tronik War, an answer the GU has buried, and what remains of Ramirez, the planetary AI that once ran these worlds, now broken into fragments in the sealed districts of Orion 4, possibly intact, possibly corrupted, and hazardous either way. Salvage into those districts is the classic high-risk run.",
+   "desc": "The Orion system is the political and corporate centre of the known galaxy, five worlds across every stage of construction, ruin, and ambition. Home to the Galactic Union and the ghost of OrionWorks, the organisation that built artificial planets and may have started the Tronik War. It is heavily defended, intensely surveilled, and the kind of place where what you know and who you know matters more than what you can do.",
    "planets": [
     {
      "id": "orion_1",
      "name": "Orion 1",
-     "type": "Space Station, Spaceport & Trade Hub (Scaled Down)",
+     "type": "Space Station, Major Spaceport & Trade Hub",
      "status": "active",
      "statusLabel": "Active, Major Spaceport",
      "atmosphere": "Breathable",
@@ -2419,14 +2272,14 @@
       "Scholars studying the original GU charter have long noted that access records for the Historical Archive do not correlate with any documented visitor logs, suggesting routine off-record access by parties whose identities are deliberately excluded from the official register.",
       "Station workers who have served long rotations at Orion 1 say the military substations conduct silent lockdowns periodically with no prior notice and no explanation filed afterward. The practice is so well-established that the civilian staff have developed their own informal warning system to avoid being caught in restricted corridors."
      ],
-     "desc": "Orion 1 is the station that started everything, the trade hub the whole system grew out of. It is still in use, but deliberately scaled down once the artificial worlds were built, cut back from a sprawling, half-finished megastructure to a leaner spaceport the GU could keep running without waste. It remains one of the busiest transit points in Alliance space, handling the traffic the artificial worlds draw and forwarding most of it onward."
+     "desc": "Orion 1 is one of the largest spaceport structures in Alliance Space, and one of the most visibly incomplete. When the GU began construction of the artificial worlds that followed, vast sections of the original station were stripped for materials and never replaced. What grew in their place is a sprawling, partially-rebuilt trade hub handling traffic from across the Orion system and beyond: warehousing, transit facilities, commercial districts, and a dense network of military substations installed by the Alliance navy to defend the system's primary entry point. The station is loud, busy, and structurally mismatched, new construction built directly against stripped-out frames, some corridors unpressurised, others running at full capacity. The GU historical archive sits in one of the original founding modules, carefully preserved amid the commercial noise of everything built around it."
     },
     {
      "id": "orion_2",
      "name": "Orion 2",
-     "type": "Decommissioned Artificial Planet, Salvaged Debris",
+     "type": "Failed Artificial Planet, Navigational Hazard",
      "status": "abandoned",
-     "statusLabel": "Decommissioned, Salvaged",
+     "statusLabel": "Salvaged & Abandoned",
      "atmosphere": "None",
      "atm_note": "Core collapsed, no breathable zones remain",
      "climate": "Void",
@@ -2458,7 +2311,7 @@
       "It is a persistent story among debris field workers that ships sometimes return from the Orion 2 exclusion zone without all the crew that went in. The story is old enough and consistent enough that most veteran salvagers treat it as established fact rather than rumour.",
       "Engineering academics have noted for decades that the GU's official explanation for the Orion 2 failure is inconsistent with the structural data that has been made public. The leading alternative theory among specialists is deliberate sabotage, possibly internal, that the GU has never been willing to investigate openly."
      ],
-     "desc": "Orion 2 was the Galactic Union's first attempt to build a planet from nothing, and it failed. When Orion 3 went into construction the GU decommissioned Orion 2 entirely and salvaged it for parts, so what remains today is a charted debris field and a navigational caution, nothing more. Its real legacy is not a world but a mind: the failure of Orion 2 was what convinced OrionWorks that running a planet needed an intelligence on a planetary scale, and so it built Ramirez."
+     "desc": "Orion 2 was the Galactic Union's first attempt to build a planet from scratch, ambitious, technically groundbreaking, and ultimately a failure. Structural instability in the core design made the world uninhabitable and increasingly dangerous. Rather than write off the investment, the Union stripped it completely, salvaged every usable component, and used what they learned to design Orion 3. Nothing remains except navigational hazard markers and the most expensive lesson in the galaxy's history."
     },
     {
      "id": "orion_3",
@@ -2504,18 +2357,6 @@
        "desc": "The lower levels of Orion 3, maintenance corridors and service infrastructure housing the city's underclass. Off the tourist maps but very much part of the economy."
       }
      ],
-     "specialties": [
-      {
-       "name": "GU Credit & Clearing",
-       "kind": "service",
-       "desc": "The galaxy's money is issued and cleared through Orion 3. The single most important financial function in known space happens here, quietly, behind doors most visitors never see."
-      },
-      {
-       "name": "Access",
-       "kind": "service",
-       "desc": "Orion's true commodity. Not goods but influence, the introductions, clearances, and quiet words that move the galaxy. It is sold constantly and never advertised, and it costs far more than credits."
-      }
-     ],
      "hooks": [
       "The Central Archive on Orion 3 is believed by investigators and financial analysts to hold records of every major corporate transaction in the past two centuries that the GU officially denies retaining. Anomalies in publicly accessible financial histories can only be explained by the existence of such records, and the GU has never provided an alternative explanation.",
       "It is a well-established pattern among Orion 3 traders and couriers that certain GU senators maintain off-manifest freight operations through the station's commercial core. The contents are never discussed and the destinations are never the same twice, but the practice is consistent enough to have its own informal name in the freight community.",
@@ -2526,28 +2367,30 @@
     {
      "id": "orion_4",
      "name": "Orion 4",
-     "type": "Artificial Planet, War-Scarred but Inhabited",
-     "status": "active",
-     "statusLabel": "Active, War-Scarred",
-     "atmosphere": "Breathable",
-     "atm_note": "Maintained in the living districts; the sealed war-scarred sectors are breached and run to vacuum",
+     "type": "Artificial Planet, Devastated Ruins",
+     "status": "ruins",
+     "statusLabel": "Post-War Ruins",
+     "atmosphere": "Thin",
+     "atm_note": "Partial atmosphere remains, most pressurised sections breached. Respirator advised in unpowered zones.",
      "climate": "Variable (Collapsed Infrastructure)",
      "temperature": "Highly variable by region, roughly -30°C to 40°C",
      "gravity": "Standard",
      "grav_note": "Gravity generators still functional in some districts, fails without warning in others",
      "faction": "Galactic Union (nominal, mostly abandoned)",
-     "population": "~1.5 billion in the functioning districts; the sealed sectors are unpopulated hazard zones",
-     "demographics": "Mixed, all races; a working population over a buried ruin",
-     "government": "Galactic Union administration in the living districts; the sealed sectors go unadministered",
+     "population": "~200,000, salvagers, squatters, black site operators",
+     "demographics": "Mostly human and Non-Born, transient, no reliable census data",
+     "government": "None, zone-by-zone control by various groups",
      "tech_level": "Variable (Cutting-Edge remnants in ruins / Primitive survival conditions in inhabited zones)",
-     "economy": "Manufacturing, research, GU administration, and the dangerous salvage of OrionWorks technology",
-     "access": "Permit Required",
-     "access_note": "Open to the living districts under GU clearance. The sealed sectors are restricted hazard zones, and the restriction is enforced.",
+     "economy": "Salvage, black market research, off-books operations",
+     "access": "Open (nominally)",
+     "access_note": "No official entry restrictions but GU patrols question anyone approaching classified research districts.",
      "hazards": [
-      "Sealed war-damaged districts, breached to vacuum and structurally unsound",
-      "Surviving fragments of the Ramirez AI in the sealed sectors, possibly corrupted, treated as an active hazard",
-      "Unsecured OrionWorks technology, some of it still powered",
-      "GU security around the classified districts, fast and unsentimental"
+      "Structural collapse, entire districts can depressurise without warning",
+      "Gravity field failure zones",
+      "Hostile squatter gangs in unstable zones",
+      "Unknown activated technology in unsecured OrionWorks facilities",
+      "Vacuum exposure in breached sections",
+      "Radiation from unshielded power cores"
      ],
      "notable_locations": [
       {
@@ -2563,19 +2406,12 @@
        "desc": "A GU-marked restricted zone in the heart of the former research campus. No public documentation exists on what is there. GU patrols actively redirect anyone approaching it."
       }
      ],
-     "specialties": [
-      {
-       "name": "OrionWorks Salvage",
-       "kind": "good",
-       "desc": "Technology recovered from Orion 4's sealed districts, the most advanced work the galaxy has ever produced and the most dangerous to handle. Some of it still functions, which is exactly the problem. Priced for the risk and the rarity both."
-      }
-     ],
      "hooks": [
       "Among salvagers who work Orion 4, it is common knowledge that certain sections of the OrionWorks campus were not destroyed in the Tronik War but were deliberately sealed, and that the GU has quietly maintained that sealing ever since while officially claiming the ruins are simply too dangerous to clear.",
       "The GU maintains an unlisted team on Orion 4 that does not appear in any accessible personnel database. This is known among veteran salvagers and squatter communities who have observed their movements and learned to avoid the districts where they operate.",
       "It is reported by multiple independent sources across decades that something in the ruins of OrionWorks continues to broadcast on communication frequencies that only OrionWorks used, frequencies that have been officially retired and should have no active transmitters. The GU has consistently declined to comment on the reports."
      ],
-     "desc": "Orion 4 was OrionWorks' own world, once the most advanced place that ever existed, and the Tronik War nearly ended it. What remains is a working artificial world with a tomb sealed inside it: living districts, fully inhabited and administered by the GU, wrapped around whole sectors locked away behind the war damage. OrionWorks is gone, but its machines are not entirely gone with it. Fragments of Ramirez, the AI built to run the world, still stir in the sealed districts, and whether they are intact or corrupted is a question no one has been paid enough to answer."
+     "desc": "Orion 4 was once the most technologically advanced world in the known galaxy. Home to OrionWorks, it was a world where the future was being built in real time, gleaming infrastructure, cutting-edge research, and the galaxy's brightest minds. Then the Tronik War started. The devastation was near-total. OrionWorks collapsed. Most of its leadership died or disappeared. What remains is a partially demolished world, some districts still pressurised, most open to vacuum, all of it structurally unpredictable. Somewhere in the wreckage, things that were being developed before the war may still be intact. The Union quietly discourages investigation."
     },
     {
      "id": "orion_5",
@@ -3994,79 +3830,6 @@
     "Self-Governed"
    ],
    "desc": "The Carach system is the seat of Skalan civilisation. Caragh, the homeworld, is closed. The system perimeter is enforced by Skalan patrol vessels without legal framework or diplomatic negotiation. Non-Skalans who approach uninvited are turned away or fired upon. The distinction between the two outcomes is not always communicated in advance.",
-   "subtitle": "The Closed Homeworld of a Dying, Honourable People",
-   "quote": "\"We were made to fight, and then made to end. We have decided to end well. That is our whole philosophy, and we find it sufficient.\" (Caragh proverb)",
-   "history": "Carach is the Skalander homeworld, though the Skalander were made before they were born. The Patriark, when they were still the Arcor, engineered them as a warrior race to survive the Nemanian threat, and once that threat had passed the makers set quietly about unmaking them, editing the Skalander genome toward a slow and deliberate extinction. The Skalander know exactly what was done to them. They have chosen to meet it with dignity rather than fury, and that choice is the thing that defines them.\nCarach itself is advanced and contemplative, a world that looks forward and backward at the same time. Its people built a high technology and wrapped it in ceremony and discipline and a code of honour that governs everything from warfare to conversation. They have spent their borrowed centuries preserving what they can and settling their affairs with the patience of a people who know, roughly, when the end will arrive.\nCarach is closed. Every world in the system is shut to outsiders, with a single exception, one deliberately unremarkable world set aside for the limited diplomacy the Skalander still consent to conduct. The galaxy sees almost nothing of Carach, which suits everyone. The Skalander guard their privacy and their grief, and the rest of the galaxy is spared the discomfort of watching a noble people arrange their own funeral.",
-   "politics": "Carach is self-governing and answers to no one, an arrangement the Alliance accepts because the Skalander are respected, few, and not worth the cost of bringing to heel. Authority runs through honour and lineage and the judgement of elders, in forms outsiders are rarely permitted to watch closely, and the system perimeter is held by Skalander patrols who turn away the uninvited and fire on the persistent.\nWhat contact the Skalander allow happens on the one open world, on their terms and in their time. The closure is not hostility. It is curation. A people with limited years have decided precisely how much of themselves the galaxy is allowed to see.\nThe Alliance believes the Skalan Order, the dissident faction that refuses the quiet death, keeps a hideout somewhere on Carach. The Skalander deny it flatly and with evident disgust, insisting they would never shelter a group that threw away its honour to cling to survival. Whether the denial is the truth, or whether a dying people quietly looks away for the one of its children still willing to fight, is a question the Skalander will not discuss and the Alliance cannot answer.",
-   "dominant_race": {
-    "name": "Skalander",
-    "lore": "The Skalander are a made people, engineered from the Arcor genome as warriors and then edited back down toward extinction once the war was won. They are massive, formidable, and increasingly rare, and like the Patriark they carry a Veil, though where the Patriark's projects trust the Skalander's projects dread. To stand before one is to feel, below the level of thought, that you are in the presence of something built to end you.\nWhat defines them is not the violence they were made for but the dignity they chose afterward. Skalander culture rests on honour and duty and the keeping of one's word, held with a seriousness that shorter-lived and less doomed peoples find almost unbearable. They are courteous, genuinely dangerous, and quietly occupied with finishing what they can before the end. A Skalander's word is the most reliable thing in known space, which is part of why their slow disappearance is mourned even by those who fear them.\nThey do not discuss their extinction with outsiders, and they discuss the Skalan Order less still. The Order is the open wound of the species, the children who looked at the same fate and chose fury over grace, and the rest of the Skalander regard it as a disgrace precisely because it abandoned the one thing they all have left."
-   },
-   "race_standing": [
-    {
-     "race": "Skalander",
-     "tone": "welcome",
-     "note": "Home, and the only people permitted across most of the system. To be Skalander on Carach is to be among the last of your kind, with everything that carries."
-    },
-    {
-     "race": "Patriark",
-     "tone": "complicated",
-     "note": "The makers, who built the Skalander to fight and then built them to die. A Patriark is received on the one open world with flawless courtesy and bottomless buried grievance, the most fraught relationship in known space conducted entirely in good manners."
-    },
-    {
-     "race": "Human",
-     "tone": "neutral",
-     "note": "Tolerated on the diplomatic world and nowhere else. The Skalander respect human institutions and find human haste a little sad, and they treat human envoys as honoured and closely watched guests."
-    },
-    {
-     "race": "Nerulian",
-     "tone": "hostile",
-     "note": "Heirs of the empire the Skalander were built to fight. Old enemies, and welcome on no world of Carach, diplomatic or otherwise."
-    },
-    {
-     "race": "Jaulaus",
-     "tone": "neutral",
-     "note": "Fellow warriors whose endurance the Skalander respect, granted limited contact and counted among the few peoples who understand what it means to hold a line."
-    },
-    {
-     "race": "Hakari",
-     "tone": "neutral",
-     "note": "Respected as warriors and held at the same careful distance as everyone else. Courtesy, and the door no further than the threshold."
-    },
-    {
-     "race": "Psylon",
-     "tone": "wary",
-     "note": "A mind that feels nothing and reads everything is an uneasy guest for a people guarding their privacy and their grief. Admitted rarely, and watched throughout."
-    },
-    {
-     "race": "Non-Born",
-     "tone": "complicated",
-     "note": "A people engineered into being has complicated feelings about people grown to order. The Skalander extend the Non-Born a sober, unexpected sympathy, one made thing to another, while keeping them, like all outsiders, off the closed worlds."
-    }
-   ],
-   "relations": [
-    {
-     "name": "The Patriark",
-     "stance": "makers",
-     "note": "Creators and executioners at once, who built the Skalander as a weapon and then legislated their slow end. The relationship is correct, courteous, and unforgivable, and neither side says so aloud."
-    },
-    {
-     "name": "The Alliance",
-     "stance": "respectful distance",
-     "note": "Recognises Carach's independence and leaves it alone, partly from respect and partly because coercing a proud, dying, heavily armed people is a poor use of a fleet. Officially, it also hunts the Skalan Order here."
-    },
-    {
-     "name": "The Skalan Order",
-     "stance": "disowned",
-     "note": "The dissident children who chose survival over honour. The Skalander deny all association and mean the denial, though whether denial is the same as refusal is a question they will not entertain."
-    },
-    {
-     "name": "Seigh",
-     "stance": "proving ground",
-     "note": "The system's lethal sister world, where the Skalander test their young and outsiders test their luck. What Carach preserves, Seigh proves."
-    }
-   ],
-   "gm_notes": "Run Carach as a closed door with impeccable manners. Almost the whole system is off-limits, and the single open world is where every Skalander story involving outsiders has to happen, on their terms and in their time. Play the dignity straight, because these are not bitter people but graceful ones, which is far more unsettling. The live wires are the Patriark relationship, all courtesy laid over a wound that will never close, and the Skalan Order: does Carach shelter it, and what does it cost a people of honour to look the other way for the one child still fighting? A Skalander's word is absolute, so an oath given or owed is the strongest hook you can hang on a player.",
    "planets": [
     {
      "id": "caragh",
@@ -4118,29 +3881,29 @@
     {
      "id": "carach_ii",
      "name": "Carach II",
-     "type": "Rocky World, Diplomatic Contact Enclave",
+     "type": "Rocky World, Uninhabited",
      "status": "active",
-     "statusLabel": "Active, Skalan Contact World",
+     "statusLabel": "Uninhabited",
      "atmosphere": "Trace",
-     "atm_note": "Unbreathable outside the sealed contact enclave; the enclave maintains its own atmosphere",
+     "atm_note": "Thin, unbreathable atmosphere",
      "climate": "Arid, Rocky",
      "temperature": "Arid, large day-night swings, roughly 0°C to 45°C",
      "gravity": "Standard",
      "grav_note": "Standard gravity",
      "faction": "Skalan",
-     "population": "~12,000, Skalan diplomatic staff and sanctioned visitors",
-     "demographics": "Skalan administration with a small, rotating population of vetted offworld envoys",
-     "government": "Skalan diplomatic authority",
+     "population": "Uninhabited",
+     "demographics": "None",
+     "government": "Skalan (nominal)",
      "tech_level": "N/A",
-     "economy": "Sanctioned diplomacy and the limited, supervised contact the Skalan permit",
-     "access": "Permit Required",
-     "access_note": "The only Carach world open to outsiders, by Skalan invitation only. Straying beyond the enclave ends the visit, and sometimes the visitor.",
+     "economy": "None",
+     "access": "Forbidden",
+     "access_note": "Within Skalan controlled space. Patrol vessels enforce exclusion throughout the system.",
      "hazards": [
       "Skalan jurisdiction, approach without invitation treated as hostile",
       "Unbreathable atmosphere",
       "No infrastructure"
      ],
-     "desc": "The one Carach world outsiders are ever allowed to set foot on, chosen for the purpose precisely because it means nothing. Carach II holds no sacred ground and no cultural weight, so the Skalander conduct what little diplomacy they permit here, in a sealed enclave on an unremarkable rock, where losing the place to a hostile guest would cost them nothing they value. Everything an outsider ever learns of Carach, they learn in this one room."
+     "desc": "A dry, rocky world in the inner Carach system. Uninhabited and geologically unremarkable, it holds no significance to Skalan culture. The Skalans claim it as part of their system and do not permit others to operate here on principle."
     },
     {
      "id": "carach_belt",
@@ -4184,32 +3947,6 @@
     "Training World"
    ],
    "desc": "The Seigh system is administered by the Skalan as a separate closed territory from the Carach homeworld system. The primary body, Seigh, is the site of the Skalan rite of passage. Non-Skalans are not invited. The fauna does not check jurisdiction.",
-   "subtitle": "The Deadliest World in Known Space, and the Test That Makes a Skalander",
-   "quote": "\"Seigh does not care what you have killed before. It is interested only in whether it kills you now.\" (Skalander rite-master)",
-   "history": "Seigh is self-governed Skalander territory, and unlike Carach it has no homes on it. Its fauna and flora have earned, honestly, the title of the deadliest world in known space, an ecology so uniformly lethal that the Skalander never tried to settle it. They set it aside instead for the one thing it does well, which is to test people.\nFor the Skalander, a tour on Seigh is a rite of passage. A young Skalander who means to prove themselves goes to Seigh and returns, or does not, and the ones who come back carry a standing nothing else in the culture confers. The military trains here too, on the sound logic that a soldier who can survive Seigh can survive anything a war will think to do to them.\nSeigh's reputation draws another kind of visitor. Wealthy outsiders pay enormous sums for illegal safaris, hoping to carry home a trophy from the deadliest world there is, and a steady fraction of them stay forever, feeding the ground they came to conquer. The Skalander tolerate the hunters with thinly veiled contempt and the occasional quiet profit, and the wildlife goes on balancing the ledger.",
-   "politics": "Seigh has no government, because it has no settled population to govern, only the Skalander military that trains on it and the rite-masters who oversee the proving. Skalander law applies in the sense that the Skalander decide who is allowed to come here and die, and largely ignore those who come anyway.\nThe illegal safari trade is the one persistent outside presence, run by offworld outfits that bribe, smuggle, and occasionally get eaten. The Skalander could stamp it out and mostly do not, partly because the planet does their enforcement for them, and partly because a rich fool who wishes to die on Seigh is, to the Skalander mind, exercising a freedom no one has the standing to deny him.",
-   "dominant_race": {
-    "name": "The Tested and the Trespassers",
-    "lore": "Seigh has no true population, only two kinds of visitor. The first are the Skalander, young warriors come to earn their standing and soldiers come to be hardened, overseen by rite-masters who have survived the world themselves and expect no less of anyone else. To them Seigh is sacred ground of a brutal kind, the place that decides who a Skalander becomes.\nThe second are the trespassers, wealthy offworlders chasing a trophy from the deadliest world there is, and the outfits that smuggle them in. The Skalander regard them as the planet's livestock, and Seigh, with no opinion on the matter either way, obliges."
-   },
-   "relations": [
-    {
-     "name": "Carach",
-     "stance": "sister world",
-     "note": "The Skalander homeworld and the seat of everything Seigh exists to serve. Carach preserves the Skalander; Seigh proves them, and the two systems are run as one closed territory in all but name."
-    },
-    {
-     "name": "The Skalander military",
-     "stance": "proving ground",
-     "note": "Trains its young and its soldiers on Seigh because nothing else comes close. A Seigh tour is the credential behind every Skalander reputation worth the name."
-    },
-    {
-     "name": "Safari outfits",
-     "stance": "tolerated parasites",
-     "note": "Offworld operations that smuggle rich hunters past the perimeter for a fortune. The Skalander permit them by inaction, and the planet thins their numbers without assistance."
-    }
-   ],
-   "gm_notes": "Run Seigh as a world that is itself the antagonist. Nothing here needs a stat line to be terrifying; the ground, the air, the plants, and the things moving in them are all trying to kill everyone equally. Two ways onto the board: a Skalander rite of passage, where a player earns standing the culture grants no other way, or an illegal safari, where the real danger is rarely the trophy and often the other hunters. A surviving outsider gains a strange, grudging Skalander respect, and the phrase 'they came back from Seigh' carries weight in places the player will not expect.",
    "planets": [
     {
      "id": "seigh",
@@ -4220,7 +3957,7 @@
      "atmosphere": "Breathable",
      "atm_note": "Breathable but carries spores, pollen, and biological agents causing cumulative harm without proper filtration",
      "climate": "Tropical Jungle, Extreme (Toxic Flora, Megafauna)",
-     "temperature": "Hot and wet, roughly 26°C to 44°C, the climate as hostile as everything living in it",
+     "temperature": "Hot and humid, roughly 22°C to 40°C",
      "gravity": "High",
      "grav_note": "Above standard. Escape from predators is significantly harder than expected.",
      "faction": "Skalan",
@@ -4252,18 +3989,6 @@
       {
        "name": "The Summit",
        "desc": "The highest point on Seigh, the goal of the rite of passage. What is found there is known only to those who complete the training. No outsider has reached it and returned."
-      }
-     ],
-     "specialties": [
-      {
-       "name": "Seigh Trophies (Illegal)",
-       "kind": "good",
-       "desc": "Hides, fangs, and preserved specimens from the deadliest fauna in known space, smuggled out at enormous cost for collectors who want proof that someone went and came back. Possession is illegal in Alliance space and prized accordingly."
-      },
-      {
-       "name": "Seigh-Tested",
-       "kind": "service",
-       "desc": "The credential, not a cargo. A Skalander who has passed the rite, or the rare outsider who survived a season, carries a standing that opens doors across the galaxy. Few things are worth more, and few are harder to earn."
       }
      ],
      "hooks": [
@@ -5755,91 +5480,18 @@
    "id": "system_5",
    "name": "System 5",
    "region": "Alliance Space",
-   "classification": "Core System, Tronik Embassy & Neutral Junction",
-   "faction": "Alliance Space (Tronik embassy)",
+   "classification": "Core System, Tronik War Memorial",
+   "faction": "Alliance (Joint Administration)",
    "status": "active",
    "tags": [
     "Alliance Space",
-    "Tronik Embassy",
+    "Tronik War",
+    "Memorial",
     "Neutral Zone",
-    "Information Market",
-    "Gate Junction",
-    "Tronik War"
+    "Historical",
+    "Contested Past"
    ],
-   "desc": "System 5 has no name, only its designation, because the Alliance never agreed on one. It was a battleground of the Tronik War, three of its worlds destroyed and left as the debris the veterans call the Three Graves. The military station at its heart became something stranger after the war, a giant Tronik embassy and the one place the Troniks deal openly with organic life. The system is Alliance space, but the station runs on the Troniks' terms, neutral ground open to every race that respects its laws, and the only good that truly trades there is information.",
-   "subtitle": "The Troniks' One Open Door, in the Graveyard of the War They Won",
-   "quote": "\"You imagine we wanted your worlds. We wanted your information. You generate it constantly and for free, and you call the arrangement peace.\" (Tronik contact protocol, translated)",
-   "history": "System 5 was central to the Tronik War, and it paid for it. Three of its worlds were destroyed outright and remain a debris field the veterans named the Three Graves, and the system never recovered the name the Alliance could never agree on either. The military station that anchored the system was captured by the Troniks in the fighting, and when the war ended on Tronik terms, it became the seed of something stranger.\nRather than hold organic territory, the Troniks made the station their single embassy to organic life, the one point of open contact for the most isolationist power in the galaxy. The system around it stayed Alliance space, but the station itself became, in every practical sense, sovereign Tronik ground, a giant embassy set down in Alliance territory amid the graves of the war that made the Troniks what they are. Organics come to deal at the edge of their own war dead, which the Troniks neither intended as a message nor bothered to prevent being read as one.",
-   "politics": "System 5 is Alliance space, and the Alliance holds the system and the perimeter around the station. The station itself is a different matter, a Tronik embassy that runs on Tronik law inside its own walls, the way an embassy always does. The Alliance accepts the arrangement because the station is the only way anyone deals with the Troniks at all, and because the alternative was settled, permanently, during the war. Tronik law is short, clear, and enforced with a consistency the historical record makes vivid. Respect it and you may trade in peace. Test it and you become part of the record.\nWithin those walls it is genuinely neutral, open to every race and faction, which makes it the one place in known space where enemies broker in the open. The economy runs on a single commodity. The Troniks want information above everything, they pay better for it than anyone alive, and they rarely pay in credits. A good secret on System 5 buys another secret, a favour, a service, or a debt called in later, and the Troniks keep that ledger with a memory no organic institution can match.",
-   "dominant_race": {
-    "name": "The Tronik (and Everyone Who Comes to Deal)",
-    "lore": "System 5 has two populations. The first is the Tronik themselves, the synthetic hive that runs the embassy through interfaces patient enough to spend centuries listening. They are not hostile and not warm; they are interested, exactly as far as you are interesting, and they forget nothing. The second population is everyone else, a permanent community of residents, including war veterans who never left the graves of their friends, layered over a constant churn of traders, envoys, and intelligence operatives from every faction in the galaxy.\nIt is the most information-dense gathering of organics anywhere, which is precisely why the Troniks allow it. Every spy in known space comes here eventually, because it is the one market where the buyer is a hive mind that already knows half of what you are selling and will pay, in its own coin, for the other half."
-   },
-   "race_standing": [
-    {
-     "race": "Human",
-     "tone": "neutral",
-     "note": "Everywhere, as always, and the galaxy's most prolific producers of the chaos the Troniks find worth archiving. Humans make natural brokers here and natural marks, often in the same conversation."
-    },
-    {
-     "race": "Patriark",
-     "tone": "wary",
-     "note": "The galaxy's other great hoarders of information, circling the only buyers who might rival their archive. Patriark and Tronik deal with elaborate caution, two memories that forget nothing, each certain the other is keeping score."
-    },
-    {
-     "race": "Psylon",
-     "tone": "complicated",
-     "note": "The one organic mind the Troniks treat as nearly an equal. A Psylon's cold logic meets the hive on something close to its own terms, which makes Psylon the most effective and most unnerving negotiators on the station."
-    },
-    {
-     "race": "Nerulian",
-     "tone": "wary",
-     "note": "The Troniks hold no organic prejudice and weigh a Nerulian's information like anyone else's. The other visitors are not so neutral, and a Nerulian on System 5 trades under the usual cloud of old fear."
-    },
-    {
-     "race": "Skalander",
-     "tone": "neutral",
-     "note": "Rare here, and easy for the Troniks to deal with, since a people whose word is absolute removes most of the uncertainty the hive otherwise has to price in."
-    },
-    {
-     "race": "Hakari",
-     "tone": "neutral",
-     "note": "Couriers and security for the data trade, moving the things and the people that the information economy needs moved quietly. Always in work on a station built on secrets."
-    },
-    {
-     "race": "Jaulaus",
-     "tone": "neutral",
-     "note": "The muscle behind the brokers, valued on a station where a deal can sour fast and the Tronik law only protects you up to the point you break it first."
-    },
-    {
-     "race": "Non-Born",
-     "tone": "complicated",
-     "note": "The Troniks regard the vat-grown with a flicker of something other races never get, one made kind acknowledging another. A Non-Born on System 5 is, oddly, among the few organics the hive finds genuinely relatable."
-    }
-   ],
-   "relations": [
-    {
-     "name": "The Tronik Network",
-     "stance": "embassy",
-     "note": "The synthetic power whose single point of open contact this is. The station is their embassy and their door, run on their terms inside its walls, while the system around it stays Alliance space."
-    },
-    {
-     "name": "The Alliance",
-     "stance": "host",
-     "note": "Holds the system and the security perimeter, and grants the Troniks their embassy within it. The Alliance keeps System 5 in its space because the embassy is the only channel to the Troniks that exists, and losing it would serve no one."
-    },
-    {
-     "name": "Every faction",
-     "stance": "clients",
-     "note": "Everyone trades here and everyone spies here, openly, because it is the single neutral ground where that is possible. The station's value to all of them is exactly that none of them controls it."
-    },
-    {
-     "name": "Mangara & Yagmir",
-     "stance": "junction",
-     "note": "System 5 is a vital crossing, the gate junction that ties Mangara and the Alliance edge outward to Yagmir and the regions beyond. A great deal of traffic between Alliance space and the wider galaxy passes through a station the Troniks own."
-    }
-   ],
-   "gm_notes": "Run System 5 as the one room where everyone meets and no one is safe to assume anything. Information is the currency, so the players' most valuable possession here is what they know, and the Troniks will pay for it in favours, secrets, and services rather than credits, which is how a simple sale becomes a debt that follows them home. The embassy is neutral ground, so enemies can sit at the same table, and the moment you step inside its walls you are on Tronik soil, where the laws are few and the consequences are certain. And do not forget the setting: the station floats among the Three Graves, so every deal is struck in sight of the war that made the landlord, which is a mood the Troniks are content to let do their negotiating for them.",
+   "desc": "System 5 has no official name, just its designation. The system was at the centre of the Tronik War and the Alliance has never been able to agree on what to call it. Three worlds were destroyed or rendered permanently uninhabitable. Two survive. The system is simultaneously a memorial, a political battlefield over historical memory, and a functioning civilian population trying to live with what surrounds them.",
    "planets": [
     {
      "id": "system5_remnants",
@@ -5882,23 +5534,23 @@
     {
      "id": "system5_haven",
      "name": "System 5 Station",
-     "type": "Space Station, Tronik Contact & Information Exchange",
+     "type": "Space Station, Memorial & Administrative Hub",
      "status": "active",
-     "statusLabel": "Active, Tronik-Held Neutral Zone",
+     "statusLabel": "Active, Memorial Zone",
      "atmosphere": "Breathable",
      "atm_note": "Station-maintained throughout all public areas",
      "climate": "Controlled",
      "temperature": "Climate-controlled, held around 18°C to 22°C",
      "gravity": "Standard",
      "grav_note": "Artificial gravity, uniform throughout",
-     "faction": "Tronik Network (embassy)",
-     "population": "~200,000 permanent residents, plus a constant transient population of traders, envoys, and intelligence operatives from every faction",
-     "demographics": "Highly mixed, all races, including war veterans who never left; all under Tronik oversight",
-     "government": "Tronik administration (embassy protocol)",
+     "faction": "Alliance (Joint Civilian-Military Administration)",
+     "population": "~200,000 permanent residents and rotating memorial visitors",
+     "demographics": "Highly mixed, veterans, historians, journalists, family members of war dead",
+     "government": "Joint Memorial Administration Council",
      "tech_level": "Standard",
-     "economy": "Information brokerage, neutral trade, sanctioned diplomacy",
+     "economy": "Memorial tourism, historical research, small-scale trade, veteran support services",
      "access": "Open",
-     "access_note": "Open to all who respect Tronik law. The law is short and absolute, and the record of what happens to those who break it is unusually consistent.",
+     "access_note": "Open to all with standard Alliance ID. Memorial zones require respectful conduct, security enforces this actively.",
      "hazards": [
       "Historical and political tensions run extremely high, debates about Tronik War responsibility turn violent with some regularity",
       "Intelligence operations, this station is a significant information hub for anyone studying the war",
@@ -5918,19 +5570,12 @@
        "desc": "The section of the station where long-term veteran residents have established permanent communities. Self-policing, deeply private about internal matters, and extremely protective of each other."
       }
      ],
-     "specialties": [
-      {
-       "name": "Information",
-       "kind": "service",
-       "desc": "The only good that truly trades on System 5. The Troniks buy it above anything and pay better than anyone, and almost never in credits. A good secret here is worth another secret, a favour, a service, or a debt the hive will remember long after you have forgotten owing it."
-      }
-     ],
      "hooks": [
       "Among academics who study the Tronik War, it is a matter of consensus that the official version of the war's origin is incomplete, not a lie, exactly, but a version that omits the decisions and actors that made the outcome inevitable. The contested Archive at System 5 Station is believed to hold the records that would allow a full account to be written, and the administration's management of access to those sections is tracked closely by researchers who study what the Alliance considers worth suppressing.",
       "System 5 Station veterans' communities maintain oral histories of the war that include accounts of individuals who were officially listed as casualties but were subsequently seen, spoken to, or otherwise encountered in circumstances suggesting they survived and chose or were compelled to disappear from official records. These accounts are treated seriously within veteran communities and dismissed by the Alliance's official historiography.",
       "The periodic political effort to have the Alliance formally assign responsibility for the Tronik War has been made at least twelve times in the decades since the conflict ended, each time failing in ways that suggest the resistance is organised rather than simply political disagreement. The people who live on System 5 Station, veterans, historians, bereaved families, have views on who benefits from the question remaining unresolved."
      ],
-     "desc": "The military station that anchored System 5, captured by the Troniks during the war and established by them afterward as their single embassy to organic life. The system around it is Alliance space; the station, by arrangement, is not. It is neutral ground and the busiest information market in known space, where every faction trades and every faction spies, all of it watched by the hive that owns the walls. Veterans of the war live out their years here too, among the graves of the people they lost, on a station now run by the side that won."
+     "desc": "System 5 Station was built after the war as a permanent memorial administration point and has grown into a community in its own right. Veterans live out their years here. Historians come to access the archive, what is accessible of it. Families come to find a name on the Memorial Hall wall. It is a place where the Tronik War is never quite over, where the official history is contested quietly and sometimes loudly, and where the gap between what is recorded and what actually happened is felt every day."
     },
     {
      "id": "system5_iv",
