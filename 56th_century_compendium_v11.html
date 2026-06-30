@@ -5263,7 +5263,7 @@ function ccRenderIdentity(){
   h+='<div style="margin-bottom:8px;"><div style="font-size:10.5px;color:#888;margin-bottom:2px;">Race</div>';
   h+='<select style="'+CC_SEL.replace('font-size:11px','font-size:12px')+'padding:4px;" onchange="ccState.race=this.value;ccApplyRaceDefaults(g.races.find(r=>r.name===this.value));render();">';
   h+='<option value="">— Select race —</option>';
-  (g.races||[]).slice().sort((a,b)=>a.name.localeCompare(b.name)).forEach(r=>{h+='<option value="'+esc(r.name)+'"'+(st.race===r.name?' selected':'')+'>'+esc(r.name)+'</option>';});
+  (g.races||[]).filter(r=>!r.npc).slice().sort((a,b)=>a.name.localeCompare(b.name)).forEach(r=>{h+='<option value="'+esc(r.name)+'"'+(st.race===r.name?' selected':'')+'>'+esc(r.name)+'</option>';});
   h+='</select></div>';
   h+=ccLbl('Occupation','<div style="display:flex;gap:5px;"><input type="text" value="'+esc(st.occupation||'')+'" style="'+CC_INP+'" oninput="ccState.occupation=this.value;"><button onclick="ccState.picker={type:\'occupation\'};ccState.pickerSearch=\'\';render();" style="background:rgba(255,107,53,.15);border:1px solid var(--a2);color:var(--a2);padding:3px 8px;border-radius:4px;cursor:pointer;font-size:11px;white-space:nowrap;">Browse</button></div>');
   h+=ccLbl('Background','<div style="display:flex;gap:5px;"><input type="text" value="'+esc(st.background||'')+'" style="'+CC_INP+'" oninput="ccState.background=this.value;"><button onclick="ccState.picker={type:\'background\'};ccState.pickerSearch=\'\';render();" style="background:rgba(255,200,0,.1);border:1px solid var(--ye);color:var(--ye);padding:3px 8px;border-radius:4px;cursor:pointer;font-size:11px;white-space:nowrap;">Browse</button></div>');
@@ -6557,7 +6557,7 @@ function egTierName(tier,race,archLabel){
 }
 
 function egPickRace(){
-  const all=g.races||[];
+  const all=(g.races||[]).filter(r=>!r.npc);
   const base=all.filter(r=>!r.name.startsWith('Non-Born'));
   const nonBorn=all.filter(r=>r.name.startsWith('Non-Born'));
   // Equal weight: each base race is 1 slot, all non-borns together are 1 slot
@@ -7320,20 +7320,29 @@ function render(){
       function sr(k){if(!r.stats||!r.stats[k])return '—';const s=r.stats[k];return '<span class="minmax">'+s.min+'</span>/<span class="avg">'+s.avg+'</span>/<span class="minmax">'+s.max+'</span>';}
       html+='<tr><td>'+esc(r.name)+'</td><td>'+sr('physical')+'</td><td>'+sr('acuity')+'</td><td>'+sr('mental')+'</td><td>'+sr('social')+'</td><td>'+sr('endurance')+'</td><td>'+sr('speed')+'</td><td>'+sr('wits')+'</td><td>'+sr('willpower')+'</td></tr>';
     });
-    html+='</tbody></table></div><div class="grid2">';
-    F.forEach((r,i)=>{
-      const id='rc'+i;
-      html+='<div class="card" id="'+id+'" data-tog="'+id+'"><div class="ch"><div><div class="cn">'+hl(r.name,sq)+'</div>'+(r.subtitle?'<div style="font-style:italic;color:var(--a2);font-size:11.5px;margin-top:2px;">'+esc(r.subtitle)+'</div>':'')+'</div><span class="xi">▼</span></div>';
-      if(r.mods&&r.mods.length)html+='<div class="tags">'+r.mods.slice(0,8).map(m=>'<span class="tag tgr">'+esc(m)+'</span>').join('')+'</div>';
-      html+='<div class="cb">';
-      if(r.quote)html+='<div style="border-left:3px solid var(--a3);padding:2px 0 2px 9px;margin:0 0 9px;font-style:italic;opacity:.88;">'+hl(r.quote,sq)+'</div>';
-      if(r.racial)html+='<div class="trait-row"><div class="trait-lbl" style="color:var(--a2);">Racial</div><div class="trait-val">'+hl(r.racial,sq)+'</div></div>';
-      if(r.evolution)html+='<div class="trait-row"><div class="trait-lbl" style="color:var(--a3);">Evolution</div><div class="trait-val">'+hl(r.evolution,sq)+'</div></div>';
-      if(r.environment)html+='<div class="trait-row"><div class="trait-lbl" style="color:var(--gr);">Environment</div><div class="trait-val">'+hl(r.environment,sq)+'</div></div>';
-      [['Origins & Homeworld','origins'],['Physiology','physical'],['Society & Culture','society'],['Disposition in the Galaxy','disposition']].forEach(function(s){var lbl=s[0],key=s[1];if(r[key])html+='<div style="margin-top:9px;"><div style="font-weight:600;letter-spacing:.04em;font-size:11px;text-transform:uppercase;color:var(--gr);margin-bottom:3px;">'+lbl+'</div>'+r[key].split('\n').map(function(t){return '<p style="margin:0 0 6px;line-height:1.5;">'+hl(t,sq)+'</p>';}).join('')+'</div>';});
-      html+='</div></div>';
-    });
+    html+='</tbody></table></div>';
+    function raceCard(r,id){
+      var h='<div class="card" id="'+id+'" data-tog="'+id+'"><div class="ch"><div><div class="cn">'+hl(r.name,sq)+'</div>'+(r.subtitle?'<div style="font-style:italic;color:var(--a2);font-size:11.5px;margin-top:2px;">'+esc(r.subtitle)+'</div>':'')+'</div><span class="xi">▼</span></div>';
+      if(r.mods&&r.mods.length)h+='<div class="tags">'+r.mods.slice(0,8).map(m=>'<span class="tag tgr">'+esc(m)+'</span>').join('')+'</div>';
+      h+='<div class="cb">';
+      if(r.quote)h+='<div style="border-left:3px solid var(--a3);padding:2px 0 2px 9px;margin:0 0 9px;font-style:italic;opacity:.88;">'+hl(r.quote,sq)+'</div>';
+      if(r.racial)h+='<div class="trait-row"><div class="trait-lbl" style="color:var(--a2);">Racial</div><div class="trait-val">'+hl(r.racial,sq)+'</div></div>';
+      if(r.evolution)h+='<div class="trait-row"><div class="trait-lbl" style="color:var(--a3);">Evolution</div><div class="trait-val">'+hl(r.evolution,sq)+'</div></div>';
+      if(r.environment)h+='<div class="trait-row"><div class="trait-lbl" style="color:var(--gr);">Environment</div><div class="trait-val">'+hl(r.environment,sq)+'</div></div>';
+      [['Origins & Homeworld','origins'],['Physiology','physical'],['Society & Culture','society'],['Disposition in the Galaxy','disposition']].forEach(function(s){var lbl=s[0],key=s[1];if(r[key])h+='<div style="margin-top:9px;"><div style="font-weight:600;letter-spacing:.04em;font-size:11px;text-transform:uppercase;color:var(--gr);margin-bottom:3px;">'+lbl+'</div>'+r[key].split('\n').map(function(t){return '<p style="margin:0 0 6px;line-height:1.5;">'+hl(t,sq)+'</p>';}).join('')+'</div>';});
+      h+='</div></div>';return h;
+    }
+    var Fp=F.filter(r=>!r.npc), Fn=F.filter(r=>r.npc);
+    html+='<div class="grid2">';
+    Fp.forEach((r,i)=>{html+=raceCard(r,'rc'+i);});
     html+='</div>';
+    if(Fn.length){
+      html+='<div class="ssub" style="margin-top:18px;">Non-Playable Races <span class="badge">'+Fn.length+'</span></div>';
+      html+='<div style="font-style:italic;opacity:.7;font-size:11.5px;margin:0 0 10px;">GM reference. Native to the powers beyond and around the Alliance; not available for player characters.</div>';
+      html+='<div class="grid2">';
+      Fn.forEach((r,i)=>{html+=raceCard(r,'rcn'+i);});
+      html+='</div>';
+    }
   }
 
   else if(cs==='backgrounds'){
@@ -9046,7 +9055,7 @@ function render(){
     html+='<button class="eg-lock-btn'+(egState.locks.race?' locked':'')+'" title="Lock race" onclick="egState.locks.race=!egState.locks.race;render();">'+(egState.locks.race?'🔒':'🔓')+'</button>';
     html+='<span class="eg-label">RACE</span>';
     html+='<select class="eg-select" onchange="egState.race=this.value;egSetRaceAttrs();egCalcResources();render();">';
-    (g.races||[]).forEach(r=>{html+='<option value="'+esc(r.name)+'"'+(egState.race===r.name?' selected':'')+'>'+esc(r.name)+'</option>';});
+    (g.races||[]).filter(r=>!r.npc).forEach(r=>{html+='<option value="'+esc(r.name)+'"'+(egState.race===r.name?' selected':'')+'>'+esc(r.name)+'</option>';});
     html+='</select>';
     html+='</div>';
     // Difficulty slider row
