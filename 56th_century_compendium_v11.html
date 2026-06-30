@@ -3934,11 +3934,11 @@ function gcFacLore(f){
   if(!f)return'';
   var has=f.subtitle||f.quote||f.history||f.politics||f.culture||(f.relations&&f.relations.length);
   if(!has)return'';
-  var accId='gc-acc-faclore-'+esc(f.id);
-  var h='<div class="gc-region-acc" id="'+accId+'" style="margin:6px 0 10px;">';
-  h+='<div class="gc-region-acc-hd" onclick="gcToggleAcc(\''+accId+'\')">';
-  h+='<span class="gc-region-acc-title">Lore &amp; Politics</span><span class="gc-region-acc-arr">▼</span></div>';
-  h+='<div class="gc-region-acc-body">';
+  /* 17.0 fix: render lore INLINE (no nested accordion). The faction card is itself a [data-tog]
+     click-to-expand target, so an inner accordion's click bubbled up and collapsed the whole card
+     (the "card goes blank" bug). Inline rendering matches every other card type: expand once, see all. */
+  var h='<div class="gc-faclore" style="margin:8px 0 4px;">';
+  h+='<div class="gc-sec-div" style="color:var(--a);">Lore &amp; Politics</div>';
   if(f.subtitle)h+='<div style="font-family:\'Chakra Petch\',sans-serif;color:var(--a);font-size:12.5px;letter-spacing:.03em;margin:2px 0 8px;">'+esc(f.subtitle)+'</div>';
   if(f.quote)h+='<div style="border-left:2px solid var(--a);padding:6px 12px;margin:0 0 12px;font-style:italic;color:var(--tx2);font-size:12.5px;line-height:1.6;">'+esc(f.quote)+'</div>';
   if(f.history){h+='<div class="gc-sec-div">History</div><div class="gc-desc-block" style="margin-bottom:12px;">'+descHtml(f.history,'')+'</div>';}
@@ -3953,7 +3953,7 @@ function gcFacLore(f){
     });
     h+='</div>';
   }
-  h+='</div></div>';
+  h+='</div>';
   return h;
 }
 function gcSetSection(idx){gcSection=(idx===null||idx===undefined)?null:idx;af='';sq='';render();}
