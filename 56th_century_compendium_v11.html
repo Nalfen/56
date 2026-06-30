@@ -127,6 +127,7 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 .placeholder-desc{font-size:13px;line-height:1.8;color:var(--mu);font-style:italic;border-left:2px solid var(--border2);padding-left:8px;margin-bottom:8px;}
 .fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:1px;margin-top:8px;background:var(--border);border-radius:6px;overflow:hidden;}
 .f{background:var(--bg);padding:9px 12px;}
+.fg>.f:last-child:nth-child(odd){grid-column:1 / -1;}
 .fl{font-size:10.5px;color:var(--mu2);font-family:'JetBrains Mono',monospace;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;}
 .fv{font-size:13px;color:var(--tx3);font-family:'JetBrains Mono',monospace;}
 .gitem{display:flex;gap:10px;padding:10px 12px;background:transparent;border:none;border-left:2px solid #3a3a3c;border-bottom:1px solid var(--border);border-radius:0;margin-bottom:0;}
@@ -356,6 +357,7 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 .gc-stat-g{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border-radius:6px;overflow:hidden;}
 .gc-stat-g.g3{grid-template-columns:repeat(3,1fr);}
 .gc-stat{background:#1a1a1c;padding:8px 10px;}
+.gc-stat-g>.gc-stat:last-child:nth-child(odd){grid-column:1 / -1;}
 .gc-stat-l{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mu3);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;}
 .gc-stat-v{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx2);line-height:1.4;}
 .gc-stat-v.green{color:var(--gr);}.gc-stat-v.orange{color:var(--or);}.gc-stat-v.red{color:var(--re);}.gc-stat-v.yellow{color:var(--ye);}.gc-stat-v.blue{color:var(--bl);}.gc-stat-v.purple{color:var(--pu);}
@@ -510,6 +512,7 @@ aside.open{transform:translateX(0);}
 .gc-sections-grid{grid-template-columns:1fr;}
 .db-zones{grid-template-columns:1fr;}
 .fg{grid-template-columns:repeat(2,1fr);}
+.fg.fg1{grid-template-columns:1fr;}
 .db-stat-grid{grid-template-columns:repeat(2,1fr);}
 .world-panel{width:100%;}
 .gc-panel{width:100%;}
@@ -8750,7 +8753,12 @@ function render(){
         html+='</div>';
         if(f.hq){html+='<div class="cr2" style="margin-top:4px;"><span style="font-size:10.5px;color:var(--mu);font-family:\'JetBrains Mono\',monospace;margin-right:4px;">HQ</span><span style="font-size:11px;color:#c0c0c0;font-family:\'Exo 2\',sans-serif;">'+esc(f.hq)+'</span></div>';}
         html+='<div class="cb">';
-        if(f.status)html+='<div class="fg" style="margin-bottom:8px;"><div class="f"><div class="fl">Status</div><div class="fv">'+esc(f.status)+'</div></div></div>';
+        /* 17.0 fix: render Status + Legal Standing together in one .fg so both grid cells fill
+           (a single-field .fg left an empty grey cell). Falls back to one column (.fg1) if only one. */
+        var fmeta='';
+        if(f.status)fmeta+='<div class="f"><div class="fl">Status</div><div class="fv">'+esc(f.status)+'</div></div>';
+        if(f.legal_standing)fmeta+='<div class="f"><div class="fl">Legal Standing</div><div class="fv" style="font-size:11px;">'+esc(f.legal_standing)+'</div></div>';
+        if(fmeta){var fn=(f.status?1:0)+(f.legal_standing?1:0);html+='<div class="fg'+(fn<2?' fg1':'')+'" style="margin-bottom:10px;">'+fmeta+'</div>';}
         if(f.desc)html+='<div style="font-size:12px;line-height:1.7;color:#c0c0c0;font-family:\'Exo 2\',sans-serif;margin-bottom:10px;">'+descHtml(f.desc,sq)+'</div>';
         html+=gcFacLore(f);
         if(f.presence&&f.presence.length){
@@ -8765,7 +8773,6 @@ function render(){
           f.known_for.forEach(function(k){html+='<li style="font-size:12px;color:#a0a0a0;font-family:\'Exo 2\',sans-serif;margin-bottom:3px;">'+esc(k)+'</li>';});
           html+='</ul></div>';
         }
-        if(f.legal_standing)html+='<div class="fg"><div class="f"><div class="fl">Legal Standing</div><div class="fv" style="font-size:11px;">'+esc(f.legal_standing)+'</div></div></div>';
         html+='</div></div>';
       });
       html+='</div>';
