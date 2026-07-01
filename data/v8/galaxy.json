@@ -152,7 +152,8 @@
    "lore_notes": [
     "The full archive lives in one place and is copied to no other. Navigators are licensed fragments of it, never the whole, so that no captain who defects can carry the map out the door.",
     "The Guild holds standing relations with the Tronik Network that no other faction has matched. What it ships to the hive, and what charts it gets back, is the one entry in its own ledgers a member is never allowed to read.",
-    "San Tien raiders take a predictable share of Guild traffic every year, and the Guild budgets for it like weather. Twice it has tried to buy the raids off instead of fighting them, and both arrangements ended the moment the Nerulians found a richer convoy."
+    "San Tien raiders take a predictable share of Guild traffic every year, and the Guild budgets for it like weather. Twice it has tried to buy the raids off instead of fighting them, and both arrangements ended the moment the Nerulians found a richer convoy.",
+    "For most of the far-corner peoples, a Guild ship is the only outside face they ever see. The Yaevi answer its hails decades late and the Ongoran leave devices where its crews will find them, and the Guild carries both home, which is why much of what the galaxy knows about the deep reaches it knows secondhand from Zegitor manifests."
    ]
   },
   {
@@ -216,12 +217,13 @@
    "known_for": [
     "Complete legal vacuum, everything the Alliance prohibits operates openly in some Dark Space systems",
     "Extreme variation between systems, a traveller can move from a functioning democracy to a warlord dictatorship in a single jump",
-    "The most diverse independent cultures in the galaxy, developed in isolation from Alliance standardisation",
+    "The most diverse independent cultures in the galaxy, from the hardy Harran clans to a hundred smaller peoples, developed in isolation from Alliance standardisation",
     "Corporate extraction operations without environmental or labour regulation",
     "Dozens of politically-motivated colonies and independent worlds that chose isolation from Alliance society"
    ],
    "notable_systems": [
     "San Tien, last surviving Nerulian world; spiritual and political home of the surviving Nerulian people",
+    "Haran, an abandoned corporate extraction world now held by the Harran, the clan-people the lawless reach bred to outlast it",
     "Dozens of unnamed extraction operations, pirate waypoints, and colony worlds that do not appear on public charts"
    ],
    "lore_notes": [
@@ -248,7 +250,7 @@
    "population_est": "None confirmed, no known permanent habitation; several expedition vessels unaccounted for",
    "government": "None",
    "alignment": "Hostile to all, the Rift is an environment, not an entity, but the distinction has limited practical value",
-   "desc": "The Nemani Rift is a vast nebula of unknown composition stretching from the Ash system frontier deep into what was once Nerulian territory. Navigation inside it is acutely hazardous, electromagnetic anomalies disable ship systems without warning, navigational references become unreliable, and sensor readings cannot be trusted.\n\nThe expeditions that have entered and returned report that the Rift seems to change, passages that were navigable on entry are obstructed on return.\n\nIts most significant property, and the one that has most shaped modern galactic history, is this: the Kravens cannot or will not traverse it. In every direction of Kraven expansion, they have encountered the Rift and stopped. No Kraven vessel has ever been observed inside or beyond it. This single fact is the only reason anything west of the Rift still exists.",
+   "desc": "The Nemani Rift is a vast nebula of unknown composition stretching from the Ash system frontier deep into what was once Nerulian territory. Navigation inside it is acutely hazardous, electromagnetic anomalies disable ship systems without warning, navigational references become unreliable, and sensor readings cannot be trusted.\n\nThe expeditions that have entered and returned report that the Rift seems to change, passages that were navigable on entry are obstructed on return.\n\nIts most significant property, and the one that has most shaped modern galactic history, is this: the main Kraven hive cannot or will not cross it. In every direction of its expansion the swarm reached the Rift and stopped, and it has stayed behind the barrier ever since. A handful of lone Kravens have been recorded on the western side over the years, never in sustained or massive numbers and never for long, but the hive itself has never come through. That single fact is the only reason anything west of the Rift still exists.",
    "history": "The Nerulian Empire knew of the Rift and mapped its boundaries over several centuries. Nerulian navigators occasionally entered and occasionally did not return. It was considered a hazard, not a barrier, the Nerulians had no reason to need it as one. When the Kravens emerged from the east and consumed the Empire, the Rift's role changed overnight.\n\nSurvivors fleeing west discovered that Kraven pursuit stopped at the Rift boundary. This observation, confirmed over years of desperate observation from the frontier, established the Rift as the defining strategic reality of the post-Nerulian galaxy.\n\nThe Alliance built the Ash system military installation specifically because of the Rift. The boundary holds. Why it holds is not understood.",
    "known_for": [
     "The only known absolute barrier to Kraven expansion, the mechanism is entirely unknown",
@@ -285,23 +287,23 @@
    "population_est": "No living beings, all Nerulian worlds and any previous inhabitants are consumed",
    "government": "Swarm intelligence. No individual decision-makers identified. No communication, no negotiation, no diplomacy. Behaviour is consistent with pure biological expansion.",
    "alignment": "Hostile to all life without exception, no variant behaviour ever recorded",
-   "desc": "Kraven Space is the graveyard of the greatest civilisation the galaxy ever produced. The Nerulian Empire spanned hundreds of systems and had been advancing scientifically for a thousand years. It was gone in under two years from the moment the Kravens arrived. Nobody knows where the Kravens came from. Nobody has successfully communicated with them, attempts have simply resulted in faster attack. Nobody who has engaged Kraven forces at close range in meaningful numbers has survived to provide a full account.\n\nThe swarm consumes everything biological and adapts continuously to resistance. Its expansion has been arrested only by the Nemani Rift to the west and the void to the east.",
-   "history": "The Nerulian Empire had no warning. There were no advance scouts, no first contact, no period of observation. Kraven forces appeared in the eastern systems and consumed them. Every defensive response was overwhelmed. The Empire, which had stood for over a thousand years and had never faced an existential threat, collapsed completely in under two years.\n\nThe survivors who reached the west, a fraction of the Nerulian population, mostly those who were off-world or in transit, became the refugees who eventually settled San Tien and the fleet-cities. What the Kravens did with the Empire's worlds after consuming the population is unknown. Deep sensors aimed east from beyond the Rift return data that is difficult to interpret.",
+   "desc": "Kraven Space is the graveyard of the greatest civilisation the galaxy ever produced, and it was dug in a week. The Nerulian Empire spanned hundreds of systems and had advanced for a thousand years. It was gone seven days after the Kravens arrived. No one knows where they came from. No one has communicated with them, since every attempt has only drawn a faster attack, and no one who has met them in force at close range has come back to give a full account. What is known is the shape of the thing: not a fleet but a swarm, a biology that arrives in overwhelming numbers and adapts to whatever is used against it, so the weapon that worked yesterday is shrugged off today. The main hive reached the Nemani Rift and, for reasons no one understands, mostly stays behind it. Mostly.",
+   "history": "The Nerulian Empire had no warning. There were no scouts, no first contact, no period of observation. The Kravens appeared in the eastern systems and consumed them, and every defence raised against them was overwhelmed and then digested. An empire of a thousand years and hundreds of worlds collapsed completely in a single week. The survivors were the lucky remainder who happened to be off-world or in transit, and they fled west to become the refugees of San Tien and the fleet-cities. What the Kravens do with a world once its life is gone is the part that turns study into nightmare. The swarm is rumoured to travel on ring-shaped ships built around an empty centre wide enough to hold a planet, and to fit whole worlds into that hollow and burn them for fuel as it moves. Whether the rumour is true, no one who has seen it up close has lived to confirm.",
    "known_for": [
-    "The complete consumption of the Nerulian Empire, the single largest civilisational loss in galactic history",
-    "The fastest military collapse of a major power ever recorded, the Nerulians had no effective response",
-    "Adaptive biology, Kraven forces encountered in different conditions show different defensive characteristics, suggesting rapid environmental adaptation",
-    "Complete absence of communication, negotiation, or non-hostile behaviour in every recorded contact",
-    "The only non-Kraven entity to have entered Kraven Space and returned was a Nerulian automated probe, sixty years after the fall; its data was incomplete and has been classified"
+    "Consuming the thousand-year Nerulian Empire, hundreds of systems, in a single week",
+    "A swarm biology of overwhelming numbers that adapts to any weapon used against it, so nothing works on it twice",
+    "The rumoured ring-ships, hollow-cored vessels said to swallow whole planets and burn them for fuel on the move",
+    "Total silence: no communication, no negotiation, and no non-hostile behaviour ever recorded",
+    "Halting at the Nemani Rift, which the main hive crosses so rarely that the galaxy to its west still exists"
    ],
    "notable_systems": [
     "Former Nerulian Core (designation only), the heart of the Nerulian Empire, now consumed; its exact location within Kraven Space is known from pre-fall records",
     "The Expansion Boundary, the current eastern limit of confirmed Kraven presence; actively monitored by Alliance and Zegitor long-range sensors"
    ],
    "lore_notes": [
-    "The Alliance's most classified Kraven assessments, according to multiple independent sources with claimed access, do not attempt to answer the question of whether the Kravens can be stopped. They attempt to answer the question of how long it will take them to reach the Rift at current expansion velocity, and what happens if the Rift ceases to function.",
-    "Nerulian survivors who lived through the fall and are still alive, there are very few, will not describe the Kraven attack in detail. Those who have studied the historical accounts note a consistency in what survivors choose not to say, as though there is a specific aspect of what they saw that they have collectively agreed not to record.",
-    "The question of where the Kravens came from is formally classified at Level Seven Restricted. It is the only question to which multiple independent analysts, reviewing the same data, have privately concluded the answer might be the Endless Darkness, and that they may not have originated there, but been driven out of it."
+    "The consumption of the Nerulian Empire took a week. Analysts who model the numbers do not publish the models, because the only way the arithmetic closes is if the Kravens were already present, in strength, before anyone saw the first one.",
+    "The ring-ships are the galaxy's favourite Kraven nightmare and its least confirmed: vessels built around a hole large enough to seat a planet, which the swarm is said to fill and burn as fuel on the move. Every account is second-hand, because the first-hand ones did not return.",
+    "The Rift stops the main hive, but not perfectly. A handful of lone Kravens have been recorded on its western side over the years, always single, always hunted down before they could become many. Nothing sustained has ever crossed, and the Alliance watches Ash for the day that changes."
    ]
   },
   {
@@ -365,13 +367,13 @@
    "known_for": [
     "The largest surviving archive of Nerulian history, science, and culture in known space",
     "Safe navigation of the nebula interior, a skill the Nuzoni Order controls absolutely and shares with no one",
-    "A multi-faith, multi-species community that has held internal peace for two centuries without a standing army",
+    "A multi-faith, multi-species community, the Nerulian refugees and the plant-bonded Vessa chief among them, that has held internal peace for two centuries without a standing army",
     "The prophecy of Nuzonia, which described both the refuge and the catastrophe centuries before either arrived",
-    "Biotech grown from the nebula's strange flora, found nowhere else"
+    "Biotech grown from the nebula's strange flora and tended by the Vessa, found nowhere else"
    ],
    "notable_systems": [
     "Puthea, the Convergence world where the Nuzoni Order gathers, its location given only to credentialed visitors",
-    "Zelmolla, the principal archive world, holding the deepest collections of Nerulian record",
+    "Zelmolla, the principal archive world, its Nerulian collections kept by the Vessa, the plant-symbiote people bonded to the nebula's flora",
     "Nypsos F47, the charted entry point to the interior, where all traffic is met and guided",
     "Betravir, a deep-interior settlement reachable only with an Order pilot",
     "Lumia, the far southern edge of the inhabited nebula, the last light before the outer dark"
@@ -406,7 +408,7 @@
    "known_for": [
     "The furthest confirmed inhabited systems in known space, Grulania among them",
     "Cultures grown in total isolation, with no outside contact for centuries and no parallel anywhere else",
-    "Technological fragments of unidentified origin recovered from multiple systems",
+    "Technological fragments of unidentified origin recovered across the region, most of them the work of the Ongoran of Ongora",
     "Transit times measured in months, which keeps the region effectively beyond anyone's reach or rule",
     "Pholla, the last resupply and information point before the deep northern systems"
    ],
@@ -414,8 +416,8 @@
     "Pholla, the frontier outpost that serves as the last stop before the deep Expanse",
     "Grulania, the furthest charted system, whose long-range spectroscopy returned readings unlike anything on record; three expeditions to it did not return",
     "Nausica, an isolated inhabited system at the eastern reach of the Expanse, contacted only intermittently",
-    "Yaevis, the western anchor of the charted arc, a cold world with a small stubborn population",
-    "Ongora and Thars, mid-Expanse systems whose people show technological traditions with no known source"
+    "Yaevis, the western anchor of the arc and homeworld of the Yaevi, whose glacially slow, long-lived natives predate the Alliance gateway built among them",
+    "Ongora, home of the Ongoran, the artificers whose unreadable devices are the true source of the region's fragments of unknown origin; Thars shows the same craft at its edges"
    ],
    "lore_notes": [
     "The probes that mapped the outer Expanse are decades old. Survey analysts have flagged datasets showing objects in some systems that are simply gone by the next observation window, having apparently moved.",
@@ -445,19 +447,19 @@
    "history": "Erbrother was logged as a navigation hazard on the earliest surveys and otherwise ignored. The second Alliance survey went in only because the data hinted at more inhabited systems than anyone expected, and it confirmed two while failing to reach others as navigation collapsed around it. The published findings were narrow and odd: both systems had developed in isolation, both showed technological levels that independent development should not have produced, and each was aware of the other despite no evidence the two had ever been in contact.",
    "known_for": [
     "Navigation conditions that defeat standard sensor arrays, with specialised equipment required for any safe transit",
-    "Two isolated inhabited systems that show clear awareness of each other with no confirmed contact between them",
+    "The Phoxi, one people split across Phoxitis and Peavis, who share a felt awareness across the nebula and have never met in the flesh",
     "Dense electromagnetic interference that blocks outside observation of the interior entirely",
     "A reported third inhabited system that neither survey could reach, its position consistent across both attempts",
     "The oddity of a high-level classification applied to the survey of an obscure and distant nebula"
    ],
    "notable_systems": [
-    "Phoxitis, the first inhabited system reachable from the entry point, developed in isolation",
-    "Peavis, deeper in and harder to reach, where the second survey confirmed habitation and left before navigation turned critical",
+    "Phoxitis, home to one half of the Phoxi, the twinned people who share an awareness across the nebula with their unmet kin on Peavis",
+    "Peavis, deeper in and harder to reach, home to the other half of the Phoxi; the second survey confirmed it and left before navigation turned critical",
     "A third system, its position recorded by both surveys, never reached and never confirmed"
    ],
    "lore_notes": [
     "The classified portion of the second survey is known to exist only because its designation appears in Survey Office records without the document attached. A classification that high on a remote nebula is itself atypical enough to have been noticed.",
-    "Both Erbrother populations, when contacted, asked the survey teams about a third party by a name no one recognised and no catalogue contains. Pressed on who they meant, both gave the same answer: the ones who came before the silence.",
+    "Both Phoxi communities, when contacted, asked the survey teams about a third party by a name no one recognised and no catalogue contains. Pressed on who they meant, both gave the same answer: the ones who came before the silence.",
     "Navigation failures inside the nebula are not random. Experienced pilots report that they cluster at specific coordinates, stable across attempts, as if something there is what the instruments are reacting to."
    ]
   },
@@ -495,7 +497,7 @@
     "Soth L4, a far-arc world at the edge of the charted Tail, half-abandoned and half-stubborn"
    ],
    "lore_notes": [
-    "Several Tail communities have kept their own records since the census ships stopped coming. Brought out by traders, they describe events the Alliance never logged, including at least one first-contact account with an unidentified species that no one followed up.",
+    "Several Tail communities have kept their own records since the census ships stopped coming. Brought out by traders, they describe events the Alliance never logged, including the single documented contact with the Sethine, a species that arrived without a drive signature, spoke once, and has not been reliably seen in the sixty years since.",
     "The Realmsingers have been testing the same handful of outer Tail systems for thirty years. Analysts who doubt the border-probing story note that you do not test the same door for three decades unless you believe something specific is behind it.",
     "An independent astronomer on one of the larger colonies published a survey claiming the filament's star distribution is too regular to be natural. The paper went nowhere, the Alliance issued a brief rebuttal, and the original data was never released."
    ]
@@ -517,26 +519,26 @@
    "span": "Unknown, extent not confirmed; estimated to be substantial based on observed military capacity",
    "discovered": "First confirmed contact with Alliance 5275 CE; Empire appears to have been aware of the Alliance for considerably longer",
    "population_est": "Unknown, no census data available",
-   "government": "Absolute hereditary empire under the Realmsinger line, a caste so rare that the empire is administered day to day by a conventional hierarchy and defended by hired mercenaries. A Realmsinger merges permanently with a single object and rules, in effect, as that object, for ages, so decisions of the line are final and dynastic upheaval almost never comes. No representative structures exist, and rulers who do not die on any ordinary schedule have never needed them.",
-   "alignment": "Territorial and isolationist; not seeking war but not yielding; the Ithov conflict was started by the Torc Federation; actual Realmsingers are almost never seen",
-   "desc": "The Realmsingers Empire is ancient, stable, and almost entirely unseen. It is named for the Realmsinger caste, a line of beings so rare that much of the galaxy doubts they are real, whose defining power is to merge permanently with a single object and bring it to life, anything from a pea to a planet, and then control and reshape it from within. The empire beneath them runs on ordinary administrators and hired mercenaries, and the mercenaries are what its enemies actually fight. The Torc Federation started a border war over the Ithov system years ago and has yet to confirm killing, or even meeting, a single Realmsinger, because the empire holds its edges with paid soldiers and with merged objects whose nature no Torc officer can predict. The empire does not seek the galaxy and does not yield to it. It endures, on timescales that make patience cost it nothing.",
-   "history": "The Realmsingers predate Alliance contact by what their own records claim are several thousand years, none of it open to checking. The galaxy did not discover the empire so much as learn it had been watched, when rim survey ships met patrol vessels that had plainly been observing them for some time. What kept the empire stable across those millennia is partly the nature of its rulers, since a Realmsinger merges with one object and lives in it for ages, and a ruling caste that does not die on a mortal schedule does not breed the usual dynastic chaos. The Ithov war is recent by their measure, a border friction Torc began and the Realmsingers have answered with mercenaries and merged things rather than with anything resembling urgency.",
+   "government": "No government the galaxy would recognise. The Realmsingers, the ancient beings the region is named for, keep to no rulership or politics; they neither govern nor campaign nor hold court. The polity outsiders call an empire is administered by ordinary officials and defended by hired mercenaries, all of it arranged around a handful of beings who predate the planets and answer to no one, least of all their own nominal subjects.",
+   "alignment": "Isolationist; its space is closed to trespass but it seeks nothing beyond; the Ithov conflict was started by the Torc Federation; actual Realmsingers are almost never seen",
+   "desc": "The Realmsingers Empire is ancient past reckoning, sparsely seen, and misnamed. It takes its name from the Realmsingers, the oldest recorded race in the known universe, small birdlike beings older than some of the worlds around them, whose defining act is to bind themselves for life to a single object, from a pea to a planet, and wake it into a bent and limited life they can shape but never fundamentally change. There are very few of them and they care nothing for rulership, so what the galaxy calls an empire is really the polity that accreted around them, run by administrators and paid soldiers while the Realmsingers themselves drift through it on concerns no shorter-lived species has parsed. The Torc Federation started a border war over the Ithov system years ago and has never confirmed meeting a single Realmsinger, because the empire's edges are held by mercenaries and by bound objects whose nature no Torc officer can predict.",
+   "history": "The Realmsingers predate Alliance contact by an interval their own records put in the thousands of years, and predate a fair number of inhabited worlds outright, which makes their history less a chronicle than a geology. The galaxy did not discover them so much as notice it had always been watched, when rim survey ships met patrols that had plainly been observing them for a long time. The empire formed the way weather forms around a mountain, ordinary peoples and their institutions gathering in the lee of beings too old and too strange to rule them and too significant to ignore. The Ithov war is recent by any measure but theirs, a friction Torc began and the Realmsingers have met with mercenaries and bound things rather than with anything resembling haste.",
    "known_for": [
-    "The Realmsinger caste, beings so few that most of the galaxy treats them as myth",
-    "The merging: a Realmsinger bonds permanently with one object, from a pea to a planet, and animates and reshapes it from within",
-    "An empire defended at its edges by hired mercenaries and by merged objects, so enemies rarely face a Realmsinger at all",
-    "Internal stability across millennia, with no recorded civil war, dynasty change, or schism",
-    "The Ithov standoff, a border war the Torc Federation started and cannot seem to bring to a decision"
+    "The Realmsingers, the oldest recorded race in the known universe, older than some of the planets around them",
+    "The binding: a Realmsinger bonds for life to one object, from a pea to a planet, waking and bending its nature without ever changing what it fundamentally is",
+    "Bound objects that are among the galaxy's most coveted collector's items and among the most faked, with roughly ninety-nine of every hundred relics on the market forged",
+    "A polity with no rulership its subjects would recognise, administered around beings who care nothing for governing it",
+    "The Ithov standoff, a border war the Torc Federation started and cannot bring to a decision"
    ],
    "notable_systems": [
     "Ithov, contested with the Torc Federation; years of fighting and not one confirmed Realmsinger among the dead",
-    "Nulneon, a Realmsinger frontier system facing the Torc border, defended by mercenaries and by things that are not quite ships",
-    "The Imperial interior (designation only), the empire's true extent, which no outside party has mapped"
+    "Nulneon, a Realmsinger frontier system facing the Torc border, held by mercenaries and by things that are not quite ships",
+    "The Imperial interior (designation only), the true extent of the region, which no outside party has mapped"
    ],
    "lore_notes": [
-    "What the old reports call Realmsinger matter-resonance is almost certainly the work of merged objects rather than any field a Realmsinger projects. The distinction matters: you are not watching a being move matter, you are watching matter that is a being.",
-    "A merged object is sentient and under its Realmsinger's control, and nothing fixes its size. The implication Alliance analysts note and do not enjoy is that a sufficiently old Realmsinger could be a world, and a world that is paying attention.",
-    "Torc started the Ithov war and will not say why, and the Realmsingers have not committed a real force to ending it. Analysts who doubt the territorial story think both sides are reaching for the same thing at Ithov, and that the Realmsingers, who measure time differently, are simply in no hurry to be first."
+    "What old reports call Realmsinger matter-resonance is almost certainly the work of bound objects rather than any field a Realmsinger projects. You are not watching a being move matter; you are watching matter that a being woke up.",
+    "A bound object is sentient and no rule fixes its size, so a sufficiently old Realmsinger could be a moon, a mountain, or a world, awake and paying attention. Alliance analysts note this and change the subject.",
+    "The relic trade is enormous and almost entirely fraudulent. A genuine bound object small enough to own is one of the most valuable things a collector can hold, and the market grown up around that fact runs ninety-nine parts forgery to one part miracle."
    ]
   },
   {
@@ -5724,8 +5726,8 @@
    ],
    "desc": "Ash sits at the Alliance edge of the Nemani Rift, the one barrier in the galaxy the Kraven swarm cannot or will not cross. The Alliance keeps a permanent watch here for any sign that the wall is failing, because if it ever does, Ash is the first thing in Alliance space the thing that ate the Nerulian Empire will reach. Around the watch has grown a hard salvage economy of dry docks and scrappers and pilots who run the Rift for what can be dragged out of it. Most do not come back.",
    "subtitle": "The Watchtower on the One Wall Holding Back the Kraven",
-   "quote": "\"Everything past Ash is the Rift, and everything the Rift holds back ate an empire in two years. We are not here to fight it. We are here to notice the day it learns to come through.\" (Rift Watch duty officer)",
-   "history": "Ash matters for one reason: it sits at the near edge of the Nemani Rift, and the Nemani Rift is the only thing that has ever stopped the Kraven. The swarm consumed the Nerulian Empire, hundreds of systems, in under two years, and then it reached the Rift and halted, in every direction, for reasons no one understands. Ash is the Alliance world that lives closest to that miracle, and trusts it least.\nThe Alliance keeps a permanent military watch here, monitoring the Rift for any change in the barrier and any hint of Kraven activity along it. Around that watch a second economy grew up on its own, the salvage trade. Beyond the Rift lie the dead worlds of the Nerulian Empire, full of a thousand years of abandoned technology, and pilots come to Ash precisely to brave the Rift and haul some of it home. The Rift kills most of them, not the Kraven but the nebula itself, which scrambles instruments and rearranges its own passages. The ones who return come back rich, famous, or permanently changed.",
+   "quote": "\"Everything past Ash is the Rift, and everything the Rift holds back ate an empire in a week. We are not here to fight it. We are here to notice the day it learns to come through.\" (Rift Watch duty officer)",
+   "history": "Ash matters for one reason: it sits at the near edge of the Nemani Rift, and the Nemani Rift is the only thing that has ever stopped the Kraven. The swarm consumed the Nerulian Empire, hundreds of systems, in a single week, and then it reached the Rift and halted, in every direction, for reasons no one understands. Ash is the Alliance world that lives closest to that miracle, and trusts it least.\nThe Alliance keeps a permanent military watch here, monitoring the Rift for any change in the barrier and any hint of Kraven activity along it. Around that watch a second economy grew up on its own, the salvage trade. Beyond the Rift lie the dead worlds of the Nerulian Empire, full of a thousand years of abandoned technology, and pilots come to Ash precisely to brave the Rift and haul some of it home. The Rift kills most of them, not the Kraven but the nebula itself, which scrambles instruments and rearranges its own passages. The ones who return come back rich, famous, or permanently changed.",
    "politics": "Ash runs on two authorities that mostly leave each other alone. The Alliance Navy holds the frontier station and the watch, and on the subject of the Rift its word is final. Everything else, the dry docks, the salvage yards, the crews and brokers and Rift runners, is a rough, self-policing community of independents who tolerate the military because the military tolerates them, and because both understand what they are sitting next to.\nThere is almost no civilian life here in the ordinary sense. People come to Ash to watch the Rift or to risk it, and the place has the particular calm of somewhere everyone has already made peace with the odds. The Navy's one non-negotiable rule is that the watch comes first. Anything that interferes with monitoring the Rift is dealt with quickly, because the entire point of Ash is to be the alarm that gives the rest of Alliance space time to react.",
    "dominant_race": {
     "name": "The Watch and the Salvagers",
@@ -8065,7 +8067,7 @@
     "Frontier",
     "Unexplored"
    ],
-   "desc": "Soth L4 is a system notation rather than a proper name, the fourth catalogued system in the Soth survey cluster, designated L-type for its unstable stellar configuration. The star is a variable that cycles through significant energy output fluctuations on an irregular schedule. Most navigators route around it. The few who don't either have good reason or didn't check their charts.",
+   "desc": "Soth L4 is a system notation rather than a proper name, the fourth catalogued system in the Soth survey cluster, designated L-type for its unstable stellar configuration. The star is a variable that cycles through significant energy output fluctuations on an irregular schedule. Most navigators route around it. The few who don't either have good reason or didn't check their charts. It was out past Soth L4 that a Dragon Tail colony logged its single contact with the Sethine, the species that arrived without a drive signature and vanished, which is the only reason this empty survey zone is remembered at all.",
    "planets": [
     {
      "id": "soth_l4_zone",
@@ -10653,7 +10655,7 @@
     "Independent",
     "Exploration Hub"
    ],
-   "desc": "Yaevis is the most developed system in the Solar Expanse, the first one the Alliance formally catalogued and the staging point for most organised exploration further into the region. It has the infrastructure that comes from being the gateway to a frontier: good fuel, decent repair facilities, and a community that has learned to deal with people who are either heading out or just came back.",
+   "desc": "Yaevis is the most developed system in the Solar Expanse, the first one the Alliance formally catalogued and the staging point for most organised exploration further into the region. It has the infrastructure that comes from being the gateway to a frontier: good fuel, decent repair facilities, and a community that has learned to deal with people who are either heading out or just came back. The system's oldest inhabitants are the Yaevi, the glacially slow, centuries-lived natives who were here long before it became the Alliance's Expanse gateway, and who regard the hurry of the exploration crews with unbothered patience.",
    "planets": [
     {
      "id": "yaevis_prime",
@@ -10668,7 +10670,7 @@
      "gravity": "Standard",
      "faction": "Yaevis Pioneer Council (Alliance-affiliated)",
      "population": "~600,000",
-     "demographics": "Mixed, pioneer families, Alliance support staff, exploration contractors",
+     "demographics": "Native Yaevi alongside pioneer families, Alliance support staff, and exploration contractors",
      "government": "Pioneer Council (locally elected, formally Alliance-affiliated)",
      "tech_level": "Standard",
      "economy": "Frontier logistics, exploration support, fuel trade, basic manufacturing, agricultural development",
@@ -11112,7 +11114,7 @@
     "Research Subject",
     "Unexplained"
    ],
-   "desc": "Ongora is a frontier system that has attracted disproportionate scientific attention because of a consistently anomalous set of readings that multiple independent surveys have confirmed and none have explained. The system functions normally in every measurable way except for a set of gravitational and electromagnetic patterns that do not correspond to any known natural phenomenon.",
+   "desc": "Ongora is a frontier system that has attracted disproportionate scientific attention because of a consistently anomalous set of readings that multiple independent surveys have confirmed and none have explained. The system functions normally in every measurable way except for a set of gravitational and electromagnetic patterns that do not correspond to any known natural phenomenon. The anomalies are not natural. They are the work of the Ongoran, the native artificers whose devices run on principles no survey has ever reversed, which is exactly why the system sits under permanent observation.",
    "planets": [
     {
      "id": "ongora_prime",
@@ -11128,7 +11130,7 @@
      "grav_note": "Standard at surface, anomalous readings are system-wide in certain electromagnetic bands, not local gravitational",
      "faction": "Independent with Alliance Science Authority presence",
      "population": "~50,000, small permanent settlement and rotating research teams",
-     "demographics": "Mixed, research-heavy population",
+     "demographics": "Native Ongoran, plus the research teams drawn by their work",
      "government": "Settlement Council with Science Authority observer status",
      "tech_level": "Standard",
      "economy": "Research support, small-scale agriculture, frontier services",
@@ -11217,7 +11219,7 @@
     "Development",
     "Early Stage"
    ],
-   "desc": "Thars is in the early stages of industrial development, a frontier system that has attracted investment attention because of its resource profile and is in the process of being built up. The tension between those developing it and those who were already there is active and unresolved.",
+   "desc": "Thars is in the early stages of industrial development, a frontier system that has attracted investment attention because of its resource profile and is in the process of being built up. The tension between those developing it and those who were already there is active and unresolved. The community that was already here works in the same unreadable craft as the Ongoran of Ongora, whether as kin or as students no survey has settled, and it is part of why the fight over who owns Thars has never resolved cleanly.",
    "planets": [
     {
      "id": "thars_prime",
@@ -11729,7 +11731,7 @@
     "Alliance Survey",
     "Research"
    ],
-   "desc": "Phoxitis was identified by an Alliance survey mission as one of the more accessible systems inside the Erbrother Nebula, a smaller, more navigable nebula than the Gravemist but still challenging to transit without proper equipment. The system's unusual stellar characteristics have made it a subject of ongoing scientific interest.",
+   "desc": "Phoxitis was identified by an Alliance survey mission as one of the more accessible systems inside the Erbrother Nebula, a smaller, more navigable nebula than the Gravemist but still challenging to transit without proper equipment. The system's unusual stellar characteristics have made it a subject of ongoing scientific interest. The Science Authority is here for the natives: the Phoxi, half of a people whose other half lives on Peavis and who share an awareness across the nebula that no instrument has explained. Studying that bond is the mission's real purpose.",
    "planets": [
     {
      "id": "phoxitis_prime",
@@ -11744,7 +11746,7 @@
      "gravity": "Below Standard",
      "faction": "Alliance Science Authority (temporary survey installation)",
      "population": "~2,000, survey team and support staff",
-     "demographics": "Almost entirely Science Authority personnel and contracted researchers",
+     "demographics": "Native Phoxi and the Science Authority personnel who came to study them",
      "government": "Survey Mission Command",
      "tech_level": "Advanced (Survey)",
      "economy": "Scientific research, no commercial economy",
@@ -11835,7 +11837,7 @@
     "Free Access",
     "Frontier"
    ],
-   "desc": "Peavis is the second known system inside the Erbrother Nebula and the one that has developed without institutional presence. Where Phoxitis has the Science Authority, Peavis has whoever found it useful, independent operators who valued the nebula's natural navigation deterrent as a form of privacy protection. It has become a small but established independent community.",
+   "desc": "Peavis is the second known system inside the Erbrother Nebula and the one that has developed without institutional presence. Where Phoxitis has the Science Authority, Peavis has whoever found it useful, independent operators who valued the nebula's natural navigation deterrent as a form of privacy protection. It has become a small but established independent community. Peavis is also home to the other half of the Phoxi, the twinned people who feel their unmet kin on Phoxitis across the gas, so the privacy-seekers who settled here share the world with a population that is never quite only present.",
    "planets": [
     {
      "id": "peavis_prime",
@@ -11850,7 +11852,7 @@
      "gravity": "Standard",
      "faction": "Peavis Community Council",
      "population": "~30,000",
-     "demographics": "Mixed, people who came here for the privacy it offers",
+     "demographics": "Native Phoxi and the independents who came for the privacy the nebula offers",
      "government": "Community Council (minimal governance)",
      "tech_level": "Standard",
      "economy": "Small-scale agriculture, technical services, privacy-valued activities, observation of Phoxitis mission",
@@ -12292,7 +12294,7 @@
     "Salvage",
     "Post-Corporate"
    ],
-   "desc": "Haran was a corporate extraction operation that was abandoned when the economics deteriorated and the Dark Space security situation became too costly to maintain. The corporate withdrawal was rapid and incomplete, infrastructure was left in place, some equipment is still running, and the small resident workforce that was not evacuated in time has been managing on its own for years.",
+   "desc": "Haran was a corporate extraction operation that was abandoned when the economics deteriorated and the Dark Space security situation became too costly to maintain. The corporate withdrawal was rapid and incomplete, infrastructure was left in place, some equipment is still running, and the small resident workforce that was not evacuated in time has been managing on its own for years. The corporations are gone, but Haran is not empty. It is held now by the Harran, the hardy clan-people the Dark Space bred to outlast exactly this kind of place, who moved into the abandoned infrastructure the way they take everything the reach discards and made it theirs.",
    "planets": [
     {
      "id": "haran_prime",
@@ -12307,7 +12309,7 @@
      "gravity": "Standard",
      "faction": "Haran Survivor Community",
      "population": "~8,000, people who didn't make it out",
-     "demographics": "Mixed, the accident of who was in the evacuation zone and who wasn't",
+     "demographics": "The Harran clans who hold the world, and the corporate-workforce remnants left behind in the evacuation",
      "government": "Survivor Committee (ad hoc, functional)",
      "tech_level": "Standard (maintained)",
      "economy": "Subsistence, maintaining what the corporation left running, limited salvage for trade",
@@ -12624,7 +12626,7 @@
     "Border Region",
     "Deep Frontier"
    ],
-   "desc": "Zelmolla shares Nypsos F47's border position between the Dream region and Dark Space, but has one additional piece of documentation: a brief long-range scan from a Dark Space survey vessel that recorded what appears to be electromagnetic activity inconsistent with a dead system. The scan was not followed up. Whether the activity represents technology, unusual natural phenomena, or something else was not determined.",
+   "desc": "Zelmolla shares Nypsos F47's border position between the Dream region and Dark Space, but has one additional piece of documentation: a brief long-range scan from a Dark Space survey vessel that recorded what appears to be electromagnetic activity inconsistent with a dead system. The scan was not followed up. Whether the activity represents technology, unusual natural phenomena, or something else was not determined. Dream-side accounts, harder to verify, place one of the Nuzoni archives here, kept by the Vessa, which would explain an activity signature that reads as neither wholly dead nor conventionally alive.",
    "planets": [
     {
      "id": "zelmolla_prime",

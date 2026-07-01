@@ -43,8 +43,10 @@ The browser blocks reading these files when you double-click the HTML
   file. Edits to these JSON files appear on refresh.
 
 ## Notes
-- `_archive_partial/` holds the earlier, incomplete extraction attempt. It is
-  not used by the compendium and can be deleted.
+- The earlier, incomplete extraction attempt (`_archive_partial/`) and the
+  pre-skill-migration data snapshot (`v8_pre_skillmigration/`) have been moved out
+  of the data directory to `Claude Code/Archive/`. The data directory now holds
+  only the master files listed above.
 - A few small mechanics/config tables (ship- and drone-component generator
   definitions: `SCOMP_DEF`, `DB_COMP`, etc.) are still inline in the HTML because
   they are generator parameters tied to code, not flat content. They can be
