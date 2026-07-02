@@ -106,7 +106,7 @@
    "application": "INGESTED",
    "legality": "restricted",
    "cost": "2000",
-   "effect": "Stops your body from radiating heat, slows down heartbeat and makes user quasi invisible to electronic surveillance. LARGE bonus to concealment vs Electronics, SMALL bonus vs everything else."
+   "effect": "Stops your body from radiating heat, slows down heartbeat and makes user quasi invisible to electronic surveillance. LARGE bonus to STEALTH vs Electronics, SMALL bonus vs everything else."
   },
   {
    "name": "Stazz",

@@ -5134,7 +5134,7 @@
     "cost": "20000",
     "availability": "RARE",
     "legality": "Illegal",
-    "effect": "Your nanites to form any MELEE weapon up to size medium. Weapon counts as a DRONE, can be used anywhere within datacom range with an OPERATOR roll or you can use it as a normal MELEE weapon with MARTIAL ARTS. [TEMPORARY - Under revision]",
+    "effect": "Your nanites to form any MELEE weapon up to size medium. Weapon counts as a DRONE, can be used anywhere within datacom range with an OPERATOR roll or you can use it as a normal MELEE weapon with MELEE WEAPONS. [TEMPORARY - Under revision]",
     "desc": "Detailed instructions for your nanites to form a Melee weapon."
    },
    {
@@ -5277,7 +5277,7 @@
     "cost": "20000",
     "availability": "UNCOMMON",
     "legality": "Illegal",
-    "effect": "Your NANITES create a thin (1HP) invible wire (Concealment 5 TYPE I and II) you can throw to attack to technological devices. If you hit the target with a DEXTERITY skill check you are directly connected to the target device (Bypass External Network). Range is 1/3/5m. [TEMPORARY - Under revision]",
+    "effect": "Your NANITES create a thin (1HP) invible wire (Concealment 5 TYPE I and II) you can throw to attack to technological devices. If you hit the target with a PROJECTILES skill check you are directly connected to the target device (Bypass External Network). Range is 1/3/5m. [TEMPORARY - Under revision]",
     "desc": "Your nanites can be aimed at a target to form a direct hacking link."
    },
    {
@@ -5299,7 +5299,7 @@
     "cost": "90000",
     "availability": "RARE",
     "legality": "Restricted",
-    "effect": "Your NANITES create 5 MONOMOLECULAR Throwing Knives or Shirukens. The weapons can be thrown with DEXTERITY checks and disappear after being thrown. [TEMPORARY - Under revision]",
+    "effect": "Your NANITES create 5 MONOMOLECULAR Throwing Knives or Shirukens. The weapons can be thrown with PROJECTILES checks and disappear after being thrown. [TEMPORARY - Under revision]",
     "desc": "Generate some throwing weapons out of raw nanites"
    },
    {
@@ -5376,7 +5376,7 @@
     "cost": "140000",
     "availability": "LIMITED",
     "legality": "Restricted",
-    "effect": "Grants passive CONCEALMENT of 6 when not moving and a LARGE bonus to CONCEALMENT when moving. Opticloak ends if you take any damage or after a SCENE [TEMPORARY - Under revision]",
+    "effect": "Grants passive CONCEALMENT of 6 when not moving and a LARGE bonus to STEALTH when moving. Opticloak ends if you take any damage or after a SCENE [TEMPORARY - Under revision]",
     "desc": "Nanites will distort light coming at you granting you insibility."
    },
    {

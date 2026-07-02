@@ -1387,7 +1387,7 @@
    "traits": [
     "Spiritbound : You are permanently tatoed with a bound spirit. The MAGIC penality for ARMORS, CYBERNETICS and LARGE Items is always LARGE. BARRIERS on you cannot drop under the AWAKENED tier even if your spirit is not. Start the game with the \"Spirit Link\" EVO 1 for free. This EVO can only be used for MANIFEST DESTINY.",
     "Secret training : You have automatic mastery of any spell with the LUCK tag. When acquiring random spells you can force the result to Manifest Destiny.",
-    "Oracle : People have a great deal of respect or fear towards fate witches. The Social Stigma racial trait is now a LARGE bonus/penality against any target affected by a SOOTHSAYER skill in the same SCENE."
+    "Oracle : People have a great deal of respect or fear towards fate witches. The Social Stigma racial trait is now a LARGE bonus/penality against any target affected by a SOOTHSAYER spell or power in the same SCENE."
    ]
   },
   {
@@ -1495,7 +1495,7 @@
    "race": "ANY",
    "desc": "Someone activated you recently. You are one of the few remaining AI cyborgs in existence. Your design was put out of production centuries ago and the only reason you remain is that you got lost when your spaceship crashed.",
    "traits": [
-    "You literally lived the past; gain a LARGE bonus to any skills that deals with ancient knowledge. You do not count as a LIVING being; you count as a MACHINE. JOURNEYMAN skills checks must be used instead of medicine to FABRICATION your body.",
+    "You literally lived the past; gain a LARGE bonus to any skills that deals with ancient knowledge. You do not count as a LIVING being; you count as a MACHINE. FABRICATION skill checks must be used instead of MEDICINE to repair your body.",
     "Gain  +1 ACUITY , +1 MENTAL. Your body was made to last; start with an additional 3 HEALTH / MORALE and the SUBDERMAL PLATING TIER 2 EVO.",
     "You do not need to eat or drink but you do need air for your internal systems. You also require REST to recharge your systems. You auto repair on a REST action, treat your REST to work the same as a normal living creature. Your maximum CHI is always 0. You cannot benefit from GENETIC and MAGICAL EVO and DRUGS/ MEDICINE have no effect on you."
    ],
@@ -1686,7 +1686,7 @@
    "details": [
     "Start with a small car (worth 100k)  and 150k of illegal drugs/poison (common or uncommon).  You also have a drug contact at lvl 4",
     "Starting funds 150k",
-    "Gain a SMALL bonus to either SCIENCE and SOCIAL SCIENCE or to SCAVENGING and MEDICINE"
+    "Gain a SMALL bonus to either SCIENCE and SOCIAL SCIENCE or to SCAVENGE and MEDICINE"
    ],
    "occ_bonus": [
     [
@@ -1724,7 +1724,7 @@
    "details": [
     "Start with the clothes on your back,  and an EVO1 Cybernetic Scrambler (Not installed) . You literraly pulled that out of your cult leader while running away.",
     "Starting funds 100k, you escaped with nothing.",
-    "Gain a a SMALL bonus to CHARM , INTIMIDATE and INSIGHT"
+    "Gain a SMALL bonus to CHARM, INTIMIDATION and INSIGHT"
    ],
    "occ_bonus": {
     "fixed": [
@@ -1778,7 +1778,7 @@
    "details": [
     "Effect: Start the game with a \"GU-22 Police Drone\", a restricted license and a level 4 law contact.",
     "Starting funds: 200k",
-    "Gain a SMALL bonus to either INTIMIDATE and MELEE WEAPONS or ACADEMICS and STREETWISE"
+    "Gain a SMALL bonus to either INTIMIDATION and HAND-TO-HAND, INTIMIDATION and MELEE WEAPONS, or SOCIAL SCIENCE and STREETWISE"
    ],
    "occ_bonus": [
     [
@@ -1896,7 +1896,7 @@
    "details": [
     "Effect: Start the game a with a lvl 4 corporate contact or a lvl 4 gang contact and a vehicle of your choice valued under 500k.",
     "Starting funds: 100k",
-    "Gain a SMALL bonus to either NEGOTIATION and CHARM or SCAVENGING and STREETWISE"
+    "Gain a SMALL bonus to either NEGOTIATION and CHARM or SCAVENGE and STREETWISE"
    ],
    "occ_bonus": [
     [
@@ -1934,7 +1934,7 @@
    "details": [
     "Start the game with a level 4 contact of your choice and a living space fully furnished worth up to  200k. The living space is paid for 3 months.  You have a clean ID and the right to live for a full year.",
     "Starting funds: 200k",
-    "Gain a SMALL bonus to either JOURNEYMAN and SCAVENGING or SCIENCE and ENGINEERING."
+    "Gain a SMALL bonus to either FABRICATION and SCAVENGE or SCIENCE and ENGINEERING."
    ],
    "occ_bonus": [
     [
@@ -1972,7 +1972,7 @@
    "details": [
     "Start the game with a level 4 corporate contact of your choice and a spaceship worth less than 5 milions (that you still have to pay 4.5 million credits on).",
     "Starting funds: 100k",
-    "Gain a SMALL bonus to either PILOTING and PROTOCOL or NEGOTIATION and JOURNEYMAN."
+    "Gain a SMALL bonus to either PILOTING and PROTOCOL or NEGOTIATION and FABRICATION."
    ],
    "occ_bonus": [
     [
@@ -2067,7 +2067,7 @@
    "details": [
     "Start the game with a level 4 space pirate contact and a Lazarfeld Survey Drone",
     "Starting funds : 200k",
-    "Gain a SMALL bonus to SCAVENGING and NAVIGATION or to FABRICATION and ATHLETICS"
+    "Gain a SMALL bonus to SCAVENGE, plus one of SURVIVAL, TECHNOLOGY or FABRICATION"
    ],
    "occ_bonus": {
     "fixed": [
@@ -2126,7 +2126,7 @@
    "details": [
     "Start with a level 4 contact in medical supplies and an uninstalled GENETICS EVO 1 (common or uncommon) under 100k.",
     "Starting funds : 200k and 2 level 5 skillschips you could try to sell for around 150k each",
-    "Gain a SMALL bonus to SCIENCE and MEDICINE or TECHNOLOGY and SCAVENGING"
+    "Gain a SMALL bonus to SCIENCE and MEDICINE or TECHNOLOGY and SCAVENGE"
    ],
    "occ_bonus": [
     [
@@ -2313,7 +2313,7 @@
     "cost": "600000",
     "availability": "RARE",
     "legality": "Restricted",
-    "effect": "Your body can now morph and change itself to imitate textures and surroundings. You are completely invisible (STEALTH 10) when not moving, otherwise you have LARGE concealment bonus."
+    "effect": "Your body can now morph and change itself to imitate textures and surroundings. You are completely invisible (STEALTH 10) when not moving, otherwise you have a LARGE bonus to STEALTH."
    },
    {
     "evo_type": "GENETICS",
@@ -2322,7 +2322,7 @@
     "cost": "3000000",
     "availability": "LIMITED",
     "legality": "Illegal",
-    "effect": "Your adaptive camouflage now also produces electronic and psychic interference. Your invisibility works against all detection methods, same for your LARGE concealment bonus when moving."
+    "effect": "Your adaptive camouflage now also produces electronic and psychic interference. Your invisibility works against all detection methods, same for your LARGE STEALTH bonus when moving."
    },
    {
     "evo_type": "GENETICS",
@@ -3357,7 +3357,7 @@
     "cost": "50000",
     "availability": "UNCOMMON",
     "legality": "Restricted",
-    "effect": "Passive: When an enemy enters MELEE (1m) range he has to succeed a DC5 Athletic check or be pushed back and knocked prone. This effect cannot trigger again this round.\nActive: Force the implant to trigger a second time allowing for a second push. (Max once per round)"
+    "effect": "Passive: When an enemy enters MELEE (1m) range he has to succeed a DC5 ATHLETICS check or be pushed back and knocked prone. This effect cannot trigger again this round.\nActive: Force the implant to trigger a second time allowing for a second push. (Max once per round)"
    },
    {
     "evo_type": "CYBERNETICS",
@@ -3843,7 +3843,7 @@
     "cost": "400000",
     "availability": "RARE",
     "legality": "Illegal",
-    "effect": "Passive: Your body has optical camouflage (Type I,  LARGE bonus to STEALTH) when not moving. You can now make concealment checks in plain sight but at a LARGE penalty. \nActive: Turn invisible, set STEALTH skill value to 10 until you move or perform an action."
+    "effect": "Passive: Your body has optical camouflage (Type I,  LARGE bonus to STEALTH) when not moving. You can now make STEALTH checks in plain sight but at a LARGE penalty. \nActive: Turn invisible, set STEALTH skill value to 10 until you move or perform an action."
    },
    {
     "evo_type": "CYBERNETICS",
@@ -4943,7 +4943,7 @@
       "cost": "600000",
       "availability": "RARE",
       "legality": "Restricted",
-      "effect": "Your body can now morph and change itself to imitate textures and surroundings. You are completely invisible (STEALTH 10) when not moving, otherwise you have LARGE concealment bonus."
+      "effect": "Your body can now morph and change itself to imitate textures and surroundings. You are completely invisible (STEALTH 10) when not moving, otherwise you have a LARGE bonus to STEALTH."
      },
      "TIER III": {
       "evo_type": "GENETICS",
@@ -4952,7 +4952,7 @@
       "cost": "3000000",
       "availability": "LIMITED",
       "legality": "Illegal",
-      "effect": "Your adaptive camouflage now also produces electronic and psychic interference. Your invisibility works against all detection methods, same for your LARGE concealment bonus when moving."
+      "effect": "Your adaptive camouflage now also produces electronic and psychic interference. Your invisibility works against all detection methods, same for your LARGE STEALTH bonus when moving."
      }
     }
    },
@@ -6221,7 +6221,7 @@
       "cost": "50000",
       "availability": "UNCOMMON",
       "legality": "Restricted",
-      "effect": "Passive: When an enemy enters MELEE (1m) range he has to succeed a DC5 Athletic check or be pushed back and knocked prone. This effect cannot trigger again this round.\nActive: Force the implant to trigger a second time allowing for a second push. (Max once per round)"
+      "effect": "Passive: When an enemy enters MELEE (1m) range he has to succeed a DC5 ATHLETICS check or be pushed back and knocked prone. This effect cannot trigger again this round.\nActive: Force the implant to trigger a second time allowing for a second push. (Max once per round)"
      },
      "TIER II": {
       "evo_type": "CYBERNETICS",
@@ -6815,7 +6815,7 @@
       "cost": "400000",
       "availability": "RARE",
       "legality": "Illegal",
-      "effect": "Passive: Your body has optical camouflage (Type I,  LARGE bonus to STEALTH) when not moving. You can now make concealment checks in plain sight but at a LARGE penalty. \nActive: Turn invisible, set STEALTH skill value to 10 until you move or perform an action."
+      "effect": "Passive: Your body has optical camouflage (Type I,  LARGE bonus to STEALTH) when not moving. You can now make STEALTH checks in plain sight but at a LARGE penalty. \nActive: Turn invisible, set STEALTH skill value to 10 until you move or perform an action."
      },
      "TIER II": {
       "evo_type": "CYBERNETICS",

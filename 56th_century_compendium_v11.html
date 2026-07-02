@@ -4510,6 +4510,21 @@ let ccPickerFacets=[];
 function ccPickCat(i){ccState.pickerCat=(i<0?'ALL':ccPickerFacets[i]);render();}
 function ccToggleAvailOnly(){ccState.pickerAvailOnly=!ccState.pickerAvailOnly;render();}
 function ccDefFamily(t){t=(t||'').toLowerCase();if(t.indexOf('barrier')>=0)return 'Barrier';if(t.indexOf('forcefield')>=0||t.indexOf('shield')>=0)return 'Forcefield';if(t.indexOf('datacom')>=0||t.indexOf('network')>=0)return 'Datacom';return 'Armor';}
+/* ── ccClearSlot: reset a fixed gear slot back to its fresh-state shape (must
+   mirror ccMakeFreshState exactly). Costs are auto-tracked from slot contents,
+   so clearing a purchased item refunds its credits automatically. ── */
+function ccClearSlot(kind,i){
+  const F={
+    weapons:()=>({name:'',skill:'',dmg:'',dmgtype:'',power:0,expertise:0,special:'',close_range:'',medium_range:'',long_range:'',rof:'',ammo:0,currentammo:0,reload:'',mfr:'Generic',base_data:null,options:[]}),
+    armor:()=>({name:'',type:'',def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',special:'',soak_expr:'',charges:0,regen:'',mfr:'Generic',base_data:null,options:[]}),
+    datacoms:()=>({name:'',cpu:0,mem:0,nanite:0,def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',def_dmg:'',int_ext:0,int_int:0,int_main:0,expertise:0,special:'',mfr:'Generic',base_data:null,options:[]}),
+    programs:()=>({name:'',type:'',cpu:0,mem:0,passive:'',active:''}),
+    gadgets:()=>({name:'',nanite:0,effect:''}),
+    spells:()=>({name:'',domain:''})
+  };
+  if(F[kind]&&ccState[kind]&&ccState[kind][i])ccState[kind][i]=F[kind]();
+  render();
+}
 
 const CC_ATTR_KEYS=['PHYSICAL','MENTAL','SOCIAL','ACUITY','ENDURANCE','SPEED','WITS','WILLPOWER'];
 const CC_ATTR_RK={PHYSICAL:'physical',MENTAL:'mental',SOCIAL:'social',ACUITY:'acuity',ENDURANCE:'endurance',SPEED:'speed',WITS:'wits',WILLPOWER:'willpower'};
@@ -5917,6 +5932,7 @@ function ccRenderCombat(){
     h+='<div style="display:flex;gap:4px;align-items:center;">';
     if(w.mfr&&w.mfr!=='Generic')h+='<span style="font-size:10.5px;color:var(--a2);font-family:\'JetBrains Mono\',monospace;">'+esc(w.mfr)+'</span>';
     h+='<button onclick="ccState.picker={type:\'weapon\',slot:'+i+',mfr:ccState.weapons['+i+'].mfr||\'Generic\'};ccState.pickerSearch=\'\';render();" style="background:rgba(255,107,53,.1);border:1px solid var(--a2);color:var(--a2);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10.5px;">Browse</button>';
+    h+='<button title="Clear slot" onclick="ccClearSlot(\'weapons\','+i+');" style="background:none;border:1px solid #333;color:#555;padding:1px 5px;border-radius:3px;cursor:pointer;font-size:10.5px;">✕</button>';
     const wCost=ccCalcWeaponCost(w);
     if(wCost>0)h+='<span style="font-size:10.5px;color:var(--gr);font-family:\'JetBrains Mono\',monospace;">'+fmt(wCost)+' Cr</span>';
     h+='</div></div>';
@@ -5972,6 +5988,7 @@ function ccRenderCombat(){
     h+='<div style="display:flex;gap:4px;align-items:center;">';
     if(ar.mfr&&ar.mfr!=='Generic')h+='<span style="font-size:10.5px;color:var(--gr);font-family:\'JetBrains Mono\',monospace;">'+esc(ar.mfr)+'</span>';
     h+='<button onclick="ccState.picker={type:\'armor\',slot:'+i+',mfr:ccState.armor['+i+'].mfr||\'Generic\'};ccState.pickerSearch=\'\';render();" style="background:rgba(0,200,100,.1);border:1px solid var(--gr);color:var(--gr);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10.5px;">Browse</button>';
+    h+='<button title="Clear slot" onclick="ccClearSlot(\'armor\','+i+');" style="background:none;border:1px solid #333;color:#555;padding:1px 5px;border-radius:3px;cursor:pointer;font-size:10.5px;">✕</button>';
     const arCost=ccCalcArmorCost(ar);
     if(arCost>0)h+='<span style="font-size:10.5px;color:var(--gr);font-family:\'JetBrains Mono\',monospace;">'+fmt(arCost)+' Cr</span>';
     h+='</div></div>';
@@ -6049,6 +6066,7 @@ function ccRenderTech(){
     h+='<div style="display:flex;gap:4px;align-items:center;">';
     if(d.mfr&&d.mfr!=='Generic')h+='<span style="font-size:10.5px;color:var(--a);font-family:\'JetBrains Mono\',monospace;">'+esc(d.mfr)+'</span>';
     h+='<button onclick="ccState.picker={type:\'datacom\',slot:'+i+',mfr:ccState.datacoms['+i+'].mfr||\'Generic\'};ccState.pickerSearch=\'\';render();" style="background:rgba(0,200,255,.1);border:1px solid var(--a);color:var(--a);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10.5px;">Browse</button>';
+    h+='<button title="Clear slot" onclick="ccClearSlot(\'datacoms\','+i+');" style="background:none;border:1px solid #333;color:#555;padding:1px 5px;border-radius:3px;cursor:pointer;font-size:10.5px;">✕</button>';
     const dcCost=ccCalcDatacomCost(d);
     if(dcCost>0)h+='<span style="font-size:10.5px;color:var(--gr);font-family:\'JetBrains Mono\',monospace;">'+fmt(dcCost)+' Cr</span>';
     h+='</div></div>';
@@ -6095,7 +6113,8 @@ function ccRenderTech(){
   st.programs.forEach((p,i)=>{
     h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(163,85,247,.1);border-radius:4px;padding:6px;">';
     h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><span style="font-size:10.5px;color:#555;">Prog '+(i+1)+'</span>';
-    h+='<button onclick="ccState.picker={type:\'program\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:rgba(163,85,247,.08);border:1px solid var(--a3);color:var(--a3);padding:1px 6px;border-radius:3px;cursor:pointer;font-size:10px;">Browse</button></div>';
+    h+='<div style="display:flex;gap:4px;align-items:center;"><button onclick="ccState.picker={type:\'program\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:rgba(163,85,247,.08);border:1px solid var(--a3);color:var(--a3);padding:1px 6px;border-radius:3px;cursor:pointer;font-size:10px;">Browse</button>';
+    h+='<button title="Clear slot" onclick="ccClearSlot(\'programs\','+i+');" style="background:none;border:1px solid #333;color:#555;padding:1px 5px;border-radius:3px;cursor:pointer;font-size:10px;">✕</button></div></div>';
     h+='<input type="text" placeholder="Program name" value="'+esc(p.name||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.2)')+'margin-bottom:3px;" oninput="ccState.programs['+i+'].name=this.value;">';
     h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-bottom:3px;">';
     h+='<div><div style="font-size:10px;color:#666;">TYPE</div><input type="text" placeholder="Type" value="'+esc(p.type||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.15)')+'margin-bottom:0;" oninput="ccState.programs['+i+'].type=this.value;"></div>';
@@ -6114,7 +6133,8 @@ function ccRenderTech(){
     h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,107,53,.1);border-radius:4px;padding:6px;">';
     h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">';
     h+='<span style="font-size:10.5px;color:#555;">Gadget '+(i+1)+'</span>';
-    h+='<button onclick="ccState.picker={type:\'gadget\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:rgba(255,107,53,.08);border:1px solid rgba(255,107,53,.4);color:var(--a2);padding:0px 5px;border-radius:3px;cursor:pointer;font-size:10px;">Browse</button>';
+    h+='<div style="display:flex;gap:4px;align-items:center;"><button onclick="ccState.picker={type:\'gadget\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:rgba(255,107,53,.08);border:1px solid rgba(255,107,53,.4);color:var(--a2);padding:0px 5px;border-radius:3px;cursor:pointer;font-size:10px;">Browse</button>';
+    h+='<button title="Clear slot" onclick="ccClearSlot(\'gadgets\','+i+');" style="background:none;border:1px solid #333;color:#555;padding:0 4px;border-radius:3px;cursor:pointer;font-size:10px;">✕</button></div>';
     h+='</div>';
     h+='<div><div style="font-size:10px;color:#666;">NAME</div><input type="text" placeholder="Name" value="'+esc(gad.name||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(255,107,53,.2)')+'margin-bottom:0;" oninput="ccState.gadgets['+i+'].name=this.value;"></div>';
     h+='<div style="margin-top:3px;"><div style="font-size:10px;color:#666;">NANITE</div><input type="number" placeholder="Nanite" value="'+(+(gad.nanite)||0)+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(255,107,53,.15)')+'margin-bottom:0;" oninput="ccState.gadgets['+i+'].nanite=+this.value||0;"></div>';
@@ -6131,7 +6151,7 @@ function ccRenderMagicGear(){
   h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:18px;">';
   st.spells.forEach((sp,i)=>{
     h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(163,85,247,.12);border-radius:4px;padding:6px;">';
-    h+='<div style="font-size:10px;color:#555;margin-bottom:3px;">Spell '+(i+1)+'</div>';
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;"><span style="font-size:10px;color:#555;">Spell '+(i+1)+'</span><button title="Clear slot" onclick="ccClearSlot(\'spells\','+i+');" style="background:none;border:1px solid #333;color:#555;padding:0 4px;border-radius:3px;cursor:pointer;font-size:10px;">✕</button></div>';
     h+='<input type="text" placeholder="Spell name" value="'+esc(sp.name||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.2)')+'margin-bottom:2px;" oninput="ccState.spells['+i+'].name=this.value;">';
     h+='<input type="text" placeholder="Domain" value="'+esc(sp.domain||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.12)')+'" oninput="ccState.spells['+i+'].domain=this.value;">';
     h+='</div>';
@@ -9489,7 +9509,21 @@ function render(){
 
   if(!cnt&&sq){html+='<div class="empty"><div style="font-size:32px;margin-bottom:8px;">🔍</div><div style="font-family:\'JetBrains Mono\',monospace;font-size:11px;">No results for &quot;'+esc(sq)+'&quot;</div></div>';}
   document.getElementById('res').textContent=sq?(cnt+' results'):'';
+  // ── preserve focus + caret of an in-#main text field across the innerHTML swap ──
+  // (search boxes that call render() on every keystroke were losing focus after 1 char)
+  var _fxSig=function(x){return x.tagName+'|'+(x.type||'')+'|'+(x.id||'')+'|'+(x.getAttribute('placeholder')||'')+'|'+((x.dataset&&x.dataset.db)||'');};
+  var _ae=document.activeElement,_fx=null;
+  if(_ae&&main.contains(_ae)&&(_ae.tagName==='INPUT'||_ae.tagName==='TEXTAREA')){
+    var _sig=_fxSig(_ae);
+    var _pre=[].slice.call(main.querySelectorAll('input,textarea')).filter(function(x){return _fxSig(x)===_sig;});
+    _fx={sig:_sig,idx:_pre.indexOf(_ae),s:_ae.selectionStart,e:_ae.selectionEnd};
+  }
   document.getElementById('main').innerHTML=html;
+  if(_fx&&_fx.idx>=0){
+    var _post=[].slice.call(main.querySelectorAll('input,textarea')).filter(function(x){return _fxSig(x)===_fx.sig;});
+    var _el=_post[_fx.idx];
+    if(_el){_el.focus();try{if(_fx.s!=null)_el.setSelectionRange(_fx.s,_fx.e);}catch(_er){}}
+  }
   main.querySelectorAll('table').forEach(t=>{if(!t.parentElement.classList.contains('tbl-wrap')){const w=document.createElement('div');w.className='tbl-wrap';t.parentNode.insertBefore(w,t);w.appendChild(t);}});
   if(_prevSection===cs){main.scrollTop=_prevScroll;}else{main.scrollTop=0;main.dataset.activeSection=cs;}
   if(cs==='starmap')initStarmap();

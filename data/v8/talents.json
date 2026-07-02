@@ -30,7 +30,7 @@
    "skill": "FABRICATION",
    "req": "0",
    "cost": "5",
-   "effect": "If you used a JOURNEYMAN check to fix or repair a device all your rolls using that device are LUCKY until the end of the SCENE."
+   "effect": "If you used a FABRICATION check to fix or repair a device all your rolls using that device are LUCKY until the end of the SCENE."
   },
   {
    "category": "PHYSICAL",
@@ -486,7 +486,7 @@
    "skill": "FABRICATION",
    "req": "0",
    "cost": "10",
-   "effect": "You can take a LARGE penalty to CRAFT or REPAIR skill checks to consume 50% less materials or credits when creating, modifying or repairing items."
+   "effect": "You can take a LARGE penalty to FABRICATION skill checks to consume 50% less materials or credits when creating, modifying or repairing items."
   },
   {
    "category": "PHYSICAL",
@@ -652,7 +652,7 @@
    "skill": "ATHLETICS",
    "req": "0",
    "cost": "15",
-   "effect": "When making ATHLETICS checks to show off you gain a LARGE bonus to FLAIR checks and can instead use FLAIR for ATHLETIC checks or ATHLETIC checks for FLAIR checks."
+   "effect": "When making ATHLETICS checks to show off you gain a LARGE bonus to PERFORMANCE checks and can instead use PERFORMANCE for ATHLETICS checks or ATHLETICS checks for PERFORMANCE checks."
   },
   {
    "category": "PHYSICAL",
@@ -1612,7 +1612,7 @@
    "skill": "PROTOCOL",
    "req": "0",
    "cost": "5",
-   "effect": "You have a knack for fitting in.  If you spend at least a SCENE in an environment, you gain a SMALL bonus to ETIQUETTE and STREETWISE checks made in that environment."
+   "effect": "You have a knack for fitting in.  If you spend at least a SCENE in an environment, you gain a SMALL bonus to PROTOCOL and STREETWISE checks made in that environment."
   },
   {
    "category": "SOCIAL",
@@ -1628,7 +1628,7 @@
    "skill": "PERFORMANCE",
    "req": "0",
    "cost": "5",
-   "effect": "You can attempt to use ETIQUETTE or FLAIR with a SMALL penalty to impress/intimidate a target instead of INTIMIDATE. However if you fail, you ridicule yourself and lose your result as MORALE."
+   "effect": "You can attempt to use PROTOCOL or PERFORMANCE with a SMALL penalty to impress/intimidate a target instead of INTIMIDATION. However if you fail, you ridicule yourself and lose your result as MORALE."
   },
   {
    "category": "SOCIAL",
@@ -1724,7 +1724,7 @@
    "skill": "PERFORMANCE",
    "req": "0",
    "cost": "5",
-   "effect": "If you performed a successful INTUITION, SCAN or TACTICS check against someone you gain a LARGE bonus to ACTING checks to pass yourself off as that target."
+   "effect": "If you performed a successful INSIGHT, SCAN or TACTICS check against someone you gain a LARGE bonus to PERFORMANCE checks to pass yourself off as that target."
   },
   {
    "category": "SOCIAL",
@@ -1884,7 +1884,7 @@
    "skill": "PROTOCOL",
    "req": "0",
    "cost": "10",
-   "effect": "A successful ETIQUETTE checks grants a LARGE bonus to CONCEALMENT when in an environment that requires an ETIQUETTE roll."
+   "effect": "A successful PROTOCOL check grants a LARGE bonus to STEALTH when in an environment that requires a PROTOCOL roll."
   },
   {
    "category": "SOCIAL",
@@ -1892,7 +1892,7 @@
    "skill": "SUBTERFUGE",
    "req": "0",
    "cost": "10",
-   "effect": "You can use an ACTING, CHARM or SUBTERFUGE check to replace any MENTAL skill check but with a LARGE penalty; everyone is convinced that you know what you are doing."
+   "effect": "You can use a PERFORMANCE, CHARM or SUBTERFUGE check to replace any MENTAL skill check but with a LARGE penalty; everyone is convinced that you know what you are doing."
   },
   {
    "category": "SOCIAL",
@@ -2140,7 +2140,7 @@
    "skill": "PERFORMANCE",
    "req": "0",
    "cost": "10",
-   "effect": "When 2 or more allies are in a SCENE with you, you can include them in your ACTING role. Your acting roll now counts for them as well."
+   "effect": "When 2 or more allies are in a SCENE with you, you can include them in your PERFORMANCE role. Your PERFORMANCE roll now counts for them as well."
   },
   {
    "category": "SOCIAL",
@@ -2292,7 +2292,7 @@
    "skill": "PERFORMANCE",
    "req": "HUMAN",
    "cost": "25",
-   "effect": "On a critical success with ACTING, when passing yourself, as another race, you also gain their RACIAL traits while maintaining the role."
+   "effect": "On a critical success with PERFORMANCE, when passing yourself, as another race, you also gain their RACIAL traits while maintaining the role."
   },
   {
    "category": "SOCIAL",
@@ -2372,7 +2372,7 @@
    "skill": "LARCENY",
    "req": "0",
    "cost": "5",
-   "effect": "You are trained at escaping bonds and restraints. Gain a LARGE bonus to DEXTERITY or ATHLETICS checks made to escape bindings and holds."
+   "effect": "You are trained at escaping bonds and restraints. Gain a LARGE bonus to LARCENY or ATHLETICS checks made to escape bindings and holds."
   },
   {
    "category": "ACUITY",
@@ -2428,7 +2428,7 @@
    "skill": "STEALTH",
    "req": "0",
    "cost": "5",
-   "effect": "When a CONCEALMENT skill checks is made by someone with the INFILTRATE talent everyone else with the INFILTRATE talent can pick that roll instead of theirs."
+   "effect": "When a STEALTH skill check is made by someone with the INFILTRATE talent everyone else with the INFILTRATE talent can pick that roll instead of theirs."
   },
   {
    "category": "ACUITY",
@@ -2452,7 +2452,7 @@
    "skill": "STEALTH",
    "req": "0",
    "cost": "5",
-   "effect": "You know how to look as normal as possible. Gain a LARGE bonus to CONCEALMENT when making rolls in a crowded area (more than 10 people)."
+   "effect": "You know how to look as normal as possible. Gain a LARGE bonus to STEALTH when making rolls in a crowded area (more than 10 people)."
   },
   {
    "category": "ACUITY",
@@ -2492,7 +2492,7 @@
    "skill": "INSIGHT",
    "req": "0",
    "cost": "5",
-   "effect": "You can take 30 minutes to feel the last 24h of an object or a person. Roll INTUITION, the info you get is tied to your roll result."
+   "effect": "You can take 30 minutes to feel the last 24h of an object or a person. Roll INSIGHT, the info you get is tied to your roll result."
   },
   {
    "category": "ACUITY",
@@ -2532,7 +2532,7 @@
    "skill": "LARCENY",
    "req": "0",
    "cost": "5",
-   "effect": "When casting spells through RELIC SHARDS you can use a DEXTERITY check to throw the relic into a target. This roll determines if the spell hits or not."
+   "effect": "When casting spells through RELIC SHARDS you can use a PROJECTILES check to throw the relic into a target. This roll determines if the spell hits or not."
   },
   {
    "category": "ACUITY",
@@ -2564,7 +2564,7 @@
    "skill": "LARCENY",
    "req": "0",
    "cost": "5",
-   "effect": "You can attempt to use DEXTERITY to steal items that are Larger than small with a (SMALL penalty) or being held (LARGE penalty)."
+   "effect": "You can attempt to use LARCENY to steal items that are Larger than small with a (SMALL penalty) or being held (LARGE penalty)."
   },
   {
    "category": "ACUITY",
@@ -2676,7 +2676,7 @@
    "skill": "INSIGHT",
    "req": "0",
    "cost": "10",
-   "effect": "Use a QUICK action to roll INTUITION vs the target's WITS to predict all of its actions for the following round. Your DEFENSES have a LARGE bonus against the target actions until next MAINTENANCE."
+   "effect": "Use a QUICK action to roll INSIGHT vs the target's WITS to predict all of its actions for the following round. Your DEFENSES have a LARGE bonus against the target actions until next MAINTENANCE."
   },
   {
    "category": "ACUITY",
@@ -2692,7 +2692,7 @@
    "skill": "LARCENY",
    "req": "0",
    "cost": "10",
-   "effect": "You can attempt to pick pocket a tiny object when making a successful melee attack as a free action. Roll (DEXTERITY Vs SPEED). Must have a free hand."
+   "effect": "You can attempt to pick pocket a tiny object when making a successful melee attack as a free action. Roll (LARCENY Vs SPEED). Must have a free hand."
   },
   {
    "category": "ACUITY",
@@ -2756,7 +2756,7 @@
    "skill": "SPIRITUAL",
    "req": "0",
    "cost": "10",
-   "effect": "You can tap a target for their CHI by touching them. (Martial arts required for unwilling targets)."
+   "effect": "You can tap a target for their CHI by touching them. (Hand-to-Hand required for unwilling targets)."
   },
   {
    "category": "ACUITY",
@@ -2812,7 +2812,7 @@
    "skill": "RACIAL",
    "req": "PSYLON",
    "cost": "10",
-   "effect": "PSYLONS can ignore a MORALE TRAUMA by passing it to a willing ally within 10m. On a successful INTUITION + LARGE penalty Vs a target's WITS you can pass it to an unwilling target."
+   "effect": "PSYLONS can ignore a MORALE TRAUMA by passing it to a willing ally within 10m. On a successful INSIGHT + LARGE penalty Vs a target's WITS you can pass it to an unwilling target."
   },
   {
    "category": "ACUITY",
@@ -2844,7 +2844,7 @@
    "skill": "GENERAL",
    "req": "SKALANDER",
    "cost": "10",
-   "effect": "Any target within your VEIL range has a LARGE penalty to CONCEALMENT, SUBTERFUGE and any skills check used to lie or pass as someone they are not."
+   "effect": "Any target within your VEIL range has a LARGE penalty to STEALTH, SUBTERFUGE and any skills check used to lie or pass as someone they are not."
   },
   {
    "category": "ACUITY",
@@ -2868,7 +2868,7 @@
    "skill": "LARCENY",
    "req": "0",
    "cost": "15",
-   "effect": "All of your DEXTERITY skill checks counts their targets as BREACHED"
+   "effect": "All of your LARCENY skill checks counts their targets as BREACHED"
   },
   {
    "category": "ACUITY",

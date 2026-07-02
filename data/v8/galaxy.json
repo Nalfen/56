@@ -13633,7 +13633,7 @@
     "size": "ANY",
     "availability": "LIMITED",
     "cost": 250000,
-    "description": "Grants CLOAK : You are cloaked when not moving, provides a LARGE bonus to CONCEALMENT type I and II rolls (applies during maintenance phase), prevents new LOCK-ON, and all sensors from picking up your location."
+    "description": "Grants CLOAK : You are cloaked when not moving, provides a LARGE bonus to STEALTH type I and II rolls (applies during maintenance phase), prevents new LOCK-ON, and all sensors from picking up your location."
    },
    {
     "name": "EMP Shielding",
@@ -13752,7 +13752,7 @@
     "size": "ANY",
     "availability": "COMMON",
     "cost": 15000,
-    "description": "One module of your choice gains the ROGUE special attribute : Can hide up to a small object. Provides passive concealment of 5 or a LARGE bonus to an active Concealment roll."
+    "description": "One module of your choice gains the ROGUE special attribute : Can hide up to a small object. Provides passive concealment of 5 or a LARGE bonus to an active STEALTH roll."
    },
    {
     "name": "Environement package",

@@ -286,7 +286,7 @@
   },
   {
    "name": "INSTANT DETONATION",
-   "desc": "You can take a SMALL penality to your DEXTERITY roll to prevents targets from performing any actions before detonation."
+   "desc": "You can take a SMALL penality to your PROJECTILES roll to prevents targets from performing any actions before detonation."
   },
   {
    "name": "INTEGRITY",
@@ -470,7 +470,7 @@
   },
   {
    "name": "SMUGGLER",
-   "desc": "Can hide up to a small object. Provides passive concealment of 5 or a LARGE bonus to an active Concealment roll."
+   "desc": "Can hide up to a small object. Provides passive concealment of 5 or a LARGE bonus to an active STEALTH roll."
   },
   {
    "name": "ROLE ADVANTAGE",
@@ -502,7 +502,7 @@
   },
   {
    "name": "SERVOS",
-   "desc": "Your PHYSICAL attribute for MIGHT checks is 10. Device now counts as ELECTRONIC Vs EMP."
+   "desc": "Your PHYSICAL attribute for ATHLETICS checks is 10. Device now counts as ELECTRONIC Vs EMP."
   },
   {
    "name": "SHAKEN",
@@ -598,7 +598,7 @@
   },
   {
    "name": "SHIP REPAIRS",
-   "desc": "When repairing a ship you need to have the available resource units and perform a skill check (TECHNOLOGY for SYSTEM or JOURNEYMAN for HULL) to restore one point. Shields do not require skill checks and can instead convert X resources units to shield see SHIP SHIELD RECHARGE."
+   "desc": "When repairing a ship you need to have the available resource units and perform a skill check (TECHNOLOGY for SYSTEM or FABRICATION for HULL) to restore one point. Shields do not require skill checks and can instead convert X resources units to shield see SHIP SHIELD RECHARGE."
   },
   {
    "name": "SHIP SCAN RANGE",
@@ -678,7 +678,7 @@
   },
   {
    "name": "STEALTH",
-   "desc": "Device is designed for covert ops and provides a SMALL bonus to CONCEALMENT rolls."
+   "desc": "Device is designed for covert ops and provides a SMALL bonus to STEALTH rolls."
   },
   {
    "name": "STRUCTURE",
@@ -762,7 +762,7 @@
   },
   {
    "name": "ENGINEER (ROLE)",
-   "desc": "A ship crew role that uses ENGINEERING vs the ship's Engineering rating. Generates Resource Units (RU) on success, which are spent to repair shields (no check), hull (CRAFT), or systems (TECHNOLOGY)."
+   "desc": "A ship crew role that uses ENGINEERING vs the ship's Engineering rating. Generates Resource Units (RU) on success, which are spent to repair shields (no check), hull (FABRICATION), or systems (TECHNOLOGY)."
   },
   {
    "name": "NAVIGATOR (ROLE)",
