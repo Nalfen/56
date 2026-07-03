@@ -3823,7 +3823,7 @@
    },
    {
     "name": "Skillsoft (Skill name)",
-    "type": "Program",
+    "type": "Passive, Routine",
     "memory": "1",
     "cpu": "1",
     "availability": "COMMON",
@@ -3835,7 +3835,7 @@
    },
    {
     "name": "Data Purge",
-    "type": "Program",
+    "type": "Passive, Routine",
     "memory": "1",
     "cpu": "1",
     "availability": "COMMON",
@@ -3847,7 +3847,7 @@
    },
    {
     "name": "Cyberwall I",
-    "type": "Program",
+    "type": "Passive, Routine",
     "memory": "1",
     "cpu": "1",
     "availability": "COMMON",
@@ -3859,7 +3859,7 @@
    },
    {
     "name": "Mr. Fix-it",
-    "type": "Program",
+    "type": "Passive, Routine",
     "memory": "2",
     "cpu": "1",
     "availability": "COMMON",
@@ -3871,7 +3871,7 @@
    },
    {
     "name": "Gorilla backup",
-    "type": "Program",
+    "type": "Passive, Routine",
     "memory": "1",
     "cpu": "2",
     "availability": "UNCOMMON",
@@ -3883,7 +3883,7 @@
    },
    {
     "name": "Patch-Me",
-    "type": "Program",
+    "type": "Passive, Routine",
     "memory": "1",
     "cpu": "1",
     "availability": "COMMON",
@@ -3895,7 +3895,7 @@
    },
    {
     "name": "McTavish Pro",
-    "type": "Program",
+    "type": "Passive, Routine",
     "memory": "1",
     "cpu": "1",
     "availability": "COMMON",
@@ -3907,7 +3907,7 @@
    },
    {
     "name": "Honey Pot",
-    "type": "Program",
+    "type": "Passive, Routine",
     "memory": "1",
     "cpu": "1",
     "availability": "UNCOMMON",
@@ -3919,7 +3919,7 @@
    },
    {
     "name": "Noise Maker",
-    "type": "Program",
+    "type": "Passive, Routine",
     "memory": "1",
     "cpu": "1",
     "availability": "UNCOMMON",
@@ -3931,7 +3931,7 @@
    },
    {
     "name": "Misdirection",
-    "type": "Program",
+    "type": "Passive, Routine",
     "memory": "1",
     "cpu": "1",
     "availability": "RARE",
@@ -3943,7 +3943,7 @@
    },
    {
     "name": "Encryption",
-    "type": "Program",
+    "type": "Passive, Routine",
     "memory": "1",
     "cpu": "1",
     "availability": "UNCOMMON",
@@ -3955,19 +3955,24 @@
    },
    {
     "name": "ICE Pick",
-    "type": "Program",
+    "type": "Program, HACKING vs WITS",
     "memory": "1",
     "cpu": "1",
     "availability": "RARE",
     "legality": "Illegal",
     "cost": "80000",
-    "passive": "MEDIUM power tech attack that Deals 4D+2 TECH MORALE damage. If target is suffering from an AILMENT the crit range of this attack increases by 3",
-    "active": "HIGH power tech attack that Deals 4D+3 TECH MORALE damage. If target is suffering from an AILMENT this attack is an automatic critical hit",
-    "desc": "A black market ice breaker that claimed the lives of many a hacker."
+    "passive": "MEDIUM power tech attack that Deals 4D+4 TECH MORALE damage. If target is suffering from an AILMENT the crit range of this attack increases by 3",
+    "active": "HIGH power tech attack that Deals 6D+4 TECH MORALE damage. If target is suffering from an AILMENT this attack is an automatic critical hit",
+    "desc": "A black market ice breaker that claimed the lives of many a hacker.",
+    "skill": "HACKING",
+    "power": "MEDIUM",
+    "damage": "4D+4",
+    "damage_type": "TECH",
+    "dmgtarget": "MORALE"
    },
    {
     "name": "Cybershell",
-    "type": "Program",
+    "type": "Passive, Routine",
     "memory": "2",
     "cpu": "1",
     "availability": "UNCOMMON",
@@ -3979,7 +3984,7 @@
    },
    {
     "name": "Pink Slip",
-    "type": "Program",
+    "type": "Passive, Routine",
     "memory": "1",
     "cpu": "1",
     "availability": "UNCOMMON",
@@ -4008,7 +4013,7 @@
    },
    {
     "name": "Getaway Driver",
-    "type": "Routine, CYBERINTEL",
+    "type": "Passive, Routine",
     "memory": "2",
     "cpu": "1",
     "availability": "UNCOMMON",
@@ -4088,7 +4093,7 @@
    },
    {
     "name": "Super Bleach",
-    "type": "Passive Program",
+    "type": "Passive, Routine",
     "memory": "1",
     "cpu": "1",
     "availability": "LIMITED",
@@ -4139,7 +4144,7 @@
    },
    {
     "name": "User Manual",
-    "type": "Passive Program",
+    "type": "Passive, Routine",
     "memory": "2",
     "cpu": "1",
     "availability": "UNCOMMON",
@@ -4156,7 +4161,7 @@
    },
    {
     "name": "Unity",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "memory": "2",
     "cpu": "2",
     "availability": "LIMITED",
@@ -4207,7 +4212,7 @@
    },
    {
     "name": "Combat HUD",
-    "type": "Passive Program",
+    "type": "Passive, Routine",
     "memory": "1",
     "cpu": "1",
     "availability": "RARE",
@@ -4241,7 +4246,7 @@
    },
    {
     "name": "Watchdog Rexxx",
-    "type": "Passive Program",
+    "type": "Passive, Routine",
     "memory": "2",
     "cpu": "1",
     "availability": "RARE",
@@ -4276,7 +4281,7 @@
    },
    {
     "name": "Buffbot",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "memory": "1",
     "cpu": "2",
     "availability": "RARE",
@@ -4310,7 +4315,7 @@
    },
    {
     "name": "Backupotron MK 2",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "action": "Phase 3 toggle",
     "memory": "1",
     "cpu": "1",
@@ -4323,7 +4328,7 @@
    },
    {
     "name": "Witch Doctor",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "action": "Phase 3 toggle",
     "memory": "1",
     "cpu": "1",
@@ -4353,7 +4358,7 @@
    },
    {
     "name": "Killer nanobots",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "action": "Phase 3 toggle",
     "memory": "1",
     "cpu": "1",
@@ -4366,7 +4371,7 @@
    },
    {
     "name": "Beryl Protocol",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "action": "Phase 3 toggle",
     "memory": "1",
     "cpu": "1",
@@ -4379,7 +4384,7 @@
    },
    {
     "name": "Matter processor",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "action": "Phase 3 toggle",
     "memory": "1",
     "cpu": "1",
@@ -4392,7 +4397,7 @@
    },
    {
     "name": "BOOMSTICK!",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "action": "Phase 3 toggle",
     "memory": "1",
     "cpu": "1",
@@ -4405,7 +4410,7 @@
    },
    {
     "name": "Recursive Loop",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "action": "Phase 3 toggle",
     "memory": "1",
     "cpu": "2",
@@ -4418,7 +4423,7 @@
    },
    {
     "name": "Ghost 2.2",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "action": "Phase 3 toggle",
     "memory": "2",
     "cpu": "1",
@@ -4431,7 +4436,7 @@
    },
    {
     "name": "Cyberwall Nano",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "action": "Phase 3 toggle",
     "memory": "2",
     "cpu": "2",
@@ -4444,7 +4449,7 @@
    },
    {
     "name": "Carnifex Ultra-Violet",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "action": "Phase 3 toggle",
     "memory": "1",
     "cpu": "1",
@@ -4457,7 +4462,7 @@
    },
    {
     "name": "Distributed Denial of Service",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "action": "Phase 3 toggle",
     "memory": "1",
     "cpu": "2",
@@ -4470,7 +4475,7 @@
    },
    {
     "name": "Killdog Rexxx",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "action": "Phase 3 toggle",
     "memory": "2",
     "cpu": "2",
@@ -4483,7 +4488,7 @@
    },
    {
     "name": "Nordcorp Protocol 0",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "action": "Phase 3 toggle",
     "memory": "2",
     "cpu": "2",
@@ -4613,7 +4618,7 @@
    },
    {
     "name": "Nulify Defenses",
-    "type": "Routine (Tronik)",
+    "type": "Passive, Routine",
     "action": "Phase 3 toggle",
     "memory": "3",
     "cpu": "2",
@@ -4622,11 +4627,12 @@
     "cost": "120000",
     "passive": "While this routine is active, once per round one of your hacking attacks may change its damage type to match the target's lowest DEFENSE rating. You must have learned that defense first (a successful SCAN or Deep Scan against the target this SCENE).",
     "active": "All of your hacking attacks may retune this way, and you no longer need a prior scan - the routine reads the defenses in real time.",
-    "desc": "Tronik warfare code. It does not break your wall, it simply asks which one you forgot to build."
+    "desc": "Tronik warfare code. It does not break your wall, it simply asks which one you forgot to build.",
+    "tags": "TRONIK"
    },
    {
     "name": "Conference Call",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "action": "Phase 3 toggle",
     "memory": "1",
     "cpu": "1",
@@ -4639,7 +4645,7 @@
    },
    {
     "name": "Cyber Mole",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "action": "Phase 3 toggle",
     "memory": "1",
     "cpu": "1",
@@ -4666,7 +4672,7 @@
    },
    {
     "name": "Reinforcement",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "action": "Phase 3 toggle",
     "memory": "1",
     "cpu": "1",
@@ -4679,7 +4685,7 @@
    },
    {
     "name": "Pufferfish",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "action": "Phase 3 toggle",
     "memory": "2",
     "cpu": "1",
@@ -4863,7 +4869,7 @@
    },
    {
     "name": "Verminator",
-    "type": "Tronik TEK Routine",
+    "type": "TEK Routine",
     "skill": "OPERATOR",
     "action": "Phase 3 toggle",
     "memory": "2",
@@ -4875,7 +4881,7 @@
     "damage": "4D+5",
     "damage_type": "ENERGY",
     "dmgtarget": "HEALTH",
-    "tags": "X-ALL",
+    "tags": "X-ALL TRONIK",
     "passive": "Load into a TEK weapon: it fires POWER HIGH, 4D+5 ENERGY HEALTH damage with X-ALL (maximum defense against this attack is MEDIUM).",
     "active": "Defenses against the attack are capped at LOW instead of MEDIUM.",
     "desc": "A black-project chameleon round. Whatever your armor is good at, it is politely something else."
@@ -5164,7 +5170,7 @@
    },
    {
     "name": "Master Key",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "action": "Phase 3 toggle",
     "memory": "1",
     "cpu": "1",
@@ -5177,7 +5183,7 @@
    },
    {
     "name": "Publix Edumacation",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "action": "Phase 3 toggle",
     "memory": "1",
     "cpu": "1",
@@ -5334,7 +5340,7 @@
    },
    {
     "name": "Dead Man's Hand",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "action": "Phase 3 toggle",
     "memory": "1",
     "cpu": "1",
@@ -5347,7 +5353,7 @@
    },
    {
     "name": "War Chest",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "action": "Phase 3 toggle",
     "memory": "1",
     "cpu": "1",
@@ -5360,7 +5366,7 @@
    },
    {
     "name": "Quarantine",
-    "type": "Routine",
+    "type": "Passive, Routine",
     "action": "Phase 3 toggle",
     "memory": "1",
     "cpu": "1",
