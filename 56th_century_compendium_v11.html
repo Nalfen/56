@@ -4521,10 +4521,10 @@ function ccMakeFreshState(){
     ...sk,
     talents:Array(3).fill(0).map(()=>({name:'',skill:'',category:'',xp_cost:0,effect:'',credited:false})),
     evolutions:Array(2).fill(0).map(()=>({name:'',type:'',tier:'',effect:'',credited:false})),
-    weapons:Array(6).fill(0).map(()=>({name:'',skill:'',dmg:'',dmgtype:'',power:0,expertise:0,special:'',close_range:'',medium_range:'',long_range:'',rof:'',ammo:0,currentammo:0,reload:'',mfr:'Generic',base_data:null,options:[]})),
-    armor:Array(2).fill(0).map(()=>({name:'',type:'',def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',special:'',soak_expr:'',charges:0,regen:'',mfr:'Generic',base_data:null,options:[]})),
-    datacoms:Array(3).fill(0).map(()=>({name:'',cpu:0,mem:0,nanite:0,def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',def_dmg:'',int_ext:0,int_int:0,int_main:0,expertise:0,special:'',mfr:'Generic',base_data:null,options:[]})),
-    programs:Array(10).fill(0).map(()=>({name:'',type:'',cpu:0,mem:0,passive:'',active:''})),
+    weapons:Array(6).fill(0).map(()=>({name:'',skill:'',dmg:'',dmgtype:'',power:'',power_num:0,legality:'',expertise:0,special:'',close_range:'',medium_range:'',long_range:'',rof:'',ammo:0,ammo_cat:'',magazines:0,currentammo:0,reload:'',mfr:'Generic',base_data:null,options:[],custom:false})),
+    armor:Array(2).fill(0).map(()=>({name:'',type:'',def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',special:'',soak_expr:'',charges:0,regen:'',mfr:'Generic',base_data:null,options:[],custom:false})),
+    datacoms:Array(3).fill(0).map(()=>({name:'',cpu:0,mem:0,nanite:0,system:0,system_max:0,def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',def_dmg:'',expertise:0,special:'',mfr:'Generic',base_data:null,options:[],custom:false})),
+    programs:Array(10).fill(0).map(()=>({name:'',type:'',cpu:0,mem:0,nanite:0,passive:'',active:''})),
     gadgets:Array(5).fill(0).map(()=>({name:'',nanite:0,effect:''})),
     occupation_bonus_choice:null,occ_bonus_skills:[],occ_bonus_picks:[],
     credits:0,credits_spent:0,gear_cat_filter:'',gear_search:'',med_mfr_filter:'Generic',med_search:'',
@@ -4546,10 +4546,10 @@ function ccDefFamily(t){t=(t||'').toLowerCase();if(t.indexOf('barrier')>=0)retur
    so clearing a purchased item refunds its credits automatically. ── */
 function ccClearSlot(kind,i){
   const F={
-    weapons:()=>({name:'',skill:'',dmg:'',dmgtype:'',power:0,expertise:0,special:'',close_range:'',medium_range:'',long_range:'',rof:'',ammo:0,currentammo:0,reload:'',mfr:'Generic',base_data:null,options:[]}),
-    armor:()=>({name:'',type:'',def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',special:'',soak_expr:'',charges:0,regen:'',mfr:'Generic',base_data:null,options:[]}),
-    datacoms:()=>({name:'',cpu:0,mem:0,nanite:0,def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',def_dmg:'',int_ext:0,int_int:0,int_main:0,expertise:0,special:'',mfr:'Generic',base_data:null,options:[]}),
-    programs:()=>({name:'',type:'',cpu:0,mem:0,passive:'',active:''}),
+    weapons:()=>({name:'',skill:'',dmg:'',dmgtype:'',power:'',power_num:0,legality:'',expertise:0,special:'',close_range:'',medium_range:'',long_range:'',rof:'',ammo:0,ammo_cat:'',magazines:0,currentammo:0,reload:'',mfr:'Generic',base_data:null,options:[],custom:false}),
+    armor:()=>({name:'',type:'',def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',special:'',soak_expr:'',charges:0,regen:'',mfr:'Generic',base_data:null,options:[],custom:false}),
+    datacoms:()=>({name:'',cpu:0,mem:0,nanite:0,system:0,system_max:0,def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',def_dmg:'',expertise:0,special:'',mfr:'Generic',base_data:null,options:[],custom:false}),
+    programs:()=>({name:'',type:'',cpu:0,mem:0,nanite:0,passive:'',active:''}),
     gadgets:()=>({name:'',nanite:0,effect:''}),
     spells:()=>({name:'',domain:''})
   };
@@ -4746,8 +4746,9 @@ function ccApplyMfrToWpnSlot(i){
   wp.name=applied.name||'';wp.dmg=applied.damage||'';wp.dmgtype=applied.type||'';
   wp.special=(Array.isArray(applied.special)?applied.special.join(' '):applied.special)||'';
   wp.close_range=applied.range_short||'';wp.medium_range=applied.range_med||'';wp.long_range=applied.range_long||'';
-  wp.rof=applied.rof||'';wp.ammo=+(applied.ammo)||0;wp.reload=applied.reload||'';
-  wp.power=+(applied.power_num)||0;wp.expertise=+(applied.expertise)||0;
+  wp.rof=applied.rof||'';wp.ammo=parseInt(applied.ammo,10)||0;wp.reload=applied.reload||'';
+  wp.power=applied.power||'';wp.power_num=+(applied.power_num)||0;wp.expertise=+(applied.expertise)||0;
+  wp.legality=applied.legality||wp.legality||'';
 }
 
 function ccApplyMfrToArmorSlot(i){
@@ -4853,7 +4854,7 @@ function ccCalcWeaponCost(wp){
   const base=parseFloat(wp.base_data.cost)||0;if(!base)return 0;
   const mfr=g.manufacturers&&g.manufacturers[wp.mfr||''];
   const pm=parseFloat((mfr&&mfr.price_mult)||1)||1;
-  return Math.round(base*pm*ccGetOptionsMult(wp.options));
+  return Math.round(base*pm*ccGetOptionsMult(wp.options))+ccMagCost(wp);
 }
 function ccCalcArmorCost(ar){
   if(!ar.base_data||!ar.name)return 0;
@@ -4944,8 +4945,12 @@ function ccPickFromCache(pidx){
     wp.skill=EG_WPN_SKILL_MAP[w.category]||wp.skill||'';
     wp.special=(Array.isArray(aw.special)?aw.special.join(' '):aw.special)||'';
     wp.close_range=aw.range_short||'';wp.medium_range=aw.range_med||'';wp.long_range=aw.range_long||'';
-    wp.rof=aw.rof||'';wp.ammo=+(aw.ammo)||0;wp.reload=aw.reload||'';
-    wp.power=+(aw.power_num)||0;wp.expertise=+(aw.expertise)||0;
+    wp.rof=aw.rof||'';wp.reload=aw.reload||'';
+    wp.ammo=parseInt(aw.ammo,10)||0;
+    const _am=/^\s*\d+\s*\/\s*(\S+)/.exec(String(aw.ammo||''));wp.ammo_cat=_am?_am[1]:'';wp.magazines=0;
+    wp.power=aw.power||'';wp.power_num=+(aw.power_num)||0;wp.expertise=+(aw.expertise)||0;
+    wp.legality=aw.legality||w.legality||'';
+    wp.custom=false;
   }
   else if(type==='armor'){
     const a=item;const ar=ccState.armor[slot];
@@ -4953,15 +4958,18 @@ function ccPickFromCache(pidx){
     ar.mfr=ccState.picker.mfr||ar.mfr||'Generic';
     const applied=applyArmorMfr({...a},ar.mfr)||a;
     ar.name=applied.name||'';ar.type=applied.category||'';
-    ar.soak_expr=applied.soak||'';ar.special=applied.special||'';
+    ar.soak_expr=applied.soak||'';ar.special=(Array.isArray(applied.special)?applied.special.join(' '):applied.special)||'';
+    ar.charges=+(applied.charges)||0;ar.regen=applied.regen||'';
     const dm={physical:'phys',energy:'energy',tech:'tech',spiritual:'spirit'};
     ['physical','energy','tech','spiritual'].forEach(k=>{
       const raw=applied['def_'+k]||'None';
       ar['def_'+(dm[k]||k)]=raw.charAt(0).toUpperCase()+raw.slice(1).toLowerCase();
     });
+    ar.custom=false;
   }
-  else if(type==='datacom'){const d=item;const dc=ccState.datacoms[slot];dc.base_data={...d};dc.options=[];dc.mfr=ccState.picker.mfr||dc.mfr||'Generic';dc.name=d.name||'';dc.cpu=+(d.cpu)||0;dc.mem=+(d.memory)||0;dc.nanite=+(d.nanites!=null?d.nanites:d.nanite)||0;dc.expertise=+(d.expertise_bonus)||0;dc.def_phys=d.def_physical||d.def_phys||'None';dc.def_energy=d.def_energy||'None';dc.def_tech=d.def_tech||'None';dc.def_spirit=d.def_spiritual||d.def_spirit||'None';dc.special=(Array.isArray(d.special)?d.special.join(' '):d.special)||'';}
-  else if(type==='program'){const p=item;const pr=ccState.programs[slot];pr.name=p.name||'';pr.type=p.type||'';pr.cpu=p.cpu||0;pr.mem=p.memory||0;pr.passive=p.passive||'';pr.active=p.active||'';}
+  else if(type==='datacom'){const d=item;const dc=ccState.datacoms[slot];const _cap=s=>{s=String(s||'None');return s.charAt(0).toUpperCase()+s.slice(1).toLowerCase();};dc.base_data={...d};dc.options=[];dc.mfr=ccState.picker.mfr||dc.mfr||'Generic';dc.name=d.name||'';dc.cpu=+(d.cpu)||0;dc.mem=+(d.memory)||0;dc.nanite=+(d.nanites!=null?d.nanites:d.nanite)||0;dc.system=+(d.system)||0;dc.system_max=+(d.system)||0;dc.expertise=+(d.expertise!=null?d.expertise:d.expertise_bonus)||0;dc.def_dmg=d.soak||'';dc.def_phys=_cap(d.def_physical||d.def_phys);dc.def_energy=_cap(d.def_energy);dc.def_tech=_cap(d.def_tech);dc.def_spirit=_cap(d.def_spiritual||d.def_spirit);dc.special=(Array.isArray(d.special)?d.special.join(' '):d.special)||'';dc.custom=false;}
+  else if(type==='software'){const x=item;const pr=ccState.programs[slot];pr.name=x.name||'';pr.type=x._kind==='gadget'?'Gadget':(x.type||'');pr.cpu=+(x.cpu)||0;pr.mem=+(x.memory!=null?x.memory:x.mem)||0;pr.nanite=+(x.nanite!=null?x.nanite:(x.nanites!=null?x.nanites:0))||0;pr.passive=x.passive||'';pr.active=x.active||x.effect||x.desc||'';}
+  else if(type==='program'){const p=item;const pr=ccState.programs[slot];pr.name=p.name||'';pr.type=p.type||'';pr.cpu=+(p.cpu)||0;pr.mem=+(p.memory)||0;pr.nanite=+(p.nanite!=null?p.nanite:(p.nanites!=null?p.nanites:0))||0;pr.passive=p.passive||'';pr.active=p.active||'';}
   else if(type==='gadget'){const gd=item;const gs=ccState.gadgets[slot];gs.name=gd.name||'';gs.nanite=+(gd.nanite)||0;gs.effect=gd.effect||gd.desc||'';}
   else if(type==='wpn_option'){ccAddItemOption('weapons',slot,item.name);}
   else if(type==='armor_option'){ccAddItemOption('armor',slot,item.name);}
@@ -5047,10 +5055,10 @@ function ccExportRoll20(){
   CC_ALL_SKILLS.forEach(s=>{const _k=s.replace(/[ -]/g,'_');a(_k,st[s]||0);a(_k+'_bonus',st[s+'_bonus']||0);a(_k+'_crit',st[s+'_crit']||'10');});
   (st.talents||[]).filter(t=>t&&t.name).forEach(t=>{const r='repeating_talents_'+egGenId()+'_';a(r+'name',t.name||'');a(r+'category',t.category||'');a(r+'xp_cost',t.xp_cost||0);a(r+'effect',t.effect||'');});
   (st.evolutions||[]).filter(e=>e&&e.name).forEach(e=>{const r='repeating_evolutions_'+egGenId()+'_';a(r+'name',e.name||'');a(r+'type',e.type||'');a(r+'tier',e.tier||'');a(r+'effect',e.effect||'');});
-  for(let i=1;i<=6;i++){const w=st.weapons[i-1]||{};const wOpts=(w.options||[]).join(', ');a('weapon'+i+'_name',w.name||'');a('weapon'+i+'_mfr',w.mfr||'Generic');a('weapon'+i+'_skill',String(w.skill||'').replace(/[ -]/g,'_'));a('weapon'+i+'_dmg',w.dmg||'');a('weapon'+i+'_dmgtype',w.dmgtype||'');a('weapon'+i+'_power',w.power||0);a('weapon'+i+'_expertise',w.expertise||0);a('weapon'+i+'_special',(w.special||'')+(wOpts?' ['+wOpts+']':''));a('weapon'+i+'_options',wOpts);a('weapon'+i+'_close_range',w.close_range||'');a('weapon'+i+'_medium_range',w.medium_range||'');a('weapon'+i+'_long_range',w.long_range||'');a('weapon'+i+'_rof',w.rof||'');a('weapon'+i+'_ammo',w.ammo||0);a('weapon'+i+'_currentammo',w.currentammo||0);a('weapon'+i+'_reload',w.reload||'');a('weapon'+i+'_dmgtarget',w.dmgtarget||'');}
+  for(let i=1;i<=6;i++){const w=st.weapons[i-1]||{};const wOpts=(w.options||[]).join(', ');a('weapon'+i+'_name',w.name||'');a('weapon'+i+'_mfr',w.mfr||'Generic');a('weapon'+i+'_skill',String(w.skill||'').replace(/[ -]/g,'_'));a('weapon'+i+'_dmg',w.dmg||'');a('weapon'+i+'_dmgtype',w.dmgtype||'');a('weapon'+i+'_power',w.power||'');a('weapon'+i+'_expertise',w.expertise||0);a('weapon'+i+'_special',(w.special||'')+(wOpts?' ['+wOpts+']':''));a('weapon'+i+'_options',wOpts);a('weapon'+i+'_close_range',w.close_range||'');a('weapon'+i+'_medium_range',w.medium_range||'');a('weapon'+i+'_long_range',w.long_range||'');a('weapon'+i+'_rof',w.rof||'');a('weapon'+i+'_ammo',w.ammo||0);a('weapon'+i+'_currentammo',w.currentammo||0);a('weapon'+i+'_reload',w.reload||'');a('weapon'+i+'_dmgtarget',w.dmgtarget||'');}
   for(let i=1;i<=2;i++){const ar=st.armor[i-1]||{};const arOpts=(ar.options||[]).join(', ');a('armor'+i+'_name',ar.name||'');a('armor'+i+'_mfr',ar.mfr||'Generic');a('armor'+i+'_type',ar.type||'');a('armor'+i+'_def_phys',ar.def_phys||'None');a('armor'+i+'_def_energy',ar.def_energy||'None');a('armor'+i+'_def_tech',ar.def_tech||'None');a('armor'+i+'_def_spirit',ar.def_spirit||'None');a('armor'+i+'_special',(ar.special||'')+(arOpts?' ['+arOpts+']':''));a('armor'+i+'_options',arOpts);a('armor'+i+'_soak_expr',ar.soak_expr||'');a('armor'+i+'_charges',ar.charges||0);a('armor'+i+'_regen',ar.regen||'');}
-  for(let i=1;i<=3;i++){const d=st.datacoms[i-1]||{};const dcOpts=(d.options||[]).join(', ');a('datacom'+i+'_name',d.name||'');a('datacom'+i+'_mfr',d.mfr||'Generic');a('datacom'+i+'_cpu',d.cpu||0);a('datacom'+i+'_mem',d.mem||0);a('datacom'+i+'_nanite',d.nanite||0);a('datacom'+i+'_def_phys',d.def_phys||'None');a('datacom'+i+'_def_energy',d.def_energy||'None');a('datacom'+i+'_def_tech',d.def_tech||'None');a('datacom'+i+'_def_spirit',d.def_spirit||'None');a('datacom'+i+'_def_dmg',d.def_dmg||(d.base_data&&d.base_data.soak)||'');var _dcsys=(d.base_data&&(d.base_data.system!=null?d.base_data.system:0))||0;a('datacom'+i+'_system',_dcsys);a('datacom'+i+'_system_max',_dcsys);a('datacom'+i+'_expertise',d.expertise||0);a('datacom'+i+'_special',(d.special||'')+(dcOpts?' ['+dcOpts+']':''));a('datacom'+i+'_options',dcOpts);}
-  (st.programs||[]).filter(p=>p&&p.name).forEach(p=>{const r='repeating_programs_'+egGenId()+'_';a(r+'name',p.name||'');a(r+'type',p.type||'');a(r+'cpu',p.cpu||0);a(r+'mem',p.mem||0);a(r+'passive',p.passive||'');a(r+'active',p.active||'');});
+  for(let i=1;i<=3;i++){const d=st.datacoms[i-1]||{};const dcOpts=(d.options||[]).join(', ');a('datacom'+i+'_name',d.name||'');a('datacom'+i+'_mfr',d.mfr||'Generic');a('datacom'+i+'_cpu',d.cpu||0);a('datacom'+i+'_mem',d.mem||0);a('datacom'+i+'_nanite',d.nanite||0);a('datacom'+i+'_def_phys',d.def_phys||'None');a('datacom'+i+'_def_energy',d.def_energy||'None');a('datacom'+i+'_def_tech',d.def_tech||'None');a('datacom'+i+'_def_spirit',d.def_spirit||'None');a('datacom'+i+'_def_dmg',d.def_dmg||(d.base_data&&d.base_data.soak)||'');var _dcsys=(d.system!=null?d.system:((d.base_data&&d.base_data.system)||0))||0;a('datacom'+i+'_system',_dcsys);a('datacom'+i+'_system_max',d.system_max||_dcsys);a('datacom'+i+'_expertise',d.expertise||0);a('datacom'+i+'_special',(d.special||'')+(dcOpts?' ['+dcOpts+']':''));a('datacom'+i+'_options',dcOpts);}
+  (st.programs||[]).filter(p=>p&&p.name).forEach(p=>{const r='repeating_programs_'+egGenId()+'_';a(r+'name',p.name||'');a(r+'type',p.type||'');a(r+'cpu',p.cpu||0);a(r+'mem',p.mem||0);a(r+'nanite',p.nanite||0);a(r+'passive',p.passive||'');a(r+'active',p.active||'');});
   (st.gadgets||[]).filter(g=>g&&g.name).forEach(g=>{const r='repeating_gadgets_'+egGenId()+'_';a(r+'name',g.name||'');a(r+'nanite',g.nanite||0);a(r+'effect',g.effect||'');});
   const autoTrk=ccAutoTrackedSpent();
   a('credits',+(st.credits)||0);a('credits_auto_tracked',autoTrk);a('credits_spent',+(st.credits_spent)||0);a('credits_remaining',(+(st.credits)||0)-autoTrk-(+(st.credits_spent)||0));
@@ -5092,6 +5100,7 @@ function ccRenderPicker(){
   else if(type==='datacom'){items=g.datacoms||[];title='Datacom for slot '+(slot+1);}
   else if(type==='program'){items=(g.software&&g.software.programs)||[];title='Program for slot '+(slot+1);bdr='var(--a3)';}
   else if(type==='gadget'){items=(g.software&&g.software.gadgets)||[];title='Gadget for slot '+(slot+1);bdr='var(--a2)';}
+  else if(type==='software'){items=[...(((g.software&&g.software.programs)||[]).map(p=>({...p,_kind:'program'}))),...(((g.software&&g.software.gadgets)||[]).map(gd=>({...gd,_kind:'gadget'})))];title='Software / Gadget for slot '+(slot+1);bdr='var(--a3)';}
   else if(type==='wpn_option'){
     items=(g.options||[]).filter(o=>o.wpn_ranged==='1'||o.wpn_melee==='1');
     title='Weapon Option (slot '+(slot+1)+')';bdr='var(--a2)';
@@ -5246,6 +5255,7 @@ function ccRenderPicker(){
     }
     else if(type==='program')h+='<div style="font-size:10.5px;color:#888;">'+esc(x.type||'')+(x.cpu?' | CPU '+x.cpu:'')+(x.memory?' | Mem '+x.memory:'')+'</div>';
     else if(type==='gadget')h+='<div style="font-size:10.5px;color:#666;margin-top:2px;">'+esc(x.desc||x.effect||'')+'</div>';
+    else if(type==='software'){const _nan=(x.nanite!=null?x.nanite:(x.nanites!=null?x.nanites:null));h+='<div style="font-size:10.5px;color:#888;">'+(x._kind==='gadget'?'<span style="color:var(--a2);">Gadget</span>':esc(x.type||'Program'))+(x.cpu?' | CPU '+esc(x.cpu):'')+((x.memory!=null||x.mem!=null)?' | Mem '+esc(x.memory!=null?x.memory:x.mem):'')+(_nan!=null?' | Nanite '+esc(_nan):'')+'</div>';const _d=x.desc||x.effect||x.active||'';if(_d)h+='<div style="font-size:10.5px;color:#666;margin-top:2px;">'+esc(_d.substring(0,100))+(_d.length>100?'…':'')+'</div>';}
     else if(type==='wpn_option'||type==='armor_option'||type==='dc_option')h+='<div style="font-size:10.5px;color:#888;">×'+esc(x.cost||'1')+'cost · '+esc(x.availability||'')+'</div><div style="font-size:10.5px;color:#666;margin-top:2px;">'+esc(x.desc||'')+'</div>';
     else if(type==='background'){
       if(x.traits&&x.traits[0])h+='<div style="font-size:10.5px;color:var(--gr);line-height:1.4;margin-bottom:2px;">✓ '+esc(x.traits[0])+'</div>';
@@ -5963,6 +5973,152 @@ function ccRenderTalents(){
   return h;
 }
 
+/* ── CC gear display helpers (Milestone 21.0) ─────────────────────────────────
+   Picked catalogue items render as STATIC read-only cards; a ✎ Modify button
+   flips a slot to `custom:true` and shows the editable form. Power/legality/def
+   show as named tiers (never hidden numbers). Ammo weapons get a magazine row. */
+function ccLegCls(l){l=(l||'').toLowerCase();if(l.indexOf('illegal')>=0)return 'tr';if(l.indexOf('restrict')>=0)return 'ty';if(l.indexOf('classif')>=0)return 'tp';return 'tw';}
+const CC_PWR_CLS={'Low':'tg','Medium':'to','High':'ty','Extreme':'tr','EXTREME':'tr','LOC':'tp','LOC+1':'tp'};
+const CC_DEF_CLS={None:'tgr',Low:'tg',Medium:'to',High:'ty',Extreme:'tr'};
+// Weapon base_data.ammo is "count / cat" (e.g. "3 / HM"); cat maps to g.ammo_types[].cat.
+function ccWpnAmmoInfo(w){
+  const raw=(w&&w.base_data&&w.base_data.ammo)||'';
+  const m=/^\s*(\d+)\s*\/\s*(\S+)/.exec(String(raw));
+  if(!m)return null;
+  const cat=m[2];
+  const mag=(g.ammo_types||[]).find(a=>String(a.cat).toUpperCase()===cat.toUpperCase())||null;
+  return {cat:cat,per:+m[1]||0,mag:mag};
+}
+function ccMagCost(w){const info=ccWpnAmmoInfo(w);if(!info||!info.mag)return 0;return Math.max(0,+(w.magazines)||0)*(parseFloat(info.mag.cost)||0);}
+function ccMagAdj(i,d){const w=ccState.weapons[i];if(!w)return;w.magazines=Math.max(0,(+(w.magazines)||0)+d);render();}
+function ccMagRow(w,i){
+  const info=ccWpnAmmoInfo(w);if(!info)return '';
+  let h='<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:11px;margin:5px 0;padding:5px 7px;background:rgba(255,107,53,.06);border:1px solid rgba(255,107,53,.18);border-radius:3px;">';
+  h+='<span style="color:#777;font-family:\'Chakra Petch\',sans-serif;">AMMO</span>';
+  h+='<span style="color:var(--tx);">'+info.per+' rounds / magazine</span>';
+  if(info.mag){
+    h+='<span style="color:#999;">'+esc(info.mag.name)+' <span style="color:#555;">('+esc(info.mag.cat)+' · '+fmt(info.mag.cost)+' Cr ea)</span></span>';
+    const spares=+(w.magazines)||0;
+    h+='<span style="margin-left:auto;display:flex;align-items:center;gap:5px;">';
+    h+='<span style="color:#777;">Spare mags</span>';
+    h+='<button onclick="ccMagAdj('+i+',-1)" style="background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.35);color:var(--a2);width:20px;height:20px;border-radius:3px;cursor:pointer;font-size:12px;line-height:1;">−</button>';
+    h+='<span style="min-width:16px;text-align:center;color:var(--a2);font-family:\'JetBrains Mono\',monospace;">'+spares+'</span>';
+    h+='<button onclick="ccMagAdj('+i+',1)" style="background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.35);color:var(--a2);width:20px;height:20px;border-radius:3px;cursor:pointer;font-size:12px;line-height:1;">+</button>';
+    if(spares>0)h+='<span style="color:var(--gr);font-family:\'JetBrains Mono\',monospace;">+'+fmt(spares*(parseFloat(info.mag.cost)||0))+' Cr</span>';
+    h+='</span>';
+  } else {
+    h+='<span style="color:#666;">'+esc(info.cat)+' — no standard magazine</span>';
+  }
+  h+='</div>';
+  return h;
+}
+function ccWpnROBody(w,i){
+  const ro=(l,v)=>'<span><span style="color:#666;">'+l+'</span> <span style="color:var(--tx);">'+v+'</span></span>';
+  const chip=(l,v,c)=>'<span><span style="color:#666;">'+l+'</span> <span class="tag '+c+'" style="font-size:10px;">'+esc(v)+'</span></span>';
+  let h='<div style="font-size:12px;font-weight:bold;color:var(--tx);margin-bottom:4px;">'+esc(w.name||'')+'</div>';
+  h+='<div style="display:flex;flex-wrap:wrap;gap:5px 14px;font-size:11px;margin-bottom:4px;">';
+  h+=ro('Skill',esc(w.skill||'—'))+ro('Exp.',esc(String(+(w.expertise)||0)))+ro('Damage',esc(w.dmg||'—'))+chip('Power',w.power||'—',CC_PWR_CLS[w.power]||'tgr')+ro('Type',esc(w.dmgtype||'—'))+chip('Legality',w.legality||'—',ccLegCls(w.legality));
+  h+='</div>';
+  h+='<div style="display:flex;flex-wrap:wrap;gap:5px 14px;font-size:11px;color:#bbb;margin-bottom:2px;">';
+  h+=ro('Close',esc(w.close_range||'—'))+ro('Med',esc(w.medium_range||'—'))+ro('Long',esc(w.long_range||'—'))+ro('RoF',esc(w.rof||'—'))+ro('Reload',esc(w.reload||'—'));
+  h+='</div>';
+  h+=ccMagRow(w,i);
+  if(w.special)h+='<div style="margin:4px 0;display:flex;flex-wrap:wrap;gap:3px;">'+bst(w.special)+'</div>';
+  return h;
+}
+function ccWpnEdBody(w,i,wBase,whi){
+  const lbl=t=>'<div style="font-size:10px;color:#666;margin-bottom:1px;">'+t+'</div>';
+  let h='<div style="display:grid;grid-template-columns:2fr 1.2fr 46px;gap:4px;margin-bottom:3px;">';
+  h+='<div>'+lbl('Name')+'<input type="text" value="'+esc(w.name||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].name=this.value;"></div>';
+  h+='<div>'+lbl('Skill')+'<input type="text" value="'+esc(w.skill||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].skill=this.value;"></div>';
+  h+='<div>'+lbl('Exp.')+'<input type="number" value="'+(+(w.expertise)||0)+'" style="'+CC_INP_SM+whi(w.expertise,wBase&&wBase.expertise)+'" oninput="ccState.weapons['+i+'].expertise=+this.value||0;"></div>';
+  h+='</div>';
+  h+='<div style="display:grid;grid-template-columns:1.2fr 92px 1fr 1fr;gap:4px;margin-bottom:3px;">';
+  h+='<div>'+lbl('Damage')+'<input type="text" value="'+esc(w.dmg||'')+'" style="'+CC_INP_SM+whi(w.dmg,wBase&&wBase.damage)+'" oninput="ccState.weapons['+i+'].dmg=this.value;"></div>';
+  h+='<div>'+lbl('Power')+'<select style="'+CC_SEL+'" onchange="ccState.weapons['+i+'].power=this.value;">';
+  ['','None','Low','Medium','High','Extreme'].forEach(o=>{h+='<option value="'+o+'"'+((w.power||'')===o?' selected':'')+'>'+(o||'—')+'</option>';});
+  h+='</select></div>';
+  h+='<div>'+lbl('Type')+'<input type="text" value="'+esc(w.dmgtype||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].dmgtype=this.value;"></div>';
+  h+='<div>'+lbl('Legality')+'<input type="text" value="'+esc(w.legality||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].legality=this.value;"></div>';
+  h+='</div>';
+  h+='<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-bottom:3px;">';
+  [['close_range','Close',wBase&&wBase.range_short],['medium_range','Med',wBase&&wBase.range_med],['long_range','Long',wBase&&wBase.range_long],['rof','RoF',null],['reload','Reload',wBase&&wBase.reload]].forEach(([k,l_,base])=>{
+    h+='<div>'+lbl(l_)+'<input type="text" value="'+esc(w[k]||'')+'" style="'+CC_INP_SM+(base!=null?whi(w[k],base):'')+'" oninput="ccState.weapons['+i+'].'+k+'=this.value;"></div>';
+  });
+  h+='</div>';
+  h+='<div style="margin-bottom:3px;">'+lbl('Special')+'<input type="text" value="'+esc(w.special||'')+'" style="'+CC_INP_SM+whi(w.special,wBase&&wBase.special)+'" oninput="ccState.weapons['+i+'].special=this.value;"></div>';
+  h+=ccMagRow(w,i);
+  if(w.special)h+='<div style="margin-bottom:4px;display:flex;flex-wrap:wrap;gap:3px;">'+bst(w.special)+'</div>';
+  return h;
+}
+function ccArmROBody(ar,i){
+  const ro=(l,v)=>'<span><span style="color:#666;">'+l+'</span> <span style="color:var(--tx);">'+v+'</span></span>';
+  const chip=(l,v,c)=>'<span><span style="color:#666;">'+l+'</span> <span class="tag '+c+'" style="font-size:10px;">'+esc(v)+'</span></span>';
+  let h='<div style="font-size:12px;font-weight:bold;color:var(--tx);margin-bottom:4px;">'+esc(ar.name||'')+(ar.type?' <span style="font-size:10px;color:#777;font-weight:normal;">'+esc(ar.type)+'</span>':'')+'</div>';
+  h+='<div style="display:flex;flex-wrap:wrap;gap:5px 14px;font-size:11px;margin-bottom:4px;">';
+  [['Physical','def_phys'],['Energy','def_energy'],['Tech','def_tech'],['Spirit','def_spirit']].forEach(([l,k])=>{h+=chip(l,ar[k]||'None',CC_DEF_CLS[ar[k]]||'tgr');});
+  h+=ro('Soak',esc(ar.soak_expr||'—'));
+  if(+(ar.charges)||0)h+=ro('Charges',esc(String(ar.charges)));
+  h+='</div>';
+  if(ar.special)h+='<div style="margin:4px 0;display:flex;flex-wrap:wrap;gap:3px;">'+bst(ar.special)+'</div>';
+  return h;
+}
+function ccArmEdBody(ar,i,arBase,ahi){
+  const lbl=t=>'<div style="font-size:10px;color:#666;margin-bottom:1px;">'+t+'</div>';
+  const DEF=['None','Low','Medium','High','Extreme'];
+  let h='<div style="display:grid;grid-template-columns:2fr 1fr;gap:4px;margin-bottom:4px;">';
+  h+='<div>'+lbl('Name')+'<input type="text" value="'+esc(ar.name||'')+'" style="'+CC_INP_SM+'" oninput="ccState.armor['+i+'].name=this.value;"></div>';
+  h+='<div>'+lbl('Type')+'<input type="text" value="'+esc(ar.type||'')+'" style="'+CC_INP_SM+'" oninput="ccState.armor['+i+'].type=this.value;"></div>';
+  h+='</div>';
+  h+='<div style="display:grid;grid-template-columns:repeat(4,1fr) 1fr 1fr 1fr;gap:3px;margin-bottom:3px;">';
+  ['phys','energy','tech','spirit'].forEach(dk=>{
+    h+='<div>'+lbl({phys:'Physical',energy:'Energy',tech:'Tech',spirit:'Spirit'}[dk])+'<select style="'+CC_SEL+'" onchange="ccState.armor['+i+'].def_'+dk+'=this.value;">';
+    DEF.forEach(o=>{h+='<option value="'+o+'"'+(ar['def_'+dk]===o?' selected':'')+'>'+o+'</option>';});
+    h+='</select></div>';
+  });
+  h+='<div>'+lbl('Soak')+'<input type="text" placeholder="3D" value="'+esc(ar.soak_expr||'')+'" style="'+CC_INP_SM+ahi(ar.soak_expr,arBase&&arBase.soak)+'" oninput="ccState.armor['+i+'].soak_expr=this.value;"></div>';
+  h+='<div>'+lbl('Charges')+'<input type="number" value="'+(+(ar.charges)||0)+'" style="'+CC_INP_SM+'" oninput="ccState.armor['+i+'].charges=+this.value||0;"></div>';
+  h+='<div>'+lbl('Special')+'<input type="text" value="'+esc(ar.special||'')+'" style="'+CC_INP_SM+ahi(ar.special,arBase&&arBase.special)+'" oninput="ccState.armor['+i+'].special=this.value;"></div>';
+  h+='</div>';
+  if(ar.special)h+='<div style="margin-bottom:4px;display:flex;flex-wrap:wrap;gap:3px;">'+bst(ar.special)+'</div>';
+  return h;
+}
+function ccDcROBody(d,i){
+  const ro=(l,v)=>'<span><span style="color:#666;">'+l+'</span> <span style="color:var(--tx);">'+v+'</span></span>';
+  const chip=(l,v,c)=>'<span><span style="color:#666;">'+l+'</span> <span class="tag '+c+'" style="font-size:10px;">'+esc(v)+'</span></span>';
+  let h='<div style="font-size:12px;font-weight:bold;color:var(--tx);margin-bottom:4px;">'+esc(d.name||'')+'</div>';
+  h+='<div style="display:flex;flex-wrap:wrap;gap:5px 14px;font-size:11px;margin-bottom:4px;">';
+  h+=ro('CPU',esc(String(+(d.cpu)||0)))+ro('Mem',esc(String(+(d.mem)||0)))+ro('Nanite',esc(String(+(d.nanite)||0)))+ro('System',esc(String(+(d.system)||0)))+ro('Soak',esc(d.def_dmg||'—'))+ro('Exp.',esc(String(+(d.expertise)||0)));
+  h+='</div>';
+  h+='<div style="display:flex;flex-wrap:wrap;gap:5px 14px;font-size:11px;margin-bottom:2px;">';
+  [['Physical','def_phys'],['Energy','def_energy'],['Tech','def_tech'],['Spirit','def_spirit']].forEach(([l,k])=>{h+=chip(l,d[k]||'None',CC_DEF_CLS[d[k]]||'tgr');});
+  h+='</div>';
+  if(d.special)h+='<div style="margin:4px 0;display:flex;flex-wrap:wrap;gap:3px;">'+bst(d.special)+'</div>';
+  return h;
+}
+function ccDcEdBody(d,i){
+  const DEF=['None','Low','Medium','High','Extreme'];
+  let h='<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:4px;margin-bottom:4px;">';
+  h+='<div><div style="font-size:10px;color:#666;">NAME</div><input type="text" placeholder="Datacom name" value="'+esc(d.name||'')+'" style="'+CC_INP_SM+'" oninput="ccState.datacoms['+i+'].name=this.value;"></div>';
+  [['cpu','CPU'],['mem','MEM'],['nanite','NANITE'],['system','SYSTEM']].forEach(([k,l])=>{
+    h+='<div><div style="font-size:10px;color:#666;">'+l+'</div><input type="number" value="'+(+(d[k])||0)+'" style="'+CC_INP_SM+'" oninput="ccState.datacoms['+i+'].'+k+'=+this.value||0;"></div>';
+  });
+  h+='</div>';
+  h+='<div style="display:grid;grid-template-columns:repeat(4,1fr) 1fr 1fr;gap:3px;">';
+  ['phys','energy','tech','spirit'].forEach(dk=>{
+    h+='<div><div style="font-size:10px;color:#666;">'+{phys:'Physical',energy:'Energy',tech:'Tech',spirit:'Spirit'}[dk]+'</div>';
+    h+='<select style="'+CC_SEL+'" onchange="ccState.datacoms['+i+'].def_'+dk+'=this.value;">';
+    DEF.forEach(o=>{h+='<option value="'+o+'"'+(d['def_'+dk]===o?' selected':'')+'>'+o+'</option>';});
+    h+='</select></div>';
+  });
+  h+='<div><div style="font-size:10px;color:#666;">Soak</div><input type="text" placeholder="3D+0" value="'+esc(d.def_dmg||'')+'" style="'+CC_INP_SM+'" oninput="ccState.datacoms['+i+'].def_dmg=this.value;"></div>';
+  h+='<div><div style="font-size:10px;color:#666;">Expertise</div><input type="number" value="'+(+(d.expertise)||0)+'" style="'+CC_INP_SM+'" oninput="ccState.datacoms['+i+'].expertise=+this.value||0;"></div>';
+  h+='</div>';
+  h+='<input type="text" placeholder="Special..." value="'+esc(d.special||'')+'" style="'+CC_INP_SM+'margin-top:3px;margin-bottom:3px;" oninput="ccState.datacoms['+i+'].special=this.value;">';
+  if(d.special){const bstH=bst(d.special);if(bstH)h+='<div style="margin-bottom:5px;">'+bstH+'</div>';}
+  return h;
+}
+
 function ccRenderCombat(){
   const st=ccState;
   const DEF=['None','Low','Medium','High','Extreme'];
@@ -5975,40 +6131,19 @@ function ccRenderCombat(){
   st.weapons.forEach((w,i)=>{
     const wBase=w.base_data&&w.mfr&&w.mfr!=='Generic'?(applyWpnMfr({...w.base_data},'Generic')||w.base_data):null;
     const whi=(cur,base)=>wBase&&String(cur||'')!==String(base||'')?'color:var(--a2);':'';
+    const picked=!!(w.name&&w.base_data&&!w.custom);
     h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.07);border-radius:4px;padding:7px;margin-bottom:7px;">';
     h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">';
     h+='<span style="font-size:10.5px;color:#666;">Weapon '+(i+1)+'</span>';
     h+='<div style="display:flex;gap:4px;align-items:center;">';
     if(w.mfr&&w.mfr!=='Generic')h+='<span style="font-size:10.5px;color:var(--a2);font-family:\'JetBrains Mono\',monospace;">'+esc(w.mfr)+'</span>';
     h+='<button onclick="ccState.picker={type:\'weapon\',slot:'+i+',mfr:ccState.weapons['+i+'].mfr||\'Generic\'};ccState.pickerSearch=\'\';render();" style="background:rgba(255,107,53,.1);border:1px solid var(--a2);color:var(--a2);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10.5px;">Browse</button>';
+    if(picked)h+='<button title="Modify — turn into an editable custom entry" onclick="ccState.weapons['+i+'].custom=true;render();" style="background:rgba(255,214,10,.1);border:1px solid var(--ye);color:var(--ye);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10.5px;">✎ Modify</button>';
     h+='<button title="Clear slot" onclick="ccClearSlot(\'weapons\','+i+');" style="background:none;border:1px solid #333;color:#555;padding:1px 5px;border-radius:3px;cursor:pointer;font-size:10.5px;">✕</button>';
     const wCost=ccCalcWeaponCost(w);
     if(wCost>0)h+='<span style="font-size:10.5px;color:var(--gr);font-family:\'JetBrains Mono\',monospace;">'+fmt(wCost)+' Cr</span>';
     h+='</div></div>';
-    // Row 1: Name | Skill | Damage | Type
-    h+='<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4px;margin-bottom:3px;">';
-    h+='<div>'+lbl('Name')+'<input type="text" value="'+esc(w.name||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].name=this.value;"></div>';
-    h+='<div>'+lbl('Skill')+'<input type="text" value="'+esc(w.skill||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].skill=this.value;"></div>';
-    h+='<div>'+lbl('Damage')+'<input type="text" value="'+esc(w.dmg||'')+'" style="'+CC_INP_SM+whi(w.dmg,wBase&&wBase.damage)+'" oninput="ccState.weapons['+i+'].dmg=this.value;"></div>';
-    h+='<div>'+lbl('Type')+'<input type="text" value="'+esc(w.dmgtype||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].dmgtype=this.value;"></div>';
-    h+='</div>';
-    // Row 2: Close | Med | Long | RoF | Special | Ammo | Expertise
-    h+='<div style="display:grid;grid-template-columns:55px 55px 60px 40px 2fr 48px 48px;gap:3px;margin-bottom:3px;">';
-    [['close_range','Close',wBase&&wBase.range_short],['medium_range','Med',wBase&&wBase.range_med],['long_range','Long',wBase&&wBase.range_long]].forEach(([k,lbl_,base])=>{
-      h+='<div>'+lbl(lbl_)+'<input type="text" value="'+esc(w[k]||'')+'" style="'+CC_INP_SM+whi(w[k],base)+'" oninput="ccState.weapons['+i+'].'+k+'=this.value;"></div>';
-    });
-    h+='<div>'+lbl('RoF')+'<input type="text" value="'+esc(w.rof||'')+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].rof=this.value;"></div>';
-    h+='<div>'+lbl('Special')+'<input type="text" value="'+esc(w.special||'')+'" style="'+CC_INP_SM+whi(w.special,wBase&&wBase.special)+'" oninput="ccState.weapons['+i+'].special=this.value;"></div>';
-    h+='<div>'+lbl('Ammo')+'<input type="number" value="'+(+(w.ammo)||0)+'" style="'+CC_INP_SM+'" oninput="ccState.weapons['+i+'].ammo=+this.value||0;"></div>';
-    h+='<div>'+lbl('Exp.')+'<input type="number" value="'+(+(w.expertise)||0)+'" style="'+CC_INP_SM+whi(w.expertise,wBase&&wBase.expertise)+'" oninput="ccState.weapons['+i+'].expertise=+this.value||0;"></div>';
-    h+='</div>';
-    // Row 3: Power | Reload
-    h+='<div style="display:grid;grid-template-columns:70px 1fr;gap:3px;margin-bottom:3px;">';
-    h+='<div>'+lbl('Power')+'<input type="number" value="'+(+(w.power)||0)+'" style="'+CC_INP_SM+whi(w.power,wBase&&wBase.power_num)+'" oninput="ccState.weapons['+i+'].power=+this.value||0;"></div>';
-    h+='<div>'+lbl('Reload')+'<input type="text" value="'+esc(w.reload||'')+'" style="'+CC_INP_SM+whi(w.reload,wBase&&wBase.reload)+'" oninput="ccState.weapons['+i+'].reload=this.value;"></div>';
-    h+='</div>';
-    // Hoverable special tags
-    if(w.special)h+='<div style="margin-bottom:4px;display:flex;flex-wrap:wrap;gap:3px;">'+bst(w.special)+'</div>';
+    h+= picked ? ccWpnROBody(w,i) : ccWpnEdBody(w,i,wBase,whi);
     // Options row
     const wSpec=w.special||'';
     const wHasOptPlus=/\bOPT\+/i.test(wSpec),wHasOpt=/\bOPT\b/i.test(wSpec);
@@ -6030,38 +6165,19 @@ function ccRenderCombat(){
   st.armor.forEach((ar,i)=>{
     const arBase=ar.base_data&&ar.mfr&&ar.mfr!=='Generic'?(applyArmorMfr({...ar.base_data},'Generic')||ar.base_data):null;
     const ahi=(cur,base)=>arBase&&String(cur||'')!==String(base||'')?'color:var(--a2);':'';
-    const defBase=k=>arBase?capDef(arBase['def_'+k]||'None'):'';
+    const picked=!!(ar.name&&ar.base_data&&!ar.custom);
     h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.07);border-radius:4px;padding:7px;margin-bottom:7px;">';
     h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">';
     h+='<span style="font-size:10.5px;color:#666;">Defense '+(i+1)+'</span>';
     h+='<div style="display:flex;gap:4px;align-items:center;">';
     if(ar.mfr&&ar.mfr!=='Generic')h+='<span style="font-size:10.5px;color:var(--gr);font-family:\'JetBrains Mono\',monospace;">'+esc(ar.mfr)+'</span>';
     h+='<button onclick="ccState.picker={type:\'armor\',slot:'+i+',mfr:ccState.armor['+i+'].mfr||\'Generic\'};ccState.pickerSearch=\'\';render();" style="background:rgba(0,200,100,.1);border:1px solid var(--gr);color:var(--gr);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10.5px;">Browse</button>';
+    if(picked)h+='<button title="Modify — turn into an editable custom entry" onclick="ccState.armor['+i+'].custom=true;render();" style="background:rgba(255,214,10,.1);border:1px solid var(--ye);color:var(--ye);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10.5px;">✎ Modify</button>';
     h+='<button title="Clear slot" onclick="ccClearSlot(\'armor\','+i+');" style="background:none;border:1px solid #333;color:#555;padding:1px 5px;border-radius:3px;cursor:pointer;font-size:10.5px;">✕</button>';
     const arCost=ccCalcArmorCost(ar);
     if(arCost>0)h+='<span style="font-size:10.5px;color:var(--gr);font-family:\'JetBrains Mono\',monospace;">'+fmt(arCost)+' Cr</span>';
     h+='</div></div>';
-    h+='<div style="display:grid;grid-template-columns:2fr 1fr;gap:4px;margin-bottom:4px;">';
-    h+='<div>'+lbl('Name')+'<input type="text" value="'+esc(ar.name||'')+'" style="'+CC_INP_SM+'" oninput="ccState.armor['+i+'].name=this.value;"></div>';
-    h+='<div>'+lbl('Type')+'<input type="text" value="'+esc(ar.type||'')+'" style="'+CC_INP_SM+'" oninput="ccState.armor['+i+'].type=this.value;"></div>';
-    h+='</div>';
-    h+='<div style="display:grid;grid-template-columns:repeat(4,1fr) 1fr 1fr 1fr;gap:3px;margin-bottom:3px;">';
-    ['phys','energy','tech','spirit'].forEach(dk=>{
-      const defChg=arBase&&ar['def_'+dk]!==defBase('def_'+dk.replace('phys','physical').replace('spirit','spiritual'));
-      // map state key back to data key
-      const dataKey=dk==='phys'?'physical':dk==='spirit'?'spiritual':dk;
-      const baseDefVal=defBase('def_'+dataKey);
-      const changed=arBase&&ar['def_'+dk]!==baseDefVal;
-      h+='<div>'+lbl({phys:'Physical',energy:'Energy',tech:'Tech',spirit:'Spirit'}[dk])+'<select style="'+CC_SEL+(changed?'color:var(--a2);border-color:rgba(255,107,53,.5);':'')+'" onchange="ccState.armor['+i+'].def_'+dk+'=this.value;">';
-      DEF.forEach(o=>{h+='<option value="'+o+'"'+(ar['def_'+dk]===o?' selected':'')+'>'+o+'</option>';});
-      h+='</select></div>';
-    });
-    const soakChg=arBase&&ar.soak_expr!==(arBase.soak||'');
-    h+='<div>'+lbl('Soak')+'<input type="text" placeholder="3D" value="'+esc(ar.soak_expr||'')+'" style="'+CC_INP_SM+ahi(ar.soak_expr,arBase&&arBase.soak)+'" oninput="ccState.armor['+i+'].soak_expr=this.value;"></div>';
-    h+='<div>'+lbl('Charges')+'<input type="number" value="'+(+(ar.charges)||0)+'" style="'+CC_INP_SM+'" oninput="ccState.armor['+i+'].charges=+this.value||0;"></div>';
-    h+='<div>'+lbl('Special')+'<input type="text" value="'+esc(ar.special||'')+'" style="'+CC_INP_SM+ahi(ar.special,arBase&&arBase.special)+'" oninput="ccState.armor['+i+'].special=this.value;"></div>';
-    h+='</div>';
-    if(ar.special)h+='<div style="margin-bottom:4px;display:flex;flex-wrap:wrap;gap:3px;">'+bst(ar.special)+'</div>';
+    h+= picked ? ccArmROBody(ar,i) : ccArmEdBody(ar,i,arBase,ahi);
     // Options row
     const arSpec=ar.special||'';
     const arHasOptPlus=/\bOPT\+/i.test(arSpec),arHasOpt=/\bOPT\b/i.test(arSpec);
@@ -6078,9 +6194,8 @@ function ccRenderCombat(){
     }
     h+='</div>';
   });
-  h+='<div style="display:flex;gap:10px;align-items:center;margin-top:8px;"><span style="font-size:11px;color:#888;">Base Soak:</span>';
-  h+='<input type="text" placeholder="expr e.g. 3D" value="'+esc(st.armorsoak||'')+'" style="width:90px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.2);color:var(--tx);padding:3px 5px;font-size:11px;" oninput="ccState.armorsoak=this.value;">';
-  h+='<input type="number" placeholder="+bonus" value="'+(+(st.armorsoak_bonus)||0)+'" style="width:60px;background:rgba(0,0,0,.4);border:1px solid rgba(0,200,255,.2);color:var(--tx);padding:3px 5px;font-size:11px;" oninput="ccState.armorsoak_bonus=+this.value||0;"></div>';
+  // (Base Soak line removed — base soak is ENDURANCE/WILLPOWER by damage pool, not a gear field.
+  //  armorsoak/armorsoak_bonus state + export fields retained for Roll20 sheet compatibility.)
   // T4-C: Background combat/vulnerability notes
   if(st.background){
     const bgObj=(g.backgrounds||[]).find(b=>b.name===st.background);
@@ -6109,37 +6224,19 @@ function ccRenderTech(){
   // Datacoms
   h+=ccSecHead('DATACOMS — 3 slots');
   st.datacoms.forEach((d,i)=>{
+    const picked=!!(d.name&&d.base_data&&!d.custom);
     h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(0,200,255,.1);border-radius:4px;padding:7px;margin-bottom:7px;">';
     h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">';
     h+='<span style="font-size:10.5px;color:#666;">Datacom '+(i+1)+'</span>';
     h+='<div style="display:flex;gap:4px;align-items:center;">';
     if(d.mfr&&d.mfr!=='Generic')h+='<span style="font-size:10.5px;color:var(--a);font-family:\'JetBrains Mono\',monospace;">'+esc(d.mfr)+'</span>';
     h+='<button onclick="ccState.picker={type:\'datacom\',slot:'+i+',mfr:ccState.datacoms['+i+'].mfr||\'Generic\'};ccState.pickerSearch=\'\';render();" style="background:rgba(0,200,255,.1);border:1px solid var(--a);color:var(--a);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10.5px;">Browse</button>';
+    if(picked)h+='<button title="Modify — turn into an editable custom entry" onclick="ccState.datacoms['+i+'].custom=true;render();" style="background:rgba(255,214,10,.1);border:1px solid var(--ye);color:var(--ye);padding:1px 7px;border-radius:3px;cursor:pointer;font-size:10.5px;">✎ Modify</button>';
     h+='<button title="Clear slot" onclick="ccClearSlot(\'datacoms\','+i+');" style="background:none;border:1px solid #333;color:#555;padding:1px 5px;border-radius:3px;cursor:pointer;font-size:10.5px;">✕</button>';
     const dcCost=ccCalcDatacomCost(d);
     if(dcCost>0)h+='<span style="font-size:10.5px;color:var(--gr);font-family:\'JetBrains Mono\',monospace;">'+fmt(dcCost)+' Cr</span>';
     h+='</div></div>';
-    h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:4px;margin-bottom:4px;">';
-    h+='<div><div style="font-size:10px;color:#666;">NAME</div><input type="text" placeholder="Datacom name" value="'+esc(d.name||'')+'" style="'+CC_INP_SM+'" oninput="ccState.datacoms['+i+'].name=this.value;"></div>';
-    ['cpu','mem','nanite'].forEach(k=>{
-      h+='<div><div style="font-size:10px;color:#666;">'+k.toUpperCase()+'</div><input type="number" value="'+(+(d[k])||0)+'" style="'+CC_INP_SM+'" oninput="ccState.datacoms['+i+'].'+k+'=+this.value||0;"></div>';
-    });
-    h+='</div>';
-    h+='<div style="display:grid;grid-template-columns:repeat(4,1fr) 1fr repeat(3,1fr) 1fr;gap:3px;">';
-    ['phys','energy','tech','spirit'].forEach(dk=>{
-      h+='<div><div style="font-size:10px;color:#666;">'+dk.charAt(0).toUpperCase()+dk.slice(1)+'</div>';
-      h+='<select style="'+CC_SEL+'" onchange="ccState.datacoms['+i+'].def_'+dk+'=this.value;">';
-      DEF.forEach(o=>{h+='<option value="'+o+'"'+(d['def_'+dk]===o?' selected':'')+'>'+o+'</option>';});
-      h+='</select></div>';
-    });
-    h+='<div><div style="font-size:10px;color:#666;">Def Dmg</div><input type="text" placeholder="1D" value="'+esc(d.def_dmg||'')+'" style="'+CC_INP_SM+'" oninput="ccState.datacoms['+i+'].def_dmg=this.value;"></div>';
-    ['int_ext','int_int','int_main'].forEach(k=>{
-      h+='<div><div style="font-size:10px;color:#666;">'+(k==='int_ext'?'Ext':k==='int_int'?'Int':'Main')+'</div><input type="number" value="'+(+(d[k])||0)+'" style="'+CC_INP_SM+'" oninput="ccState.datacoms['+i+'].'+k+'=+this.value||0;"></div>';
-    });
-    h+='<div><div style="font-size:10px;color:#666;">Expertise</div><input type="number" value="'+(+(d.expertise)||0)+'" style="'+CC_INP_SM+'" oninput="ccState.datacoms['+i+'].expertise=+this.value||0;"></div>';
-    h+='</div>';
-    h+='<input type="text" placeholder="Special..." value="'+esc(d.special||'')+'" style="'+CC_INP_SM+'margin-top:3px;margin-bottom:3px;" oninput="ccState.datacoms['+i+'].special=this.value;">';
-    if(d.special){const bstH=bst(d.special);if(bstH)h+='<div style="margin-bottom:5px;">'+bstH+'</div>';else h+='<div style="margin-bottom:5px;"></div>';}else{h+='<div style="margin-bottom:5px;"></div>';}
+    h+= picked ? ccDcROBody(d,i) : ccDcEdBody(d,i);
     // Options row (gated on OPT/OPT+ in special)
     const dcSpec=d.special||'';
     const dcHasOptPlus=/\bOPT\+/i.test(dcSpec),dcHasOpt=/\bOPT\b/i.test(dcSpec);
@@ -6156,38 +6253,23 @@ function ccRenderTech(){
     }
     h+='</div>';
   });
-  // Programs
-  h+=ccSecHead('SOFTWARE PROGRAMS — 10 slots','var(--a3)');
+  // Software & Gadgets (merged — a gadget is a nanite-costed program entry)
+  h+=ccSecHead('SOFTWARE & GADGETS — 10 slots <span style="font-size:10px;color:#555;font-family:sans-serif;">(programs · routines · gadgets — nanite covers gadget cost)</span>','var(--a3)');
   h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">';
   st.programs.forEach((p,i)=>{
     h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(163,85,247,.1);border-radius:4px;padding:6px;">';
-    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><span style="font-size:10.5px;color:#555;">Prog '+(i+1)+'</span>';
-    h+='<div style="display:flex;gap:4px;align-items:center;"><button onclick="ccState.picker={type:\'program\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:rgba(163,85,247,.08);border:1px solid var(--a3);color:var(--a3);padding:1px 6px;border-radius:3px;cursor:pointer;font-size:10px;">Browse</button>';
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><span style="font-size:10.5px;color:#555;">Slot '+(i+1)+'</span>';
+    h+='<div style="display:flex;gap:4px;align-items:center;"><button onclick="ccState.picker={type:\'software\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:rgba(163,85,247,.08);border:1px solid var(--a3);color:var(--a3);padding:1px 6px;border-radius:3px;cursor:pointer;font-size:10px;">Browse</button>';
     h+='<button title="Clear slot" onclick="ccClearSlot(\'programs\','+i+');" style="background:none;border:1px solid #333;color:#555;padding:1px 5px;border-radius:3px;cursor:pointer;font-size:10px;">✕</button></div></div>';
-    h+='<input type="text" placeholder="Program name" value="'+esc(p.name||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.2)')+'margin-bottom:3px;" oninput="ccState.programs['+i+'].name=this.value;">';
-    h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-bottom:3px;">';
+    h+='<input type="text" placeholder="Program / gadget name" value="'+esc(p.name||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.2)')+'margin-bottom:3px;" oninput="ccState.programs['+i+'].name=this.value;">';
+    h+='<div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:3px;margin-bottom:3px;">';
     h+='<div><div style="font-size:10px;color:#666;">TYPE</div><input type="text" placeholder="Type" value="'+esc(p.type||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.15)')+'margin-bottom:0;" oninput="ccState.programs['+i+'].type=this.value;"></div>';
-    h+='<div><div style="font-size:10px;color:#666;">CPU</div><input type="number" placeholder="CPU" value="'+(+(p.cpu)||0)+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.15)')+'margin-bottom:0;" oninput="ccState.programs['+i+'].cpu=+this.value||0;"></div>';
-    h+='<div><div style="font-size:10px;color:#666;">MEM</div><input type="number" placeholder="Mem" value="'+(+(p.mem)||0)+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.15)')+'margin-bottom:0;" oninput="ccState.programs['+i+'].mem=+this.value||0;"></div>';
+    [['cpu','CPU'],['mem','MEM'],['nanite','NANITE']].forEach(([k,lb])=>{
+      h+='<div><div style="font-size:10px;color:#666;">'+lb+'</div><input type="number" placeholder="'+lb+'" value="'+(+(p[k])||0)+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.15)')+'margin-bottom:0;" oninput="ccState.programs['+i+'].'+k+'=+this.value||0;"></div>';
+    });
     h+='</div>';
     h+='<input type="text" placeholder="Passive..." value="'+esc(p.passive||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.1)')+'margin-bottom:2px;" oninput="ccState.programs['+i+'].passive=this.value;">';
-    h+='<input type="text" placeholder="Active..." value="'+esc(p.active||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.1)')+'" oninput="ccState.programs['+i+'].active=this.value;">';
-    h+='</div>';
-  });
-  h+='</div>';
-  // Gadgets
-  h+=ccSecHead('GADGETS — 5 slots','var(--a2)');
-  h+='<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;">';
-  st.gadgets.forEach((gad,i)=>{
-    h+='<div style="background:rgba(0,0,0,.3);border:1px solid rgba(255,107,53,.1);border-radius:4px;padding:6px;">';
-    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">';
-    h+='<span style="font-size:10.5px;color:#555;">Gadget '+(i+1)+'</span>';
-    h+='<div style="display:flex;gap:4px;align-items:center;"><button onclick="ccState.picker={type:\'gadget\',slot:'+i+'};ccState.pickerSearch=\'\';render();" style="background:rgba(255,107,53,.08);border:1px solid rgba(255,107,53,.4);color:var(--a2);padding:0px 5px;border-radius:3px;cursor:pointer;font-size:10px;">Browse</button>';
-    h+='<button title="Clear slot" onclick="ccClearSlot(\'gadgets\','+i+');" style="background:none;border:1px solid #333;color:#555;padding:0 4px;border-radius:3px;cursor:pointer;font-size:10px;">✕</button></div>';
-    h+='</div>';
-    h+='<div><div style="font-size:10px;color:#666;">NAME</div><input type="text" placeholder="Name" value="'+esc(gad.name||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(255,107,53,.2)')+'margin-bottom:0;" oninput="ccState.gadgets['+i+'].name=this.value;"></div>';
-    h+='<div style="margin-top:3px;"><div style="font-size:10px;color:#666;">NANITE</div><input type="number" placeholder="Nanite" value="'+(+(gad.nanite)||0)+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(255,107,53,.15)')+'margin-bottom:0;" oninput="ccState.gadgets['+i+'].nanite=+this.value||0;"></div>';
-    h+='<input type="text" placeholder="Effect..." value="'+esc(gad.effect||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(255,107,53,.1)')+'" oninput="ccState.gadgets['+i+'].effect=this.value;">';
+    h+='<input type="text" placeholder="Active / effect..." value="'+esc(p.active||'')+'" style="'+CC_INP_SM.replace('rgba(0,200,255,.2)','rgba(163,85,247,.1)')+'" oninput="ccState.programs['+i+'].active=this.value;">';
     h+='</div>';
   });
   h+='</div>';
