@@ -1195,7 +1195,7 @@
       },
       {
        "key": "POWER (weapon)",
-       "text": "The attack's penetrating force, measured against your defence's rating for that damage type. Each point POWER sits ABOVE the rating cancels a point of SOAK - that damage gets through automatically; each point BELOW reduces the incoming damage by one."
+       "text": "The attack's penetrating force, measured against your defence's rating for that damage type. POWER does not add to or subtract from the numbers - it decides whether a hit wounds or only stuns. ABOVE the rating, whatever your SOAK stops still lands, as temporary (stun) damage instead of being negated. EQUAL to it, SOAK negates what it stops as normal. BELOW it, even the damage that gets past SOAK lands as temporary damage only. A stronger POWER means a target cannot cleanly shrug the hit off; a weaker one can bruise but not wound."
       },
       {
        "key": "YOUR DEFENSIVE LAYER",
@@ -1215,11 +1215,11 @@
       },
       {
        "key": "",
-       "text": "2) Compare POWER to your defence rating for that damage type. Each point of POWER above the rating cancels a point of SOAK (automatic damage); each point below reduces the damage."
+       "text": "2) Compare POWER to your defence rating for that damage type. ABOVE: the damage your SOAK stops still lands, but as temporary (stun) damage. EQUAL: SOAK negates what it stops, as normal. BELOW: the damage that gets through SOAK lands as temporary damage only."
       },
       {
        "key": "",
-       "text": "3) Roll SOAK + ENDURANCE (for HEALTH attacks) or SOAK + WILLPOWER (for MORALE attacks) and remove that many points from the remaining damage."
+       "text": "3) Roll SOAK + ENDURANCE (for HEALTH attacks) or SOAK + WILLPOWER (for MORALE attacks); each success stops one point of damage. Step 2's POWER comparison then decides whether the stopped damage is negated or lands as stun, and whether the damage that got through wounds or only stuns."
       },
       {
        "key": "",
@@ -1708,7 +1708,7 @@
       },
       {
        "key": "POWER",
-       "text": "The attack's penetrating force, measured against the target's defence rating for this weapon's damage type: each point above the rating cancels a point of SOAK, each point below softens the hit."
+       "text": "The attack's penetrating force, measured against the target's defence rating for this weapon's damage type: above the rating, the damage SOAK stops still lands as stun rather than being negated; below it, the damage that lands is stun only."
       },
       {
        "key": "DAMAGE TYPE",
@@ -3374,11 +3374,6 @@
    "desc": "Decrease total successes of a roll by 1 (min 0)"
   },
   {
-   "name": "DEFLECT",
-   "action": "",
-   "desc": "Deflect gets added to your DEFENSE (along cover and other modifiers) to counter POWER and determine how much damage penetrates or is negated by the armor. A higher value will reduce damage while a lower value will hinder your ability to SOAK damage properly."
-  },
-  {
    "name": "REGEN",
    "action": "",
    "desc": "When SOAK run out a forcefield is rendered innactive. To recharge a forcefield, you must spend the time under \"Regen\" not being shot at. When that condition is true your forcefield returns during the next maintenance phase."
@@ -3396,7 +3391,7 @@
   {
    "name": "POWER",
    "action": "",
-   "desc": "Power determines the relative strength of the weapon and is a direct counter to DEFENSE. Every point of power above DEFENSE will deny SOAK and under will reduce damage by the same amount."
+   "desc": "Power is the weapon's penetrating force, compared to the target's DEFENSE rating. It flips damage between wounding and stunning rather than changing the numbers: above DEFENSE, the damage SOAK would stop still lands as temporary (stun) damage instead of being negated; equal, SOAK works as normal; below, the damage that gets through lands as stun only."
   },
   {
    "name": "LIGHT ARMOR",

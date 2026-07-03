@@ -4521,7 +4521,7 @@ function ccMakeFreshState(){
     ...sk,
     talents:Array(3).fill(0).map(()=>({name:'',skill:'',category:'',xp_cost:0,effect:'',credited:false})),
     evolutions:Array(2).fill(0).map(()=>({name:'',type:'',tier:'',effect:'',credited:false})),
-    weapons:Array(6).fill(0).map(()=>({name:'',skill:'',dmg:'',dmgtype:'',power:'',power_num:0,legality:'',expertise:0,special:'',close_range:'',medium_range:'',long_range:'',rof:'',ammo:0,ammo_cat:'',magazines:0,currentammo:0,reload:'',mfr:'Generic',base_data:null,options:[],custom:false})),
+    weapons:Array(6).fill(0).map(()=>({name:'',skill:'',dmg:'',dmgtype:'',power:'',power_num:0,legality:'',expertise:0,special:'',close_range:'',medium_range:'',long_range:'',rof:'',ammo:0,ammo_cat:'',ammo_opts:[],magazines:0,currentammo:0,reload:'',mfr:'Generic',base_data:null,options:[],custom:false})),
     armor:Array(2).fill(0).map(()=>({name:'',type:'',def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',special:'',soak_expr:'',charges:0,regen:'',mfr:'Generic',base_data:null,options:[],custom:false})),
     datacoms:Array(3).fill(0).map(()=>({name:'',cpu:0,mem:0,nanite:0,system:0,system_max:0,def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',def_dmg:'',expertise:0,special:'',mfr:'Generic',base_data:null,options:[],custom:false})),
     programs:Array(10).fill(0).map(()=>({name:'',type:'',cpu:0,mem:0,nanite:0,passive:'',active:''})),
@@ -4546,7 +4546,7 @@ function ccDefFamily(t){t=(t||'').toLowerCase();if(t.indexOf('barrier')>=0)retur
    so clearing a purchased item refunds its credits automatically. ── */
 function ccClearSlot(kind,i){
   const F={
-    weapons:()=>({name:'',skill:'',dmg:'',dmgtype:'',power:'',power_num:0,legality:'',expertise:0,special:'',close_range:'',medium_range:'',long_range:'',rof:'',ammo:0,ammo_cat:'',magazines:0,currentammo:0,reload:'',mfr:'Generic',base_data:null,options:[],custom:false}),
+    weapons:()=>({name:'',skill:'',dmg:'',dmgtype:'',power:'',power_num:0,legality:'',expertise:0,special:'',close_range:'',medium_range:'',long_range:'',rof:'',ammo:0,ammo_cat:'',ammo_opts:[],magazines:0,currentammo:0,reload:'',mfr:'Generic',base_data:null,options:[],custom:false}),
     armor:()=>({name:'',type:'',def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',special:'',soak_expr:'',charges:0,regen:'',mfr:'Generic',base_data:null,options:[],custom:false}),
     datacoms:()=>({name:'',cpu:0,mem:0,nanite:0,system:0,system_max:0,def_phys:'None',def_energy:'None',def_tech:'None',def_spirit:'None',def_dmg:'',expertise:0,special:'',mfr:'Generic',base_data:null,options:[],custom:false}),
     programs:()=>({name:'',type:'',cpu:0,mem:0,nanite:0,passive:'',active:''}),
@@ -4947,7 +4947,7 @@ function ccPickFromCache(pidx){
     wp.close_range=aw.range_short||'';wp.medium_range=aw.range_med||'';wp.long_range=aw.range_long||'';
     wp.rof=aw.rof||'';wp.reload=aw.reload||'';
     wp.ammo=parseInt(aw.ammo,10)||0;
-    const _am=/^\s*\d+\s*\/\s*(\S+)/.exec(String(aw.ammo||''));wp.ammo_cat=_am?_am[1]:'';wp.magazines=0;
+    const _am=/^\s*\d+\s*\/\s*(\S+)/.exec(String(aw.ammo||''));wp.ammo_cat=_am?_am[1]:'';wp.magazines=0;wp.ammo_opts=[];
     wp.power=aw.power||'';wp.power_num=+(aw.power_num)||0;wp.expertise=+(aw.expertise)||0;
     wp.legality=aw.legality||w.legality||'';
     wp.custom=false;
@@ -5989,25 +5989,71 @@ function ccWpnAmmoInfo(w){
   const mag=(g.ammo_types||[]).find(a=>String(a.cat).toUpperCase()===cat.toUpperCase())||null;
   return {cat:cat,per:+m[1]||0,mag:mag};
 }
-function ccMagCost(w){const info=ccWpnAmmoInfo(w);if(!info||!info.mag)return 0;return Math.max(0,+(w.magazines)||0)*(parseFloat(info.mag.cost)||0);}
+// per-magazine price = base magazine cost × Π(selected ammo-option cost multipliers)
+function ccMagUnitCost(w){const info=ccWpnAmmoInfo(w);if(!info||!info.mag)return 0;let c=parseFloat(info.mag.cost)||0;(w.ammo_opts||[]).forEach(code=>{const o=(g.ammo_opts||[]).find(x=>x.code===code);if(o)c*=(+o.cost_mult||1);});return Math.round(c);}
+function ccMagCost(w){return Math.max(0,+(w.magazines)||0)*ccMagUnitCost(w);}
 function ccMagAdj(i,d){const w=ccState.weapons[i];if(!w)return;w.magazines=Math.max(0,(+(w.magazines)||0)+d);render();}
+// toggle a custom-munition option (respects type + mutual AMMO_COMPAT gating at click time)
+function ccMagOpt(i,code){const w=ccState.weapons[i];if(!w)return;w.ammo_opts=w.ammo_opts||[];const k=w.ammo_opts.indexOf(code);if(k>=0)w.ammo_opts.splice(k,1);else w.ammo_opts.push(code);render();}
 function ccMagRow(w,i){
   const info=ccWpnAmmoInfo(w);if(!info)return '';
-  let h='<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:11px;margin:5px 0;padding:5px 7px;background:rgba(255,107,53,.06);border:1px solid rgba(255,107,53,.18);border-radius:3px;">';
+  const btn='width:20px;height:20px;border-radius:3px;cursor:pointer;font-size:12px;line-height:1;background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.35);color:var(--a2);';
+  let h='<div style="margin:5px 0;padding:6px 8px;background:rgba(255,107,53,.06);border:1px solid rgba(255,107,53,.18);border-radius:3px;font-size:11px;">';
+  h+='<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">';
   h+='<span style="color:#777;font-family:\'Chakra Petch\',sans-serif;">AMMO</span>';
   h+='<span style="color:var(--tx);">'+info.per+' rounds / magazine</span>';
+  if(info.mag)h+='<span style="color:#999;">'+esc(info.mag.name)+' <span style="color:#555;">('+esc(info.mag.cat)+')</span></span>';
+  else h+='<span style="color:#666;">'+esc(info.cat)+' — no standard magazine</span>';
+  h+='</div>';
   if(info.mag){
-    h+='<span style="color:#999;">'+esc(info.mag.name)+' <span style="color:#555;">('+esc(info.mag.cat)+' · '+fmt(info.mag.cost)+' Cr ea)</span></span>';
+    const AO=g.ammo_opts||[];
+    const compatCodes=info.mag.options==='All'?AMMO_OPT_CODES.slice():String(info.mag.options||'').split(/\s+/).filter(Boolean);
+    const sel=w.ammo_opts||[];
+    // custom-munition option chips (gated by magazine type + mutual compatibility)
+    h+='<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:5px;align-items:center;">';
+    h+='<span style="color:#777;">Munitions</span>';
+    AMMO_OPT_CODES.forEach(code=>{
+      const o=AO.find(x=>x.code===code);if(!o)return;
+      const isSel=sel.includes(code);
+      const typeOk=compatCodes.includes(code);
+      const others=sel.filter(c=>c!==code);
+      const mutOk=others.every(c=>AMMO_COMPAT[c]&&AMMO_COMPAT[c][code]!==0);
+      const enabled=typeOk&&(isSel||mutOk);
+      const bg=isSel?'rgba(255,107,53,.28)':'rgba(0,0,0,.4)';
+      const bc=isSel?'var(--a2)':'rgba(255,255,255,.15)';
+      const col=isSel?'var(--a2)':(enabled?'#bbb':'#555');
+      const dis=enabled?'':'opacity:.4;cursor:not-allowed;';
+      const onc=enabled?'onclick="ccMagOpt('+i+',\''+code+'\')" ':'';
+      h+='<button '+onc+'title="'+esc(o.name)+' ×'+o.cost_mult+' · '+esc(o.legality)+' · '+esc(o.avail)+'" style="'+dis+'padding:1px 6px;border-radius:3px;cursor:pointer;font-size:10px;font-family:\'JetBrains Mono\',monospace;background:'+bg+';border:1px solid '+bc+';color:'+col+';">'+code+'</button>';
+    });
+    h+='</div>';
+    // per-mag price + breakdown + spare counter + total
+    const unit=ccMagUnitCost(w);
+    let bd=fmt(info.mag.cost)+' Cr';
+    sel.forEach(c=>{const o=AO.find(x=>x.code===c);if(o)bd+=' ×'+o.cost_mult;});
     const spares=+(w.magazines)||0;
+    h+='<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:5px;">';
+    h+='<span style="color:#777;">Per mag</span><span style="color:var(--gr);font-family:\'JetBrains Mono\',monospace;">'+fmt(unit)+' Cr</span>';
+    if(sel.length)h+='<span style="color:#555;font-family:\'JetBrains Mono\',monospace;font-size:10px;">'+bd+'</span>';
     h+='<span style="margin-left:auto;display:flex;align-items:center;gap:5px;">';
     h+='<span style="color:#777;">Spare mags</span>';
-    h+='<button onclick="ccMagAdj('+i+',-1)" style="background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.35);color:var(--a2);width:20px;height:20px;border-radius:3px;cursor:pointer;font-size:12px;line-height:1;">−</button>';
+    h+='<button onclick="ccMagAdj('+i+',-1)" style="'+btn+'">−</button>';
     h+='<span style="min-width:16px;text-align:center;color:var(--a2);font-family:\'JetBrains Mono\',monospace;">'+spares+'</span>';
-    h+='<button onclick="ccMagAdj('+i+',1)" style="background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.35);color:var(--a2);width:20px;height:20px;border-radius:3px;cursor:pointer;font-size:12px;line-height:1;">+</button>';
-    if(spares>0)h+='<span style="color:var(--gr);font-family:\'JetBrains Mono\',monospace;">+'+fmt(spares*(parseFloat(info.mag.cost)||0))+' Cr</span>';
+    h+='<button onclick="ccMagAdj('+i+',1)" style="'+btn+'">+</button>';
+    if(spares>0)h+='<span style="color:var(--gr);font-family:\'JetBrains Mono\',monospace;">= '+fmt(spares*unit)+' Cr</span>';
     h+='</span>';
-  } else {
-    h+='<span style="color:#666;">'+esc(info.cat)+' — no standard magazine</span>';
+    h+='</div>';
+    // final munition legality / availability (per the Ammunition section rules)
+    if(sel.length){
+      const AVAIL_ORD=['COMMON','UNCOMMON','RARE','LIMITED','UNIQUE'];
+      const LEG_ORD=['No Permit','Restricted','Illegal','Classified'];
+      let ai=0,li=0;
+      sel.forEach(c=>{const o=AO.find(x=>x.code===c);if(!o)return;ai=Math.max(ai,AVAIL_ORD.indexOf(o.avail));const lx=LEG_ORD.findIndex(L=>L.toLowerCase()===(o.legality||'').toLowerCase());if(lx>li)li=lx;});
+      const finalAvail=AVAIL_ORD[Math.min(ai+(sel.length>1?sel.length-1:0),AVAIL_ORD.length-1)];
+      h+='<div style="margin-top:5px;display:flex;gap:6px;align-items:center;">';
+      h+='<span style="color:#777;">Munition</span><span class="tag '+ccLegCls(LEG_ORD[li])+'" style="font-size:10px;">'+esc(LEG_ORD[li])+'</span><span class="tag tgr" style="font-size:10px;">'+esc(finalAvail)+'</span>';
+      h+='</div>';
+    }
   }
   h+='</div>';
   return h;
