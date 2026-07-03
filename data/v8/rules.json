@@ -1695,6 +1695,14 @@
        "text": "A weapon's card tells you how hard it hits, what kind of hit it is, how far, how fast, and how reliably. Here is every line."
       },
       {
+       "key": "TEK WEAPONS (two-part weapons)",
+       "text": "A TEK weapon is a portable turret: a frame with no firepower of its own, always fired with OPERATOR no matter its shape - pistol, rifle, or a knife that fights from across the room. The FRAME provides the weapon type, range, rate of fire, ammo, reload and expertise. The LOADED TEK ROUTINE - a datacom routine, toggled during Phase 3 of maintenance and reserving CPU while active - provides the power, damage, damage type, special properties and the weapon's effective legality; a bare frame is merely Restricted. Swap the routine and the same frame becomes a different gun. Manufacturers can only improve the frame's own attributes: any manufacturer perk that would touch the routine-driven stats is lost.",
+       "examples": [
+        "a Disruptor TEK Pistol running TriggerHappy sprays 9D+0 PHYSICAL needles; load DeathWhisper instead and the same pistol murmurs SPIRITUAL dread",
+        "a hacker with no weapon skills at all fighting a whole skirmish through OPERATOR and a floating TEK knife"
+       ]
+      },
+      {
        "key": "DAMAGE",
        "text": "How much damage the weapon deals once a hit clears defenses - the size of the wound before SOAK. (See Damage & Defense.)"
       },

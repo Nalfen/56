@@ -970,6 +970,8 @@ document.addEventListener('click',e=>{
 document.addEventListener('change',e=>{
   const sel=e.target.closest('.mfr-sel[data-sec]');
   if(sel){mfrState[sel.dataset.sec]=sel.value;render();}
+  const tsel=e.target.closest('.mfr-sel[data-tekrt]');
+  if(tsel){tekRoutineSel=tsel.value;render();}
 });
 let st;document.getElementById('search').addEventListener('input',e=>{clearTimeout(st);st=setTimeout(()=>{sq=e.target.value.trim().toLowerCase();render();},110);});
 document.addEventListener('input',e=>{const ni=e.target.closest('#db-name-inp');if(ni){dbState.name=ni.value;return;}if(e.target.dataset&&e.target.dataset.db==='wpnsearch'){dbAdd.wpnSearch=e.target.value;render();}});
@@ -1098,8 +1100,8 @@ function applyWpnMfr(item,mfrName){
   // Cost
   const pm=parseFloat(m.price_mult||1);
   if(pm&&pm!==1&&w.cost)w.cost=String(Math.round(parseFloat(w.cost)*pm));
-  // Special
-  const sp=m.special||'';if(sp){const ex=w.special||'';w.special=(ex?ex+' ':'')+sp;}
+  // Special — manufacturer specials do NOT transfer to TEK frames (program-determined attrs are lost)
+  const sp=m.special||'';if(sp&&!item.tek){const ex=w.special||'';w.special=(ex?ex+' ':'')+sp;}
   if(m.abbr)w.name=w.name+' '+m.abbr;
   return w;
 }
@@ -1269,10 +1271,39 @@ function mfrInfo(sec,mfr){
   return parts.length?'<div class="mfr-info">'+(m.abbr?esc(m.abbr)+' \u2014 ':'')+parts.map(esc).join(' \xb7 ')+'</div>':'';
 }
 
-const CAT_LBL={'Pistols and Handguns (Gunslinger)':'PISTOLS','Rifles (Marksman)':'RIFLES','Sniper Rifles and Tactical Weapons (Marksman)':'SNIPERS','Auto pistols and S.M.G (Gunslinger)':'SMG','Shotguns (Gunslinger)':'SHOTGUNS','Machine Guns (Heavy weapons)':'MACHINE GUNS','Launchers and AT Weapons (Heavy weapons)':'LAUNCHERS','Vehicle weapons(Heavy weapons)':'VEHICLE','Explosives (Heavy Weapons, Engineering or Projectiles)':'EXPLOSIVES','Melee Weapons (Melee Weapons)':'MELEE','Powered Melee Weapons (Melee Weapons)':'PWR MELEE','Ranged / Throwing Weapons (Projectiles)':'THROWING'};
+const CAT_LBL={'Pistols and Handguns (Gunslinger)':'PISTOLS','Rifles (Marksman)':'RIFLES','Sniper Rifles and Tactical Weapons (Marksman)':'SNIPERS','Auto pistols and S.M.G (Gunslinger)':'SMG','Shotguns (Gunslinger)':'SHOTGUNS','Machine Guns (Heavy weapons)':'MACHINE GUNS','Launchers and AT Weapons (Heavy weapons)':'LAUNCHERS','Vehicle weapons(Heavy weapons)':'VEHICLE','Explosives (Heavy Weapons, Engineering or Projectiles)':'EXPLOSIVES','Melee Weapons (Melee Weapons)':'MELEE','Powered Melee Weapons (Melee Weapons)':'PWR MELEE','Ranged / Throwing Weapons (Projectiles)':'THROWING','TEK Weapons (Operator)':'TEK'};
 const MELEE_CATS=new Set(['Melee Weapons (Melee Weapons)','Powered Melee Weapons (Melee Weapons)','Ranged / Throwing Weapons (Projectiles)']);
 const WPN_MFRS=['Generic','Malivaux','Kintech','Nakamura','Arms Corp',"Zang'Hai",'TORC','Voran','Dilithium','Monomolecular'];
 const WPN_MFRS_MELEE_ONLY=new Set(['Dilithium','Monomolecular']);
+// ── TEK weapons: two-part weapons (frame + loaded TEK routine), fired with OPERATOR ──
+const TEK_CAT='TEK Weapons (Operator)';
+const TEK_POWER_NUM={LOW:3,MEDIUM:6,HIGH:9,EXTREME:12};
+let tekRoutineSel='None';
+function tekRoutines(){return ((g.software&&g.software.programs)||[]).filter(p=>/TEK Routine/i.test(p.type||''));}
+function tekRoutineByName(n){return tekRoutines().find(r=>r.name===n)||null;}
+function applyTekRoutine(item,rtName){
+  // Merge a TEK routine's stat line into a TEK frame. Frame keeps range/RoF/ammo/reload/expertise/size/cost;
+  // routine supplies power/damage/type/special/legality. No routine = bare frame (Restricted, no stat line).
+  const w={...item};
+  const rt=rtName&&rtName!=='None'?tekRoutineByName(rtName):null;
+  if(!rt){w.power='';w.damage='';w.dmg_type='';w.type='';w.special='';w.legality='Restricted';w.tek_routine='';return w;}
+  const P=(rt.power||'').toUpperCase();
+  w.power=P?P.charAt(0)+P.slice(1).toLowerCase():'';
+  w.power_num=TEK_POWER_NUM[P]||0;
+  w.damage=rt.damage||'';
+  w.dmg_type=(rt.damage_type||'')+(rt.dmgtarget==='MORALE'?' (MORALE)':'');
+  w.type=rt.damage_type||'';
+  w.special=rt.tags||'';
+  w.legality=rt.legality||'Restricted';
+  w.tek_routine=rt.name;
+  return w;
+}
+function tekBar(cur){
+  let s='<div class="mfr-bar"><span class="mfr-lbl">TEK ROUTINE:</span><select class="mfr-sel" data-tekrt="1"><option value="None"'+(cur==='None'?' selected':'')+'>None (bare frame)</option>';
+  tekRoutines().forEach(r=>{s+='<option value="'+esc(r.name)+'"'+(cur===r.name?' selected':'')+'>'+esc(r.name)+' — '+esc(r.power||'')+' '+esc(r.damage||'')+' '+esc(r.damage_type||'')+'</option>';});
+  s+='</select><span class="mfr-note">TEK frames fire whatever routine the datacom loads: power, damage, type, legality and special come from the routine.</span></div>';
+  return s;
+}
 const ARMOR_MFRS=['Generic','Kintech','Harsh','Santech','BMS','Acer'];
 const DATACOM_MFRS=['Generic','Securicorp','Orionworks','Biocom','Carnifex','Saiko','Yotoma',"Zang'Hai"];
 const MEDICAL_MFRS=['Generic','Altair Biomed','RX Generic','Goodman Holistic','Diva Solutions','Mono-Med Customs'];
@@ -4343,7 +4374,7 @@ const EG_AVAIL_BY_TIER={henchmen:['COMMON'],regular:['COMMON','UNCOMMON'],elite:
 const EG_LEGAL_BY_TIER={henchmen:['No Permit'],regular:['No Permit','Restricted'],elite:['No Permit','Restricted','Illegal'],boss:['No Permit','Restricted','Illegal','Classified']};
 const EG_SKILLS_ALL = g.skills.map(s=>({key:s.name,cat:s.category}));
 const EG_SKILL_DISP={'Heavy Weapons':'Heavy Weapons','Melee Weapons':'Melee Weapons','Galactic Knowledge':'Galactic Knowledge','Social Science':'Social Science','Hand-to-Hand':'Hand-to-Hand'};
-const EG_WPN_SKILL_MAP={'Pistols and Handguns (Gunslinger)':'Gunslinger','Auto pistols and S.M.G (Gunslinger)':'Gunslinger','Shotguns (Gunslinger)':'Gunslinger','Rifles (Marksman)':'Marksman','Sniper Rifles and Tactical Weapons (Marksman)':'Marksman','Melee Weapons (Melee Weapons)':'Melee Weapons','Powered Melee Weapons (Melee Weapons)':'Melee Weapons','Machine Guns (Heavy weapons)':'Heavy Weapons','Launchers and AT Weapons (Heavy weapons)':'Heavy Weapons','Vehicle weapons(Heavy weapons)':'Heavy Weapons','Ranged / Throwing Weapons (Projectiles)':'Projectiles','Explosives (Heavy Weapons, Engineering or Projectiles)':'Heavy Weapons'};
+const EG_WPN_SKILL_MAP={'Pistols and Handguns (Gunslinger)':'Gunslinger','Auto pistols and S.M.G (Gunslinger)':'Gunslinger','Shotguns (Gunslinger)':'Gunslinger','Rifles (Marksman)':'Marksman','Sniper Rifles and Tactical Weapons (Marksman)':'Marksman','Melee Weapons (Melee Weapons)':'Melee Weapons','Powered Melee Weapons (Melee Weapons)':'Melee Weapons','Machine Guns (Heavy weapons)':'Heavy Weapons','Launchers and AT Weapons (Heavy weapons)':'Heavy Weapons','Vehicle weapons(Heavy weapons)':'Heavy Weapons','Ranged / Throwing Weapons (Projectiles)':'Projectiles','Explosives (Heavy Weapons, Engineering or Projectiles)':'Heavy Weapons','TEK Weapons (Operator)':'Operator'};
 // Reverse map: skill → weapon categories
 const EG_SKILL_WPN_CATS={};
 (function(){Object.entries(EG_WPN_SKILL_MAP).forEach(([cat,sk])=>{if(!EG_SKILL_WPN_CATS[sk])EG_SKILL_WPN_CATS[sk]=[];EG_SKILL_WPN_CATS[sk].push(cat);});})();
@@ -4899,12 +4930,18 @@ function ccPickFromCache(pidx){
   if(type==='talent'){const t=item;ccState.talents[slot]={name:t.name||'',skill:t.skill||'',category:(Array.isArray(t.categories)&&ccState.pickerCat&&ccState.pickerCat!=='ALL')?ccState.pickerCat:(t.category||''),xp_cost:+(t.cost)||0,effect:t.effect||'',credited:false};}
   else if(type==='evolution'){const e=item;ccState.evolutions[slot]={name:e.name||'',type:e.evo_type||'',tier:e.tier||'',effect:e.effect||'',credited:false};}
   else if(type==='weapon'){
-    const w=item;const wp=ccState.weapons[slot];
+    const w=item;
+    if(w.category===TEK_CAT&&(!ccState.picker.tek||ccState.picker.tek==='None')){ccState.pickerCat=TEK_CAT;render();return;}
+    const wp=ccState.weapons[slot];
     wp.base_data={...w};wp.options=[];
     wp.mfr=ccState.picker.mfr||wp.mfr||'Generic';
     const applied=applyWpnMfr({...w},wp.mfr);
-    const aw=applied||w;
-    wp.name=aw.name||'';wp.dmg=aw.damage||'';wp.dmgtype=aw.type||'';
+    let aw=applied||w;
+    if(w.category===TEK_CAT){aw=applyTekRoutine(aw,ccState.picker.tek);wp.tek_routine=aw.tek_routine||'';}
+    else wp.tek_routine='';
+    wp.name=(aw.name||'')+(aw.tek_routine?' ['+aw.tek_routine+']':'');
+    wp.dmg=aw.damage||'';wp.dmgtype=aw.type||aw.dmg_type||'';
+    wp.skill=EG_WPN_SKILL_MAP[w.category]||wp.skill||'';
     wp.special=(Array.isArray(aw.special)?aw.special.join(' '):aw.special)||'';
     wp.close_range=aw.range_short||'';wp.medium_range=aw.range_med||'';wp.long_range=aw.range_long||'';
     wp.rof=aw.rof||'';wp.ammo=+(aw.ammo)||0;wp.reload=aw.reload||'';
@@ -5101,6 +5138,7 @@ function ccRenderPicker(){
   let fmatches=matches;
   if(facetOpts&&pickerCat&&pickerCat!=='ALL')fmatches=fmatches.filter(x=>getFacet(x)===pickerCat||(Array.isArray(x.categories)&&x.categories.map(c=>(''+c).toUpperCase()).indexOf(pickerCat)>=0));
   if(type==='talent'&&st.pickerAvailOnly)fmatches=fmatches.filter(x=>{const c=(x.category||'').toUpperCase();const rem=ccTalentPoints(c)-ccTalentUsed(c);return (+(x.cost)||0)<=rem;});
+  if(type==='weapon'&&pickerCat===TEK_CAT&&(!st.picker.tek||st.picker.tek==='None'))fmatches=[];
   ccPickerCache=fmatches.slice(0,150);
   let h='<div style="background:rgba(0,0,0,.7);border:1px solid '+bdr+';border-radius:6px;padding:12px;margin-bottom:14px;">';
   h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">';
@@ -5125,6 +5163,16 @@ function ccRenderPicker(){
     h+='<select style="background:#111;border:1px solid rgba(255,107,53,.35);color:var(--a2);padding:2px 6px;font-size:11px;border-radius:3px;" onchange="ccState.picker.mfr=this.value;render();">';
     WPN_MFRS.forEach(m=>{h+='<option value="'+esc(m)+'"'+(curMfr===m?' selected':'')+'>'+esc(m)+'</option>';});
     h+='</select></div>';
+    if(pickerCat===TEK_CAT){
+      const curRt=st.picker.tek||'None';
+      h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;">';
+      h+='<span style="font-size:10.5px;color:#888;">TEK Routine:</span>';
+      h+='<select style="background:#111;border:1px solid rgba(163,85,247,.45);color:var(--a3);padding:2px 6px;font-size:11px;border-radius:3px;" onchange="ccState.picker.tek=this.value;render();">';
+      h+='<option value="None"'+(curRt==='None'?' selected':'')+'>Select a routine…</option>';
+      tekRoutines().forEach(r=>{h+='<option value="'+esc(r.name)+'"'+(curRt===r.name?' selected':'')+'>'+esc(r.name)+' — '+esc(r.power||'')+' '+esc(r.damage||'')+' '+esc(r.damage_type||'')+'</option>';});
+      h+='</select></div>';
+      if(curRt==='None')h+='<div style="padding:10px 12px;border:1px dashed rgba(163,85,247,.35);border-radius:4px;color:#999;font-size:11px;margin-bottom:8px;">TEK frames fire whatever routine the datacom loads. Select a TEK routine above to browse TEK weapons — the routine determines power, damage, damage type, legality and special. The routine must also be installed in your datacom program slots.</div>';
+    }
   } else if(type==='armor'){
     const curMfr=st.picker.mfr||'Generic';
     h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">';
@@ -5150,7 +5198,8 @@ function ccRenderPicker(){
     if(type==='talent'){h+='<div style="font-size:10.5px;color:#888;">'+esc(x.skill||'')+(x.category?' · '+esc(x.category):'')+'  —  '+(x.cost||0)+' XP</div>';if(x.effect)h+='<div style="font-size:10.5px;color:#aaa;margin-top:3px;line-height:1.4;white-space:pre-wrap;">'+esc(x.effect)+'</div>';}
     else if(type==='evolution'){h+='<div style="font-size:10.5px;color:#888;">'+esc(x.evo_type||'')+' · Tier '+esc(x.tier||'?')+'</div>';if(x.effect)h+='<div style="font-size:10.5px;color:#aaa;margin-top:3px;line-height:1.4;white-space:pre-wrap;">'+esc(x.effect)+'</div>';}
     else if(type==='weapon'){
-      const xw=applyWpnMfr({...x},pickerMfr)||x;
+      let xw=applyWpnMfr({...x},pickerMfr)||x;
+      if(x.category===TEK_CAT)xw=applyTekRoutine(xw,st.picker.tek||'None');
       const dmgChg=pickerMfr!=='Generic'&&xw.damage!==x.damage;
       const rngChg=pickerMfr!=='Generic'&&(xw.range_short!==x.range_short||xw.range_med!==x.range_med||xw.range_long!==x.range_long);
       const xwSpecStr=Array.isArray(xw.special)?xw.special.join(' '):(xw.special||'');
@@ -6443,7 +6492,7 @@ function egTryApplyWpnMfr(item,isMelee,state=egState){
 
 function egAutoGearWeapons(state=egState){
   const arch=EG_ARCHETYPES[state.archetype]||EG_ARCHETYPES.soldier;
-  const wpnSkills=['Marksman','Gunslinger','Heavy Weapons','Melee Weapons','Larceny'];
+  const wpnSkills=['Marksman','Gunslinger','Heavy Weapons','Melee Weapons','Larceny','Operator'];
   let bestSkill=null,bestVal=-1;
   wpnSkills.forEach(sk=>{const v=state.skills[sk]||0;if(v>bestVal){bestVal=v;bestSkill=sk;}});
   let cats=arch.weaponCats;
@@ -6531,8 +6580,15 @@ function egAutoGear(state=egState){
 
 function egWpnToState(w){
   const skill=EG_WPN_SKILL_MAP[w.category]||'Gunslinger';
+  let dmgtarget='HEALTH';
+  if(w.category===TEK_CAT||w.tek){
+    // TEK frames need a loaded routine: keep one already applied, otherwise load a random one.
+    if(!w.tek_routine){const rts=tekRoutines();if(rts.length)w=applyTekRoutine(w,rts[Math.floor(Math.random()*rts.length)].name);}
+    const rt=tekRoutineByName(w.tek_routine);
+    if(rt&&rt.dmgtarget)dmgtarget=rt.dmgtarget;
+  }
   const catLabel=w.category.replace(/\s*\([^)]+\)/,'');
-  return{name:w.name,type:catLabel,dmgtype:w.dmg_type||w.type||'PHYSICAL',power:w.power||'Low',dmg:(w.damage||'').replace(/\s/g,''),expertise:w.expertise||'0',special:w.special||'',close_range:w.range_short||'0',medium_range:w.range_med||'0',long_range:w.range_long||'0',rof:w.rof||'',ammo:w.ammo||'0',reload:w.reload||'',skill:skill,dmgtarget:'HEALTH',_src:w};
+  return{name:w.name+(w.tek_routine?' ['+w.tek_routine+']':''),type:catLabel,dmgtype:w.dmg_type||w.type||'PHYSICAL',power:w.power||'Low',dmg:(w.damage||'').replace(/\s/g,''),expertise:w.expertise||'0',special:w.special||'',close_range:w.range_short||'0',medium_range:w.range_med||'0',long_range:w.range_long||'0',rof:w.rof||'',ammo:w.ammo||'0',reload:w.reload||'',skill:skill,dmgtarget:dmgtarget,_src:w};
 }
 
 function egArmorToState(a){
@@ -7504,12 +7560,13 @@ function render(){
       const isMelee=MELEE_CATS.has(w.category);
       if(WPN_MFRS_MELEE_ONLY.has(curMfr)&&!isMelee)return w;
       return applyWpnMfr(w,curMfr);
-    }).filter(Boolean);
-    const F=source.filter(w=>ms([w.name,w.type,w.special,w.category,w.damage,w.legality,w.notes,w.desc])).filter(w=>!af||w.category===af);
+    }).filter(Boolean).map(w=>w.category===TEK_CAT?applyTekRoutine(w,tekRoutineSel):w);
+    const F=source.filter(w=>ms([w.name,w.type,w.special,w.category,w.damage,w.legality,w.notes,w.desc,w.tek,w.tek_routine])).filter(w=>!af||w.category===af);
     cnt=F.length;
     html='<div class="stitle">🔫 WEAPONS <span class="badge">'+cnt+'</span></div>';
     html+=mfrBar('weapons',availMfrs,curMfr);
     html+=mfrInfo('weapons',curMfr);
+    if(af===''||af===TEK_CAT)html+=tekBar(tekRoutineSel);
     html+='<div class="fbar">'+fcBtn('ALL','ALL',af);
     allCats.forEach(c=>{html+=fcBtn(CAT_LBL[c]||c.split('(')[0].trim().toUpperCase(),c,af);});
     html+='</div>';
@@ -7570,6 +7627,7 @@ function render(){
         }
         if(w.expertise)   html+='<div class="f"><div class="fl">🎯 Expertise</div><div class="fv">'+hl(w.expertise,sq)+'</div></div>';
         if(w.size)         html+='<div class="f"><div class="fl">📦 Size</div><div class="fv">'+hl(w.size,sq)+'</div></div>';
+        if(w.category===TEK_CAT)html+='<div class="f"><div class="fl">🔌 TEK Frame</div><div class="fv">'+hl(w.tek||'TEK',sq)+(w.tek_routine?' · running '+hl(w.tek_routine,sq):' · <span style="color:var(--mu);">no routine loaded — power, damage, type, legality and special come from the loaded TEK routine</span>')+'</div></div>';
         if(w.cost)         html+='<div class="f"><div class="fl">© Cost</div><div class="fv">'+fmt(w.cost)+' Cr</div></div>';
         if(w.legality)     html+='<div class="f"><div class="fl">⚖ Legality</div><div class="fv">'+hl(w.legality,sq)+'</div></div>';
         if(w.availability) html+='<div class="f"><div class="fl">◈ Avail</div><div class="fv">'+hl(w.availability,sq)+'</div></div>';

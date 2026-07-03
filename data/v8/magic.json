@@ -1982,6 +1982,14 @@
       "name": "Needler",
       "desc": "Weapon fires high velocity needles; crits automatically on a 9 or 10 and and has a SMALL bonus to damage on critical hits."
     },
+    "EFFICIENT": {
+      "name": "Efficient",
+      "desc": "Weapon only consumes 1 AMMO per attack regardless of actions (FULL AUTO, BURST etc.)"
+    },
+    "X-ALL": {
+      "name": "Cross-All",
+      "desc": "Maximum defenses against this attack is [MEDIUM]."
+    },
     "OPT": {
       "name": "Options",
       "desc": "Item can have 1 compatible option of any kind"
