@@ -8145,11 +8145,14 @@ function render(){
 
   else if(cs==='hacking'){
     const sw=g.software;
-    const all=[...sw.actions.map(x=>({...x,cat:'BASIC ACTIONS'})),...sw.programs.map(x=>({...x,cat:'PROGRAMS'})),...sw.gadgets.map(x=>({...x,cat:'GADGETS'}))];
+    // Category derived from `type` (not source array): TEK weapon statlines, datacom Defense Matrix
+    // routines, nanite Gadgets, no-roll Routines (incl Passive Programs), and general Programs.
+    const hkCat=x=>{const t=(x.type||'');return /Basic Action/i.test(t)?'BASIC ACTIONS':/TEK Routine/i.test(t)?'TEK':/Defense Matrix/i.test(t)?'DEFENSE MATRIX':/Gadget/i.test(t)?'GADGETS':/Routine|Passive Program/i.test(t)?'ROUTINES':'PROGRAMS';};
+    const all=[...sw.actions,...sw.programs,...sw.gadgets].map(x=>({...x,cat:hkCat(x)}));
     const F=all.filter(x=>ms([x.name,x.type,x.action,x.desc,x.effect,x.skill,x.passive,x.active])).filter(x=>!af||x.cat===af);
     cnt=F.length;
     html='<div class="stitle">💻 HACKING SOFTWARE <span class="badge">'+all.length+'</span></div><div class="fbar">';
-    ['ALL','BASIC ACTIONS','PROGRAMS','GADGETS'].forEach(c=>{html+=fcBtn(c,c,af);});
+    ['ALL','BASIC ACTIONS','PROGRAMS','ROUTINES','TEK','DEFENSE MATRIX','GADGETS'].forEach(c=>{html+=fcBtn(c,c,af);});
     html+='</div>';
     html+='<div class="ssub">Quick Reference</div>';
     html+='<table class="stab" style="margin-bottom:14px;"><thead><tr><th>Name</th><th>Category</th><th>Type / Action</th><th>CPU / Nanite</th><th>MEM</th><th>Cost</th><th>Avail</th><th>Legality</th></tr></thead><tbody>';
@@ -8162,7 +8165,8 @@ function render(){
     F.forEach((x,i)=>{
       const id='h'+i;const desc=x.desc||x.effect||'';
       html+='<div class="card" id="'+id+'" data-tog="'+id+'"><div class="ch"><div><div class="cn">'+hl(x.name,sq)+'</div><div class="cs">'+hl(x.type||x.action||'',sq)+'</div></div>';
-      html+='<div style="display:flex;align-items:center;gap:4px;"><span class="tag '+(x.cat==='GADGETS'?'tp':'tb')+'">'+esc(x.cat)+'</span><span class="xi">▼</span></div></div>';
+      const hkCatCls={'BASIC ACTIONS':'tb','PROGRAMS':'tgr','ROUTINES':'tg','GADGETS':'tp','TEK':'to','DEFENSE MATRIX':'ty'}[x.cat]||'tb';
+      html+='<div style="display:flex;align-items:center;gap:4px;"><span class="tag '+hkCatCls+'">'+esc(x.cat)+'</span><span class="xi">▼</span></div></div>';
       html+='<div class="tags">'+(x.memory?'<span class="tag tgr">MEM: '+hl(x.memory,sq)+'</span>':'')+(x.nanite?'<span class="tag tp">◆ NANITE: '+hl(x.nanite,sq)+'</span>':'')+(x.cpu?'<span class="tag to">CPU: '+hl(x.cpu,sq)+'</span>':'')+(x.cost?'<span class="tag tg">⊕ '+hl(x.cost,sq)+'</span>':'')+(x.availability?'<span class="tag '+tc(x.availability)+'">'+hl(x.availability,sq)+'</span>':'')+(x.legality?'<span class="tag '+tc(x.legality)+'">'+hl(x.legality,sq)+'</span>':'')+'</div>';
       if(x.power||x.damage){
         html+='<div class="cr2">';
