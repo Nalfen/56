@@ -1102,7 +1102,24 @@ const GC_RARHEX={COMMON:'#8a97a1',UNCOMMON:'#30d158',RARE:'#0a84ff',LIMITED:'#bf
 const GC_DEFHEX={physical:'#ff9f0a',energy:'#bf5af2',tech:'#5fd4c4',spiritual:'#ffd60a'};
 const GC_C={dmg:'#e07a4d',pow:'#ff453a',rng:'#5fd4c4',exp:'#5fd4c4',cap:'#30d158',soak:'#30d158',blast:'#ff9f0a',sys:'#0a84ff',mem:'#5fd4c4',cpu:'#30d158'};
 function gcNum(x){const v=parseFloat(String(x==null?'':x).replace(/,/g,''));return isNaN(v)?null:v;}
-function gcDmgScore(s){const m=String(s).match(/(\d+)\s*D\s*\+\s*(\d+)/i);return m?(+m[1]+ +m[2]):(gcNum(s)||0);}
+/* Effective value of an "<N>D + <F>" pool: dice succeed ~60% each (d10 ≥5), the flat is
+   guaranteed — so expected = 0.6·dice + flat (0D+8 > 8D+0). Handles negative flats. */
+function gcDmgScore(s){
+  const m=String(s).match(/(\d+)\s*D\s*(.*)$/i);
+  if(!m)return gcNum(s)||0;
+  const dice=+m[1];
+  const rest=(m[2]||'').replace(/\s+/g,'').replace(/^\+/,'');
+  const flat=(rest===''||rest==='-'||rest==='+')?0:(parseInt(rest,10)||0);
+  return dice*0.6+flat;
+}
+/* Canonical RANGE band table (Phil's worksheet): a weapon's short/med/long triple maps to a
+   fixed range TIER 0–25 (NONE..SPACE_A). Per-weapon + absolute — what the weapon actually IS. */
+const GC_RNG={'400000/2000000/8000000':25,'200000/1000000/4000000':24,'100000/750000/2500000':23,'75000/500000/1500000':22,'500000/300000/1000000':21,'400/2000/8000':20,'200/1000/4000':19,'100/750/2500':18,'75/500/1500':17,'50/300/1000':16,'150/400/750':15,'100/300/600':14,'50/200/500':13,'40/100/400':12,'30/50/300':11,'60/160/300':10,'40/120/240':9,'20/80/200':8,'16/40/160':7,'12/20/120':6,'15/40/75':5,'10/30/60':4,'5/20/50':3,'4/10/40':2,'3/5/30':1,'0/0/0':0};
+function gcRangeTier(w){const k=['range_short','range_med','range_long'].map(kk=>{const n=gcNum(w[kk]);return n==null?0:n;}).join('/');return GC_RNG[k];}
+// average ENGAGEMENT range (short/med/long mean) — fallback when a triple isn't on the table
+function gcAvgRange(w){const v=['range_short','range_med','range_long'].map(k=>gcNum(w[k])).filter(x=>x!=null&&x>0);return v.length?v.reduce((a,b)=>a+b,0)/v.length:null;}
+// percentile rank of v within a sorted array (fraction ≤ v) — "against the majority"
+function gcPct(sorted,v){if(!sorted||!sorted.length||v==null)return 0;let c=0;for(let i=0;i<sorted.length;i++){if(sorted[i]<=v)c++;}return c/sorted.length;}
 function gcRarHex(a){return GC_RARHEX[(a||'').toUpperCase()]||'#8a97a1';}
 /* R.O.F parser: fire modes (B/F) + blast radius (Nm) live in the same field */
 function gcParseRof(rof){
@@ -1115,17 +1132,31 @@ function gcParseRof(rof){
 let _gcCeils=null;
 function gcCeils(){
   if(_gcCeils)return _gcCeils;
-  const by=(items,key,val)=>{const m={};(items||[]).forEach(it=>{const k=it[key]||'?';const v=val(it);if(v==null||!isFinite(v))return;if(!(k in m)||v>m[k])m[k]=v;});return m;};
+  // grouped ceiling: max of val() within each group (keyFn) → returns {group: max}
+  const gmaxBy=(items,keyFn,val)=>{const m={};(items||[]).forEach(it=>{const k=keyFn(it);const v=val(it);if(v==null||!isFinite(v))return;if(!(k in m)||v>m[k])m[k]=v;});return m;};
+  // Weapons share ONE scale (whole armory) except VEHICLE weapons, which are their own class.
+  const wGrp=w=>(/vehicle/i.test(w.category||'')?'vehicle':'weapon');
+  // Datacom section: NETWORKs (not really player gear) scale on their own; Basic + Full share a scale.
+  const dGrp=d=>(d.type==='Network'?'network':'player');
   _gcCeils={
     w:{
-      dmg:by(g.weapons,'category',w=>gcDmgScore(w.damage)),
-      rng:by(g.weapons,'category',w=>gcNum(w.range_long)),
-      exp:by(g.weapons,'category',w=>gcNum(w.expertise)),
-      ammo:by(g.weapons,'category',w=>{const a=gcNum(w.ammo);return(a&&a<10000)?a:null;}),
-      blast:by(g.weapons,'category',w=>gcParseRof(w.rof).radius),
+      dmg:gmaxBy(g.weapons,wGrp,w=>gcDmgScore(w.damage)),
+      ammo:gmaxBy(g.weapons,wGrp,w=>{const a=gcNum(w.ammo);return(a&&a<10000)?a:null;}),
+      blast:gmaxBy(g.weapons,wGrp,w=>gcParseRof(w.rof).radius),
+      // RANGE: canonical per-weapon range TIER (0–25), scaled to the top tier present in the
+      // group so the longest-reaching handheld fills the bar. (rngDist = percentile fallback.)
+      rngTierMax:(()=>{const m={};(g.weapons||[]).forEach(w=>{const t=gcRangeTier(w);if(t==null)return;const k=wGrp(w);if(!(k in m)||t>m[k])m[k]=t;});return m;})(),
+      rngDist:(()=>{const m={};(g.weapons||[]).forEach(w=>{const a=gcAvgRange(w);if(a==null)return;const k=wGrp(w);(m[k]=m[k]||[]).push(a);});Object.values(m).forEach(a=>a.sort((x,y)=>x-y));return m;})(),
+      // NOTE: expertise is a universal 0–10 stat → scaled /10, not from a ceiling here.
     },
-    a:{soak:by(g.armor,'type',a=>gcDmgScore(a.soak))},
-    d:{soak:by(g.datacoms,'type',d=>gcDmgScore(d.soak)),sys:by(g.datacoms,'type',d=>gcNum(d.system)),mem:by(g.datacoms,'type',d=>gcNum(d.memory)),cpu:by(g.datacoms,'type',d=>gcNum(d.cpu))},
+    // Defenses: each FAMILY (Armor / Forcefield / Barrier / Datacom) gets its own soak ratio.
+    a:{soak:gmaxBy(g.armor,a=>ccDefFamily(a.type),a=>gcDmgScore(a.soak))},
+    d:{
+      soak:gmaxBy(g.datacoms,dGrp,d=>gcDmgScore(d.soak)),
+      sys:gmaxBy(g.datacoms,dGrp,d=>gcNum(d.system)),
+      mem:gmaxBy(g.datacoms,dGrp,d=>gcNum(d.memory)),
+      cpu:gmaxBy(g.datacoms,dGrp,d=>gcNum(d.cpu)),
+    },
   };
   return _gcCeils;
 }
@@ -1177,7 +1208,7 @@ function gcTagRow(legality,special,cost,sq){
 function gcField(label,valHtml){return '<div class="f"><div class="fl">'+label+'</div><div class="fv">'+valHtml+'</div></div>';}
 
 function gcWeaponCard(w,id,sq){
-  const C=gcCeils().w, cat=w.category, isMelee=(typeof MELEE_CATS!=='undefined'&&MELEE_CATS.has(cat));
+  const C=gcCeils().w, cat=w.category, grp=(/vehicle/i.test(cat||'')?'vehicle':'weapon'), isMelee=(typeof MELEE_CATS!=='undefined'&&MELEE_CATS.has(cat));
   const isLoc=(w.power_num===66||w.power_num===77);
   const rof=gcParseRof(w.rof);
   const rc=rarCls(w.availability);
@@ -1188,19 +1219,21 @@ function gcWeaponCard(w,id,sq){
   // POWER or LOC strip
   if(isLoc)s+=gcLocStrip(w.power_num===77);
   else if(w.power)s+=gcTierStat('Power',w.power,GC_C.pow);
-  // DAMAGE (per-category)
-  if(w.damage)s+=gcBarStat('Damage',hl(w.damage,sq),gcBar(gcDmgScore(w.damage)/(C.dmg[cat]||1),GC_C.dmg));
+  // DAMAGE (whole-armory scale; vehicles separate)
+  if(w.damage)s+=gcBarStat('Damage',hl(w.damage,sq),gcBar(gcDmgScore(w.damage)/(C.dmg[grp]||1),GC_C.dmg));
   // FIRE MODE (firearms only)
   if(!isMelee&&gcNum(w.range_long))s+=gcFireModes(rof);
-  // RANGE (per-category)
-  if(!isMelee&&gcNum(w.range_long)){const rl=gcNum(w.range_long),mx=C.rng[cat];s+=gcBarStat('Range',(rl>=1000?(rl/1000)+'k m':rl+' m'),gcBar(mx?rl/mx:0,GC_C.rng));}
+  // RANGE (canonical per-weapon range tier ÷ top tier in group; percentile fallback if off-table)
+  if(!isMelee&&gcNum(w.range_long)){const rl=gcNum(w.range_long),t=gcRangeTier(w),mx=C.rngTierMax[grp];
+    const rfill=(t!=null&&mx)?t/mx:gcPct(C.rngDist[grp],gcAvgRange(w));
+    s+=gcBarStat('Range',(rl>=1000?(rl/1000)+'k m':rl+' m'),gcBar(rfill,GC_C.rng));}
   // BLAST radius (separate stat — rof field overloads this)
-  if(rof.radius){const mx=C.blast[cat];s+=gcBarStat('Blast Radius',rof.radius+' m',gcBar(mx?rof.radius/mx:0,GC_C.blast),{wide:true});}
+  if(rof.radius){const mx=C.blast[grp];s+=gcBarStat('Blast Radius',rof.radius+' m',gcBar(mx?rof.radius/mx:0,GC_C.blast),{wide:true});}
   // CAPACITY
   if(String(w.ammo).toLowerCase().includes('unlim'))s+=gcBarStat('Capacity','Unlimited',gcBar(1,GC_C.cap));
-  else if(gcNum(w.ammo)&&C.ammo[cat])s+=gcBarStat('Capacity',hl(String(w.ammo),sq),gcBar(gcNum(w.ammo)/C.ammo[cat],GC_C.cap));
-  // EXPERTISE
-  if(gcNum(w.expertise)!=null&&C.exp[cat])s+=gcBarStat('Expertise',esc(String(w.expertise)),gcBar(gcNum(w.expertise)/C.exp[cat],GC_C.exp));
+  else if(gcNum(w.ammo)&&C.ammo[grp])s+=gcBarStat('Capacity',hl(String(w.ammo),sq),gcBar(gcNum(w.ammo)/C.ammo[grp],GC_C.cap));
+  // EXPERTISE (universal 0–10 stat)
+  if(gcNum(w.expertise)!=null)s+=gcBarStat('Expertise',esc(String(w.expertise)),gcBar(gcNum(w.expertise)/10,GC_C.exp));
   s+='</div>';
   s+=gcTagRow(w.legality,w.special,w.cost,sq);
   // ── expanded detail (full — nothing lost) ──
@@ -1238,7 +1271,7 @@ function gcWeaponCard(w,id,sq){
 }
 
 function gcArmorCard(a,id,sq){
-  const smax=gcCeils().a.soak[a.type]||8;
+  const smax=gcCeils().a.soak[ccDefFamily(a.type)]||1;
   const rc=rarCls(a.availability);
   const dv=t=>'<span class="'+defCls(t)+'">'+esc(t||'—')+'</span>';
   let s='<div class="card '+rc+'" id="'+id+'" data-tog="'+id+'" style="--rc:'+gcRarHex(a.availability)+'">';
@@ -1274,7 +1307,7 @@ function gcArmorCard(a,id,sq){
 }
 
 function gcDatacomCard(d,id,sq){
-  const Cd=gcCeils().d, t=d.type;
+  const Cd=gcCeils().d, dgrp=(d.type==='Network'?'network':'player');
   const rc=rarCls(d.availability);
   const dv=v=>'<span class="'+defCls(v)+'">'+esc(v||'—')+'</span>';
   let s='<div class="card '+rc+'" id="'+id+'" data-tog="'+id+'" style="--rc:'+gcRarHex(d.availability)+'">';
@@ -1285,10 +1318,10 @@ function gcDatacomCard(d,id,sq){
   s+=gcTierStat('Def · Enrg',d.def_energy,GC_DEFHEX.energy);
   s+=gcTierStat('Def · Tech',d.def_tech,GC_DEFHEX.tech);
   s+=gcTierStat('Def · Sprt',d.def_spiritual,GC_DEFHEX.spiritual);
-  if(d.soak)s+=gcBarStat('Soak',hl(d.soak,sq),gcBar(gcDmgScore(d.soak)/(Cd.soak[t]||1),GC_C.soak),{wide:true});
-  if(gcNum(d.system)&&Cd.sys[t])s+=gcBarStat('System',hl(String(d.system),sq),gcBar(gcNum(d.system)/Cd.sys[t],GC_C.sys));
-  if(gcNum(d.memory)&&Cd.mem[t])s+=gcBarStat('Memory',hl(String(d.memory),sq),gcBar(gcNum(d.memory)/Cd.mem[t],GC_C.mem));
-  if(gcNum(d.cpu)&&Cd.cpu[t])s+=gcBarStat('CPU',hl(String(d.cpu),sq),gcBar(gcNum(d.cpu)/Cd.cpu[t],GC_C.cpu));
+  if(d.soak)s+=gcBarStat('Soak',hl(d.soak,sq),gcBar(gcDmgScore(d.soak)/(Cd.soak[dgrp]||1),GC_C.soak),{wide:true});
+  if(gcNum(d.system)!=null)s+=gcBarStat('System',hl(String(d.system),sq),gcBar(gcNum(d.system)/(Cd.sys[dgrp]||1),GC_C.sys));
+  if(gcNum(d.memory)!=null)s+=gcBarStat('Memory',hl(String(d.memory),sq),gcBar(gcNum(d.memory)/(Cd.mem[dgrp]||1),GC_C.mem));
+  if(gcNum(d.cpu)!=null)s+=gcBarStat('CPU',hl(String(d.cpu),sq),gcBar(gcNum(d.cpu)/(Cd.cpu[dgrp]||1),GC_C.cpu));
   s+='</div>';
   s+=gcTagRow(d.legality,d.special,d.cost,sq);
   s+='<div class="cb">';
