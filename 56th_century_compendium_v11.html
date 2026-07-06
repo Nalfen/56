@@ -33,6 +33,9 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 .fc:hover{border-color:var(--mu);color:var(--tx2);}
 .fc.active{background:rgba(255,255,255,.08);border-color:var(--tx3);color:var(--tx);font-weight:500;}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:8px;}
+/* only lay out / paint cards as they scroll into view (native virtualization) — keeps big
+   card lists (weapons/armor/…) from stalling the first paint. Harmless where unsupported. */
+.grid>.card,.grid2>.card{content-visibility:auto;contain-intrinsic-size:auto 116px;}
 .grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:8px;}
 .list{display:flex;flex-direction:column;gap:0;}
 .card{background:transparent;border:none;border-left:2px solid #3a3a3c;border-bottom:1px solid var(--border);border-radius:0;padding:14px 0 14px 16px;transition:background .14s;cursor:pointer;}
@@ -232,17 +235,21 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 .gc-lab{font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--mu2);font-family:'JetBrains Mono',monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .gc-val{font-size:11px;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--tx3);white-space:nowrap;flex:none;}
 .gc-val.tier{font-size:9.5px;letter-spacing:.02em;}
-.gc-bar{display:flex;gap:1px;height:5px;overflow:hidden;}
-.gc-seg{flex:1;min-width:0;background:rgba(255,255,255,.14);border-radius:1px;}
-.gc-seg.f{background:var(--gcbar,#5fd4c4);}
+/* segmented bar via CSS gradients = 2 DOM nodes instead of ~11 (keeps the pip look, far lighter
+   to render across hundreds of cards). FIXED-px pips (10px pip + 2px gap) so every pip is the
+   SAME size on every bar regardless of bar width; filled & empty pips are identical (same grid,
+   just coloured vs dim). Track = dim pips; the <i> child (width = fill%) = the coloured pips. */
+.gc-bar{position:relative;height:5px;border-radius:1px;overflow:hidden;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.15) 0 10px,rgba(0,0,0,0) 10px 12px);}
+.gc-bar>i{position:absolute;left:0;top:0;bottom:0;display:block;
+  background:repeating-linear-gradient(90deg,var(--gcbar,#5fd4c4) 0 10px,rgba(0,0,0,0) 10px 12px);}
 /* roomier + a soft glow only when the card is opened */
 .card.x .gc-stats{gap:9px 16px;margin-top:10px;}
 .card.x .gc-srow{margin-bottom:4px;}
 .card.x .gc-lab{font-size:9.5px;letter-spacing:.09em;}
 .card.x .gc-val{font-size:12px;}
 .card.x .gc-val.tier{font-size:10px;}
-.card.x .gc-bar{gap:2px;height:8px;}
-.card.x .gc-seg.f{box-shadow:0 0 4px color-mix(in srgb,var(--gcbar,#5fd4c4) 55%,transparent);}
+.card.x .gc-bar{height:8px;}
 /* shotgun LOC range-power strip */
 .gc-loc-cells{display:flex;gap:5px;}
 .gc-loc-cell{flex:1;min-width:0;border:1px solid var(--border);border-radius:4px;padding:3px 2px;text-align:center;background:rgba(255,255,255,.02);}
@@ -1160,18 +1167,15 @@ function gcCeils(){
   };
   return _gcCeils;
 }
-function gcBar(pct,color){
-  pct=Math.max(0,Math.min(1,isFinite(pct)?pct:0));const f=Math.round(pct*GC_SEGN);
-  let s='<div class="gc-bar" style="--gcbar:'+color+'">';
-  for(let i=0;i<GC_SEGN;i++)s+='<div class="gc-seg'+(i<f?' f':'')+'"></div>';
-  return s+'</div>';
+// 2-node bar: <div.gc-bar (dim pip track)><i (coloured pips, width = fill%)></i></div>.
+// Pips are a fixed-px texture (uniform everywhere); the fill is a smooth width so the level is
+// exact and filled/empty pips are the same size.
+function gcBarN(frac,color){
+  frac=Math.max(0,Math.min(1,isFinite(frac)?frac:0));
+  return '<div class="gc-bar" style="--gcbar:'+color+'"><i style="width:'+(frac*100).toFixed(2)+'%"></i></div>';
 }
-function gcTierBar(lbl,color){
-  const f=Math.round((GC_TIER[String(lbl||'').toLowerCase()]??0)*GC_SEGN);
-  let s='<div class="gc-bar" style="--gcbar:'+color+'">';
-  for(let i=0;i<GC_SEGN;i++)s+='<div class="gc-seg'+(i<f?' f':'')+'"></div>';
-  return s+'</div>';
-}
+function gcBar(pct,color){return gcBarN(pct,color);}
+function gcTierBar(lbl,color){return gcBarN(GC_TIER[String(lbl||'').toLowerCase()]??0,color);}
 function gcBarStat(lab,valHtml,inner,opts){
   opts=opts||{};
   return '<div class="gc-stat'+(opts.wide?' wide':'')+'"><div class="gc-srow"><span class="gc-lab">'+lab+
@@ -1228,7 +1232,7 @@ function gcWeaponCard(w,id,sq){
     const rfill=(t!=null&&mx)?t/mx:gcPct(C.rngDist[grp],gcAvgRange(w));
     s+=gcBarStat('Range',(rl>=1000?(rl/1000)+'k m':rl+' m'),gcBar(rfill,GC_C.rng));}
   // BLAST radius (separate stat — rof field overloads this)
-  if(rof.radius){const mx=C.blast[grp];s+=gcBarStat('Blast Radius',rof.radius+' m',gcBar(mx?rof.radius/mx:0,GC_C.blast),{wide:true});}
+  if(rof.radius){const mx=C.blast[grp];s+=gcBarStat('Blast Radius',rof.radius+' m',gcBar(mx?rof.radius/mx:0,GC_C.blast));}
   // CAPACITY
   if(String(w.ammo).toLowerCase().includes('unlim'))s+=gcBarStat('Capacity','Unlimited',gcBar(1,GC_C.cap));
   else if(gcNum(w.ammo)&&C.ammo[grp])s+=gcBarStat('Capacity',hl(String(w.ammo),sq),gcBar(gcNum(w.ammo)/C.ammo[grp],GC_C.cap));
@@ -1282,7 +1286,7 @@ function gcArmorCard(a,id,sq){
   s+=gcTierStat('Def · Enrg',a.def_energy,GC_DEFHEX.energy);
   s+=gcTierStat('Def · Tech',a.def_tech,GC_DEFHEX.tech);
   s+=gcTierStat('Def · Sprt',a.def_spiritual,GC_DEFHEX.spiritual);
-  if(a.soak)s+=gcBarStat('Soak',hl(a.soak,sq),gcBar(gcDmgScore(a.soak)/(smax||1),GC_C.soak),{wide:true});
+  if(a.soak)s+=gcBarStat('Soak',hl(a.soak,sq),gcBar(gcDmgScore(a.soak)/(smax||1),GC_C.soak));
   s+='</div>';
   s+=gcTagRow(a.legality,a.special,a.cost,sq);
   s+='<div class="cb">';
@@ -1318,7 +1322,7 @@ function gcDatacomCard(d,id,sq){
   s+=gcTierStat('Def · Enrg',d.def_energy,GC_DEFHEX.energy);
   s+=gcTierStat('Def · Tech',d.def_tech,GC_DEFHEX.tech);
   s+=gcTierStat('Def · Sprt',d.def_spiritual,GC_DEFHEX.spiritual);
-  if(d.soak)s+=gcBarStat('Soak',hl(d.soak,sq),gcBar(gcDmgScore(d.soak)/(Cd.soak[dgrp]||1),GC_C.soak),{wide:true});
+  if(d.soak)s+=gcBarStat('Soak',hl(d.soak,sq),gcBar(gcDmgScore(d.soak)/(Cd.soak[dgrp]||1),GC_C.soak));
   if(gcNum(d.system)!=null)s+=gcBarStat('System',hl(String(d.system),sq),gcBar(gcNum(d.system)/(Cd.sys[dgrp]||1),GC_C.sys));
   if(gcNum(d.memory)!=null)s+=gcBarStat('Memory',hl(String(d.memory),sq),gcBar(gcNum(d.memory)/(Cd.mem[dgrp]||1),GC_C.mem));
   if(gcNum(d.cpu)!=null)s+=gcBarStat('CPU',hl(String(d.cpu),sq),gcBar(gcNum(d.cpu)/(Cd.cpu[dgrp]||1),GC_C.cpu));
@@ -9884,6 +9888,10 @@ function render(){
   }catch(e){}
   var act=document.querySelector('.nb.active');if(act){var dd=act.closest('details.ngrp');if(dd)dd.open=true;}
 })();
+// Warm the heavy one-time caches now (during boot, behind the progress bar) so the first
+// weapons/armor/… view doesn't pay for them on click: card scaling ceilings + xref index.
+try{gcCeils();}catch(e){}
+try{xrefMap();}catch(e){}
 render();
 // ─── Star Map Popup Drag ──────────────────────────────────────────────────────
 // Uses DOMContentLoaded so smap-popup (defined after the closing script tag) exists in DOM.
