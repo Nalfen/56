@@ -1107,7 +1107,7 @@ const GC_SEGN=10;
 const GC_TIER={none:0,'':0,'—':0,low:.25,medium:.5,med:.5,high:.78,extreme:1,loc:0};
 const GC_RARHEX={COMMON:'#8a97a1',UNCOMMON:'#30d158',RARE:'#0a84ff',LIMITED:'#bf5af2',UNIQUE:'#ffd60a',CLASSIFIED:'#ff453a'};
 const GC_DEFHEX={physical:'#ff9f0a',energy:'#bf5af2',tech:'#5fd4c4',spiritual:'#ffd60a'};
-const GC_C={dmg:'#e07a4d',pow:'#ff453a',rng:'#5fd4c4',exp:'#5fd4c4',cap:'#30d158',soak:'#30d158',blast:'#ff9f0a',sys:'#0a84ff',mem:'#5fd4c4',cpu:'#30d158'};
+const GC_C={dmg:'#e07a4d',pow:'#ff453a',rng:'#5fd4c4',exp:'#5fd4c4',cap:'#30d158',soak:'#30d158',blast:'#ff9f0a',sys:'#0a84ff',mem:'#5fd4c4',cpu:'#30d158',reload:'#4fc3f7'};
 function gcNum(x){const v=parseFloat(String(x==null?'':x).replace(/,/g,''));return isNaN(v)?null:v;}
 /* Effective value of an "<N>D + <F>" pool: dice succeed ~60% each (d10 ≥5), the flat is
    guaranteed — so expected = 0.6·dice + flat (0D+8 > 8D+0). Handles negative flats. */
@@ -1138,6 +1138,22 @@ function gcParseRof(w){
   return {burst,auto,radius,raw};
 }
 function gcFmtBlast(n){n=+n;return n>=1000?fmt(n/1000)+' km':n+' m';}
+/* Reload/Recharge — INVERTED speed bar (faster = fuller): quick/1-round is best, then
+   standard/2-round, complex/3-round, then the slow tiers (5r, many, scene+). Label is
+   format-based (Phil): action words = munition RELOAD; a time value = energy RECHARGE. */
+function gcReloadTier(s){
+  s=String(s||'').toLowerCase();
+  if(!s.trim())return null;
+  if(/scene|minute|hour|day/.test(s))return 0.10;
+  if(/quick/.test(s))return 1.0;
+  if(/standard/.test(s))return 0.75;
+  if(/complex/.test(s))return 0.55;
+  const m=s.match(/(\d+)/);
+  if(m){const n=+m[1];return n<=1?1.0:n===2?0.75:n===3?0.55:n<=5?0.4:n<=9?0.28:0.15;}
+  return null;
+}
+function gcReloadLabel(s){return /quick|standard|complex/i.test(String(s||''))?'Reload':'Recharge';}
+function gcReloadDisp(s){return String(s||'').replace(/\s*round\(s\)/i,'r').trim();}
 let _gcCeils=null;
 function gcCeils(){
   if(_gcCeils)return _gcCeils;
@@ -1238,6 +1254,8 @@ function gcWeaponCard(w,id,sq){
   // CAPACITY
   if(String(w.ammo).toLowerCase().includes('unlim'))s+=gcBarStat('Capacity','Unlimited',gcBar(1,GC_C.cap));
   else if(gcNum(w.ammo)&&C.ammo[grp])s+=gcBarStat('Capacity',hl(String(w.ammo),sq),gcBar(gcNum(w.ammo)/C.ammo[grp],GC_C.cap));
+  // RELOAD / RECHARGE (inverted speed — faster = fuller; label is munition-action vs energy-time)
+  {const rt=gcReloadTier(w.reload);if(rt!=null)s+=gcBarStat(gcReloadLabel(w.reload),esc(gcReloadDisp(w.reload)),gcBar(rt,GC_C.reload));}
   // EXPERTISE (universal 0–10 stat)
   if(gcNum(w.expertise)!=null)s+=gcBarStat('Expertise',esc(String(w.expertise)),gcBar(gcNum(w.expertise)/10,GC_C.exp));
   s+='</div>';
