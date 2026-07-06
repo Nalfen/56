@@ -1132,12 +1132,12 @@ function gcTierBar(lbl,color){
   for(let i=0;i<GC_SEGN;i++)s+='<div class="gc-seg'+(i<f?' f':'')+'"></div>';
   return s+'</div>';
 }
-function gcStat(lab,valHtml,inner,opts){
+function gcBarStat(lab,valHtml,inner,opts){
   opts=opts||{};
   return '<div class="gc-stat'+(opts.wide?' wide':'')+'"><div class="gc-srow"><span class="gc-lab">'+lab+
     '</span><span class="gc-val'+(opts.tier?' tier':'')+'">'+valHtml+'</span></div>'+inner+'</div>';
 }
-function gcTierStat(lab,lbl,color){return gcStat(lab,esc(lbl||'None'),gcTierBar(lbl,color),{tier:true});}
+function gcTierStat(lab,lbl,color){return gcBarStat(lab,esc(lbl||'None'),gcTierBar(lbl,color),{tier:true});}
 /* shotgun LOC strip: LOC = High@short/Med@med/Low@long; LOC+1 bumps each up a tier */
 const GC_TUP={Low:'Medium',Medium:'High',High:'Extreme'};
 const GC_THEX={Low:'#30d158',Medium:'#ffd60a',High:'#ff9f0a',Extreme:'#ff453a'};
@@ -1180,18 +1180,18 @@ function gcWeaponCard(w,id,sq){
   if(isLoc)s+=gcLocStrip(w.power_num===77);
   else if(w.power)s+=gcTierStat('Power',w.power,GC_C.pow);
   // DAMAGE (per-category)
-  if(w.damage)s+=gcStat('Damage',hl(w.damage,sq),gcBar(gcDmgScore(w.damage)/(C.dmg[cat]||1),GC_C.dmg));
+  if(w.damage)s+=gcBarStat('Damage',hl(w.damage,sq),gcBar(gcDmgScore(w.damage)/(C.dmg[cat]||1),GC_C.dmg));
   // FIRE MODE (firearms only)
   if(!isMelee&&gcNum(w.range_long))s+=gcFireModes(rof);
   // RANGE (per-category)
-  if(!isMelee&&gcNum(w.range_long)){const rl=gcNum(w.range_long),mx=C.rng[cat];s+=gcStat('Range',(rl>=1000?(rl/1000)+'k m':rl+' m'),gcBar(mx?rl/mx:0,GC_C.rng));}
+  if(!isMelee&&gcNum(w.range_long)){const rl=gcNum(w.range_long),mx=C.rng[cat];s+=gcBarStat('Range',(rl>=1000?(rl/1000)+'k m':rl+' m'),gcBar(mx?rl/mx:0,GC_C.rng));}
   // BLAST radius (separate stat — rof field overloads this)
-  if(rof.radius){const mx=C.blast[cat];s+=gcStat('Blast Radius',rof.radius+' m',gcBar(mx?rof.radius/mx:0,GC_C.blast),{wide:true});}
+  if(rof.radius){const mx=C.blast[cat];s+=gcBarStat('Blast Radius',rof.radius+' m',gcBar(mx?rof.radius/mx:0,GC_C.blast),{wide:true});}
   // CAPACITY
-  if(String(w.ammo).toLowerCase().includes('unlim'))s+=gcStat('Capacity','Unlimited',gcBar(1,GC_C.cap));
-  else if(gcNum(w.ammo)&&C.ammo[cat])s+=gcStat('Capacity',hl(String(w.ammo),sq),gcBar(gcNum(w.ammo)/C.ammo[cat],GC_C.cap));
+  if(String(w.ammo).toLowerCase().includes('unlim'))s+=gcBarStat('Capacity','Unlimited',gcBar(1,GC_C.cap));
+  else if(gcNum(w.ammo)&&C.ammo[cat])s+=gcBarStat('Capacity',hl(String(w.ammo),sq),gcBar(gcNum(w.ammo)/C.ammo[cat],GC_C.cap));
   // EXPERTISE
-  if(gcNum(w.expertise)!=null&&C.exp[cat])s+=gcStat('Expertise',esc(String(w.expertise)),gcBar(gcNum(w.expertise)/C.exp[cat],GC_C.exp));
+  if(gcNum(w.expertise)!=null&&C.exp[cat])s+=gcBarStat('Expertise',esc(String(w.expertise)),gcBar(gcNum(w.expertise)/C.exp[cat],GC_C.exp));
   s+='</div>';
   s+=gcTagRow(w.legality,w.special,w.cost,sq);
   // ── expanded detail (full — nothing lost) ──
@@ -1240,7 +1240,7 @@ function gcArmorCard(a,id,sq){
   s+=gcTierStat('Def · Enrg',a.def_energy,GC_DEFHEX.energy);
   s+=gcTierStat('Def · Tech',a.def_tech,GC_DEFHEX.tech);
   s+=gcTierStat('Def · Sprt',a.def_spiritual,GC_DEFHEX.spiritual);
-  if(a.soak)s+=gcStat('Soak',hl(a.soak,sq),gcBar((a.soak_max||0)/smax,GC_C.soak),{wide:true});
+  if(a.soak)s+=gcBarStat('Soak',hl(a.soak,sq),gcBar((a.soak_max||0)/smax,GC_C.soak),{wide:true});
   s+='</div>';
   s+=gcTagRow(a.legality,a.special,a.cost,sq);
   s+='<div class="cb">';
@@ -1276,10 +1276,10 @@ function gcDatacomCard(d,id,sq){
   s+=gcTierStat('Def · Enrg',d.def_energy,GC_DEFHEX.energy);
   s+=gcTierStat('Def · Tech',d.def_tech,GC_DEFHEX.tech);
   s+=gcTierStat('Def · Sprt',d.def_spiritual,GC_DEFHEX.spiritual);
-  if(d.soak)s+=gcStat('Soak',hl(d.soak,sq),gcBar((d.soak_max||0)/(Cd.soak[t]||8),GC_C.soak),{wide:true});
-  if(gcNum(d.system)&&Cd.sys[t])s+=gcStat('System',hl(String(d.system),sq),gcBar(gcNum(d.system)/Cd.sys[t],GC_C.sys));
-  if(gcNum(d.memory)&&Cd.mem[t])s+=gcStat('Memory',hl(String(d.memory),sq),gcBar(gcNum(d.memory)/Cd.mem[t],GC_C.mem));
-  if(gcNum(d.cpu)&&Cd.cpu[t])s+=gcStat('CPU',hl(String(d.cpu),sq),gcBar(gcNum(d.cpu)/Cd.cpu[t],GC_C.cpu));
+  if(d.soak)s+=gcBarStat('Soak',hl(d.soak,sq),gcBar((d.soak_max||0)/(Cd.soak[t]||8),GC_C.soak),{wide:true});
+  if(gcNum(d.system)&&Cd.sys[t])s+=gcBarStat('System',hl(String(d.system),sq),gcBar(gcNum(d.system)/Cd.sys[t],GC_C.sys));
+  if(gcNum(d.memory)&&Cd.mem[t])s+=gcBarStat('Memory',hl(String(d.memory),sq),gcBar(gcNum(d.memory)/Cd.mem[t],GC_C.mem));
+  if(gcNum(d.cpu)&&Cd.cpu[t])s+=gcBarStat('CPU',hl(String(d.cpu),sq),gcBar(gcNum(d.cpu)/Cd.cpu[t],GC_C.cpu));
   s+='</div>';
   s+=gcTagRow(d.legality,d.special,d.cost,sq);
   s+='<div class="cb">';
