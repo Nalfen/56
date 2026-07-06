@@ -219,6 +219,31 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 /* Weapon pills */
 .wpn-pills{display:flex;flex-wrap:wrap;gap:3px;margin-top:5px;}
 .wpn-pill{font-family:'JetBrains Mono',monospace;font-size:10.5px;padding:2px 7px;border-radius:4px;white-space:nowrap;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:var(--tx2);}
+/* ── Graphical stat cards (gc-*) — segmented graded bars, video-game loadout look ── */
+.gc-head{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.gc-badge{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:20px;font-size:9px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;border:1px solid var(--rc,#636366);color:var(--rc,#8a97a1);background:color-mix(in srgb,var(--rc,#636366) 13%,transparent);white-space:nowrap;}
+.gc-badge .gc-dot{width:5px;height:5px;border-radius:50%;background:var(--rc,#8a97a1);box-shadow:0 0 6px var(--rc,#8a97a1);}
+.gc-sub{font-size:10.5px;color:var(--mu);margin-top:3px;letter-spacing:.03em;}
+.gc-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;margin-top:10px;}
+.gc-stat{min-width:0;}
+.gc-stat.wide{grid-column:1 / -1;}
+.gc-srow{display:flex;justify-content:space-between;align-items:baseline;gap:6px;margin-bottom:4px;}
+.gc-lab{font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mu2);font-family:'JetBrains Mono',monospace;white-space:nowrap;}
+.gc-val{font-size:12px;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--tx3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.gc-val.tier{font-size:10px;letter-spacing:.03em;}
+.gc-bar{display:flex;gap:2px;height:7px;}
+.gc-seg{flex:1;background:rgba(255,255,255,.06);border-radius:1px;}
+.gc-seg.f{background:var(--gcbar,#5fd4c4);box-shadow:0 0 4px color-mix(in srgb,var(--gcbar,#5fd4c4) 65%,transparent);}
+/* shotgun LOC range-power strip */
+.gc-loc-cells{display:flex;gap:5px;}
+.gc-loc-cell{flex:1;border:1px solid var(--border);border-radius:4px;padding:4px 3px;text-align:center;background:rgba(255,255,255,.02);}
+.gc-lr{font-size:8px;letter-spacing:.06em;color:var(--mu);text-transform:uppercase;}
+.gc-lt{font-size:11px;font-weight:700;margin-top:1px;font-family:'JetBrains Mono',monospace;}
+/* fire-mode indicators */
+.gc-modes{display:flex;gap:4px;}
+.gc-mchip{flex:1;text-align:center;font-size:9px;letter-spacing:.06em;font-family:'JetBrains Mono',monospace;padding:3px 2px;border-radius:3px;border:1px solid var(--border);color:var(--mu2);background:rgba(255,255,255,.02);text-transform:uppercase;}
+.gc-mchip.on{border-color:var(--gcbar,#5fd4c4);color:var(--gcbar,#5fd4c4);background:color-mix(in srgb,var(--gcbar,#5fd4c4) 12%,transparent);font-weight:700;}
+.gc-mchip.off{opacity:.32;}
 .wpill-dmg{border-color:rgba(255,159,10,.25)!important;color:var(--or)!important;}
 .wpill-pwr{border-color:rgba(255,214,10,.2)!important;color:var(--ye)!important;}
 .wpill-cst{border-color:rgba(48,209,88,.2)!important;color:var(--gr)!important;}
@@ -1052,6 +1077,238 @@ function descHtml(descStr,sq){
   if(paras.length===1)return '<div class="desc" style="margin-bottom:8px;">'+hl(descStr,sq)+'</div>';
   return '<div class="desc" style="margin-bottom:8px;">'+paras.map(p=>p.trim()).filter(Boolean).map(p=>'<p>'+hl(p,sq)+'</p>').join('')+'</div>';
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Graphical stat cards (gc-*) — segmented graded bars for weapons/armor/datacoms.
+   Per-CATEGORY scaling: numeric bars normalise against the max within the item's
+   own group (weapons by `category`, armor & datacoms by `type`). POWER / DEFENSE
+   use the absolute tier ladder (None/Low/Medium/High/Extreme). Shotguns (POWER
+   "LOC", power_num 66/77) get a range→power strip. R.O.F is split into fire-mode
+   indicators (Single/Burst/Auto) + a separate BLAST radius stat (the rof field
+   currently conflates the two — see decisions log).
+   ══════════════════════════════════════════════════════════════════════════ */
+const GC_SEGN=14;
+const GC_TIER={none:0,'':0,'—':0,low:4,medium:8,med:8,high:11,extreme:14,loc:0};
+const GC_RARHEX={COMMON:'#8a97a1',UNCOMMON:'#30d158',RARE:'#0a84ff',LIMITED:'#bf5af2',UNIQUE:'#ffd60a',CLASSIFIED:'#ff453a'};
+const GC_DEFHEX={physical:'#ff9f0a',energy:'#bf5af2',tech:'#5fd4c4',spiritual:'#ffd60a'};
+const GC_C={dmg:'#e07a4d',pow:'#ff453a',rng:'#5fd4c4',exp:'#5fd4c4',cap:'#30d158',soak:'#30d158',blast:'#ff9f0a',sys:'#0a84ff',mem:'#5fd4c4',cpu:'#30d158'};
+function gcNum(x){const v=parseFloat(String(x==null?'':x).replace(/,/g,''));return isNaN(v)?null:v;}
+function gcDmgScore(s){const m=String(s).match(/(\d+)\s*D\s*\+\s*(\d+)/i);return m?(+m[1]+ +m[2]):(gcNum(s)||0);}
+function gcRarHex(a){return GC_RARHEX[(a||'').toUpperCase()]||'#8a97a1';}
+/* R.O.F parser: fire modes (B/F) + blast radius (Nm) live in the same field */
+function gcParseRof(rof){
+  const s=String(rof||'');
+  const rm=s.match(/(\d+)\s*m\b/i);
+  const burst=/B/i.test(s), auto=/F/i.test(s);
+  const raw=(!burst&&!auto&&!rm&&s.trim()&&s.trim()!=='-')?s.trim():'';
+  return {burst,auto,radius:rm?+rm[1]:null,raw};
+}
+let _gcCeils=null;
+function gcCeils(){
+  if(_gcCeils)return _gcCeils;
+  const by=(items,key,val)=>{const m={};(items||[]).forEach(it=>{const k=it[key]||'?';const v=val(it);if(v==null||!isFinite(v))return;if(!(k in m)||v>m[k])m[k]=v;});return m;};
+  _gcCeils={
+    w:{
+      dmg:by(g.weapons,'category',w=>gcDmgScore(w.damage)),
+      rng:by(g.weapons,'category',w=>gcNum(w.range_long)),
+      exp:by(g.weapons,'category',w=>gcNum(w.expertise)),
+      ammo:by(g.weapons,'category',w=>{const a=gcNum(w.ammo);return(a&&a<10000)?a:null;}),
+      blast:by(g.weapons,'category',w=>gcParseRof(w.rof).radius),
+    },
+    a:{soak:by(g.armor,'type',a=>a.soak_max)},
+    d:{soak:by(g.datacoms,'type',d=>d.soak_max),sys:by(g.datacoms,'type',d=>gcNum(d.system)),mem:by(g.datacoms,'type',d=>gcNum(d.memory)),cpu:by(g.datacoms,'type',d=>gcNum(d.cpu))},
+  };
+  return _gcCeils;
+}
+function gcBar(pct,color){
+  pct=Math.max(0,Math.min(1,isFinite(pct)?pct:0));const f=Math.round(pct*GC_SEGN);
+  let s='<div class="gc-bar" style="--gcbar:'+color+'">';
+  for(let i=0;i<GC_SEGN;i++)s+='<div class="gc-seg'+(i<f?' f':'')+'"></div>';
+  return s+'</div>';
+}
+function gcTierBar(lbl,color){
+  const f=GC_TIER[String(lbl||'').toLowerCase()]??0;
+  let s='<div class="gc-bar" style="--gcbar:'+color+'">';
+  for(let i=0;i<GC_SEGN;i++)s+='<div class="gc-seg'+(i<f?' f':'')+'"></div>';
+  return s+'</div>';
+}
+function gcStat(lab,valHtml,inner,opts){
+  opts=opts||{};
+  return '<div class="gc-stat'+(opts.wide?' wide':'')+'"><div class="gc-srow"><span class="gc-lab">'+lab+
+    '</span><span class="gc-val'+(opts.tier?' tier':'')+'">'+valHtml+'</span></div>'+inner+'</div>';
+}
+function gcTierStat(lab,lbl,color){return gcStat(lab,esc(lbl||'None'),gcTierBar(lbl,color),{tier:true});}
+/* shotgun LOC strip: LOC = High@short/Med@med/Low@long; LOC+1 bumps each up a tier */
+const GC_TUP={Low:'Medium',Medium:'High',High:'Extreme'};
+const GC_THEX={Low:'#30d158',Medium:'#ffd60a',High:'#ff9f0a',Extreme:'#ff453a'};
+function gcLocStrip(plus){
+  let cells=[['Short','High'],['Med','Medium'],['Long','Low']];
+  if(plus)cells=cells.map(([r,t])=>[r,GC_TUP[t]||t]);
+  return '<div class="gc-stat wide"><div class="gc-srow"><span class="gc-lab">Power · by range (LOC'+(plus?'+1':'')+')</span>'+
+    '<span class="gc-val tier">Falloff</span></div><div class="gc-loc-cells">'+
+    cells.map(([r,t])=>'<div class="gc-loc-cell"><div class="gc-lr">'+r+'</div><div class="gc-lt" style="color:'+(GC_THEX[t]||'#8a97a1')+'">'+t+'</div></div>').join('')+
+    '</div></div>';
+}
+/* fire-mode indicators: SGL always available on a firearm; BST/AUTO lit per rof flags */
+function gcFireModes(rofParsed){
+  const mk=(lbl,on)=>'<div class="gc-mchip '+(on?'on':'off')+'" style="--gcbar:'+GC_C.pow+'">'+lbl+'</div>';
+  return '<div class="gc-stat wide"><div class="gc-srow"><span class="gc-lab">Fire Mode</span>'+
+    '<span class="gc-val tier">'+(rofParsed.auto?'Full Auto':rofParsed.burst?'Burst':'Single')+'</span></div>'+
+    '<div class="gc-modes">'+mk('SGL',true)+mk('BURST',rofParsed.burst)+mk('AUTO',rofParsed.auto)+'</div></div>';
+}
+function gcHead(name,avail,sq){
+  return '<div class="ch gc-head"><div class="cn">'+hl(name,sq)+'</div>'+
+    '<div style="display:flex;align-items:center;gap:6px;"><span class="gc-badge"><span class="gc-dot"></span>'+esc(avail||'—')+'</span><span class="xi">▼</span></div></div>';
+}
+function gcTagRow(legality,special,cost,sq){
+  return '<div class="cr3" style="margin-top:8px;"><div class="cr3l">'+
+    (legality?'<span class="tag '+tc(legality)+'" style="font-size:9px;margin-right:4px;">'+hl(legality,sq)+'</span>':'')+
+    bst(special||'')+'</div><div class="cr3r">'+fmt(cost)+' Cr</div></div>';
+}
+function gcField(label,valHtml){return '<div class="f"><div class="fl">'+label+'</div><div class="fv">'+valHtml+'</div></div>';}
+
+function gcWeaponCard(w,id,sq){
+  const C=gcCeils().w, cat=w.category, isMelee=(typeof MELEE_CATS!=='undefined'&&MELEE_CATS.has(cat));
+  const isLoc=(w.power_num===66||w.power_num===77);
+  const rof=gcParseRof(w.rof);
+  const rc=rarCls(w.availability);
+  let s='<div class="card '+rc+'" id="'+id+'" data-tog="'+id+'" style="--rc:'+gcRarHex(w.availability)+'">';
+  s+=gcHead(w.name,w.availability,sq);
+  s+='<div class="gc-sub">'+esc((CAT_LBL[cat]||cat||'').split('(')[0].trim())+(w.dmg_type&&!isMelee?' · '+esc(w.dmg_type):isMelee?' · MELEE':'')+'</div>';
+  s+='<div class="gc-stats">';
+  // POWER or LOC strip
+  if(isLoc)s+=gcLocStrip(w.power_num===77);
+  else if(w.power)s+=gcTierStat('Power',w.power,GC_C.pow);
+  // DAMAGE (per-category)
+  if(w.damage)s+=gcStat('Damage',hl(w.damage,sq),gcBar(gcDmgScore(w.damage)/(C.dmg[cat]||1),GC_C.dmg));
+  // FIRE MODE (firearms only)
+  if(!isMelee&&gcNum(w.range_long))s+=gcFireModes(rof);
+  // RANGE (per-category)
+  if(!isMelee&&gcNum(w.range_long)){const rl=gcNum(w.range_long),mx=C.rng[cat];s+=gcStat('Range',(rl>=1000?(rl/1000)+'k m':rl+' m'),gcBar(mx?rl/mx:0,GC_C.rng));}
+  // BLAST radius (separate stat — rof field overloads this)
+  if(rof.radius){const mx=C.blast[cat];s+=gcStat('Blast Radius',rof.radius+' m',gcBar(mx?rof.radius/mx:0,GC_C.blast),{wide:true});}
+  // CAPACITY
+  if(String(w.ammo).toLowerCase().includes('unlim'))s+=gcStat('Capacity','Unlimited',gcBar(1,GC_C.cap));
+  else if(gcNum(w.ammo)&&C.ammo[cat])s+=gcStat('Capacity',hl(String(w.ammo),sq),gcBar(gcNum(w.ammo)/C.ammo[cat],GC_C.cap));
+  // EXPERTISE
+  if(gcNum(w.expertise)!=null&&C.exp[cat])s+=gcStat('Expertise',esc(String(w.expertise)),gcBar(gcNum(w.expertise)/C.exp[cat],GC_C.exp));
+  s+='</div>';
+  s+=gcTagRow(w.legality,w.special,w.cost,sq);
+  // ── expanded detail (full — nothing lost) ──
+  s+='<div class="cb">';
+  if(w.desc)s+=descHtml(w.desc,sq);
+  s+='<div class="fg">';
+  if(w.category)s+=gcField('▤ Category',hl(w.category,sq));
+  if(w.damage)s+=gcField('⚔ Damage',hl(w.damage,sq));
+  if(w.power)s+=gcField('⚡ Power',hl(w.power,sq));
+  if(w.dmg_type)s+=gcField('💥 Type',hl(w.dmg_type,sq));
+  if(isMelee){
+    if(w.handed)s+=gcField('✋ Handed',hl(w.handed,sq));
+    if(w.ammo)s+=gcField('◉ Ammo',hl(String(w.ammo),sq));
+    if(w.reload)s+=gcField('↺ Reload',hl(w.reload,sq));
+  }else{
+    if(w.rof)s+=gcField('↺ R.O.F',hl(w.rof,sq)+(rof.radius?' <span style="color:var(--mu);">(fire modes + '+rof.radius+'m blast)</span>':''));
+    if(rof.radius)s+=gcField('💣 Blast',rof.radius+' m');
+    if(w.ammo)s+=gcField('◉ Ammo',hl(String(w.ammo),sq));
+    if(w.reload)s+=gcField('⟳ Reload',hl(w.reload,sq));
+    if(w.range_short)s+=gcField('📍 Short',hl(w.range_short,sq)+'m');
+    if(w.range_med)s+=gcField('📍 Medium',hl(w.range_med,sq)+'m');
+    if(w.range_long)s+=gcField('📍 Long',hl(w.range_long,sq)+'m');
+  }
+  if(w.expertise)s+=gcField('🎯 Expertise',hl(String(w.expertise),sq));
+  if(w.size)s+=gcField('📦 Size',hl(w.size,sq));
+  if(typeof TEK_CAT!=='undefined'&&w.category===TEK_CAT)s+=gcField('🔌 TEK Frame',hl(w.tek||'TEK',sq)+(w.tek_routine?' · running '+hl(w.tek_routine,sq):' · <span style="color:var(--mu);">no routine loaded</span>'));
+  if(w.cost)s+=gcField('© Cost',fmt(w.cost)+' Cr');
+  if(w.legality)s+=gcField('⚖ Legality',hl(w.legality,sq));
+  if(w.availability)s+=gcField('◈ Avail',hl(w.availability,sq));
+  s+='</div>';
+  if(w.notes&&w.notes!=='N/A')s+='<div style="margin-top:5px;font-size:10.5px;color:var(--mu);font-style:italic;">'+hl(w.notes,sq)+'</div>';
+  if(w.special)s+='<div style="margin-top:8px;"><div class="fl" style="margin-bottom:3px;">✦ SPECIAL</div><div>'+bst(w.special)+'</div></div>';
+  s+='</div></div>';
+  return s;
+}
+
+function gcArmorCard(a,id,sq){
+  const smax=gcCeils().a.soak[a.type]||8;
+  const rc=rarCls(a.availability);
+  const dv=t=>'<span class="'+defCls(t)+'">'+esc(t||'—')+'</span>';
+  let s='<div class="card '+rc+'" id="'+id+'" data-tog="'+id+'" style="--rc:'+gcRarHex(a.availability)+'">';
+  s+=gcHead(a.name,a.availability,sq);
+  s+='<div class="gc-sub">'+esc(a.type||'')+'</div>';
+  s+='<div class="gc-stats">';
+  s+=gcTierStat('Def · Phys',a.def_physical,GC_DEFHEX.physical);
+  s+=gcTierStat('Def · Enrg',a.def_energy,GC_DEFHEX.energy);
+  s+=gcTierStat('Def · Tech',a.def_tech,GC_DEFHEX.tech);
+  s+=gcTierStat('Def · Sprt',a.def_spiritual,GC_DEFHEX.spiritual);
+  if(a.soak)s+=gcStat('Soak',hl(a.soak,sq),gcBar((a.soak_max||0)/smax,GC_C.soak),{wide:true});
+  s+='</div>';
+  s+=gcTagRow(a.legality,a.special,a.cost,sq);
+  s+='<div class="cb">';
+  if(a.desc)s+=descHtml(a.desc,sq);
+  s+='<div class="fg">';
+  if(a.type)s+=gcField('▤ Type',hl(a.type,sq));
+  if(a.def_physical)s+=gcField('🛡 Physical',dv(a.def_physical));
+  if(a.def_energy)s+=gcField('⚡ Energy',dv(a.def_energy));
+  if(a.def_tech)s+=gcField('💻 Tech',dv(a.def_tech));
+  if(a.def_spiritual)s+=gcField('✨ Spiritual',dv(a.def_spiritual));
+  if(a.soak)s+=gcField('🛡 Soak',hl(a.soak,sq));
+  if(a.charges&&a.charges!=='0')s+=gcField('⚡ Charges',hl(a.charges,sq));
+  if(a.regen&&a.regen!=='0')s+=gcField('↺ Regen',hl(a.regen,sq));
+  if(a.size)s+=gcField('📦 Size',hl(a.size,sq));
+  if(a.cost)s+=gcField('© Cost',fmt(a.cost)+' Cr');
+  if(a.legality)s+=gcField('⚖ Legality',hl(a.legality,sq));
+  if(a.availability)s+=gcField('◈ Avail',hl(a.availability,sq));
+  s+='</div>';
+  if(a.special)s+='<div style="margin-top:8px;"><div class="fl" style="margin-bottom:3px;">✦ SPECIAL</div><div>'+bst(a.special)+'</div></div>';
+  s+='</div></div>';
+  return s;
+}
+
+function gcDatacomCard(d,id,sq){
+  const Cd=gcCeils().d, t=d.type;
+  const rc=rarCls(d.availability);
+  const dv=v=>'<span class="'+defCls(v)+'">'+esc(v||'—')+'</span>';
+  let s='<div class="card '+rc+'" id="'+id+'" data-tog="'+id+'" style="--rc:'+gcRarHex(d.availability)+'">';
+  s+=gcHead(d.name,d.availability,sq);
+  s+='<div class="gc-sub">'+esc(d.type||'')+'</div>';
+  s+='<div class="gc-stats">';
+  s+=gcTierStat('Def · Phys',d.def_physical,GC_DEFHEX.physical);
+  s+=gcTierStat('Def · Enrg',d.def_energy,GC_DEFHEX.energy);
+  s+=gcTierStat('Def · Tech',d.def_tech,GC_DEFHEX.tech);
+  s+=gcTierStat('Def · Sprt',d.def_spiritual,GC_DEFHEX.spiritual);
+  if(d.soak)s+=gcStat('Soak',hl(d.soak,sq),gcBar((d.soak_max||0)/(Cd.soak[t]||8),GC_C.soak),{wide:true});
+  if(gcNum(d.system)&&Cd.sys[t])s+=gcStat('System',hl(String(d.system),sq),gcBar(gcNum(d.system)/Cd.sys[t],GC_C.sys));
+  if(gcNum(d.memory)&&Cd.mem[t])s+=gcStat('Memory',hl(String(d.memory),sq),gcBar(gcNum(d.memory)/Cd.mem[t],GC_C.mem));
+  if(gcNum(d.cpu)&&Cd.cpu[t])s+=gcStat('CPU',hl(String(d.cpu),sq),gcBar(gcNum(d.cpu)/Cd.cpu[t],GC_C.cpu));
+  s+='</div>';
+  s+=gcTagRow(d.legality,d.special,d.cost,sq);
+  s+='<div class="cb">';
+  if(d.desc||d.info)s+='<div class="desc" style="margin-bottom:8px;">'+hl(d.desc||d.info,sq)+'</div>';
+  s+='<div class="def-row">';
+  s+='<span class="def-pill '+defCls(d.def_physical)+'">PHYS '+esc(d.def_physical||'—')+'</span>';
+  s+='<span class="def-pill '+defCls(d.def_energy)+'">ENRG '+esc(d.def_energy||'—')+'</span>';
+  s+='<span class="def-pill '+defCls(d.def_tech)+'">TECH '+esc(d.def_tech||'—')+'</span>';
+  s+='<span class="def-pill '+defCls(d.def_spiritual)+'">SPRT '+esc(d.def_spiritual||'—')+'</span>';
+  s+='</div><div class="fg">';
+  if(d.type)s+=gcField('▤ Type',hl(d.type,sq));
+  if(d.system)s+=gcField('⚡ System',hl(String(d.system),sq));
+  if(d.cpu)s+=gcField('🖥 CPU',hl(String(d.cpu),sq));
+  if(d.memory)s+=gcField('💾 Memory',hl(String(d.memory),sq));
+  if(d.nanites)s+=gcField('🔬 Nanites',hl(String(d.nanites),sq));
+  if(d.expertise)s+=gcField('🎯 Expertise',hl(String(d.expertise),sq));
+  if(d.wits)s+=gcField('👁 Wits',hl(String(d.wits),sq));
+  if(d.structure)s+=gcField('🏗 Structure',hl(String(d.structure),sq));
+  if(d.size)s+=gcField('📦 Size',hl(d.size,sq));
+  if(d.soak)s+=gcField('🛡 Soak',hl(d.soak,sq));
+  if(d.cost)s+=gcField('© Cost',fmt(d.cost)+' Cr');
+  if(d.legality)s+=gcField('⚖ Legality',hl(d.legality,sq));
+  if(d.availability)s+=gcField('◈ Avail',hl(d.availability,sq));
+  s+='</div>';
+  if(d.special)s+='<div style="margin-top:8px;"><div class="fl" style="margin-bottom:3px;">✦ SPECIAL</div><div>'+bst(d.special)+'</div></div>';
+  s+='</div></div>';
+  return s;
+}
+
 function paraHtml(str){
   if(!str)return '';
   const paras=String(str).split(/\n\n+/);
@@ -7709,61 +7966,7 @@ function render(){
       });
       html+='</tbody></table>';
       html+='<div class="grid">';
-      F.forEach((w,i)=>{
-        const id='w'+i; const isMelee=MELEE_CATS.has(w.category);
-        const pwrC={'Low':'tg','Medium':'to','High':'ty','EXTREME':'tr','Extreme':'tr'}[w.power]||'tgr';
-        const rc=rarCls(w.availability);
-        // Compact card layout:
-        // Row 1: Name ................... Legality
-        // Row 2: Damage · Power · DmgType
-        // Row 3: Special tags ........... Cost
-        html+='<div class="card '+rc+'" id="'+id+'" data-tog="'+id+'"><div class="ch">';
-        html+='<div class="cn">'+hl(w.name,sq)+'</div>';
-        html+='<div class="cs-right">'+hl(w.legality||'—',sq)+'</div>';
-        html+='</div>';
-        // Row 2: damage · power · damage type
-        html+='<div class="cr2">';
-        if(w.damage)  html+='<span class="wpn-pill wpill-dmg">⚔ '+hl(w.damage,sq)+'</span>';
-        if(w.power)   html+='<span class="wpn-pill wpill-pwr">⚡ '+hl(w.power,sq)+'</span>';
-        if(w.dmg_type)html+='<span class="wpn-pill" style="opacity:.7;">'+hl(w.dmg_type,sq)+'</span>';
-        if(!isMelee&&w.rof) html+='<span class="wpn-pill">↺ '+hl(w.rof,sq)+'</span>';
-        if(isMelee)   html+='<span class="wpn-pill" style="color:var(--a3);border-color:rgba(168,85,247,.25);">⚔ MELEE</span>';
-        html+='</div>';
-        // Row 3: special tags (left) · cost (right)
-        html+='<div class="cr3">';
-        html+='<div class="cr3l">'+bst(w.special||'')+'</div>';
-        html+='<div class="cr3r">'+fmt(w.cost)+' Cr</div>';
-        html+='</div>';
-        // Expanded content
-        html+='<div class="cb">';
-        if(w.desc)html+=descHtml(w.desc,sq);
-        html+='<div class="fg">';
-        if(w.damage)   html+='<div class="f"><div class="fl">⚔ Damage</div><div class="fv">'+hl(w.damage,sq)+'</div></div>';
-        if(w.power)    html+='<div class="f"><div class="fl">⚡ Power</div><div class="fv">'+hl(w.power,sq)+'</div></div>';
-        if(w.dmg_type) html+='<div class="f"><div class="fl">💥 Type</div><div class="fv">'+hl(w.dmg_type,sq)+'</div></div>';
-        if(isMelee){
-          if(w.handed) html+='<div class="f"><div class="fl">✋ Handed</div><div class="fv">'+hl(w.handed,sq)+'</div></div>';
-          if(w.ammo)   html+='<div class="f"><div class="fl">◉ Ammo</div><div class="fv">'+hl(w.ammo,sq)+'</div></div>';
-          if(w.reload) html+='<div class="f"><div class="fl">↺ Reload</div><div class="fv">'+hl(w.reload,sq)+'</div></div>';
-        }else{
-          if(w.rof)    html+='<div class="f"><div class="fl">↺ R.O.F</div><div class="fv">'+hl(w.rof,sq)+'</div></div>';
-          if(w.ammo)   html+='<div class="f"><div class="fl">◉ Ammo</div><div class="fv">'+hl(w.ammo,sq)+'</div></div>';
-          if(w.reload) html+='<div class="f"><div class="fl">⟳ Reload</div><div class="fv">'+hl(w.reload,sq)+'</div></div>';
-          if(w.range_short) html+='<div class="f"><div class="fl">📍 Short</div><div class="fv">'+hl(w.range_short,sq)+'m</div></div>';
-          if(w.range_med)   html+='<div class="f"><div class="fl">📍 Medium</div><div class="fv">'+hl(w.range_med,sq)+'m</div></div>';
-          if(w.range_long)  html+='<div class="f"><div class="fl">📍 Long</div><div class="fv">'+hl(w.range_long,sq)+'m</div></div>';
-        }
-        if(w.expertise)   html+='<div class="f"><div class="fl">🎯 Expertise</div><div class="fv">'+hl(w.expertise,sq)+'</div></div>';
-        if(w.size)         html+='<div class="f"><div class="fl">📦 Size</div><div class="fv">'+hl(w.size,sq)+'</div></div>';
-        if(w.category===TEK_CAT)html+='<div class="f"><div class="fl">🔌 TEK Frame</div><div class="fv">'+hl(w.tek||'TEK',sq)+(w.tek_routine?' · running '+hl(w.tek_routine,sq):' · <span style="color:var(--mu);">no routine loaded — power, damage, type, legality and special come from the loaded TEK routine</span>')+'</div></div>';
-        if(w.cost)         html+='<div class="f"><div class="fl">© Cost</div><div class="fv">'+fmt(w.cost)+' Cr</div></div>';
-        if(w.legality)     html+='<div class="f"><div class="fl">⚖ Legality</div><div class="fv">'+hl(w.legality,sq)+'</div></div>';
-        if(w.availability) html+='<div class="f"><div class="fl">◈ Avail</div><div class="fv">'+hl(w.availability,sq)+'</div></div>';
-        html+='</div>';
-        if(w.notes&&w.notes!=='N/A') html+='<div style="margin-top:5px;font-size:10.5px;color:var(--mu);font-style:italic;">'+hl(w.notes,sq)+'</div>';
-        if(w.special) html+='<div style="margin-top:8px;"><div class="fl" style="margin-bottom:3px;">✦ SPECIAL</div><div>'+bst(w.special)+'</div></div>';
-        html+='</div></div>';
-      });
+      F.forEach((w,i)=>{ html+=gcWeaponCard(w,'w'+i,sq); });
       html+='</div>';
     }
   }
@@ -7827,48 +8030,7 @@ function render(){
     });
     html+='</tbody></table>';
     html+='<div class="grid">';
-    F.forEach((a,i)=>{
-      const id='ar'+i; const arc=rarCls(a.availability);
-      // Compact armor layout:
-      // Row 1: Name
-      // Row 2: Soak · Type
-      // Row 3: Defense pills (P E T S)
-      // Row 4: Special tags ........... Cost
-      html+='<div class="card '+arc+'" id="'+id+'" data-tog="'+id+'">';
-      html+='<div class="ch"><div class="cn">'+hl(a.name,sq)+'</div></div>';
-      // Row 2: soak + type
-      html+='<div class="cr2">';
-      if(a.soak) html+='<span class="wpn-pill" style="border-color:rgba(0,200,255,.25);color:var(--a);">🛡 '+hl(a.soak,sq)+'</span>';
-      if(a.type) html+='<span class="wpn-pill" style="opacity:.7;">'+hl(a.type,sq)+'</span>';
-      html+='</div>';
-      // Row 3: defense pills
-      const defPill=(lbl,ico,val)=>{
-        if(!val||val==='None') return '<span class="def-pill dp-none">'+ico+'<span> '+lbl+'</span></span>';
-        return '<span class="def-pill '+defCls(val)+'">'+ico+'<span> '+lbl+' '+esc(val)+'</span></span>';
-      };
-      html+='<div class="def-row">'+defPill('P','🛡',a.def_physical)+defPill('E','⚡',a.def_energy)+defPill('T','💻',a.def_tech)+defPill('S','✨',a.def_spiritual)+'</div>';
-      // Row 4: special + cost
-      html+='<div class="cr3"><div class="cr3l">'+bst(a.special||'')+'</div><div class="cr3r">'+fmt(a.cost)+' Cr</div></div>';
-      // Expanded content
-      html+='<div class="cb">';
-      if(a.desc) html+=descHtml(a.desc,sq);
-      html+='<div class="fg">';
-      const dv=(t)=>{const c=defCls(t);return '<span class="'+c+'">'+esc(t)+'</span>';};
-      if(a.def_physical)  html+='<div class="f"><div class="fl">🛡 Physical</div><div class="fv">'+dv(a.def_physical)+'</div></div>';
-      if(a.def_energy)    html+='<div class="f"><div class="fl">⚡ Energy</div><div class="fv">'+dv(a.def_energy)+'</div></div>';
-      if(a.def_tech)      html+='<div class="f"><div class="fl">💻 Tech</div><div class="fv">'+dv(a.def_tech)+'</div></div>';
-      if(a.def_spiritual) html+='<div class="f"><div class="fl">✨ Spiritual</div><div class="fv">'+dv(a.def_spiritual)+'</div></div>';
-      if(a.soak)          html+='<div class="f"><div class="fl">🛡 Soak</div><div class="fv">'+hl(a.soak,sq)+'</div></div>';
-      if(a.charges&&a.charges!=='0') html+='<div class="f"><div class="fl">⚡ Charges</div><div class="fv">'+hl(a.charges,sq)+'</div></div>';
-      if(a.regen&&a.regen!=='0')     html+='<div class="f"><div class="fl">↺ Regen</div><div class="fv">'+hl(a.regen,sq)+'</div></div>';
-      if(a.size)          html+='<div class="f"><div class="fl">📦 Size</div><div class="fv">'+hl(a.size,sq)+'</div></div>';
-      if(a.cost)          html+='<div class="f"><div class="fl">© Cost</div><div class="fv">'+fmt(a.cost)+' Cr</div></div>';
-      if(a.legality)      html+='<div class="f"><div class="fl">⚖ Legality</div><div class="fv">'+hl(a.legality,sq)+'</div></div>';
-      if(a.availability)  html+='<div class="f"><div class="fl">◈ Avail</div><div class="fv">'+hl(a.availability,sq)+'</div></div>';
-      html+='</div>';
-      if(a.special) html+='<div style="margin-top:8px;"><div class="fl" style="margin-bottom:3px;">✦ SPECIAL</div><div>'+bst(a.special)+'</div></div>';
-      html+='</div></div>';
-    });
+    F.forEach((a,i)=>{ html+=gcArmorCard(a,'ar'+i,sq); });
     html+='</div>';
   }
 
@@ -8089,56 +8251,7 @@ function render(){
     });
     html+='</tbody></table>';
     html+='<div class="grid">';
-    F.forEach((dc,i)=>{
-      const id='dc'+i; const rc=rarCls(dc.availability);
-      // Compact datacom layout:
-      // Row 1: Name ................... Legality
-      // Row 2: Soak · Type
-      // Row 3: CPU · MEM · NANITES
-      // Row 4: Special tags ........... Cost
-      html+='<div class="card '+rc+'" id="'+id+'" data-tog="'+id+'">';
-      html+='<div class="ch"><div class="cn">'+hl(dc.name,sq)+'</div><div class="cs-right">'+hl(dc.legality||'—',sq)+'</div></div>';
-      // Row 2: soak + type
-      html+='<div class="cr2">';
-      if(dc.soak) html+='<span class="wpn-pill" style="border-color:rgba(0,200,255,.25);color:var(--a);">🛡 '+hl(dc.soak,sq)+'</span>';
-      if(dc.type) html+='<span class="wpn-pill" style="opacity:.7;">'+hl(dc.type,sq)+'</span>';
-      html+='</div>';
-      // Row 3: CPU · MEM · NANITES
-      html+='<div class="cr2">';
-      if(dc.cpu)    html+='<span class="wpn-pill" style="border-color:rgba(34,197,94,.25);color:#6ee7a0;">CPU '+hl(dc.cpu,sq)+'</span>';
-      if(dc.memory) html+='<span class="wpn-pill" style="border-color:rgba(0,200,255,.2);color:var(--a);">MEM '+hl(dc.memory,sq)+'</span>';
-      if(dc.nanites)html+='<span class="wpn-pill" style="border-color:rgba(168,85,247,.25);color:var(--a3);">NAN '+hl(dc.nanites,sq)+'</span>';
-      html+='</div>';
-      // Row 3b: SYSTEM
-      if(dc.system) html+='<div class="cr2"><span class="wpn-pill" style="border-color:rgba(239,68,68,.3);color:var(--re);">SYS '+hl(dc.system,sq)+'</span></div>';
-      // Row 4: special + cost
-      html+='<div class="cr3"><div class="cr3l">'+bst(dc.special||'')+'</div><div class="cr3r">'+fmt(dc.cost)+' Cr</div></div>';
-      // Expanded
-      html+='<div class="cb">';
-      if(dc.desc||dc.info) html+='<div class="desc" style="margin-bottom:8px;">'+hl(dc.desc||dc.info,sq)+'</div>';
-      html+='<div class="def-row">';
-      html+='<span class="def-pill '+defCls(dc.def_physical)+'">PHYS '+esc(dc.def_physical||'—')+'</span>';
-      html+='<span class="def-pill '+defCls(dc.def_energy)+'">ENRG '+esc(dc.def_energy||'—')+'</span>';
-      html+='<span class="def-pill '+defCls(dc.def_tech)+'">TECH '+esc(dc.def_tech||'—')+'</span>';
-      html+='<span class="def-pill '+defCls(dc.def_spiritual)+'">SPRT '+esc(dc.def_spiritual||'—')+'</span>';
-      html+='</div>';
-      html+='<div class="fg">';
-      if(dc.system)   html+='<div class="f"><div class="fl">⚡ System</div><div class="fv">'+hl(dc.system,sq)+'</div></div>';
-      if(dc.cpu)      html+='<div class="f"><div class="fl">🖥 CPU</div><div class="fv">'+hl(dc.cpu,sq)+'</div></div>';
-      if(dc.memory)   html+='<div class="f"><div class="fl">💾 Memory</div><div class="fv">'+hl(dc.memory,sq)+'</div></div>';
-      if(dc.nanites)  html+='<div class="f"><div class="fl">🔬 Nanites</div><div class="fv">'+hl(dc.nanites,sq)+'</div></div>';
-      if(dc.expertise)html+='<div class="f"><div class="fl">🎯 Expertise</div><div class="fv">'+hl(dc.expertise,sq)+'</div></div>';
-      if(dc.wits)     html+='<div class="f"><div class="fl">👁 Wits</div><div class="fv">'+hl(dc.wits,sq)+'</div></div>';
-      if(dc.structure)html+='<div class="f"><div class="fl">🏗 Structure</div><div class="fv">'+hl(dc.structure,sq)+'</div></div>';
-      if(dc.size)     html+='<div class="f"><div class="fl">📦 Size</div><div class="fv">'+hl(dc.size,sq)+'</div></div>';
-      if(dc.soak)     html+='<div class="f"><div class="fl">🛡 Soak</div><div class="fv">'+hl(dc.soak,sq)+'</div></div>';
-      if(dc.cost)     html+='<div class="f"><div class="fl">© Cost</div><div class="fv">'+fmt(dc.cost)+' Cr</div></div>';
-      if(dc.legality) html+='<div class="f"><div class="fl">⚖ Legality</div><div class="fv">'+hl(dc.legality,sq)+'</div></div>';
-      if(dc.availability) html+='<div class="f"><div class="fl">◈ Avail</div><div class="fv">'+hl(dc.availability,sq)+'</div></div>';
-      html+='</div>';
-      if(dc.special) html+='<div style="margin-top:8px;"><div class="fl" style="margin-bottom:3px;">✦ SPECIAL</div><div>'+bst(dc.special)+'</div></div>';
-      html+='</div></div>';
-    });
+    F.forEach((dc,i)=>{ html+=gcDatacomCard(dc,'dc'+i,sq); });
     html+='</div>';
     // (Programs & Gadgets reference removed — hacking software lives in its own "hacking" section)
   }
@@ -8175,6 +8288,7 @@ function render(){
         if(x.damage_type) html+='<span class="wpn-pill" style="opacity:.7;">'+hl(x.damage_type,sq)+'</span>';
         html+='</div>';
       }
+      if(x.tags) html+='<div style="margin:2px 0 5px;display:flex;flex-wrap:wrap;gap:3px;">'+bst(x.tags)+'</div>';
       html+='<div class="cb">';
       if(x.passive){
         html+='<div style="margin-bottom:6px;"><div class="fl" style="color:var(--gr);margin-bottom:3px;">WITHOUT CONTROL</div><div class="desc">'+hl(x.passive,sq)+'</div></div>';
