@@ -219,31 +219,40 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 /* Weapon pills */
 .wpn-pills{display:flex;flex-wrap:wrap;gap:3px;margin-top:5px;}
 .wpn-pill{font-family:'JetBrains Mono',monospace;font-size:10.5px;padding:2px 7px;border-radius:4px;white-space:nowrap;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:var(--tx2);}
-/* ── Graphical stat cards (gc-*) — segmented graded bars, video-game loadout look ── */
+/* ── Graphical stat cards (gc-*) — segmented graded bars, video-game loadout look ──
+   COMPACT by default (grid tiles); roomier once a card is expanded (.card.x). */
 .gc-head{display:flex;align-items:center;justify-content:space-between;gap:8px;}
-.gc-badge{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:20px;font-size:9px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;border:1px solid var(--rc,#636366);color:var(--rc,#8a97a1);background:color-mix(in srgb,var(--rc,#636366) 13%,transparent);white-space:nowrap;}
+.gc-badge{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:20px;font-size:9px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;border:1px solid var(--rc,#636366);color:var(--rc,#8a97a1);background:color-mix(in srgb,var(--rc,#636366) 13%,transparent);white-space:nowrap;flex:none;}
 .gc-badge .gc-dot{width:5px;height:5px;border-radius:50%;background:var(--rc,#8a97a1);box-shadow:0 0 6px var(--rc,#8a97a1);}
-.gc-sub{font-size:10.5px;color:var(--mu);margin-top:3px;letter-spacing:.03em;}
-.gc-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;margin-top:10px;}
-.gc-stat{min-width:0;}
+.gc-sub{font-size:10px;color:var(--mu);margin-top:2px;letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.gc-stats{display:grid;grid-template-columns:1fr 1fr;gap:5px 12px;margin-top:7px;}
+.gc-stat{min-width:0;overflow:hidden;}
 .gc-stat.wide{grid-column:1 / -1;}
-.gc-srow{display:flex;justify-content:space-between;align-items:baseline;gap:6px;margin-bottom:4px;}
-.gc-lab{font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mu2);font-family:'JetBrains Mono',monospace;white-space:nowrap;}
-.gc-val{font-size:12px;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--tx3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.gc-val.tier{font-size:10px;letter-spacing:.03em;}
-.gc-bar{display:flex;gap:2px;height:7px;}
-.gc-seg{flex:1;background:rgba(255,255,255,.06);border-radius:1px;}
-.gc-seg.f{background:var(--gcbar,#5fd4c4);box-shadow:0 0 4px color-mix(in srgb,var(--gcbar,#5fd4c4) 65%,transparent);}
+.gc-srow{display:flex;justify-content:space-between;align-items:baseline;gap:6px;margin-bottom:2px;min-width:0;}
+.gc-lab{font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--mu2);font-family:'JetBrains Mono',monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.gc-val{font-size:11px;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--tx3);white-space:nowrap;flex:none;}
+.gc-val.tier{font-size:9.5px;letter-spacing:.02em;}
+.gc-bar{display:flex;gap:1px;height:5px;overflow:hidden;}
+.gc-seg{flex:1;min-width:0;background:rgba(255,255,255,.14);border-radius:1px;}
+.gc-seg.f{background:var(--gcbar,#5fd4c4);}
+/* roomier + a soft glow only when the card is opened */
+.card.x .gc-stats{gap:9px 16px;margin-top:10px;}
+.card.x .gc-srow{margin-bottom:4px;}
+.card.x .gc-lab{font-size:9.5px;letter-spacing:.09em;}
+.card.x .gc-val{font-size:12px;}
+.card.x .gc-val.tier{font-size:10px;}
+.card.x .gc-bar{gap:2px;height:8px;}
+.card.x .gc-seg.f{box-shadow:0 0 4px color-mix(in srgb,var(--gcbar,#5fd4c4) 55%,transparent);}
 /* shotgun LOC range-power strip */
 .gc-loc-cells{display:flex;gap:5px;}
-.gc-loc-cell{flex:1;border:1px solid var(--border);border-radius:4px;padding:4px 3px;text-align:center;background:rgba(255,255,255,.02);}
-.gc-lr{font-size:8px;letter-spacing:.06em;color:var(--mu);text-transform:uppercase;}
-.gc-lt{font-size:11px;font-weight:700;margin-top:1px;font-family:'JetBrains Mono',monospace;}
+.gc-loc-cell{flex:1;min-width:0;border:1px solid var(--border);border-radius:4px;padding:3px 2px;text-align:center;background:rgba(255,255,255,.02);}
+.gc-lr{font-size:8px;letter-spacing:.05em;color:var(--mu);text-transform:uppercase;}
+.gc-lt{font-size:10.5px;font-weight:700;margin-top:1px;font-family:'JetBrains Mono',monospace;}
 /* fire-mode indicators */
 .gc-modes{display:flex;gap:4px;}
-.gc-mchip{flex:1;text-align:center;font-size:9px;letter-spacing:.06em;font-family:'JetBrains Mono',monospace;padding:3px 2px;border-radius:3px;border:1px solid var(--border);color:var(--mu2);background:rgba(255,255,255,.02);text-transform:uppercase;}
+.gc-mchip{flex:1;min-width:0;text-align:center;font-size:8.5px;letter-spacing:.05em;font-family:'JetBrains Mono',monospace;padding:2px 2px;border-radius:3px;border:1px solid var(--border);color:var(--mu2);background:rgba(255,255,255,.02);text-transform:uppercase;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .gc-mchip.on{border-color:var(--gcbar,#5fd4c4);color:var(--gcbar,#5fd4c4);background:color-mix(in srgb,var(--gcbar,#5fd4c4) 12%,transparent);font-weight:700;}
-.gc-mchip.off{opacity:.32;}
+.gc-mchip.off{opacity:.3;}
 .wpill-dmg{border-color:rgba(255,159,10,.25)!important;color:var(--or)!important;}
 .wpill-pwr{border-color:rgba(255,214,10,.2)!important;color:var(--ye)!important;}
 .wpill-cst{border-color:rgba(48,209,88,.2)!important;color:var(--gr)!important;}
@@ -1087,8 +1096,8 @@ function descHtml(descStr,sq){
    indicators (Single/Burst/Auto) + a separate BLAST radius stat (the rof field
    currently conflates the two — see decisions log).
    ══════════════════════════════════════════════════════════════════════════ */
-const GC_SEGN=14;
-const GC_TIER={none:0,'':0,'—':0,low:4,medium:8,med:8,high:11,extreme:14,loc:0};
+const GC_SEGN=10;
+const GC_TIER={none:0,'':0,'—':0,low:.25,medium:.5,med:.5,high:.78,extreme:1,loc:0};
 const GC_RARHEX={COMMON:'#8a97a1',UNCOMMON:'#30d158',RARE:'#0a84ff',LIMITED:'#bf5af2',UNIQUE:'#ffd60a',CLASSIFIED:'#ff453a'};
 const GC_DEFHEX={physical:'#ff9f0a',energy:'#bf5af2',tech:'#5fd4c4',spiritual:'#ffd60a'};
 const GC_C={dmg:'#e07a4d',pow:'#ff453a',rng:'#5fd4c4',exp:'#5fd4c4',cap:'#30d158',soak:'#30d158',blast:'#ff9f0a',sys:'#0a84ff',mem:'#5fd4c4',cpu:'#30d158'};
@@ -1115,8 +1124,8 @@ function gcCeils(){
       ammo:by(g.weapons,'category',w=>{const a=gcNum(w.ammo);return(a&&a<10000)?a:null;}),
       blast:by(g.weapons,'category',w=>gcParseRof(w.rof).radius),
     },
-    a:{soak:by(g.armor,'type',a=>a.soak_max)},
-    d:{soak:by(g.datacoms,'type',d=>d.soak_max),sys:by(g.datacoms,'type',d=>gcNum(d.system)),mem:by(g.datacoms,'type',d=>gcNum(d.memory)),cpu:by(g.datacoms,'type',d=>gcNum(d.cpu))},
+    a:{soak:by(g.armor,'type',a=>gcDmgScore(a.soak))},
+    d:{soak:by(g.datacoms,'type',d=>gcDmgScore(d.soak)),sys:by(g.datacoms,'type',d=>gcNum(d.system)),mem:by(g.datacoms,'type',d=>gcNum(d.memory)),cpu:by(g.datacoms,'type',d=>gcNum(d.cpu))},
   };
   return _gcCeils;
 }
@@ -1127,7 +1136,7 @@ function gcBar(pct,color){
   return s+'</div>';
 }
 function gcTierBar(lbl,color){
-  const f=GC_TIER[String(lbl||'').toLowerCase()]??0;
+  const f=Math.round((GC_TIER[String(lbl||'').toLowerCase()]??0)*GC_SEGN);
   let s='<div class="gc-bar" style="--gcbar:'+color+'">';
   for(let i=0;i<GC_SEGN;i++)s+='<div class="gc-seg'+(i<f?' f':'')+'"></div>';
   return s+'</div>';
@@ -1240,7 +1249,7 @@ function gcArmorCard(a,id,sq){
   s+=gcTierStat('Def · Enrg',a.def_energy,GC_DEFHEX.energy);
   s+=gcTierStat('Def · Tech',a.def_tech,GC_DEFHEX.tech);
   s+=gcTierStat('Def · Sprt',a.def_spiritual,GC_DEFHEX.spiritual);
-  if(a.soak)s+=gcBarStat('Soak',hl(a.soak,sq),gcBar((a.soak_max||0)/smax,GC_C.soak),{wide:true});
+  if(a.soak)s+=gcBarStat('Soak',hl(a.soak,sq),gcBar(gcDmgScore(a.soak)/(smax||1),GC_C.soak),{wide:true});
   s+='</div>';
   s+=gcTagRow(a.legality,a.special,a.cost,sq);
   s+='<div class="cb">';
@@ -1276,7 +1285,7 @@ function gcDatacomCard(d,id,sq){
   s+=gcTierStat('Def · Enrg',d.def_energy,GC_DEFHEX.energy);
   s+=gcTierStat('Def · Tech',d.def_tech,GC_DEFHEX.tech);
   s+=gcTierStat('Def · Sprt',d.def_spiritual,GC_DEFHEX.spiritual);
-  if(d.soak)s+=gcBarStat('Soak',hl(d.soak,sq),gcBar((d.soak_max||0)/(Cd.soak[t]||8),GC_C.soak),{wide:true});
+  if(d.soak)s+=gcBarStat('Soak',hl(d.soak,sq),gcBar(gcDmgScore(d.soak)/(Cd.soak[t]||1),GC_C.soak),{wide:true});
   if(gcNum(d.system)&&Cd.sys[t])s+=gcBarStat('System',hl(String(d.system),sq),gcBar(gcNum(d.system)/Cd.sys[t],GC_C.sys));
   if(gcNum(d.memory)&&Cd.mem[t])s+=gcBarStat('Memory',hl(String(d.memory),sq),gcBar(gcNum(d.memory)/Cd.mem[t],GC_C.mem));
   if(gcNum(d.cpu)&&Cd.cpu[t])s+=gcBarStat('CPU',hl(String(d.cpu),sq),gcBar(gcNum(d.cpu)/Cd.cpu[t],GC_C.cpu));
