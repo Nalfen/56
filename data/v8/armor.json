@@ -164,7 +164,7 @@
    "def_e_num": 6,
    "def_t_num": 3,
    "def_s_num": 3,
-   "soak_max": 4,
+   "soak_max": 7,
    "soak_min": 0,
    "legality": null
   },
@@ -236,7 +236,7 @@
    "def_e_num": 3,
    "def_t_num": 3,
    "def_s_num": 3,
-   "soak_max": 5,
+   "soak_max": 6,
    "soak_min": 1,
    "legality": null
   },
@@ -260,7 +260,7 @@
    "def_e_num": 6,
    "def_t_num": 3,
    "def_s_num": 6,
-   "soak_max": 4,
+   "soak_max": 8,
    "soak_min": 1,
    "legality": null
   },
@@ -380,7 +380,7 @@
    "def_e_num": 6,
    "def_t_num": 3,
    "def_s_num": 6,
-   "soak_max": 5,
+   "soak_max": 6,
    "soak_min": 2,
    "legality": null
   },
@@ -452,7 +452,7 @@
    "def_e_num": 6,
    "def_t_num": 3,
    "def_s_num": 6,
-   "soak_max": 5,
+   "soak_max": 7,
    "soak_min": 2,
    "legality": null
   },
@@ -476,7 +476,7 @@
    "def_e_num": 6,
    "def_t_num": 3,
    "def_s_num": 6,
-   "soak_max": 5,
+   "soak_max": 6,
    "soak_min": 4,
    "legality": null
   },
@@ -500,7 +500,7 @@
    "def_e_num": 9,
    "def_t_num": 6,
    "def_s_num": 9,
-   "soak_max": 5,
+   "soak_max": 8,
    "soak_min": 3,
    "legality": null
   },
@@ -524,7 +524,7 @@
    "def_e_num": 9,
    "def_t_num": 3,
    "def_s_num": 6,
-   "soak_max": 4,
+   "soak_max": 6,
    "soak_min": 2,
    "legality": null
   },
@@ -548,7 +548,7 @@
    "def_e_num": 6,
    "def_t_num": 6,
    "def_s_num": 6,
-   "soak_max": 4,
+   "soak_max": 6,
    "soak_min": 2,
    "legality": null
   },
@@ -572,7 +572,7 @@
    "def_e_num": 6,
    "def_t_num": 6,
    "def_s_num": 6,
-   "soak_max": 5,
+   "soak_max": 7,
    "soak_min": 3,
    "legality": null
   },
@@ -1556,7 +1556,7 @@
    "def_e_num": 1,
    "def_t_num": 2,
    "def_s_num": 1,
-   "soak_max": 4,
+   "soak_max": 7,
    "soak_min": 0,
    "legality": null
   },
@@ -1580,7 +1580,7 @@
    "def_e_num": 1,
    "def_t_num": 2,
    "def_s_num": 1,
-   "soak_max": 4,
+   "soak_max": 6,
    "soak_min": 2,
    "legality": null
   },
@@ -1604,7 +1604,7 @@
    "def_e_num": 1,
    "def_t_num": 3,
    "def_s_num": 1,
-   "soak_max": 5,
+   "soak_max": 7,
    "soak_min": 2,
    "legality": null
   },
@@ -1628,7 +1628,7 @@
    "def_e_num": 1,
    "def_t_num": 3,
    "def_s_num": 1,
-   "soak_max": 5,
+   "soak_max": 8,
    "soak_min": 1,
    "legality": null
   },
@@ -1652,7 +1652,7 @@
    "def_e_num": 2,
    "def_t_num": 3,
    "def_s_num": 3,
-   "soak_max": 4,
+   "soak_max": 10,
    "soak_min": 1,
    "legality": null
   },
@@ -1796,7 +1796,7 @@
    "def_e_num": 2,
    "def_t_num": 3,
    "def_s_num": 1,
-   "soak_max": 5,
+   "soak_max": 6,
    "soak_min": 2,
    "legality": null
   },
@@ -1820,7 +1820,7 @@
    "def_e_num": 2,
    "def_t_num": 3,
    "def_s_num": 1,
-   "soak_max": 5,
+   "soak_max": 6,
    "soak_min": 4,
    "legality": null
   },
@@ -1844,7 +1844,7 @@
    "def_e_num": 2,
    "def_t_num": 3,
    "def_s_num": 1,
-   "soak_max": 5,
+   "soak_max": 7,
    "soak_min": 3,
    "legality": null
   },
@@ -1868,7 +1868,7 @@
    "def_e_num": 3,
    "def_t_num": 3,
    "def_s_num": 2,
-   "soak_max": 4,
+   "soak_max": 9,
    "soak_min": 2,
    "legality": null
   },
@@ -2324,7 +2324,7 @@
    "def_e_num": 3,
    "def_t_num": 3,
    "def_s_num": 6,
-   "soak_max": 4,
+   "soak_max": 7,
    "soak_min": 0,
    "legality": null
   },
@@ -2348,7 +2348,7 @@
    "def_e_num": 3,
    "def_t_num": 3,
    "def_s_num": 6,
-   "soak_max": 7,
+   "soak_max": 9,
    "soak_min": 0,
    "legality": null
   },
@@ -2468,7 +2468,7 @@
    "def_e_num": 3,
    "def_t_num": 3,
    "def_s_num": 6,
-   "soak_max": 6,
+   "soak_max": 8,
    "soak_min": -1,
    "legality": null
   },
@@ -2492,7 +2492,7 @@
    "def_e_num": 3,
    "def_t_num": 3,
    "def_s_num": 6,
-   "soak_max": 12,
+   "soak_max": 10,
    "soak_min": -2,
    "legality": null
   },
@@ -2516,7 +2516,7 @@
    "def_e_num": 6,
    "def_t_num": 6,
    "def_s_num": 9,
-   "soak_max": 18,
+   "soak_max": 15,
    "soak_min": -3,
    "legality": null
   },
@@ -2612,7 +2612,7 @@
    "def_e_num": 3,
    "def_t_num": 6,
    "def_s_num": 0,
-   "soak_max": 5,
+   "soak_max": 7,
    "soak_min": 0,
    "legality": null
   },
@@ -2636,7 +2636,7 @@
    "def_e_num": 3,
    "def_t_num": 6,
    "def_s_num": 0,
-   "soak_max": 7,
+   "soak_max": 8,
    "soak_min": 1,
    "legality": null
   },
@@ -2972,7 +2972,7 @@
    "def_e_num": 3,
    "def_t_num": 6,
    "def_s_num": 0,
-   "soak_max": 5,
+   "soak_max": 6,
    "soak_min": 1,
    "legality": null
   },
@@ -3044,7 +3044,7 @@
    "def_e_num": 3,
    "def_t_num": 6,
    "def_s_num": 0,
-   "soak_max": 4,
+   "soak_max": 7,
    "soak_min": 0,
    "legality": null
   },
@@ -3068,7 +3068,7 @@
    "def_e_num": 3,
    "def_t_num": 6,
    "def_s_num": 0,
-   "soak_max": 6,
+   "soak_max": 9,
    "soak_min": 0,
    "legality": null
   },
@@ -3092,7 +3092,7 @@
    "def_e_num": 6,
    "def_t_num": 9,
    "def_s_num": 0,
-   "soak_max": 8,
+   "soak_max": 10,
    "soak_min": 0,
    "legality": null
   },
@@ -3140,7 +3140,7 @@
    "def_e_num": 3,
    "def_t_num": 6,
    "def_s_num": 3,
-   "soak_max": 4,
+   "soak_max": 5,
    "soak_min": 3,
    "legality": null
   },
@@ -3184,7 +3184,9 @@
    "availability": "COMMON",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.)",
    "desc": "An even-handed ward with no favorites and no flair. It leans a touch toward the physical, turning aside blade and bludgeon a little better than most minor workings, while still keeping a hand raised against beam, intrusion, and the occult. There is no clever trick to it — just a calm, well-centered field that does a respectable amount of everything and a brilliant amount of nothing. The veil firms as its bearer's spirit stirs, firmer still at full focus. Common, affordable starter gear for adepts who haven't yet decided what they're afraid of. The sensible first ward, which is exactly why nobody brags about it.",
-   "legality": null
+   "legality": null,
+   "soak_max": 4,
+   "soak_min": 1
   },
   {
    "category": "Armors",
@@ -3202,7 +3204,9 @@
    "availability": "UNCOMMON",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.)",
    "desc": "No single weakness, no single strength — this seasoned ward spreads itself evenly, a veil that meets the fist a little better than the rest while keeping a steady eye on energy, machine, and the unseen alike. It is the all-rounder's working, favored by mystics who would rather be ready for anything than brilliant at one thing and naked to the others. The protection is honest and well-built, the kind of dependable that wins long fights. It firms as the keeper's spirit gathers and firms again at the peak of their focus, every facet rising together. There is an elegance to refusing to specialize. There is also the smug satisfaction of watching a specialist meet the one thing they didn't prepare for.",
-   "legality": null
+   "legality": null,
+   "soak_max": 6,
+   "soak_min": 2
   },
   {
    "category": "Armors",
@@ -3220,7 +3224,9 @@
    "availability": "RARE",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.)",
    "desc": "The masterwork of mystics who distrusted clever tricks and built, instead, a thing that is simply good at everything. No single brilliant gimmick — just a deep, even ward that meets steel a touch more readily than the rest, and answers fire, wire, and the occult with the same unhurried competence. Where flashier relics gamble and dazzle, this one merely holds, on every front, all the time. As the bearer's spirit wakes each guard lifts together, climbing high at full power. A flagship working of the old balanced school, favored by those who have outlived their taste for surprises — which, on the frontier, is most of the ones still breathing.",
-   "legality": null
+   "legality": null,
+   "soak_max": 8,
+   "soak_min": 3
   },
   {
    "category": "Armors",
@@ -3238,7 +3244,9 @@
    "availability": "UNCOMMON",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), MASTERWORK (Critical hits have no additional effects. Masterwork has no effect if the wearer is BREACHED.)",
    "desc": "A carefully wrought field that refuses to let a lucky blow become a catastrophe. It leans toward the physical, blunting blade and impact a little better than beam, intrusion, or the occult. Its craft shows when a strike lands true: where a clean hit might cripple or maim through lesser wards, this one strips away the extra cruelty and treats the wound as ordinary. The fineness fails, however, the moment the field itself is breached. The veil firms as its bearer's spirit stirs, firmer still at full focus. Uncommon and moderately priced, the work of an artisan who clearly took it personally. A small, elegant insistence that nothing be worse than it has to be.",
-   "legality": null
+   "legality": null,
+   "soak_max": 4,
+   "soak_min": 1
   },
   {
    "category": "Armors",
@@ -3256,7 +3264,9 @@
    "availability": "RARE",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), MASTERWORK (Critical hits have no additional effects. Masterwork has no effect if the wearer is BREACHED.)",
    "desc": "A craftsman's ward, shaped rather than merely summoned, this developed working denies the killing flourish — when a blow lands with that extra savage twist meant to maim or cripple, the field flattens it to a plain, ordinary hit, stripping away the cruelty and leaving only the bruise. It favors the physical, a clean and steady veil that holds together with quiet pride. It firms as the bearer's spirit rises and firms again at the crest of their focus. The fine print is fair: should the field itself be breached, the flourish-eating goes with it. The armorers of Berilia sign their best ones. Critical hits still hurt. They just stop showing off.",
-   "legality": null
+   "legality": null,
+   "soak_max": 6,
+   "soak_min": 2
   },
   {
    "category": "Armors",
@@ -3274,7 +3284,9 @@
    "availability": "LIMITED",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), MASTERWORK (Critical hits have no additional effects. Masterwork has no effect if the wearer is BREACHED.)",
    "desc": "Critical blows are how most armor dies, the lucky strike that finds the seam and turns a scratch into a catastrophe, and this masterwork refuses the premise so completely that collectors empty vaults for the one that exists. A perfect hit lands as merely a hit, its cruel little bonus effects sheared cleanly off, so long as the ward still stands. It holds firmly across the board, a touch keener against the physical, and asks only that you not let it be broken first, after which all bets are off. Every guard rises as the spirit wakes, vaulting high at full power. The artisan who shaped it signed the work; the truly desperate pay a fortune for the signature, and a second fortune merely for the chance to be near it.",
-   "legality": null
+   "legality": null,
+   "soak_max": 8,
+   "soak_min": 3
   },
   {
    "category": "Armors",
@@ -3292,7 +3304,9 @@
    "availability": "UNCOMMON",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), HARDENED (Always get maximum SOAK rolls when defending against PHYSICAL attacks.)",
    "desc": "A blunt, honest ward for people who get hit with solid objects. Against blade, fist, and shrapnel it always holds at its very firmest — no flinching, no flutter, just a flat refusal to let the physical world have its way. It leans toward the body, doing only the courteous minimum against beam, intrusion, and the occult. The field strengthens as its bearer's spirit stirs, stronger still at full focus. Uncommon, modestly priced, and refreshingly free of mystique. Brawlers and bouncers swear by it; it asks nothing of you but to keep standing there and let the hits be disappointing.",
-   "legality": null
+   "legality": null,
+   "soak_max": 3,
+   "soak_min": 2
   },
   {
    "category": "Armors",
@@ -3310,7 +3324,9 @@
    "availability": "RARE",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), HARDENED (Always get maximum SOAK rolls when defending against PHYSICAL attacks.)",
    "desc": "Against anything physical — blade, fist, slug, falling girder — this seasoned ward gives its absolute fullness every single time, the field hardening over the skin like a second hide that simply does not flinch. It is the brawler's working: unsubtle, dependable, leaning hard into the body's guard, a veil that meets violence with a shrug it has perfected. It firms as the keeper's spirit gathers and firms again at the height of their focus, the hide growing thicker still. Energy and the occult get the ordinary treatment, but no one buys this for nuance. They buy it because punches stop being interesting. Hit it as hard as you like. The ward has felt worse, and recently.",
-   "legality": null
+   "legality": null,
+   "soak_max": 5,
+   "soak_min": 3
   },
   {
    "category": "Armors",
@@ -3328,7 +3344,9 @@
    "availability": "LIMITED",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), HARDENED (Always get maximum SOAK rolls when defending against PHYSICAL attacks.)",
    "desc": "Against anything with mass and malice behind it, the fist, the blade, the slug, the falling wall, this ward holds at its absolute best, every single time, no roll left to chance, and the brawlers who covet one will tell you that certainty is the only luxury worth saving for. Physical violence simply meets the maximum and stops there, predictable as gravity and twice as patient. Its guard against fire and the occult is modest by comparison; it knows what it is for and refuses to pretend otherwise. As the bearer's spirit wakes every guard climbs higher, reaching absurd heights at full flood. Bodyguards across Alliance Space speak of it in the reverent, slightly bored tone of people who have stopped worrying about getting hit, and traded a great deal for the right to stop worrying.",
-   "legality": null
+   "legality": null,
+   "soak_max": 7,
+   "soak_min": 4
   },
   {
    "category": "Armors",
@@ -3346,7 +3364,9 @@
    "availability": "RARE",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), HEALING (During MAINTENANCE you can spend any number of NANITES, or personal CHI to recover an equal amount of HEALTH or MORALE)",
    "desc": "A nurturing veil that does as much mending as warding. It leans toward the physical, blunting blade and impact a little better than the rest, but its real worth comes in the quiet between fights: in those still moments the bearer may pour in healing-nanites or a measure of their own inner reserve and draw back an equal portion of body or spirit. The field also firms as its bearer's spirit stirs, firmer still at full focus. Rare and costly, favored by long-haul mystics who'd rather not bleed out waiting for a medic. It will not patch you for free — but it makes every drop you spend on yourself actually count.",
-   "legality": null
+   "legality": null,
+   "soak_max": 6,
+   "soak_min": 1
   },
   {
    "category": "Armors",
@@ -3364,7 +3384,9 @@
    "availability": "LIMITED",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), HEALING (During MAINTENANCE you can spend any number of NANITES, or personal CHI to recover an equal amount of HEALTH or MORALE)",
    "desc": "This developed ward turns the lull between fights into a quiet workshop of repair, and field medics across Alliance Space save and barter for years to put one on their own backs. During a moment's maintenance the bearer can pour out nanites or their own inner reserve and draw back an equal measure of mended flesh or steadied nerve. The standing veil is solid and physical-leaning, a confident wall, but its real charm is the slow knitting-shut that follows the worst of the day. It firms as the bearer's spirit rises and firms again at the peak of their focus. The exchange is literal: spend to mend, nothing for free. Medics adore it for the simple reason that it lets a body buy back what the day took, in coin and spirit both, and the waiting list for one is long with grateful names.",
-   "legality": null
+   "legality": null,
+   "soak_max": 7,
+   "soak_min": 2
   },
   {
    "category": "Armors",
@@ -3382,7 +3404,9 @@
    "availability": "UNIQUE",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), HEALING (During MAINTENANCE you can spend any number of NANITES, or personal CHI to recover an equal amount of HEALTH or MORALE)",
    "desc": "A ward that does not merely endure but quietly repays the debt, and there is exactly one to repay it. In the still moments between violence, the bearer may pour in nanites or their own inner reserve and draw back an equal measure of mended flesh or steadied spirit, a slow, deliberate alchemy of trading what you have for what you've lost. Its everyday shielding is deep and balanced, keenest against the physical, lifting every guard as the spirit wakes and soaring at full power. One of a kind, grown rather than built, and faintly warm to the touch. Field-menders speak of it the way pilgrims speak of a relic, and the people who priced it have never fully recovered from being told what it was worth, or that it was not, in any case, for sale.",
-   "legality": null
+   "legality": null,
+   "soak_max": 8,
+   "soak_min": 3
   },
   {
    "category": "Armors",
@@ -3400,7 +3424,9 @@
    "availability": "UNCOMMON",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), KINETIC (If you CHARGE during any round where this defense was hit by a PHYSICAL attack you apply the attack you received to the recipient of the charge (if you receive multiple attacks, only apply the last one).)",
    "desc": "A spiteful little field that remembers who hit it. It leans toward the physical, dulling blade and impact a touch better than beam, intrusion, or the occult, but its temper shows when the wearer charges: any solid blow it absorbed that round is handed straight to whoever they crash into. The veil holds a grudge and a momentum at once. It also firms as its bearer's spirit stirs, firmer still at full focus. Uncommon, modestly priced, and popular with adepts who consider taking a hit merely the first step of returning it. Strike the bearer, then watch them go give it to someone else with interest.",
-   "legality": null
+   "legality": null,
+   "soak_max": 3,
+   "soak_min": 2
   },
   {
    "category": "Armors",
@@ -3418,7 +3444,9 @@
    "availability": "RARE",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), KINETIC (If you CHARGE during any round where this defense was hit by a PHYSICAL attack you apply the attack you received to the recipient of the charge (if you receive multiple attacks, only apply the last one).)",
    "desc": "This seasoned ward keeps the receipt. When a physical blow lands on the field and the wearer answers with a charge in the same breath, the harm they absorbed is handed straight to whatever they slam into — the last hit they ate becomes the first hit their target eats. The standing veil leans into the body's guard, sturdy and unbothered, content to drink the blow so it has something to repay. It firms as the keeper's spirit gathers and firms again at the height of their focus. Take many blows before charging and only the freshest gets forwarded; the ward is a courier, not a warehouse. Hit the wearer. The wearer, with great enthusiasm, will hit you back with it.",
-   "legality": null
+   "legality": null,
+   "soak_max": 5,
+   "soak_min": 3
   },
   {
    "category": "Armors",
@@ -3436,7 +3464,9 @@
    "availability": "LIMITED",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), KINETIC (If you CHARGE during any round where this defense was hit by a PHYSICAL attack you apply the attack you received to the recipient of the charge (if you receive multiple attacks, only apply the last one).)",
    "desc": "This ward keeps a tally, the bearer settles it in person, and there is only one such ledger in all of known space. Take a physical blow while wrapped in its field, then charge, and the very harm you absorbed is delivered, whole, into whatever you crash into, as though the field had merely been holding your enemy's attack in trust until you found a better recipient. Its cover is deep and even, a touch keener against the physical, climbing with the spirit as it wakes and vaulting high at full power. There is a particular look on a striker's face the instant their own blow comes back through someone else's shoulder. Connoisseurs of that look have offered legendary sums for this thing, and not one has yet persuaded its owner to let it go.",
-   "legality": null
+   "legality": null,
+   "soak_max": 7,
+   "soak_min": 4
   },
   {
    "category": "Armors",
@@ -3454,7 +3484,9 @@
    "availability": "RARE",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), HEALTHY (While this DEFENSE is active your life recovery from any source is doubled.)",
    "desc": "A vital, green-tinged ward that keeps the bearer knitting back together faster than they ought to. It leans toward the physical, blunting blade and impact a little better than beam, intrusion, or the occult. Its true gift is in recovery: while the field is up, every drop of healing the bearer receives, from any source, counts double, so wounds close and strength returns at an almost unseemly pace. The veil also firms as its bearer's spirit stirs, firmer still at full focus. Rare and dear, prized by those who plan on being hurt and intend to get over it quickly. It doesn't stop the harm — it just refuses to let the harm stick around.",
-   "legality": null
+   "legality": null,
+   "soak_max": 7,
+   "soak_min": 0
   },
   {
    "category": "Armors",
@@ -3472,7 +3504,9 @@
    "availability": "LIMITED",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), HEALTHY (While this DEFENSE is active your life recovery from any source is doubled.)",
    "desc": "Life clings harder under this developed ward, and the healers who covet one will tell you that's worth every favor and every long month of waiting. While the field is up, every drop of recovery the bearer earns from any source arrives doubled, wounds closing and strength returning at a pace that feels almost rude. The standing veil is a solid, physical-leaning wall, but its gift is the relentless thrum of renewal underneath, a body that refuses to stay spent. It firms as the bearer's spirit rises and firms again at the crest of their focus. The healers of Berilia pair it with their own work and watch patients sit up early, complaining. Genesis means beginning, and this ward keeps insisting on one. It will not raise the dead. It is, however, deeply opposed to letting you join them, which is precisely why people line up for it.",
-   "legality": null
+   "legality": null,
+   "soak_max": 9,
+   "soak_min": 0
   },
   {
    "category": "Armors",
@@ -3490,7 +3524,9 @@
    "availability": "UNIQUE",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), HEALTHY (While this DEFENSE is active your life recovery from any source is doubled.)",
    "desc": "Life clings harder inside this field, and there is exactly one field in which it clings this hard. While it burns, every trickle of recovery the bearer receives, salve, spell, slow stubborn knitting of the body, arrives doubled, as though the ward were quietly arguing with death about the terms. Its shielding is broad and deep, keenest against the physical, rising with the spirit as it wakes and soaring at full power. Wear it long enough and wounds that should linger simply lose interest. One of a kind, and the sort of relic medics whisper about on the frontier, where the difference between mending and not is usually just whether the universe could be bothered, this thing bothers, and the lengths people go to find it are the kind that outlive them.",
-   "legality": null
+   "legality": null,
+   "soak_max": 10,
+   "soak_min": 0
   },
   {
    "category": "Armors",
@@ -3508,7 +3544,9 @@
    "availability": "UNCOMMON",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), BUNKER (Always get maximum SOAK rolls when not moving. (Bonus applies during maintenance phase after a full round of no movement).)",
    "desc": "A ward that rewards patience and punishes fidgeting. It leans toward the physical, dulling blade and impact a touch better than beam, intrusion, or the occult — but plant your feet and stop moving, and it locks down to its absolute firmest, a wall content to simply stand its ground. The longer you hold still, the more immovable you become. The veil also firms as its bearer's spirit stirs, firmer still at full focus. Uncommon, moderately priced, and beloved by sentries, snipers, and anyone defending a doorway. Stay put and it's a bunker; run and it's merely a coat.",
-   "legality": null
+   "legality": null,
+   "soak_max": 5,
+   "soak_min": 0
   },
   {
    "category": "Armors",
@@ -3526,7 +3564,9 @@
    "availability": "RARE",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), BUNKER (Always get maximum SOAK rolls when not moving. (Bonus applies during maintenance phase after a full round of no movement).)",
    "desc": "Plant your feet and this seasoned ward becomes a fortress — hold still through a full round and the field settles to its absolute fullness, every part of the bearer's guard locked at its best while they refuse to budge. It rewards patience and punishes the jittery: a veil that leans into the body's protection and turns stillness into a wall worth hiding behind. It firms as the keeper's spirit gathers and firms again at the peak of their focus, the dug-in stance growing only more obstinate. Move and you trade the bunker for an ordinary good ward. Snipers and last-standers love it. Run, and it forgives you; it simply stops being a bunker the moment you do.",
-   "legality": null
+   "legality": null,
+   "soak_max": 7,
+   "soak_min": 1
   },
   {
    "category": "Armors",
@@ -3544,7 +3584,9 @@
    "availability": "LIMITED",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), BUNKER (Always get maximum SOAK rolls when not moving. (Bonus applies during maintenance phase after a full round of no movement).)",
    "desc": "Stand your ground and this ward becomes a fortress that grew where you planted your feet, and there is precisely one of it to grow anywhere. Hold still, truly still, through a full round of stubborn refusal to budge, and it holds at its absolute best, every measure of cover maximal, a bunker of pure resolve. Move, and it relaxes to a still-formidable guard, deep across the board and keenest against the physical. Every guard rises as the spirit wakes, vaulting high at full power. It is the patient warrior's masterwork, the singular choice of those who have learned that the most dangerous thing on a battlefield is sometimes the one person who simply will not move, and the lengths the patient go to own it are themselves a study in resolve.",
-   "legality": null
+   "legality": null,
+   "soak_max": 9,
+   "soak_min": 2
   },
   {
    "category": "Armors",
@@ -3562,7 +3604,9 @@
    "availability": "RARE",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), ENERGIZING (You have maximum SOAK value against HEALTH attacks)",
    "desc": "A life-tending veil that simply refuses to let your body be ground down. It leans toward the physical, blunting blade and impact a little better than the rest, but its certainty is reserved for assaults on the flesh itself — poison, decay, anything aimed at your vitality is met at its very firmest, every time. The field also strengthens as its bearer's spirit stirs, stronger still at full focus. Rare and costly, the work of healer-mystics who treat the wearer's stamina as something to be defended rather than spent. It won't keep you from being struck, but it will keep the struggle from hollowing you out.",
-   "legality": null
+   "legality": null,
+   "soak_max": 7,
+   "soak_min": 0
   },
   {
    "category": "Armors",
@@ -3580,7 +3624,9 @@
    "availability": "LIMITED",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), ENERGIZING (You have maximum SOAK value against HEALTH attacks)",
    "desc": "Whatever reaches for the bearer's vitality, poison, draining touch, the slow theft of strength from the flesh itself, meets this developed ward at its absolute fullness, every time, the field guarding the body's life-spark like a thing it grew on purpose, and serious operators will trade up through years of favors to wear one. The standing veil is sturdy and physical-leaning, but its devotion is to keeping the wearer's vigor exactly where it belongs: inside them. It firms as the bearer's spirit rises and firms again at the height of their focus. The name speaks of life made from itself, and that is the promise, your own, undiminished, against everything that would siphon it. Bleed somebody else. This one is full, intends to stay that way, and there is a quiet line of people hoping to be next to carry it.",
-   "legality": null
+   "legality": null,
+   "soak_max": 8,
+   "soak_min": 1
   },
   {
    "category": "Armors",
@@ -3598,7 +3644,9 @@
    "availability": "UNIQUE",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), ENERGIZING (You have maximum SOAK value against HEALTH attacks)",
    "desc": "Some attacks bypass armor entirely and reach straight for the meat, poison, plague, the slow rot, the assault on the body's own machinery, and against all of it this ward holds at its absolute best, every time, the flesh defended to the maximum as a matter of settled law, and there is exactly one such law in existence. Its broader shielding is deep and even, a touch keener against the physical, climbing with the spirit as it wakes and soaring at full power. It is named for life that needs no second to make more of itself, and it guards the body with that same self-sufficient stubbornness. One of a kind, grown in a vat no one will admit to owning, and quietly coveted by everyone who has ever felt their own strength drain out of a wound that armor never even saw.",
-   "legality": null
+   "legality": null,
+   "soak_max": 9,
+   "soak_min": 2
   },
   {
    "category": "Armors",
@@ -3616,7 +3664,9 @@
    "availability": "COMMON",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), AEGIS (Special modifiers to damage or power (DEADLY, DP, AS, AR and EMP etc) have no effect Vs this armor. Treat all damage at its base value.)",
    "desc": "A leveling field that strips the cruelty out of clever weapons. It leans toward energy, turning aside pulse and plasma a little better than blade, intrusion, or the occult. Its quiet genius is in refusal: all the nasty enhancements that make a weapon worse than it should be — armor-shredding, deadliness, the disruptive ones, every fancy modifier — simply don't take, and the harm arrives plain and unembellished. The veil also firms as its bearer's spirit stirs, firmer still at full focus. Common and affordable, prized by adepts who'd rather face an honest hit than a gimmicked one. It can't make the world gentle, but it can make it stop showing off.",
-   "legality": null
+   "legality": null,
+   "soak_max": 4,
+   "soak_min": 1
   },
   {
    "category": "Armors",
@@ -3634,7 +3684,9 @@
    "availability": "UNCOMMON",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), AEGIS (Special modifiers to damage or power (DEADLY, DP, AS, AR and EMP etc) have no effect Vs this armor. Treat all damage at its base value.)",
    "desc": "Clever ammunition means nothing to this seasoned ward. Every cruel modifier an attacker layers on — armor-shredding tricks, lethality flourishes, the field-frying jolts meant to bypass protection — is simply ignored, the field treating each strike at its plain base value as though the gunsmith never bothered. It leans toward warding off energy, a calm and confident veil that finds gimmicks tedious. It firms as the keeper's spirit gathers and firms again at the crest of their focus. The alchemists of Berilia built it to transmute the exotic into the ordinary, which is exactly what it does to your enemy's expensive loadout. All that engineering, reduced to a regular hit. The ward is not impressed, and says so.",
-   "legality": null
+   "legality": null,
+   "soak_max": 6,
+   "soak_min": 2
   },
   {
    "category": "Armors",
@@ -3652,7 +3704,9 @@
    "availability": "RARE",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), AEGIS (Special modifiers to damage or power (DEADLY, DP, AS, AR and EMP etc) have no effect Vs this armor. Treat all damage at its base value.)",
    "desc": "The cruelest weapons in Alliance Space are the ones with a clever modifier bolted on — armor-shredders, soul-burners, the pulse that fries the wires, the rounds bred to do more than merely hurt. This ward strips every one of those tricks away and treats the attack as the plain, base thing it pretended not to be, refusing to acknowledge the upgrade at all. It holds deep and even, keenest against raw energy, lifting every guard as the spirit wakes and soaring at full power. Alchemists named it well: it transmutes the exotic into the ordinary, then shrugs at the ordinary. The most expensive shrug money can buy.",
-   "legality": null
+   "legality": null,
+   "soak_max": 8,
+   "soak_min": 3
   },
   {
    "category": "Armors",
@@ -3670,7 +3724,9 @@
    "availability": "UNCOMMON",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), DUELIST (Always get maximum SOAK rolls when defending against MELEE attacks.)",
    "desc": "A close-quarters ward for mystics who keep the fight within arm's reach. It leans toward energy, blunting pulse and plasma a touch better than blade, intrusion, or the occult, but against anything swung at melee distance it always holds at its very firmest. Up close it is flawless; at range it remembers it has other things to do. The veil also strengthens as its bearer's spirit stirs, stronger still at full focus. Uncommon and moderately priced, favored by blade-dancers and brawling adepts who treat personal space as a kill-box. Let them in and you've made their weapon a polite suggestion.",
-   "legality": null
+   "legality": null,
+   "soak_max": 3,
+   "soak_min": 1
   },
   {
    "category": "Armors",
@@ -3688,7 +3744,9 @@
    "availability": "RARE",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), DUELIST (Always get maximum SOAK rolls when defending against MELEE attacks.)",
    "desc": "Step into close quarters and this developed ward comes alive — against any blow struck at melee range it gives its absolute fullness, every time, turning a knife-fight into an exercise in the attacker's growing frustration. The field has the grace of a martial form, energy-leaning and flowing, treating each near strike as a gesture it has already answered. It firms as the bearer's spirit rises and firms again at the peak of their focus, the dance only getting tighter. Ranged threats get the ordinary veil; the up-close brawler gets the full lesson. Frontier monks favor it for the obvious reason. Come close. It would genuinely love for you to come close.",
-   "legality": null
+   "legality": null,
+   "soak_max": 6,
+   "soak_min": 2
   },
   {
    "category": "Armors",
@@ -3706,7 +3764,9 @@
    "availability": "LIMITED",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), DUELIST (Always get maximum SOAK rolls when defending against MELEE attacks.)",
    "desc": "Step into reach of this ward with a blade and you have made a small, fatal scheduling error, and there is only one wearer in the galaxy entitled to watch you make it. Against anything wielded in close, sword, claw, baton, bare knuckle, it holds at its absolute best, every time, the field meeting steel at the maximum as though it had trained for melee its whole life. Its guard against ranged fire is fair; against the occult and the physical, even. Keenest of all against raw energy, it lifts every guard as the spirit wakes and soars at full power. Dueling mystics across the frontier tell of it like a legend they'd ruin themselves to inherit, and the smarter killers, knowing only one such ward exists and respecting whoever holds it, learn to fight from very far away.",
-   "legality": null
+   "legality": null,
+   "soak_max": 7,
+   "soak_min": 3
   },
   {
    "category": "Armors",
@@ -3724,7 +3784,9 @@
    "availability": "COMMON",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), INSULATING (Always get maximum SOAK rolls when defending against ENERGY attacks.)",
    "desc": "A specialist's veil that drinks the sting out of every beam and bolt. Against pulse, plasma, flame, and shock it always holds at its very firmest, shrugging off energy where lesser wards merely smolder. It leans, naturally, toward the energetic, doing only the modest minimum against blade, intrusion, and the occult. The field strengthens as its bearer's spirit stirs, stronger still at full focus. Common and affordable, standard issue for anyone expecting to walk into a firefight rather than a knife-fight. Bring a blade and it shrugs; bring a beam and it positively yawns.",
-   "legality": null
+   "legality": null,
+   "soak_max": 3,
+   "soak_min": 1
   },
   {
    "category": "Armors",
@@ -3742,7 +3804,9 @@
    "availability": "UNCOMMON",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), INSULATING (Always get maximum SOAK rolls when defending against ENERGY attacks.)",
    "desc": "Fire, frost, current, blast, the searing breath of weapons that burn rather than bite — against all of it this seasoned ward gives its absolute fullness, every time, the field grounding and scattering raw energy before it can take hold. It leans hard into warding off energy, an insulating veil that treats a plasma bolt the way a thick coat treats a cold draft. It firms as the keeper's spirit gathers and firms again at the height of their focus, the dampening only deepening. The physical and the occult get the ordinary treatment, but heat and charge get nothing at all. There are lesser versions sold to people who play with fire. This one lets you mean it.",
-   "legality": null
+   "legality": null,
+   "soak_max": 6,
+   "soak_min": 2
   },
   {
    "category": "Armors",
@@ -3760,7 +3824,9 @@
    "availability": "RARE",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), INSULATING (Always get maximum SOAK rolls when defending against ENERGY attacks.)",
    "desc": "Fire, lightning, plasma, the searing breath of an energy lance — against all of it this ward holds at its absolute best, every single time, no luck involved. Raw energy simply meets the maximum and dissipates, grounded out into the field as though it had nowhere worth going. Its shielding against the physical and the occult is fair and steady; it knows its calling and answers it perfectly. As the bearer's spirit wakes every guard climbs higher, reaching absurd heights at full flood. Wear it into a firefight and the searing things wash over you like weather you forgot to dress for. A masterwork the energy-gunners have learned, grudgingly, to respect.",
-   "legality": null
+   "legality": null,
+   "soak_max": 8,
+   "soak_min": 3
   },
   {
    "category": "Armors",
@@ -3778,7 +3844,9 @@
    "availability": "RARE",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), ADAPTIVE (ADAPTIVE raises your defense to HIGH against any the last type of damage you were attacked by.)",
    "desc": "A learning field that studies whatever just hurt you and braces for more of it. It leans toward energy, blunting pulse and plasma a little better than the rest at rest — but the instant a particular kind of harm lands, the veil rallies hard against that exact threat, holding stout the next time it comes. It is always one beat behind and one beat smarter. The field also firms as its bearer's spirit stirs, firmer still at full focus. Rare and costly, the work of adaptive mystics who'd rather adjust than predict. The first hit teaches it; the second hit regrets it.",
-   "legality": null
+   "legality": null,
+   "soak_max": 6,
+   "soak_min": 2
   },
   {
    "category": "Armors",
@@ -3796,7 +3864,9 @@
    "availability": "LIMITED",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), ADAPTIVE (ADAPTIVE raises your defense to HIGH against any the last type of damage you were attacked by.)",
    "desc": "This developed ward learns the song of whatever just hit it, and the operators who covet one will wait years for the privilege of teaching it. After a strike, the field tunes itself to that exact kind of harm and raises its guard against it to a formidable pitch, so the second blow of a sort fares far worse than the first. It leans toward warding off energy at rest, a responsive veil that treats every attacker as a teacher it intends to outgrow. It firms as the bearer's spirit gathers and firms again at the crest of their focus, the adaptation sharpening alongside. Hit it once and you've shown it your hand. Hit it the same way twice and you'll wonder why it suddenly stopped working, the ward was listening, and it has very good ears.",
-   "legality": null
+   "legality": null,
+   "soak_max": 7,
+   "soak_min": 3
   },
   {
    "category": "Armors",
@@ -3814,7 +3884,9 @@
    "availability": "UNIQUE",
    "special_desc": "BARRIER (BARRIERS increase all DEFENSES by 1 category when SPIRIT MANIFESTATION is AWAKENED or 2 when EMPOWERED.), ADAPTIVE (ADAPTIVE raises your defense to HIGH against any the last type of damage you were attacked by.)",
    "desc": "It learns, and there is exactly one of it left learning anywhere. Whatever last struck the bearer, flame, fist, wire, or worse, this ward instantly tunes itself to a towering guard against precisely that, as though the attack had foolishly handed over its own instruction manual. Hit it with fire and the next fire finds a wall; switch to steel and it has already moved on, raising itself to meet you there instead. Its baseline is deep and even, keenest against raw energy, lifting every guard as the spirit wakes and soaring at full power. One of a kind, a nightmare to fight by repetition, and the subject of more quiet plotting to possess it than its makers ever imagined, since the only way through it is novelty, and most killers run out of new ideas long before it runs out of answers.",
-   "legality": null
+   "legality": null,
+   "soak_max": 8,
+   "soak_min": 4
   }
  ],
  "armor_options": [
