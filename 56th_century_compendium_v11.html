@@ -33,9 +33,6 @@ main{flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:22px 24px;back
 .fc:hover{border-color:var(--mu);color:var(--tx2);}
 .fc.active{background:rgba(255,255,255,.08);border-color:var(--tx3);color:var(--tx);font-weight:500;}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:8px;}
-/* only lay out / paint cards as they scroll into view (native virtualization) — keeps big
-   card lists (weapons/armor/…) from stalling the first paint. Harmless where unsupported. */
-.grid>.card,.grid2>.card{content-visibility:auto;contain-intrinsic-size:auto 116px;}
 .grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:8px;}
 .list{display:flex;flex-direction:column;gap:0;}
 .card{background:transparent;border:none;border-left:2px solid #3a3a3c;border-bottom:1px solid var(--border);border-radius:0;padding:14px 0 14px 16px;transition:background .14s;cursor:pointer;}
@@ -922,7 +919,7 @@ document.addEventListener('click',e=>{
   const dcDefBtn=e.target.closest('.dc-def-btn[data-def]');
   if(dcDefBtn){mfrState.dcDef=dcDefBtn.dataset.def;render();return;}
   const card=e.target.closest('[data-tog]');
-  if(card){const el=document.getElementById(card.dataset.tog);if(el)el.classList.toggle('x');return;}
+  if(card){const el=document.getElementById(card.dataset.tog);if(el){gcFillCB(el);el.classList.toggle('x');}return;}
   const rg=e.target.closest('[data-rgtog]');
   if(rg){const el=document.getElementById(rg.dataset.rgtog);if(el)el.classList.toggle('open');return;}
   // ── Ammo Calculator interactions ───────────────────────────────────────────
@@ -1063,7 +1060,7 @@ function tc(v){
   if(['RESTRICTED'].some(x=>u.includes(x)))return 'ty';
   return 'tgr';
 }
-function tog(id){const el=document.getElementById(id);if(el)el.classList.toggle('x');}
+function tog(id){const el=document.getElementById(id);if(el){gcFillCB(el);el.classList.toggle('x');}}
 
 // Safe filter button builder, uses data-cat attribute, no inline string eval
 function fcBtn(label,val,curAf){
@@ -1154,6 +1151,22 @@ function gcReloadTier(s){
 }
 function gcReloadLabel(s){return /quick|standard|complex/i.test(String(s||''))?'Reload':'Recharge';}
 function gcReloadDisp(s){return String(s||'').replace(/\s*round\(s\)/i,'r').trim();}
+/* Lazy expanded body: at first paint only the COLLAPSED card is in the DOM (fast, no deferred
+   layout). Each card's `.cb` HTML is cached by id and injected the first time it's expanded, so
+   there's no big one-time layout stall on the first click. gcCard(...) builds the full card as
+   before, then gcLazyCard splits off the `.cb`. */
+const gcCB={};
+function gcLazyCard(html,id){
+  const M='<div class="cb">';
+  const i=html.indexOf(M);
+  if(i<0)return html;
+  const head=html.slice(0,i);
+  const rest=html.slice(i+M.length);           // = <cb content> + '</div></div>'
+  gcCB[id]=rest.slice(0,rest.length-12);        // strip the trailing cb-close + card-close divs
+  return head+'<div class="cb" data-cb="'+id+'"></div></div>';
+}
+// materialize a lazy .cb the first time its card is opened (idempotent)
+function gcFillCB(el){if(!el||!el.querySelector)return;const cb=el.querySelector('.cb[data-cb]');if(cb&&!cb.firstChild&&gcCB[cb.dataset.cb])cb.innerHTML=gcCB[cb.dataset.cb];}
 let _gcCeils=null;
 function gcCeils(){
   if(_gcCeils)return _gcCeils;
@@ -1291,7 +1304,7 @@ function gcWeaponCard(w,id,sq){
   if(w.notes&&w.notes!=='N/A')s+='<div style="margin-top:5px;font-size:10.5px;color:var(--mu);font-style:italic;">'+hl(w.notes,sq)+'</div>';
   if(w.special)s+='<div style="margin-top:8px;"><div class="fl" style="margin-bottom:3px;">✦ SPECIAL</div><div>'+bst(w.special)+'</div></div>';
   s+='</div></div>';
-  return s;
+  return gcLazyCard(s,id);
 }
 
 function gcArmorCard(a,id,sq){
@@ -1327,7 +1340,7 @@ function gcArmorCard(a,id,sq){
   s+='</div>';
   if(a.special)s+='<div style="margin-top:8px;"><div class="fl" style="margin-bottom:3px;">✦ SPECIAL</div><div>'+bst(a.special)+'</div></div>';
   s+='</div></div>';
-  return s;
+  return gcLazyCard(s,id);
 }
 
 function gcDatacomCard(d,id,sq){
@@ -1372,7 +1385,7 @@ function gcDatacomCard(d,id,sq){
   s+='</div>';
   if(d.special)s+='<div style="margin-top:8px;"><div class="fl" style="margin-bottom:3px;">✦ SPECIAL</div><div>'+bst(d.special)+'</div></div>';
   s+='</div></div>';
-  return s;
+  return gcLazyCard(s,id);
 }
 
 function paraHtml(str){
@@ -10142,7 +10155,7 @@ function xrefFetchCard(sec,name){
       var rkvs=main.querySelectorAll('.rkv');
       for(var i=0;i<rkvs.length;i++){var rk=rkvs[i].querySelector('.rk');var t=rk?rk.textContent.trim().toLowerCase():'';if(t===nl||t.indexOf(nl)>=0){card=rkvs[i];break;}}
     }
-    if(card){card.classList.add('x');html=card.outerHTML;}
+    if(card){gcFillCB(card);card.classList.add('x');html=card.outerHTML;}
     else{
       // card-less targets (ammo types/options, weapon/armor options, ...): extract the table row
       var exact=null,loose=null;
