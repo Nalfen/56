@@ -1128,14 +1128,16 @@ function gcAvgRange(w){const v=['range_short','range_med','range_long'].map(k=>g
 // percentile rank of v within a sorted array (fraction ≤ v) — "against the majority"
 function gcPct(sorted,v){if(!sorted||!sorted.length||v==null)return 0;let c=0;for(let i=0;i<sorted.length;i++){if(sorted[i]<=v)c++;}return c/sorted.length;}
 function gcRarHex(a){return GC_RARHEX[(a||'').toUpperCase()]||'#8a97a1';}
-/* R.O.F parser: fire modes (B/F) + blast radius (Nm) live in the same field */
-function gcParseRof(rof){
-  const s=String(rof||'');
-  const rm=s.match(/(\d+)\s*m\b/i);
+/* R.O.F now holds fire modes only (B/F); blast radius is the separate `blast_radius` field. */
+function gcParseRof(w){
+  const s=String((w&&w.rof)||'');
   const burst=/B/i.test(s), auto=/F/i.test(s);
-  const raw=(!burst&&!auto&&!rm&&s.trim()&&s.trim()!=='-')?s.trim():'';
-  return {burst,auto,radius:rm?+rm[1]:null,raw};
+  const t=s.trim();
+  const raw=(!burst&&!auto&&t&&t!=='-'&&t!=='- / -')?t:''; // e.g. '*' (varies, grenade launchers)
+  const radius=(w&&w.blast_radius!=null&&isFinite(+w.blast_radius))?+w.blast_radius:null;
+  return {burst,auto,radius,raw};
 }
+function gcFmtBlast(n){n=+n;return n>=1000?fmt(n/1000)+' km':n+' m';}
 let _gcCeils=null;
 function gcCeils(){
   if(_gcCeils)return _gcCeils;
@@ -1149,7 +1151,7 @@ function gcCeils(){
     w:{
       dmg:gmaxBy(g.weapons,wGrp,w=>gcDmgScore(w.damage)),
       ammo:gmaxBy(g.weapons,wGrp,w=>{const a=gcNum(w.ammo);return(a&&a<10000)?a:null;}),
-      blast:gmaxBy(g.weapons,wGrp,w=>gcParseRof(w.rof).radius),
+      blast:gmaxBy(g.weapons,wGrp,w=>gcNum(w.blast_radius)),
       // RANGE: canonical per-weapon range TIER (0–25), scaled to the top tier present in the
       // group so the longest-reaching handheld fills the bar. (rngDist = percentile fallback.)
       rngTierMax:(()=>{const m={};(g.weapons||[]).forEach(w=>{const t=gcRangeTier(w);if(t==null)return;const k=wGrp(w);if(!(k in m)||t>m[k])m[k]=t;});return m;})(),
@@ -1214,7 +1216,7 @@ function gcField(label,valHtml){return '<div class="f"><div class="fl">'+label+'
 function gcWeaponCard(w,id,sq){
   const C=gcCeils().w, cat=w.category, grp=(/vehicle/i.test(cat||'')?'vehicle':'weapon'), isMelee=(typeof MELEE_CATS!=='undefined'&&MELEE_CATS.has(cat));
   const isLoc=(w.power_num===66||w.power_num===77);
-  const rof=gcParseRof(w.rof);
+  const rof=gcParseRof(w);
   const rc=rarCls(w.availability);
   let s='<div class="card '+rc+'" id="'+id+'" data-tog="'+id+'" style="--rc:'+gcRarHex(w.availability)+'">';
   s+=gcHead(w.name,w.availability,sq);
@@ -1232,7 +1234,7 @@ function gcWeaponCard(w,id,sq){
     const rfill=(t!=null&&mx)?t/mx:gcPct(C.rngDist[grp],gcAvgRange(w));
     s+=gcBarStat('Range',(rl>=1000?(rl/1000)+'k m':rl+' m'),gcBar(rfill,GC_C.rng));}
   // BLAST radius (separate stat — rof field overloads this)
-  if(rof.radius){const mx=C.blast[grp];s+=gcBarStat('Blast Radius',rof.radius+' m',gcBar(mx?rof.radius/mx:0,GC_C.blast));}
+  if(rof.radius){const mx=C.blast[grp];s+=gcBarStat('Blast Radius',gcFmtBlast(rof.radius),gcBar(mx?rof.radius/mx:0,GC_C.blast));}
   // CAPACITY
   if(String(w.ammo).toLowerCase().includes('unlim'))s+=gcBarStat('Capacity','Unlimited',gcBar(1,GC_C.cap));
   else if(gcNum(w.ammo)&&C.ammo[grp])s+=gcBarStat('Capacity',hl(String(w.ammo),sq),gcBar(gcNum(w.ammo)/C.ammo[grp],GC_C.cap));
@@ -1253,8 +1255,8 @@ function gcWeaponCard(w,id,sq){
     if(w.ammo)s+=gcField('◉ Ammo',hl(String(w.ammo),sq));
     if(w.reload)s+=gcField('↺ Reload',hl(w.reload,sq));
   }else{
-    if(w.rof)s+=gcField('↺ R.O.F',hl(w.rof,sq)+(rof.radius?' <span style="color:var(--mu);">(fire modes + '+rof.radius+'m blast)</span>':''));
-    if(rof.radius)s+=gcField('💣 Blast',rof.radius+' m');
+    if(w.rof)s+=gcField('↺ R.O.F',hl(w.rof,sq));
+    if(rof.radius)s+=gcField('💣 Blast',gcFmtBlast(rof.radius));
     if(w.ammo)s+=gcField('◉ Ammo',hl(String(w.ammo),sq));
     if(w.reload)s+=gcField('⟳ Reload',hl(w.reload,sq));
     if(w.range_short)s+=gcField('📍 Short',hl(w.range_short,sq)+'m');
