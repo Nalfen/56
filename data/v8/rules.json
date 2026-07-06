@@ -3136,7 +3136,7 @@
   {
    "name": "FULL AUTO",
    "action": "Complex",
-   "desc": "Weapons with a F in the R.O.F category can perform a FULL AUTO action. Full auto is always COMPLEX action. On a FULL AUTO action your EXPERTISE result counts as additional hits instead of additional damage. You can distribute the hits among any targets within X (EXPERTISE) meters of the initial target."
+   "desc": "Weapons with a F in the R.O.F category can perform a FULL AUTO action. Full auto is always COMPLEX action, at the cost of 9 ammo. On a FULL AUTO action your EXPERTISE result counts as additional hits instead of additional damage. You can distribute the hits among any targets within X (EXPERTISE) meters of the initial target."
   },
   {
    "name": "DUAL WEAPONS",
