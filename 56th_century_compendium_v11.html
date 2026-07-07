@@ -1150,7 +1150,7 @@ function gcReloadTier(s){
   return null;
 }
 function gcReloadLabel(s){return /quick|standard|complex/i.test(String(s||''))?'Reload':'Recharge';}
-function gcReloadDisp(s){return String(s||'').replace(/\s*round\(s\)/i,'r').trim();}
+function gcReloadDisp(s){s=String(s||'').trim();const m=s.match(/^(\d+)\s*round\(s\)$/i);return m?(m[1]+' round'+(+m[1]===1?'':'s')):s;}
 /* Lazy expanded body: at first paint only the COLLAPSED card is in the DOM (fast, no deferred
    layout). Each card's `.cb` HTML is cached by id and injected the first time it's expanded, so
    there's no big one-time layout stall on the first click. gcCard(...) builds the full card as
@@ -1229,7 +1229,7 @@ function gcFireModes(rofParsed){
   const mk=(lbl,on)=>'<div class="gc-mchip '+(on?'on':'off')+'" style="--gcbar:'+GC_C.pow+'">'+lbl+'</div>';
   return '<div class="gc-stat wide"><div class="gc-srow"><span class="gc-lab">Fire Mode</span>'+
     '<span class="gc-val tier">'+(rofParsed.auto?'Full Auto':rofParsed.burst?'Burst':'Single')+'</span></div>'+
-    '<div class="gc-modes">'+mk('SGL',true)+mk('BURST',rofParsed.burst)+mk('AUTO',rofParsed.auto)+'</div></div>';
+    '<div class="gc-modes">'+mk('SINGLE',true)+mk('BURST',rofParsed.burst)+mk('AUTO',rofParsed.auto)+'</div></div>';
 }
 function gcHead(name,avail,sq){
   return '<div class="ch gc-head"><div class="cn">'+hl(name,sq)+'</div>'+
