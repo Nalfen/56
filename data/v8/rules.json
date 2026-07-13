@@ -1894,19 +1894,19 @@
       },
       {
        "key": "SIZE BUDGET - Core / Internal / External",
-       "text": "A ship is a chassis with three kinds of slot: CORE, INTERNAL and EXTERNAL, each with a capacity. Every component you install spends slot space, so a loadout is a budgeting exercise - you cannot have everything."
+       "text": "A ship is a chassis with three kinds of slot: CORE, INTERNAL and EXTERNAL, each with a capacity. Every component you install spends slot space, so a loadout is a budgeting exercise - you cannot have everything. Placement matters: CORE components keep working until the ship is SCRAPPED, INTERNAL components stop on a CRIPPLED result, and EXTERNAL components go down on any ship TRAUMA."
       },
       {
        "key": "POWER",
        "text": "How much power the ship generates to run its systems each round - the resource the engineer manages in combat."
       },
       {
-       "key": "COST & MODULES",
-       "text": "A ship's total cost is its chassis plus every module bolted into it. MODULES are the installable parts - weapons, drives, systems - each with its own size, cost and availability."
+       "key": "COST & COMPONENTS",
+       "text": "A ship's total cost is its chassis plus every component bolted into it. SHIP COMPONENTS are the installable parts - weapons, drives, systems - each with its own size, power, cost, availability and legality. Where you put a part changes its price: CORE installation costs double, EXTERNAL mounting costs half. EXPANDABLE components (quarters, life support, cargo, escape pods) grow per person or unit added instead of being bought twice."
       },
       {
        "key": "FOR THE GM",
-       "text": "Build (or let players build) ships as expressions of a crew: where they spent their slots says what they value. For running one in anger, hand straight to Space Combat."
+       "text": "Build (or let players build) ships as expressions of a crew: where they spent their slots says what they value. The SHIP BUILDER tab assembles a design from a class template and live-checks space, power, crew and life support. For running one in anger, hand straight to Space Combat."
       }
      ]
     },

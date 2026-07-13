@@ -10,6 +10,7 @@
     "hacking.json",
     "rules.json",
     "glossary.json",
-    "galaxy.json"
+    "galaxy.json",
+    "ships.json"
   ]
 }
