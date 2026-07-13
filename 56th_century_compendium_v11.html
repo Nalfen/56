@@ -1664,7 +1664,8 @@ const SHIP_CLS_EMO={DRONE:'🛸',FIGHTER:'✈️',CORVETTE:'🚀',FRIGATE:'⚓',
 if(!g.catalog) g.catalog={};
 g.catalog.ship_components=g.ship_components||[];
 g.catalog.ships=g.ships||[];
-const SCOMP_BY_ID={};(g.ship_components||[]).forEach(c=>{SCOMP_BY_ID[c.id]=c;COMP_NAMES[c.type]=c.name;});
+const SCOMP_BY_ID={};(g.ship_components||[]).forEach(c=>{SCOMP_BY_ID[c.id]=c;});
+Object.assign(COMP_NAMES,(g.ship_config&&g.ship_config.type_names)||{});
 const SHIP_TPL={};(g.ship_templates||[]).forEach(t=>{SHIP_TPL[t.id]=t;});
 const SHIP_AREAS=['core','internal','external'];
 const SHIP_AREA_KEY={core:'core_space',internal:'internal_space',external:'external_space'};
@@ -1683,13 +1684,15 @@ function shipCompute(ship){
   const POOLS=['structure','hull','ecm','system'],RTG=['command','handling','instruments','engineering','warfare'];
   const stat={};POOLS.concat(RTG).forEach(k=>stat[k]=t[k]||0);
   const AV=['COMMON','UNCOMMON','RARE','LIMITED','UNIQUE'],LEG=['No Permit','Restricted','Illegal'];
-  let cost=t.price||0,wAv=0,wLeg=0;const areaUsed={};
+  let cost=t.price||0,wAv=0,wLeg=0;const areaUsed={};const groups={};
   SHIP_AREAS.forEach(area=>{
     let used=0;
     (ship[area]||[]).forEach(ref=>{
       const[c,n,id]=shipResolve(ref);
       if(!c){res.errors.push('missing component: '+id);return;}
       if(c.classes.indexOf(ship.class)<0)res.errors.push(c.id+' not allowed on '+ship.class);
+      if((c.placement||'CIE').indexOf({core:'C',internal:'I',external:'E'}[area])<0)res.errors.push(c.id+' cannot be mounted in '+area);
+      if(c.mandatory_group)groups[c.mandatory_group]=1;
       const exp=!!c.expandable,copies=exp?1:Math.max(1,n),adds=exp?n:0;
       used+=(c.unit_size||0)*copies+(c.exp_size||0)*adds;
       cost+=SHIP_AREA_MULT[area]*((c.price||0)*copies+(c.exp_cost||0)*adds);
@@ -1702,7 +1705,7 @@ function shipCompute(ship){
         else if(per==='cargo')agg.cargo+=adds;
         else if(per==='life_ppl')agg.life_ppl+=(c.life_ppl||0)+adds;
       }
-      if(c.type==='CREWAUTOMATION'){agg.crew_min-=(c.crew_min||0)*copies;agg.crew_max-=(c.crew_max||0)*copies;}
+      if(c.type==='CREWAUTOMATION'){agg.crew_min-=(c.crew_min||0)*copies;}
       else if(!exp){['crew_min','passengers','life_ppl'].forEach(k=>{agg[k]+=(c[k]||0)*copies;});agg.berths+=(c.crew_max||0)*copies;}
       agg.life_hrs=Math.max(agg.life_hrs,c.life_hrs||0);
       ['combat_range','detect_range','max_range','jump_range','speed','atmospheric'].forEach(k=>{agg[k]=Math.max(agg[k],c[k]||0);});
@@ -1719,8 +1722,12 @@ function shipCompute(ship){
   const crewed=ship.class!=='DRONE';
   if(agg.pwr_consumption>agg.pwr_creation+1e-9)res.errors.push('power: draws '+(Math.round(agg.pwr_consumption*10)/10)+' / creates '+agg.pwr_creation);
   if(agg.pwr_activation>(agg.pwr_creation-agg.pwr_consumption)+agg.energy_storage+1e-9)res.warnings.push('activation surge '+agg.pwr_activation+' exceeds headroom+storage');
-  if(crewed&&agg.berths<agg.crew_max)res.errors.push('berths: '+agg.berths+' quarters / '+agg.crew_max+' max crew');
-  if(crewed&&(agg.crew_max+agg.passengers)>agg.life_ppl)res.errors.push('life support: '+agg.crew_max+'+'+agg.passengers+' aboard / '+agg.life_ppl+' supported');
+  if(crewed&&agg.berths<agg.crew_min)res.errors.push('berths: '+agg.berths+' quarters / '+agg.crew_min+' minimum crew');
+  else if(crewed&&agg.berths<agg.crew_max)res.warnings.push('berths cover '+agg.berths+' of '+agg.crew_max+' max crew');
+  const aboard=agg.berths+agg.passengers;
+  if(crewed&&aboard>agg.life_ppl)res.errors.push('life support: '+aboard+' aboard (berths+passengers) / '+agg.life_ppl+' supported');
+  else if(crewed&&(agg.crew_max+agg.passengers)>agg.life_ppl)res.warnings.push('life support short for a full crew: '+agg.crew_max+'+'+agg.passengers+' vs '+agg.life_ppl);
+  ((g.ship_config&&g.ship_config.mandatory_by_class||{})[ship.class]||[]).forEach(grp=>{if(!groups[grp])res.errors.push('missing mandatory system: '+grp);});
   agg.pwr_consumption=Math.round(agg.pwr_consumption*10)/10;agg.pwr_activation=Math.round(agg.pwr_activation*10)/10;
   Object.assign(res,agg,stat);
   res.area_used=areaUsed;
@@ -1735,7 +1742,9 @@ function shipCompute(ship){
 function scompTypeOrder(){const seen=[],has={};(g.ship_components||[]).forEach(c=>{if(!has[c.type]){has[c.type]=1;seen.push(c.type);}});return seen;}
 
 // ─── Ship Builder state + events ──────────────────────────────────────────────
-let sbState={name:'Unnamed Ship',cls:null,tpl:null,areas:{core:[],internal:[],external:[]},picker:null,ptype:'',search:'',showJson:false};
+let sbState={name:'Unnamed Ship',cls:null,tpl:null,areas:{core:[],internal:[],external:[]},picker:null,ptype:'',search:'',pgroup:'',showJson:false};
+let scF={t:{},c:{}};
+document.addEventListener('click',e=>{const el=e.target.closest('[data-scf]');if(!el)return;const v=el.dataset.scf;if(v==='clear'){scF={t:{},c:{}};}else{const i=v.indexOf(':'),k=v.slice(0,i),val=v.slice(i+1);scF[k][val]=!scF[k][val];}render();});
 function sbShip(){return{name:sbState.name,class:sbState.cls,template:sbState.tpl,
   core:sbState.areas.core.map(x=>x.n?x.id+' ×'+x.n:x.id),
   internal:sbState.areas.internal.map(x=>x.n?x.id+' ×'+x.n:x.id),
@@ -1745,16 +1754,17 @@ document.addEventListener('click',e=>{
   const v=el.dataset.sb;
   if(v.startsWith('cls:')){sbState.cls=v.slice(4);sbState.tpl=null;sbState.areas={core:[],internal:[],external:[]};sbState.picker=null;}
   else if(v.startsWith('tpl:')){sbState.tpl=v.slice(4);sbState.areas={core:[],internal:[],external:[]};sbState.picker=null;}
-  else if(v.startsWith('open:')){sbState.picker=v.slice(5);sbState.ptype='';sbState.search='';}
-  else if(v==='close'){sbState.picker=null;}
-  else if(v.startsWith('ptype:')){sbState.ptype=v.slice(6);}
-  else if(v.startsWith('pick:')){const id=v.slice(5);if(sbState.picker){sbState.areas[sbState.picker].push({id:id,n:0});sbState.picker=null;}}
+  else if(v.startsWith('open:')){sbState.picker=v.slice(5);sbState.ptype='';sbState.search='';sbState.pgroup='';}
+  else if(v==='close'){sbState.picker=null;sbState.pgroup='';}
+  else if(v.startsWith('ptype:')){sbState.ptype=v.slice(6);sbState.pgroup='';}
+  else if(v.startsWith('need:')){sbState.picker='internal';sbState.ptype='';sbState.search='';sbState.pgroup=v.slice(5);}
+  else if(v.startsWith('pick:')){const id=v.slice(5);if(sbState.picker){sbState.areas[sbState.picker].push({id:id,n:0});sbState.picker=null;sbState.pgroup='';}}
   else if(v.startsWith('inc:')||v.startsWith('dec:')||v.startsWith('del:')){
     const p=v.split(':'),area=p[1],i=parseInt(p[2]),it=sbState.areas[area][i];
     if(it){if(p[0]==='del')sbState.areas[area].splice(i,1);
       else if(p[0]==='inc')it.n=(it.n||0)+1;
       else it.n=Math.max(0,(it.n||0)-1);}}
-  else if(v==='reset'){sbState={name:'Unnamed Ship',cls:null,tpl:null,areas:{core:[],internal:[],external:[]},picker:null,ptype:'',search:'',showJson:false};}
+  else if(v==='reset'){sbState={name:'Unnamed Ship',cls:null,tpl:null,areas:{core:[],internal:[],external:[]},picker:null,ptype:'',search:'',pgroup:'',showJson:false};}
   else if(v==='json'){sbState.showJson=!sbState.showJson;}
   else return;
   render();
@@ -8580,25 +8590,27 @@ function render(){
   else if(cs==='ship_components'){
     const ALL=g.catalog&&g.catalog.ship_components||[];
     const typeOrder=scompTypeOrder();
-    const clsFilter=af&&af.startsWith('CLS:')?(af.slice(4)):'';
-    const typeFilter=clsFilter?'':(af||'');
+    const selT=Object.keys(scF.t).filter(k=>scF.t[k]);
+    const selC=Object.keys(scF.c).filter(k=>scF.c[k]);
     const SC=ALL.filter(c=>{
       if(!ms([c.name,c.type,c.ship_class,c.quality,c.desc,c.availability,c.legality])) return false;
-      if(clsFilter&&c.classes.indexOf(clsFilter)<0) return false;
-      if(typeFilter&&c.type!==typeFilter) return false;
+      if(selT.length&&selT.indexOf(c.type)<0) return false;
+      if(selC.length&&!selC.some(k=>c.classes.indexOf(k)>=0)) return false;
       return true;
     });
     cnt=SC.length;
     html='<div class="stitle">⚙ SHIP COMPONENTS <span class="badge">'+cnt+'</span></div>';
+    html+='<div style="font-size:10px;color:#6b7280;margin:2px 0 6px;">Filters stack: pick any number of component types and ship classes at once.'+((selT.length||selC.length)?' <button class="fc" data-scf="clear">✕ Clear filters</button>':'')+'</div>';
     html+='<div class="fbar">';
-    html+=fcBtn('All','',af);
-    typeOrder.forEach(t=>{if(ALL.some(c=>c.type===t))html+=fcBtn(COMP_NAMES[t]||t,t,af);});
-    html+='<span style="color:#4b5563;margin:0 4px;">│</span>';
-    SHIP_CLASSES.forEach(k=>html+=fcBtn(SHIP_CLS_EMO[k]+' '+k,'CLS:'+k,af));
+    typeOrder.forEach(t=>{if(ALL.some(c=>c.type===t))html+='<button class="fc'+(scF.t[t]?' active':'')+'" data-scf="t:'+t+'">'+esc(COMP_NAMES[t]||t)+'</button>';});
+    html+='</div><div class="fbar">';
+    SHIP_CLASSES.forEach(k=>{html+='<button class="fc'+(scF.c[k]?' active':'')+'" data-scf="c:'+k+'" style="'+(scF.c[k]?'color:'+SHIP_CLS_TX[k]+';':'')+'">'+SHIP_CLS_EMO[k]+' '+k+'</button>';});
     html+='</div>';
     const legCol={'No Permit':'#4ade80','Restricted':'#facc15','Illegal':'#fb923c'};
+    const PLC={C:'🔒C',I:'⚙I',E:'🔧E'};
+    const plStr=p=>(p||'CIE').split('').map(x=>PLC[x]||x).join(' ');
     const EFFK=[['structure','STRUCTURE'],['hull','HULL'],['ecm','ECM'],['system','SYSTEM'],['command','COMMAND'],['handling','HANDLING'],['instruments','INSTRUMENTS'],['engineering','ENGINEERING'],['warfare','WARFARE'],['speed','SPEED'],['jump_range','JUMP RANGE']];
-    const CAPK=[['pwr_creation','⚡ Power Creation','#fbbf24'],['pwr_consumption','🔌 Power Draw','#f87171'],['pwr_activation','💥 Activation Power','#fb923c'],['energy_storage','🔋 Energy Storage','#60a5fa'],['shield_max','🛡 Shield Max','#34d399'],['shield_recharge','♻ Shield Recharge','#34d399'],['life_ppl','💨 Life Support (ppl)','#a7f3d0'],['life_hrs','⏱ Life Support (hrs)','#a7f3d0'],['fuel_cons','🔥 Fuel/hr','#fb923c'],['fuel_units','🛢 Fuel Units','#fbbf24'],['combat_range','📡 Combat Range','#22d3ee'],['detect_range','🔭 Detect Range','#22d3ee'],['max_range','📻 Max Range','#22d3ee'],['crew_min','👤 Crew','#e5e7eb'],['crew_max','👥 Crew Max','#e5e7eb'],['passengers','🧍 Passengers','#e5e7eb'],['cargo','📦 Cargo','#e5e7eb'],['atmospheric','🌍 Atmospheric','#34d399']];
+    const CAPK=[['pwr_creation','⚡ Power Creation','#fbbf24'],['pwr_consumption','🔌 Power Draw','#f87171'],['pwr_activation','💥 Activation Power','#fb923c'],['energy_storage','🔋 Energy Storage','#60a5fa'],['shield_max','🛡 Shield Max','#34d399'],['shield_recharge','♻ Shield Recharge','#34d399'],['life_ppl','💨 Life Support (ppl)','#a7f3d0'],['life_hrs','⏱ Life Support (hrs)','#a7f3d0'],['fuel_cons','🔥 Fuel/hr','#fb923c'],['fuel_units','🛢 Fuel Units','#fbbf24'],['combat_range','📡 Combat Range','#22d3ee'],['detect_range','🔭 Detect Range','#22d3ee'],['max_range','📻 Max Range','#22d3ee'],['crew_min','👤 Min-crew reduction','#e5e7eb'],['passengers','🧍 Passengers','#e5e7eb'],['cargo','📦 Cargo','#e5e7eb'],['atmospheric','🌍 Atmospheric','#34d399']];
     typeOrder.forEach(type=>{
       const group=SC.filter(c=>c.type===type);
       if(!group.length) return;
@@ -8614,6 +8626,8 @@ function render(){
         html+='<div class="cs" style="color:'+col+';">'+(c.ship_class==='ALL'?'◈ UNIVERSAL':(SHIP_CLS_EMO[c.ship_class]||'')+' '+esc(c.ship_class))+'</div>';
         html+='</div><div style="display:flex;align-items:center;gap:4px;">'+qBadge(c.quality)+'<span class="xi">▼</span></div></div>';
         html+='<div class="cr2">';
+        if(c.mandatory_group) html+='<span class="wpn-pill" style="color:#f0abfc;">★ REQUIRED ('+esc(c.mandatory_group)+')</span>';
+        html+='<span class="wpn-pill" style="color:#93c5fd;">'+plStr(c.placement)+'</span>';
         if(c.availability) html+='<span class="wpn-pill wpill-avl">◈ '+hl(c.availability,sq)+'</span>';
         if(c.legality&&c.legality!=='No Permit') html+='<span class="wpn-pill" style="color:'+(legCol[c.legality]||'#9ca3af')+';">⚖ '+hl(c.legality,sq)+'</span>';
         if(c.expandable) html+='<span class="wpn-pill" style="color:#a78bfa;">⤢ EXPANDABLE</span>';
@@ -8626,9 +8640,9 @@ function render(){
         html+='<div class="cb">';
         if(c.desc) html+='<div class="rd" style="margin-bottom:8px;color:#9ca3af;">'+hl(c.desc,sq)+'</div>';
         html+='<div class="fg">';
-        let eff=0;
-        EFFK.forEach(k=>{const v=c[k[0]];if(v){eff++;html+='<div class="f"><div class="fl">'+k[1]+'</div><div class="fv" style="color:'+(v>0?'#4ade80':'#f87171')+';">'+(v>0?'+':'')+v+'</div></div>';}});
-        CAPK.forEach(k=>{const v=c[k[0]];if(v){html+='<div class="f"><div class="fl">'+k[1]+'</div><div class="fv" style="color:'+k[2]+';">'+v+'</div></div>';}});
+        EFFK.forEach(k=>{const v=c[k[0]];if(v&&!(c.type==='CREWAUTOMATION'&&k[0]!=='crew_min')){html+='<div class="f"><div class="fl">'+k[1]+'</div><div class="fv" style="color:'+(v>0?'#4ade80':'#f87171')+';">'+(v>0?'+':'')+v+'</div></div>';}});
+        CAPK.forEach(k=>{const v=c[k[0]];if(v&&!(c.type!=='CREWAUTOMATION'&&k[0]==='crew_min'&&false)){if(k[0]==='crew_min'&&c.type!=='CREWAUTOMATION'){html+='<div class="f"><div class="fl">👤 Crew Required</div><div class="fv">'+v+'</div></div>';}else{html+='<div class="f"><div class="fl">'+k[1]+'</div><div class="fv" style="color:'+k[2]+';">'+v+'</div></div>';}}});
+        html+='<div class="f"><div class="fl">Placement</div><div class="fv" style="color:#93c5fd;">'+plStr(c.placement)+'</div></div>';
         html+='<div class="f"><div class="fl">Unit Size</div><div class="fv" style="color:var(--mu);">'+((c.unit_size||0)>0?'+':'')+(c.unit_size||0)+'</div></div>';
         html+='<div class="f"><div class="fl">Price</div><div class="fv" style="color:#4ade80;">'+fmt(c.price||0)+' Cr</div></div>';
         html+='</div>';
@@ -8644,13 +8658,13 @@ function render(){
   else if(cs==='ship_builder'){
     const S=sbState;
     const legCol={'No Permit':'#4ade80','Restricted':'#facc15','Illegal':'#fb923c'};
+    const PLC={C:'🔒C',I:'⚙I',E:'🔧E'};
+    const plStr=p=>(p||'CIE').split('').map(x=>PLC[x]||x).join(' ');
     html='<div class="stitle">🛠 SHIP BUILDER</div>';
-    // 1. class picker
     html+='<div class="nl">1 · SHIP CLASS</div><div class="fbar">';
     SHIP_CLASSES.forEach(k=>{html+='<button class="fc'+(S.cls===k?' active':'')+'" data-sb="cls:'+k+'" style="'+(S.cls===k?'color:'+SHIP_CLS_TX[k]+';':'')+'">'+SHIP_CLS_EMO[k]+' '+k+'</button>';});
     html+='</div>';
     if(S.cls){
-      // 2. template picker
       const tpls=(g.ship_templates||[]).filter(t=>t.ship_class===S.cls);
       html+='<div class="nl">2 · TEMPLATE (hull frame — sets budgets, base ratings, base crew)</div><div class="grid" style="margin-bottom:12px;">';
       tpls.forEach(t=>{
@@ -8667,22 +8681,31 @@ function render(){
       const t=SHIP_TPL[S.tpl];
       const ship=sbShip();
       const cp=shipCompute(ship);
-      html+='<div class="nl">3 · FIT COMPONENTS</div>';
+      // 3 · REQUIRED SYSTEMS checklist — pick these first
+      const mand=(g.ship_config&&g.ship_config.mandatory_by_class||{})[S.cls]||[];
+      const have={};
+      SHIP_AREAS.forEach(a=>{S.areas[a].forEach(it=>{const c=SCOMP_BY_ID[it.id];if(c&&c.mandatory_group)have[c.mandatory_group]=1;});});
+      html+='<div class="nl">3 · REQUIRED SYSTEMS — every ship needs these to be spaceworthy</div>';
+      html+='<div style="display:flex;flex-wrap:wrap;gap:4px;margin:6px 0;">';
+      mand.forEach(grp=>{
+        const ok2=!!have[grp];
+        html+='<span class="wpn-pill" style="cursor:'+(ok2?'default':'pointer')+';color:'+(ok2?'#4ade80':'#ef4444')+';border-color:'+(ok2?'rgba(74,222,128,.4)':'rgba(239,68,68,.5)')+';"'+(ok2?'':' data-sb="need:'+grp+'"')+'>'+(ok2?'✔ ':'＋ ')+grp+'</span>';
+      });
+      html+='</div>';
+      html+='<div class="nl">4 · FIT COMPONENTS</div>';
       html+='<div style="margin:6px 0;"><input data-sbname="1" value="'+esc(S.name)+'" style="background:var(--s2);border:1px solid var(--b);color:var(--fg);padding:5px 9px;border-radius:5px;font-size:12px;width:240px;" placeholder="Ship name"/> ';
       html+='<button class="fc" data-sb="reset">↺ Reset</button> <button class="fc" data-sb="json">⎘ '+(S.showJson?'Hide':'Show')+' JSON</button></div>';
       if(S.showJson){const exp={...ship,computed:cp};html+='<textarea readonly style="width:100%;height:140px;background:var(--s2);border:1px solid var(--b);color:#9ca3af;font-family:\'JetBrains Mono\',monospace;font-size:10px;padding:6px;border-radius:5px;" onclick="this.select()">'+esc(JSON.stringify(exp))+'</textarea>';}
-      // status banner
       html+='<div style="margin:8px 0;padding:8px 10px;border-radius:6px;border:1px solid '+(cp.valid?'rgba(74,222,128,.4)':'rgba(239,68,68,.4)')+';background:'+(cp.valid?'rgba(74,222,128,.06)':'rgba(239,68,68,.06)')+';">';
       html+='<div style="font-weight:700;font-size:12px;color:'+(cp.valid?'#4ade80':'#ef4444')+';">'+(cp.valid?'✔ VALID DESIGN':'✗ INVALID DESIGN')+'<span style="float:right;color:#4ade80;">'+fmt(cp.total_cost)+' Cr</span></div>';
       (cp.errors||[]).forEach(e2=>{html+='<div style="font-size:11px;color:#f87171;margin-top:3px;">✗ '+esc(e2)+'</div>';});
       (cp.warnings||[]).forEach(w2=>{html+='<div style="font-size:11px;color:#facc15;margin-top:3px;">⚠ '+esc(w2)+'</div>';});
       html+='</div>';
-      // live stats
       const statPill=(l,v,c2)=>'<span class="wpn-pill" style="color:'+(c2||'#d1d5db')+';font-size:10px;"><span style="color:#6b7280;">'+l+'</span> '+v+'</span>';
       html+='<div style="display:flex;flex-wrap:wrap;gap:3px;margin:6px 0;">';
       html+=statPill('STR',cp.structure,'#94a3b8')+statPill('HULL',cp.hull,'#60a5fa')+statPill('ECM',cp.ecm,'#34d399')+statPill('SYS',cp.system,'#a78bfa')+statPill('CMD',cp.command,'#fbbf24')+statPill('HDL',cp.handling,'#fb923c')+statPill('INS',cp.instruments,'#22d3ee')+statPill('ENG',cp.engineering,'#4ade80')+statPill('WAR',cp.warfare,'#f87171');
       html+=statPill('⚡',cp.pwr_consumption+'/'+cp.pwr_creation,cp.pwr_consumption>cp.pwr_creation?'#ef4444':'#fbbf24');
-      html+=statPill('🛡',cp.shield_max,'#34d399')+statPill('👥',cp.crew_min+'-'+cp.crew_max,'#e5e7eb');
+      html+=statPill('🛡',cp.shield_max,'#34d399')+statPill('👥',cp.crew_min+'-'+cp.crew_max,'#e5e7eb')+statPill('🛏',cp.berths,'#e5e7eb');
       if(cp.passengers)html+=statPill('🧍',cp.passengers,'#e5e7eb');
       if(cp.cargo)html+=statPill('📦',cp.cargo,'#e5e7eb');
       html+=statPill('🚀',cp.speed,'#d1d5db');
@@ -8690,8 +8713,7 @@ function render(){
       html+=statPill('◈',cp.availability,'#9ca3af');
       if(cp.legality!=='No Permit')html+=statPill('⚖',cp.legality,legCol[cp.legality]);
       html+='</div>';
-      // area panels
-      const AREAS=[['core','🔒 CORE','#34d399','components keep working until the ship is SCRAPPED — ×'+SHIP_AREA_MULT.core+' price'],['internal','⚙ INTERNAL','#60a5fa','protected — stops on CRIPPLED'],['external','🔧 EXTERNAL','#fb923c','exposed — stops on any ship TRAUMA — ×'+SHIP_AREA_MULT.external+' price']];
+      const AREAS=[['core','🔒 CORE','#34d399','protected until SCRAPPED — ×'+SHIP_AREA_MULT.core+' price'],['internal','⚙ INTERNAL','#60a5fa','protected — stops on CRIPPLED'],['external','🔧 EXTERNAL','#fb923c','exposed — stops on any TRAUMA — ×'+SHIP_AREA_MULT.external+' price']];
       AREAS.forEach(ar=>{
         const key=ar[0],budget=t[SHIP_AREA_KEY[key]]||0,used=(cp.area_used||{})[key]||0;
         const over=used>budget;
@@ -8700,9 +8722,10 @@ function render(){
         html+='<div style="height:5px;border-radius:3px;background:rgba(255,255,255,.07);margin:5px 0;"><div style="height:5px;border-radius:3px;width:'+Math.min(100,budget?used/budget*100:0)+'%;background:'+(over?'#ef4444':ar[2])+';"></div></div>';
         S.areas[key].forEach((it,i)=>{
           const c=SCOMP_BY_ID[it.id];if(!c)return;
+          const bad=(c.placement||'CIE').indexOf({core:'C',internal:'I',external:'E'}[key])<0;
           const sz=shipItemSize(c,it.n),cost2=Math.round(shipItemCost(c,it.n)*SHIP_AREA_MULT[key]);
-          html+='<div style="display:flex;align-items:center;gap:6px;padding:3px 0;border-bottom:1px dashed rgba(255,255,255,.05);font-size:11px;">';
-          html+='<span style="flex:1;">'+esc(c.name)+' '+qBadge(c.quality)+(c.ship_class!=='ALL'?' <span style="color:'+(SHIP_CLS_TX[c.ship_class]||'#666')+';font-size:9px;">'+esc(c.ship_class)+'</span>':'')+'</span>';
+          html+='<div style="display:flex;align-items:center;gap:6px;padding:3px 0;border-bottom:1px dashed rgba(255,255,255,.05);font-size:11px;'+(bad?'background:rgba(239,68,68,.08);':'')+'">';
+          html+='<span style="flex:1;">'+(bad?'<span style="color:#ef4444;">⚠</span> ':'')+esc(c.name)+' '+qBadge(c.quality)+(c.ship_class!=='ALL'?' <span style="color:'+(SHIP_CLS_TX[c.ship_class]||'#666')+';font-size:9px;">'+esc(c.ship_class)+'</span>':'')+'</span>';
           if(c.expandable){html+='<button class="fc" data-sb="dec:'+key+':'+i+'" style="padding:0 6px;">−</button><span style="color:#a78bfa;min-width:30px;text-align:center;">+'+(it.n||0)+'</span><button class="fc" data-sb="inc:'+key+':'+i+'" style="padding:0 6px;">+</button>';}
           else if(it.n>1){html+='<button class="fc" data-sb="dec:'+key+':'+i+'" style="padding:0 6px;">−</button><span style="color:#a78bfa;min-width:30px;text-align:center;">×'+it.n+'</span><button class="fc" data-sb="inc:'+key+':'+i+'" style="padding:0 6px;">+</button>';}
           else{html+='<button class="fc" data-sb="inc:'+key+':'+i+'" style="padding:0 6px;" title="duplicate">＋</button>';}
@@ -8714,22 +8737,24 @@ function render(){
         html+='<div style="margin-top:6px;"><button class="fc" data-sb="open:'+key+'">＋ Add component</button></div>';
         html+='</div>';
       });
-      // picker
       if(S.picker){
-        const avail=(g.ship_components||[]).filter(c=>c.classes.indexOf(S.cls)>=0);
+        const aLetter={core:'C',internal:'I',external:'E'}[S.picker];
+        const avail=(g.ship_components||[]).filter(c=>c.classes.indexOf(S.cls)>=0&&(c.placement||'CIE').indexOf(aLetter)>=0);
         const types=[];const seen={};avail.forEach(c=>{if(!seen[c.type]){seen[c.type]=1;types.push(c.type);}});
         const q=(S.search||'').toLowerCase();
-        const list=avail.filter(c=>(!S.ptype||c.type===S.ptype)&&(!q||(c.name+' '+c.type+' '+c.desc).toLowerCase().includes(q)));
+        const list=avail.filter(c=>(!S.ptype||c.type===S.ptype)&&(!S.pgroup||c.mandatory_group===S.pgroup)&&(!q||(c.name+' '+c.type+' '+c.desc).toLowerCase().includes(q)));
         html+='<div style="margin:10px 0;padding:10px;border:1px solid rgba(96,165,250,.4);border-radius:6px;background:rgba(96,165,250,.04);">';
-        html+='<div style="font-size:11px;font-weight:700;color:#60a5fa;margin-bottom:6px;">ADD TO '+S.picker.toUpperCase()+' <button class="fc" data-sb="close" style="float:right;">✕ Close</button></div>';
+        html+='<div style="font-size:11px;font-weight:700;color:#60a5fa;margin-bottom:6px;">ADD TO '+S.picker.toUpperCase()+(S.pgroup?' — REQUIRED: '+esc(S.pgroup):'')+' <button class="fc" data-sb="close" style="float:right;">✕ Close</button></div>';
+        html+='<div style="font-size:9.5px;color:#6b7280;margin-bottom:4px;">Showing only parts that can be mounted here.</div>';
         html+='<input data-sbsearch="1" value="'+esc(S.search)+'" placeholder="Search components…" style="background:var(--s2);border:1px solid var(--b);color:var(--fg);padding:4px 8px;border-radius:5px;font-size:11px;width:220px;margin-bottom:6px;"/>';
-        html+='<div class="fbar" style="margin-bottom:6px;"><button class="fc'+(S.ptype===''?' active':'')+'" data-sb="ptype:">All</button>';
+        html+='<div class="fbar" style="margin-bottom:6px;"><button class="fc'+((S.ptype===''&&!S.pgroup)?' active':'')+'" data-sb="ptype:">All</button>';
         types.forEach(tp=>{html+='<button class="fc'+(S.ptype===tp?' active':'')+'" data-sb="ptype:'+tp+'">'+esc(COMP_NAMES[tp]||tp)+'</button>';});
         html+='</div>';
         html+='<div style="max-height:300px;overflow-y:auto;">';
         list.slice(0,200).forEach(c=>{
           html+='<div style="display:flex;align-items:center;gap:6px;padding:3px 4px;border-bottom:1px dashed rgba(255,255,255,.05);font-size:11px;cursor:pointer;" data-sb="pick:'+esc(c.id)+'">';
-          html+='<span style="flex:1;">'+esc(c.name)+' '+qBadge(c.quality)+(c.ship_class!=='ALL'?' <span style="color:'+(SHIP_CLS_TX[c.ship_class]||'#666')+';font-size:9px;">'+esc(c.ship_class)+'</span>':'')+(c.expandable?' <span style="color:#a78bfa;font-size:9px;">⤢</span>':'')+'</span>';
+          html+='<span style="flex:1;">'+(c.mandatory_group?'<span style="color:#f0abfc;">★</span> ':'')+esc(c.name)+' '+qBadge(c.quality)+(c.ship_class!=='ALL'?' <span style="color:'+(SHIP_CLS_TX[c.ship_class]||'#666')+';font-size:9px;">'+esc(c.ship_class)+'</span>':'')+(c.expandable?' <span style="color:#a78bfa;font-size:9px;">⤢</span>':'')+'</span>';
+          html+='<span style="color:#93c5fd;font-size:9px;">'+plStr(c.placement)+'</span>';
           html+='<span style="color:#6b7280;">'+(c.unit_size||0)+' u</span>';
           if(c.pwr_consumption)html+='<span style="color:#f87171;">'+c.pwr_consumption+' pwr</span>';
           if(c.pwr_creation)html+='<span style="color:#fbbf24;">+'+c.pwr_creation+' pwr</span>';
