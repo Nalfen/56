@@ -866,6 +866,7 @@ tr.xref-row>td{padding:10px 12px!important;background:var(--bg2);border-bottom:1
   <button class="nb" data-s="ship_components"><span class="ni">⚙</span>Ship Components<span class="nct" data-ct="ship_components"></span></button>
   </details>
   <details class="ngrp" data-grp="builder" open><summary class="nl">Builder<span class="nchev">▾</span></summary>
+  <button class="nb" data-s="ship_builder"><span class="ni">🛠</span>Ship Builder</button>
   <button class="nb" data-s="drone_builder"><span class="ni">🤖</span>Drone Builder<span class="nct" data-ct="drone_builder"></span></button>
   <button class="nb" data-s="drone_parts"><span class="ni">🔩</span>Drone Parts<span class="nct" data-ct="drone_parts"></span></button>
   </details>
@@ -1652,256 +1653,116 @@ function compLine(code){if(!code||code==='EMPTY')return'<span style="color:#3741
 function shipStat(s,type){const all=[...(s.core||[]),...(s.internal||[]),...(s.external||[])];const c=all.find(x=>{const p=x.split('_');return p.slice(0,p.length-2).join('_')===type;});return c?pComp(c).quality:null;}
 function qBadge(q){const qs=COMP_QCOL[q]||'color:#9ca3af;border:1px solid rgba(156,163,175,.3)';return q?'<span style="font-size:10px;padding:1px 5px;border-radius:3px;'+qs+'">'+q+'</span>':'';}
 
-// ─── Ship Stat Calculator ─────────────────────────────────────────────────────
-// Quality index: BASIC=0 AVERAGE=1 GOOD=2 UNIVERSAL=3 / Weapon size: XLARGE=0 HUGE=1 MASSIVE=2 COLOSSAL=3
-const COMP_Q={BASIC:0,AVERAGE:1,GOOD:2,UNIVERSAL:3,XLARGE:0,HUGE:1,MASSIVE:2,COLOSSAL:3};
-// Base frame stats by ship class, command base reflects crew-direction complexity
-const SHIP_BASE={DRONE:{structure:1,hull:5,crew_min:0,command:0},FIGHTER:{structure:2,hull:8,crew_min:1,command:1},CORVETTE:{structure:3,hull:10,crew_min:3,command:2},FRIGATE:{structure:4,hull:12,crew_min:5,command:3},CRUISER:{structure:6,hull:15,crew_min:8,command:4},BATTLECRUISER:{structure:8,hull:18,crew_min:12,command:5},CARRIER:{structure:10,hull:20,crew_min:20,command:6},NOVA:{structure:15,hull:25,crew_min:30,command:7}};
-// Component stat contributions: {stat:[base, per_quality_bonus], ...}
-// Quality bonus q: BASIC=0 AVERAGE=1 GOOD=2 UNIVERSAL=3
-// pwr_draw = passive power consumed by this component
-const COMP_CC={
-  // Power systems
-  POWER:          {pwr_create:[20,5],energy_storage:[6,4],system:[3,1],pwr_draw:[0,0]},
-  POWER_CORONTHIA:{pwr_create:[35,18],system:[4,2],fuel_cons:[8,5],pwr_draw:[0,0]},  // burns coronthia fuel cells, requires FUELTANK
-  ENERGYTANK:     {energy_storage:[10,5],pwr_draw:[0,0]},
-  // Frame
-  HULL:           {structure:[-1,1],command:[1,-1],pwr_draw:[0,0]},  // BASIC penalises structure, GOOD hull is heavy (-command)
-  STRUCTURE:      {structure:[1,1],pwr_draw:[0,0]},
-  // Defences
-  SHIELD:         {shield_max:[15,5],shield_recharge:[3,1],system:[0,1],pwr_draw:[3,0]},
-  ECM:            {ecm:[1,1],pwr_draw:[3,0]},         // tier 1/2/3 → ecm 1/2/3
-  SYSTEM:         {system:[3,1],pwr_draw:[3,0]},
-  // Crew direction (BRIDGE: command = -1/0/+1 vs class base; NAVBRIDGE: instruments = tier; COMBRIDGE: warfare = tier)
-  WARFARESUITE:   {warfare:[2,1],pwr_draw:[2,0]},
-  BRIDGE:         {command:[-1,1],pwr_draw:[2,0]},
-  COMBRIDGE:      {warfare:[1,1],max_range:[500,500],pwr_draw:[2,0]},
-  AIRLOCKBRIDGE:  {command:[1,0],pwr_draw:[1,0]},
-  NAVBRIDGE:      {instruments:[1,1],pwr_draw:[2,0]},  // instruments = tier
-  // Navigation
-  JUMPDRIVE:      {jump_range:[1,1],pwr_activation:[5,0],pwr_draw:[0,0]},  // BASIC=1 AVERAGE=2 GOOD=3
-  // Engines, speed tier = base(2=LOW) + q (BASIC+0 AVERAGE+1 GOOD+2)
-  // BALANCED: handling = tier; COMBAT: warfare = tier; HANDLING: handling = 2 flat
-  ENGINEBALANCED: {handling:[1,1],pwr_draw:[4,0]},
-  ENGINECOMBAT:   {warfare:[1,1],pwr_draw:[4,0]},
-  ENGINEHANDLING: {handling:[2,0],pwr_draw:[4,0]},
-  // Sensors
-  INSTRUMENTS:    {instruments:[1,1],detect_range:[200,0],max_range:[2000,0],pwr_draw:[2,0]},
-  RADAR:           {instruments:[1,1],combat_range:[100,0],detect_range:[1000,0],max_range:[10000,0],pwr_draw:[1,0]},
-  RADAR_COMBAT:    {instruments:[0,1],combat_range:[300,0],detect_range:[3000,0],max_range:[9000,0],pwr_draw:[1,0]},
-  RADAR_DEEPSPACE: {instruments:[2,1],combat_range:[50,0],detect_range:[5000,0],max_range:[50000,0],pwr_draw:[1,0]},
-  // Engineering systems
-  ENGINEERING:    {engineering:[1,1],pwr_draw:[2,0]},
-  CONSTRUCTION:   {engineering:[1,1],pwr_draw:[2,0]},
-  // Crew / life
-  LIFESUPPORT:    {life_ppl:[5,5],life_hrs:[720,8040],pwr_draw:[2,0]},  // BASIC=30d AVERAGE=1yr GOOD=~2yr per unit
-  FUELTANK:       {fuel_units:[100,50],pwr_draw:[0,0]},
-  CARGOSPACE:     {cargo:[1,0],pwr_draw:[1,0]},
-  CREWSPACE:      {crew_max:[5,5],pwr_draw:[1,0]},
-  CREWAUTOMATION: {crew_auto:[2,1],pwr_draw:[1,0]},
-  PASSENGERSSPACE:{passengers:[10,10],pwr_draw:[1,0]},
-  COCKPIT:        {handling:[1,0],pwr_draw:[1,0]},
-  MEDBAY:         {pwr_draw:[2,0]},
-  // Weapons
-  WEAPON_TURRET:  {warfare:[1,0],pwr_activation:[3,1],pwr_draw:[0,0]},
-  WEAPON_FIXED:   {warfare:[1,0],pwr_activation:[2,1],pwr_draw:[0,0]},
-  ORDONNANCE_FIXED:{warfare:[1,0],pwr_activation:[2,0],pwr_draw:[1,0]},
-  AMMOBAY:        {pwr_draw:[0,0]},
-  // Misc
-  ESCAPEPOD:      {pwr_draw:[1,0]},
-  BAY_CORVETTE:   {pwr_draw:[2,0]},
-  BAY_DRONE:      {pwr_draw:[2,0]},
-  BAY_FIGHTER:    {pwr_draw:[2,0]},
-  LANDING:        {pwr_draw:[1,0]},
-  ATMOSPHERIC:    {pwr_draw:[2,0]},
-  JACUZI:         {pwr_draw:[1,0]},
-  SWIMPOOL:       {pwr_draw:[1,0]},
-  BAR:            {pwr_draw:[1,0]},
-};
-// All engines: speed base tier 2 (LOW); +q per quality level → BASIC=LOW AVERAGE=MEDIUM GOOD=HIGH
-const ENG_SPD={ENGINEBALANCED:2,ENGINECOMBAT:2,ENGINEHANDLING:2};
-const SPD_STR=['NONE','VERY LOW','LOW','MEDIUM','HIGH','VERY HIGH','ULTRA'];
-function calcShip(comps,cls){
-  const base=SHIP_BASE[cls]||{structure:1,hull:5,crew_min:0,command:0};
-  const s={pwr_create:0,pwr_draw:0,pwr_activation:0,energy_storage:0,shield_max:0,shield_recharge:0,crew_min:base.crew_min,crew_max:0,passengers:0,cargo:0,life_ppl:0,life_hrs:0,fuel_cons:0,fuel_units:0,combat_range:0,detect_range:0,max_range:0,structure:base.structure,hull:base.hull,ecm:0,system:0,command:base.command,handling:0,instruments:0,engineering:0,warfare:0,spd_tier:0,spd_cnt:0,atmospheric:'NONE',crew_auto:0};
-  (comps||[]).forEach(code=>{
-    if(!code||code==='EMPTY') return;
-    const xm=code.match(/^(.+?)\s+\u00d7(\d+)$/);
-    const raw=xm?xm[1]:code;
-    const cnt=xm?parseInt(xm[2]):1;
-    const{type,quality}=pComp(raw);
-    const q=COMP_Q[quality]??0;
-    if(ENG_SPD[type]!==undefined){
-      const tier=ENG_SPD[type]+q;  // base 2 + quality 0/1/2 → LOW/MEDIUM/HIGH
-      for(let i=0;i<cnt;i++){s.spd_cnt++;s.spd_tier=s.spd_cnt===1?tier:Math.min(s.spd_tier+1,SPD_STR.length-1);}
-    }
-    if(type==='LANDING') s.atmospheric=s.atmospheric==='NONE'?'LIMITED':s.atmospheric;
-    if(type==='ATMOSPHERIC') s.atmospheric='FULL';
-    const contrib=COMP_CC[type];
-    if(!contrib) return;
-    Object.entries(contrib).forEach(([stat,[bv,pq]])=>{s[stat]=(s[stat]||0)+(bv+pq*q)*cnt;});
-  });
-  s.pwr_consumption=s.pwr_draw; delete s.pwr_draw;
-  // Every ship has at least basic propulsion; use class minimum if no engine component found
-  const CLASS_MIN_SPD={DRONE:2,FIGHTER:3,CORVETTE:2,FRIGATE:2,CRUISER:2,BATTLECRUISER:2,CARRIER:2,NOVA:2};
-  if(s.spd_tier===0) s.spd_tier=CLASS_MIN_SPD[cls]||1;
-  s.speed=SPD_STR[Math.min(s.spd_tier,SPD_STR.length-1)];
-  // Scale sensor ranges by ship class (values in COMP_CC are at CORVETTE scale)
-  const SENSOR_MULT={DRONE:0.1,FIGHTER:0.3,CORVETTE:1,FRIGATE:2,CRUISER:4,BATTLECRUISER:8,CARRIER:16,NOVA:32};
-  const sm=SENSOR_MULT[cls]||1;
-  if(s.combat_range) s.combat_range=Math.round(s.combat_range*sm);
-  if(s.detect_range) s.detect_range=Math.round(s.detect_range*sm);
-  if(s.max_range) s.max_range=Math.round(s.max_range*sm);
-  // DRONE: combat sensors only; FIGHTER: no long-range max sensor
-  if(cls==='DRONE'){s.detect_range=null;s.max_range=null;}
-  else if(cls==='FIGHTER'){s.max_range=null;}
-  delete s.spd_tier; delete s.spd_cnt;
-  s.crew_min=Math.max(0,s.crew_min-s.crew_auto); delete s.crew_auto;
-  return s;
-}
-
-// ─── Ship Component Catalog ───────────────────────────────────────────────────
-// Compact component definitions, unit/pwr/price per class [DRONE,FIGHTER,CORVETTE,FRIGATE,CRUISER,BATTLECRUISER,CARRIER,NOVA]
-// tiers: stat objects for [BASIC, AVERAGE, GOOD]
-// classes: 'ALL' or array of allowed ship classes
-const SCOMP_DEF={
-  ENGINEBALANCED:{name:'Balanced Engine',classes:'ALL',
-    unit:[5,8,13,20,30,44,65,95],pwr:[4,6,10,15,22,32,47,69],price:[160000,320000,760000,1700000,3800000,8600000,19200000,43000000],
-    tiers:[{handling:1,speed:'LOW',rarity:'RARE'},{handling:2,speed:'MEDIUM',rarity:'LIMITED'},{handling:3,speed:'HIGH',rarity:'UNIQUE'}]},
-  ENGINECOMBAT:{name:'Combat Engine',classes:'ALL',
-    unit:[5,8,13,20,30,44,65,95],pwr:[5,8,12,18,26,38,56,82],price:[200000,400000,960000,2160000,4800000,10800000,24200000,54400000],
-    tiers:[{warfare:1,speed:'LOW',rarity:'RARE'},{warfare:2,speed:'MEDIUM',rarity:'LIMITED'},{warfare:3,speed:'HIGH',rarity:'UNIQUE'}]},
-  ENGINEHANDLING:{name:'Handling Engine',classes:'ALL',
-    unit:[5,8,13,20,30,44,65,95],pwr:[4,6,10,15,22,32,47,69],price:[180000,360000,860000,1920000,4320000,9720000,21800000,49000000],
-    tiers:[{handling:2,speed:'LOW',rarity:'RARE'},{handling:2,speed:'MEDIUM',rarity:'LIMITED'},{handling:2,speed:'HIGH',rarity:'UNIQUE'}]},
-  POWER:{name:'Fusion Core',classes:'ALL',
-    unit:[4,6,10,15,22,32,47,69],pwr:[0,0,0,0,0,0,0,0],price:[240000,480000,1140000,2560000,5800000,13000000,29200000,65600000],
-    tiers:[{pwr_create:20,energy_storage:6,system:3,rarity:'RARE'},{pwr_create:25,energy_storage:10,system:4,rarity:'LIMITED'},{pwr_create:30,energy_storage:14,system:5,rarity:'UNIQUE'}]},
-  POWER_CORONTHIA:{name:'Coronthia Power Core',classes:'ALL',note:'Requires Fuel Tank',
-    unit:[4,6,10,15,22,32,47,69],pwr:[0,0,0,0,0,0,0,0],price:[400000,800000,1900000,4200000,9400000,21200000,47600000,107000000],
-    tiers:[{pwr_create:35,system:4,fuel_cons:8,rarity:'RARE'},{pwr_create:53,system:6,fuel_cons:13,rarity:'LIMITED'},{pwr_create:71,system:8,fuel_cons:18,rarity:'UNIQUE'}]},
-  SHIELD:{name:'Shield',classes:'ALL',
-    unit:[4,6,10,15,22,32,47,69],pwr:[3,5,8,12,17,25,37,54],price:[160000,320000,760000,1700000,3800000,8600000,19200000,43000000],
-    tiers:[{shield_max:15,shield_recharge:3,rarity:'UNCOMMON'},{shield_max:20,shield_recharge:4,rarity:'RARE'},{shield_max:25,shield_recharge:5,rarity:'LIMITED'}]},
-  ECM:{name:'ECM',classes:'ALL',
-    unit:[3,5,8,12,17,25,37,54],pwr:[3,5,8,12,17,25,37,54],price:[120000,240000,570000,1280000,2860000,6440000,14460000,32500000],
-    tiers:[{ecm:1,rarity:'UNCOMMON'},{ecm:2,rarity:'RARE'},{ecm:3,rarity:'LIMITED'}]},
-  SYSTEM:{name:'System',classes:'ALL',
-    unit:[3,5,8,12,17,25,37,54],pwr:[3,5,8,12,17,25,37,54],price:[120000,240000,570000,1280000,2860000,6440000,14460000,32500000],
-    tiers:[{system:3,rarity:'UNCOMMON'},{system:4,rarity:'RARE'},{system:5,rarity:'LIMITED'}]},
-  WARFARESUITE:{name:'Warfare Suite',classes:'ALL',
-    unit:[3,5,8,12,17,25,37,54],pwr:[2,3,5,8,11,16,24,35],price:[160000,320000,760000,1700000,3800000,8600000,19200000,43000000],
-    tiers:[{warfare:2,rarity:'UNCOMMON'},{warfare:3,rarity:'RARE'},{warfare:4,rarity:'LIMITED'}]},
-  HULL:{name:'Hull',classes:'ALL',
-    unit:[-5,-8,-12,-18,-27,-40,-58,-85],pwr:[0,0,0,0,0,0,0,0],price:[80000,160000,380000,860000,1920000,4320000,9700000,21800000],
-    tiers:[{structure:-1,command:1,rarity:'COMMON'},{structure:0,command:0,rarity:'COMMON'},{structure:1,command:-1,rarity:'UNCOMMON'}]},
-  STRUCTURE:{name:'Structure',classes:'ALL',
-    unit:[2,3,5,8,11,16,24,35],pwr:[0,0,0,0,0,0,0,0],price:[60000,120000,286000,640000,1440000,3240000,7280000,16360000],
-    tiers:[{structure:1,rarity:'COMMON'},{structure:2,rarity:'COMMON'},{structure:3,rarity:'UNCOMMON'}]},
-  BRIDGE:{name:'Bridge',classes:['CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[4,6,10,15,22,32,47,69],pwr:[2,3,5,8,11,16,24,35],price:[200000,400000,960000,2160000,4800000,10800000,24200000,54400000],
-    tiers:[{command:-1,rarity:'UNCOMMON'},{command:0,rarity:'RARE'},{command:1,rarity:'RARE'}]},
-  NAVBRIDGE:{name:'Nav Bridge',classes:['CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[4,6,10,15,22,32,47,69],pwr:[2,3,5,8,11,16,24,35],price:[160000,320000,760000,1700000,3800000,8600000,19200000,43000000],
-    tiers:[{instruments:1,rarity:'UNCOMMON'},{instruments:2,rarity:'RARE'},{instruments:3,rarity:'RARE'}]},
-  COMBRIDGE:{name:'Comms Bridge',classes:['CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[3,5,8,12,17,25,37,54],pwr:[2,3,5,8,11,16,24,35],price:[180000,360000,860000,1920000,4320000,9720000,21800000,49000000],
-    tiers:[{warfare:1,rarity:'UNCOMMON'},{warfare:2,rarity:'RARE'},{warfare:3,rarity:'RARE'}]},
-  AIRLOCKBRIDGE:{name:'Airlock Bridge',classes:['CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[3,5,8,12,17,25,37,54],pwr:[1,2,3,5,7,10,15,22],price:[100000,200000,476000,1070000,2400000,5400000,12120000,27200000],
-    tiers:[{command:1,rarity:'COMMON'},{command:1,rarity:'UNCOMMON'},{command:1,rarity:'UNCOMMON'}]},
-  INSTRUMENTS:{name:'Instruments',classes:'ALL',
-    unit:[3,5,8,12,17,25,37,54],pwr:[2,3,5,8,11,16,24,35],price:[120000,240000,570000,1280000,2860000,6440000,14460000,32500000],
-    tiers:[{instruments:1,detect_range:100,max_range:200,rarity:'UNCOMMON'},{instruments:2,detect_range:200,max_range:400,rarity:'RARE'},{instruments:3,detect_range:300,max_range:600,rarity:'RARE'}]},
-  RADAR:{name:'Radar',classes:'ALL',
-    unit:[2,3,5,8,11,16,24,35],pwr:[1,2,3,5,7,10,15,22],price:[80000,160000,380000,860000,1920000,4320000,9700000,21800000],
-    tiers:[{instruments:1,combat_range:100,detect_range:50,rarity:'COMMON'},{instruments:2,combat_range:150,detect_range:75,rarity:'UNCOMMON'},{instruments:3,combat_range:200,detect_range:100,rarity:'RARE'}]},
-  RADAR_COMBAT:{name:'Combat Radar',classes:'ALL',
-    unit:[2,3,5,8,11,16,24,35],pwr:[1,2,3,5,7,10,15,22],price:[120000,240000,570000,1280000,2860000,6440000,14460000,32500000],
-    tiers:[{instruments:0,combat_range:300,detect_range:3000,max_range:9000,rarity:'UNCOMMON'},{instruments:1,combat_range:300,detect_range:3000,max_range:9000,rarity:'RARE'},{instruments:2,combat_range:300,detect_range:3000,max_range:9000,rarity:'LIMITED'}]},
-  RADAR_DEEPSPACE:{name:'Deep Space Radar',classes:'ALL',
-    unit:[2,3,5,8,11,16,24,35],pwr:[1,2,3,5,7,10,15,22],price:[160000,320000,760000,1700000,3800000,8600000,19200000,43000000],
-    tiers:[{instruments:2,combat_range:50,detect_range:5000,max_range:50000,rarity:'RARE'},{instruments:3,combat_range:50,detect_range:5000,max_range:50000,rarity:'LIMITED'},{instruments:4,combat_range:50,detect_range:5000,max_range:50000,rarity:'LIMITED'}]},
-  ENGINEERING:{name:'Engineering',classes:['CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[3,5,8,12,17,25,37,54],pwr:[2,3,5,8,11,16,24,35],price:[120000,240000,570000,1280000,2860000,6440000,14460000,32500000],
-    tiers:[{engineering:1,rarity:'UNCOMMON'},{engineering:2,rarity:'RARE'},{engineering:3,rarity:'RARE'}]},
-  CONSTRUCTION:{name:'Construction Arms',classes:['CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[3,5,8,12,17,25,37,54],pwr:[2,3,5,8,11,16,24,35],price:[160000,320000,760000,1700000,3800000,8600000,19200000,43000000],
-    tiers:[{engineering:1,rarity:'UNCOMMON'},{engineering:2,rarity:'RARE'},{engineering:3,rarity:'LIMITED'}]},
-  JUMPDRIVE:{name:'Jump Drive',classes:['CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[5,8,13,20,30,44,65,95],pwr:[0,0,0,0,0,0,0,0],price:[600000,1200000,2860000,6400000,14400000,32400000,72800000,163600000],
-    tiers:[{jump_range:1,pwr_activation:5,rarity:'LIMITED'},{jump_range:2,pwr_activation:5,rarity:'LIMITED'},{jump_range:3,pwr_activation:5,rarity:'UNIQUE'}]},
-  ENERGYTANK:{name:'Energy Tank',classes:'ALL',
-    unit:[3,5,8,12,17,25,37,54],pwr:[0,0,0,0,0,0,0,0],price:[80000,160000,380000,860000,1920000,4320000,9700000,21800000],
-    tiers:[{energy_storage:10,rarity:'COMMON'},{energy_storage:20,rarity:'UNCOMMON'},{energy_storage:30,rarity:'RARE'}]},
-  FUELTANK:{name:'Fuel Tank',classes:'ALL',
-    unit:[3,5,8,12,17,25,37,54],pwr:[0,0,0,0,0,0,0,0],price:[60000,120000,286000,640000,1440000,3240000,7280000,16360000],
-    tiers:[{fuel_units:100,rarity:'COMMON'},{fuel_units:200,rarity:'COMMON'},{fuel_units:300,rarity:'UNCOMMON'}]},
-  LIFESUPPORT:{name:'Life Support',classes:['FIGHTER','CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[3,5,8,12,17,25,37,54],pwr:[2,3,5,8,11,16,24,35],price:[100000,200000,476000,1070000,2400000,5400000,12120000,27200000],
-    tiers:[{life_ppl:5,life_hrs:720,rarity:'COMMON'},{life_ppl:10,life_hrs:8760,rarity:'UNCOMMON'},{life_ppl:15,life_hrs:16800,rarity:'RARE'}]},
-  CREWSPACE:{name:'Crew Quarters',classes:['CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[0,0,3,5,8,12,17,25],pwr:[0,0,1,2,3,5,7,10],price:[0,0,286000,640000,1440000,3240000,7280000,16360000],
-    tiers:[{crew_max:5,rarity:'COMMON'},{crew_max:10,rarity:'UNCOMMON'},{crew_max:15,rarity:'RARE'}]},
-  CREWAUTOMATION:{name:'Crew Automation',classes:'ALL',
-    unit:[3,5,8,12,17,25,37,54],pwr:[1,2,3,5,7,10,15,22],price:[200000,400000,950000,2140000,4800000,10800000,24200000,54400000],
-    tiers:[{crew_min_reduction:2,rarity:'UNCOMMON'},{crew_min_reduction:3,rarity:'RARE'},{crew_min_reduction:4,rarity:'LIMITED'}]},
-  PASSENGERSSPACE:{name:'Passenger Space',classes:'ALL',
-    unit:[0,0,4,6,10,15,22,32],pwr:[0,0,1,2,3,5,7,10],price:[0,0,380000,860000,1920000,4320000,9700000,21800000],
-    tiers:[{passengers:10,rarity:'COMMON'},{passengers:20,rarity:'UNCOMMON'},{passengers:30,rarity:'RARE'}]},
-  CARGOSPACE:{name:'Cargo Space',classes:'ALL',
-    unit:[2,3,5,8,11,16,24,35],pwr:[1,2,3,5,7,10,15,22],price:[40000,80000,190000,428000,960000,2160000,4860000,10920000],
-    tiers:[{cargo:1,rarity:'COMMON'},{cargo:1,rarity:'COMMON'},{cargo:1,rarity:'COMMON'}]},
-  MEDBAY:{name:'Med Bay',classes:['CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[3,5,8,12,17,25,37,54],pwr:[2,3,5,8,11,16,24,35],price:[100000,200000,476000,1070000,2400000,5400000,12120000,27200000],
-    tiers:[{rarity:'COMMON'},{rarity:'UNCOMMON'},{rarity:'RARE'}]},
-  ESCAPEPOD:{name:'Escape Pod',classes:'ALL',
-    unit:[2,3,5,8,11,16,24,35],pwr:[0,0,0,0,0,0,0,0],price:[40000,80000,190000,428000,960000,2160000,4860000,10920000],
-    tiers:[{rarity:'COMMON'},{rarity:'COMMON'},{rarity:'COMMON'}]},
-  LANDING:{name:'Landing System',classes:['FIGHTER','CORVETTE','FRIGATE','CRUISER'],
-    unit:[3,5,8,12,17,25,37,54],pwr:[0,0,0,0,0,0,0,0],price:[80000,160000,380000,860000,1920000,4320000,9700000,21800000],
-    tiers:[{pwr_activation:2,rarity:'UNCOMMON'},{pwr_activation:3,rarity:'RARE'},{pwr_activation:4,rarity:'RARE'}]},
-  ATMOSPHERIC:{name:'Atmospheric Package',classes:['FIGHTER','CORVETTE','FRIGATE','CRUISER'],
-    unit:[5,8,13,20,30,44,65,95],pwr:[0,0,0,0,0,0,0,0],price:[160000,320000,760000,1700000,3800000,8600000,19200000,43000000],
-    tiers:[{pwr_activation:4,rarity:'UNCOMMON'},{pwr_activation:6,rarity:'RARE'},{pwr_activation:8,rarity:'LIMITED'}]},
-  BAY_FIGHTER:{name:'Fighter Bay',classes:['CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[0,0,8,11,16,24,35,50],pwr:[0,0,2,3,5,8,11,16],price:[0,0,1430000,3200000,7200000,16200000,36400000,81800000],
-    tiers:[{rarity:'RARE'},{rarity:'LIMITED'},{rarity:'UNIQUE'}]},
-  BAY_CORVETTE:{name:'Corvette Bay',classes:['FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'],
-    unit:[0,0,0,15,22,33,48,70],pwr:[0,0,0,3,5,8,11,16],price:[0,0,0,6400000,14400000,32400000,72800000,163600000],
-    tiers:[{rarity:'RARE'},{rarity:'LIMITED'},{rarity:'UNIQUE'}]},
-  BAY_DRONE:{name:'Drone Bay',classes:'ALL',
-    unit:[4,6,10,15,22,32,47,69],pwr:[1,2,3,5,7,10,15,22],price:[200000,400000,950000,2140000,4800000,10800000,24200000,54400000],
-    tiers:[{rarity:'UNCOMMON'},{rarity:'RARE'},{rarity:'LIMITED'}]},
-  COCKPIT:{name:'Cockpit',classes:['DRONE','FIGHTER'],
-    unit:[2,3,0,0,0,0,0,0],pwr:[1,2,0,0,0,0,0,0],price:[60000,120000,0,0,0,0,0,0],
-    tiers:[{handling:1,rarity:'COMMON'},{handling:1,rarity:'COMMON'},{handling:1,rarity:'UNCOMMON'}]},
-};
-const SCOMP_CLASSES=['DRONE','FIGHTER','CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'];
-const SCOMP_TIERS=['BASIC','AVERAGE','GOOD'];
-// Build flat component entry array from compact SCOMP_DEF
-function buildShipComps(){
-  const RARITY_MULT={COMMON:1,UNCOMMON:1.5,RARE:3,LIMITED:8,UNIQUE:20};
-  const out=[];
-  Object.entries(SCOMP_DEF).forEach(([type,def])=>{
-    SCOMP_CLASSES.forEach((cls,si)=>{
-      if(def.classes!=='ALL'&&!def.classes.includes(cls)) return;
-      SCOMP_TIERS.forEach((qual,ti)=>{
-        const u=def.unit[si]||0, pw=def.pwr[si]||0, pr=def.price[si]||0;
-        if(!u&&!pr) return; // skip zero-cost/zero-size entries (class not applicable)
-        const tierDef=def.tiers[ti]||{};
-        const rarity=tierDef.rarity||'COMMON';
-        const rmult=RARITY_MULT[rarity]||1;
-        const stats={};
-        Object.entries(tierDef).forEach(([k,v])=>{if(k!=='rarity')stats[k]=v;});
-        out.push({id:`${type}_${si+1}-${cls}_${ti+1}-${qual}`,type,name:def.name,ship_class:cls,quality:qual,unit_size:u,pwr_draw:pw,price:Math.round(pr*rmult),rarity,note:def.note||null,stats});
-      });
-    });
-  });
-  return out;
-}
+// ─── Ship Data Engine (23.0 — data-driven from ships.json) ────────────────────
+// Components / templates / prebuilt ships live in data/v8/ships.json.
+// "ID ×N": non-expandable → N copies; expandable → 1 base + N expansions.
+const SHIP_CLASSES=(g.ship_config&&g.ship_config.classes)||['DRONE','FIGHTER','CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'];
+const SHIP_AREA_MULT=(g.ship_config&&g.ship_config.area_price_mult)||{core:2,internal:1,external:0.5};
+const SCOMP_CLASSES=SHIP_CLASSES;
+const SHIP_CLS_TX={DRONE:'#a78bfa',FIGHTER:'#60a5fa',CORVETTE:'#34d399',FRIGATE:'#fbbf24',CRUISER:'#f87171',BATTLECRUISER:'#ef4444',CARRIER:'#fb923c',NOVA:'#d946ef'};
+const SHIP_CLS_EMO={DRONE:'🛸',FIGHTER:'✈️',CORVETTE:'🚀',FRIGATE:'⚓',CRUISER:'🛳',BATTLECRUISER:'⚔️',CARRIER:'🛫',NOVA:'🌟'};
 if(!g.catalog) g.catalog={};
-g.catalog.ship_components=buildShipComps();
+g.catalog.ship_components=g.ship_components||[];
+g.catalog.ships=g.ships||[];
+const SCOMP_BY_ID={};(g.ship_components||[]).forEach(c=>{SCOMP_BY_ID[c.id]=c;COMP_NAMES[c.type]=c.name;});
+const SHIP_TPL={};(g.ship_templates||[]).forEach(t=>{SHIP_TPL[t.id]=t;});
+const SHIP_AREAS=['core','internal','external'];
+const SHIP_AREA_KEY={core:'core_space',internal:'internal_space',external:'external_space'};
+function shipParseRef(ref){const m=/^(.*?)\s*[x×]\s*(\d+)$/.exec((ref||'').trim());return m?[m[1].trim(),parseInt(m[2])]:[(ref||'').trim(),0];}
+function shipResolve(ref){const[id,n]=shipParseRef(ref);return[SCOMP_BY_ID[id]||null,n,id];}
+function shipItemSize(c,n){return c.expandable?(c.unit_size||0)+(c.exp_size||0)*n:(c.unit_size||0)*Math.max(1,n);}
+function shipItemCost(c,n){return c.expandable?(c.price||0)+(c.exp_cost||0)*n:(c.price||0)*Math.max(1,n);}
+// Full build validator/aggregator — mirrors work/23.0/ship_engine.py compute()
+function shipCompute(ship){
+  const t=SHIP_TPL[ship.template];
+  const res={errors:[],warnings:[]};
+  if(!t){res.errors.push('unknown template: '+ship.template);res.valid=false;return res;}
+  const AGGK=['pwr_consumption','pwr_activation','pwr_creation','energy_storage','shield_max','shield_recharge','crew_min','crew_max','passengers','cargo','life_ppl','life_hrs','fuel_cons','fuel_units','combat_range','detect_range','max_range','jump_range','speed','atmospheric','berths'];
+  const agg={};AGGK.forEach(k=>agg[k]=0);
+  agg.crew_min=t.crew_min||0;agg.crew_max=t.crew_max||0;
+  const POOLS=['structure','hull','ecm','system'],RTG=['command','handling','instruments','engineering','warfare'];
+  const stat={};POOLS.concat(RTG).forEach(k=>stat[k]=t[k]||0);
+  const AV=['COMMON','UNCOMMON','RARE','LIMITED','UNIQUE'],LEG=['No Permit','Restricted','Illegal'];
+  let cost=t.price||0,wAv=0,wLeg=0;const areaUsed={};
+  SHIP_AREAS.forEach(area=>{
+    let used=0;
+    (ship[area]||[]).forEach(ref=>{
+      const[c,n,id]=shipResolve(ref);
+      if(!c){res.errors.push('missing component: '+id);return;}
+      if(c.classes.indexOf(ship.class)<0)res.errors.push(c.id+' not allowed on '+ship.class);
+      const exp=!!c.expandable,copies=exp?1:Math.max(1,n),adds=exp?n:0;
+      used+=(c.unit_size||0)*copies+(c.exp_size||0)*adds;
+      cost+=SHIP_AREA_MULT[area]*((c.price||0)*copies+(c.exp_cost||0)*adds);
+      ['pwr_consumption','pwr_activation','pwr_creation','energy_storage','shield_max','shield_recharge','fuel_cons','fuel_units','cargo'].forEach(k=>{agg[k]+=(c[k]||0)*copies;});
+      agg.pwr_consumption+=(c.exp_power||0)*adds;
+      if(exp){
+        const per={CREWSPACE:'berths',PASSENGERSSPACE:'passengers',CARGOSPACE:'cargo',LIFESUPPORT:'life_ppl'}[c.type];
+        if(per==='berths')agg.berths+=adds;
+        else if(per==='passengers')agg.passengers+=adds;
+        else if(per==='cargo')agg.cargo+=adds;
+        else if(per==='life_ppl')agg.life_ppl+=(c.life_ppl||0)+adds;
+      }
+      if(c.type==='CREWAUTOMATION'){agg.crew_min-=(c.crew_min||0)*copies;agg.crew_max-=(c.crew_max||0)*copies;}
+      else if(!exp){['crew_min','passengers','life_ppl'].forEach(k=>{agg[k]+=(c[k]||0)*copies;});agg.berths+=(c.crew_max||0)*copies;}
+      agg.life_hrs=Math.max(agg.life_hrs,c.life_hrs||0);
+      ['combat_range','detect_range','max_range','jump_range','speed','atmospheric'].forEach(k=>{agg[k]=Math.max(agg[k],c[k]||0);});
+      POOLS.concat(RTG).forEach(k=>{stat[k]+=(c[k]||0)*copies;});
+      wAv=Math.max(wAv,Math.max(0,AV.indexOf(c.availability)));
+      wLeg=Math.max(wLeg,Math.max(0,LEG.indexOf(c.legality)));
+    });
+    areaUsed[area]=Math.round(used*100)/100;
+    const budget=t[SHIP_AREA_KEY[area]]||0;
+    if(used>budget+1e-9)res.errors.push(area+' over budget: '+areaUsed[area]+'/'+budget);
+  });
+  agg.crew_min=ship.class==='DRONE'?Math.max(0,agg.crew_min):Math.max(1,agg.crew_min);
+  agg.crew_max=Math.max(agg.crew_max,agg.crew_min);
+  const crewed=ship.class!=='DRONE';
+  if(agg.pwr_consumption>agg.pwr_creation+1e-9)res.errors.push('power: draws '+(Math.round(agg.pwr_consumption*10)/10)+' / creates '+agg.pwr_creation);
+  if(agg.pwr_activation>(agg.pwr_creation-agg.pwr_consumption)+agg.energy_storage+1e-9)res.warnings.push('activation surge '+agg.pwr_activation+' exceeds headroom+storage');
+  if(crewed&&agg.berths<agg.crew_max)res.errors.push('berths: '+agg.berths+' quarters / '+agg.crew_max+' max crew');
+  if(crewed&&(agg.crew_max+agg.passengers)>agg.life_ppl)res.errors.push('life support: '+agg.crew_max+'+'+agg.passengers+' aboard / '+agg.life_ppl+' supported');
+  agg.pwr_consumption=Math.round(agg.pwr_consumption*10)/10;agg.pwr_activation=Math.round(agg.pwr_activation*10)/10;
+  Object.assign(res,agg,stat);
+  res.area_used=areaUsed;
+  res.speed=({0:'NONE',1:'LOW',2:'MEDIUM',3:'HIGH'})[res.speed]||'LOW';
+  res.atmospheric=({0:'NONE',1:'HALF',2:'FULL'})[res.atmospheric];
+  res.total_cost=Math.round(cost);
+  res.availability=AV[wAv];res.legality=LEG[wLeg];
+  res.valid=!res.errors.length;
+  return res;
+}
+// component catalogue type order = first-appearance order in the data
+function scompTypeOrder(){const seen=[],has={};(g.ship_components||[]).forEach(c=>{if(!has[c.type]){has[c.type]=1;seen.push(c.type);}});return seen;}
+
+// ─── Ship Builder state + events ──────────────────────────────────────────────
+let sbState={name:'Unnamed Ship',cls:null,tpl:null,areas:{core:[],internal:[],external:[]},picker:null,ptype:'',search:'',showJson:false};
+function sbShip(){return{name:sbState.name,class:sbState.cls,template:sbState.tpl,
+  core:sbState.areas.core.map(x=>x.n?x.id+' ×'+x.n:x.id),
+  internal:sbState.areas.internal.map(x=>x.n?x.id+' ×'+x.n:x.id),
+  external:sbState.areas.external.map(x=>x.n?x.id+' ×'+x.n:x.id)};}
+document.addEventListener('click',e=>{
+  const el=e.target.closest('[data-sb]');if(!el)return;
+  const v=el.dataset.sb;
+  if(v.startsWith('cls:')){sbState.cls=v.slice(4);sbState.tpl=null;sbState.areas={core:[],internal:[],external:[]};sbState.picker=null;}
+  else if(v.startsWith('tpl:')){sbState.tpl=v.slice(4);sbState.areas={core:[],internal:[],external:[]};sbState.picker=null;}
+  else if(v.startsWith('open:')){sbState.picker=v.slice(5);sbState.ptype='';sbState.search='';}
+  else if(v==='close'){sbState.picker=null;}
+  else if(v.startsWith('ptype:')){sbState.ptype=v.slice(6);}
+  else if(v.startsWith('pick:')){const id=v.slice(5);if(sbState.picker){sbState.areas[sbState.picker].push({id:id,n:0});sbState.picker=null;}}
+  else if(v.startsWith('inc:')||v.startsWith('dec:')||v.startsWith('del:')){
+    const p=v.split(':'),area=p[1],i=parseInt(p[2]),it=sbState.areas[area][i];
+    if(it){if(p[0]==='del')sbState.areas[area].splice(i,1);
+      else if(p[0]==='inc')it.n=(it.n||0)+1;
+      else it.n=Math.max(0,(it.n||0)-1);}}
+  else if(v==='reset'){sbState={name:'Unnamed Ship',cls:null,tpl:null,areas:{core:[],internal:[],external:[]},picker:null,ptype:'',search:'',showJson:false};}
+  else if(v==='json'){sbState.showJson=!sbState.showJson;}
+  else return;
+  render();
+});
+document.addEventListener('input',e=>{
+  if(e.target.dataset&&e.target.dataset.sbname!==undefined){sbState.name=e.target.value;return;}
+  if(e.target.dataset&&e.target.dataset.sbsearch!==undefined){sbState.search=e.target.value;render();}
+});
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // ─── Drone Builder ────────────────────────────────────────────────────────────
@@ -8604,125 +8465,95 @@ function render(){
     const ships=(g.catalog&&g.catalog.ships||[]);
     const SF=ships.filter(s=>ms([s.name,s.class,s.role,s.description,...(s.core||[]),...(s.internal||[]),...(s.external||[])]));
     cnt=SF.length;
-    const classOrder=['DRONE','FIGHTER','CORVETTE','FRIGATE','CRUISER','BATTLECRUISER','CARRIER','NOVA'];
-    const classEmoji={'DRONE':'🛸','FIGHTER':'✈️','CORVETTE':'🚀','FRIGATE':'⚓','CRUISER':'🛳','BATTLECRUISER':'⚔️','CARRIER':'🛫','NOVA':'🌟'};
-    const classColors={'DRONE':'rgba(139,92,246,.3)','FIGHTER':'rgba(59,130,246,.3)','CORVETTE':'rgba(16,185,129,.3)','FRIGATE':'rgba(245,158,11,.3)','CRUISER':'rgba(239,68,68,.3)','BATTLECRUISER':'rgba(220,38,38,.4)','CARRIER':'rgba(249,115,22,.3)','NOVA':'rgba(168,85,247,.5)'};
-    const classTx={'DRONE':'#a78bfa','FIGHTER':'#60a5fa','CORVETTE':'#34d399','FRIGATE':'#fbbf24','CRUISER':'#f87171','BATTLECRUISER':'#ef4444','CARRIER':'#fb923c','NOVA':'#d946ef'};
-    const sv=(v,unit)=>(!v&&v!==0)?'\u2014':(v+(unit||''));
-    const fmtTime=h=>{if(!h)return'\u2014';if(h<48)return h+' hrs';const d=Math.round(h/24);if(d<60)return d+' days';const mo=Math.round(h/730);if(mo<24)return mo+' months';return(h/8760).toFixed(1)+' years';};
-    const sp=(v)=>v>0?'+'+v:String(v);
+    const classColors={'DRONE':'rgba(139,92,246,.3)','FIGHTER':'rgba(59,130,246,.3)','CORVETTE':'rgba(16,185,129,.3)','FRIGATE':'rgba(245,158,11,.3)','CRUISER':'rgba(239,68,68,.3)','BATTLECRUISER':'rgba(220,38,38,.4)','CARRIER':'rgba(249,115,22,.3)','NOVA':'rgba(217,70,239,.3)'};
+    const sv=(v,unit)=>(!v&&v!==0)?'—':(v+(unit||''));
+    const fmtTime=h=>{if(!h)return'—';if(h<48)return h+' hrs';const d=Math.round(h/24);if(d<60)return d+' days';const mo=Math.round(h/730);if(mo<24)return mo+' months';return(h/8760).toFixed(1)+' years';};
     const statPill=(label,val,col)=>'<span class="wpn-pill" style="color:'+(col||'#d1d5db')+';font-size:10px;padding:1px 5px;"><span style="color:#6b7280;font-size:10px;">'+label+'</span> '+val+'</span>';
     const sLabel=(lbl)=>'<div style="font-size:10px;font-weight:700;letter-spacing:1px;color:#4b5563;text-transform:uppercase;margin:8px 0 4px;">'+lbl+'</div>';
     const cSec=(list,used,mx,lbl,col,icon)=>{
       if(!list||!list.length) return '';
-      const slotStr=used&&mx?(used+'/'+mx+' units'):(mx?mx+' units':'');
+      const slotStr=(used||used===0)&&mx?(used+'/'+mx+' units'):(mx?mx+' units':'');
       let h='<div style="margin-top:10px;">';
-      h+='<div style="font-size:10px;font-weight:700;letter-spacing:1px;color:'+col+';padding:3px 0;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:5px;">'+icon+' '+lbl+(slotStr?' \u2014 <span style="color:#6b7280;">'+slotStr+'</span>':'')+'</div>';
+      h+='<div style="font-size:10px;font-weight:700;letter-spacing:1px;color:'+col+';padding:3px 0;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:5px;">'+icon+' '+lbl+(slotStr?' — <span style="color:#6b7280;">'+slotStr+'</span>':'')+'</div>';
       h+='<div style="display:flex;flex-direction:column;gap:4px;">';
       list.forEach(c=>{h+='<div style="padding:1px 0;">'+compLine(c)+'</div>';});
       h+='</div></div>';
       return h;
     };
     html='<div class="stitle">🚀 SPACESHIPS <span class="badge">'+cnt+'</span></div>';
-    classOrder.forEach(cls=>{
+    SHIP_CLASSES.forEach(cls=>{
       const cShips=SF.filter(s=>s.class===cls);
       if(!cShips.length) return;
       html+='<div style="margin-bottom:16px;">';
-      html+='<div style="font-family:\'Chakra Petch\',monospace;font-size:11px;font-weight:700;color:'+classTx[cls]+';letter-spacing:2px;padding:8px 4px;border-bottom:1px solid '+(classColors[cls]||'rgba(255,255,255,.1)')+';margin-bottom:8px;">';
-      html+=classEmoji[cls]+' '+cls+'S</div>';
+      html+='<div style="font-family:\'Chakra Petch\',monospace;font-size:11px;font-weight:700;color:'+SHIP_CLS_TX[cls]+';letter-spacing:2px;padding:8px 4px;border-bottom:1px solid '+(classColors[cls]||'rgba(255,255,255,.1)')+';margin-bottom:8px;">';
+      html+=SHIP_CLS_EMO[cls]+' '+cls+'S</div>';
       html+='<div class="grid">';
       cShips.forEach(s=>{
         const id='ship-'+esc(s.name||s.role).replace(/\W/g,'_');
         const bc=classColors[cls]||'rgba(255,255,255,.05)';
+        const cp=s.computed||shipCompute(s);
+        const t=SHIP_TPL[s.template]||{};
         const allComps=[...(s.core||[]),...(s.internal||[]),...(s.external||[])];
-        const cp=calcShip(allComps,s.class);
-        // jump_range derives from JUMPDRIVE quality: BASIC=1 AVERAGE=2 GOOD=3 (via COMP_CC)
         const hasCoronthia=allComps.some(c=>(c||'').startsWith('POWER_CORONTHIA'));
-        html+='<div class="card" style="border-color:'+bc+'" id="'+id+'" data-tog="'+id+'">';
-        // Compact header: name | role
+        html+='<div class="card '+rarCls(cp.availability||'')+'" style="border-color:'+bc+'" id="'+id+'" data-tog="'+id+'">';
         html+='<div class="ch">';
         html+='<div class="cn">'+hl(s.name||s.role,sq)+'</div>';
         html+='<div class="cs-right" style="font-size:10px;color:#9ca3af;">'+esc(s.role||s.class)+'</div>';
         html+='</div>';
-        // Row 2: class badge + type + speed + atmospheric
         html+='<div class="cr2">';
-        html+='<span class="wpn-pill" style="color:'+classTx[cls]+';border-color:'+bc+';">'+classEmoji[cls]+' '+cls+'</span>';
+        html+='<span class="wpn-pill" style="color:'+SHIP_CLS_TX[cls]+';border-color:'+bc+';">'+SHIP_CLS_EMO[cls]+' '+cls+'</span>';
         if(cp.speed) html+='<span class="wpn-pill">🚀 '+esc(cp.speed)+'</span>';
         if(cp.atmospheric&&cp.atmospheric!=='NONE') html+='<span class="wpn-pill" style="color:#34d399;">🌍 ATM '+esc(cp.atmospheric)+'</span>';
         if(hasCoronthia) html+='<span class="wpn-pill" style="color:#fb923c;">⚗ CORON</span>';
         if(cp.jump_range) html+='<span class="wpn-pill" style="color:#a78bfa;">🌌 JMP '+cp.jump_range+'</span>';
-        // Sensor summary: Combat / Detect / Max (null = N/A for that class)
-        {const sp=[cp.combat_range!=null?'C'+cp.combat_range:null,cp.detect_range!=null?'D'+cp.detect_range:null,cp.max_range!=null?'M'+cp.max_range:null].filter(x=>x!=null);
-        if(sp.length)html+='<span class="wpn-pill" style="color:#22d3ee;">📡 '+sp.join('/')+'</span>';}
+        if(cp.crew_max) html+='<span class="wpn-pill" style="color:#e5e7eb;">👥 '+cp.crew_min+'-'+cp.crew_max+'</span>';
+        if(cp.availability) html+='<span class="wpn-pill wpill-avl">◈ '+esc(cp.availability)+'</span>';
+        if(cp.legality&&cp.legality!=='No Permit') html+='<span class="wpn-pill" style="color:#f87171;">⚖ '+esc(cp.legality)+'</span>';
+        if(cp.valid===false) html+='<span class="wpn-pill" style="color:#ef4444;">⚠ INVALID</span>';
         html+='</div>';
-        // Row 3: key ratings as small stat pills
         html+='<div style="display:flex;flex-wrap:wrap;gap:3px;margin:4px 0;">';
-        if(cp.structure!=null) html+=statPill('STR',cp.structure,'#94a3b8');
-        if(cp.hull!=null) html+=statPill('HULL',cp.hull,'#60a5fa');
-        if(cp.ecm!=null) html+=statPill('ECM',cp.ecm,'#34d399');
-        if(cp.system!=null) html+=statPill('SYS',cp.system,'#a78bfa');
-        if(cp.command!=null) html+=statPill('CMD',cp.command,'#fbbf24');
-        if(cp.handling!=null) html+=statPill('HDL',cp.handling,'#fb923c');
-        if(cp.instruments!=null) html+=statPill('INS',cp.instruments,'#22d3ee');
-        if(cp.engineering!=null) html+=statPill('ENG',cp.engineering,'#4ade80');
-        if(cp.warfare!=null) html+=statPill('WAR',cp.warfare,'#f87171');
+        html+=statPill('STR',cp.structure,'#94a3b8')+statPill('HULL',cp.hull,'#60a5fa')+statPill('ECM',cp.ecm,'#34d399')+statPill('SYS',cp.system,'#a78bfa');
+        html+=statPill('CMD',cp.command,'#fbbf24')+statPill('HDL',cp.handling,'#fb923c')+statPill('INS',cp.instruments,'#22d3ee')+statPill('ENG',cp.engineering,'#4ade80')+statPill('WAR',cp.warfare,'#f87171');
         html+='</div>';
-        // Row 4: price
-        html+='<div class="cr3"><div class="cr3l"></div>';
-        if(s.total_cost) html+='<div class="cr3r">'+fmt(s.total_cost)+' Cr</div>';
+        html+='<div class="cr3"><div class="cr3l" style="font-size:10px;color:#6b7280;">'+esc((t.name||'').replace(' — ',' · '))+'</div>';
+        html+='<div class="cr3r">'+fmt(cp.total_cost||s.total_cost||0)+' Cr</div>';
         html+='</div>';
-        // Expanded card
         html+='<div class="cb">';
         if(s.description) html+='<div class="rd" style="margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--b);font-style:italic;color:#9ca3af;">'+hl(s.description,sq)+'</div>';
-        // Combat ratings grid
         html+=sLabel('Combat Ratings');
         html+='<div class="fg">';
-        html+='<div class="f"><div class="fl">Structure</div><div class="fv" style="color:#94a3b8;">'+sv(cp.structure)+'</div></div>';
-        html+='<div class="f"><div class="fl">Hull</div><div class="fv" style="color:#60a5fa;">'+sv(cp.hull)+'</div></div>';
-        html+='<div class="f"><div class="fl">ECM</div><div class="fv" style="color:#34d399;">'+sv(cp.ecm)+'</div></div>';
-        html+='<div class="f"><div class="fl">System</div><div class="fv" style="color:#a78bfa;">'+sv(cp.system)+'</div></div>';
-        html+='<div class="f"><div class="fl">Command</div><div class="fv" style="color:#fbbf24;">'+sv(cp.command)+'</div></div>';
-        html+='<div class="f"><div class="fl">Handling</div><div class="fv" style="color:#fb923c;">'+sv(cp.handling)+'</div></div>';
-        html+='<div class="f"><div class="fl">Instruments</div><div class="fv" style="color:#22d3ee;">'+sv(cp.instruments)+'</div></div>';
-        html+='<div class="f"><div class="fl">Engineering</div><div class="fv" style="color:#4ade80;">'+sv(cp.engineering)+'</div></div>';
-        html+='<div class="f"><div class="fl">Warfare</div><div class="fv" style="color:#f87171;">'+sv(cp.warfare)+'</div></div>';
+        [['Structure',cp.structure,'#94a3b8'],['Hull',cp.hull,'#60a5fa'],['ECM',cp.ecm,'#34d399'],['System',cp.system,'#a78bfa'],['Command',cp.command,'#fbbf24'],['Handling',cp.handling,'#fb923c'],['Instruments',cp.instruments,'#22d3ee'],['Engineering',cp.engineering,'#4ade80'],['Warfare',cp.warfare,'#f87171']].forEach(r=>{
+          html+='<div class="f"><div class="fl">'+r[0]+'</div><div class="fv" style="color:'+r[2]+';">'+sv(r[1])+'</div></div>';});
         html+='</div>';
-        // Power
-        html+=sLabel('Power');
+        html+=sLabel('Power & Shields');
         html+='<div class="fg">';
-        html+='<div class="f"><div class="fl">⚡ Creation</div><div class="fv" style="color:#fbbf24;">'+sv(cp.pwr_create)+'</div></div>';
+        html+='<div class="f"><div class="fl">⚡ Creation</div><div class="fv" style="color:#fbbf24;">'+sv(cp.pwr_creation)+'</div></div>';
         html+='<div class="f"><div class="fl">🔌 Consumption</div><div class="fv" style="color:#f87171;">'+sv(cp.pwr_consumption)+'</div></div>';
         html+='<div class="f"><div class="fl">💥 Activation</div><div class="fv" style="color:#fb923c;">'+sv(cp.pwr_activation)+'</div></div>';
         html+='<div class="f"><div class="fl">🔋 Storage</div><div class="fv" style="color:#60a5fa;">'+sv(cp.energy_storage)+'</div></div>';
         html+='<div class="f"><div class="fl">🛡 Shield Max</div><div class="fv" style="color:#34d399;">'+sv(cp.shield_max)+'</div></div>';
         html+='<div class="f"><div class="fl">♻ Recharge</div><div class="fv" style="color:#34d399;">'+sv(cp.shield_recharge)+'</div></div>';
         html+='</div>';
-        // Personnel & capacity
         if(cp.crew_min||cp.crew_max||cp.passengers||cp.cargo||cp.life_ppl){
           html+=sLabel('Personnel & Capacity');
           html+='<div class="fg">';
-          if(cp.crew_min!=null){html+='<div class="f"><div class="fl">👤 Min Crew</div><div class="fv">'+sv(cp.crew_min)+'</div></div>';}
+          html+='<div class="f"><div class="fl">👤 Min Crew</div><div class="fv">'+sv(cp.crew_min)+'</div></div>';
           if(cp.crew_max){html+='<div class="f"><div class="fl">👥 Max Crew</div><div class="fv">'+sv(cp.crew_max)+'</div></div>';}
+          if(cp.berths){html+='<div class="f"><div class="fl">🛏 Berths</div><div class="fv">'+sv(cp.berths)+'</div></div>';}
           if(cp.passengers){html+='<div class="f"><div class="fl">🧍 Passengers</div><div class="fv">'+sv(cp.passengers)+'</div></div>';}
           if(cp.cargo){html+='<div class="f"><div class="fl">📦 Cargo</div><div class="fv">'+sv(cp.cargo,' HUGE')+'</div></div>';}
           if(cp.life_ppl){html+='<div class="f"><div class="fl">💨 Life Support</div><div class="fv">'+sv(cp.life_ppl,' ppl')+(cp.life_hrs?' / '+fmtTime(cp.life_hrs):'')+'</div></div>';}
           html+='</div>';
         }
-        // Navigation
-        html+=sLabel('Navigation');
+        html+=sLabel('Navigation & Sensors');
         html+='<div class="fg">';
         html+='<div class="f"><div class="fl">🚀 Speed</div><div class="fv">'+sv(cp.speed)+'</div></div>';
         html+='<div class="f"><div class="fl">🌍 Atmospheric</div><div class="fv">'+sv(cp.atmospheric)+'</div></div>';
-        if(cp.jump_range){html+='<div class="f"><div class="fl">🌌 Jump Range</div><div class="fv" style="color:#a78bfa;">'+sv(cp.jump_range)+'</div></div>';}
+        if(cp.jump_range){html+='<div class="f"><div class="fl">🌌 Jump Range</div><div class="fv" style="color:#a78bfa;">'+sv(cp.jump_range,' quadrants')+'</div></div>';}
+        html+='<div class="f"><div class="fl">📡 Combat Range</div><div class="fv" style="color:#22d3ee;">'+sv(cp.combat_range,' km')+'</div></div>';
+        html+='<div class="f"><div class="fl">🔭 Detect Range</div><div class="fv" style="color:#22d3ee;">'+sv(cp.detect_range,' km')+'</div></div>';
+        html+='<div class="f"><div class="fl">📻 Max Range</div><div class="fv" style="color:#22d3ee;">'+sv(cp.max_range,' km')+'</div></div>';
         html+='</div>';
-        // Sensors, always show all three categories
-        html+=sLabel('Sensors');
-        html+='<div class="fg">';
-        html+='<div class="f"><div class="fl">📡 Combat Range</div><div class="fv" style="color:#22d3ee;">'+(cp.combat_range!=null?sv(cp.combat_range,' km'):'N/A')+'</div></div>';
-        html+='<div class="f"><div class="fl">🔭 Detect Range</div><div class="fv" style="color:#22d3ee;">'+(cp.detect_range!=null?sv(cp.detect_range,' km'):'N/A')+'</div></div>';
-        html+='<div class="f"><div class="fl">📻 Max Range</div><div class="fv" style="color:#22d3ee;">'+(cp.max_range!=null?sv(cp.max_range,' km'):'N/A')+'</div></div>';
-        html+='</div>';
-        // Fuel, only when POWER_CORONTHIA is in the component list
         if(hasCoronthia){
           html+=sLabel('⚗ Coronthia Fuel');
           html+='<div class="fg">';
@@ -8735,10 +8566,10 @@ function render(){
           }
           html+='</div>';
         }
-        // Component sections
-        html+=cSec(s.core,s.core_used,s.core_max,'CORE','#34d399','🔒');
-        html+=cSec(s.internal,s.int_used,s.int_max,'INTERNAL','#60a5fa','⚙');
-        html+=cSec(s.external,s.ext_used,s.ext_max,'EXTERNAL','#fb923c','🔧');
+        const au=cp.area_used||{};
+        html+=cSec(s.core,au.core,t.core_space,'CORE (×'+SHIP_AREA_MULT.core+' cost)','#34d399','🔒');
+        html+=cSec(s.internal,au.internal,t.internal_space,'INTERNAL','#60a5fa','⚙');
+        html+=cSec(s.external,au.external,t.external_space,'EXTERNAL (×'+SHIP_AREA_MULT.external+' cost)','#fb923c','🔧');
         html+='</div></div>';
       });
       html+='</div></div>';
@@ -8748,71 +8579,169 @@ function render(){
   // ─── SHIP COMPONENTS ───
   else if(cs==='ship_components'){
     const ALL=g.catalog&&g.catalog.ship_components||[];
-    const clsOrder=SCOMP_CLASSES;
-    const typeOrder=Object.keys(SCOMP_DEF);
+    const typeOrder=scompTypeOrder();
     const clsFilter=af&&af.startsWith('CLS:')?(af.slice(4)):'';
     const typeFilter=clsFilter?'':(af||'');
     const SC=ALL.filter(c=>{
-      if(!ms([c.name,c.type,c.ship_class,c.quality])) return false;
-      if(clsFilter&&c.ship_class!==clsFilter) return false;
+      if(!ms([c.name,c.type,c.ship_class,c.quality,c.desc,c.availability,c.legality])) return false;
+      if(clsFilter&&c.classes.indexOf(clsFilter)<0) return false;
       if(typeFilter&&c.type!==typeFilter) return false;
       return true;
     });
     cnt=SC.length;
-    const clsTx={DRONE:'#a78bfa',FIGHTER:'#60a5fa',CORVETTE:'#34d399',FRIGATE:'#fbbf24',CRUISER:'#f87171',BATTLECRUISER:'#ef4444',CARRIER:'#fb923c',NOVA:'#d946ef'};
-    const clsEmoji={DRONE:'🛸',FIGHTER:'✈️',CORVETTE:'🚀',FRIGATE:'⚓',CRUISER:'🛳',BATTLECRUISER:'⚔️',CARRIER:'🛫',NOVA:'🌟'};
     html='<div class="stitle">⚙ SHIP COMPONENTS <span class="badge">'+cnt+'</span></div>';
     html+='<div class="fbar">';
     html+=fcBtn('All','',af);
-    typeOrder.forEach(t=>{if(ALL.some(c=>c.type===t))html+=fcBtn(SCOMP_DEF[t].name,t,af);});
+    typeOrder.forEach(t=>{if(ALL.some(c=>c.type===t))html+=fcBtn(COMP_NAMES[t]||t,t,af);});
     html+='<span style="color:#4b5563;margin:0 4px;">│</span>';
-    clsOrder.forEach(k=>html+=fcBtn(clsEmoji[k]+' '+k,'CLS:'+k,af));
+    SHIP_CLASSES.forEach(k=>html+=fcBtn(SHIP_CLS_EMO[k]+' '+k,'CLS:'+k,af));
     html+='</div>';
+    const legCol={'No Permit':'#4ade80','Restricted':'#facc15','Illegal':'#fb923c'};
+    const EFFK=[['structure','STRUCTURE'],['hull','HULL'],['ecm','ECM'],['system','SYSTEM'],['command','COMMAND'],['handling','HANDLING'],['instruments','INSTRUMENTS'],['engineering','ENGINEERING'],['warfare','WARFARE'],['speed','SPEED'],['jump_range','JUMP RANGE']];
+    const CAPK=[['pwr_creation','⚡ Power Creation','#fbbf24'],['pwr_consumption','🔌 Power Draw','#f87171'],['pwr_activation','💥 Activation Power','#fb923c'],['energy_storage','🔋 Energy Storage','#60a5fa'],['shield_max','🛡 Shield Max','#34d399'],['shield_recharge','♻ Shield Recharge','#34d399'],['life_ppl','💨 Life Support (ppl)','#a7f3d0'],['life_hrs','⏱ Life Support (hrs)','#a7f3d0'],['fuel_cons','🔥 Fuel/hr','#fb923c'],['fuel_units','🛢 Fuel Units','#fbbf24'],['combat_range','📡 Combat Range','#22d3ee'],['detect_range','🔭 Detect Range','#22d3ee'],['max_range','📻 Max Range','#22d3ee'],['crew_min','👤 Crew','#e5e7eb'],['crew_max','👥 Crew Max','#e5e7eb'],['passengers','🧍 Passengers','#e5e7eb'],['cargo','📦 Cargo','#e5e7eb'],['atmospheric','🌍 Atmospheric','#34d399']];
     typeOrder.forEach(type=>{
       const group=SC.filter(c=>c.type===type);
       if(!group.length) return;
       html+='<div style="margin-bottom:16px;">';
-      html+='<div class="nl">'+esc(SCOMP_DEF[type].name)+'</div>';
+      html+='<div class="nl">'+esc(COMP_NAMES[type]||type)+'</div>';
       html+='<div class="grid">';
-      const rarCol={COMMON:'#9ca3af',UNCOMMON:'#4ade80',RARE:'#60a5fa',LIMITED:'#a78bfa',UNIQUE:'#fbbf24'};
       group.forEach(c=>{
         const cid='sc'+c.id.replace(/\W/g,'_');
-        const col=clsTx[c.ship_class]||'#d1d5db';
-        const qbadge=qBadge(c.quality);
-        const statRows=Object.entries(c.stats||{}).filter(([,v])=>v!==0&&v!==''&&v!==null);
-        html+='<div class="card '+rarCls(c.rarity||'')+'" id="'+cid+'" data-tog="'+cid+'">';
-        // Header, always visible
+        const col=SHIP_CLS_TX[c.ship_class]||'#d1d5db';
+        html+='<div class="card '+rarCls(c.availability||'')+'" id="'+cid+'" data-tog="'+cid+'">';
         html+='<div class="ch"><div>';
         html+='<div class="cn">'+hl(c.name,sq)+'</div>';
-        html+='<div class="cs" style="color:'+col+';">'+(clsEmoji[c.ship_class]||'')+' '+esc(c.ship_class)+'</div>';
-        html+='</div><div style="display:flex;align-items:center;gap:4px;">'+qbadge+'<span class="xi">▼</span></div></div>';
-        // Rarity row, always visible
+        html+='<div class="cs" style="color:'+col+';">'+(c.ship_class==='ALL'?'◈ UNIVERSAL':(SHIP_CLS_EMO[c.ship_class]||'')+' '+esc(c.ship_class))+'</div>';
+        html+='</div><div style="display:flex;align-items:center;gap:4px;">'+qBadge(c.quality)+'<span class="xi">▼</span></div></div>';
         html+='<div class="cr2">';
-        if(c.rarity) html+='<span class="wpn-pill" style="color:'+(rarCol[c.rarity]||'#9ca3af')+';font-size:10px;">'+c.rarity+'</span>';
-        if(c.note) html+='<span class="wpn-pill" style="color:#fbbf24;font-size:10px;">⚠ '+esc(c.note)+'</span>';
+        if(c.availability) html+='<span class="wpn-pill wpill-avl">◈ '+hl(c.availability,sq)+'</span>';
+        if(c.legality&&c.legality!=='No Permit') html+='<span class="wpn-pill" style="color:'+(legCol[c.legality]||'#9ca3af')+';">⚖ '+hl(c.legality,sq)+'</span>';
+        if(c.expandable) html+='<span class="wpn-pill" style="color:#a78bfa;">⤢ EXPANDABLE</span>';
         html+='</div>';
-        // Summary row, always visible
         html+='<div class="cr3"><div class="cr3l">';
-        html+='<span class="wpn-pill"><span style="color:var(--mu)">SIZE</span> '+(c.unit_size>0?'+':'')+c.unit_size+'</span>';
-        if(c.pwr_draw) html+='<span class="wpn-pill" style="color:#f87171;"><span style="color:var(--mu)">PWR</span> '+c.pwr_draw+'</span>';
-        html+='</div><div class="cr3r">'+fmt(c.price)+' Cr</div></div>';
-        // Expanded stats, inside .cb only
-        html+='<div class="cb"><div class="fg">';
-        if(statRows.length){
-          statRows.forEach(([k,v])=>{
-            const label=k.replace(/_/g,' ').replace(/\b\w/g,x=>x.toUpperCase());
-            html+='<div class="f"><div class="fl">'+label+'</div><div class="fv">'+v+'</div></div>';
-          });
-        } else {
-          html+='<div class="f"><div class="fl" style="color:var(--mu);font-style:italic;">No stat bonus</div></div>';
-        }
-        if(c.pwr_draw) html+='<div class="f"><div class="fl">Pwr Draw</div><div class="fv" style="color:#f87171;">'+c.pwr_draw+'</div></div>';
-        html+='<div class="f"><div class="fl">Unit Size</div><div class="fv" style="color:var(--mu);">'+(c.unit_size>0?'+':'')+c.unit_size+'</div></div>';
-        html+='<div class="f"><div class="fl">Price</div><div class="fv" style="color:#4ade80;">'+fmt(c.price)+' Cr</div></div>';
-        html+='</div></div></div>';
+        html+='<span class="wpn-pill"><span style="color:var(--mu)">SIZE</span> '+((c.unit_size||0)>0?'+':'')+(c.unit_size||0)+'</span>';
+        if(c.pwr_consumption) html+='<span class="wpn-pill" style="color:#f87171;"><span style="color:var(--mu)">PWR</span> '+c.pwr_consumption+'</span>';
+        if(c.pwr_creation) html+='<span class="wpn-pill" style="color:#fbbf24;"><span style="color:var(--mu)">GEN</span> '+c.pwr_creation+'</span>';
+        html+='</div><div class="cr3r">'+fmt(c.price||0)+' Cr</div></div>';
+        html+='<div class="cb">';
+        if(c.desc) html+='<div class="rd" style="margin-bottom:8px;color:#9ca3af;">'+hl(c.desc,sq)+'</div>';
+        html+='<div class="fg">';
+        let eff=0;
+        EFFK.forEach(k=>{const v=c[k[0]];if(v){eff++;html+='<div class="f"><div class="fl">'+k[1]+'</div><div class="fv" style="color:'+(v>0?'#4ade80':'#f87171')+';">'+(v>0?'+':'')+v+'</div></div>';}});
+        CAPK.forEach(k=>{const v=c[k[0]];if(v){html+='<div class="f"><div class="fl">'+k[1]+'</div><div class="fv" style="color:'+k[2]+';">'+v+'</div></div>';}});
+        html+='<div class="f"><div class="fl">Unit Size</div><div class="fv" style="color:var(--mu);">'+((c.unit_size||0)>0?'+':'')+(c.unit_size||0)+'</div></div>';
+        html+='<div class="f"><div class="fl">Price</div><div class="fv" style="color:#4ade80;">'+fmt(c.price||0)+' Cr</div></div>';
+        html+='</div>';
+        if(c.expandable) html+='<div style="margin-top:6px;padding-top:6px;border-top:1px solid var(--b);font-size:10.5px;color:#a78bfa;">⤢ Expandable — each addition: '+(c.exp_size||0)+' size · '+fmt(c.exp_cost||0)+' Cr'+(c.exp_power?' · '+c.exp_power+' power':'')+'</div>';
+        html+='<div style="margin-top:6px;font-size:10px;color:#6b7280;">Fits: '+c.classes.map(k=>SHIP_CLS_EMO[k]||k).join(' ')+' · <span style="font-family:\'JetBrains Mono\',monospace;">'+esc(c.id)+'</span></div>';
+        html+='</div></div>';
       });
       html+='</div></div>';
     });
+  }
+
+  // ─── SHIP BUILDER ───
+  else if(cs==='ship_builder'){
+    const S=sbState;
+    const legCol={'No Permit':'#4ade80','Restricted':'#facc15','Illegal':'#fb923c'};
+    html='<div class="stitle">🛠 SHIP BUILDER</div>';
+    // 1. class picker
+    html+='<div class="nl">1 · SHIP CLASS</div><div class="fbar">';
+    SHIP_CLASSES.forEach(k=>{html+='<button class="fc'+(S.cls===k?' active':'')+'" data-sb="cls:'+k+'" style="'+(S.cls===k?'color:'+SHIP_CLS_TX[k]+';':'')+'">'+SHIP_CLS_EMO[k]+' '+k+'</button>';});
+    html+='</div>';
+    if(S.cls){
+      // 2. template picker
+      const tpls=(g.ship_templates||[]).filter(t=>t.ship_class===S.cls);
+      html+='<div class="nl">2 · TEMPLATE (hull frame — sets budgets, base ratings, base crew)</div><div class="grid" style="margin-bottom:12px;">';
+      tpls.forEach(t=>{
+        const on=S.tpl===t.id;
+        html+='<div class="card" data-sb="tpl:'+esc(t.id)+'" style="cursor:pointer;'+(on?'border-color:'+SHIP_CLS_TX[S.cls]+';box-shadow:0 0 0 1px '+SHIP_CLS_TX[S.cls]+';':'')+'">';
+        html+='<div class="ch"><div class="cn">'+esc(t.role)+'</div><div class="cs-right">'+fmt(t.price)+' Cr</div></div>';
+        html+='<div class="cr2"><span class="wpn-pill">🔒 '+t.core_space+'</span><span class="wpn-pill">⚙ '+t.internal_space+'</span><span class="wpn-pill">🔧 '+t.external_space+'</span><span class="wpn-pill">👥 '+t.crew_min+'-'+t.crew_max+'</span></div>';
+        html+='<div class="cr3"><div class="cr3l">'+esc(t.desc||'')+'</div></div>';
+        html+='</div>';
+      });
+      html+='</div>';
+    }
+    if(S.cls&&S.tpl&&SHIP_TPL[S.tpl]){
+      const t=SHIP_TPL[S.tpl];
+      const ship=sbShip();
+      const cp=shipCompute(ship);
+      html+='<div class="nl">3 · FIT COMPONENTS</div>';
+      html+='<div style="margin:6px 0;"><input data-sbname="1" value="'+esc(S.name)+'" style="background:var(--s2);border:1px solid var(--b);color:var(--fg);padding:5px 9px;border-radius:5px;font-size:12px;width:240px;" placeholder="Ship name"/> ';
+      html+='<button class="fc" data-sb="reset">↺ Reset</button> <button class="fc" data-sb="json">⎘ '+(S.showJson?'Hide':'Show')+' JSON</button></div>';
+      if(S.showJson){const exp={...ship,computed:cp};html+='<textarea readonly style="width:100%;height:140px;background:var(--s2);border:1px solid var(--b);color:#9ca3af;font-family:\'JetBrains Mono\',monospace;font-size:10px;padding:6px;border-radius:5px;" onclick="this.select()">'+esc(JSON.stringify(exp))+'</textarea>';}
+      // status banner
+      html+='<div style="margin:8px 0;padding:8px 10px;border-radius:6px;border:1px solid '+(cp.valid?'rgba(74,222,128,.4)':'rgba(239,68,68,.4)')+';background:'+(cp.valid?'rgba(74,222,128,.06)':'rgba(239,68,68,.06)')+';">';
+      html+='<div style="font-weight:700;font-size:12px;color:'+(cp.valid?'#4ade80':'#ef4444')+';">'+(cp.valid?'✔ VALID DESIGN':'✗ INVALID DESIGN')+'<span style="float:right;color:#4ade80;">'+fmt(cp.total_cost)+' Cr</span></div>';
+      (cp.errors||[]).forEach(e2=>{html+='<div style="font-size:11px;color:#f87171;margin-top:3px;">✗ '+esc(e2)+'</div>';});
+      (cp.warnings||[]).forEach(w2=>{html+='<div style="font-size:11px;color:#facc15;margin-top:3px;">⚠ '+esc(w2)+'</div>';});
+      html+='</div>';
+      // live stats
+      const statPill=(l,v,c2)=>'<span class="wpn-pill" style="color:'+(c2||'#d1d5db')+';font-size:10px;"><span style="color:#6b7280;">'+l+'</span> '+v+'</span>';
+      html+='<div style="display:flex;flex-wrap:wrap;gap:3px;margin:6px 0;">';
+      html+=statPill('STR',cp.structure,'#94a3b8')+statPill('HULL',cp.hull,'#60a5fa')+statPill('ECM',cp.ecm,'#34d399')+statPill('SYS',cp.system,'#a78bfa')+statPill('CMD',cp.command,'#fbbf24')+statPill('HDL',cp.handling,'#fb923c')+statPill('INS',cp.instruments,'#22d3ee')+statPill('ENG',cp.engineering,'#4ade80')+statPill('WAR',cp.warfare,'#f87171');
+      html+=statPill('⚡',cp.pwr_consumption+'/'+cp.pwr_creation,cp.pwr_consumption>cp.pwr_creation?'#ef4444':'#fbbf24');
+      html+=statPill('🛡',cp.shield_max,'#34d399')+statPill('👥',cp.crew_min+'-'+cp.crew_max,'#e5e7eb');
+      if(cp.passengers)html+=statPill('🧍',cp.passengers,'#e5e7eb');
+      if(cp.cargo)html+=statPill('📦',cp.cargo,'#e5e7eb');
+      html+=statPill('🚀',cp.speed,'#d1d5db');
+      if(cp.jump_range)html+=statPill('🌌',cp.jump_range,'#a78bfa');
+      html+=statPill('◈',cp.availability,'#9ca3af');
+      if(cp.legality!=='No Permit')html+=statPill('⚖',cp.legality,legCol[cp.legality]);
+      html+='</div>';
+      // area panels
+      const AREAS=[['core','🔒 CORE','#34d399','components keep working until the ship is SCRAPPED — ×'+SHIP_AREA_MULT.core+' price'],['internal','⚙ INTERNAL','#60a5fa','protected — stops on CRIPPLED'],['external','🔧 EXTERNAL','#fb923c','exposed — stops on any ship TRAUMA — ×'+SHIP_AREA_MULT.external+' price']];
+      AREAS.forEach(ar=>{
+        const key=ar[0],budget=t[SHIP_AREA_KEY[key]]||0,used=(cp.area_used||{})[key]||0;
+        const over=used>budget;
+        html+='<div style="margin:10px 0;padding:8px 10px;border:1px solid var(--b);border-radius:6px;">';
+        html+='<div style="font-size:11px;font-weight:700;letter-spacing:1px;color:'+ar[2]+';">'+ar[1]+' <span style="color:'+(over?'#ef4444':'#6b7280')+';">'+used+'/'+budget+' units</span><span style="float:right;color:#4b5563;font-weight:400;font-size:10px;">'+ar[3]+'</span></div>';
+        html+='<div style="height:5px;border-radius:3px;background:rgba(255,255,255,.07);margin:5px 0;"><div style="height:5px;border-radius:3px;width:'+Math.min(100,budget?used/budget*100:0)+'%;background:'+(over?'#ef4444':ar[2])+';"></div></div>';
+        S.areas[key].forEach((it,i)=>{
+          const c=SCOMP_BY_ID[it.id];if(!c)return;
+          const sz=shipItemSize(c,it.n),cost2=Math.round(shipItemCost(c,it.n)*SHIP_AREA_MULT[key]);
+          html+='<div style="display:flex;align-items:center;gap:6px;padding:3px 0;border-bottom:1px dashed rgba(255,255,255,.05);font-size:11px;">';
+          html+='<span style="flex:1;">'+esc(c.name)+' '+qBadge(c.quality)+(c.ship_class!=='ALL'?' <span style="color:'+(SHIP_CLS_TX[c.ship_class]||'#666')+';font-size:9px;">'+esc(c.ship_class)+'</span>':'')+'</span>';
+          if(c.expandable){html+='<button class="fc" data-sb="dec:'+key+':'+i+'" style="padding:0 6px;">−</button><span style="color:#a78bfa;min-width:30px;text-align:center;">+'+(it.n||0)+'</span><button class="fc" data-sb="inc:'+key+':'+i+'" style="padding:0 6px;">+</button>';}
+          else if(it.n>1){html+='<button class="fc" data-sb="dec:'+key+':'+i+'" style="padding:0 6px;">−</button><span style="color:#a78bfa;min-width:30px;text-align:center;">×'+it.n+'</span><button class="fc" data-sb="inc:'+key+':'+i+'" style="padding:0 6px;">+</button>';}
+          else{html+='<button class="fc" data-sb="inc:'+key+':'+i+'" style="padding:0 6px;" title="duplicate">＋</button>';}
+          html+='<span style="color:#6b7280;min-width:52px;text-align:right;">'+sz+' u</span>';
+          html+='<span style="color:#4ade80;min-width:86px;text-align:right;">'+fmt(cost2)+' Cr</span>';
+          html+='<button class="fc" data-sb="del:'+key+':'+i+'" style="color:#f87171;padding:0 6px;">✕</button>';
+          html+='</div>';
+        });
+        html+='<div style="margin-top:6px;"><button class="fc" data-sb="open:'+key+'">＋ Add component</button></div>';
+        html+='</div>';
+      });
+      // picker
+      if(S.picker){
+        const avail=(g.ship_components||[]).filter(c=>c.classes.indexOf(S.cls)>=0);
+        const types=[];const seen={};avail.forEach(c=>{if(!seen[c.type]){seen[c.type]=1;types.push(c.type);}});
+        const q=(S.search||'').toLowerCase();
+        const list=avail.filter(c=>(!S.ptype||c.type===S.ptype)&&(!q||(c.name+' '+c.type+' '+c.desc).toLowerCase().includes(q)));
+        html+='<div style="margin:10px 0;padding:10px;border:1px solid rgba(96,165,250,.4);border-radius:6px;background:rgba(96,165,250,.04);">';
+        html+='<div style="font-size:11px;font-weight:700;color:#60a5fa;margin-bottom:6px;">ADD TO '+S.picker.toUpperCase()+' <button class="fc" data-sb="close" style="float:right;">✕ Close</button></div>';
+        html+='<input data-sbsearch="1" value="'+esc(S.search)+'" placeholder="Search components…" style="background:var(--s2);border:1px solid var(--b);color:var(--fg);padding:4px 8px;border-radius:5px;font-size:11px;width:220px;margin-bottom:6px;"/>';
+        html+='<div class="fbar" style="margin-bottom:6px;"><button class="fc'+(S.ptype===''?' active':'')+'" data-sb="ptype:">All</button>';
+        types.forEach(tp=>{html+='<button class="fc'+(S.ptype===tp?' active':'')+'" data-sb="ptype:'+tp+'">'+esc(COMP_NAMES[tp]||tp)+'</button>';});
+        html+='</div>';
+        html+='<div style="max-height:300px;overflow-y:auto;">';
+        list.slice(0,200).forEach(c=>{
+          html+='<div style="display:flex;align-items:center;gap:6px;padding:3px 4px;border-bottom:1px dashed rgba(255,255,255,.05);font-size:11px;cursor:pointer;" data-sb="pick:'+esc(c.id)+'">';
+          html+='<span style="flex:1;">'+esc(c.name)+' '+qBadge(c.quality)+(c.ship_class!=='ALL'?' <span style="color:'+(SHIP_CLS_TX[c.ship_class]||'#666')+';font-size:9px;">'+esc(c.ship_class)+'</span>':'')+(c.expandable?' <span style="color:#a78bfa;font-size:9px;">⤢</span>':'')+'</span>';
+          html+='<span style="color:#6b7280;">'+(c.unit_size||0)+' u</span>';
+          if(c.pwr_consumption)html+='<span style="color:#f87171;">'+c.pwr_consumption+' pwr</span>';
+          if(c.pwr_creation)html+='<span style="color:#fbbf24;">+'+c.pwr_creation+' pwr</span>';
+          html+='<span style="color:#9ca3af;min-width:70px;text-align:right;">'+(c.availability||'')+'</span>';
+          html+='<span style="color:#4ade80;min-width:86px;text-align:right;">'+fmt(c.price||0)+' Cr</span>';
+          html+='</div>';
+        });
+        if(list.length>200)html+='<div style="font-size:10px;color:#6b7280;padding:4px;">…'+(list.length-200)+' more — refine the search</div>';
+        html+='</div></div>';
+      }
+    }
+    cnt=0;
   }
 
   else if(cs==='drone_parts'){
