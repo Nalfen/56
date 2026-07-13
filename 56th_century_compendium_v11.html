@@ -1684,7 +1684,7 @@ function shipCompute(ship){
   const POOLS=['structure','hull','ecm','system'],RTG=['command','handling','instruments','engineering','warfare'];
   const stat={};POOLS.concat(RTG).forEach(k=>stat[k]=t[k]||0);
   const AV=['COMMON','UNCOMMON','RARE','LIMITED','UNIQUE'],LEG=['No Permit','Restricted','Illegal'];
-  let cost=t.price||0,wAv=0,wLeg=0;const areaUsed={};const groups={};const typesSeen={};
+  let cost=t.price||0,wAv=0,wLeg=0;const areaUsed={};const groups={};const typesSeen={};let autoRed=0,autoPct=0;
   SHIP_AREAS.forEach(area=>{
     let used=0;
     (ship[area]||[]).forEach(ref=>{
@@ -1706,7 +1706,7 @@ function shipCompute(ship){
         else if(per==='cargo')agg.cargo+=adds;
         else if(per==='life_ppl')agg.life_ppl+=(c.life_ppl||0)+adds;
       }
-      if(c.type==='CREWAUTOMATION'){agg.crew_min-=(c.crew_min||0)*copies;}
+      if(c.type==='CREWAUTOMATION'){autoRed+=1+adds;autoPct=Math.max(autoPct,({BASIC:0.25,AVERAGE:0.5,GOOD:0.75})[c.quality]||0.25);}
       else if(!exp){['crew_min','passengers','life_ppl'].forEach(k=>{agg[k]+=(c[k]||0)*copies;});agg.berths+=(c.crew_max||0)*copies;}
       if(c.type==='LSSTORAGE'){agg.ls_store_hrs=(agg.ls_store_hrs||0)+(c.life_hrs||0)*(1+adds);}
       else agg.life_hrs=Math.max(agg.life_hrs,c.life_hrs||0);
@@ -1719,6 +1719,7 @@ function shipCompute(ship){
     const budget=t[SHIP_AREA_KEY[area]]||0;
     if(used>budget+1e-9)res.errors.push(area+' over budget: '+areaUsed[area]+'/'+budget);
   });
+  if(autoRed){const capMin=Math.max(1,Math.floor(autoPct*(t.crew_min||0)));const capMax=Math.max(1,Math.floor(autoPct*(t.crew_max||0)));agg.crew_min-=Math.min(autoRed,capMin);agg.crew_max-=Math.min(autoRed,capMax);}
   agg.crew_min=ship.class==='DRONE'?Math.max(0,agg.crew_min):Math.max(1,agg.crew_min);
   agg.crew_max=Math.max(agg.crew_max,agg.crew_min);
   const crewed=ship.class!=='DRONE';
@@ -8754,7 +8755,7 @@ function render(){
       html+=tile('💥','Activation',cp.pwr_activation,'#fb923c','ACTIVATION POWER — surge needed when on-demand systems (jump drive, landing...) fire; cover it with headroom or energy storage');
       html+=tile('🔋','Storage',cp.energy_storage,'#60a5fa','ENERGY STORAGE — buffered power for activation surges and shield recharging');
       html+=tile('🛡','Shield',cp.shield_max+(cp.shield_recharge?' (+'+cp.shield_recharge+'/recharge)':''),'#34d399','SHIELD — damage buffer absorbed before HULL or SYSTEM; recharge = points restored per unit of power spent');
-      html+=tile('👥','Crew',cp.crew_min+' – '+cp.crew_max,'#e5e7eb','CREW — minimum required to fly (LARGE penalty below it) — full complement (SMALL penalty below it). Crew automation lowers the minimum');
+      html+=tile('👥','Crew',cp.crew_min+' – '+cp.crew_max,'#e5e7eb','CREW — minimum required to fly (LARGE penalty below it) — full complement (SMALL penalty below it). Crew automation replaces stations: each unit/expansion automates 1 crew, capped at 25/50/75% of the hull\'s crew by suite grade (min never below 1)');
       html+=tile('🛏','Berths',cp.berths,'#e5e7eb','BERTHS — crew quarters capacity. Must at least cover minimum crew');
       html+=tile('🧍','Passengers',cp.passengers,'#e5e7eb','PASSENGERS — paying (or boarding) souls beyond the crew');
       html+=tile('💨','Life support',cp.life_ppl+' ppl'+(cp.life_hrs?(cp.life_hrs>=999999?' / ∞ self-sustaining':' / '+cp.life_hrs+' hrs'):''),'#a7f3d0','LIFE SUPPORT — how many people it keeps alive and for how long: minimal = weeks (planet to planet), standard = a year (interstellar), extended = self-sustaining. Stores add a month each. Must cover berths + passengers');
