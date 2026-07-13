@@ -1902,7 +1902,7 @@
       },
       {
        "key": "MANDATORY SYSTEMS",
-       "text": "No hull is spaceworthy without its required systems. Every ship needs a power source, an engine, a radar, a shield generator and a transponder. Crewed ships add life support and crew quarters (fighters use a cockpit instead of quarters). Corvette-class and larger also need a command bridge, a nav bridge, a warfare suite and an engineering bay. Long-haul designs add a jump drive and a fuel reserve. The SHIP BUILDER tracks this checklist for you and flags anything missing."
+       "text": "No hull is spaceworthy without its required systems. Every ship needs a power source, an engine, a radar, a shield generator and a transponder. Crewed ships add life support and crew quarters (fighters use a cockpit instead of quarters) - each comes fitted for one person and grows per person added at a discount. Quality tiers change comfort, not capacity: fit several blocks of different grades to give the captain, the officers and the lower decks very different accommodations. Corvette-class and larger also need a command bridge, a nav bridge, a warfare suite and an engineering bay. Some parts bring their own needs: jump drives and coronthia reactors demand a fuel tank, and ordnance mounts without an ammo bay fire only what is loaded aboard - no reloads. The SHIP BUILDER tracks all of this for you and flags anything missing."
       },
       {
        "key": "COST & COMPONENTS",
@@ -3620,7 +3620,7 @@
   {
    "name": "SHIP LIFE SUPPORT",
    "action": "",
-   "desc": "This value lets you know how long your life support can handle a full load of passengers on board in optimal conditions. Having more people than life support will lead to death."
+   "desc": "This value lets you know how many people your life support can keep alive and for how long in optimal conditions. Minimal units carry weeks of scrubbers and stores (planet-to-planet hops), standard units carry about a year (true interstellar travel), and extended units run closed-loop recyclers - self-sustaining, indefinite endurance. LIFE SUPPORT STORES add roughly a month of endurance each for long hauls. Having more people aboard than life support covers leads to death."
   },
   {
    "name": "SHIP AVAILABLE POWER",
