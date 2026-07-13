@@ -1894,11 +1894,15 @@
       },
       {
        "key": "SIZE BUDGET - Core / Internal / External",
-       "text": "A ship is a chassis with three kinds of slot: CORE, INTERNAL and EXTERNAL, each with a capacity. Every component you install spends slot space, so a loadout is a budgeting exercise - you cannot have everything. Placement matters: CORE components keep working until the ship is SCRAPPED, INTERNAL components stop on a CRIPPLED result, and EXTERNAL components go down on any ship TRAUMA."
+       "text": "A ship is a chassis with three kinds of slot: CORE, INTERNAL and EXTERNAL, each with a capacity. Every component you install spends slot space, so a loadout is a budgeting exercise - you cannot have everything. Placement matters twice over: CORE components keep working until the ship is SCRAPPED, INTERNAL components stop on a CRIPPLED result, EXTERNAL components go down on any ship TRAUMA - and each component lists which of the three areas can hold it (landing gear must ride the hull; a bridge belongs inside)."
       },
       {
        "key": "POWER",
        "text": "How much power the ship generates to run its systems each round - the resource the engineer manages in combat."
+      },
+      {
+       "key": "MANDATORY SYSTEMS",
+       "text": "No hull is spaceworthy without its required systems. Every ship needs a power source, an engine, a radar, a shield generator and a transponder. Crewed ships add life support and crew quarters (fighters use a cockpit instead of quarters). Corvette-class and larger also need a command bridge, a nav bridge, a warfare suite and an engineering bay. Long-haul designs add a jump drive and a fuel reserve. The SHIP BUILDER tracks this checklist for you and flags anything missing."
       },
       {
        "key": "COST & COMPONENTS",
