@@ -3595,7 +3595,7 @@
   {
    "name": "SHIP MINIMUM CREW",
    "action": "",
-   "desc": "The minimum amount of personnel required on a ship to operate it. Anyone operating on a ship under minimum crew has a LARGE penalty to all their skill checks."
+   "desc": "The minimum amount of personnel required on a ship to operate it. Anyone operating on a ship under minimum crew has a LARGE penalty to all their skill checks. CREW AUTOMATION replaces stations: each automation unit or expansion removes one crew member from both minimum and maximum, capped at 25%/50%/75% of the hull's crew by suite grade - minimum crew never drops below 1."
   },
   {
    "name": "SHIP MAXIMUM CREW",
