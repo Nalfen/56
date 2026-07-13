@@ -1684,7 +1684,7 @@ function shipCompute(ship){
   const POOLS=['structure','hull','ecm','system'],RTG=['command','handling','instruments','engineering','warfare'];
   const stat={};POOLS.concat(RTG).forEach(k=>stat[k]=t[k]||0);
   const AV=['COMMON','UNCOMMON','RARE','LIMITED','UNIQUE'],LEG=['No Permit','Restricted','Illegal'];
-  let cost=t.price||0,wAv=0,wLeg=0;const areaUsed={};const groups={};
+  let cost=t.price||0,wAv=0,wLeg=0;const areaUsed={};const groups={};const typesSeen={};
   SHIP_AREAS.forEach(area=>{
     let used=0;
     (ship[area]||[]).forEach(ref=>{
@@ -1693,6 +1693,7 @@ function shipCompute(ship){
       if(c.classes.indexOf(ship.class)<0)res.errors.push(c.id+' not allowed on '+ship.class);
       if((c.placement||'CIE').indexOf({core:'C',internal:'I',external:'E'}[area])<0)res.errors.push(c.id+' cannot be mounted in '+area);
       if(c.mandatory_group)groups[c.mandatory_group]=1;
+      typesSeen[c.type]=1;
       const exp=!!c.expandable,copies=exp?1:Math.max(1,n),adds=exp?n:0;
       used+=(c.unit_size||0)*copies+(c.exp_size||0)*adds;
       cost+=SHIP_AREA_MULT[area]*((c.price||0)*copies+(c.exp_cost||0)*adds);
@@ -1700,14 +1701,15 @@ function shipCompute(ship){
       agg.pwr_consumption+=(c.exp_power||0)*adds;
       if(exp){
         const per={CREWSPACE:'berths',PASSENGERSSPACE:'passengers',CARGOSPACE:'cargo',LIFESUPPORT:'life_ppl'}[c.type];
-        if(per==='berths')agg.berths+=adds;
+        if(per==='berths')agg.berths+=(c.crew_max||0)+adds;
         else if(per==='passengers')agg.passengers+=adds;
         else if(per==='cargo')agg.cargo+=adds;
         else if(per==='life_ppl')agg.life_ppl+=(c.life_ppl||0)+adds;
       }
       if(c.type==='CREWAUTOMATION'){agg.crew_min-=(c.crew_min||0)*copies;}
       else if(!exp){['crew_min','passengers','life_ppl'].forEach(k=>{agg[k]+=(c[k]||0)*copies;});agg.berths+=(c.crew_max||0)*copies;}
-      agg.life_hrs=Math.max(agg.life_hrs,c.life_hrs||0);
+      if(c.type==='LSSTORAGE'){agg.ls_store_hrs=(agg.ls_store_hrs||0)+(c.life_hrs||0)*(1+adds);}
+      else agg.life_hrs=Math.max(agg.life_hrs,c.life_hrs||0);
       ['combat_range','detect_range','max_range','jump_range','speed','atmospheric'].forEach(k=>{agg[k]=Math.max(agg[k],c[k]||0);});
       POOLS.concat(RTG).forEach(k=>{stat[k]+=(c[k]||0)*copies;});
       wAv=Math.max(wAv,Math.max(0,AV.indexOf(c.availability)));
@@ -1728,6 +1730,9 @@ function shipCompute(ship){
   if(crewed&&aboard>agg.life_ppl)res.errors.push('life support: '+aboard+' aboard (berths+passengers) / '+agg.life_ppl+' supported');
   else if(crewed&&(agg.crew_max+agg.passengers)>agg.life_ppl)res.warnings.push('life support short for a full crew: '+agg.crew_max+'+'+agg.passengers+' vs '+agg.life_ppl);
   ((g.ship_config&&g.ship_config.mandatory_by_class||{})[ship.class]||[]).forEach(grp=>{if(!groups[grp])res.errors.push('missing mandatory system: '+grp);});
+  if((agg.fuel_cons>0||typesSeen.JUMPDRIVE)&&agg.fuel_units<=0)res.errors.push('fuel: the '+(agg.fuel_cons>0?'coronthia reactor':'jump drive')+' consumes fuel but there is no fuel tank aboard');
+  if(typesSeen.ORDONNANCE_FIXED&&!typesSeen.AMMOBAY)res.warnings.push('ordnance mounts have no AMMO BAY: only what is loaded on board, no reloads');
+  if(agg.life_hrs)agg.life_hrs=Math.min(999999,agg.life_hrs+(agg.ls_store_hrs||0));delete agg.ls_store_hrs;
   agg.pwr_consumption=Math.round(agg.pwr_consumption*10)/10;agg.pwr_activation=Math.round(agg.pwr_activation*10)/10;
   Object.assign(res,agg,stat);
   res.area_used=areaUsed;
@@ -8493,7 +8498,7 @@ function render(){
     cnt=SF.length;
     const classColors={'DRONE':'rgba(139,92,246,.3)','FIGHTER':'rgba(59,130,246,.3)','CORVETTE':'rgba(16,185,129,.3)','FRIGATE':'rgba(245,158,11,.3)','CRUISER':'rgba(239,68,68,.3)','BATTLECRUISER':'rgba(220,38,38,.4)','CARRIER':'rgba(249,115,22,.3)','NOVA':'rgba(217,70,239,.3)'};
     const sv=(v,unit)=>(!v&&v!==0)?'—':(v+(unit||''));
-    const fmtTime=h=>{if(!h)return'—';if(h<48)return h+' hrs';const d=Math.round(h/24);if(d<60)return d+' days';const mo=Math.round(h/730);if(mo<24)return mo+' months';return(h/8760).toFixed(1)+' years';};
+    const fmtTime=h=>{if(!h)return'—';if(h>=999999)return'∞ self-sustaining';if(h<48)return h+' hrs';const d=Math.round(h/24);if(d<60)return d+' days';const mo=Math.round(h/730);if(mo<24)return mo+' months';return(h/8760).toFixed(1)+' years';};
     const statPill=(label,val,col)=>'<span class="wpn-pill" style="color:'+(col||'#d1d5db')+';font-size:10px;padding:1px 5px;"><span style="color:#6b7280;font-size:10px;">'+label+'</span> '+val+'</span>';
     const sLabel=(lbl)=>'<div style="font-size:10px;font-weight:700;letter-spacing:1px;color:#4b5563;text-transform:uppercase;margin:8px 0 4px;">'+lbl+'</div>';
     const cSec=(list,used,mx,lbl,col,icon)=>{
@@ -8657,7 +8662,7 @@ function render(){
         if(c.desc) html+='<div class="rd" style="margin-bottom:8px;color:#9ca3af;">'+hl(c.desc,sq)+'</div>';
         html+='<div class="fg">';
         EFFK.forEach(k=>{const v=c[k[0]];if(v&&!(c.type==='CREWAUTOMATION'&&k[0]!=='crew_min')){html+='<div class="f"><div class="fl">'+k[1]+'</div><div class="fv" style="color:'+(v>0?'#4ade80':'#f87171')+';">'+(v>0?'+':'')+v+'</div></div>';}});
-        CAPK.forEach(k=>{const v=c[k[0]];if(v&&!(c.type!=='CREWAUTOMATION'&&k[0]==='crew_min'&&false)){if(k[0]==='crew_min'&&c.type!=='CREWAUTOMATION'){html+='<div class="f"><div class="fl">👤 Crew Required</div><div class="fv">'+v+'</div></div>';}else{html+='<div class="f"><div class="fl">'+k[1]+'</div><div class="fv" style="color:'+k[2]+';">'+v+'</div></div>';}}});
+        CAPK.forEach(k=>{let v=c[k[0]];if(v&&!(c.type!=='CREWAUTOMATION'&&k[0]==='crew_min'&&false)){if(k[0]==='life_hrs'&&v>=999999)v='∞';if(k[0]==='crew_min'&&c.type!=='CREWAUTOMATION'){html+='<div class="f"><div class="fl">👤 Crew Required</div><div class="fv">'+v+'</div></div>';}else{html+='<div class="f"><div class="fl">'+k[1]+'</div><div class="fv" style="color:'+k[2]+';">'+v+'</div></div>';}}});
         html+='<div class="f"><div class="fl">Placement</div><div class="fv" style="color:#93c5fd;">'+plStr(c.placement)+'</div></div>';
         html+='<div class="f"><div class="fl">Unit Size</div><div class="fv" style="color:var(--mu);">'+((c.unit_size||0)>0?'+':'')+(c.unit_size||0)+'</div></div>';
         html+='<div class="f"><div class="fl">Price</div><div class="fv" style="color:#4ade80;">'+fmt(c.price||0)+' Cr</div></div>';
@@ -8740,11 +8745,11 @@ function render(){
       html+=tile('🚢','Hull',cp.hull,'#60a5fa','HULL — the ship\'s health. At 0 the ship is SCRAPPED');
       html+=tile('📶','ECM',cp.ecm,'#34d399','ECM — electronic damage threshold: system hits above this cause a TRAUMA');
       html+=tile('💻','System',cp.system,'#a78bfa','SYSTEM — electronics health. At 0 the electronics are dead');
-      html+=tile('⭐','Command',cp.command,'#fbbf24','COMMAND rating — the Commander rolls LEADERSHIP vs this to direct the crew');
-      html+=tile('🎮','Handling',cp.handling,'#fb923c','HANDLING rating — the Pilot rolls PILOTING vs this to maneuver');
-      html+=tile('🧭','Instruments',cp.instruments,'#22d3ee','INSTRUMENTS rating — the Navigator rolls NAVIGATION vs this to plot and scan');
-      html+=tile('🔧','Engineering',cp.engineering,'#4ade80','ENGINEERING rating — the Engineer rolls vs this to manage power and repairs');
-      html+=tile('🎯','Warfare',cp.warfare,'#f87171','WARFARE rating — Gunners roll HEAVY WEAPONS vs this to fire');
+      html+=tile('⭐','Command',cp.command,'#fbbf24','COMMAND rating — the Commander rolls LEADERSHIP vs this; on a success the rating is ADDED as a bonus to one crew job this round. Higher is better');
+      html+=tile('🎮','Handling',cp.handling,'#fb923c','HANDLING rating — the Pilot rolls PILOTING vs this; on a success the rating is ADDED and compared to the enemy ship to swing Advantage to your Gunners. Higher is better');
+      html+=tile('🧭','Instruments',cp.instruments,'#22d3ee','INSTRUMENTS rating — the Navigator rolls NAVIGATION vs this; on a success the rating is ADDED and compared to the enemy ship to win the information war. Higher is better');
+      html+=tile('🔧','Engineering',cp.engineering,'#4ade80','ENGINEERING rating — the Engineer rolls ENGINEERING vs this; on a success it generates that many RESOURCE UNITS for repairs. Higher is better');
+      html+=tile('🎯','Warfare',cp.warfare,'#f87171','WARFARE rating — Gunners roll HEAVY WEAPONS vs this; on a success the rating is ADDED and compared to the enemy ship to land hits and critical hits. Higher is better');
       html+=tile('⚡','Power',cp.pwr_consumption+' / '+cp.pwr_creation,cp.pwr_consumption>cp.pwr_creation?'#ef4444':'#fbbf24','POWER — passive draw / total creation. Draw may never exceed creation');
       html+=tile('💥','Activation',cp.pwr_activation,'#fb923c','ACTIVATION POWER — surge needed when on-demand systems (jump drive, landing...) fire; cover it with headroom or energy storage');
       html+=tile('🔋','Storage',cp.energy_storage,'#60a5fa','ENERGY STORAGE — buffered power for activation surges and shield recharging');
@@ -8752,7 +8757,7 @@ function render(){
       html+=tile('👥','Crew',cp.crew_min+' – '+cp.crew_max,'#e5e7eb','CREW — minimum required to fly (LARGE penalty below it) — full complement (SMALL penalty below it). Crew automation lowers the minimum');
       html+=tile('🛏','Berths',cp.berths,'#e5e7eb','BERTHS — crew quarters capacity. Must at least cover minimum crew');
       html+=tile('🧍','Passengers',cp.passengers,'#e5e7eb','PASSENGERS — paying (or boarding) souls beyond the crew');
-      html+=tile('💨','Life support',cp.life_ppl+' ppl'+(cp.life_hrs?' / '+cp.life_hrs+' hrs':''),'#a7f3d0','LIFE SUPPORT — how many people it keeps alive and the reserve per scrubber cycle. Must cover berths + passengers');
+      html+=tile('💨','Life support',cp.life_ppl+' ppl'+(cp.life_hrs?(cp.life_hrs>=999999?' / ∞ self-sustaining':' / '+cp.life_hrs+' hrs'):''),'#a7f3d0','LIFE SUPPORT — how many people it keeps alive and for how long: minimal = weeks (planet to planet), standard = a year (interstellar), extended = self-sustaining. Stores add a month each. Must cover berths + passengers');
       html+=tile('📦','Cargo',cp.cargo,'#e5e7eb','CARGO — holds in units; 1 unit fits one HUGE item');
       html+=tile('🚀','Speed',cp.speed,'#d1d5db','SPEED — LOW / MEDIUM / HIGH, from the engine quality. Faster ships dictate engagements');
       html+=tile('🌌','Jump',cp.jump_range||'—','#a78bfa','JUMP RANGE — galactic quadrants per jump. 0 = no jump drive, in-system only');
