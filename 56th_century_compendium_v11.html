@@ -1700,11 +1700,12 @@ function shipCompute(ship){
       ['pwr_consumption','pwr_activation','pwr_creation','energy_storage','shield_max','shield_recharge','fuel_cons','fuel_units','cargo'].forEach(k=>{agg[k]+=(c[k]||0)*copies;});
       agg.pwr_consumption+=(c.exp_power||0)*adds;
       if(exp){
-        const per={CREWSPACE:'berths',PASSENGERSSPACE:'passengers',CARGOSPACE:'cargo',LIFESUPPORT:'life_ppl'}[c.type];
+        const per={CREWSPACE:'berths',PASSENGERSSPACE:'passengers',CARGOSPACE:'cargo',LIFESUPPORT:'life_ppl',CRYOBAY:'cryo'}[c.type];
         if(per==='berths')agg.berths+=(c.crew_max||0)+adds;
         else if(per==='passengers')agg.passengers+=adds;
         else if(per==='cargo')agg.cargo+=adds;
         else if(per==='life_ppl')agg.life_ppl+=(c.life_ppl||0)+adds;
+        else if(per==='cryo')agg.cryo_pax=(agg.cryo_pax||0)+(c.passengers||0)+adds;/* inert: no active life support */
       }
       if(c.type==='CREWAUTOMATION'){autoRed+=1+adds;autoPct=Math.max(autoPct,({BASIC:0.25,AVERAGE:0.5,GOOD:0.75})[c.quality]||0.25);}
       else if(!exp){['crew_min','passengers','life_ppl'].forEach(k=>{agg[k]+=(c[k]||0)*copies;});agg.berths+=(c.crew_max||0)*copies;}
