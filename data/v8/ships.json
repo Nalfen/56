@@ -185,7 +185,7 @@
    "name": "Airlock Bridge",
    "ship_class": "ALL",
    "quality": "UNIVERSAL",
-   "desc": "typical retractable airlock found on most spaceships",
+   "desc": "A standard retractable airlock, how crew and boarders get on and off in hard vacuum.",
    "placement": "E",
    "classes": [
     "CORVETTE",
@@ -307,7 +307,7 @@
    "name": "Atmospheric Package",
    "ship_class": "FIGHTER",
    "quality": "UNIVERSAL",
-   "desc": "fighter atmospheric package",
+   "desc": "Lets the hull dive into atmosphere and climb back out without burning up, the difference between orbit and the ground.",
    "placement": "E",
    "classes": [
     "FIGHTER"
@@ -326,7 +326,7 @@
    "name": "Atmospheric Package",
    "ship_class": "CORVETTE",
    "quality": "UNIVERSAL",
-   "desc": "corvette atmospheric package",
+   "desc": "Lets the hull dive into atmosphere and climb back out without burning up, the difference between orbit and the ground.",
    "placement": "E",
    "classes": [
     "CORVETTE"
@@ -345,7 +345,7 @@
    "name": "Atmospheric Package",
    "ship_class": "FRIGATE",
    "quality": "UNIVERSAL",
-   "desc": "frigate atmospheric package",
+   "desc": "Lets the hull dive into atmosphere and climb back out without burning up, the difference between orbit and the ground.",
    "placement": "E",
    "classes": [
     "FRIGATE"
@@ -364,7 +364,7 @@
    "name": "Atmospheric Package",
    "ship_class": "CRUISER",
    "quality": "UNIVERSAL",
-   "desc": "cruiser atmosphetic package",
+   "desc": "Lets the hull dive into atmosphere and climb back out without burning up, the difference between orbit and the ground.",
    "placement": "E",
    "classes": [
     "CRUISER"
@@ -383,7 +383,7 @@
    "name": "Canteen",
    "ship_class": "ALL",
    "quality": "BASIC",
-   "desc": "canteen: nutrient paste with a smile",
+   "desc": "A canteen: nutrient paste with a smile, and somewhere to sit while you eat it. (GM: keeps the crew fed, not happy.)",
    "placement": "CI",
    "classes": [
     "CORVETTE",
@@ -435,7 +435,7 @@
    "name": "Bar & Lounge",
    "ship_class": "ALL",
    "quality": "AVERAGE",
-   "desc": "bar & lounge: real drinks, real seats",
+   "desc": "A bar and lounge with real drinks, real seats and real conversation. (GM: a morale lift on a long haul.)",
    "placement": "CI",
    "classes": [
     "CORVETTE",
@@ -461,7 +461,7 @@
    "name": "Corvette Bay",
    "ship_class": "ALL",
    "quality": "UNIVERSAL",
-   "desc": "internal launch and docking for (1) corvette",
+   "desc": "An internal cradle, clamps and fuel line to launch and recover one corvette.",
    "placement": "E",
    "classes": [
     "CRUISER",
@@ -485,7 +485,7 @@
    "name": "Drone Bay",
    "ship_class": "ALL",
    "quality": "UNIVERSAL",
-   "desc": "internal launch and docking for (1) drone",
+   "desc": "An internal cradle and rails to launch and recover one drone.",
    "placement": "E",
    "classes": [
     "CORVETTE",
@@ -511,7 +511,7 @@
    "name": "Fighter Bay",
    "ship_class": "ALL",
    "quality": "UNIVERSAL",
-   "desc": "internal launch and docking for (1) fighter",
+   "desc": "An internal cradle, clamps and fuel line to launch and recover one fighter.",
    "placement": "E",
    "classes": [
     "FRIGATE",
@@ -556,7 +556,7 @@
    "name": "Command Bridge",
    "ship_class": "CORVETTE",
    "quality": "AVERAGE",
-   "desc": "standard corvette command bridge (no rating change)",
+   "desc": "No rating change. The ship's nerve centre: a captain's chair, a ring of stations and the sightlines to run a fight from.",
    "placement": "CI",
    "classes": [
     "CORVETTE"
@@ -615,7 +615,7 @@
    "name": "Command Bridge",
    "ship_class": "FRIGATE",
    "quality": "AVERAGE",
-   "desc": "standard frigate command bridge (no rating change)",
+   "desc": "No rating change. The ship's nerve centre: a captain's chair, a ring of stations and the sightlines to run a fight from.",
    "placement": "CI",
    "classes": [
     "FRIGATE"
@@ -674,7 +674,7 @@
    "name": "Command Bridge",
    "ship_class": "CRUISER",
    "quality": "AVERAGE",
-   "desc": "standard cruiser command bridge (no rating change)",
+   "desc": "No rating change. The ship's nerve centre: a captain's chair, a ring of stations and the sightlines to run a fight from.",
    "placement": "CI",
    "classes": [
     "CRUISER"
@@ -792,7 +792,7 @@
    "name": "Command Bridge",
    "ship_class": "CARRIER",
    "quality": "AVERAGE",
-   "desc": "standard carrier command bridge (no rating change)",
+   "desc": "No rating change. The ship's nerve centre: a captain's chair, a ring of stations and the sightlines to run a fight from.",
    "placement": "CI",
    "classes": [
     "CARRIER"
@@ -851,7 +851,7 @@
    "name": "Command Bridge",
    "ship_class": "NOVA",
    "quality": "AVERAGE",
-   "desc": "standard nova command bridge (no rating change)",
+   "desc": "No rating change. The ship's nerve centre: a captain's chair, a ring of stations and the sightlines to run a fight from.",
    "placement": "CI",
    "classes": [
     "NOVA"
@@ -890,7 +890,7 @@
    "name": "Cargo Space",
    "ship_class": "ALL",
    "quality": "UNIVERSAL",
-   "desc": "cargo space (1 HUGE item per unit)",
+   "desc": "Holds 1 HUGE item per unit. Bare deck and tie-down rings, the reason most ships leave the yard at all.",
    "placement": "CIE",
    "classes": [
     "DRONE",
@@ -915,7 +915,7 @@
    "name": "Bare Cockpit",
    "ship_class": "FIGHTER",
    "quality": "BASIC",
-   "desc": "bare cockpit: one seat, one stick, no comforts",
+   "desc": "Seats 1. A bare cockpit, one seat and one stick, no comforts and no distractions.",
    "placement": "CI",
    "classes": [
     "FIGHTER"
@@ -1005,7 +1005,7 @@
    "name": "Comms Bridge",
    "ship_class": "CORVETTE",
    "quality": "AVERAGE",
-   "desc": "dedicated corvette comms bridge (+2 COMMAND)",
+   "desc": "+2 COMMAND. A dedicated comms bridge that keeps the squadron in earshot and the orders flowing.",
    "placement": "CI",
    "classes": [
     "CORVETTE"
@@ -1062,7 +1062,7 @@
    "name": "Comms Bridge",
    "ship_class": "FRIGATE",
    "quality": "AVERAGE",
-   "desc": "dedicated frigate comms bridge (+2 COMMAND)",
+   "desc": "+2 COMMAND. A dedicated comms bridge that keeps the squadron in earshot and the orders flowing.",
    "placement": "CI",
    "classes": [
     "FRIGATE"
@@ -1119,7 +1119,7 @@
    "name": "Comms Bridge",
    "ship_class": "CRUISER",
    "quality": "AVERAGE",
-   "desc": "dedicated cruiser comms bridge (+2 COMMAND)",
+   "desc": "+2 COMMAND. A dedicated comms bridge that keeps the squadron in earshot and the orders flowing.",
    "placement": "CI",
    "classes": [
     "CRUISER"
@@ -1176,7 +1176,7 @@
    "name": "Comms Bridge",
    "ship_class": "BATTLECRUISER",
    "quality": "AVERAGE",
-   "desc": "dedicated battlecruiser comms bridge (+2 COMMAND)",
+   "desc": "+2 COMMAND. A dedicated comms bridge that keeps the squadron in earshot and the orders flowing.",
    "placement": "CI",
    "classes": [
     "BATTLECRUISER"
@@ -1233,7 +1233,7 @@
    "name": "Comms Bridge",
    "ship_class": "CARRIER",
    "quality": "AVERAGE",
-   "desc": "dedicated carrier comms bridge (+2 COMMAND)",
+   "desc": "+2 COMMAND. A dedicated comms bridge that keeps the squadron in earshot and the orders flowing.",
    "placement": "CI",
    "classes": [
     "CARRIER"
@@ -1290,7 +1290,7 @@
    "name": "Comms Bridge",
    "ship_class": "NOVA",
    "quality": "AVERAGE",
-   "desc": "dedicated nova comms bridge (+2 COMMAND)",
+   "desc": "+2 COMMAND. A dedicated comms bridge that keeps the squadron in earshot and the orders flowing.",
    "placement": "CI",
    "classes": [
     "NOVA"
@@ -1911,7 +1911,7 @@
    "name": "ECM Suite",
    "ship_class": "DRONE",
    "quality": "AVERAGE",
-   "desc": "standard drone ECM suite (+2 ECM)",
+   "desc": "+2 ECM. A proper jammer humming behind the hull plate, enough static to make a targeting computer second-guess itself.",
    "placement": "CIE",
    "classes": [
     "DRONE"
@@ -1968,7 +1968,7 @@
    "name": "ECM Suite",
    "ship_class": "FIGHTER",
    "quality": "AVERAGE",
-   "desc": "standard fighter ECM suite (+2 ECM)",
+   "desc": "+2 ECM. A proper jammer humming behind the hull plate, enough static to make a targeting computer second-guess itself.",
    "placement": "CIE",
    "classes": [
     "FIGHTER"
@@ -2025,7 +2025,7 @@
    "name": "ECM Suite",
    "ship_class": "CORVETTE",
    "quality": "AVERAGE",
-   "desc": "standard corvette ECM suite (+2 ECM)",
+   "desc": "+2 ECM. A proper jammer humming behind the hull plate, enough static to make a targeting computer second-guess itself.",
    "placement": "CIE",
    "classes": [
     "CORVETTE"
@@ -2082,7 +2082,7 @@
    "name": "ECM Suite",
    "ship_class": "FRIGATE",
    "quality": "AVERAGE",
-   "desc": "standard frigate ECM suite (+2 ECM)",
+   "desc": "+2 ECM. A proper jammer humming behind the hull plate, enough static to make a targeting computer second-guess itself.",
    "placement": "CIE",
    "classes": [
     "FRIGATE"
@@ -2139,7 +2139,7 @@
    "name": "ECM Suite",
    "ship_class": "CRUISER",
    "quality": "AVERAGE",
-   "desc": "standard cruiser ECM suite (+2 ECM)",
+   "desc": "+2 ECM. A proper jammer humming behind the hull plate, enough static to make a targeting computer second-guess itself.",
    "placement": "CIE",
    "classes": [
     "CRUISER"
@@ -2196,7 +2196,7 @@
    "name": "ECM Suite",
    "ship_class": "BATTLECRUISER",
    "quality": "AVERAGE",
-   "desc": "standard battlecruiser ECM suite (+2 ECM)",
+   "desc": "+2 ECM. A proper jammer humming behind the hull plate, enough static to make a targeting computer second-guess itself.",
    "placement": "CIE",
    "classes": [
     "BATTLECRUISER"
@@ -2253,7 +2253,7 @@
    "name": "ECM Suite",
    "ship_class": "CARRIER",
    "quality": "AVERAGE",
-   "desc": "standard carrier ECM suite (+2 ECM)",
+   "desc": "+2 ECM. A proper jammer humming behind the hull plate, enough static to make a targeting computer second-guess itself.",
    "placement": "CIE",
    "classes": [
     "CARRIER"
@@ -2310,7 +2310,7 @@
    "name": "ECM Suite",
    "ship_class": "NOVA",
    "quality": "AVERAGE",
-   "desc": "standard nova ECM suite (+2 ECM)",
+   "desc": "+2 ECM. A proper jammer humming behind the hull plate, enough static to make a targeting computer second-guess itself.",
    "placement": "CIE",
    "classes": [
     "NOVA"
@@ -2366,7 +2366,7 @@
    "name": "Energy Tank",
    "ship_class": "DRONE",
    "quality": "AVERAGE",
-   "desc": "standard drone energy tank",
+   "desc": "+4 energy storage. A capacitor buffer for the surges: shields under fire, a jump, an overcharged gun.",
    "placement": "CIE",
    "classes": [
     "DRONE"
@@ -2420,7 +2420,7 @@
    "name": "Energy Tank",
    "ship_class": "FIGHTER",
    "quality": "AVERAGE",
-   "desc": "standard fighter energy tank",
+   "desc": "+5 energy storage. A capacitor buffer for the surges: shields under fire, a jump, an overcharged gun.",
    "placement": "CIE",
    "classes": [
     "FIGHTER"
@@ -2474,7 +2474,7 @@
    "name": "Energy Tank",
    "ship_class": "CORVETTE",
    "quality": "AVERAGE",
-   "desc": "standard corvette energy tank",
+   "desc": "+15 energy storage. A capacitor buffer for the surges: shields under fire, a jump, an overcharged gun.",
    "placement": "CIE",
    "classes": [
     "CORVETTE"
@@ -2528,7 +2528,7 @@
    "name": "Energy Tank",
    "ship_class": "FRIGATE",
    "quality": "AVERAGE",
-   "desc": "standard frigate energy tank",
+   "desc": "+30 energy storage. A capacitor buffer for the surges: shields under fire, a jump, an overcharged gun.",
    "placement": "CIE",
    "classes": [
     "FRIGATE"
@@ -2582,7 +2582,7 @@
    "name": "Energy Tank",
    "ship_class": "CRUISER",
    "quality": "AVERAGE",
-   "desc": "standard cruiser energy tank",
+   "desc": "+60 energy storage. A capacitor buffer for the surges: shields under fire, a jump, an overcharged gun.",
    "placement": "CIE",
    "classes": [
     "CRUISER"
@@ -2636,7 +2636,7 @@
    "name": "Energy Tank",
    "ship_class": "BATTLECRUISER",
    "quality": "AVERAGE",
-   "desc": "standard battlecruiser energy tank",
+   "desc": "+120 energy storage. A capacitor buffer for the surges: shields under fire, a jump, an overcharged gun.",
    "placement": "CIE",
    "classes": [
     "BATTLECRUISER"
@@ -2690,7 +2690,7 @@
    "name": "Energy Tank",
    "ship_class": "CARRIER",
    "quality": "AVERAGE",
-   "desc": "standard carrier energy tank",
+   "desc": "+240 energy storage. A capacitor buffer for the surges: shields under fire, a jump, an overcharged gun.",
    "placement": "CIE",
    "classes": [
     "CARRIER"
@@ -2744,7 +2744,7 @@
    "name": "Energy Tank",
    "ship_class": "NOVA",
    "quality": "AVERAGE",
-   "desc": "standard nova energy tank",
+   "desc": "+480 energy storage. A capacitor buffer for the surges: shields under fire, a jump, an overcharged gun.",
    "placement": "CIE",
    "classes": [
     "NOVA"
@@ -3329,7 +3329,7 @@
    "name": "Mid-speed Combat Engine",
    "ship_class": "DRONE",
    "quality": "AVERAGE",
-   "desc": "MEDIUM speed combat drive (+2 WARFARE)",
+   "desc": "MEDIUM speed, +2 WARFARE. A combat drive tuned for gunnery stability over pace, steady enough to shoot straight from.",
    "placement": "IE",
    "classes": [
     "DRONE"
@@ -3392,7 +3392,7 @@
    "name": "Mid-speed Combat Engine",
    "ship_class": "FIGHTER",
    "quality": "AVERAGE",
-   "desc": "MEDIUM speed combat drive (+2 WARFARE)",
+   "desc": "MEDIUM speed, +2 WARFARE. A combat drive tuned for gunnery stability over pace, steady enough to shoot straight from.",
    "placement": "IE",
    "classes": [
     "FIGHTER"
@@ -3455,7 +3455,7 @@
    "name": "Mid-speed Combat Engine",
    "ship_class": "CORVETTE",
    "quality": "AVERAGE",
-   "desc": "MEDIUM speed combat drive (+2 WARFARE)",
+   "desc": "MEDIUM speed, +2 WARFARE. A combat drive tuned for gunnery stability over pace, steady enough to shoot straight from.",
    "placement": "IE",
    "classes": [
     "CORVETTE"
@@ -3518,7 +3518,7 @@
    "name": "Mid-speed Combat Engine",
    "ship_class": "FRIGATE",
    "quality": "AVERAGE",
-   "desc": "MEDIUM speed combat drive (+2 WARFARE)",
+   "desc": "MEDIUM speed, +2 WARFARE. A combat drive tuned for gunnery stability over pace, steady enough to shoot straight from.",
    "placement": "IE",
    "classes": [
     "FRIGATE"
@@ -3581,7 +3581,7 @@
    "name": "Mid-speed Combat Engine",
    "ship_class": "CRUISER",
    "quality": "AVERAGE",
-   "desc": "MEDIUM speed combat drive (+2 WARFARE)",
+   "desc": "MEDIUM speed, +2 WARFARE. A combat drive tuned for gunnery stability over pace, steady enough to shoot straight from.",
    "placement": "IE",
    "classes": [
     "CRUISER"
@@ -3644,7 +3644,7 @@
    "name": "Mid-speed Combat Engine",
    "ship_class": "BATTLECRUISER",
    "quality": "AVERAGE",
-   "desc": "MEDIUM speed combat drive (+2 WARFARE)",
+   "desc": "MEDIUM speed, +2 WARFARE. A combat drive tuned for gunnery stability over pace, steady enough to shoot straight from.",
    "placement": "IE",
    "classes": [
     "BATTLECRUISER"
@@ -3707,7 +3707,7 @@
    "name": "Mid-speed Combat Engine",
    "ship_class": "CARRIER",
    "quality": "AVERAGE",
-   "desc": "MEDIUM speed combat drive (+2 WARFARE)",
+   "desc": "MEDIUM speed, +2 WARFARE. A combat drive tuned for gunnery stability over pace, steady enough to shoot straight from.",
    "placement": "IE",
    "classes": [
     "CARRIER"
@@ -3770,7 +3770,7 @@
    "name": "Mid-speed Combat Engine",
    "ship_class": "NOVA",
    "quality": "AVERAGE",
-   "desc": "MEDIUM speed combat drive (+2 WARFARE)",
+   "desc": "MEDIUM speed, +2 WARFARE. A combat drive tuned for gunnery stability over pace, steady enough to shoot straight from.",
    "placement": "IE",
    "classes": [
     "NOVA"
@@ -3832,7 +3832,7 @@
    "name": "Engineering Bay",
    "ship_class": "CORVETTE",
    "quality": "AVERAGE",
-   "desc": "proper corvette engineering bay (+2 ENGINEERING)",
+   "desc": "+2 ENGINEERING. A real engine room with the tools bolted down, where a good chief turns damage reports into fixed problems.",
    "placement": "CIE",
    "classes": [
     "CORVETTE"
@@ -3892,7 +3892,7 @@
    "name": "Engineering Bay",
    "ship_class": "FRIGATE",
    "quality": "AVERAGE",
-   "desc": "proper frigate engineering bay (+2 ENGINEERING)",
+   "desc": "+2 ENGINEERING. A real engine room with the tools bolted down, where a good chief turns damage reports into fixed problems.",
    "placement": "CIE",
    "classes": [
     "FRIGATE"
@@ -3952,7 +3952,7 @@
    "name": "Engineering Bay",
    "ship_class": "CRUISER",
    "quality": "AVERAGE",
-   "desc": "proper cruiser engineering bay (+2 ENGINEERING)",
+   "desc": "+2 ENGINEERING. A real engine room with the tools bolted down, where a good chief turns damage reports into fixed problems.",
    "placement": "CIE",
    "classes": [
     "CRUISER"
@@ -4012,7 +4012,7 @@
    "name": "Engineering Bay",
    "ship_class": "BATTLECRUISER",
    "quality": "AVERAGE",
-   "desc": "proper battlecruiser engineering bay (+2 ENGINEERING)",
+   "desc": "+2 ENGINEERING. A real engine room with the tools bolted down, where a good chief turns damage reports into fixed problems.",
    "placement": "CIE",
    "classes": [
     "BATTLECRUISER"
@@ -4072,7 +4072,7 @@
    "name": "Engineering Bay",
    "ship_class": "CARRIER",
    "quality": "AVERAGE",
-   "desc": "proper carrier engineering bay (+2 ENGINEERING)",
+   "desc": "+2 ENGINEERING. A real engine room with the tools bolted down, where a good chief turns damage reports into fixed problems.",
    "placement": "CIE",
    "classes": [
     "CARRIER"
@@ -4132,7 +4132,7 @@
    "name": "Engineering Bay",
    "ship_class": "NOVA",
    "quality": "AVERAGE",
-   "desc": "proper nova engineering bay (+2 ENGINEERING)",
+   "desc": "+2 ENGINEERING. A real engine room with the tools bolted down, where a good chief turns damage reports into fixed problems.",
    "placement": "CIE",
    "classes": [
     "NOVA"
@@ -4193,7 +4193,7 @@
    "name": "Mid-speed Handling Engine",
    "ship_class": "DRONE",
    "quality": "AVERAGE",
-   "desc": "MEDIUM speed handling drive (+2 HANDLING)",
+   "desc": "MEDIUM speed, +2 HANDLING. A nimble drive that turns and docks on a credit, if never in a hurry.",
    "placement": "IE",
    "classes": [
     "DRONE"
@@ -4256,7 +4256,7 @@
    "name": "Mid-speed Handling Engine",
    "ship_class": "FIGHTER",
    "quality": "AVERAGE",
-   "desc": "MEDIUM speed handling drive (+2 HANDLING)",
+   "desc": "MEDIUM speed, +2 HANDLING. A nimble drive that turns and docks on a credit, if never in a hurry.",
    "placement": "IE",
    "classes": [
     "FIGHTER"
@@ -4319,7 +4319,7 @@
    "name": "Mid-speed Handling Engine",
    "ship_class": "CORVETTE",
    "quality": "AVERAGE",
-   "desc": "MEDIUM speed handling drive (+2 HANDLING)",
+   "desc": "MEDIUM speed, +2 HANDLING. A nimble drive that turns and docks on a credit, if never in a hurry.",
    "placement": "IE",
    "classes": [
     "CORVETTE"
@@ -4382,7 +4382,7 @@
    "name": "Mid-speed Handling Engine",
    "ship_class": "FRIGATE",
    "quality": "AVERAGE",
-   "desc": "MEDIUM speed handling drive (+2 HANDLING)",
+   "desc": "MEDIUM speed, +2 HANDLING. A nimble drive that turns and docks on a credit, if never in a hurry.",
    "placement": "IE",
    "classes": [
     "FRIGATE"
@@ -4445,7 +4445,7 @@
    "name": "Mid-speed Handling Engine",
    "ship_class": "CRUISER",
    "quality": "AVERAGE",
-   "desc": "MEDIUM speed handling drive (+2 HANDLING)",
+   "desc": "MEDIUM speed, +2 HANDLING. A nimble drive that turns and docks on a credit, if never in a hurry.",
    "placement": "IE",
    "classes": [
     "CRUISER"
@@ -4508,7 +4508,7 @@
    "name": "Mid-speed Handling Engine",
    "ship_class": "BATTLECRUISER",
    "quality": "AVERAGE",
-   "desc": "MEDIUM speed handling drive (+2 HANDLING)",
+   "desc": "MEDIUM speed, +2 HANDLING. A nimble drive that turns and docks on a credit, if never in a hurry.",
    "placement": "IE",
    "classes": [
     "BATTLECRUISER"
@@ -4571,7 +4571,7 @@
    "name": "Mid-speed Handling Engine",
    "ship_class": "CARRIER",
    "quality": "AVERAGE",
-   "desc": "MEDIUM speed handling drive (+2 HANDLING)",
+   "desc": "MEDIUM speed, +2 HANDLING. A nimble drive that turns and docks on a credit, if never in a hurry.",
    "placement": "IE",
    "classes": [
     "CARRIER"
@@ -4634,7 +4634,7 @@
    "name": "Mid-speed Handling Engine",
    "ship_class": "NOVA",
    "quality": "AVERAGE",
-   "desc": "MEDIUM speed handling drive (+2 HANDLING)",
+   "desc": "MEDIUM speed, +2 HANDLING. A nimble drive that turns and docks on a credit, if never in a hurry.",
    "placement": "IE",
    "classes": [
     "NOVA"
@@ -4676,7 +4676,7 @@
    "name": "Escape Pods",
    "ship_class": "ALL",
    "quality": "UNIVERSAL",
-   "desc": "escape pods, size and cost per person covered",
+   "desc": "One pod per soul aboard, sized and priced per head. The law, and the difference between an incident and an obituary.",
    "placement": "E",
    "classes": [
     "CORVETTE",
@@ -4700,7 +4700,7 @@
    "name": "Small Fuel Tank",
    "ship_class": "CORVETTE",
    "quality": "BASIC",
-   "desc": "small corvette fuel tank: minimum coronthia reserve",
+   "desc": "100 units of coronthia fuel, a minimum reserve for planet-to-planet hops.",
    "placement": "CIE",
    "classes": [
     "CORVETTE"
@@ -4718,7 +4718,7 @@
    "name": "Fuel Tank",
    "ship_class": "CORVETTE",
    "quality": "AVERAGE",
-   "desc": "standard corvette fuel tank",
+   "desc": "200 units of coronthia fuel, a standard reserve for crossing a system.",
    "placement": "CIE",
    "classes": [
     "CORVETTE"
@@ -4754,7 +4754,7 @@
    "name": "Small Fuel Tank",
    "ship_class": "FRIGATE",
    "quality": "BASIC",
-   "desc": "small frigate fuel tank: minimum coronthia reserve",
+   "desc": "200 units of coronthia fuel, a minimum reserve for planet-to-planet hops.",
    "placement": "CIE",
    "classes": [
     "FRIGATE"
@@ -4772,7 +4772,7 @@
    "name": "Fuel Tank",
    "ship_class": "FRIGATE",
    "quality": "AVERAGE",
-   "desc": "standard frigate fuel tank",
+   "desc": "400 units of coronthia fuel, a standard reserve for crossing a system.",
    "placement": "CIE",
    "classes": [
     "FRIGATE"
@@ -4808,7 +4808,7 @@
    "name": "Small Fuel Tank",
    "ship_class": "CRUISER",
    "quality": "BASIC",
-   "desc": "small cruiser fuel tank: minimum coronthia reserve",
+   "desc": "400 units of coronthia fuel, a minimum reserve for planet-to-planet hops.",
    "placement": "CIE",
    "classes": [
     "CRUISER"
@@ -4826,7 +4826,7 @@
    "name": "Fuel Tank",
    "ship_class": "CRUISER",
    "quality": "AVERAGE",
-   "desc": "standard cruiser fuel tank",
+   "desc": "800 units of coronthia fuel, a standard reserve for crossing a system.",
    "placement": "CIE",
    "classes": [
     "CRUISER"
@@ -4880,7 +4880,7 @@
    "name": "Fuel Tank",
    "ship_class": "BATTLECRUISER",
    "quality": "AVERAGE",
-   "desc": "standard battlecruiser fuel tank",
+   "desc": "1600 units of coronthia fuel, a standard reserve for crossing a system.",
    "placement": "CIE",
    "classes": [
     "BATTLECRUISER"
@@ -4916,7 +4916,7 @@
    "name": "Small Fuel Tank",
    "ship_class": "CARRIER",
    "quality": "BASIC",
-   "desc": "small carrier fuel tank: minimum coronthia reserve",
+   "desc": "1600 units of coronthia fuel, a minimum reserve for planet-to-planet hops.",
    "placement": "CIE",
    "classes": [
     "CARRIER"
@@ -4934,7 +4934,7 @@
    "name": "Fuel Tank",
    "ship_class": "CARRIER",
    "quality": "AVERAGE",
-   "desc": "standard carrier fuel tank",
+   "desc": "3200 units of coronthia fuel, a standard reserve for crossing a system.",
    "placement": "CIE",
    "classes": [
     "CARRIER"
@@ -4970,7 +4970,7 @@
    "name": "Small Fuel Tank",
    "ship_class": "NOVA",
    "quality": "BASIC",
-   "desc": "small nova fuel tank: minimum coronthia reserve",
+   "desc": "3200 units of coronthia fuel, a minimum reserve for planet-to-planet hops.",
    "placement": "CIE",
    "classes": [
     "NOVA"
@@ -4988,7 +4988,7 @@
    "name": "Fuel Tank",
    "ship_class": "NOVA",
    "quality": "AVERAGE",
-   "desc": "standard nova fuel tank",
+   "desc": "6400 units of coronthia fuel, a standard reserve for crossing a system.",
    "placement": "CIE",
    "classes": [
     "NOVA"
@@ -5475,7 +5475,7 @@
    "name": "Instrument Suite",
    "ship_class": "DRONE",
    "quality": "AVERAGE",
-   "desc": "standard drone instrument suite (no rating change)",
+   "desc": "No rating change. A standard instrument suite giving clean, honest readouts a navigator can trust.",
    "placement": "CIE",
    "classes": [
     "DRONE"
@@ -5531,7 +5531,7 @@
    "name": "Instrument Suite",
    "ship_class": "FIGHTER",
    "quality": "AVERAGE",
-   "desc": "standard fighter instrument suite (no rating change)",
+   "desc": "No rating change. A standard instrument suite giving clean, honest readouts a navigator can trust.",
    "placement": "CIE",
    "classes": [
     "FIGHTER"
@@ -5587,7 +5587,7 @@
    "name": "Instrument Suite",
    "ship_class": "CORVETTE",
    "quality": "AVERAGE",
-   "desc": "standard corvette instrument suite (no rating change)",
+   "desc": "No rating change. A standard instrument suite giving clean, honest readouts a navigator can trust.",
    "placement": "CIE",
    "classes": [
     "CORVETTE"
@@ -5643,7 +5643,7 @@
    "name": "Instrument Suite",
    "ship_class": "FRIGATE",
    "quality": "AVERAGE",
-   "desc": "standard frigate instrument suite (no rating change)",
+   "desc": "No rating change. A standard instrument suite giving clean, honest readouts a navigator can trust.",
    "placement": "CIE",
    "classes": [
     "FRIGATE"
@@ -5699,7 +5699,7 @@
    "name": "Instrument Suite",
    "ship_class": "CRUISER",
    "quality": "AVERAGE",
-   "desc": "standard cruiser instrument suite (no rating change)",
+   "desc": "No rating change. A standard instrument suite giving clean, honest readouts a navigator can trust.",
    "placement": "CIE",
    "classes": [
     "CRUISER"
@@ -5811,7 +5811,7 @@
    "name": "Instrument Suite",
    "ship_class": "CARRIER",
    "quality": "AVERAGE",
-   "desc": "standard carrier instrument suite (no rating change)",
+   "desc": "No rating change. A standard instrument suite giving clean, honest readouts a navigator can trust.",
    "placement": "CIE",
    "classes": [
     "CARRIER"
@@ -5867,7 +5867,7 @@
    "name": "Instrument Suite",
    "ship_class": "NOVA",
    "quality": "AVERAGE",
-   "desc": "standard nova instrument suite (no rating change)",
+   "desc": "No rating change. A standard instrument suite giving clean, honest readouts a navigator can trust.",
    "placement": "CIE",
    "classes": [
     "NOVA"
@@ -5904,7 +5904,7 @@
    "name": "Jacuzzi",
    "ship_class": "ALL",
    "quality": "UNIVERSAL",
-   "desc": "a ship hot tub (serves 1+)",
+   "desc": "A ship's hot tub, the small luxury that makes a long crossing bearable. Serves 1+.",
    "placement": "CI",
    "classes": [
     "CORVETTE",
@@ -5949,7 +5949,7 @@
    "name": "Jump Drive",
    "ship_class": "CORVETTE",
    "quality": "AVERAGE",
-   "desc": "standard corvette jump drive: 2 quadrants per jump",
+   "desc": "2 quadrants per jump. The fleet-standard coil: reliable, unremarkable, and the reason most captains never think about jumping.",
    "placement": "CIE",
    "classes": [
     "CORVETTE"
@@ -6006,7 +6006,7 @@
    "name": "Jump Drive",
    "ship_class": "FRIGATE",
    "quality": "AVERAGE",
-   "desc": "standard frigate jump drive: 2 quadrants per jump",
+   "desc": "2 quadrants per jump. The fleet-standard coil: reliable, unremarkable, and the reason most captains never think about jumping.",
    "placement": "CIE",
    "classes": [
     "FRIGATE"
@@ -6063,7 +6063,7 @@
    "name": "Jump Drive",
    "ship_class": "CRUISER",
    "quality": "AVERAGE",
-   "desc": "standard cruiser jump drive: 2 quadrants per jump",
+   "desc": "2 quadrants per jump. The fleet-standard coil: reliable, unremarkable, and the reason most captains never think about jumping.",
    "placement": "CIE",
    "classes": [
     "CRUISER"
@@ -6177,7 +6177,7 @@
    "name": "Jump Drive",
    "ship_class": "CARRIER",
    "quality": "AVERAGE",
-   "desc": "standard carrier jump drive: 2 quadrants per jump",
+   "desc": "2 quadrants per jump. The fleet-standard coil: reliable, unremarkable, and the reason most captains never think about jumping.",
    "placement": "CIE",
    "classes": [
     "CARRIER"
@@ -6234,7 +6234,7 @@
    "name": "Jump Drive",
    "ship_class": "NOVA",
    "quality": "AVERAGE",
-   "desc": "standard nova jump drive: 2 quadrants per jump",
+   "desc": "2 quadrants per jump. The fleet-standard coil: reliable, unremarkable, and the reason most captains never think about jumping.",
    "placement": "CIE",
    "classes": [
     "NOVA"
@@ -6272,7 +6272,7 @@
    "name": "Landing System",
    "ship_class": "FIGHTER",
    "quality": "UNIVERSAL",
-   "desc": "Fighter landing package",
+   "desc": "Gear, struts and shocks to set the ship down intact on a planet's surface.",
    "placement": "E",
    "classes": [
     "FIGHTER"
@@ -6291,7 +6291,7 @@
    "name": "Landing System",
    "ship_class": "CORVETTE",
    "quality": "UNIVERSAL",
-   "desc": "corvette landing package",
+   "desc": "Gear, struts and shocks to set the ship down intact on a planet's surface.",
    "placement": "E",
    "classes": [
     "CORVETTE"
@@ -6310,7 +6310,7 @@
    "name": "Landing System",
    "ship_class": "FRIGATE",
    "quality": "UNIVERSAL",
-   "desc": "frigate landing package",
+   "desc": "Gear, struts and shocks to set the ship down intact on a planet's surface.",
    "placement": "E",
    "classes": [
     "FRIGATE"
@@ -6329,7 +6329,7 @@
    "name": "Landing System",
    "ship_class": "CRUISER",
    "quality": "UNIVERSAL",
-   "desc": "cruiser landing package",
+   "desc": "Gear, struts and shocks to set the ship down intact on a planet's surface.",
    "placement": "E",
    "classes": [
     "CRUISER"
@@ -6374,7 +6374,7 @@
    "name": "Med Bay",
    "ship_class": "ALL",
    "quality": "AVERAGE",
-   "desc": "med bay: proper treatment beds and a pharmacy",
+   "desc": "A proper med bay with treatment beds and a pharmacy: stabilise, treat and send them back on shift. +1 bed per expansion.",
    "placement": "CI",
    "classes": [
     "CORVETTE",
@@ -6446,7 +6446,7 @@
    "name": "Nav Bridge",
    "ship_class": "CORVETTE",
    "quality": "AVERAGE",
-   "desc": "proper corvette nav bridge (+2 INSTRUMENTS)",
+   "desc": "+2 INSTRUMENTS. A full plotting table and a navigator who is not the last tired ensign aboard.",
    "placement": "CI",
    "classes": [
     "CORVETTE"
@@ -6506,7 +6506,7 @@
    "name": "Nav Bridge",
    "ship_class": "FRIGATE",
    "quality": "AVERAGE",
-   "desc": "proper frigate nav bridge (+2 INSTRUMENTS)",
+   "desc": "+2 INSTRUMENTS. A full plotting table and a navigator who is not the last tired ensign aboard.",
    "placement": "CI",
    "classes": [
     "FRIGATE"
@@ -6566,7 +6566,7 @@
    "name": "Nav Bridge",
    "ship_class": "CRUISER",
    "quality": "AVERAGE",
-   "desc": "proper cruiser nav bridge (+2 INSTRUMENTS)",
+   "desc": "+2 INSTRUMENTS. A full plotting table and a navigator who is not the last tired ensign aboard.",
    "placement": "CI",
    "classes": [
     "CRUISER"
@@ -6626,7 +6626,7 @@
    "name": "Nav Bridge",
    "ship_class": "BATTLECRUISER",
    "quality": "AVERAGE",
-   "desc": "proper battlecruiser nav bridge (+2 INSTRUMENTS)",
+   "desc": "+2 INSTRUMENTS. A full plotting table and a navigator who is not the last tired ensign aboard.",
    "placement": "CI",
    "classes": [
     "BATTLECRUISER"
@@ -6686,7 +6686,7 @@
    "name": "Nav Bridge",
    "ship_class": "CARRIER",
    "quality": "AVERAGE",
-   "desc": "proper carrier nav bridge (+2 INSTRUMENTS)",
+   "desc": "+2 INSTRUMENTS. A full plotting table and a navigator who is not the last tired ensign aboard.",
    "placement": "CI",
    "classes": [
     "CARRIER"
@@ -6746,7 +6746,7 @@
    "name": "Nav Bridge",
    "ship_class": "NOVA",
    "quality": "AVERAGE",
-   "desc": "proper nova nav bridge (+2 INSTRUMENTS)",
+   "desc": "+2 INSTRUMENTS. A full plotting table and a navigator who is not the last tired ensign aboard.",
    "placement": "CI",
    "classes": [
     "NOVA"
@@ -6900,7 +6900,7 @@
    "name": "Passenger Cabins",
    "ship_class": "ALL",
    "quality": "AVERAGE",
-   "desc": "passenger cabins: proper doors, proper beds",
+   "desc": "Proper cabins with real doors and real beds, the comfortable middle fare. 1 passenger per unit, +1 per expansion.",
    "placement": "CIE",
    "classes": [
     "CORVETTE",
@@ -6961,7 +6961,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 5,
-   "pwr_creation": 15,
+   "pwr_creation": 17,
    "engineering": -1,
    "price": 75000,
    "expandable": false,
@@ -6981,7 +6981,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 7,
-   "pwr_creation": 25,
+   "pwr_creation": 29,
    "price": 150000,
    "expandable": false,
    "availability": "UNCOMMON",
@@ -7000,7 +7000,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 9,
-   "pwr_creation": 35,
+   "pwr_creation": 40,
    "engineering": 1,
    "price": 300000,
    "expandable": false,
@@ -7020,7 +7020,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 6,
-   "pwr_creation": 20,
+   "pwr_creation": 23,
    "engineering": -1,
    "price": 100000,
    "expandable": false,
@@ -7040,7 +7040,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 8,
-   "pwr_creation": 30,
+   "pwr_creation": 34,
    "price": 200000,
    "expandable": false,
    "availability": "UNCOMMON",
@@ -7059,7 +7059,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 10,
-   "pwr_creation": 40,
+   "pwr_creation": 46,
    "engineering": 1,
    "price": 400000,
    "expandable": false,
@@ -7084,7 +7084,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 12,
-   "pwr_creation": 65,
+   "pwr_creation": 75,
    "engineering": -1,
    "price": 250000,
    "expandable": false,
@@ -7109,7 +7109,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 14,
-   "pwr_creation": 75,
+   "pwr_creation": 86,
    "price": 500000,
    "expandable": false,
    "availability": "UNCOMMON",
@@ -7133,7 +7133,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 16,
-   "pwr_creation": 85,
+   "pwr_creation": 98,
    "engineering": 1,
    "price": 1000000,
    "expandable": false,
@@ -7153,7 +7153,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 24,
-   "pwr_creation": 130,
+   "pwr_creation": 150,
    "engineering": -1,
    "price": 500000,
    "expandable": false,
@@ -7173,7 +7173,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 28,
-   "pwr_creation": 150,
+   "pwr_creation": 172,
    "price": 1000000,
    "expandable": false,
    "availability": "UNCOMMON",
@@ -7192,7 +7192,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 32,
-   "pwr_creation": 170,
+   "pwr_creation": 195,
    "engineering": 1,
    "price": 2000000,
    "expandable": false,
@@ -7212,7 +7212,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 48,
-   "pwr_creation": 260,
+   "pwr_creation": 299,
    "engineering": -1,
    "price": 1000000,
    "expandable": false,
@@ -7232,7 +7232,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 56,
-   "pwr_creation": 300,
+   "pwr_creation": 345,
    "price": 2000000,
    "expandable": false,
    "availability": "RARE",
@@ -7251,7 +7251,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 64,
-   "pwr_creation": 340,
+   "pwr_creation": 391,
    "engineering": 1,
    "price": 4000000,
    "expandable": false,
@@ -7271,7 +7271,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 96,
-   "pwr_creation": 520,
+   "pwr_creation": 598,
    "engineering": -1,
    "price": 2000000,
    "expandable": false,
@@ -7291,7 +7291,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 112,
-   "pwr_creation": 600,
+   "pwr_creation": 690,
    "price": 4000000,
    "expandable": false,
    "availability": "RARE",
@@ -7310,7 +7310,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 128,
-   "pwr_creation": 680,
+   "pwr_creation": 782,
    "engineering": 1,
    "price": 8000000,
    "expandable": false,
@@ -7330,7 +7330,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 192,
-   "pwr_creation": 1040,
+   "pwr_creation": 1196,
    "engineering": -1,
    "price": 4000000,
    "expandable": false,
@@ -7350,7 +7350,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 224,
-   "pwr_creation": 1200,
+   "pwr_creation": 1380,
    "price": 8000000,
    "expandable": false,
    "availability": "LIMITED",
@@ -7369,7 +7369,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 256,
-   "pwr_creation": 1360,
+   "pwr_creation": 1564,
    "engineering": 1,
    "price": 16000000,
    "expandable": false,
@@ -7389,7 +7389,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 384,
-   "pwr_creation": 2080,
+   "pwr_creation": 2392,
    "engineering": -1,
    "price": 8000000,
    "expandable": false,
@@ -7409,7 +7409,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 448,
-   "pwr_creation": 2400,
+   "pwr_creation": 2760,
    "price": 16000000,
    "expandable": false,
    "availability": "LIMITED",
@@ -7428,7 +7428,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 512,
-   "pwr_creation": 2720,
+   "pwr_creation": 3128,
    "engineering": 1,
    "price": 32000000,
    "expandable": false,
@@ -7453,7 +7453,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 6,
-   "pwr_creation": 85,
+   "pwr_creation": 98,
    "fuel_cons": 1,
    "engineering": -1,
    "price": 50000,
@@ -7479,7 +7479,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 7,
-   "pwr_creation": 95,
+   "pwr_creation": 109,
    "fuel_cons": 2,
    "price": 100000,
    "expandable": false,
@@ -7504,7 +7504,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 8,
-   "pwr_creation": 105,
+   "pwr_creation": 121,
    "fuel_cons": 3,
    "engineering": 1,
    "price": 200000,
@@ -7525,7 +7525,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 12,
-   "pwr_creation": 170,
+   "pwr_creation": 195,
    "fuel_cons": 2,
    "engineering": -1,
    "price": 100000,
@@ -7546,7 +7546,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 14,
-   "pwr_creation": 190,
+   "pwr_creation": 218,
    "fuel_cons": 4,
    "price": 200000,
    "expandable": false,
@@ -7566,7 +7566,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 16,
-   "pwr_creation": 210,
+   "pwr_creation": 241,
    "fuel_cons": 6,
    "engineering": 1,
    "price": 400000,
@@ -7587,7 +7587,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 24,
-   "pwr_creation": 340,
+   "pwr_creation": 391,
    "fuel_cons": 4,
    "engineering": -1,
    "price": 200000,
@@ -7608,7 +7608,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 28,
-   "pwr_creation": 380,
+   "pwr_creation": 437,
    "fuel_cons": 8,
    "price": 400000,
    "expandable": false,
@@ -7628,7 +7628,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 32,
-   "pwr_creation": 420,
+   "pwr_creation": 483,
    "fuel_cons": 12,
    "engineering": 1,
    "price": 800000,
@@ -7649,7 +7649,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 48,
-   "pwr_creation": 680,
+   "pwr_creation": 782,
    "fuel_cons": 8,
    "engineering": -1,
    "price": 400000,
@@ -7670,7 +7670,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 56,
-   "pwr_creation": 760,
+   "pwr_creation": 874,
    "fuel_cons": 16,
    "price": 800000,
    "expandable": false,
@@ -7690,7 +7690,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 64,
-   "pwr_creation": 840,
+   "pwr_creation": 966,
    "fuel_cons": 24,
    "engineering": 1,
    "price": 1600000,
@@ -7711,7 +7711,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 96,
-   "pwr_creation": 1360,
+   "pwr_creation": 1564,
    "fuel_cons": 16,
    "engineering": -1,
    "price": 800000,
@@ -7732,7 +7732,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 112,
-   "pwr_creation": 1520,
+   "pwr_creation": 1748,
    "fuel_cons": 32,
    "price": 1600000,
    "expandable": false,
@@ -7752,7 +7752,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 128,
-   "pwr_creation": 1680,
+   "pwr_creation": 1932,
    "fuel_cons": 48,
    "engineering": 1,
    "price": 3200000,
@@ -7773,7 +7773,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 192,
-   "pwr_creation": 2720,
+   "pwr_creation": 3128,
    "fuel_cons": 32,
    "engineering": -1,
    "price": 1600000,
@@ -7794,7 +7794,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 224,
-   "pwr_creation": 3040,
+   "pwr_creation": 3496,
    "fuel_cons": 64,
    "price": 3200000,
    "expandable": false,
@@ -7814,7 +7814,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 256,
-   "pwr_creation": 3360,
+   "pwr_creation": 3864,
    "fuel_cons": 96,
    "engineering": 1,
    "price": 6400000,
@@ -7849,7 +7849,7 @@
    "name": "Radar Array",
    "ship_class": "DRONE",
    "quality": "AVERAGE",
-   "desc": "standard drone radar array (no rating change)",
+   "desc": "No rating change; 200 combat range. A dependable array that holds a firing solution and spots the storm before it becomes a problem.",
    "placement": "IE",
    "classes": [
     "DRONE"
@@ -7912,7 +7912,7 @@
    "name": "Radar Array",
    "ship_class": "FIGHTER",
    "quality": "AVERAGE",
-   "desc": "standard fighter radar array (no rating change)",
+   "desc": "No rating change; 200 combat range. A dependable array that holds a firing solution and spots the storm before it becomes a problem.",
    "placement": "IE",
    "classes": [
     "FIGHTER"
@@ -7978,7 +7978,7 @@
    "name": "Radar Array",
    "ship_class": "CORVETTE",
    "quality": "AVERAGE",
-   "desc": "standard corvette radar array (no rating change)",
+   "desc": "No rating change; 100 combat range. A dependable array that holds a firing solution and spots the storm before it becomes a problem.",
    "placement": "IE",
    "classes": [
     "CORVETTE"
@@ -8046,7 +8046,7 @@
    "name": "Radar Array",
    "ship_class": "FRIGATE",
    "quality": "AVERAGE",
-   "desc": "standard frigate radar array (no rating change)",
+   "desc": "No rating change; 200 combat range. A dependable array that holds a firing solution and spots the storm before it becomes a problem.",
    "placement": "IE",
    "classes": [
     "FRIGATE"
@@ -8114,7 +8114,7 @@
    "name": "Radar Array",
    "ship_class": "CRUISER",
    "quality": "AVERAGE",
-   "desc": "standard cruiser radar array (no rating change)",
+   "desc": "No rating change; 400 combat range. A dependable array that holds a firing solution and spots the storm before it becomes a problem.",
    "placement": "IE",
    "classes": [
     "CRUISER"
@@ -8182,7 +8182,7 @@
    "name": "Radar Array",
    "ship_class": "BATTLECRUISER",
    "quality": "AVERAGE",
-   "desc": "standard battlecruiser radar array (no rating change)",
+   "desc": "No rating change; 800 combat range. A dependable array that holds a firing solution and spots the storm before it becomes a problem.",
    "placement": "IE",
    "classes": [
     "BATTLECRUISER"
@@ -8250,7 +8250,7 @@
    "name": "Radar Array",
    "ship_class": "CARRIER",
    "quality": "AVERAGE",
-   "desc": "standard carrier radar array (no rating change)",
+   "desc": "No rating change; 1600 combat range. A dependable array that holds a firing solution and spots the storm before it becomes a problem.",
    "placement": "IE",
    "classes": [
     "CARRIER"
@@ -8318,7 +8318,7 @@
    "name": "Radar Array",
    "ship_class": "NOVA",
    "quality": "AVERAGE",
-   "desc": "standard nova radar array (no rating change)",
+   "desc": "No rating change; 3200 combat range. A dependable array that holds a firing solution and spots the storm before it becomes a problem.",
    "placement": "IE",
    "classes": [
     "NOVA"
@@ -8885,7 +8885,7 @@
    "name": "Structure Reinforcement",
    "ship_class": "DRONE",
    "quality": "AVERAGE",
-   "desc": "standard drone structure reinforcement (+2 STRUCTURE)",
+   "desc": "+2 STRUCTURE. Extra bracing along the spine, raising the threshold before a hit starts breaking things.",
    "placement": "CIE",
    "classes": [
     "DRONE"
@@ -9263,7 +9263,7 @@
    "name": "Structure Reinforcement",
    "ship_class": "NOVA",
    "quality": "AVERAGE",
-   "desc": "standard nova structure reinforcement (+2 STRUCTURE)",
+   "desc": "+2 STRUCTURE. Extra bracing along the spine, raising the threshold before a hit starts breaking things.",
    "placement": "CIE",
    "classes": [
     "NOVA"
@@ -9299,7 +9299,7 @@
    "name": "Swimming Pool",
    "ship_class": "ALL",
    "quality": "UNIVERSAL",
-   "desc": "a ship swimming pool (serves 1+)",
+   "desc": "A real ship's pool, water and all, for crews with the room to spare. Serves 1+.",
    "placement": "CI",
    "classes": [
     "CORVETTE",
@@ -9344,7 +9344,7 @@
    "name": "System Core",
    "ship_class": "DRONE",
    "quality": "AVERAGE",
-   "desc": "standard drone system core (+10 SYSTEM)",
+   "desc": "+10 SYSTEM. A standard core: enough electronic buffer to soak the hits meant for your systems instead of your hull.",
    "placement": "CIE",
    "classes": [
     "DRONE"
@@ -9401,7 +9401,7 @@
    "name": "System Core",
    "ship_class": "FIGHTER",
    "quality": "AVERAGE",
-   "desc": "standard fighter system core (+10 SYSTEM)",
+   "desc": "+10 SYSTEM. A standard core: enough electronic buffer to soak the hits meant for your systems instead of your hull.",
    "placement": "CIE",
    "classes": [
     "FIGHTER"
@@ -9458,7 +9458,7 @@
    "name": "System Core",
    "ship_class": "CORVETTE",
    "quality": "AVERAGE",
-   "desc": "standard corvette system core (+10 SYSTEM)",
+   "desc": "+10 SYSTEM. A standard core: enough electronic buffer to soak the hits meant for your systems instead of your hull.",
    "placement": "CIE",
    "classes": [
     "CORVETTE"
@@ -9515,7 +9515,7 @@
    "name": "System Core",
    "ship_class": "FRIGATE",
    "quality": "AVERAGE",
-   "desc": "standard frigate system core (+10 SYSTEM)",
+   "desc": "+10 SYSTEM. A standard core: enough electronic buffer to soak the hits meant for your systems instead of your hull.",
    "placement": "CIE",
    "classes": [
     "FRIGATE"
@@ -9572,7 +9572,7 @@
    "name": "System Core",
    "ship_class": "CRUISER",
    "quality": "AVERAGE",
-   "desc": "standard cruiser system core (+10 SYSTEM)",
+   "desc": "+10 SYSTEM. A standard core: enough electronic buffer to soak the hits meant for your systems instead of your hull.",
    "placement": "CIE",
    "classes": [
     "CRUISER"
@@ -9629,7 +9629,7 @@
    "name": "System Core",
    "ship_class": "BATTLECRUISER",
    "quality": "AVERAGE",
-   "desc": "standard battlecruiser system core (+10 SYSTEM)",
+   "desc": "+10 SYSTEM. A standard core: enough electronic buffer to soak the hits meant for your systems instead of your hull.",
    "placement": "CIE",
    "classes": [
     "BATTLECRUISER"
@@ -9686,7 +9686,7 @@
    "name": "System Core",
    "ship_class": "CARRIER",
    "quality": "AVERAGE",
-   "desc": "standard carrier system core (+10 SYSTEM)",
+   "desc": "+10 SYSTEM. A standard core: enough electronic buffer to soak the hits meant for your systems instead of your hull.",
    "placement": "CIE",
    "classes": [
     "CARRIER"
@@ -9743,7 +9743,7 @@
    "name": "System Core",
    "ship_class": "NOVA",
    "quality": "AVERAGE",
-   "desc": "standard nova system core (+10 SYSTEM)",
+   "desc": "+10 SYSTEM. A standard core: enough electronic buffer to soak the hits meant for your systems instead of your hull.",
    "placement": "CIE",
    "classes": [
     "NOVA"
@@ -9801,7 +9801,7 @@
    "name": "Warfare Suite",
    "ship_class": "DRONE",
    "quality": "AVERAGE",
-   "desc": "standard drone warfare assist suite (no rating change)",
+   "desc": "No rating change. Keeps the guns talking and the firing solution honest, the baseline every warship carries.",
    "placement": "CIE",
    "classes": [
     "DRONE"
@@ -10214,7 +10214,7 @@
    "name": "Warfare Suite",
    "ship_class": "NOVA",
    "quality": "AVERAGE",
-   "desc": "standard nova warfare assist suite (no rating change)",
+   "desc": "No rating change. Keeps the guns talking and the firing solution honest, the baseline every warship carries.",
    "placement": "CIE",
    "classes": [
     "NOVA"
@@ -11035,7 +11035,7 @@
    "name": "Holding Cell",
    "ship_class": "ALL",
    "quality": "BASIC",
-   "desc": "holding cell: a lockable door and a cot",
+   "desc": "A holding cell: a lockable door and a cot, enough for a guest not trying hard to leave. +1 cell per expansion.",
    "placement": "CI",
    "classes": [
     "CORVETTE",
@@ -11061,7 +11061,7 @@
    "name": "Brig",
    "ship_class": "ALL",
    "quality": "AVERAGE",
-   "desc": "brig: purpose-built cells with monitoring",
+   "desc": "A proper brig: purpose-built cells with monitoring, for the guest who is trying hard to leave. +1 cell per expansion.",
    "placement": "CI",
    "classes": [
     "CORVETTE",
@@ -11113,7 +11113,7 @@
    "name": "Field Lab",
    "ship_class": "ALL",
    "quality": "BASIC",
-   "desc": "field lab: sample cases and a bench",
+   "desc": "A field lab: sample cases and a bench, enough to answer the easy questions. +1 station per expansion.",
    "placement": "CI",
    "classes": [
     "CORVETTE",
@@ -11139,7 +11139,7 @@
    "name": "Science Lab",
    "ship_class": "ALL",
    "quality": "AVERAGE",
-   "desc": "science lab: proper instruments and clean benches",
+   "desc": "A science lab with proper instruments and clean benches for real analysis. +1 station per expansion.",
    "placement": "CI",
    "classes": [
     "CORVETTE",
@@ -11165,7 +11165,7 @@
    "name": "Research Complex",
    "ship_class": "ALL",
    "quality": "GOOD",
-   "desc": "research complex: publication-grade facilities",
+   "desc": "A research complex with publication-grade facilities, the heart of a survey or explorer ship. +1 station per expansion.",
    "placement": "CI",
    "classes": [
     "CORVETTE",
@@ -11269,7 +11269,7 @@
    "name": "Light Mining Rig",
    "ship_class": "ALL",
    "quality": "BASIC",
-   "desc": "light mining rig: strips small rocks slowly",
+   "desc": "A light mining rig that strips small rocks slowly, for the occasional prospector.",
    "placement": "E",
    "classes": [
     "FRIGATE",
@@ -11294,7 +11294,7 @@
    "name": "Mining Rig",
    "ship_class": "ALL",
    "quality": "AVERAGE",
-   "desc": "mining rig: industrial extraction heads",
+   "desc": "A mining rig with industrial extraction heads, steady tonnage from a decent seam.",
    "placement": "E",
    "classes": [
     "FRIGATE",
@@ -11319,7 +11319,7 @@
    "name": "Industrial Mining Rig",
    "ship_class": "ALL",
    "quality": "GOOD",
-   "desc": "industrial mining rig: eats asteroids for breakfast",
+   "desc": "An industrial mining rig that eats asteroids for breakfast, for a ship that mines for a living.",
    "placement": "E",
    "classes": [
     "FRIGATE",
@@ -11829,9 +11829,10 @@
     "NOVA"
    ],
    "unit_size": 1,
-   "pwr_consumption": 2,
+   "pwr_consumption": 1,
    "exp_size": 1,
    "exp_cost": 5000,
+   "exp_power": 0.15,
    "passengers": 2,
    "price": 90000,
    "expandable": true,
@@ -13018,9 +13019,10 @@
     "NOVA"
    ],
    "unit_size": 4,
-   "pwr_consumption": 2,
+   "pwr_consumption": 1,
    "exp_size": 1,
    "exp_cost": 6000,
+   "exp_power": 0.15,
    "passengers": 2,
    "price": 180000,
    "expandable": true,
@@ -13077,6 +13079,8 @@
    "pwr_consumption": 1,
    "exp_size": 1,
    "exp_cost": 12000,
+   "exp_power": 0.1,
+   "life_ppl": 1,
    "life_hrs": 300,
    "price": 22000,
    "expandable": true,
@@ -13125,7 +13129,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 6,
-   "pwr_creation": 20,
+   "pwr_creation": 23,
    "engineering": -1,
    "price": 100000,
    "expandable": false,
@@ -13147,7 +13151,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 6,
-   "pwr_creation": 20,
+   "pwr_creation": 23,
    "engineering": -2,
    "price": 75000,
    "expandable": false,
@@ -13169,7 +13173,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 6,
-   "pwr_creation": 95,
+   "pwr_creation": 109,
    "fuel_cons": 2,
    "engineering": -2,
    "price": 65000,
@@ -13192,7 +13196,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 6,
-   "pwr_creation": 75,
+   "pwr_creation": 86,
    "fuel_cons": 2,
    "engineering": -2,
    "price": 35000,
@@ -13600,7 +13604,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 3,
-   "pwr_creation": 200,
+   "pwr_creation": 230,
    "price": 2500000,
    "expandable": false,
    "availability": "UNIQUE",
@@ -13724,7 +13728,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 6,
-   "pwr_creation": 20,
+   "pwr_creation": 23,
    "price": 180000,
    "expandable": false,
    "availability": "UNCOMMON",
@@ -13743,7 +13747,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 12,
-   "pwr_creation": 40,
+   "pwr_creation": 46,
    "price": 360000,
    "expandable": false,
    "availability": "UNCOMMON",
@@ -13762,7 +13766,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 24,
-   "pwr_creation": 80,
+   "pwr_creation": 92,
    "price": 720000,
    "expandable": false,
    "availability": "UNCOMMON",
@@ -13781,7 +13785,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 48,
-   "pwr_creation": 160,
+   "pwr_creation": 184,
    "price": 1440000,
    "expandable": false,
    "availability": "UNCOMMON",
@@ -13800,7 +13804,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 96,
-   "pwr_creation": 320,
+   "pwr_creation": 368,
    "price": 2880000,
    "expandable": false,
    "availability": "UNCOMMON",
@@ -13819,7 +13823,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 192,
-   "pwr_creation": 640,
+   "pwr_creation": 736,
    "price": 5760000,
    "expandable": false,
    "availability": "UNCOMMON",
@@ -13838,7 +13842,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 384,
-   "pwr_creation": 1280,
+   "pwr_creation": 1472,
    "price": 11520000,
    "expandable": false,
    "availability": "UNCOMMON",
@@ -13857,7 +13861,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 6,
-   "pwr_creation": 80,
+   "pwr_creation": 92,
    "fuel_cons": 1,
    "price": 140000,
    "expandable": false,
@@ -13877,7 +13881,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 12,
-   "pwr_creation": 160,
+   "pwr_creation": 184,
    "fuel_cons": 1,
    "price": 280000,
    "expandable": false,
@@ -13897,7 +13901,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 24,
-   "pwr_creation": 320,
+   "pwr_creation": 368,
    "fuel_cons": 1,
    "price": 560000,
    "expandable": false,
@@ -13917,7 +13921,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 48,
-   "pwr_creation": 640,
+   "pwr_creation": 736,
    "fuel_cons": 1,
    "price": 1120000,
    "expandable": false,
@@ -13937,7 +13941,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 96,
-   "pwr_creation": 1280,
+   "pwr_creation": 1472,
    "fuel_cons": 1,
    "price": 2240000,
    "expandable": false,
@@ -13957,7 +13961,7 @@
    ],
    "mandatory_group": "POWER",
    "unit_size": 192,
-   "pwr_creation": 2560,
+   "pwr_creation": 2944,
    "fuel_cons": 1,
    "price": 4480000,
    "expandable": false,
@@ -15050,13 +15054,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 3,
-   "total_space": 25,
-   "core_space": 10,
-   "internal_space": 10,
-   "external_space": 5,
+   "total_space": 30,
+   "core_space": 12,
+   "internal_space": 12,
+   "external_space": 6,
    "crew_min": 0,
    "crew_max": 0,
-   "price": 552500,
+   "price": 663000,
    "availability": "COMMON",
    "legality": "No Permit"
   },
@@ -15075,13 +15079,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 3,
-   "total_space": 25,
-   "core_space": 10,
-   "internal_space": 15,
+   "total_space": 30,
+   "core_space": 12,
+   "internal_space": 18,
    "external_space": 0,
    "crew_min": 0,
    "crew_max": 0,
-   "price": 575000,
+   "price": 690000,
    "availability": "COMMON",
    "legality": "No Permit"
   },
@@ -15100,13 +15104,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 3,
-   "total_space": 25,
-   "core_space": 10,
-   "internal_space": 5,
-   "external_space": 10,
+   "total_space": 30,
+   "core_space": 12,
+   "internal_space": 6,
+   "external_space": 12,
    "crew_min": 0,
    "crew_max": 0,
-   "price": 530000,
+   "price": 636000,
    "availability": "COMMON",
    "legality": "No Permit"
   },
@@ -15125,13 +15129,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 3,
-   "total_space": 25,
-   "core_space": 5,
+   "total_space": 30,
+   "core_space": 6,
    "internal_space": 0,
-   "external_space": 20,
+   "external_space": 24,
    "crew_min": 0,
    "crew_max": 0,
-   "price": 260000,
+   "price": 312000,
    "availability": "COMMON",
    "legality": "No Permit"
   },
@@ -15150,13 +15154,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 3,
-   "total_space": 25,
-   "core_space": 10,
+   "total_space": 30,
+   "core_space": 12,
    "internal_space": 0,
-   "external_space": 15,
+   "external_space": 18,
    "crew_min": 0,
    "crew_max": 0,
-   "price": 507500,
+   "price": 609000,
    "availability": "COMMON",
    "legality": "No Permit"
   },
@@ -15175,13 +15179,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 3,
-   "total_space": 50,
-   "core_space": 15,
-   "internal_space": 15,
-   "external_space": 20,
+   "total_space": 60,
+   "core_space": 18,
+   "internal_space": 18,
+   "external_space": 24,
    "crew_min": 0,
    "crew_max": 0,
-   "price": 835000,
+   "price": 1002000,
    "availability": "UNCOMMON",
    "legality": "No Permit"
   },
@@ -15200,13 +15204,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 3,
-   "total_space": 50,
-   "core_space": 15,
-   "internal_space": 15,
-   "external_space": 20,
+   "total_space": 60,
+   "core_space": 18,
+   "internal_space": 18,
+   "external_space": 24,
    "crew_min": 0,
    "crew_max": 0,
-   "price": 835000,
+   "price": 1002000,
    "availability": "UNCOMMON",
    "legality": "No Permit"
   },
@@ -15225,13 +15229,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 3,
-   "total_space": 50,
-   "core_space": 20,
-   "internal_space": 20,
-   "external_space": 10,
+   "total_space": 60,
+   "core_space": 24,
+   "internal_space": 24,
+   "external_space": 12,
    "crew_min": 0,
    "crew_max": 0,
-   "price": 1105000,
+   "price": 1326000,
    "availability": "UNCOMMON",
    "legality": "No Permit"
   },
@@ -15250,13 +15254,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 3,
-   "total_space": 50,
-   "core_space": 10,
-   "internal_space": 20,
-   "external_space": 20,
+   "total_space": 60,
+   "core_space": 12,
+   "internal_space": 24,
+   "external_space": 24,
    "crew_min": 0,
    "crew_max": 0,
-   "price": 610000,
+   "price": 732000,
    "availability": "UNCOMMON",
    "legality": "No Permit"
   },
@@ -15275,13 +15279,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 3,
-   "total_space": 50,
-   "core_space": 10,
-   "internal_space": 30,
-   "external_space": 10,
+   "total_space": 60,
+   "core_space": 12,
+   "internal_space": 36,
+   "external_space": 12,
    "crew_min": 0,
    "crew_max": 0,
-   "price": 655000,
+   "price": 786000,
    "availability": "UNCOMMON",
    "legality": "No Permit"
   },
@@ -15300,13 +15304,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 125,
-   "core_space": 30,
-   "internal_space": 40,
-   "external_space": 55,
+   "total_space": 150,
+   "core_space": 36,
+   "internal_space": 48,
+   "external_space": 66,
    "crew_min": 4,
    "crew_max": 8,
-   "price": 1727500,
+   "price": 2073000,
    "availability": "UNCOMMON",
    "legality": "No Permit"
   },
@@ -15325,13 +15329,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 125,
-   "core_space": 50,
-   "internal_space": 50,
-   "external_space": 25,
+   "total_space": 150,
+   "core_space": 60,
+   "internal_space": 60,
+   "external_space": 30,
    "crew_min": 4,
    "crew_max": 8,
-   "price": 2762500,
+   "price": 3315000,
    "availability": "UNCOMMON",
    "legality": "No Permit"
   },
@@ -15350,13 +15354,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 125,
-   "core_space": 20,
-   "internal_space": 85,
-   "external_space": 20,
+   "total_space": 150,
+   "core_space": 24,
+   "internal_space": 102,
+   "external_space": 24,
    "crew_min": 4,
    "crew_max": 8,
-   "price": 1435000,
+   "price": 1722000,
    "availability": "UNCOMMON",
    "legality": "No Permit"
   },
@@ -15375,13 +15379,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 125,
-   "core_space": 30,
-   "internal_space": 70,
-   "external_space": 25,
+   "total_space": 150,
+   "core_space": 36,
+   "internal_space": 84,
+   "external_space": 30,
    "crew_min": 4,
    "crew_max": 8,
-   "price": 1862500,
+   "price": 2235000,
    "availability": "UNCOMMON",
    "legality": "No Permit"
   },
@@ -15400,13 +15404,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 125,
-   "core_space": 30,
-   "internal_space": 60,
-   "external_space": 35,
+   "total_space": 150,
+   "core_space": 36,
+   "internal_space": 72,
+   "external_space": 42,
    "crew_min": 4,
    "crew_max": 8,
-   "price": 1817500,
+   "price": 2181000,
    "availability": "UNCOMMON",
    "legality": "No Permit"
   },
@@ -15425,13 +15429,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 125,
-   "core_space": 20,
-   "internal_space": 45,
-   "external_space": 60,
+   "total_space": 150,
+   "core_space": 24,
+   "internal_space": 54,
+   "external_space": 72,
    "crew_min": 4,
    "crew_max": 8,
-   "price": 1255000,
+   "price": 1506000,
    "availability": "UNCOMMON",
    "legality": "No Permit"
   },
@@ -15450,13 +15454,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 125,
-   "core_space": 70,
-   "internal_space": 35,
-   "external_space": 20,
+   "total_space": 150,
+   "core_space": 84,
+   "internal_space": 42,
+   "external_space": 24,
    "crew_min": 4,
    "crew_max": 8,
-   "price": 3685000,
+   "price": 4422000,
    "availability": "UNCOMMON",
    "legality": "No Permit"
   },
@@ -15475,13 +15479,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 125,
-   "core_space": 60,
-   "internal_space": 40,
-   "external_space": 25,
+   "total_space": 150,
+   "core_space": 72,
+   "internal_space": 48,
+   "external_space": 30,
    "crew_min": 4,
    "crew_max": 8,
-   "price": 3212500,
+   "price": 3855000,
    "availability": "UNCOMMON",
    "legality": "No Permit"
   },
@@ -15500,13 +15504,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 250,
-   "core_space": 50,
-   "internal_space": 100,
-   "external_space": 100,
+   "total_space": 300,
+   "core_space": 60,
+   "internal_space": 120,
+   "external_space": 120,
    "crew_min": 8,
    "crew_max": 16,
-   "price": 3050000,
+   "price": 3660000,
    "availability": "RARE",
    "legality": "No Permit"
   },
@@ -15525,13 +15529,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 250,
-   "core_space": 90,
-   "internal_space": 90,
-   "external_space": 70,
+   "total_space": 300,
+   "core_space": 108,
+   "internal_space": 108,
+   "external_space": 84,
    "crew_min": 8,
    "crew_max": 16,
-   "price": 4985000,
+   "price": 5982000,
    "availability": "RARE",
    "legality": "No Permit"
   },
@@ -15550,13 +15554,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 250,
-   "core_space": 50,
-   "internal_space": 160,
-   "external_space": 40,
+   "total_space": 300,
+   "core_space": 60,
+   "internal_space": 192,
+   "external_space": 48,
    "crew_min": 8,
    "crew_max": 16,
-   "price": 3320000,
+   "price": 3984000,
    "availability": "RARE",
    "legality": "No Permit"
   },
@@ -15575,13 +15579,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 250,
-   "core_space": 60,
-   "internal_space": 80,
-   "external_space": 110,
+   "total_space": 300,
+   "core_space": 72,
+   "internal_space": 96,
+   "external_space": 132,
    "crew_min": 8,
    "crew_max": 16,
-   "price": 3455000,
+   "price": 4146000,
    "availability": "RARE",
    "legality": "No Permit"
   },
@@ -15600,13 +15604,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 250,
-   "core_space": 40,
-   "internal_space": 30,
-   "external_space": 180,
+   "total_space": 300,
+   "core_space": 48,
+   "internal_space": 36,
+   "external_space": 216,
    "crew_min": 8,
    "crew_max": 16,
-   "price": 2240000,
+   "price": 2688000,
    "availability": "RARE",
    "legality": "No Permit"
   },
@@ -15625,13 +15629,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 250,
-   "core_space": 60,
-   "internal_space": 40,
-   "external_space": 150,
+   "total_space": 300,
+   "core_space": 72,
+   "internal_space": 48,
+   "external_space": 180,
    "crew_min": 8,
    "crew_max": 16,
-   "price": 3275000,
+   "price": 3930000,
    "availability": "RARE",
    "legality": "No Permit"
   },
@@ -15650,13 +15654,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 250,
-   "core_space": 35,
-   "internal_space": 200,
-   "external_space": 15,
+   "total_space": 300,
+   "core_space": 42,
+   "internal_space": 240,
+   "external_space": 18,
    "crew_min": 8,
    "crew_max": 16,
-   "price": 2757500,
+   "price": 3309000,
    "availability": "RARE",
    "legality": "No Permit"
   },
@@ -15675,13 +15679,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 250,
-   "core_space": 50,
-   "internal_space": 50,
-   "external_space": 150,
+   "total_space": 300,
+   "core_space": 60,
+   "internal_space": 60,
+   "external_space": 180,
    "crew_min": 8,
    "crew_max": 16,
-   "price": 2825000,
+   "price": 3390000,
    "availability": "RARE",
    "legality": "No Permit"
   },
@@ -15700,13 +15704,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 250,
-   "core_space": 50,
+   "total_space": 300,
+   "core_space": 60,
    "internal_space": 0,
-   "external_space": 200,
+   "external_space": 240,
    "crew_min": 8,
    "crew_max": 16,
-   "price": 2600000,
+   "price": 3120000,
    "availability": "RARE",
    "legality": "No Permit"
   },
@@ -15725,13 +15729,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 500,
-   "core_space": 100,
-   "internal_space": 200,
-   "external_space": 200,
+   "total_space": 600,
+   "core_space": 120,
+   "internal_space": 240,
+   "external_space": 240,
    "crew_min": 20,
    "crew_max": 40,
-   "price": 6100000,
+   "price": 7320000,
    "availability": "RARE",
    "legality": "No Permit"
   },
@@ -15750,13 +15754,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 500,
-   "core_space": 80,
-   "internal_space": 80,
-   "external_space": 340,
+   "total_space": 600,
+   "core_space": 96,
+   "internal_space": 96,
+   "external_space": 408,
    "crew_min": 20,
    "crew_max": 40,
-   "price": 4570000,
+   "price": 5484000,
    "availability": "RARE",
    "legality": "No Permit"
   },
@@ -15775,13 +15779,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 500,
-   "core_space": 60,
-   "internal_space": 300,
-   "external_space": 140,
+   "total_space": 600,
+   "core_space": 72,
+   "internal_space": 360,
+   "external_space": 168,
    "crew_min": 20,
    "crew_max": 40,
-   "price": 4570000,
+   "price": 5484000,
    "availability": "RARE",
    "legality": "No Permit"
   },
@@ -15800,13 +15804,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 500,
-   "core_space": 60,
-   "internal_space": 390,
-   "external_space": 50,
+   "total_space": 600,
+   "core_space": 72,
+   "internal_space": 468,
+   "external_space": 60,
    "crew_min": 20,
    "crew_max": 40,
-   "price": 4975000,
+   "price": 5970000,
    "availability": "RARE",
    "legality": "No Permit"
   },
@@ -15825,13 +15829,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 500,
-   "core_space": 100,
-   "internal_space": 150,
-   "external_space": 250,
+   "total_space": 600,
+   "core_space": 120,
+   "internal_space": 180,
+   "external_space": 300,
    "crew_min": 20,
    "crew_max": 40,
-   "price": 5875000,
+   "price": 7050000,
    "availability": "RARE",
    "legality": "No Permit"
   },
@@ -15850,13 +15854,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 500,
-   "core_space": 100,
-   "internal_space": 50,
-   "external_space": 350,
+   "total_space": 600,
+   "core_space": 120,
+   "internal_space": 60,
+   "external_space": 420,
    "crew_min": 20,
    "crew_max": 40,
-   "price": 5425000,
+   "price": 6510000,
    "availability": "RARE",
    "legality": "No Permit"
   },
@@ -15875,13 +15879,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 500,
-   "core_space": 150,
-   "internal_space": 230,
-   "external_space": 120,
+   "total_space": 600,
+   "core_space": 180,
+   "internal_space": 276,
+   "external_space": 144,
    "crew_min": 20,
    "crew_max": 40,
-   "price": 8710000,
+   "price": 10452000,
    "availability": "RARE",
    "legality": "No Permit"
   },
@@ -15900,13 +15904,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 500,
-   "core_space": 80,
-   "internal_space": 300,
-   "external_space": 120,
+   "total_space": 600,
+   "core_space": 96,
+   "internal_space": 360,
+   "external_space": 144,
    "crew_min": 20,
    "crew_max": 40,
-   "price": 5560000,
+   "price": 6672000,
    "availability": "RARE",
    "legality": "No Permit"
   },
@@ -15925,13 +15929,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 1000,
-   "core_space": 300,
-   "internal_space": 300,
-   "external_space": 400,
+   "total_space": 1200,
+   "core_space": 360,
+   "internal_space": 360,
+   "external_space": 480,
    "crew_min": 50,
    "crew_max": 100,
-   "price": 16700000,
+   "price": 20040000,
    "availability": "LIMITED",
    "legality": "Restricted"
   },
@@ -15950,13 +15954,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 1000,
-   "core_space": 200,
-   "internal_space": 100,
-   "external_space": 700,
+   "total_space": 1200,
+   "core_space": 240,
+   "internal_space": 120,
+   "external_space": 840,
    "crew_min": 50,
    "crew_max": 100,
-   "price": 10850000,
+   "price": 13020000,
    "availability": "LIMITED",
    "legality": "Restricted"
   },
@@ -15975,13 +15979,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 1000,
-   "core_space": 150,
-   "internal_space": 150,
-   "external_space": 700,
+   "total_space": 1200,
+   "core_space": 180,
+   "internal_space": 180,
+   "external_space": 840,
    "crew_min": 50,
    "crew_max": 100,
-   "price": 8600000,
+   "price": 10320000,
    "availability": "LIMITED",
    "legality": "Restricted"
   },
@@ -16000,13 +16004,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 1000,
-   "core_space": 400,
-   "internal_space": 200,
-   "external_space": 400,
+   "total_space": 1200,
+   "core_space": 480,
+   "internal_space": 240,
+   "external_space": 480,
    "crew_min": 50,
    "crew_max": 100,
-   "price": 21200000,
+   "price": 25440000,
    "availability": "LIMITED",
    "legality": "Restricted"
   },
@@ -16025,13 +16029,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 1000,
-   "core_space": 300,
-   "internal_space": 600,
-   "external_space": 100,
+   "total_space": 1200,
+   "core_space": 360,
+   "internal_space": 720,
+   "external_space": 120,
    "crew_min": 50,
    "crew_max": 100,
-   "price": 18050000,
+   "price": 21660000,
    "availability": "LIMITED",
    "legality": "Restricted"
   },
@@ -16050,13 +16054,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 5000,
-   "core_space": 1000,
-   "internal_space": 3000,
-   "external_space": 1000,
+   "total_space": 6000,
+   "core_space": 1200,
+   "internal_space": 3600,
+   "external_space": 1200,
    "crew_min": 150,
    "crew_max": 300,
-   "price": 65500000,
+   "price": 78600000,
    "availability": "LIMITED",
    "legality": "Restricted"
   },
@@ -16075,13 +16079,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 5000,
-   "core_space": 1000,
-   "internal_space": 500,
-   "external_space": 3500,
+   "total_space": 6000,
+   "core_space": 1200,
+   "internal_space": 600,
+   "external_space": 4200,
    "crew_min": 150,
    "crew_max": 300,
-   "price": 54250000,
+   "price": 65100000,
    "availability": "LIMITED",
    "legality": "Restricted"
   },
@@ -16100,13 +16104,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 5000,
-   "core_space": 1000,
-   "internal_space": 3000,
-   "external_space": 1000,
+   "total_space": 6000,
+   "core_space": 1200,
+   "internal_space": 3600,
+   "external_space": 1200,
    "crew_min": 150,
    "crew_max": 300,
-   "price": 65500000,
+   "price": 78600000,
    "availability": "LIMITED",
    "legality": "Restricted"
   },
@@ -16125,13 +16129,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 5000,
-   "core_space": 1000,
-   "internal_space": 3500,
-   "external_space": 500,
+   "total_space": 6000,
+   "core_space": 1200,
+   "internal_space": 4200,
+   "external_space": 600,
    "crew_min": 150,
    "crew_max": 300,
-   "price": 67750000,
+   "price": 81300000,
    "availability": "LIMITED",
    "legality": "Restricted"
   },
@@ -16150,13 +16154,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 5000,
-   "core_space": 2000,
-   "internal_space": 500,
-   "external_space": 2500,
+   "total_space": 6000,
+   "core_space": 2400,
+   "internal_space": 600,
+   "external_space": 3000,
    "crew_min": 150,
    "crew_max": 300,
-   "price": 103750000,
+   "price": 124500000,
    "availability": "LIMITED",
    "legality": "Restricted"
   },
@@ -16175,13 +16179,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 5000,
-   "core_space": 500,
-   "internal_space": 500,
-   "external_space": 4000,
+   "total_space": 6000,
+   "core_space": 600,
+   "internal_space": 600,
+   "external_space": 4800,
    "crew_min": 150,
    "crew_max": 300,
-   "price": 29500000,
+   "price": 35400000,
    "availability": "LIMITED",
    "legality": "Restricted"
   },
@@ -16200,13 +16204,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 25000,
-   "core_space": 10000,
-   "internal_space": 10000,
-   "external_space": 5000,
+   "total_space": 30000,
+   "core_space": 12000,
+   "internal_space": 12000,
+   "external_space": 6000,
    "crew_min": 500,
    "crew_max": 1000,
-   "price": 552500000,
+   "price": 663000000,
    "availability": "UNIQUE",
    "legality": "Restricted"
   },
@@ -16225,13 +16229,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 25000,
-   "core_space": 10000,
-   "internal_space": 14000,
-   "external_space": 1000,
+   "total_space": 30000,
+   "core_space": 12000,
+   "internal_space": 16800,
+   "external_space": 1200,
    "crew_min": 500,
    "crew_max": 1000,
-   "price": 570500000,
+   "price": 684600000,
    "availability": "UNIQUE",
    "legality": "Restricted"
   },
@@ -16250,13 +16254,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 25000,
-   "core_space": 1000,
-   "internal_space": 4000,
-   "external_space": 20000,
+   "total_space": 30000,
+   "core_space": 1200,
+   "internal_space": 4800,
+   "external_space": 24000,
    "crew_min": 500,
    "crew_max": 1000,
-   "price": 80000000,
+   "price": 96000000,
    "availability": "UNIQUE",
    "legality": "Restricted"
   },
@@ -16275,13 +16279,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 25000,
-   "core_space": 2500,
-   "internal_space": 17500,
-   "external_space": 5000,
+   "total_space": 30000,
+   "core_space": 3000,
+   "internal_space": 21000,
+   "external_space": 6000,
    "crew_min": 500,
    "crew_max": 1000,
-   "price": 215000000,
+   "price": 258000000,
    "availability": "UNIQUE",
    "legality": "Restricted"
   },
@@ -16300,13 +16304,13 @@
    "instruments": 2,
    "engineering": 2,
    "warfare": 2,
-   "total_space": 25000,
-   "core_space": 2000,
-   "internal_space": 3000,
-   "external_space": 20000,
+   "total_space": 30000,
+   "core_space": 2400,
+   "internal_space": 3600,
+   "external_space": 24000,
    "crew_min": 500,
    "crew_max": 1000,
-   "price": 125000000,
+   "price": 150000000,
    "availability": "UNIQUE",
    "legality": "Restricted"
   }
@@ -16320,20 +16324,20 @@
    "description": "An autonomous drone loaded with a massive warhead. It has one job.",
    "core": [
     "SHIELD_1-DRONE_2-AVERAGE",
-    "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "POWER_1-DRONE_1-BASIC"
    ],
    "internal": [
     "ENGINECOMBAT_1-DRONE_3-GOOD",
     "ORDONNANCE_FIXED_0-ALL_1-XLARGE",
     "AMMOBAY_0-ALL_1-XLARGE ×2",
-    "RADAR_1-DRONE_2-AVERAGE"
+    "RADAR_1-DRONE_2-AVERAGE",
+    "TRANSPONDER_0-ALL_0-UNIVERSAL"
    ],
    "external": [],
    "computed": {
     "pwr_consumption": 15,
     "pwr_activation": 0,
-    "pwr_creation": 15,
+    "pwr_creation": 17,
     "energy_storage": 0,
     "shield_max": 20,
     "shield_recharge": 4,
@@ -16362,11 +16366,11 @@
     "engineering": 1,
     "warfare": 5,
     "area_used": {
-     "core": 10,
-     "internal": 15,
+     "core": 9,
+     "internal": 16,
      "external": 0
     },
-    "total_cost": 2145000,
+    "total_cost": 2250000,
     "availability": "RARE",
     "legality": "Restricted",
     "valid": true
@@ -16381,21 +16385,21 @@
    "description": "A nimble combat drone designed for suppression and target elimination.",
    "core": [
     "SHIELD_1-DRONE_2-AVERAGE",
-    "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "POWER_1-DRONE_1-BASIC"
    ],
    "internal": [
-    "WEAPON_FIXED_0-ALL_1-XLARGE",
-    "RADAR_1-DRONE_2-AVERAGE"
+    "RADAR_1-DRONE_2-AVERAGE",
+    "TRANSPONDER_0-ALL_0-UNIVERSAL"
    ],
    "external": [
     "ENGINECOMBAT_1-DRONE_3-GOOD",
+    "WEAPON_FIXED_0-ALL_1-XLARGE",
     "WEAPON_FIXED_0-ALL_1-XLARGE"
    ],
    "computed": {
     "pwr_consumption": 14,
     "pwr_activation": 0,
-    "pwr_creation": 15,
+    "pwr_creation": 17,
     "energy_storage": 0,
     "shield_max": 20,
     "shield_recharge": 4,
@@ -16424,11 +16428,11 @@
     "engineering": 1,
     "warfare": 5,
     "area_used": {
-     "core": 10,
-     "internal": 5,
-     "external": 9
+     "core": 9,
+     "internal": 3,
+     "external": 12
     },
-    "total_cost": 1850000,
+    "total_cost": 1896000,
     "availability": "RARE",
     "legality": "Restricted",
     "valid": true
@@ -16442,6 +16446,7 @@
    "template": "TEMPLATE_1-DRONE_3-CARGO",
    "description": "A utilitarian drone built for hauling and loading operations in zero-g.",
    "core": [
+    "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "POWER_1-DRONE_1-BASIC"
    ],
    "internal": [],
@@ -16449,21 +16454,20 @@
     "ENGINEBALANCED_1-DRONE_1-BASIC",
     "RADAR_1-DRONE_1-BASIC",
     "SHIELD_1-DRONE_1-BASIC",
-    "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "CONSTRUCTION_1-DRONE_1-BASIC",
-    "CARGOSPACE_0-ALL_0-UNIVERSAL ×9"
+    "CARGOSPACE_0-ALL_0-UNIVERSAL ×14"
    ],
    "computed": {
     "pwr_consumption": 8,
     "pwr_activation": 0,
-    "pwr_creation": 15,
+    "pwr_creation": 17,
     "energy_storage": 0,
     "shield_max": 15,
     "shield_recharge": 2,
     "crew_min": 0,
     "crew_max": 0,
     "passengers": 0,
-    "cargo": 9,
+    "cargo": 14,
     "life_ppl": 0,
     "life_hrs": 0,
     "fuel_cons": 0,
@@ -16485,11 +16489,11 @@
     "engineering": 2,
     "warfare": 4,
     "area_used": {
-     "core": 5,
+     "core": 6,
      "internal": 0,
-     "external": 18
+     "external": 22
     },
-    "total_cost": 635000,
+    "total_cost": 714500,
     "availability": "COMMON",
     "legality": "No Permit",
     "valid": true
@@ -16516,7 +16520,7 @@
    "computed": {
     "pwr_consumption": 8,
     "pwr_activation": 0,
-    "pwr_creation": 15,
+    "pwr_creation": 17,
     "energy_storage": 0,
     "shield_max": 15,
     "shield_recharge": 2,
@@ -16549,7 +16553,7 @@
      "internal": 0,
      "external": 14
     },
-    "total_cost": 925000,
+    "total_cost": 1026500,
     "availability": "UNCOMMON",
     "legality": "No Permit",
     "valid": true
@@ -16563,24 +16567,24 @@
    "template": "TEMPLATE_2-FIGHTER_1-INTERCEPTOR",
    "description": "A razor-fast single-seat fighter optimized for pursuit and elimination.",
    "core": [
-    "SHIELD_2-FIGHTER_3-GOOD",
     "POWER_2-FIGHTER_2-AVERAGE"
    ],
    "internal": [
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "COCKPIT_2-FIGHTER_3-GOOD",
-    "LIFESUPPORT_0-ALL_2-AVERAGE ×3"
+    "LIFESUPPORT_0-ALL_3-GOOD ×3"
    ],
    "external": [
     "ENGINECOMBAT_2-FIGHTER_3-GOOD",
     "WEAPON_FIXED_0-ALL_1-XLARGE",
     "WEAPON_FIXED_0-ALL_1-XLARGE",
-    "RADAR_2-FIGHTER_3-GOOD"
+    "RADAR_2-FIGHTER_3-GOOD",
+    "SHIELD_2-FIGHTER_3-GOOD"
    ],
    "computed": {
-    "pwr_consumption": 25.2,
+    "pwr_consumption": 26.5,
     "pwr_activation": 0,
-    "pwr_creation": 30,
+    "pwr_creation": 34,
     "energy_storage": 0,
     "shield_max": 30,
     "shield_recharge": 7,
@@ -16589,7 +16593,7 @@
     "passengers": 0,
     "cargo": 0,
     "life_ppl": 4,
-    "life_hrs": 8760,
+    "life_hrs": 999999,
     "fuel_cons": 0,
     "fuel_units": 0,
     "combat_range": 2000,
@@ -16609,11 +16613,11 @@
     "engineering": 3,
     "warfare": 5,
     "area_used": {
-     "core": 15,
-     "internal": 12.5,
-     "external": 16
+     "core": 8,
+     "internal": 17.5,
+     "external": 23
     },
-    "total_cost": 3270000,
+    "total_cost": 3172000,
     "availability": "RARE",
     "legality": "Restricted",
     "valid": true
@@ -16644,7 +16648,7 @@
    "computed": {
     "pwr_consumption": 19.0,
     "pwr_activation": 0,
-    "pwr_creation": 20,
+    "pwr_creation": 23,
     "energy_storage": 0,
     "shield_max": 25,
     "shield_recharge": 5,
@@ -16677,7 +16681,7 @@
      "internal": 10.0,
      "external": 18
     },
-    "total_cost": 1945000,
+    "total_cost": 2112000,
     "availability": "UNCOMMON",
     "legality": "Restricted",
     "valid": true
@@ -16708,7 +16712,7 @@
    "computed": {
     "pwr_consumption": 20.0,
     "pwr_activation": 0,
-    "pwr_creation": 20,
+    "pwr_creation": 23,
     "energy_storage": 0,
     "shield_max": 25,
     "shield_recharge": 5,
@@ -16741,7 +16745,7 @@
      "internal": 14.0,
      "external": 15
     },
-    "total_cost": 1695000,
+    "total_cost": 1817000,
     "availability": "UNCOMMON",
     "legality": "Restricted",
     "valid": true
@@ -16755,11 +16759,11 @@
    "template": "TEMPLATE_2-FIGHTER_4-RAIDER",
    "description": "A versatile atmospheric fighter capable of both space and surface operations.",
    "core": [
-    "POWER_2-FIGHTER_2-AVERAGE"
+    "POWER_2-FIGHTER_1-BASIC",
+    "ENERGYTANK_2-FIGHTER_3-GOOD"
    ],
    "internal": [
     "WEAPON_FIXED_0-ALL_1-XLARGE",
-    "RADAR_2-FIGHTER_2-AVERAGE",
     "SHIELD_2-FIGHTER_2-AVERAGE",
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "COCKPIT_2-FIGHTER_2-AVERAGE",
@@ -16768,13 +16772,14 @@
    ],
    "external": [
     "ENGINEHANDLING_2-FIGHTER_3-GOOD",
-    "WEAPON_FIXED_0-ALL_1-XLARGE"
+    "WEAPON_FIXED_0-ALL_1-XLARGE",
+    "RADAR_2-FIGHTER_2-AVERAGE"
    ],
    "computed": {
     "pwr_consumption": 21.0,
     "pwr_activation": 6,
-    "pwr_creation": 30,
-    "energy_storage": 0,
+    "pwr_creation": 23,
+    "energy_storage": 7,
     "shield_max": 25,
     "shield_recharge": 5,
     "crew_min": 1,
@@ -16799,14 +16804,14 @@
     "command": 0,
     "handling": 5,
     "instruments": 3,
-    "engineering": 3,
+    "engineering": 2,
     "warfare": 3,
     "area_used": {
-     "core": 8,
-     "internal": 26.0,
-     "external": 10
+     "core": 12,
+     "internal": 24.0,
+     "external": 12
     },
-    "total_cost": 4515000,
+    "total_cost": 4641000,
     "availability": "LIMITED",
     "legality": "Illegal",
     "valid": true
@@ -16822,12 +16827,10 @@
    "core": [
     "JUMPDRIVE_3-CORVETTE_3-GOOD",
     "SHIELD_3-CORVETTE_1-BASIC",
-    "MEDBAY_0-ALL_1-BASIC",
     "POWER_3-CORVETTE_1-BASIC",
-    "ENERGYTANK_3-CORVETTE_1-BASIC"
+    "ENERGYTANK_3-CORVETTE_3-GOOD"
    ],
    "internal": [
-    "RADAR_3-CORVETTE_1-BASIC",
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "CREWAUTOMATION_0-ALL_3-GOOD ×2",
     "BRIDGE_3-CORVETTE_1-BASIC",
@@ -16836,18 +16839,20 @@
     "ENGINEERING_3-CORVETTE_1-BASIC",
     "CREWSPACE_0-ALL_1-BASIC ×2",
     "LIFESUPPORT_0-ALL_1-BASIC ×2",
-    "CARGOSPACE_0-ALL_0-UNIVERSAL ×8"
+    "CARGOSPACE_0-ALL_0-UNIVERSAL ×8",
+    "MEDBAY_0-ALL_1-BASIC"
    ],
    "external": [
     "ENGINEHANDLING_3-CORVETTE_3-GOOD",
     "FUELTANK_3-CORVETTE_1-BASIC",
+    "RADAR_3-CORVETTE_1-BASIC",
     "ESCAPEPOD_0-ALL_0-UNIVERSAL ×2"
    ],
    "computed": {
     "pwr_consumption": 58.2,
     "pwr_activation": 35,
-    "pwr_creation": 65,
-    "energy_storage": 10,
+    "pwr_creation": 75,
+    "energy_storage": 20,
     "shield_max": 35,
     "shield_recharge": 3,
     "crew_min": 1,
@@ -16875,11 +16880,11 @@
     "engineering": 2,
     "warfare": 1,
     "area_used": {
-     "core": 49,
-     "internal": 47,
-     "external": 25
+     "core": 48,
+     "internal": 48,
+     "external": 29
     },
-    "total_cost": 13555000,
+    "total_cost": 15702500,
     "availability": "UNIQUE",
     "legality": "No Permit",
     "valid": true
@@ -16893,7 +16898,8 @@
    "template": "TEMPLATE_3-CORVETTE_2-SHUTTLE",
    "description": "A workhorse transport corvette designed for moving people between stations.",
    "core": [
-    "POWER_3-CORVETTE_2-AVERAGE"
+    "MEDBAY_0-ALL_1-BASIC",
+    "POWER_3-CORVETTE_3-GOOD"
    ],
    "internal": [
     "SHIELD_3-CORVETTE_2-AVERAGE",
@@ -16904,8 +16910,8 @@
     "ENGINEERING_3-CORVETTE_2-AVERAGE",
     "CREWSPACE_0-ALL_2-AVERAGE ×4",
     "LIFESUPPORT_0-ALL_2-AVERAGE ×4",
-    "PASSENGERSSPACE_0-ALL_1-BASIC ×8",
-    "LIFESUPPORT_0-ALL_1-BASIC ×8"
+    "PASSENGERSSPACE_0-ALL_2-AVERAGE ×8",
+    "LIFESUPPORT_0-ALL_2-AVERAGE ×8"
    ],
    "external": [
     "ENGINEHANDLING_3-CORVETTE_2-AVERAGE",
@@ -16913,15 +16919,15 @@
     "ESCAPEPOD_0-ALL_0-UNIVERSAL ×4"
    ],
    "computed": {
-    "pwr_consumption": 73.3,
+    "pwr_consumption": 90.0,
     "pwr_activation": 0,
-    "pwr_creation": 75,
+    "pwr_creation": 98,
     "energy_storage": 0,
     "shield_max": 40,
     "shield_recharge": 5,
     "crew_min": 4,
     "crew_max": 8,
-    "passengers": 8,
+    "passengers": 9,
     "cargo": 0,
     "life_ppl": 14,
     "life_hrs": 8760,
@@ -16941,15 +16947,15 @@
     "command": 2,
     "handling": 4,
     "instruments": 4,
-    "engineering": 4,
+    "engineering": 5,
     "warfare": 2,
     "area_used": {
-     "core": 14,
-     "internal": 82.0,
+     "core": 21,
+     "internal": 98.0,
      "external": 20
     },
-    "total_cost": 6420000,
-    "availability": "UNCOMMON",
+    "total_cost": 8392000,
+    "availability": "RARE",
     "legality": "No Permit",
     "valid": true
    },
@@ -16963,7 +16969,7 @@
    "description": "An armored assault corvette built to breach and board other vessels.",
    "core": [
     "SHIELD_3-CORVETTE_2-AVERAGE",
-    "ECM_3-CORVETTE_2-AVERAGE",
+    "SYSTEM_3-CORVETTE_2-AVERAGE",
     "POWER_3-CORVETTE_3-GOOD"
    ],
    "internal": [
@@ -16974,26 +16980,29 @@
     "ENGINEERING_3-CORVETTE_2-AVERAGE",
     "CREWSPACE_0-ALL_2-AVERAGE ×4",
     "LIFESUPPORT_0-ALL_2-AVERAGE ×4",
-    "PASSENGERSSPACE_0-ALL_1-BASIC ×6",
-    "LIFESUPPORT_0-ALL_1-BASIC ×6"
+    "PASSENGERSSPACE_0-ALL_1-BASIC ×10",
+    "LIFESUPPORT_0-ALL_1-BASIC ×10",
+    "ECM_3-CORVETTE_2-AVERAGE"
    ],
    "external": [
     "ENGINECOMBAT_3-CORVETTE_2-AVERAGE",
     "WEAPON_TURRET_0-ALL_2-HUGE",
-    "RADAR_3-CORVETTE_2-AVERAGE"
+    "RADAR_3-CORVETTE_2-AVERAGE",
+    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×4",
+    "AIRLOCKBRIDGE_0-ALL_0-UNIVERSAL"
    ],
    "computed": {
-    "pwr_consumption": 75.1,
+    "pwr_consumption": 88.5,
     "pwr_activation": 0,
-    "pwr_creation": 85,
+    "pwr_creation": 98,
     "energy_storage": 0,
     "shield_max": 40,
     "shield_recharge": 5,
     "crew_min": 4,
     "crew_max": 8,
-    "passengers": 6,
+    "passengers": 11,
     "cargo": 0,
-    "life_ppl": 12,
+    "life_ppl": 16,
     "life_hrs": 8760,
     "fuel_cons": 0,
     "fuel_units": 0,
@@ -17007,18 +17016,18 @@
     "structure": 3,
     "hull": 10,
     "ecm": 5,
-    "system": 10,
+    "system": 20,
     "command": 2,
     "handling": 2,
     "instruments": 4,
     "engineering": 5,
     "warfare": 4,
     "area_used": {
-     "core": 30,
-     "internal": 68.0,
-     "external": 24
+     "core": 36,
+     "internal": 80.0,
+     "external": 30
     },
-    "total_cost": 9467500,
+    "total_cost": 10222500,
     "availability": "RARE",
     "legality": "Restricted",
     "valid": true
@@ -17032,43 +17041,43 @@
    "template": "TEMPLATE_3-CORVETTE_4-DROPSHIP",
    "description": "A reinforced atmospheric entry craft for deploying troops under fire.",
    "core": [
-    "SYSTEM_3-CORVETTE_1-BASIC",
+    "ECM_3-CORVETTE_2-AVERAGE",
+    "SYSTEM_3-CORVETTE_2-AVERAGE",
     "STRUCTURE_3-CORVETTE_1-BASIC",
-    "POWER_3-CORVETTE_1-BASIC"
+    "POWER_3-CORVETTE_2-AVERAGE"
    ],
    "internal": [
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
-    "BRIDGE_3-CORVETTE_1-BASIC",
-    "NAVBRIDGE_3-CORVETTE_1-BASIC",
-    "WARFARESUITE_3-CORVETTE_1-BASIC",
-    "ENGINEERING_3-CORVETTE_1-BASIC",
-    "CREWSPACE_0-ALL_1-BASIC ×4",
-    "LIFESUPPORT_0-ALL_1-BASIC ×4",
-    "PASSENGERSSPACE_0-ALL_1-BASIC ×8",
-    "LIFESUPPORT_0-ALL_1-BASIC ×8",
-    "ECM_3-CORVETTE_1-BASIC"
+    "BRIDGE_3-CORVETTE_2-AVERAGE",
+    "NAVBRIDGE_3-CORVETTE_2-AVERAGE",
+    "WARFARESUITE_3-CORVETTE_2-AVERAGE",
+    "ENGINEERING_3-CORVETTE_2-AVERAGE",
+    "CREWSPACE_0-ALL_2-AVERAGE ×4",
+    "LIFESUPPORT_0-ALL_2-AVERAGE ×4",
+    "PASSENGERSSPACE_0-ALL_1-BASIC ×7",
+    "LIFESUPPORT_0-ALL_1-BASIC ×7"
    ],
    "external": [
     "ENGINECOMBAT_3-CORVETTE_2-AVERAGE",
     "WEAPON_FIXED_0-ALL_2-HUGE",
     "WEAPON_FIXED_0-ALL_2-HUGE",
-    "RADAR_3-CORVETTE_1-BASIC",
-    "SHIELD_3-CORVETTE_1-BASIC",
+    "RADAR_3-CORVETTE_2-AVERAGE",
+    "SHIELD_3-CORVETTE_2-AVERAGE",
     "ESCAPEPOD_0-ALL_0-UNIVERSAL ×4"
    ],
    "computed": {
-    "pwr_consumption": 63.2,
+    "pwr_consumption": 81.2,
     "pwr_activation": 0,
-    "pwr_creation": 65,
+    "pwr_creation": 86,
     "energy_storage": 0,
-    "shield_max": 35,
-    "shield_recharge": 3,
+    "shield_max": 40,
+    "shield_recharge": 5,
     "crew_min": 4,
     "crew_max": 8,
     "passengers": 8,
     "cargo": 0,
-    "life_ppl": 14,
-    "life_hrs": 336,
+    "life_ppl": 13,
+    "life_hrs": 8760,
     "fuel_cons": 0,
     "fuel_units": 0,
     "combat_range": 100,
@@ -17080,19 +17089,19 @@
     "berths": 5,
     "structure": 4,
     "hull": 10,
-    "ecm": 4,
-    "system": 15,
-    "command": 1,
+    "ecm": 5,
+    "system": 20,
+    "command": 2,
     "handling": 2,
-    "instruments": 2,
-    "engineering": 2,
-    "warfare": 3,
+    "instruments": 4,
+    "engineering": 4,
+    "warfare": 4,
     "area_used": {
-     "core": 25,
-     "internal": 59,
-     "external": 35
+     "core": 33,
+     "internal": 70.0,
+     "external": 40
     },
-    "total_cost": 6057500,
+    "total_cost": 8543500,
     "availability": "RARE",
     "legality": "Restricted",
     "valid": true
@@ -17106,8 +17115,7 @@
    "template": "TEMPLATE_3-CORVETTE_5-HAULER",
    "description": "A slow but dependable cargo corvette built for hauling heavy freight.",
    "core": [
-    "POWER_3-CORVETTE_1-BASIC",
-    "ENERGYTANK_3-CORVETTE_1-BASIC"
+    "POWER_3-CORVETTE_1-BASIC"
    ],
    "internal": [
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
@@ -17116,8 +17124,10 @@
     "NAVBRIDGE_3-CORVETTE_1-BASIC",
     "WARFARESUITE_3-CORVETTE_1-BASIC",
     "ENGINEERING_3-CORVETTE_1-BASIC",
-    "CREWSPACE_0-ALL_1-BASIC ×6",
-    "LIFESUPPORT_0-ALL_1-BASIC ×6"
+    "CREWSPACE_0-ALL_1-BASIC ×3",
+    "LIFESUPPORT_0-ALL_1-BASIC ×3",
+    "MEDBAY_0-ALL_1-BASIC",
+    "CARGOSPACE_0-ALL_0-UNIVERSAL ×13"
    ],
    "external": [
     "ENGINEBALANCED_3-CORVETTE_2-AVERAGE",
@@ -17125,22 +17135,22 @@
     "FUELTANK_3-CORVETTE_1-BASIC",
     "RADAR_3-CORVETTE_1-BASIC",
     "SHIELD_3-CORVETTE_1-BASIC",
-    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×6",
+    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×3",
     "LANDING_3-CORVETTE_0-UNIVERSAL",
-    "CARGOSPACE_0-ALL_0-UNIVERSAL ×2"
+    "CARGOSPACE_0-ALL_0-UNIVERSAL ×17"
    ],
    "computed": {
-    "pwr_consumption": 50.6,
+    "pwr_consumption": 51.8,
     "pwr_activation": 19,
-    "pwr_creation": 65,
-    "energy_storage": 10,
+    "pwr_creation": 75,
+    "energy_storage": 0,
     "shield_max": 35,
     "shield_recharge": 3,
     "crew_min": 3,
     "crew_max": 7,
     "passengers": 0,
-    "cargo": 2,
-    "life_ppl": 7,
+    "cargo": 30,
+    "life_ppl": 4,
     "life_hrs": 336,
     "fuel_cons": 0,
     "fuel_units": 100,
@@ -17150,7 +17160,7 @@
     "jump_range": 1,
     "speed": "MEDIUM",
     "atmospheric": "HALF",
-    "berths": 7,
+    "berths": 4,
     "structure": 3,
     "hull": 10,
     "ecm": 3,
@@ -17161,11 +17171,11 @@
     "engineering": 2,
     "warfare": 2,
     "area_used": {
-     "core": 20,
-     "internal": 43,
-     "external": 58
+     "core": 12,
+     "internal": 52,
+     "external": 70
     },
-    "total_cost": 5120000,
+    "total_cost": 4781000,
     "availability": "RARE",
     "legality": "No Permit",
     "valid": true
@@ -17180,32 +17190,31 @@
    "description": "A weapons platform corvette packing frigate-grade firepower on a corvette frame.",
    "core": [
     "SHIELD_3-CORVETTE_3-GOOD",
-    "BRIDGE_3-CORVETTE_3-GOOD",
     "NAVBRIDGE_3-CORVETTE_3-GOOD",
     "WARFARESUITE_3-CORVETTE_3-GOOD",
     "ENGINEERING_3-CORVETTE_3-GOOD",
-    "LIFESUPPORT_0-ALL_1-BASIC ×4",
-    "ECM_3-CORVETTE_1-BASIC",
-    "POWER_3-CORVETTE_3-GOOD"
+    "CREWSPACE_0-ALL_1-BASIC ×8",
+    "LIFESUPPORT_0-ALL_2-AVERAGE ×8",
+    "POWER_3-CORVETTE_2-AVERAGE"
    ],
    "internal": [
-    "WEAPON_FIXED_0-ALL_2-HUGE",
     "WEAPON_TURRET_0-ALL_2-HUGE",
     "ORDONNANCE_FIXED_0-ALL_2-HUGE",
     "AMMOBAY_0-ALL_2-HUGE ×2",
     "RADAR_3-CORVETTE_3-GOOD",
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
-    "HULL_3-CORVETTE_1-BASIC",
-    "CREWSPACE_0-ALL_1-BASIC ×4"
+    "BRIDGE_3-CORVETTE_3-GOOD",
+    "ECM_3-CORVETTE_1-BASIC"
    ],
    "external": [
     "ENGINECOMBAT_3-CORVETTE_3-GOOD",
+    "WEAPON_FIXED_0-ALL_2-HUGE",
     "WEAPON_FIXED_0-ALL_2-HUGE"
    ],
    "computed": {
-    "pwr_consumption": 77.4,
+    "pwr_consumption": 81.5,
     "pwr_activation": 0,
-    "pwr_creation": 85,
+    "pwr_creation": 86,
     "energy_storage": 0,
     "shield_max": 45,
     "shield_recharge": 7,
@@ -17213,8 +17222,8 @@
     "crew_max": 8,
     "passengers": 0,
     "cargo": 0,
-    "life_ppl": 5,
-    "life_hrs": 336,
+    "life_ppl": 9,
+    "life_hrs": 8760,
     "fuel_cons": 0,
     "fuel_units": 0,
     "combat_range": 100,
@@ -17223,22 +17232,22 @@
     "jump_range": 0,
     "speed": "HIGH",
     "atmospheric": "NONE",
-    "berths": 5,
+    "berths": 9,
     "structure": 3,
-    "hull": 5,
+    "hull": 10,
     "ecm": 4,
     "system": 10,
     "command": 3,
-    "handling": 3,
+    "handling": 2,
     "instruments": 6,
-    "engineering": 6,
+    "engineering": 5,
     "warfare": 5,
     "area_used": {
-     "core": 70,
-     "internal": 34,
-     "external": 18
+     "core": 82.0,
+     "internal": 42,
+     "external": 23
     },
-    "total_cost": 17275000,
+    "total_cost": 16242000,
     "availability": "RARE",
     "legality": "Restricted",
     "valid": true
@@ -17255,31 +17264,28 @@
     "JUMPDRIVE_3-CORVETTE_1-BASIC",
     "FUELTANK_3-CORVETTE_1-BASIC",
     "SHIELD_3-CORVETTE_3-GOOD",
-    "ENGINEERING_3-CORVETTE_3-GOOD",
-    "POWER_3-CORVETTE_3-GOOD"
+    "CREWSPACE_0-ALL_2-AVERAGE ×4",
+    "ECM_3-CORVETTE_3-GOOD",
+    "POWER_3-CORVETTE_2-AVERAGE"
    ],
    "internal": [
-    "WEAPON_TURRET_0-ALL_2-HUGE",
     "RADAR_3-CORVETTE_3-GOOD",
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "BRIDGE_3-CORVETTE_3-GOOD",
     "NAVBRIDGE_3-CORVETTE_3-GOOD",
     "WARFARESUITE_3-CORVETTE_3-GOOD",
-    "HULL_3-CORVETTE_1-BASIC",
-    "HULL_3-CORVETTE_1-BASIC",
-    "CREWSPACE_0-ALL_1-BASIC ×4",
-    "LIFESUPPORT_0-ALL_1-BASIC ×4",
-    "ECM_3-CORVETTE_1-BASIC"
+    "ENGINEERING_3-CORVETTE_3-GOOD",
+    "LIFESUPPORT_0-ALL_2-AVERAGE ×4"
    ],
    "external": [
     "ENGINECOMBAT_3-CORVETTE_3-GOOD",
     "WEAPON_TURRET_0-ALL_2-HUGE",
-    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×4"
+    "WEAPON_TURRET_0-ALL_2-HUGE"
    ],
    "computed": {
-    "pwr_consumption": 82.4,
+    "pwr_consumption": 84.5,
     "pwr_activation": 15,
-    "pwr_creation": 85,
+    "pwr_creation": 86,
     "energy_storage": 0,
     "shield_max": 45,
     "shield_recharge": 7,
@@ -17288,7 +17294,7 @@
     "passengers": 0,
     "cargo": 0,
     "life_ppl": 5,
-    "life_hrs": 336,
+    "life_hrs": 8760,
     "fuel_cons": 0,
     "fuel_units": 100,
     "combat_range": 100,
@@ -17299,20 +17305,20 @@
     "atmospheric": "NONE",
     "berths": 5,
     "structure": 3,
-    "hull": 0,
-    "ecm": 4,
+    "hull": 10,
+    "ecm": 6,
     "system": 10,
     "command": 3,
-    "handling": 4,
+    "handling": 2,
     "instruments": 6,
-    "engineering": 6,
+    "engineering": 5,
     "warfare": 5,
     "area_used": {
-     "core": 57,
-     "internal": 39,
-     "external": 25
+     "core": 70,
+     "internal": 48.0,
+     "external": 29
     },
-    "total_cost": 16427500,
+    "total_cost": 14325000,
     "availability": "RARE",
     "legality": "Restricted",
     "valid": true
@@ -17326,21 +17332,17 @@
    "template": "TEMPLATE_4-FRIGATE_0-UNIVERSAL",
    "description": "Universal-class frigate template. The base blueprint for all specialized frigate variants, balanced core, internal, and external slot allocation ready for customization.",
    "core": [
-    "SHIELD_4-FRIGATE_1-BASIC",
-    "MEDBAY_0-ALL_1-BASIC",
+    "LIFESUPPORT_0-ALL_2-AVERAGE ×16",
     "POWER_4-FRIGATE_1-BASIC"
    ],
    "internal": [
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
-    "BRIDGE_4-FRIGATE_1-BASIC",
-    "NAVBRIDGE_4-FRIGATE_1-BASIC",
-    "WARFARESUITE_4-FRIGATE_1-BASIC",
-    "ENGINEERING_4-FRIGATE_1-BASIC",
-    "CREWSPACE_0-ALL_1-BASIC ×8",
-    "LIFESUPPORT_0-ALL_1-BASIC ×8",
-    "CARGOSPACE_0-ALL_0-UNIVERSAL ×16",
-    "ECM_4-FRIGATE_1-BASIC",
-    "STRUCTURE_4-FRIGATE_1-BASIC"
+    "BRIDGE_4-FRIGATE_2-AVERAGE",
+    "NAVBRIDGE_4-FRIGATE_2-AVERAGE",
+    "WARFARESUITE_4-FRIGATE_2-AVERAGE",
+    "ENGINEERING_4-FRIGATE_2-AVERAGE",
+    "CREWSPACE_0-ALL_2-AVERAGE ×16",
+    "CARGOSPACE_0-ALL_0-UNIVERSAL ×16"
    ],
    "external": [
     "ENGINEBALANCED_4-FRIGATE_2-AVERAGE",
@@ -17348,21 +17350,22 @@
     "WEAPON_TURRET_0-ALL_2-HUGE",
     "JUMPDRIVE_4-FRIGATE_2-AVERAGE",
     "FUELTANK_4-FRIGATE_1-BASIC",
-    "RADAR_4-FRIGATE_1-BASIC"
+    "RADAR_4-FRIGATE_2-AVERAGE",
+    "SHIELD_4-FRIGATE_2-AVERAGE"
    ],
    "computed": {
-    "pwr_consumption": 96.8,
+    "pwr_consumption": 123.5,
     "pwr_activation": 50,
-    "pwr_creation": 130,
+    "pwr_creation": 150,
     "energy_storage": 0,
-    "shield_max": 70,
-    "shield_recharge": 6,
+    "shield_max": 80,
+    "shield_recharge": 10,
     "crew_min": 8,
     "crew_max": 16,
     "passengers": 0,
     "cargo": 16,
-    "life_ppl": 9,
-    "life_hrs": 336,
+    "life_ppl": 17,
+    "life_hrs": 8760,
     "fuel_cons": 0,
     "fuel_units": 200,
     "combat_range": 200,
@@ -17371,22 +17374,22 @@
     "jump_range": 2,
     "speed": "MEDIUM",
     "atmospheric": "NONE",
-    "berths": 9,
-    "structure": 5,
+    "berths": 17,
+    "structure": 4,
     "hull": 15,
-    "ecm": 5,
+    "ecm": 4,
     "system": 15,
-    "command": 1,
+    "command": 2,
     "handling": 3,
-    "instruments": 2,
-    "engineering": 2,
-    "warfare": 2,
+    "instruments": 4,
+    "engineering": 3,
+    "warfare": 3,
     "area_used": {
-     "core": 41,
-     "internal": 96,
-     "external": 97
+     "core": 51.0,
+     "internal": 119,
+     "external": 119
     },
-    "total_cost": 12470000,
+    "total_cost": 13160000,
     "availability": "LIMITED",
     "legality": "Restricted",
     "valid": true
@@ -17400,20 +17403,20 @@
    "template": "TEMPLATE_4-FRIGATE_1-ESCORT",
    "description": "Escort-class frigate designed to protect convoys and capital ships. Heavy shields, strong weapons, and rapid response systems.",
    "core": [
-    "JUMPDRIVE_4-FRIGATE_2-AVERAGE",
     "FUELTANK_4-FRIGATE_1-BASIC",
-    "ENGINEERING_4-FRIGATE_2-AVERAGE",
+    "SHIELD_4-FRIGATE_3-GOOD",
+    "LIFESUPPORT_0-ALL_2-AVERAGE ×8",
+    "ECM_4-FRIGATE_3-GOOD",
     "POWER_4-FRIGATE_2-AVERAGE"
    ],
    "internal": [
-    "SHIELD_4-FRIGATE_3-GOOD",
+    "RADAR_4-FRIGATE_3-GOOD",
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "BRIDGE_4-FRIGATE_3-GOOD",
     "NAVBRIDGE_4-FRIGATE_3-GOOD",
     "WARFARESUITE_4-FRIGATE_3-GOOD",
-    "HULL_4-FRIGATE_1-BASIC",
-    "CREWSPACE_0-ALL_1-BASIC ×8",
-    "LIFESUPPORT_0-ALL_1-BASIC ×8"
+    "ENGINEERING_4-FRIGATE_3-GOOD",
+    "CREWSPACE_0-ALL_2-AVERAGE ×8"
    ],
    "external": [
     "ENGINECOMBAT_4-FRIGATE_3-GOOD",
@@ -17422,12 +17425,12 @@
     "WEAPON_TURRET_0-ALL_2-HUGE",
     "WEAPON_TURRET_0-ALL_2-HUGE",
     "POINTDEFENSE_0-ALL_2-HUGE",
-    "RADAR_4-FRIGATE_3-GOOD"
+    "JUMPDRIVE_4-FRIGATE_2-AVERAGE"
    ],
    "computed": {
-    "pwr_consumption": 140.8,
+    "pwr_consumption": 161.5,
     "pwr_activation": 50,
-    "pwr_creation": 150,
+    "pwr_creation": 172,
     "energy_storage": 0,
     "shield_max": 90,
     "shield_recharge": 14,
@@ -17436,7 +17439,7 @@
     "passengers": 0,
     "cargo": 0,
     "life_ppl": 9,
-    "life_hrs": 336,
+    "life_hrs": 8760,
     "fuel_cons": 0,
     "fuel_units": 200,
     "combat_range": 200,
@@ -17447,20 +17450,20 @@
     "atmospheric": "NONE",
     "berths": 9,
     "structure": 4,
-    "hull": 10,
-    "ecm": 4,
+    "hull": 15,
+    "ecm": 7,
     "system": 15,
     "command": 3,
-    "handling": 3,
+    "handling": 2,
     "instruments": 6,
-    "engineering": 4,
+    "engineering": 5,
     "warfare": 5,
     "area_used": {
-     "core": 86,
-     "internal": 88,
-     "external": 70
+     "core": 103.0,
+     "internal": 105,
+     "external": 84
     },
-    "total_cost": 23135000,
+    "total_cost": 26772000,
     "availability": "LIMITED",
     "legality": "Restricted",
     "valid": true
@@ -17474,12 +17477,12 @@
    "template": "TEMPLATE_4-FRIGATE_2-YACHT",
    "description": "Luxury yacht-class frigate. Opulent passenger accommodations, premium bar and pool facilities, with enough thrust to outrun trouble.",
    "core": [
-    "SHIELD_4-FRIGATE_1-BASIC",
+    "JUMPDRIVE_4-FRIGATE_2-AVERAGE",
     "POWER_4-FRIGATE_1-BASIC"
    ],
    "internal": [
-    "JUMPDRIVE_4-FRIGATE_2-AVERAGE",
-    "FUELTANK_4-FRIGATE_1-BASIC",
+    "RADAR_4-FRIGATE_1-BASIC",
+    "SHIELD_4-FRIGATE_1-BASIC",
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "CREWAUTOMATION_0-ALL_2-AVERAGE ×3",
     "BRIDGE_4-FRIGATE_1-BASIC",
@@ -17488,25 +17491,28 @@
     "ENGINEERING_4-FRIGATE_1-BASIC",
     "CREWSPACE_0-ALL_3-GOOD ×4",
     "LIFESUPPORT_0-ALL_1-BASIC ×4",
+    "JACUZI_0-ALL_0-UNIVERSAL",
+    "THEATER_0-ALL_1-VAR",
     "PASSENGERSSPACE_0-ALL_1-BASIC ×9",
     "LIFESUPPORT_0-ALL_1-BASIC ×9",
-    "BAR_0-ALL_2-AVERAGE ×2"
+    "BAR_0-ALL_2-AVERAGE ×2",
+    "JACUZI_0-ALL_0-UNIVERSAL ×1",
+    "ENERGYTANK_4-FRIGATE_3-GOOD"
    ],
    "external": [
     "ENGINEHANDLING_4-FRIGATE_3-GOOD",
-    "RADAR_4-FRIGATE_1-BASIC",
-    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×4"
+    "FUELTANK_4-FRIGATE_1-BASIC"
    ],
    "computed": {
-    "pwr_consumption": 122.8,
+    "pwr_consumption": 140.8,
     "pwr_activation": 50,
-    "pwr_creation": 130,
-    "energy_storage": 0,
+    "pwr_creation": 150,
+    "energy_storage": 40,
     "shield_max": 70,
     "shield_recharge": 6,
     "crew_min": 4,
     "crew_max": 12,
-    "passengers": 9,
+    "passengers": 10,
     "cargo": 0,
     "life_ppl": 15,
     "life_hrs": 336,
@@ -17529,11 +17535,11 @@
     "engineering": 2,
     "warfare": 1,
     "area_used": {
-     "core": 36,
-     "internal": 159,
-     "external": 38
+     "core": 50,
+     "internal": 190,
+     "external": 46
     },
-    "total_cost": 14112500,
+    "total_cost": 17656500,
     "availability": "LIMITED",
     "legality": "No Permit",
     "valid": true
@@ -17547,8 +17553,9 @@
    "template": "TEMPLATE_4-FRIGATE_3-ASSAULT",
    "description": "Assault-class frigate built for force projection and planetary assault operations. Heavy armament, boarding facilities, and close-support ordnance.",
    "core": [
-    "CREWSPACE_0-ALL_2-AVERAGE ×8",
-    "POWER_4-FRIGATE_1-BASIC"
+    "CREWSPACE_0-ALL_1-BASIC ×16",
+    "MEDBAY_0-ALL_1-BASIC",
+    "POWER_4-FRIGATE_2-AVERAGE"
    ],
    "internal": [
     "AMMOBAY_0-ALL_3-MASSIVE",
@@ -17557,7 +17564,8 @@
     "NAVBRIDGE_4-FRIGATE_2-AVERAGE",
     "WARFARESUITE_4-FRIGATE_2-AVERAGE",
     "ENGINEERING_4-FRIGATE_2-AVERAGE",
-    "LIFESUPPORT_0-ALL_2-AVERAGE ×8"
+    "LIFESUPPORT_0-ALL_2-AVERAGE ×16",
+    "ECM_4-FRIGATE_1-BASIC"
    ],
    "external": [
     "ENGINECOMBAT_4-FRIGATE_3-GOOD",
@@ -17566,12 +17574,13 @@
     "WEAPON_TURRET_0-ALL_2-HUGE",
     "ORDONNANCE_FIXED_0-ALL_3-MASSIVE",
     "RADAR_4-FRIGATE_2-AVERAGE",
-    "SHIELD_4-FRIGATE_2-AVERAGE"
+    "SHIELD_4-FRIGATE_2-AVERAGE",
+    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×16"
    ],
    "computed": {
-    "pwr_consumption": 124.5,
+    "pwr_consumption": 155.5,
     "pwr_activation": 0,
-    "pwr_creation": 130,
+    "pwr_creation": 172,
     "energy_storage": 0,
     "shield_max": 80,
     "shield_recharge": 10,
@@ -17579,7 +17588,7 @@
     "crew_max": 16,
     "passengers": 0,
     "cargo": 0,
-    "life_ppl": 9,
+    "life_ppl": 17,
     "life_hrs": 8760,
     "fuel_cons": 0,
     "fuel_units": 0,
@@ -17589,22 +17598,22 @@
     "jump_range": 0,
     "speed": "HIGH",
     "atmospheric": "NONE",
-    "berths": 9,
+    "berths": 17,
     "structure": 4,
     "hull": 15,
-    "ecm": 4,
+    "ecm": 5,
     "system": 15,
     "command": 2,
     "handling": 2,
     "instruments": 4,
-    "engineering": 3,
+    "engineering": 4,
     "warfare": 4,
     "area_used": {
-     "core": 52,
-     "internal": 78.0,
-     "external": 109
+     "core": 68,
+     "internal": 94.0,
+     "external": 125
     },
-    "total_cost": 12505000,
+    "total_cost": 15111000,
     "availability": "LIMITED",
     "legality": "Restricted",
     "valid": true
@@ -17618,8 +17627,8 @@
    "template": "TEMPLATE_4-FRIGATE_4-JUNKER",
    "description": "Junker-class frigate, a heavily modified salvage and utility hauler. Minimal amenities, maximum cargo capacity. Gets the job done.",
    "core": [
-    "WARFARESUITE_4-FRIGATE_1-BASIC",
-    "CREWSPACE_0-ALL_1-BASIC ×2",
+    "ENGINEERING_4-FRIGATE_1-BASIC",
+    "CREWSPACE_0-ALL_1-BASIC ×4",
     "POWER_4-FRIGATE_1-BASIC"
    ],
    "internal": [
@@ -17627,7 +17636,7 @@
     "CREWAUTOMATION_0-ALL_3-GOOD ×5",
     "BRIDGE_4-FRIGATE_1-BASIC",
     "NAVBRIDGE_4-FRIGATE_1-BASIC",
-    "CARGOSPACE_0-ALL_0-UNIVERSAL ×1"
+    "WARFARESUITE_4-FRIGATE_1-BASIC"
    ],
    "external": [
     "ENGINEBALANCED_4-FRIGATE_2-AVERAGE",
@@ -17635,25 +17644,25 @@
     "FUELTANK_4-FRIGATE_1-BASIC",
     "RADAR_4-FRIGATE_1-BASIC",
     "SHIELD_4-FRIGATE_1-BASIC",
-    "ENGINEERING_4-FRIGATE_1-BASIC",
-    "LIFESUPPORT_0-ALL_1-BASIC ×2",
-    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×2",
+    "LIFESUPPORT_0-ALL_1-BASIC ×4",
+    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×4",
     "CONSTRUCTION_4-FRIGATE_2-AVERAGE",
     "WORKSHOP_0-ALL_2-AVERAGE ×1",
-    "CARGOSPACE_0-ALL_0-UNIVERSAL ×17"
+    "TRACTORBEAM_0-ALL_3-MASSIVE",
+    "CARGOSPACE_0-ALL_0-UNIVERSAL ×35"
    ],
    "computed": {
-    "pwr_consumption": 128.7,
-    "pwr_activation": 30,
-    "pwr_creation": 130,
+    "pwr_consumption": 131.9,
+    "pwr_activation": 50,
+    "pwr_creation": 150,
     "energy_storage": 0,
     "shield_max": 70,
     "shield_recharge": 6,
     "crew_min": 2,
     "crew_max": 10,
     "passengers": 0,
-    "cargo": 18,
-    "life_ppl": 3,
+    "cargo": 35,
+    "life_ppl": 5,
     "life_hrs": 336,
     "fuel_cons": 0,
     "fuel_units": 200,
@@ -17663,7 +17672,7 @@
     "jump_range": 1,
     "speed": "MEDIUM",
     "atmospheric": "NONE",
-    "berths": 3,
+    "berths": 5,
     "structure": 4,
     "hull": 15,
     "ecm": 4,
@@ -17674,11 +17683,11 @@
     "engineering": 4,
     "warfare": 2,
     "area_used": {
-     "core": 39,
-     "internal": 28,
-     "external": 178
+     "core": 45,
+     "internal": 35,
+     "external": 214
     },
-    "total_cost": 8762500,
+    "total_cost": 9865500,
     "availability": "LIMITED",
     "legality": "No Permit",
     "valid": true
@@ -17693,14 +17702,15 @@
    "description": "Scout-class frigate optimized for reconnaissance and deep-space exploration. Enhanced sensors, fast drives, and stealth-capable systems.",
    "core": [
     "ENGINEERING_4-FRIGATE_2-AVERAGE",
-    "LIFESUPPORT_0-ALL_2-AVERAGE ×8",
+    "LIFESUPPORT_0-ALL_2-AVERAGE ×16",
     "POWER_4-FRIGATE_1-BASIC"
    ],
    "internal": [
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "BRIDGE_4-FRIGATE_2-AVERAGE",
     "NAVBRIDGE_4-FRIGATE_2-AVERAGE",
-    "WARFARESUITE_4-FRIGATE_2-AVERAGE"
+    "WARFARESUITE_4-FRIGATE_2-AVERAGE",
+    "MEDBAY_0-ALL_1-BASIC"
    ],
    "external": [
     "ENGINEHANDLING_4-FRIGATE_3-GOOD",
@@ -17708,13 +17718,12 @@
     "FUELTANK_4-FRIGATE_1-BASIC",
     "RADAR_4-FRIGATE_3-GOOD",
     "SHIELD_4-FRIGATE_2-AVERAGE",
-    "CREWSPACE_0-ALL_2-AVERAGE ×8",
-    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×8"
+    "CREWSPACE_0-ALL_2-AVERAGE ×16"
    ],
    "computed": {
-    "pwr_consumption": 126.5,
+    "pwr_consumption": 134.5,
     "pwr_activation": 70,
-    "pwr_creation": 130,
+    "pwr_creation": 150,
     "energy_storage": 0,
     "shield_max": 80,
     "shield_recharge": 10,
@@ -17722,7 +17731,7 @@
     "crew_max": 16,
     "passengers": 0,
     "cargo": 0,
-    "life_ppl": 9,
+    "life_ppl": 17,
     "life_hrs": 8760,
     "fuel_cons": 0,
     "fuel_units": 200,
@@ -17732,7 +17741,7 @@
     "jump_range": 3,
     "speed": "HIGH",
     "atmospheric": "NONE",
-    "berths": 9,
+    "berths": 17,
     "structure": 4,
     "hull": 15,
     "ecm": 4,
@@ -17743,11 +17752,11 @@
     "engineering": 3,
     "warfare": 2,
     "area_used": {
-     "core": 51.0,
-     "internal": 39,
-     "external": 150
+     "core": 63.0,
+     "internal": 44,
+     "external": 166
     },
-    "total_cost": 14595000,
+    "total_cost": 16215000,
     "availability": "UNIQUE",
     "legality": "No Permit",
     "valid": true
@@ -17761,42 +17770,42 @@
    "template": "TEMPLATE_4-FRIGATE_6-HOPPER",
    "description": "Hopper-class frigate designed for short-range multi-stop transit. Atmospheric-capable, high passenger and cargo capacity, ideal for system-wide logistics.",
    "core": [
+    "MEDBAY_0-ALL_1-BASIC",
     "POWER_4-FRIGATE_1-BASIC"
    ],
    "internal": [
     "ENGINEHANDLING_4-FRIGATE_3-GOOD",
     "JUMPDRIVE_4-FRIGATE_3-GOOD",
     "FUELTANK_4-FRIGATE_1-BASIC",
-    "SHIELD_4-FRIGATE_1-BASIC",
+    "SHIELD_4-FRIGATE_2-AVERAGE",
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
-    "BRIDGE_4-FRIGATE_1-BASIC",
-    "NAVBRIDGE_4-FRIGATE_1-BASIC",
-    "WARFARESUITE_4-FRIGATE_1-BASIC",
-    "ENGINEERING_4-FRIGATE_1-BASIC",
-    "CREWSPACE_0-ALL_1-BASIC ×8",
-    "LIFESUPPORT_0-ALL_1-BASIC ×8",
-    "PASSENGERSSPACE_0-ALL_1-BASIC ×7",
-    "LIFESUPPORT_0-ALL_1-BASIC ×7",
-    "CARGOSPACE_0-ALL_0-UNIVERSAL ×16",
-    "MEDBAY_0-ALL_1-BASIC"
+    "BRIDGE_4-FRIGATE_2-AVERAGE",
+    "NAVBRIDGE_4-FRIGATE_2-AVERAGE",
+    "WARFARESUITE_4-FRIGATE_2-AVERAGE",
+    "ENGINEERING_4-FRIGATE_2-AVERAGE",
+    "CREWSPACE_0-ALL_2-AVERAGE ×8",
+    "LIFESUPPORT_0-ALL_2-AVERAGE ×8",
+    "PASSENGERSSPACE_0-ALL_1-BASIC ×10",
+    "LIFESUPPORT_0-ALL_1-BASIC ×10",
+    "CARGOSPACE_0-ALL_0-UNIVERSAL ×16"
    ],
    "external": [
-    "RADAR_4-FRIGATE_1-BASIC",
-    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×7"
+    "RADAR_4-FRIGATE_2-AVERAGE",
+    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×8"
    ],
    "computed": {
-    "pwr_consumption": 108.5,
+    "pwr_consumption": 143.5,
     "pwr_activation": 70,
-    "pwr_creation": 130,
+    "pwr_creation": 150,
     "energy_storage": 0,
-    "shield_max": 70,
-    "shield_recharge": 6,
+    "shield_max": 80,
+    "shield_recharge": 10,
     "crew_min": 8,
     "crew_max": 16,
-    "passengers": 7,
+    "passengers": 11,
     "cargo": 16,
-    "life_ppl": 17,
-    "life_hrs": 336,
+    "life_ppl": 20,
+    "life_hrs": 8760,
     "fuel_cons": 0,
     "fuel_units": 200,
     "combat_range": 200,
@@ -17810,17 +17819,17 @@
     "hull": 15,
     "ecm": 4,
     "system": 15,
-    "command": 1,
+    "command": 2,
     "handling": 4,
-    "instruments": 2,
-    "engineering": 2,
-    "warfare": 1,
+    "instruments": 4,
+    "engineering": 3,
+    "warfare": 2,
     "area_used": {
-     "core": 24,
-     "internal": 200,
-     "external": 15
+     "core": 29,
+     "internal": 237.0,
+     "external": 18
     },
-    "total_cost": 16677500,
+    "total_cost": 19949000,
     "availability": "UNIQUE",
     "legality": "No Permit",
     "valid": true
@@ -17834,7 +17843,7 @@
    "template": "TEMPLATE_4-FRIGATE_7-SCIENCE",
    "description": "Science-class frigate outfitted for field research and deep-space studies. Advanced instruments, extended life support, and dedicated laboratory modules.",
    "core": [
-    "ENGINEERING_4-FRIGATE_2-AVERAGE",
+    "LIFESUPPORT_0-ALL_2-AVERAGE ×16",
     "POWER_4-FRIGATE_1-BASIC"
    ],
    "internal": [
@@ -17842,7 +17851,8 @@
     "BRIDGE_4-FRIGATE_2-AVERAGE",
     "NAVBRIDGE_4-FRIGATE_2-AVERAGE",
     "WARFARESUITE_4-FRIGATE_2-AVERAGE",
-    "MEDBAY_0-ALL_1-BASIC"
+    "ENGINEERING_4-FRIGATE_2-AVERAGE",
+    "SCIENCELAB_0-ALL_1-BASIC"
    ],
    "external": [
     "ENGINEBALANCED_4-FRIGATE_2-AVERAGE",
@@ -17850,14 +17860,13 @@
     "FUELTANK_4-FRIGATE_1-BASIC",
     "RADAR_4-FRIGATE_3-GOOD",
     "SHIELD_4-FRIGATE_2-AVERAGE",
-    "CREWSPACE_0-ALL_2-AVERAGE ×8",
-    "LIFESUPPORT_0-ALL_2-AVERAGE ×8",
-    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×8"
+    "CREWSPACE_0-ALL_2-AVERAGE ×16",
+    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×16"
    ],
    "computed": {
-    "pwr_consumption": 126.5,
+    "pwr_consumption": 142.5,
     "pwr_activation": 50,
-    "pwr_creation": 130,
+    "pwr_creation": 150,
     "energy_storage": 0,
     "shield_max": 80,
     "shield_recharge": 10,
@@ -17865,7 +17874,7 @@
     "crew_max": 16,
     "passengers": 0,
     "cargo": 0,
-    "life_ppl": 9,
+    "life_ppl": 17,
     "life_hrs": 8760,
     "fuel_cons": 0,
     "fuel_units": 200,
@@ -17875,7 +17884,7 @@
     "jump_range": 2,
     "speed": "MEDIUM",
     "atmospheric": "NONE",
-    "berths": 9,
+    "berths": 17,
     "structure": 4,
     "hull": 15,
     "ecm": 4,
@@ -17886,11 +17895,11 @@
     "engineering": 3,
     "warfare": 3,
     "area_used": {
-     "core": 36,
-     "internal": 44,
-     "external": 149.0
+     "core": 51.0,
+     "internal": 59,
+     "external": 166
     },
-    "total_cost": 10595000,
+    "total_cost": 12600000,
     "availability": "LIMITED",
     "legality": "No Permit",
     "valid": true
@@ -17905,9 +17914,8 @@
    "description": "Repair-class frigate serving as a mobile engineering platform. Construction bays, spare parts storage, and triage medical facilities allow it to sustain a fleet in the field.",
    "core": [
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
-    "BRIDGE_4-FRIGATE_1-BASIC",
+    "BRIDGE_4-FRIGATE_2-AVERAGE",
     "NAVBRIDGE_4-FRIGATE_1-BASIC",
-    "MEDBAY_0-ALL_1-BASIC",
     "POWER_4-FRIGATE_1-BASIC"
    ],
    "internal": [],
@@ -17915,30 +17923,29 @@
     "ENGINEBALANCED_4-FRIGATE_2-AVERAGE",
     "JUMPDRIVE_4-FRIGATE_1-BASIC",
     "FUELTANK_4-FRIGATE_1-BASIC",
-    "RADAR_4-FRIGATE_1-BASIC",
-    "SHIELD_4-FRIGATE_1-BASIC",
-    "WARFARESUITE_4-FRIGATE_1-BASIC",
-    "ENGINEERING_4-FRIGATE_1-BASIC",
-    "CREWSPACE_0-ALL_1-BASIC ×8",
-    "LIFESUPPORT_0-ALL_1-BASIC ×8",
-    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×8",
+    "RADAR_4-FRIGATE_2-AVERAGE",
+    "SHIELD_4-FRIGATE_2-AVERAGE",
+    "WARFARESUITE_4-FRIGATE_2-AVERAGE",
+    "ENGINEERING_4-FRIGATE_2-AVERAGE",
+    "CREWSPACE_0-ALL_2-AVERAGE ×16",
+    "LIFESUPPORT_0-ALL_2-AVERAGE ×16",
+    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×16",
     "CARGOSPACE_0-ALL_0-UNIVERSAL ×16",
-    "WORKSHOP_0-ALL_3-GOOD ×3",
-    "ENERGYTANK_4-FRIGATE_2-AVERAGE"
+    "ENERGYTANK_4-FRIGATE_1-BASIC"
    ],
    "computed": {
-    "pwr_consumption": 105.8,
+    "pwr_consumption": 134.5,
     "pwr_activation": 30,
-    "pwr_creation": 130,
-    "energy_storage": 30,
-    "shield_max": 70,
-    "shield_recharge": 6,
+    "pwr_creation": 150,
+    "energy_storage": 20,
+    "shield_max": 80,
+    "shield_recharge": 10,
     "crew_min": 8,
     "crew_max": 16,
     "passengers": 0,
     "cargo": 16,
-    "life_ppl": 9,
-    "life_hrs": 336,
+    "life_ppl": 17,
+    "life_hrs": 8760,
     "fuel_cons": 0,
     "fuel_units": 200,
     "combat_range": 200,
@@ -17947,22 +17954,22 @@
     "jump_range": 1,
     "speed": "MEDIUM",
     "atmospheric": "NONE",
-    "berths": 9,
+    "berths": 17,
     "structure": 4,
     "hull": 15,
     "ecm": 4,
     "system": 15,
-    "command": 1,
+    "command": 2,
     "handling": 3,
-    "instruments": 2,
-    "engineering": 2,
-    "warfare": 2,
+    "instruments": 3,
+    "engineering": 3,
+    "warfare": 3,
     "area_used": {
-     "core": 48,
+     "core": 51,
      "internal": 0,
-     "external": 198
+     "external": 239.0
     },
-    "total_cost": 9190000,
+    "total_cost": 10532500,
     "availability": "RARE",
     "legality": "No Permit",
     "valid": true
@@ -17977,11 +17984,10 @@
    "description": "Universal-class cruiser template. The baseline blueprint for all cruiser roles, substantial core and internal space with ample external hardpoints.",
    "core": [
     "SHIELD_5-CRUISER_1-BASIC",
-    "ECM_5-CRUISER_1-BASIC",
+    "SYSTEM_5-CRUISER_1-BASIC",
     "POWER_5-CRUISER_1-BASIC"
    ],
    "internal": [
-    "FUELTANK_5-CRUISER_1-BASIC",
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "CREWAUTOMATION_0-ALL_2-AVERAGE ×9",
     "BRIDGE_5-CRUISER_1-BASIC",
@@ -17990,7 +17996,11 @@
     "ENGINEERING_5-CRUISER_1-BASIC",
     "CREWSPACE_0-ALL_1-BASIC ×10",
     "LIFESUPPORT_0-ALL_1-BASIC ×10",
-    "CARGOSPACE_0-ALL_0-UNIVERSAL ×40"
+    "CARGOSPACE_0-ALL_0-UNIVERSAL ×40",
+    "ECM_5-CRUISER_1-BASIC",
+    "STRUCTURE_5-CRUISER_1-BASIC",
+    "MEDBAY_0-ALL_1-BASIC",
+    "ENERGYTANK_5-CRUISER_3-GOOD"
    ],
    "external": [
     "ENGINEBALANCED_5-CRUISER_2-AVERAGE",
@@ -17999,14 +18009,15 @@
     "WEAPON_TURRET_0-ALL_3-MASSIVE",
     "WEAPON_TURRET_0-ALL_3-MASSIVE",
     "JUMPDRIVE_5-CRUISER_2-AVERAGE",
+    "FUELTANK_5-CRUISER_1-BASIC",
     "RADAR_5-CRUISER_1-BASIC",
     "ESCAPEPOD_0-ALL_0-UNIVERSAL ×10"
    ],
    "computed": {
-    "pwr_consumption": 211.5,
+    "pwr_consumption": 225.5,
     "pwr_activation": 100,
-    "pwr_creation": 260,
-    "energy_storage": 0,
+    "pwr_creation": 299,
+    "energy_storage": 80,
     "shield_max": 140,
     "shield_recharge": 12,
     "crew_min": 10,
@@ -18024,21 +18035,21 @@
     "speed": "MEDIUM",
     "atmospheric": "NONE",
     "berths": 11,
-    "structure": 5,
+    "structure": 6,
     "hull": 20,
     "ecm": 6,
-    "system": 20,
+    "system": 25,
     "command": 1,
     "handling": 3,
     "instruments": 2,
     "engineering": 2,
     "warfare": 2,
     "area_used": {
-     "core": 80,
-     "internal": 199,
-     "external": 198
+     "core": 104,
+     "internal": 240,
+     "external": 238
     },
-    "total_cost": 24235000,
+    "total_cost": 33105000,
     "availability": "UNIQUE",
     "legality": "Restricted",
     "valid": true
@@ -18052,7 +18063,7 @@
    "template": "TEMPLATE_5-CRUISER_1-FREIGHTER",
    "description": "Freighter-class cruiser, the backbone of interstellar trade. Minimal crew quarters, maximum cargo capacity, and long jump range for profitable hauls.",
    "core": [
-    "ENGINEERING_5-CRUISER_1-BASIC",
+    "CREWSPACE_0-ALL_1-BASIC ×10",
     "MEDBAY_0-ALL_1-BASIC",
     "POWER_5-CRUISER_1-BASIC"
    ],
@@ -18062,8 +18073,8 @@
     "BRIDGE_5-CRUISER_1-BASIC",
     "NAVBRIDGE_5-CRUISER_1-BASIC",
     "WARFARESUITE_5-CRUISER_1-BASIC",
-    "LIFESUPPORT_0-ALL_1-BASIC ×10",
-    "CARGOSPACE_0-ALL_0-UNIVERSAL ×2"
+    "ENGINEERING_5-CRUISER_1-BASIC",
+    "LIFESUPPORT_0-ALL_1-BASIC ×10"
    ],
    "external": [
     "ENGINEBALANCED_5-CRUISER_2-AVERAGE",
@@ -18071,21 +18082,20 @@
     "FUELTANK_5-CRUISER_1-BASIC",
     "RADAR_5-CRUISER_1-BASIC",
     "SHIELD_5-CRUISER_1-BASIC",
-    "CREWSPACE_0-ALL_1-BASIC ×10",
     "ESCAPEPOD_0-ALL_0-UNIVERSAL ×10",
-    "CARGOSPACE_0-ALL_0-UNIVERSAL ×133"
+    "CARGOSPACE_0-ALL_0-UNIVERSAL ×224"
    ],
    "computed": {
     "pwr_consumption": 185.5,
     "pwr_activation": 100,
-    "pwr_creation": 260,
+    "pwr_creation": 299,
     "energy_storage": 0,
     "shield_max": 140,
     "shield_recharge": 12,
     "crew_min": 10,
     "crew_max": 30,
     "passengers": 0,
-    "cargo": 135,
+    "cargo": 224,
     "life_ppl": 11,
     "life_hrs": 336,
     "fuel_cons": 0,
@@ -18107,11 +18117,11 @@
     "engineering": 2,
     "warfare": 2,
     "area_used": {
-     "core": 73,
-     "internal": 78,
-     "external": 338
+     "core": 76,
+     "internal": 96,
+     "external": 406
     },
-    "total_cost": 16975000,
+    "total_cost": 17976500,
     "availability": "UNIQUE",
     "legality": "No Permit",
     "valid": true
@@ -18125,10 +18135,10 @@
    "template": "TEMPLATE_5-CRUISER_2-DEEPSPACEEXPLORER",
    "description": "Deep Space Explorer-class cruiser built for prolonged voyages into uncharted systems. Extended life support, powerful jump drives, and comprehensive sensor suites.",
    "core": [
-    "FUELTANK_5-CRUISER_1-BASIC",
-    "LIFESUPPORT_0-ALL_2-AVERAGE ×10"
+    "POWER_5-CRUISER_2-AVERAGE"
    ],
    "internal": [
+    "RADAR_5-CRUISER_3-GOOD",
     "SHIELD_5-CRUISER_3-GOOD",
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "CREWAUTOMATION_0-ALL_2-AVERAGE ×9",
@@ -18136,19 +18146,21 @@
     "NAVBRIDGE_5-CRUISER_3-GOOD",
     "WARFARESUITE_5-CRUISER_3-GOOD",
     "ENGINEERING_5-CRUISER_3-GOOD",
-    "CREWSPACE_0-ALL_2-AVERAGE ×10",
-    "MEDBAY_0-ALL_1-BASIC",
-    "POWER_5-CRUISER_2-AVERAGE"
+    "CREWSPACE_0-ALL_2-AVERAGE ×20",
+    "LIFESUPPORT_0-ALL_2-AVERAGE ×20",
+    "SCIENCELAB_0-ALL_2-AVERAGE ×3",
+    "OBSERVATORY_0-ALL_1-VAR",
+    "MEDBAY_0-ALL_1-BASIC"
    ],
    "external": [
     "ENGINEBALANCED_5-CRUISER_2-AVERAGE",
     "JUMPDRIVE_5-CRUISER_3-GOOD",
-    "RADAR_5-CRUISER_3-GOOD"
+    "FUELTANK_5-CRUISER_1-BASIC"
    ],
    "computed": {
-    "pwr_consumption": 279.5,
+    "pwr_consumption": 312.0,
     "pwr_activation": 140,
-    "pwr_creation": 300,
+    "pwr_creation": 345,
     "energy_storage": 0,
     "shield_max": 180,
     "shield_recharge": 28,
@@ -18156,7 +18168,7 @@
     "crew_max": 30,
     "passengers": 0,
     "cargo": 0,
-    "life_ppl": 11,
+    "life_ppl": 21,
     "life_hrs": 8760,
     "fuel_cons": 0,
     "fuel_units": 400,
@@ -18166,22 +18178,22 @@
     "jump_range": 3,
     "speed": "MEDIUM",
     "atmospheric": "NONE",
-    "berths": 11,
+    "berths": 21,
     "structure": 5,
     "hull": 20,
     "ecm": 5,
     "system": 20,
     "command": 3,
     "handling": 3,
-    "instruments": 6,
+    "instruments": 8,
     "engineering": 5,
     "warfare": 4,
     "area_used": {
-     "core": 58.0,
-     "internal": 291,
-     "external": 136
+     "core": 56,
+     "internal": 360.0,
+     "external": 152
     },
-    "total_cost": 32510000,
+    "total_cost": 38574000,
     "availability": "UNIQUE",
     "legality": "Restricted",
     "valid": true
@@ -18195,13 +18207,12 @@
    "template": "TEMPLATE_5-CRUISER_3-SUPERLINER",
    "description": "Superliner-class cruiser, a premier passenger vessel carrying hundreds in comfort across the stars. Luxury amenities, extensive medical facilities, and stellar entertainment.",
    "core": [
+    "SHIELD_5-CRUISER_1-BASIC",
     "POWER_5-CRUISER_1-BASIC"
    ],
    "internal": [
     "JUMPDRIVE_5-CRUISER_2-AVERAGE",
     "FUELTANK_5-CRUISER_1-BASIC",
-    "RADAR_5-CRUISER_1-BASIC",
-    "SHIELD_5-CRUISER_1-BASIC",
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "CREWAUTOMATION_0-ALL_2-AVERAGE ×9",
     "BRIDGE_5-CRUISER_1-BASIC",
@@ -18210,25 +18221,28 @@
     "ENGINEERING_5-CRUISER_1-BASIC",
     "CREWSPACE_0-ALL_1-BASIC ×10",
     "LIFESUPPORT_0-ALL_2-AVERAGE ×10",
-    "PASSENGERSSPACE_0-ALL_1-BASIC ×63",
-    "LIFESUPPORT_0-ALL_1-BASIC ×63"
+    "PROMENADE_0-ALL_1-VAR",
+    "THEATER_0-ALL_1-VAR",
+    "GYM_0-ALL_1-VAR",
+    "PASSENGERSSPACE_0-ALL_1-BASIC ×94",
+    "LIFESUPPORT_0-ALL_1-BASIC ×94"
    ],
    "external": [
     "ENGINEBALANCED_5-CRUISER_2-AVERAGE",
-    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×10"
+    "RADAR_5-CRUISER_1-BASIC"
    ],
    "computed": {
-    "pwr_consumption": 252.8,
+    "pwr_consumption": 288.9,
     "pwr_activation": 100,
-    "pwr_creation": 260,
+    "pwr_creation": 299,
     "energy_storage": 0,
     "shield_max": 140,
     "shield_recharge": 12,
     "crew_min": 10,
     "crew_max": 30,
-    "passengers": 63,
+    "passengers": 95,
     "cargo": 0,
-    "life_ppl": 75,
+    "life_ppl": 106,
     "life_hrs": 8760,
     "fuel_cons": 0,
     "fuel_units": 400,
@@ -18249,11 +18263,11 @@
     "engineering": 2,
     "warfare": 2,
     "area_used": {
-     "core": 48,
-     "internal": 388.0,
-     "external": 50
+     "core": 72,
+     "internal": 465.0,
+     "external": 56
     },
-    "total_cost": 22107500,
+    "total_cost": 26340000,
     "availability": "UNIQUE",
     "legality": "No Permit",
     "valid": true
@@ -18267,7 +18281,8 @@
    "template": "TEMPLATE_5-CRUISER_4-RESEARCH",
    "description": "Research-class cruiser equipped for extended scientific missions. State-of-the-art laboratories, environmental sampling bays, and a large crew of specialists.",
    "core": [
-    "CREWSPACE_0-ALL_2-AVERAGE ×10",
+    "SCIENCELAB_0-ALL_3-GOOD ×6",
+    "OBSERVATORY_0-ALL_1-VAR",
     "POWER_5-CRUISER_2-AVERAGE"
    ],
    "internal": [
@@ -18277,6 +18292,7 @@
     "NAVBRIDGE_5-CRUISER_3-GOOD",
     "WARFARESUITE_5-CRUISER_3-GOOD",
     "ENGINEERING_5-CRUISER_3-GOOD",
+    "LIFESUPPORT_0-ALL_2-AVERAGE ×20",
     "MEDBAY_0-ALL_1-BASIC"
    ],
    "external": [
@@ -18285,13 +18301,13 @@
     "FUELTANK_5-CRUISER_1-BASIC",
     "RADAR_5-CRUISER_3-GOOD",
     "SHIELD_5-CRUISER_3-GOOD",
-    "LIFESUPPORT_0-ALL_2-AVERAGE ×10",
-    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×10"
+    "CREWSPACE_0-ALL_2-AVERAGE ×20",
+    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×20"
    ],
    "computed": {
-    "pwr_consumption": 289.5,
+    "pwr_consumption": 342.0,
     "pwr_activation": 100,
-    "pwr_creation": 300,
+    "pwr_creation": 345,
     "energy_storage": 0,
     "shield_max": 180,
     "shield_recharge": 28,
@@ -18299,7 +18315,7 @@
     "crew_max": 30,
     "passengers": 0,
     "cargo": 0,
-    "life_ppl": 11,
+    "life_ppl": 21,
     "life_hrs": 8760,
     "fuel_cons": 0,
     "fuel_units": 400,
@@ -18309,22 +18325,22 @@
     "jump_range": 2,
     "speed": "MEDIUM",
     "atmospheric": "NONE",
-    "berths": 11,
+    "berths": 21,
     "structure": 5,
     "hull": 20,
     "ecm": 5,
     "system": 20,
     "command": 3,
     "handling": 3,
-    "instruments": 6,
+    "instruments": 8,
     "engineering": 5,
     "warfare": 4,
     "area_used": {
-     "core": 90,
-     "internal": 145,
-     "external": 240.0
+     "core": 112,
+     "internal": 178.0,
+     "external": 296
     },
-    "total_cost": 28705000,
+    "total_cost": 36785000,
     "availability": "UNIQUE",
     "legality": "Restricted",
     "valid": true
@@ -18346,7 +18362,8 @@
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "CREWAUTOMATION_0-ALL_2-AVERAGE ×9",
     "BRIDGE_5-CRUISER_1-BASIC",
-    "NAVBRIDGE_5-CRUISER_1-BASIC"
+    "NAVBRIDGE_5-CRUISER_1-BASIC",
+    "MEDBAY_0-ALL_1-BASIC"
    ],
    "external": [
     "ENGINEBALANCED_5-CRUISER_2-AVERAGE",
@@ -18361,9 +18378,9 @@
     "ENERGYTANK_5-CRUISER_3-GOOD"
    ],
    "computed": {
-    "pwr_consumption": 195.5,
+    "pwr_consumption": 201.5,
     "pwr_activation": 100,
-    "pwr_creation": 260,
+    "pwr_creation": 299,
     "energy_storage": 80,
     "shield_max": 140,
     "shield_recharge": 12,
@@ -18393,10 +18410,10 @@
     "warfare": 2,
     "area_used": {
      "core": 84,
-     "internal": 48,
+     "internal": 53,
      "external": 345
     },
-    "total_cost": 20657500,
+    "total_cost": 21842500,
     "availability": "UNIQUE",
     "legality": "No Permit",
     "valid": true
@@ -18412,45 +18429,44 @@
    "core": [
     "JUMPDRIVE_5-CRUISER_1-BASIC",
     "FUELTANK_5-CRUISER_1-BASIC",
-    "MEDBAY_0-ALL_1-BASIC",
-    "POWER_5-CRUISER_1-BASIC"
+    "LIFESUPPORT_0-ALL_2-AVERAGE ×10",
+    "ECM_5-CRUISER_2-AVERAGE",
+    "POWER_5-CRUISER_2-AVERAGE"
    ],
    "internal": [
-    "ORDONNANCE_FIXED_0-ALL_3-MASSIVE",
     "AMMOBAY_0-ALL_3-MASSIVE ×1",
     "RADAR_5-CRUISER_3-GOOD",
-    "SHIELD_5-CRUISER_1-BASIC",
+    "SHIELD_5-CRUISER_3-GOOD",
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "CREWAUTOMATION_0-ALL_2-AVERAGE ×9",
-    "BRIDGE_5-CRUISER_1-BASIC",
-    "NAVBRIDGE_5-CRUISER_1-BASIC",
-    "WARFARESUITE_5-CRUISER_1-BASIC",
-    "ENGINEERING_5-CRUISER_1-BASIC",
-    "CREWSPACE_0-ALL_1-BASIC ×10",
-    "LIFESUPPORT_0-ALL_1-BASIC ×10",
-    "ECM_5-CRUISER_1-BASIC",
-    "STRUCTURE_5-CRUISER_1-BASIC"
+    "BRIDGE_5-CRUISER_3-GOOD",
+    "NAVBRIDGE_5-CRUISER_3-GOOD",
+    "WARFARESUITE_5-CRUISER_3-GOOD",
+    "ENGINEERING_5-CRUISER_3-GOOD",
+    "CREWSPACE_0-ALL_2-AVERAGE ×10"
    ],
    "external": [
     "ENGINECOMBAT_5-CRUISER_3-GOOD",
     "WEAPON_FIXED_0-ALL_3-MASSIVE",
     "WEAPON_FIXED_0-ALL_3-MASSIVE",
     "WEAPON_TURRET_0-ALL_3-MASSIVE",
-    "POINTDEFENSE_0-ALL_2-HUGE"
+    "ORDONNANCE_FIXED_0-ALL_3-MASSIVE",
+    "POINTDEFENSE_0-ALL_2-HUGE",
+    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×10"
    ],
    "computed": {
-    "pwr_consumption": 227.5,
+    "pwr_consumption": 331.5,
     "pwr_activation": 60,
-    "pwr_creation": 260,
+    "pwr_creation": 345,
     "energy_storage": 0,
-    "shield_max": 140,
-    "shield_recharge": 12,
+    "shield_max": 180,
+    "shield_recharge": 28,
     "crew_min": 10,
     "crew_max": 30,
     "passengers": 0,
     "cargo": 0,
     "life_ppl": 11,
-    "life_hrs": 336,
+    "life_hrs": 8760,
     "fuel_cons": 0,
     "fuel_units": 400,
     "combat_range": 400,
@@ -18460,21 +18476,21 @@
     "speed": "HIGH",
     "atmospheric": "NONE",
     "berths": 11,
-    "structure": 6,
+    "structure": 5,
     "hull": 20,
-    "ecm": 6,
+    "ecm": 7,
     "system": 20,
-    "command": 1,
+    "command": 3,
     "handling": 2,
-    "instruments": 4,
-    "engineering": 2,
-    "warfare": 3,
+    "instruments": 6,
+    "engineering": 5,
+    "warfare": 5,
     "area_used": {
-     "core": 133,
-     "internal": 230,
-     "external": 113
+     "core": 170.0,
+     "internal": 274,
+     "external": 138
     },
-    "total_cost": 29400000,
+    "total_cost": 43092000,
     "availability": "LIMITED",
     "legality": "Restricted",
     "valid": true
@@ -18489,10 +18505,10 @@
    "description": "Mega-yacht class cruiser, ultimate private luxury transport. Exclusive suites, a pool deck, gourmet facilities, and security staff for ultra-high-net-worth clientele.",
    "core": [
     "SHIELD_5-CRUISER_1-BASIC",
-    "POWER_5-CRUISER_1-BASIC"
+    "POWER_5-CRUISER_2-AVERAGE"
    ],
    "internal": [
-    "FUELTANK_5-CRUISER_1-BASIC",
+    "RADAR_5-CRUISER_1-BASIC",
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "CREWAUTOMATION_0-ALL_2-AVERAGE ×9",
     "BRIDGE_5-CRUISER_1-BASIC",
@@ -18501,27 +18517,31 @@
     "ENGINEERING_5-CRUISER_1-BASIC",
     "CREWSPACE_0-ALL_1-BASIC ×10",
     "LIFESUPPORT_0-ALL_1-BASIC ×10",
-    "PASSENGERSSPACE_0-ALL_1-BASIC ×67",
-    "LIFESUPPORT_0-ALL_1-BASIC ×67"
+    "SWIMPOOL_0-ALL_0-UNIVERSAL",
+    "JACUZI_0-ALL_0-UNIVERSAL",
+    "THEATER_0-ALL_1-VAR",
+    "PASSENGERSSPACE_0-ALL_1-BASIC ×73",
+    "LIFESUPPORT_0-ALL_1-BASIC ×73",
+    "MEDBAY_0-ALL_3-GOOD ×2"
    ],
    "external": [
     "ENGINEBALANCED_5-CRUISER_2-AVERAGE",
     "JUMPDRIVE_5-CRUISER_2-AVERAGE",
-    "RADAR_5-CRUISER_1-BASIC",
+    "FUELTANK_5-CRUISER_1-BASIC",
     "ESCAPEPOD_0-ALL_0-UNIVERSAL ×10"
    ],
    "computed": {
-    "pwr_consumption": 255.2,
+    "pwr_consumption": 307.8,
     "pwr_activation": 100,
-    "pwr_creation": 260,
+    "pwr_creation": 345,
     "energy_storage": 0,
     "shield_max": 140,
     "shield_recharge": 12,
     "crew_min": 10,
     "crew_max": 30,
-    "passengers": 67,
+    "passengers": 74,
     "cargo": 0,
-    "life_ppl": 79,
+    "life_ppl": 85,
     "life_hrs": 336,
     "fuel_cons": 0,
     "fuel_units": 400,
@@ -18539,14 +18559,14 @@
     "command": 1,
     "handling": 3,
     "instruments": 2,
-    "engineering": 2,
+    "engineering": 3,
     "warfare": 2,
     "area_used": {
-     "core": 72,
-     "internal": 298,
-     "external": 118
+     "core": 80,
+     "internal": 354,
+     "external": 142
     },
-    "total_cost": 23462500,
+    "total_cost": 31319500,
     "availability": "UNIQUE",
     "legality": "No Permit",
     "valid": true
@@ -18561,20 +18581,19 @@
    "description": "Universal-class battleship template. The base configuration for all battleship-tier vessels, massive combined arms capability with substantial internal and external expansion.",
    "core": [
     "SHIELD_6-BATTLECRUISER_3-GOOD",
-    "ENGINEERING_6-BATTLECRUISER_3-GOOD",
-    "POWER_6-BATTLECRUISER_3-GOOD"
+    "CREWSPACE_0-ALL_2-AVERAGE ×26",
+    "MEDBAY_0-ALL_3-GOOD",
+    "POWER_6-BATTLECRUISER_2-AVERAGE"
    ],
    "internal": [
-    "RADAR_6-BATTLECRUISER_3-GOOD",
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "CREWAUTOMATION_0-ALL_3-GOOD ×36",
     "BRIDGE_6-BATTLECRUISER_3-GOOD",
     "NAVBRIDGE_6-BATTLECRUISER_3-GOOD",
     "WARFARESUITE_6-BATTLECRUISER_3-GOOD",
-    "HULL_6-BATTLECRUISER_1-BASIC",
-    "CREWSPACE_0-ALL_1-BASIC ×13",
-    "LIFESUPPORT_0-ALL_1-BASIC ×13",
-    "ECM_6-BATTLECRUISER_3-GOOD"
+    "ENGINEERING_6-BATTLECRUISER_3-GOOD",
+    "LIFESUPPORT_0-ALL_1-BASIC ×26",
+    "ECM_6-BATTLECRUISER_2-AVERAGE"
    ],
    "external": [
     "ENGINEBALANCED_6-BATTLECRUISER_1-BASIC",
@@ -18583,12 +18602,14 @@
     "WEAPON_TURRET_0-ALL_3-MASSIVE",
     "POINTDEFENSE_0-ALL_3-MASSIVE",
     "JUMPDRIVE_6-BATTLECRUISER_1-BASIC",
-    "FUELTANK_6-BATTLECRUISER_1-BASIC"
+    "FUELTANK_6-BATTLECRUISER_1-BASIC",
+    "RADAR_6-BATTLECRUISER_3-GOOD",
+    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×26"
    ],
    "computed": {
-    "pwr_consumption": 604.8,
+    "pwr_consumption": 658.6,
     "pwr_activation": 120,
-    "pwr_creation": 680,
+    "pwr_creation": 690,
     "energy_storage": 0,
     "shield_max": 360,
     "shield_recharge": 56,
@@ -18596,7 +18617,7 @@
     "crew_max": 63,
     "passengers": 0,
     "cargo": 0,
-    "life_ppl": 14,
+    "life_ppl": 27,
     "life_hrs": 336,
     "fuel_cons": 0,
     "fuel_units": 800,
@@ -18606,22 +18627,22 @@
     "jump_range": 1,
     "speed": "LOW",
     "atmospheric": "NONE",
-    "berths": 14,
+    "berths": 27,
     "structure": 6,
-    "hull": 20,
-    "ecm": 9,
+    "hull": 25,
+    "ecm": 8,
     "system": 25,
     "command": 3,
-    "handling": 4,
+    "handling": 3,
     "instruments": 6,
-    "engineering": 6,
+    "engineering": 5,
     "warfare": 4,
     "area_used": {
-     "core": 296,
-     "internal": 300,
-     "external": 394
+     "core": 318,
+     "internal": 356,
+     "external": 468
     },
-    "total_cost": 109180000,
+    "total_cost": 93990000,
     "availability": "UNIQUE",
     "legality": "Restricted",
     "valid": true
@@ -18637,14 +18658,18 @@
    "core": [
     "WARFARESUITE_6-BATTLECRUISER_1-BASIC",
     "ENGINEERING_6-BATTLECRUISER_1-BASIC",
-    "LIFESUPPORT_0-ALL_1-BASIC ×25",
+    "CREWSPACE_0-ALL_1-BASIC ×25",
+    "MEDBAY_0-ALL_3-GOOD",
     "POWER_6-BATTLECRUISER_1-BASIC"
    ],
    "internal": [
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "CREWAUTOMATION_0-ALL_2-AVERAGE ×24",
     "BRIDGE_6-BATTLECRUISER_1-BASIC",
-    "NAVBRIDGE_6-BATTLECRUISER_1-BASIC"
+    "NAVBRIDGE_6-BATTLECRUISER_1-BASIC",
+    "ECM_6-BATTLECRUISER_1-BASIC",
+    "TRANSPONDERSPOOF_0-ALL_0-UNIVERSAL",
+    "CARGOSPACE_0-ALL_0-UNIVERSAL ×1"
    ],
    "external": [
     "ENGINEBALANCED_6-BATTLECRUISER_1-BASIC",
@@ -18654,26 +18679,25 @@
     "FUELTANK_6-BATTLECRUISER_1-BASIC",
     "RADAR_6-BATTLECRUISER_1-BASIC",
     "SHIELD_6-BATTLECRUISER_1-BASIC",
-    "CREWSPACE_0-ALL_1-BASIC ×25",
+    "LIFESUPPORT_0-ALL_1-BASIC ×25",
     "ESCAPEPOD_0-ALL_0-UNIVERSAL ×25",
-    "ECM_6-BATTLECRUISER_1-BASIC",
     "SYSTEM_6-BATTLECRUISER_1-BASIC",
     "STRUCTURE_6-BATTLECRUISER_1-BASIC",
     "SMUGGLERHOLD_0-ALL_3-GOOD",
-    "TRANSPONDERSPOOF_0-ALL_0-UNIVERSAL",
-    "CARGOSPACE_0-ALL_0-UNIVERSAL ×60"
+    "STEALTHSYSTEM_6-BATTLECRUISER_1-BASIC",
+    "CARGOSPACE_0-ALL_0-UNIVERSAL ×180"
    ],
    "computed": {
-    "pwr_consumption": 412.0,
-    "pwr_activation": 120,
-    "pwr_creation": 520,
+    "pwr_consumption": 426.0,
+    "pwr_activation": 184,
+    "pwr_creation": 598,
     "energy_storage": 0,
     "shield_max": 280,
     "shield_recharge": 24,
     "crew_min": 25,
     "crew_max": 75,
     "passengers": 0,
-    "cargo": 63,
+    "cargo": 184,
     "life_ppl": 26,
     "life_hrs": 336,
     "fuel_cons": 0,
@@ -18695,11 +18719,11 @@
     "engineering": 2,
     "warfare": 2,
     "area_used": {
-     "core": 195,
-     "internal": 99,
-     "external": 698
+     "core": 233,
+     "internal": 118,
+     "external": 838
     },
-    "total_cost": 36777500,
+    "total_cost": 54092500,
     "availability": "UNIQUE",
     "legality": "Illegal",
     "valid": true
@@ -18713,14 +18737,15 @@
    "template": "TEMPLATE_6-BATTLECRUISER_2-GATESHIP",
    "description": "Gate Ship-class battleship responsible for maintaining and operating interstellar gate infrastructure. Massive external hardpoints accommodate gate components and support vessels.",
    "core": [
-    "MEDBAY_0-ALL_3-GOOD",
-    "POWER_6-BATTLECRUISER_2-AVERAGE"
+    "WARFARESUITE_6-BATTLECRUISER_2-AVERAGE",
+    "POWER_6-BATTLECRUISER_1-BASIC"
    ],
    "internal": [
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "CREWAUTOMATION_0-ALL_3-GOOD ×36",
     "BRIDGE_6-BATTLECRUISER_2-AVERAGE",
-    "NAVBRIDGE_6-BATTLECRUISER_1-BASIC"
+    "NAVBRIDGE_6-BATTLECRUISER_2-AVERAGE",
+    "MEDBAY_0-ALL_3-GOOD"
    ],
    "external": [
     "ENGINEBALANCED_6-BATTLECRUISER_1-BASIC",
@@ -18728,18 +18753,19 @@
     "FUELTANK_6-BATTLECRUISER_1-BASIC",
     "RADAR_6-BATTLECRUISER_2-AVERAGE",
     "SHIELD_6-BATTLECRUISER_2-AVERAGE",
-    "WARFARESUITE_6-BATTLECRUISER_2-AVERAGE",
     "ENGINEERING_6-BATTLECRUISER_2-AVERAGE",
     "CREWSPACE_0-ALL_2-AVERAGE ×26",
     "LIFESUPPORT_0-ALL_3-GOOD ×26",
     "ESCAPEPOD_0-ALL_0-UNIVERSAL ×26",
     "ECM_6-BATTLECRUISER_2-AVERAGE",
-    "STRUCTURE_6-BATTLECRUISER_1-BASIC"
+    "SYSTEM_6-BATTLECRUISER_2-AVERAGE",
+    "STRUCTURE_6-BATTLECRUISER_2-AVERAGE",
+    "WORKSHOP_0-ALL_3-GOOD ×6"
    ],
    "computed": {
-    "pwr_consumption": 542.0,
+    "pwr_consumption": 597.0,
     "pwr_activation": 120,
-    "pwr_creation": 600,
+    "pwr_creation": 598,
     "energy_storage": 0,
     "shield_max": 320,
     "shield_recharge": 40,
@@ -18758,21 +18784,21 @@
     "speed": "LOW",
     "atmospheric": "NONE",
     "berths": 27,
-    "structure": 7,
+    "structure": 8,
     "hull": 25,
     "ecm": 8,
-    "system": 25,
+    "system": 35,
     "command": 2,
     "handling": 3,
-    "instruments": 3,
-    "engineering": 4,
+    "instruments": 4,
+    "engineering": 3,
     "warfare": 3,
     "area_used": {
-     "core": 124,
-     "internal": 144,
-     "external": 682.0
+     "core": 136,
+     "internal": 164,
+     "external": 790.0
     },
-    "total_cost": 48770000,
+    "total_cost": 49915000,
     "availability": "LIMITED",
     "legality": "No Permit",
     "valid": true
@@ -18787,17 +18813,18 @@
    "description": "Gate Security-class battleship stationed to defend critical gate installations. Heavy weapons coverage, advanced electronic warfare, and rapid interception capability.",
    "core": [
     "SHIELD_6-BATTLECRUISER_3-GOOD",
-    "NAVBRIDGE_6-BATTLECRUISER_3-GOOD",
-    "WARFARESUITE_6-BATTLECRUISER_3-GOOD",
     "ENGINEERING_6-BATTLECRUISER_3-GOOD",
+    "CREWSPACE_0-ALL_2-AVERAGE ×26",
+    "LIFESUPPORT_0-ALL_3-GOOD ×26",
+    "MEDBAY_0-ALL_3-GOOD",
     "POWER_6-BATTLECRUISER_2-AVERAGE"
    ],
    "internal": [
-    "RADAR_6-BATTLECRUISER_3-GOOD",
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "CREWAUTOMATION_0-ALL_3-GOOD ×36",
     "BRIDGE_6-BATTLECRUISER_3-GOOD",
-    "LIFESUPPORT_0-ALL_1-BASIC ×13"
+    "NAVBRIDGE_6-BATTLECRUISER_3-GOOD",
+    "WARFARESUITE_6-BATTLECRUISER_3-GOOD"
    ],
    "external": [
     "ENGINEBALANCED_6-BATTLECRUISER_1-BASIC",
@@ -18807,12 +18834,14 @@
     "WEAPON_TURRET_0-ALL_3-MASSIVE",
     "POINTDEFENSE_0-ALL_3-MASSIVE",
     "POINTDEFENSE_0-ALL_3-MASSIVE",
-    "CREWSPACE_0-ALL_2-AVERAGE ×13"
+    "RADAR_6-BATTLECRUISER_3-GOOD",
+    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×26",
+    "ECM_6-BATTLECRUISER_3-GOOD"
    ],
    "computed": {
-    "pwr_consumption": 572.3,
+    "pwr_consumption": 686.0,
     "pwr_activation": 0,
-    "pwr_creation": 600,
+    "pwr_creation": 690,
     "energy_storage": 0,
     "shield_max": 360,
     "shield_recharge": 56,
@@ -18820,8 +18849,8 @@
     "crew_max": 63,
     "passengers": 0,
     "cargo": 0,
-    "life_ppl": 14,
-    "life_hrs": 336,
+    "life_ppl": 27,
+    "life_hrs": 999999,
     "fuel_cons": 0,
     "fuel_units": 0,
     "combat_range": 800,
@@ -18830,10 +18859,10 @@
     "jump_range": 0,
     "speed": "LOW",
     "atmospheric": "NONE",
-    "berths": 14,
+    "berths": 27,
     "structure": 6,
     "hull": 25,
-    "ecm": 6,
+    "ecm": 9,
     "system": 25,
     "command": 3,
     "handling": 3,
@@ -18841,11 +18870,11 @@
     "engineering": 5,
     "warfare": 4,
     "area_used": {
-     "core": 384,
-     "internal": 199,
-     "external": 397
+     "core": 444.0,
+     "internal": 240,
+     "external": 476
     },
-    "total_cost": 100100000,
+    "total_cost": 110790000,
     "availability": "UNIQUE",
     "legality": "Restricted",
     "valid": true
@@ -18861,6 +18890,7 @@
    "core": [
     "JUMPDRIVE_6-BATTLECRUISER_1-BASIC",
     "FUELTANK_6-BATTLECRUISER_1-BASIC",
+    "WARFARESUITE_6-BATTLECRUISER_3-GOOD",
     "ENGINEERING_6-BATTLECRUISER_1-BASIC",
     "POWER_6-BATTLECRUISER_1-BASIC"
    ],
@@ -18870,30 +18900,29 @@
     "WEAPON_FIXED_0-ALL_4-COLOSSAL",
     "ORDONNANCE_FIXED_0-ALL_4-COLOSSAL",
     "AMMOBAY_0-ALL_4-COLOSSAL ×1",
-    "RADAR_6-BATTLECRUISER_1-BASIC",
-    "SHIELD_6-BATTLECRUISER_1-BASIC",
+    "RADAR_6-BATTLECRUISER_3-GOOD",
+    "SHIELD_6-BATTLECRUISER_3-GOOD",
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "CREWAUTOMATION_0-ALL_3-GOOD ×36",
-    "BRIDGE_6-BATTLECRUISER_1-BASIC",
-    "NAVBRIDGE_6-BATTLECRUISER_1-BASIC",
-    "WARFARESUITE_6-BATTLECRUISER_1-BASIC",
+    "BRIDGE_6-BATTLECRUISER_3-GOOD",
+    "NAVBRIDGE_6-BATTLECRUISER_3-GOOD",
     "HULL_6-BATTLECRUISER_1-BASIC",
     "CREWSPACE_0-ALL_1-BASIC ×13",
     "LIFESUPPORT_0-ALL_1-BASIC ×13",
-    "ECM_6-BATTLECRUISER_1-BASIC",
-    "STRUCTURE_6-BATTLECRUISER_1-BASIC"
+    "ECM_6-BATTLECRUISER_3-GOOD"
    ],
    "external": [
     "ENGINEBALANCED_6-BATTLECRUISER_1-BASIC",
-    "WEAPON_TURRET_0-ALL_3-MASSIVE"
+    "WEAPON_TURRET_0-ALL_3-MASSIVE",
+    "POINTDEFENSE_0-ALL_3-MASSIVE"
    ],
    "computed": {
-    "pwr_consumption": 390.8,
+    "pwr_consumption": 590.8,
     "pwr_activation": 120,
-    "pwr_creation": 520,
+    "pwr_creation": 598,
     "energy_storage": 0,
-    "shield_max": 280,
-    "shield_recharge": 24,
+    "shield_max": 360,
+    "shield_recharge": 56,
     "crew_min": 13,
     "crew_max": 63,
     "passengers": 0,
@@ -18909,21 +18938,21 @@
     "speed": "LOW",
     "atmospheric": "NONE",
     "berths": 14,
-    "structure": 7,
+    "structure": 6,
     "hull": 15,
-    "ecm": 7,
+    "ecm": 9,
     "system": 25,
-    "command": 1,
+    "command": 3,
     "handling": 5,
-    "instruments": 2,
+    "instruments": 6,
     "engineering": 2,
-    "warfare": 2,
+    "warfare": 4,
     "area_used": {
-     "core": 296,
-     "internal": 589,
-     "external": 89
+     "core": 344,
+     "internal": 709,
+     "external": 109
     },
-    "total_cost": 75690000,
+    "total_cost": 100140000,
     "availability": "UNIQUE",
     "legality": "Restricted",
     "valid": true
@@ -18937,9 +18966,9 @@
    "template": "TEMPLATE_7-CARRIER_0-UNIVERSAL",
    "description": "Universal-class carrier template. Massive hull with balanced hangar, internal operations, and external hardpoints, the definitive large-scale multi-role platform.",
    "core": [
-    "SHIELD_7-CARRIER_3-GOOD",
     "SYSTEM_7-CARRIER_3-GOOD",
     "STRUCTURE_7-CARRIER_3-GOOD",
+    "POWER_7-CARRIER_3-GOOD",
     "POWER_7-CARRIER_3-GOOD"
    ],
    "internal": [
@@ -18954,8 +18983,7 @@
     "ECM_7-CARRIER_3-GOOD",
     "COMBRIDGE_7-CARRIER_3-GOOD",
     "MEDBAY_0-ALL_3-GOOD",
-    "WORKSHOP_0-ALL_3-GOOD ×6",
-    "POWER_7-CARRIER_3-GOOD"
+    "WORKSHOP_0-ALL_3-GOOD ×6"
    ],
    "external": [
     "ENGINEBALANCED_7-CARRIER_1-BASIC",
@@ -18965,12 +18993,13 @@
     "JUMPDRIVE_7-CARRIER_2-AVERAGE",
     "FUELTANK_7-CARRIER_1-BASIC",
     "RADAR_7-CARRIER_3-GOOD",
+    "SHIELD_7-CARRIER_3-GOOD",
     "ESCAPEPOD_0-ALL_0-UNIVERSAL ×76"
    ],
    "computed": {
     "pwr_consumption": 1635.5,
     "pwr_activation": 400,
-    "pwr_creation": 2720,
+    "pwr_creation": 3128,
     "energy_storage": 0,
     "shield_max": 720,
     "shield_recharge": 112,
@@ -18999,11 +19028,11 @@
     "engineering": 7,
     "warfare": 4,
     "area_used": {
-     "core": 848,
-     "internal": 1566.0,
-     "external": 858
+     "core": 880,
+     "internal": 1310.0,
+     "external": 1082
     },
-    "total_cost": 304855000,
+    "total_cost": 295555000,
     "availability": "UNIQUE",
     "legality": "Restricted",
     "valid": true
@@ -19017,13 +19046,11 @@
    "template": "TEMPLATE_7-CARRIER_1-MEGACARGO",
    "description": "Mega-Cargo carrier, the largest purpose-built freight transport in the known galaxy. Handles freight volumes that would fill an entire convoy of lesser ships.",
    "core": [
-    "CREWSPACE_0-ALL_1-BASIC ×76",
-    "LIFESUPPORT_0-ALL_3-GOOD ×76",
     "SYSTEM_7-CARRIER_1-BASIC",
     "STRUCTURE_7-CARRIER_1-BASIC",
     "COMBRIDGE_7-CARRIER_1-BASIC",
     "POWER_7-CARRIER_1-BASIC",
-    "ENERGYTANK_7-CARRIER_2-AVERAGE"
+    "ENERGYTANK_7-CARRIER_3-GOOD"
    ],
    "internal": [
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
@@ -19032,9 +19059,10 @@
     "NAVBRIDGE_7-CARRIER_1-BASIC",
     "WARFARESUITE_7-CARRIER_1-BASIC",
     "ENGINEERING_7-CARRIER_1-BASIC",
+    "CREWSPACE_0-ALL_1-BASIC ×38",
+    "LIFESUPPORT_0-ALL_1-BASIC ×38",
     "ECM_7-CARRIER_1-BASIC",
-    "MEDBAY_0-ALL_3-GOOD",
-    "CARGOSPACE_0-ALL_0-UNIVERSAL ×51"
+    "CARGOSPACE_0-ALL_0-UNIVERSAL ×44"
    ],
    "external": [
     "ENGINEBALANCED_7-CARRIER_1-BASIC",
@@ -19042,22 +19070,22 @@
     "FUELTANK_7-CARRIER_1-BASIC",
     "RADAR_7-CARRIER_1-BASIC",
     "SHIELD_7-CARRIER_1-BASIC",
-    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×76",
-    "CARGOSPACE_0-ALL_0-UNIVERSAL ×2766"
+    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×38",
+    "CARGOSPACE_0-ALL_0-UNIVERSAL ×3504"
    ],
    "computed": {
-    "pwr_consumption": 1028.5,
+    "pwr_consumption": 922.3,
     "pwr_activation": 400,
-    "pwr_creation": 1040,
-    "energy_storage": 240,
+    "pwr_creation": 1196,
+    "energy_storage": 320,
     "shield_max": 560,
     "shield_recharge": 48,
     "crew_min": 38,
     "crew_max": 188,
     "passengers": 0,
-    "cargo": 2817,
-    "life_ppl": 77,
-    "life_hrs": 999999,
+    "cargo": 3548,
+    "life_ppl": 39,
+    "life_hrs": 336,
     "fuel_cons": 0,
     "fuel_units": 1600,
     "combat_range": 1600,
@@ -19066,7 +19094,7 @@
     "jump_range": 2,
     "speed": "LOW",
     "atmospheric": "NONE",
-    "berths": 77,
+    "berths": 39,
     "structure": 6,
     "hull": 30,
     "ecm": 6,
@@ -19077,11 +19105,11 @@
     "engineering": 2,
     "warfare": 2,
     "area_used": {
-     "core": 990.0,
-     "internal": 498,
-     "external": 3498
+     "core": 672,
+     "internal": 598,
+     "external": 4198
     },
-    "total_cost": 185732500,
+    "total_cost": 194267500,
     "availability": "UNIQUE",
     "legality": "No Permit",
     "valid": true
@@ -19109,7 +19137,6 @@
     "ENGINEERING_7-CARRIER_2-AVERAGE",
     "CREWSPACE_0-ALL_2-AVERAGE ×76",
     "LIFESUPPORT_0-ALL_3-GOOD ×76",
-    "CARGOSPACE_0-ALL_0-UNIVERSAL ×200",
     "ECM_7-CARRIER_2-AVERAGE",
     "COMBRIDGE_7-CARRIER_2-AVERAGE",
     "MEDBAY_0-ALL_3-GOOD",
@@ -19123,12 +19150,13 @@
     "RADAR_7-CARRIER_2-AVERAGE",
     "SHIELD_7-CARRIER_2-AVERAGE",
     "ESCAPEPOD_0-ALL_0-UNIVERSAL ×76",
+    "CARGOSPACE_0-ALL_0-UNIVERSAL ×200",
     "MININGRIG_0-ALL_3-GOOD ×8"
    ],
    "computed": {
     "pwr_consumption": 1672.5,
     "pwr_activation": 400,
-    "pwr_creation": 2720,
+    "pwr_creation": 3128,
     "energy_storage": 0,
     "shield_max": 640,
     "shield_recharge": 80,
@@ -19158,10 +19186,10 @@
     "warfare": 3,
     "area_used": {
      "core": 816,
-     "internal": 1804.0,
-     "external": 890
+     "internal": 1604.0,
+     "external": 1090
     },
-    "total_cost": 250630000,
+    "total_cost": 263227500,
     "availability": "UNIQUE",
     "legality": "No Permit",
     "valid": true
@@ -19182,7 +19210,6 @@
     "POWER_7-CARRIER_3-GOOD"
    ],
    "internal": [
-    "RADAR_7-CARRIER_1-BASIC",
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "CREWAUTOMATION_0-ALL_3-GOOD ×111",
     "BRIDGE_7-CARRIER_1-BASIC",
@@ -19191,28 +19218,35 @@
     "ENGINEERING_7-CARRIER_1-BASIC",
     "CREWSPACE_0-ALL_1-BASIC ×38",
     "LIFESUPPORT_0-ALL_2-AVERAGE ×38",
+    "PROMENADE_0-ALL_1-VAR",
+    "THEATER_0-ALL_1-VAR",
+    "GYM_0-ALL_1-VAR",
+    "MARKET_0-ALL_1-VAR",
+    "ARBORETUM_0-ALL_1-VAR",
+    "BAR_0-ALL_3-GOOD",
     "PASSENGERSSPACE_0-ALL_1-BASIC ×1237",
     "LIFESUPPORT_0-ALL_1-BASIC ×1237",
     "ECM_7-CARRIER_1-BASIC",
     "COMBRIDGE_7-CARRIER_1-BASIC",
-    "MEDBAY_0-ALL_3-GOOD ×10",
-    "ENERGYTANK_7-CARRIER_3-GOOD"
+    "MEDBAY_0-ALL_3-GOOD ×10"
    ],
    "external": [
     "ENGINEBALANCED_7-CARRIER_1-BASIC",
     "JUMPDRIVE_7-CARRIER_2-AVERAGE",
-    "FUELTANK_7-CARRIER_1-BASIC"
+    "FUELTANK_7-CARRIER_1-BASIC",
+    "RADAR_7-CARRIER_1-BASIC",
+    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×38"
    ],
    "computed": {
-    "pwr_consumption": 2347.2,
+    "pwr_consumption": 2412.2,
     "pwr_activation": 400,
-    "pwr_creation": 2720,
-    "energy_storage": 320,
+    "pwr_creation": 3128,
+    "energy_storage": 0,
     "shield_max": 560,
     "shield_recharge": 48,
     "crew_min": 38,
     "crew_max": 188,
-    "passengers": 1237,
+    "passengers": 1238,
     "cargo": 0,
     "life_ppl": 1277,
     "life_hrs": 8760,
@@ -19236,10 +19270,10 @@
     "warfare": 2,
     "area_used": {
      "core": 816,
-     "internal": 3441.0,
-     "external": 496
+     "internal": 3313.0,
+     "external": 598
     },
-    "total_cost": 277837500,
+    "total_cost": 268867500,
     "availability": "UNIQUE",
     "legality": "No Permit",
     "valid": true
@@ -19254,7 +19288,6 @@
    "description": "Missile carrier, a dedicated long-range strike platform. Enormous ordnance magazines and a comprehensive fire-control suite allow it to dominate entire battle zones from extreme range.",
    "core": [
     "BRIDGE_7-CARRIER_3-GOOD",
-    "NAVBRIDGE_7-CARRIER_3-GOOD",
     "WARFARESUITE_7-CARRIER_3-GOOD",
     "ENGINEERING_7-CARRIER_3-GOOD",
     "CREWSPACE_0-ALL_2-AVERAGE ×76",
@@ -19263,6 +19296,7 @@
     "SYSTEM_7-CARRIER_3-GOOD",
     "STRUCTURE_7-CARRIER_3-GOOD",
     "COMBRIDGE_7-CARRIER_3-GOOD",
+    "POWER_7-CARRIER_3-GOOD",
     "POWER_7-CARRIER_3-GOOD"
    ],
    "internal": [
@@ -19270,6 +19304,7 @@
     "AMMOBAY_0-ALL_4-COLOSSAL ×2",
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "CREWAUTOMATION_0-ALL_3-GOOD ×111",
+    "NAVBRIDGE_7-CARRIER_3-GOOD",
     "MEDBAY_0-ALL_3-GOOD"
    ],
    "external": [
@@ -19283,13 +19318,12 @@
     "RADAR_7-CARRIER_3-GOOD",
     "SHIELD_7-CARRIER_3-GOOD",
     "ESCAPEPOD_0-ALL_0-UNIVERSAL ×76",
-    "BAY-FIGHTER_0-ALL_0-UNIVERSAL ×10",
-    "POWER_7-CARRIER_3-GOOD"
+    "BAY-FIGHTER_0-ALL_0-UNIVERSAL ×10"
    ],
    "computed": {
     "pwr_consumption": 1940.5,
     "pwr_activation": 400,
-    "pwr_creation": 2720,
+    "pwr_creation": 3128,
     "energy_storage": 0,
     "shield_max": 720,
     "shield_recharge": 112,
@@ -19318,11 +19352,11 @@
     "engineering": 7,
     "warfare": 4,
     "area_used": {
-     "core": 1771.0,
-     "internal": 477,
-     "external": 1838
+     "core": 1915.0,
+     "internal": 589,
+     "external": 1582
     },
-    "total_cost": 361465000,
+    "total_cost": 397255000,
     "availability": "UNIQUE",
     "legality": "Restricted",
     "valid": true
@@ -19336,8 +19370,8 @@
    "template": "TEMPLATE_7-CARRIER_5-HIVE",
    "description": "Hive carrier, a massive fighter and drone platform. Hundreds of small craft are launched, recovered, and resupplied through its vast external bay network.",
    "core": [
-    "ENGINEERING_7-CARRIER_2-AVERAGE",
-    "STRUCTURE_7-CARRIER_2-AVERAGE",
+    "CREWSPACE_0-ALL_2-AVERAGE ×76",
+    "COMBRIDGE_7-CARRIER_2-AVERAGE",
     "POWER_7-CARRIER_3-GOOD"
    ],
    "internal": [
@@ -19346,6 +19380,7 @@
     "BRIDGE_7-CARRIER_2-AVERAGE",
     "NAVBRIDGE_7-CARRIER_2-AVERAGE",
     "WARFARESUITE_7-CARRIER_2-AVERAGE",
+    "ENGINEERING_7-CARRIER_2-AVERAGE",
     "ECM_7-CARRIER_2-AVERAGE",
     "MEDBAY_0-ALL_3-GOOD"
    ],
@@ -19356,19 +19391,21 @@
     "FUELTANK_7-CARRIER_1-BASIC",
     "RADAR_7-CARRIER_2-AVERAGE",
     "SHIELD_7-CARRIER_2-AVERAGE",
-    "CREWSPACE_0-ALL_2-AVERAGE ×76",
     "LIFESUPPORT_0-ALL_3-GOOD ×76",
     "ESCAPEPOD_0-ALL_0-UNIVERSAL ×76",
     "SYSTEM_7-CARRIER_2-AVERAGE",
+    "STRUCTURE_7-CARRIER_2-AVERAGE",
     "BAY-DRONE_0-ALL_0-UNIVERSAL ×60",
+    "BAY-FIGHTER_0-ALL_0-UNIVERSAL ×40",
     "WORKSHOP_0-ALL_3-GOOD ×4",
-    "POWER_7-CARRIER_3-GOOD"
+    "POWER_7-CARRIER_3-GOOD",
+    "ENERGYTANK_7-CARRIER_2-AVERAGE"
    ],
    "computed": {
-    "pwr_consumption": 1612.5,
+    "pwr_consumption": 2751.5,
     "pwr_activation": 400,
-    "pwr_creation": 2720,
-    "energy_storage": 0,
+    "pwr_creation": 3128,
+    "energy_storage": 240,
     "shield_max": 640,
     "shield_recharge": 80,
     "crew_min": 38,
@@ -19390,17 +19427,17 @@
     "hull": 30,
     "ecm": 7,
     "system": 40,
-    "command": 2,
+    "command": 4,
     "handling": 3,
     "instruments": 4,
     "engineering": 6,
     "warfare": 3,
     "area_used": {
-     "core": 496,
-     "internal": 495,
-     "external": 3065.0
+     "core": 584,
+     "internal": 591,
+     "external": 4787.0
     },
-    "total_cost": 171150000,
+    "total_cost": 182020000,
     "availability": "UNIQUE",
     "legality": "Restricted",
     "valid": true
@@ -19452,7 +19489,7 @@
    "computed": {
     "pwr_consumption": 4619.0,
     "pwr_activation": 800,
-    "pwr_creation": 5440,
+    "pwr_creation": 6256,
     "energy_storage": 0,
     "shield_max": 1440,
     "shield_recharge": 224,
@@ -19485,7 +19522,7 @@
      "internal": 3262.0,
      "external": 3797
     },
-    "total_cost": 1027920000,
+    "total_cost": 1138420000,
     "availability": "UNIQUE",
     "legality": "Restricted",
     "valid": true
@@ -19500,7 +19537,6 @@
    "description": "Interdictor Nova-class, designed to deny entire star systems to enemy forces. Massive interdiction arrays, overwhelming combat power, and a full complement of screening fighters.",
    "core": [
     "JUMPDRIVE_8-NOVA_3-GOOD",
-    "FUELTANK_8-NOVA_1-BASIC",
     "SHIELD_8-NOVA_3-GOOD",
     "SYSTEM_8-NOVA_3-GOOD",
     "STRUCTURE_8-NOVA_3-GOOD",
@@ -19508,6 +19544,7 @@
     "POWER_8-NOVA_3-GOOD"
    ],
    "internal": [
+    "RADAR_8-NOVA_3-GOOD",
     "TRANSPONDER_0-ALL_0-UNIVERSAL",
     "CREWAUTOMATION_0-ALL_3-GOOD ×374",
     "BRIDGE_8-NOVA_3-GOOD",
@@ -19527,12 +19564,13 @@
     "WEAPON_TURRET_0-ALL_4-COLOSSAL",
     "POINTDEFENSE_0-ALL_3-MASSIVE",
     "POINTDEFENSE_0-ALL_3-MASSIVE",
-    "RADAR_8-NOVA_3-GOOD"
+    "FUELTANK_8-NOVA_1-BASIC",
+    "TRACTORBEAM_0-ALL_4-COLOSSAL"
    ],
    "computed": {
     "pwr_consumption": 3425.0,
-    "pwr_activation": 1120,
-    "pwr_creation": 5440,
+    "pwr_activation": 1180,
+    "pwr_creation": 6256,
     "energy_storage": 0,
     "shield_max": 1440,
     "shield_recharge": 224,
@@ -19561,11 +19599,11 @@
     "engineering": 7,
     "warfare": 4,
     "area_used": {
-     "core": 3104,
-     "internal": 3214.0,
-     "external": 888
+     "core": 2784,
+     "internal": 3406.0,
+     "external": 1156
     },
-    "total_cost": 1256310000,
+    "total_cost": 1380210000,
     "availability": "UNIQUE",
     "legality": "Restricted",
     "valid": true
@@ -19596,8 +19634,10 @@
     "CREWSPACE_0-ALL_2-AVERAGE ×250",
     "LIFESUPPORT_0-ALL_3-GOOD ×250",
     "ECM_8-NOVA_3-GOOD",
+    "STRUCTURE_8-NOVA_3-GOOD",
     "COMBRIDGE_8-NOVA_3-GOOD",
-    "MEDBAY_0-ALL_3-GOOD"
+    "MEDBAY_0-ALL_3-GOOD",
+    "STRUCTURE_8-NOVA_3-GOOD"
    ],
    "external": [
     "ENGINEBALANCED_8-NOVA_1-BASIC",
@@ -19613,14 +19653,12 @@
     "RADAR_8-NOVA_3-GOOD",
     "SHIELD_8-NOVA_3-GOOD",
     "ESCAPEPOD_0-ALL_0-UNIVERSAL ×250",
-    "STRUCTURE_8-NOVA_3-GOOD",
-    "STRUCTURE_8-NOVA_3-GOOD",
     "POWER_8-NOVA_3-GOOD"
    ],
    "computed": {
     "pwr_consumption": 3657.0,
     "pwr_activation": 800,
-    "pwr_creation": 5440,
+    "pwr_creation": 6256,
     "energy_storage": 0,
     "shield_max": 1440,
     "shield_recharge": 224,
@@ -19650,10 +19688,10 @@
     "warfare": 4,
     "area_used": {
      "core": 896,
-     "internal": 3914.0,
-     "external": 3718
+     "internal": 4618.0,
+     "external": 3014
     },
-    "total_cost": 471570000,
+    "total_cost": 516370000,
     "availability": "UNIQUE",
     "legality": "Restricted",
     "valid": true
@@ -19667,13 +19705,10 @@
    "template": "TEMPLATE_8-NOVA_3-GENERATIONSHIP",
    "description": "Generation Ship Nova-class, a vessel built not for a voyage, but for a civilization. Carries tens of thousands across centuries of travel to new star systems. A world unto itself.",
    "core": [
-    "ECM_8-NOVA_2-AVERAGE",
     "SYSTEM_8-NOVA_2-AVERAGE",
     "STRUCTURE_8-NOVA_2-AVERAGE",
-    "COMBRIDGE_8-NOVA_2-AVERAGE",
-    "MEDBAY_0-ALL_3-GOOD",
-    "SCIENCELAB_0-ALL_2-AVERAGE ×10",
-    "MEDBAY_0-ALL_3-GOOD ×20",
+    "POWER_8-NOVA_3-GOOD",
+    "POWER_8-NOVA_3-GOOD",
     "POWER_8-NOVA_3-GOOD",
     "POWER_8-NOVA_3-GOOD"
    ],
@@ -19686,8 +19721,27 @@
     "ENGINEERING_8-NOVA_2-AVERAGE",
     "CREWSPACE_0-ALL_2-AVERAGE ×125",
     "LIFESUPPORT_0-ALL_2-AVERAGE ×125",
-    "PASSENGERSSPACE_0-ALL_1-BASIC ×7872",
-    "LIFESUPPORT_0-ALL_1-BASIC ×7872"
+    "SCHOOL_0-ALL_1-VAR",
+    "MARKET_0-ALL_1-VAR",
+    "ARBORETUM_0-ALL_1-VAR",
+    "HYDROFARM_0-ALL_1-VAR",
+    "MEMORIAL_0-ALL_1-VAR",
+    "GYM_0-ALL_1-VAR",
+    "PROMENADE_0-ALL_1-VAR",
+    "CHAPEL_0-ALL_1-VAR",
+    "THEATER_0-ALL_1-VAR",
+    "GENEVAULT_0-ALL_1-VAR",
+    "PASSENGERSSPACE_0-ALL_1-BASIC ×8000",
+    "LIFESUPPORT_0-ALL_1-BASIC ×8000",
+    "ECM_8-NOVA_2-AVERAGE",
+    "COMBRIDGE_8-NOVA_2-AVERAGE",
+    "MEDBAY_0-ALL_3-GOOD",
+    "SCIENCELAB_0-ALL_2-AVERAGE ×10",
+    "WORKSHOP_0-ALL_3-GOOD ×10",
+    "MEDBAY_0-ALL_3-GOOD ×20",
+    "VEHICLEBAY_0-ALL_0-UNIVERSAL ×20",
+    "FUELTANK_8-NOVA_3-GOOD",
+    "ENERGYTANK_8-NOVA_3-GOOD"
    ],
    "external": [
     "ENGINEBALANCED_8-NOVA_1-BASIC",
@@ -19695,26 +19749,20 @@
     "FUELTANK_8-NOVA_1-BASIC",
     "RADAR_8-NOVA_2-AVERAGE",
     "SHIELD_8-NOVA_2-AVERAGE",
-    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×125",
-    "WORKSHOP_0-ALL_3-GOOD ×10",
-    "VEHICLEBAY_0-ALL_0-UNIVERSAL ×20",
-    "FUELTANK_8-NOVA_3-GOOD",
-    "POWER_8-NOVA_3-GOOD",
-    "POWER_8-NOVA_3-GOOD",
-    "POWER_8-NOVA_3-GOOD"
+    "ESCAPEPOD_0-ALL_0-UNIVERSAL ×125"
    ],
    "computed": {
-    "pwr_consumption": 11680.0,
+    "pwr_consumption": 11855.8,
     "pwr_activation": 1120,
-    "pwr_creation": 13600,
-    "energy_storage": 0,
+    "pwr_creation": 12512,
+    "energy_storage": 640,
     "shield_max": 1280,
     "shield_recharge": 160,
     "crew_min": 125,
     "crew_max": 625,
-    "passengers": 7872,
+    "passengers": 8001,
     "cargo": 0,
-    "life_ppl": 7999,
+    "life_ppl": 8127,
     "life_hrs": 8760,
     "fuel_cons": 0,
     "fuel_units": 12800,
@@ -19732,14 +19780,14 @@
     "command": 4,
     "handling": 3,
     "instruments": 4,
-    "engineering": 9,
+    "engineering": 8,
     "warfare": 3,
     "area_used": {
-     "core": 2110,
-     "internal": 17496.5,
-     "external": 4516
+     "core": 2656,
+     "internal": 20014.5,
+     "external": 1757
     },
-    "total_cost": 862932500,
+    "total_cost": 1006892500,
     "availability": "UNIQUE",
     "legality": "No Permit",
     "valid": true
@@ -19755,7 +19803,7 @@
    "core": [
     "SYSTEM_8-NOVA_1-BASIC",
     "STRUCTURE_8-NOVA_1-BASIC",
-    "POWER_8-NOVA_2-AVERAGE",
+    "POWER_8-NOVA_1-BASIC",
     "ENERGYTANK_8-NOVA_3-GOOD"
    ],
    "internal": [
@@ -19770,7 +19818,7 @@
     "ECM_8-NOVA_1-BASIC",
     "COMBRIDGE_8-NOVA_1-BASIC",
     "WORKSHOP_0-ALL_2-AVERAGE ×6",
-    "CARGOSPACE_0-ALL_0-UNIVERSAL ×1410"
+    "CARGOSPACE_0-ALL_0-UNIVERSAL ×2010"
    ],
    "external": [
     "ENGINEBALANCED_8-NOVA_1-BASIC",
@@ -19780,19 +19828,19 @@
     "SHIELD_8-NOVA_1-BASIC",
     "ESCAPEPOD_0-ALL_0-UNIVERSAL ×125",
     "TRACTORBEAM_0-ALL_4-COLOSSAL",
-    "CARGOSPACE_0-ALL_0-UNIVERSAL ×18421"
+    "CARGOSPACE_0-ALL_0-UNIVERSAL ×22421"
    ],
    "computed": {
     "pwr_consumption": 2156.0,
     "pwr_activation": 860,
-    "pwr_creation": 2400,
+    "pwr_creation": 2392,
     "energy_storage": 640,
     "shield_max": 1120,
     "shield_recharge": 96,
     "crew_min": 125,
     "crew_max": 625,
     "passengers": 0,
-    "cargo": 19831,
+    "cargo": 24431,
     "life_ppl": 126,
     "life_hrs": 336,
     "fuel_cons": 0,
@@ -19811,14 +19859,14 @@
     "command": 2,
     "handling": 3,
     "instruments": 2,
-    "engineering": 3,
+    "engineering": 2,
     "warfare": 2,
     "area_used": {
-     "core": 1248,
-     "internal": 2998,
-     "external": 19998
+     "core": 1184,
+     "internal": 3598,
+     "external": 23998
     },
-    "total_cost": 456247500,
+    "total_cost": 478247500,
     "availability": "UNIQUE",
     "legality": "No Permit",
     "valid": true
