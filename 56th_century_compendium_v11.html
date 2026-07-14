@@ -861,12 +861,11 @@ tr.xref-row>td{padding:10px 12px!important;background:var(--bg2);border-bottom:1
   <details class="ngrp" data-grp="catalog" open><summary class="nl">Catalog<span class="nchev">▾</span></summary>
   <button class="nb" data-s="vehicles"><span class="ni">🚗</span>Vehicles<span class="nct" data-ct="vehicles"></span></button>
   <button class="nb" data-s="cat_drones"><span class="ni">🤖</span>Drones<span class="nct" data-ct="cat_drones"></span></button>
-  <button class="nb" data-s="modules"><span class="ni">🔧</span>Modules<span class="nct" data-ct="modules"></span></button>
   <button class="nb" data-s="ships"><span class="ni">🚀</span>Spaceships<span class="nct" data-ct="ships"></span></button>
-  <button class="nb" data-s="ship_components"><span class="ni">⚙</span>Ship Components<span class="nct" data-ct="ship_components"></span></button>
   </details>
   <details class="ngrp" data-grp="builder" open><summary class="nl">Builder<span class="nchev">▾</span></summary>
   <button class="nb" data-s="ship_builder"><span class="ni">🛠</span>Ship Builder</button>
+  <button class="nb" data-s="ship_components"><span class="ni">⚙</span>Ship Parts<span class="nct" data-ct="ship_components"></span></button>
   <button class="nb" data-s="drone_builder"><span class="ni">🤖</span>Drone Builder<span class="nct" data-ct="drone_builder"></span></button>
   <button class="nb" data-s="drone_parts"><span class="ni">🔩</span>Drone Parts<span class="nct" data-ct="drone_parts"></span></button>
   </details>
@@ -1647,6 +1646,10 @@ const MEDICAL_MFRS=['Generic','Altair Biomed','RX Generic','Goodman Holistic','D
 
 // ─── Catalog Component Helpers ────────────────────────────────────────────────
 const COMP_NAMES={AIRLOCKBRIDGE:'Airlock Bridge',AMMOBAY:'Ammo Bay',ATMOSPHERIC:'Atmospheric',BAR:'Bar',BAY_CORVETTE:'Corvette Bay',BAY_DRONE:'Drone Bay',BAY_FIGHTER:'Fighter Bay',BRIDGE:'Bridge',CARGOSPACE:'Cargo Space',COCKPIT:'Cockpit',COMBRIDGE:'Comms Bridge',CONSTRUCTION:'Construction',CREWAUTOMATION:'Crew Automation',CREWSPACE:'Crew Quarters',ECM:'ECM',ENERGYTANK:'Energy Tank',ENGINEBALANCED:'Balanced Engine',ENGINECOMBAT:'Combat Engine',ENGINEERING:'Engineering',ENGINEHANDLING:'Handling Engine',ESCAPEPOD:'Escape Pod',FUELTANK:'Fuel Tank',HULL:'Hull',INSTRUMENTS:'Instruments',JACUZI:'Jacuzzi',JUMPDRIVE:'Jump Drive',LANDING:'Landing',LIFESUPPORT:'Life Support',MEDBAY:'Med Bay',NAVBRIDGE:'Nav Bridge',ORDONNANCE_FIXED:'Fixed Ordnance',PASSENGERSSPACE:'Passenger Space',POWER:'Power Core',POWER_CORONTHIA:'Coronthia Power',RADAR:'Radar',RADAR_COMBAT:'Combat Radar',RADAR_DEEPSPACE:'Deep Space Radar',SHIELD:'Shield',STRUCTURE:'Structure',SWIMPOOL:'Pool',SYSTEM:'System',WARFARESUITE:'Warfare Suite',WEAPON_FIXED:'Fixed Weapon',WEAPON_TURRET:'Turret'};
+const SB_LABELS={GYM:'Gym',HYDROFARM:'Hydroponics',ARBORETUM:'Arboretum',CRYOBAY:'Cryosleep',OBSERVATORY:'Observatory',THEATER:'Theater',PROMENADE:'Promenade',CHAPEL:'Chapel',SCHOOL:'School',MARKET:'Market',MENAGERIE:'Menagerie',MEMORIAL:'Memorial',GENEVAULT:'Gene Vault',CARGOFLUID:'Fluid Hold',CARGOLIVE:'Livestock Hold',CARGOBULK:'Ore Hopper',CARGOVAULT:'Vault Hold',CARGORACK:'Container Rack',CARGOHAZMAT:'Hazmat Hold',PRISONERHOLD:'Prisoner Hold',BOARDINGTUBE:'Boarding Tube',SIRENBEACON:'Lure Beacon',SCIENCELAB:'Science Lab',SMUGGLERHOLD:'Smuggler Hold',LSSTORAGE:'LS Stores',VEHICLEBAY:'Vehicle Bay','BAY-DRONE':'Drone Bay','BAY-FIGHTER':'Fighter Bay','BAY-CORVETTE':'Corvette Bay',WARFARESUITE:'Warfare Suite',TRANSPONDER:'Transponder',TRANSPONDERSPOOF:'Spoof Transponder',AIRLOCKBRIDGE:'Airlock',ATMOSPHERIC:'Atmospheric',LANDING:'Landing',CONSTRUCTION:'Construction',BRIG:'Brig',ESCAPEPOD:'Escape Pod'};
+const SB_CAT=[['Power & Fuel',['POWER','POWER_CORONTHIA','ENERGYTANK','FUELTANK']],['Propulsion',['ENGINEBALANCED','ENGINECOMBAT','ENGINEHANDLING','JUMPDRIVE']],['Defense',['SHIELD','HULL','STRUCTURE','ECM','POINTDEFENSE','STEALTHSYSTEM']],['Weapons',['WEAPON_FIXED','WEAPON_TURRET','ORDONNANCE_FIXED','AMMOBAY']],['Command & Sensors',['BRIDGE','NAVBRIDGE','COMBRIDGE','COCKPIT','RADAR','INSTRUMENTS','SYSTEM','WARFARESUITE','ENGINEERING','TRANSPONDER','TRANSPONDERSPOOF','SIRENBEACON']],['Crew & Life Support',['CREWSPACE','CREWAUTOMATION','LIFESUPPORT','LSSTORAGE','MEDBAY','ESCAPEPOD']],['Passengers & Cargo',['PASSENGERSSPACE','CRYOBAY','PRISONERHOLD','CARGOSPACE','CARGOFLUID','CARGOLIVE','CARGOBULK','CARGOVAULT','CARGORACK','CARGOHAZMAT','SMUGGLERHOLD']],['Bays & Utility',['BAY-DRONE','BAY-FIGHTER','BAY-CORVETTE','VEHICLEBAY','TRACTORBEAM','MININGRIG','WORKSHOP','CONSTRUCTION','BOARDINGTUBE','LANDING','ATMOSPHERIC','AIRLOCKBRIDGE','BRIG']],['Amenities & Science',['BAR','JACUZI','SWIMPOOL','GYM','ARBORETUM','THEATER','PROMENADE','CHAPEL','SCHOOL','MARKET','MENAGERIE','MEMORIAL','SCIENCELAB','OBSERVATORY','GENEVAULT','HYDROFARM']]];
+const SB_TYPECAT={};SB_CAT.forEach(function(c){c[1].forEach(function(t){SB_TYPECAT[t]=c[0];});});
+function sbLabel(t){return COMP_NAMES[t]||SB_LABELS[t]||t;}
 const COMP_QCOL={BASIC:'color:#6b7280;background:rgba(107,114,128,.12);border:1px solid rgba(107,114,128,.3)',AVERAGE:'color:#60a5fa;background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.3)',GOOD:'color:#34d399;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.3)',UNIVERSAL:'color:#a78bfa;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.3)',XLARGE:'color:#fbbf24;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.3)',HUGE:'color:#fb923c;background:rgba(249,115,22,.12);border:1px solid rgba(249,115,22,.3)',MASSIVE:'color:#f87171;background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.3)',COLOSSAL:'color:#d946ef;background:rgba(217,70,239,.12);border:1px solid rgba(217,70,239,.3)'};
 function pComp(code){const rawCode=code.replace(/\s+\u00d7\d+$/,'');const p=rawCode.split('_');if(p.length<3)return{type:rawCode,quality:'',cls:''};const lp=p[p.length-1];const qm=lp.match(/\d+-(.+)/);const quality=qm?qm[1]:lp;const cp=p[p.length-2];const cm=cp.match(/\d+-(.+)/);const cls=cm?cm[1]:cp;const type=p.slice(0,p.length-2).join('_');return{type,quality,cls};}
 function compLine(code){if(!code||code==='EMPTY')return'<span style="color:#374151;font-size:10.5px;font-style:italic;">empty</span>';const xm=code.match(/^(.+?)\s+\u00d7(\d+)$/);const rawCode=xm?xm[1]:code;const xSuffix=xm?'\u00a0<span style="color:#a78bfa;font-size:10px;font-family:\'JetBrains Mono\',monospace;">\u00d7'+xm[2]+'</span>':'';const{type,quality}=pComp(rawCode);const name=COMP_NAMES[type]||(type.replace(/_/g,' ').toLowerCase().replace(/\b\w/g,c=>c.toUpperCase()));const qs=COMP_QCOL[quality]||'color:#9ca3af;background:rgba(156,163,175,.1);border:1px solid rgba(156,163,175,.3)';return'<span style="font-size:10.5px;color:#d1d5db;">'+name+'</span>\u00a0<span style="font-size:10px;padding:1px 5px;border-radius:3px;'+qs+'">'+quality+'</span>'+xSuffix;}
@@ -1702,10 +1705,10 @@ function shipCompute(ship){
       if(exp){
         const per={CREWSPACE:'berths',PASSENGERSSPACE:'passengers',CARGOSPACE:'cargo',LIFESUPPORT:'life_ppl',CRYOBAY:'cryo'}[c.type];
         if(per==='berths')agg.berths+=(c.crew_max||0)+adds;
-        else if(per==='passengers')agg.passengers+=adds;
+        else if(per==='passengers')agg.passengers+=(c.passengers||0)+adds;
         else if(per==='cargo')agg.cargo+=adds;
         else if(per==='life_ppl')agg.life_ppl+=(c.life_ppl||0)+adds;
-        else if(per==='cryo')agg.cryo_pax=(agg.cryo_pax||0)+(c.passengers||0)+adds;/* inert: no active life support */
+        else if(per==='cryo'){var _cp=(c.passengers||0)+adds;agg.passengers+=_cp;agg.cryo_pax=(agg.cryo_pax||0)+_cp;}/* cryo: aboard but draws no active life support */
       }
       if(c.type==='CREWAUTOMATION'){autoRed+=1+adds;autoPct=Math.max(autoPct,({BASIC:0.25,AVERAGE:0.5,GOOD:0.75})[c.quality]||0.25);}
       else if(!exp){['crew_min','passengers','life_ppl'].forEach(k=>{agg[k]+=(c[k]||0)*copies;});agg.berths+=(c.crew_max||0)*copies;}
@@ -1728,9 +1731,9 @@ function shipCompute(ship){
   if(agg.pwr_activation>(agg.pwr_creation-agg.pwr_consumption)+agg.energy_storage+1e-9)res.warnings.push('activation surge '+agg.pwr_activation+' exceeds headroom+storage');
   if(crewed&&agg.berths<agg.crew_min)res.errors.push('berths: '+agg.berths+' quarters / '+agg.crew_min+' minimum crew');
   else if(crewed&&agg.berths<agg.crew_max)res.warnings.push('berths cover '+agg.berths+' of '+agg.crew_max+' max crew');
-  const aboard=agg.berths+agg.passengers;
+  const aboard=agg.berths+agg.passengers-(agg.cryo_pax||0);
   if(crewed&&aboard>agg.life_ppl)res.errors.push('life support: '+aboard+' aboard (berths+passengers) / '+agg.life_ppl+' supported');
-  else if(crewed&&(agg.crew_max+agg.passengers)>agg.life_ppl)res.warnings.push('life support short for a full crew: '+agg.crew_max+'+'+agg.passengers+' vs '+agg.life_ppl);
+  else if(crewed&&(agg.crew_max+agg.passengers-(agg.cryo_pax||0))>agg.life_ppl)res.warnings.push('life support short for a full crew: '+agg.crew_max+'+'+agg.passengers+' vs '+agg.life_ppl);
   ((g.ship_config&&g.ship_config.mandatory_by_class||{})[ship.class]||[]).forEach(grp=>{if(!groups[grp])res.errors.push('missing mandatory system: '+grp);});
   if((agg.fuel_cons>0||typesSeen.JUMPDRIVE)&&agg.fuel_units<=0)res.errors.push('fuel: the '+(agg.fuel_cons>0?'coronthia reactor':'jump drive')+' consumes fuel but there is no fuel tank aboard');
   if(typesSeen.ORDONNANCE_FIXED&&!typesSeen.AMMOBAY)res.warnings.push('ordnance mounts have no AMMO BAY: only what is loaded on board, no reloads');
@@ -1749,7 +1752,7 @@ function shipCompute(ship){
 function scompTypeOrder(){const seen=[],has={};(g.ship_components||[]).forEach(c=>{if(!has[c.type]){has[c.type]=1;seen.push(c.type);}});return seen;}
 
 // ─── Ship Builder state + events ──────────────────────────────────────────────
-let sbState={name:'Unnamed Ship',cls:null,tpl:null,areas:{core:[],internal:[],external:[]},tray:[],picker:null,ptype:'',search:'',pgroup:'',showJson:false};
+let sbState={name:'Unnamed Ship',cls:null,tpl:null,areas:{core:[],internal:[],external:[]},tray:[],picker:null,ptype:'',pcat:'',search:'',pgroup:'',showJson:false};
 function sbList(a){return a==='tray'?sbState.tray:sbState.areas[a];}
 function sbMove(sa,si,dst){if(sa===dst)return;const it=sbList(sa)[si];if(!it)return;const c=SCOMP_BY_ID[it.id];
   if(dst!=='tray'&&c&&(c.placement||'CIE').indexOf({core:'C',internal:'I',external:'E'}[dst])<0)return;
@@ -1769,11 +1772,13 @@ document.addEventListener('click',e=>{
   const v=el.dataset.sb;
   if(v.startsWith('cls:')){sbState.cls=v.slice(4);sbState.tpl=null;sbState.areas={core:[],internal:[],external:[]};sbState.tray=[];sbState.picker=null;}
   else if(v.startsWith('tpl:')){sbState.tpl=v.slice(4);sbState.areas={core:[],internal:[],external:[]};sbState.tray=[];sbState.picker=null;}
-  else if(v.startsWith('open:')){sbState.picker=v.slice(5);sbState.ptype='';sbState.search='';sbState.pgroup='';}
-  else if(v==='close'){sbState.picker=null;sbState.pgroup='';}
+  else if(v.startsWith('imp:')){const sh=(g.catalog&&g.catalog.ships||[])[+v.slice(4)];if(sh){const pr=r=>{const m=String(r).match(/^(.*?)\s*[\u00d7x]\s*(\d+)\s*$/);return m?{id:m[1].trim(),n:+m[2]}:{id:String(r).trim(),n:0};};sbState.name=sh.name||sh.role||'Imported Ship';sbState.cls=sh.class;sbState.tpl=sh.template;sbState.areas={core:(sh.core||[]).map(pr),internal:(sh.internal||[]).map(pr),external:(sh.external||[]).map(pr)};sbState.tray=[];sbState.picker=null;sbState.pcat='';sbState.ptype='';sbState.pgroup='';cs='ship_builder';}}
+  else if(v.startsWith('open:')){sbState.picker=v.slice(5);sbState.ptype='';sbState.pcat='';sbState.search='';sbState.pgroup='';}
+  else if(v==='close'){sbState.picker=null;sbState.pcat='';sbState.pgroup='';}
   else if(v.startsWith('ptype:')){sbState.ptype=v.slice(6);sbState.pgroup='';}
-  else if(v.startsWith('need:')){sbState.picker='tray';sbState.ptype='';sbState.search='';sbState.pgroup=v.slice(5);}
-  else if(v==='opentray'){sbState.picker='tray';sbState.ptype='';sbState.search='';sbState.pgroup='';}
+  else if(v.startsWith('pcat:')){sbState.pcat=v.slice(5);sbState.ptype='';sbState.pgroup='';}
+  else if(v.startsWith('need:')){sbState.picker='tray';sbState.ptype='';sbState.pcat='';sbState.search='';sbState.pgroup=v.slice(5);}
+  else if(v==='opentray'){sbState.picker='tray';sbState.ptype='';sbState.pcat='';sbState.search='';sbState.pgroup='';}
   else if(v.startsWith('assign:')){const p=v.split(':');sbMove(p[3]||'tray',parseInt(p[2]),p[1]);return;}
   else if(v.startsWith('pick:')){const id=v.slice(5);
     if(sbState.picker==='tray'){
@@ -1787,7 +1792,7 @@ document.addEventListener('click',e=>{
     if(it){if(p[0]==='del')sbList(area).splice(i,1);
       else if(p[0]==='inc')it.n=(it.n||0)+1;
       else it.n=Math.max(0,(it.n||0)-1);}}
-  else if(v==='reset'){sbState={name:'Unnamed Ship',cls:null,tpl:null,areas:{core:[],internal:[],external:[]},tray:[],picker:null,ptype:'',search:'',pgroup:'',showJson:false};}
+  else if(v==='reset'){sbState={name:'Unnamed Ship',cls:null,tpl:null,areas:{core:[],internal:[],external:[]},tray:[],picker:null,ptype:'',pcat:'',search:'',pgroup:'',showJson:false};}
   else if(v==='json'){sbState.showJson=!sbState.showJson;}
   else return;
   render();
@@ -8469,30 +8474,6 @@ function render(){
   }
 
   // ─── CATALOG: MODULES ───
-  else if(cs==='modules'){
-    const M=(g.catalog&&g.catalog.modules||[]).filter(m=>ms([m.name,m.size,m.availability,m.description]));
-    cnt=M.length;
-    html='<div class="stitle">🔧 DRONE & VEHICLE MODULES <span class="badge">'+cnt+'</span></div>';
-    html+='<div class="grid">';
-    M.forEach(m=>{
-      const id='mod-'+esc(m.name).replace(/\W/g,'_');
-      const rc=rarCls(m.availability);
-      html+='<div class="card '+rc+'" id="'+id+'" data-tog="'+id+'">';
-      html+='<div class="ch"><div class="cn">'+hl(m.name,sq)+'</div><div class="cs-right">'+hl(m.size||'ANY',sq)+'</div></div>';
-      html+='<div class="cr2">';
-      if(m.availability) html+='<span class="wpn-pill wpill-avl">◈ '+hl(m.availability,sq)+'</span>';
-      html+='</div>';
-      html+='<div class="cr3"><div class="cr3l">'+bst(m.description||'')+'</div>';
-      if(m.cost&&typeof m.cost==='number') html+='<div class="cr3r">'+fmt(m.cost)+' Cr</div>';
-      else if(m.cost) html+='<div class="cr3r" style="font-size:8px;max-width:80px;text-align:right;">'+esc(String(m.cost))+'</div>';
-      html+='</div>';
-      html+='<div class="exp" id="x'+id+'"><div class="exb">';
-      if(m.description) html+='<div class="rd">'+hl(m.description,sq)+'</div>';
-      html+='</div></div></div>';
-    });
-    html+='</div>';
-  }
-
   // ─── CATALOG: SHIPS ───
   else if(cs==='ships'){
     const ships=(g.catalog&&g.catalog.ships||[]);
@@ -8622,7 +8603,7 @@ function render(){
       return true;
     });
     cnt=SC.length;
-    html='<div class="stitle">⚙ SHIP COMPONENTS <span class="badge">'+cnt+'</span></div>';
+    html='<div class="stitle">⚙ SHIP PARTS <span class="badge">'+cnt+'</span></div>';
     html+='<div style="font-size:10px;color:#6b7280;margin:2px 0 6px;">Filters stack: pick any number of component types and ship classes at once.'+((selT.length||selC.length)?' <button class="fc" data-scf="clear">✕ Clear filters</button>':'')+'</div>';
     html+='<div class="fbar">';
     typeOrder.forEach(t=>{if(ALL.some(c=>c.type===t))html+='<button class="fc'+(scF.t[t]?' active':'')+'" data-scf="t:'+t+'">'+esc(COMP_NAMES[t]||t)+'</button>';});
@@ -8694,6 +8675,10 @@ function render(){
       +'<b style="color:#d1d5db;">3.</b> Drag rows (⠿) between <span style="color:#34d399;">CORE</span>, <span style="color:#60a5fa;">INTERNAL</span> and <span style="color:#fb923c;">EXTERNAL</span> — or use the 🔒C ⚙I 🔧E buttons. Core parts survive anything but cost <b style="color:#d1d5db;">double</b>; external parts die to any ship trauma but cost <b style="color:#d1d5db;">half</b>. Some parts only fit certain areas.&ensp;'
       +'<b style="color:#d1d5db;">4.</b> Keep the banner green: space per area, power draw vs creation, quarters for your minimum crew, and life support for everyone aboard.'
       +'</div></div>';
+    html+='<div class="nl">📥 IMPORT A CATALOGUE SHIP <span style="color:#6b7280;font-weight:400;">— load a prebuilt design to view or modify from scratch</span></div>';
+    html+='<div class="fbar" style="max-height:98px;overflow-y:auto;margin-bottom:14px;">';
+    (g.catalog&&g.catalog.ships||[]).forEach(function(sh,i){html+='<button class="fc" data-sb="imp:'+i+'" title="'+esc(sh.class+' · '+(sh.role||''))+'">'+esc(sh.name||sh.role)+'</button>';});
+    html+='</div>';
     html+='<div class="nl">1 · SHIP CLASS</div><div class="fbar">';
     SHIP_CLASSES.forEach(k=>{html+='<button class="fc'+(S.cls===k?' active':'')+'" data-sb="cls:'+k+'" style="'+(S.cls===k?'color:'+SHIP_CLS_TX[k]+';':'')+'">'+SHIP_CLS_EMO[k]+' '+k+'</button>';});
     html+='</div>';
@@ -8825,15 +8810,20 @@ function render(){
         const avail=(g.ship_components||[]).filter(c=>c.classes.indexOf(S.cls)>=0&&(tray||(c.placement||'CIE').indexOf(aLetter)>=0));
         const types=[];const seen={};avail.forEach(c=>{if(!seen[c.type]){seen[c.type]=1;types.push(c.type);}});
         const q=(S.search||'').toLowerCase();
-        const list=avail.filter(c=>(!S.ptype||c.type===S.ptype)&&(!S.pgroup||c.mandatory_group===S.pgroup)&&(!q||(c.name+' '+c.type+' '+c.desc).toLowerCase().includes(q)));
+        const list=avail.filter(c=>(!S.ptype||c.type===S.ptype)&&(!S.pcat||(S.pcat==='Other'?!SB_TYPECAT[c.type]:SB_TYPECAT[c.type]===S.pcat))&&(!S.pgroup||c.mandatory_group===S.pgroup)&&(!q||(c.name+' '+c.type+' '+c.desc).toLowerCase().includes(q)));
         html+='<div data-sb="close" style="position:fixed;inset:0;background:rgba(0,0,0,.62);z-index:900;display:flex;align-items:center;justify-content:center;padding:20px;">';
         html+='<div data-sb="" style="width:min(960px,94vw);max-height:82vh;display:flex;flex-direction:column;background:var(--s1,#12161f);border:1px solid rgba(96,165,250,.5);border-radius:10px;padding:12px 14px;box-shadow:0 18px 60px rgba(0,0,0,.6);">';
         html+='<div style="font-size:12px;font-weight:700;color:#60a5fa;margin-bottom:4px;">'+(tray?'🧰 COMPONENT SHOP → TRAY':'ADD TO '+S.picker.toUpperCase())+(S.pgroup?' — REQUIRED: '+esc(S.pgroup):'')+' <button class="fc" data-sb="close" style="float:right;">✕ '+(tray?'Done':'Close')+'</button></div>';
         html+='<div style="font-size:10px;color:#6b7280;margin-bottom:6px;">'+(tray?'Stays open while you shop — every pick lands in the tray (parts that only fit one area are placed there directly). Close when your basket is full.':'Showing only parts that can be mounted in '+S.picker+'.')+'</div>';
         html+='<input data-sbsearch="1" value="'+esc(S.search)+'" placeholder="Search components…" style="background:var(--s2);border:1px solid var(--b);color:var(--fg);padding:5px 9px;border-radius:5px;font-size:11.5px;width:260px;margin-bottom:6px;"/>';
-        html+='<div class="fbar" style="margin-bottom:6px;"><button class="fc'+((S.ptype===''&&!S.pgroup)?' active':'')+'" data-sb="ptype:">All</button>';
-        types.forEach(tp=>{html+='<button class="fc'+(S.ptype===tp?' active':'')+'" data-sb="ptype:'+tp+'">'+esc(COMP_NAMES[tp]||tp)+'</button>';});
+        html+='<div class="fbar" style="margin-bottom:4px;"><button class="fc'+((S.pcat===''&&S.ptype==='')?' active':'')+'" data-sb="pcat:">All</button>';
+        SB_CAT.forEach(function(cc){if(types.some(function(tp){return cc[1].indexOf(tp)>=0;})){html+='<button class="fc'+(S.pcat===cc[0]?' active':'')+'" data-sb="pcat:'+esc(cc[0])+'">'+esc(cc[0])+'</button>';}});
+        if(types.some(function(tp){return !SB_TYPECAT[tp];})){html+='<button class="fc'+(S.pcat==='Other'?' active':'')+'" data-sb="pcat:Other">Other</button>';}
         html+='</div>';
+        if(S.pcat){var subT=types.filter(function(tp){return S.pcat==='Other'?!SB_TYPECAT[tp]:SB_TYPECAT[tp]===S.pcat;});
+          html+='<div class="fbar" style="margin-bottom:6px;padding-left:6px;border-left:2px solid rgba(96,165,250,.35);"><button class="fc'+(S.ptype===''?' active':'')+'" data-sb="ptype:">All '+esc(S.pcat)+'</button>';
+          subT.forEach(function(tp){html+='<button class="fc'+(S.ptype===tp?' active':'')+'" data-sb="ptype:'+tp+'">'+esc(sbLabel(tp))+'</button>';});
+          html+='</div>';}
         html+='<div style="overflow-y:auto;flex:1;min-height:120px;">';
         list.slice(0,200).forEach(c=>{
           html+='<div style="padding:4px 4px;border-bottom:1px dashed rgba(255,255,255,.06);font-size:11px;cursor:pointer;" data-sb="pick:'+esc(c.id)+'" onmouseover="this.style.background=\'rgba(96,165,250,.07)\'" onmouseout="this.style.background=\'\'">';
@@ -10017,7 +10007,6 @@ document.querySelectorAll('details.ngrp').forEach(function(d){d.addEventListener
     equipment:function(){return len(g.equipment)},medical:function(){return len(g.medical)},
     vehicles:function(){return len(g.catalog&&g.catalog.vehicles)},
     cat_drones:function(){return len(g.catalog&&g.catalog.drones)},
-    modules:function(){return len(g.catalog&&g.catalog.modules)},
     ships:function(){return len(g.catalog&&g.catalog.ships)},
     ship_components:function(){return len(g.catalog&&g.catalog.ship_components)},
     drone_parts:function(){return len(g.catalog&&g.catalog.drone_parts)},
@@ -10056,9 +10045,8 @@ function omniIndex(){
   var cat=g.catalog||{};
   add('vehicles','Vehicles',cat.vehicles,function(o){return o.name});
   add('cat_drones','Drones',cat.drones,function(o){return o.name});
-  add('modules','Ship Modules',cat.modules,function(o){return o.name});
   add('ships','Spaceships',cat.ships,function(o){return o.name},function(o){return o.class});
-  add('ship_components','Ship Components',cat.ship_components,function(o){return o.name},function(o){return o.type});
+  add('ship_components','Ship Parts',cat.ship_components,function(o){return o.name},function(o){return o.type});
   add('drone_parts','Drone Parts',cat.drone_parts,function(o){return o.name},function(o){return o.type});
   add('starmap','Star Map · Regions',g.galaxy,function(o){return o.name},function(o){return o.entry_type});
   add('starmap','Star Map · Systems',g.catalogue_systems,function(o){return o.name},function(o){return o.region});
